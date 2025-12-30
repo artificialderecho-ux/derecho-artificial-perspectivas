@@ -6,11 +6,11 @@ const Index = () => {
     <Layout>
       {/* Hero Section */}
       <section className="section-spacing border-b border-divider">
-        <div className="container-editorial">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6">
+        <div className="container-editorial text-center">
+          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.05] mb-8">
             Derecho Artificial
           </h1>
-          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl font-serif italic">
+          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-2xl mx-auto font-serif italic">
             Derecho, ética y práctica jurídica en la era de la inteligencia artificial.
           </p>
         </div>
@@ -20,7 +20,7 @@ const Index = () => {
       <section className="section-spacing border-b border-divider">
         <div className="container-editorial">
           <div className="prose-editorial">
-            <p>
+            <p className="text-lg md:text-xl leading-[1.9] first-letter:text-5xl first-letter:font-serif first-letter:font-medium first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-foreground">
               Derecho Artificial es un proyecto editorial independiente dedicado al análisis 
               crítico de la inteligencia artificial en el ámbito jurídico. Nuestro propósito 
               es ofrecer un espacio de reflexión rigurosa, alejado de modas tecnológicas y 
@@ -28,7 +28,7 @@ const Index = () => {
               puedan encontrar análisis fundamentados, documentación relevante y perspectivas 
               éticas sobre las transformaciones que la IA introduce en la práctica legal.
             </p>
-            <p>
+            <p className="text-lg md:text-xl leading-[1.9]">
               No buscamos celebrar ni demonizar la tecnología. Buscamos comprenderla, 
               contextualizarla y someterla al escrutinio que exige su creciente influencia 
               en decisiones que afectan derechos y libertades fundamentales.
@@ -39,77 +39,95 @@ const Index = () => {
 
       {/* Ámbitos de Análisis */}
       <section className="section-spacing border-b border-divider">
-        <div className="container-editorial">
-          <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
-            Ámbitos de análisis
-          </h2>
+        <div className="container-wide">
+          <div className="text-center mb-16 md:mb-20">
+            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
+              Ámbitos de análisis
+            </h2>
+            <p className="text-body text-lg max-w-xl mx-auto">
+              Las áreas donde el Derecho y la inteligencia artificial convergen.
+            </p>
+          </div>
           
-          <ul className="space-y-6">
-            <li className="border-l-2 border-divider pl-6">
-              <Link to="/analisis" className="block group">
-                <h3 className="font-serif text-lg text-foreground group-hover:text-muted-foreground transition-colors">
-                  Análisis jurídico
-                </h3>
-                <p className="text-body mt-1">
-                  Estudios en profundidad sobre las implicaciones legales de la IA en distintas ramas del Derecho.
-                </p>
-              </Link>
-            </li>
-            <li className="border-l-2 border-divider pl-6">
-              <Link to="/documentos" className="block group">
-                <h3 className="font-serif text-lg text-foreground group-hover:text-muted-foreground transition-colors">
-                  Documentos y marcos normativos
-                </h3>
-                <p className="text-body mt-1">
-                  Recopilación comentada de normativas, directrices y documentos de referencia.
-                </p>
-              </Link>
-            </li>
-            <li className="border-l-2 border-divider pl-6">
-              <Link to="/software-ia-legal" className="block group">
-                <h3 className="font-serif text-lg text-foreground group-hover:text-muted-foreground transition-colors">
-                  Software de IA legal
-                </h3>
-                <p className="text-body mt-1">
-                  Evaluación crítica de herramientas de inteligencia artificial para el sector jurídico.
-                </p>
-              </Link>
-            </li>
-            <li className="border-l-2 border-divider pl-6">
-              <Link to="/noticias" className="block group">
-                <h3 className="font-serif text-lg text-foreground group-hover:text-muted-foreground transition-colors">
-                  Noticias contextualizadas
-                </h3>
-                <p className="text-body mt-1">
-                  Actualidad sobre IA y Derecho con análisis y perspectiva editorial.
-                </p>
-              </Link>
-            </li>
-          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-divider">
+            <Link 
+              to="/analisis" 
+              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
+            >
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+                Análisis jurídico
+              </h3>
+              <p className="text-body leading-relaxed">
+                Estudios en profundidad sobre las implicaciones legales de la IA en distintas ramas del Derecho.
+              </p>
+            </Link>
+            
+            <Link 
+              to="/documentos" 
+              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
+            >
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+                Documentos y marcos normativos
+              </h3>
+              <p className="text-body leading-relaxed">
+                Recopilación comentada de normativas, directrices y documentos de referencia.
+              </p>
+            </Link>
+            
+            <Link 
+              to="/software-ia-legal" 
+              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
+            >
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+                Software de IA legal
+              </h3>
+              <p className="text-body leading-relaxed">
+                Evaluación crítica de herramientas de inteligencia artificial para el sector jurídico.
+              </p>
+            </Link>
+            
+            <Link 
+              to="/noticias" 
+              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
+            >
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+                Noticias contextualizadas
+              </h3>
+              <p className="text-body leading-relaxed">
+                Actualidad sobre IA y Derecho con análisis y perspectiva editorial.
+              </p>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Editorial Closing */}
       <section className="section-spacing">
-        <div className="container-editorial">
-          <div className="prose-editorial">
+        <div className="container-narrow text-center">
+          <div className="mb-12">
+            <p className="font-serif text-2xl md:text-3xl text-foreground leading-[1.4] italic">
+              "El rigor sobre la rapidez, la responsabilidad sobre la promoción, 
+              la reflexión sobre el ruido."
+            </p>
+          </div>
+          <div className="prose-editorial text-center mx-auto">
             <p>
               En un entorno donde la inmediatez prevalece sobre la precisión y el entusiasmo 
-              tecnológico sustituye al análisis crítico, Derecho Artificial apuesta por el 
-              rigor sobre la rapidez, la responsabilidad sobre la promoción, y la reflexión 
-              sobre el ruido.
+              tecnológico sustituye al análisis crítico, Derecho Artificial apuesta por un 
+              enfoque sereno y fundamentado ante las transformaciones del sector jurídico.
             </p>
-            <p className="text-caption">
+            <p className="text-caption text-sm mt-8">
               Este proyecto no acepta patrocinios ni acuerdos comerciales que comprometan 
               su independencia editorial.
             </p>
           </div>
-          <div className="mt-10">
+          <div className="mt-14">
             <Link 
               to="/manifiesto" 
-              className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors"
+              className="inline-flex items-center text-sm font-medium tracking-wide text-caption hover:text-foreground transition-colors duration-300 uppercase"
             >
-              Leer nuestro manifiesto editorial →
+              Leer nuestro manifiesto editorial
+              <span className="ml-2">→</span>
             </Link>
           </div>
         </div>
