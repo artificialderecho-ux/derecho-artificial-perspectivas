@@ -2,91 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
-/* Derecho Artificial - Editorial Design System
-   Minimalist, sober, typography-focused
+/* Derecho Artificial - Institutional Editorial Design System
+   Refined, sober, law firm aesthetic
    All colors in HSL */
 
 @layer base {
   :root {
-    /* Warm off-white background */
-    --background: 40 20% 97%;
-    --foreground: 0 0% 12%;
+    /* Pure, clean off-white background */
+    --background: 45 15% 98%;
+    --foreground: 220 15% 12%;
 
-    /* Cards slightly warmer */
-    --card: 40 25% 95%;
-    --card-foreground: 0 0% 12%;
+    /* Cards with subtle warmth */
+    --card: 45 10% 96%;
+    --card-foreground: 220 15% 12%;
 
-    --popover: 40 20% 97%;
-    --popover-foreground: 0 0% 12%;
+    --popover: 45 15% 98%;
+    --popover-foreground: 220 15% 12%;
 
-    /* Primary: deep charcoal for emphasis */
-    --primary: 0 0% 15%;
-    --primary-foreground: 40 20% 97%;
+    /* Primary: deep institutional charcoal */
+    --primary: 220 10% 18%;
+    --primary-foreground: 45 15% 98%;
 
-    /* Secondary: muted warm gray */
-    --secondary: 40 10% 90%;
-    --secondary-foreground: 0 0% 20%;
+    /* Secondary: refined warm gray */
+    --secondary: 45 8% 93%;
+    --secondary-foreground: 220 10% 25%;
 
     /* Muted tones for sections */
-    --muted: 40 15% 92%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 45 10% 94%;
+    --muted-foreground: 220 8% 45%;
 
-    /* Accent: subtle warm tone */
-    --accent: 35 30% 88%;
-    --accent-foreground: 0 0% 15%;
+    /* Accent: subtle institutional tone */
+    --accent: 45 12% 91%;
+    --accent-foreground: 220 10% 18%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Borders: very subtle */
-    --border: 40 10% 85%;
-    --input: 40 10% 85%;
-    --ring: 0 0% 30%;
+    /* Borders: refined subtle lines */
+    --border: 45 8% 88%;
+    --input: 45 8% 88%;
+    --ring: 220 10% 40%;
 
-    --radius: 0.25rem;
+    --radius: 0.125rem;
 
     /* Custom editorial tokens */
-    --text-body: 0 0% 25%;
-    --text-caption: 0 0% 50%;
-    --divider: 40 10% 80%;
-    --highlight: 45 40% 94%;
+    --text-body: 220 10% 30%;
+    --text-caption: 220 8% 55%;
+    --divider: 45 6% 85%;
+    --highlight: 45 20% 96%;
   }
 
   .dark {
-    --background: 0 0% 8%;
-    --foreground: 40 10% 90%;
+    --background: 220 15% 7%;
+    --foreground: 45 8% 92%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 40 10% 90%;
+    --card: 220 12% 10%;
+    --card-foreground: 45 8% 92%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 40 10% 90%;
+    --popover: 220 15% 7%;
+    --popover-foreground: 45 8% 92%;
 
-    --primary: 40 10% 90%;
-    --primary-foreground: 0 0% 8%;
+    --primary: 45 8% 92%;
+    --primary-foreground: 220 15% 7%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 40 10% 85%;
+    --secondary: 220 10% 14%;
+    --secondary-foreground: 45 6% 80%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 40 5% 60%;
+    --muted: 220 10% 14%;
+    --muted-foreground: 45 5% 55%;
 
-    --accent: 0 0% 18%;
-    --accent-foreground: 40 10% 90%;
+    --accent: 220 10% 16%;
+    --accent-foreground: 45 8% 92%;
 
     --destructive: 0 60% 45%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 40 10% 70%;
+    --border: 220 10% 18%;
+    --input: 220 10% 18%;
+    --ring: 45 8% 65%;
 
-    --text-body: 40 5% 75%;
-    --text-caption: 40 5% 55%;
-    --divider: 0 0% 25%;
-    --highlight: 0 0% 12%;
+    --text-body: 45 5% 70%;
+    --text-caption: 45 4% 50%;
+    --divider: 220 8% 22%;
+    --highlight: 220 10% 11%;
   }
 }
 
@@ -97,58 +97,81 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "kern" 1, "liga" 1;
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     text-rendering: optimizeLegibility;
+    letter-spacing: -0.01em;
   }
 
-  /* Typography scale */
+  /* Refined typography scale */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-medium tracking-tight;
+    @apply font-serif font-medium;
+    letter-spacing: -0.02em;
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl leading-[1.1];
   }
 
   h2 {
-    @apply text-3xl md:text-4xl leading-tight;
+    @apply text-2xl md:text-3xl lg:text-4xl leading-[1.15];
   }
 
   h3 {
-    @apply text-2xl md:text-3xl leading-snug;
+    @apply text-xl md:text-2xl leading-[1.2];
   }
 
   h4 {
-    @apply text-xl md:text-2xl leading-snug;
+    @apply text-lg md:text-xl leading-[1.25];
   }
 
   p {
-    @apply leading-relaxed;
+    @apply leading-[1.8];
   }
 
-  /* Editorial prose styling */
+  /* Editorial prose styling - refined */
   .prose-editorial {
-    @apply text-body leading-relaxed;
+    @apply text-body;
+    font-size: 1.0625rem;
+    line-height: 1.85;
   }
 
   .prose-editorial p {
-    @apply mb-6;
+    @apply mb-7;
+  }
+
+  .prose-editorial p:last-child {
+    @apply mb-0;
   }
 
   .prose-editorial h2 {
-    @apply mt-12 mb-6 font-serif;
+    @apply mt-16 mb-8 font-serif text-foreground;
   }
 
   .prose-editorial h3 {
-    @apply mt-10 mb-4 font-serif;
+    @apply mt-12 mb-6 font-serif text-foreground;
   }
 
   .prose-editorial blockquote {
-    @apply border-l-2 border-border pl-6 italic text-muted-foreground my-8;
+    @apply border-l border-divider pl-8 italic text-muted-foreground my-10;
+  }
+
+  .prose-editorial ul {
+    @apply my-6 ml-6 space-y-3;
+  }
+
+  .prose-editorial li {
+    @apply relative pl-4;
+  }
+
+  .prose-editorial li::before {
+    content: "—";
+    @apply absolute left-0 text-caption;
   }
 }
 
@@ -169,16 +192,41 @@
     background-color: hsl(var(--highlight));
   }
 
-  /* Editorial spacing */
+  /* Generous institutional spacing */
   .section-spacing {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-20 md:py-28 lg:py-36;
   }
 
+  .section-spacing-sm {
+    @apply py-14 md:py-20 lg:py-24;
+  }
+
+  /* Editorial containers with refined max-widths */
   .container-editorial {
-    @apply max-w-4xl mx-auto px-6 md:px-8;
+    @apply max-w-3xl mx-auto px-6 md:px-8 lg:px-10;
   }
 
   .container-wide {
-    @apply max-w-6xl mx-auto px-6 md:px-8;
+    @apply max-w-5xl mx-auto px-6 md:px-8 lg:px-10;
+  }
+
+  .container-narrow {
+    @apply max-w-2xl mx-auto px-6 md:px-8;
+  }
+
+  /* Section heading styles */
+  .section-title {
+    @apply font-serif text-foreground mb-4;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    @apply text-body font-sans text-base md:text-lg leading-relaxed;
+  }
+
+  /* Institutional link style */
+  .link-editorial {
+    @apply text-caption hover:text-foreground transition-colors duration-300;
+    text-underline-offset: 4px;
   }
 }
