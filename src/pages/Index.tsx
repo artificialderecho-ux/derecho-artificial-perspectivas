@@ -1,90 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ArticleCard } from "@/components/ui/ArticleCard";
-import { DocumentCard } from "@/components/ui/DocumentCard";
-import { AmbitoCard } from "@/components/ui/AmbitoCard";
 import { Link } from "react-router-dom";
-import { Scale, Brain, Shield, Users, Gavel, BookOpen } from "lucide-react";
-
-const ambitos = [
-  {
-    title: "Justicia Predictiva",
-    description: "Análisis de sistemas de IA aplicados a la predicción de resoluciones judiciales y sus implicaciones para el debido proceso.",
-    icon: Scale,
-    href: "/analisis",
-  },
-  {
-    title: "Protección de Datos",
-    description: "Intersección entre privacidad, protección de datos personales y el desarrollo de sistemas de inteligencia artificial.",
-    icon: Shield,
-    href: "/analisis",
-  },
-  {
-    title: "IA Generativa y Autoría",
-    description: "Cuestiones de propiedad intelectual, derechos de autor y responsabilidad en contenidos generados por IA.",
-    icon: Brain,
-    href: "/analisis",
-  },
-  {
-    title: "Sesgos Algorítmicos",
-    description: "Discriminación, equidad y transparencia en sistemas automatizados de toma de decisiones.",
-    icon: Users,
-    href: "/analisis",
-  },
-  {
-    title: "Regulación Europea",
-    description: "Reglamento de IA de la UE, directivas y normativas aplicables al ecosistema hispanohablante.",
-    icon: Gavel,
-    href: "/documentos",
-  },
-  {
-    title: "Ética Profesional",
-    description: "Responsabilidad del abogado ante herramientas de IA y límites deontológicos de su uso.",
-    icon: BookOpen,
-    href: "/analisis",
-  },
-];
-
-const recentArticles = [
-  {
-    title: "La opacidad algorítmica como obstáculo al derecho de defensa",
-    excerpt: "Cuando un sistema de IA influye en decisiones que afectan derechos fundamentales, la imposibilidad de conocer su funcionamiento interno plantea serios problemas constitucionales. Analizamos las tensiones entre secreto empresarial y garantías procesales.",
-    date: "15 de diciembre, 2024",
-    category: "Justicia Predictiva",
-    href: "/analisis",
-  },
-  {
-    title: "Límites éticos del uso de IA generativa en la práctica jurídica",
-    excerpt: "La utilización de modelos de lenguaje para redactar escritos judiciales exige una reflexión profunda sobre responsabilidad profesional, veracidad y el deber de diligencia del abogado.",
-    date: "8 de diciembre, 2024",
-    category: "Ética Profesional",
-    href: "/analisis",
-  },
-  {
-    title: "El Reglamento Europeo de IA: implicaciones para Latinoamérica",
-    excerpt: "La normativa europea establece estándares que trascienden fronteras. Exploramos cómo el AI Act puede influir en las legislaciones de habla hispana y qué lecciones ofrece para reguladores americanos.",
-    date: "1 de diciembre, 2024",
-    category: "Regulación",
-    href: "/analisis",
-  },
-];
-
-const recentDocuments = [
-  {
-    title: "Reglamento (UE) 2024/1689 del Parlamento Europeo",
-    description: "Reglamento por el que se establecen normas armonizadas en materia de inteligencia artificial (Reglamento de Inteligencia Artificial).",
-    type: "Reglamento UE",
-    source: "Diario Oficial de la Unión Europea",
-    year: "2024",
-  },
-  {
-    title: "Principios para la Gobernanza de la IA",
-    description: "Directrices sobre inteligencia artificial centrada en el ser humano para sistemas judiciales.",
-    type: "Directrices",
-    source: "CEPEJ - Consejo de Europa",
-    year: "2023",
-  },
-];
 
 const Index = () => {
   return (
@@ -92,109 +7,109 @@ const Index = () => {
       {/* Hero Section */}
       <section className="section-spacing border-b border-divider">
         <div className="container-editorial">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-8">
-            Derecho e inteligencia artificial: análisis crítico para el mundo hispanohablante
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6">
+            Derecho Artificial
           </h1>
-          <p className="text-lg md:text-xl text-body leading-relaxed max-w-3xl">
-            Un espacio editorial independiente dedicado al estudio riguroso de las implicaciones 
-            jurídicas, éticas y sociales de la inteligencia artificial. Sin concesiones al 
-            sensacionalismo, con compromiso hacia la reflexión profunda y el pensamiento crítico.
+          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl font-serif italic">
+            Derecho, ética y práctica jurídica en la era de la inteligencia artificial.
           </p>
-          <div className="mt-10">
-            <Link 
-              to="/manifiesto" 
-              className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors"
-            >
-              Leer nuestro manifiesto editorial →
-            </Link>
+        </div>
+      </section>
+
+      {/* Editorial Introduction */}
+      <section className="section-spacing border-b border-divider">
+        <div className="container-editorial">
+          <div className="prose-editorial">
+            <p>
+              Derecho Artificial es un proyecto editorial independiente dedicado al análisis 
+              crítico de la inteligencia artificial en el ámbito jurídico. Nuestro propósito 
+              es ofrecer un espacio de reflexión rigurosa, alejado de modas tecnológicas y 
+              discursos promocionales, donde profesionales del Derecho y ciudadanos informados 
+              puedan encontrar análisis fundamentados, documentación relevante y perspectivas 
+              éticas sobre las transformaciones que la IA introduce en la práctica legal.
+            </p>
+            <p>
+              No buscamos celebrar ni demonizar la tecnología. Buscamos comprenderla, 
+              contextualizarla y someterla al escrutinio que exige su creciente influencia 
+              en decisiones que afectan derechos y libertades fundamentales.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Ámbitos de Análisis */}
       <section className="section-spacing border-b border-divider">
-        <div className="container-wide">
-          <SectionHeading 
-            title="Ámbitos de análisis"
-            subtitle="Las áreas fundamentales donde el Derecho y la inteligencia artificial convergen, exigiendo nuevas respuestas jurídicas y éticas."
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ambitos.map((ambito) => (
-              <AmbitoCard key={ambito.title} {...ambito} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Análisis Recientes */}
-      <section className="section-spacing border-b border-divider">
         <div className="container-editorial">
-          <SectionHeading 
-            title="Análisis recientes"
-            subtitle="Artículos en profundidad sobre las cuestiones más relevantes en la intersección del Derecho y la IA."
-          />
+          <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
+            Ámbitos de análisis
+          </h2>
           
-          <div className="space-y-12">
-            {recentArticles.map((article, index) => (
-              <ArticleCard key={article.title} {...article} featured={index === 0} />
-            ))}
-          </div>
-          
-          <div className="mt-12">
-            <Link 
-              to="/analisis" 
-              className="inline-flex items-center text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-            >
-              Ver todos los análisis →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Documentos y Recursos */}
-      <section className="section-spacing border-b border-divider">
-        <div className="container-wide">
-          <SectionHeading 
-            title="Documentos y recursos"
-            subtitle="Normativa, directrices y documentos de referencia para comprender el marco legal de la IA."
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {recentDocuments.map((doc) => (
-              <DocumentCard key={doc.title} {...doc} />
-            ))}
-          </div>
-          
-          <div className="mt-12">
-            <Link 
-              to="/documentos" 
-              className="inline-flex items-center text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-            >
-              Explorar todos los documentos →
-            </Link>
-          </div>
+          <ul className="space-y-6">
+            <li className="border-l-2 border-divider pl-6">
+              <Link to="/analisis" className="block group">
+                <h3 className="font-serif text-lg text-foreground group-hover:text-muted-foreground transition-colors">
+                  Análisis jurídico
+                </h3>
+                <p className="text-body mt-1">
+                  Estudios en profundidad sobre las implicaciones legales de la IA en distintas ramas del Derecho.
+                </p>
+              </Link>
+            </li>
+            <li className="border-l-2 border-divider pl-6">
+              <Link to="/documentos" className="block group">
+                <h3 className="font-serif text-lg text-foreground group-hover:text-muted-foreground transition-colors">
+                  Documentos y marcos normativos
+                </h3>
+                <p className="text-body mt-1">
+                  Recopilación comentada de normativas, directrices y documentos de referencia.
+                </p>
+              </Link>
+            </li>
+            <li className="border-l-2 border-divider pl-6">
+              <Link to="/software-ia-legal" className="block group">
+                <h3 className="font-serif text-lg text-foreground group-hover:text-muted-foreground transition-colors">
+                  Software de IA legal
+                </h3>
+                <p className="text-body mt-1">
+                  Evaluación crítica de herramientas de inteligencia artificial para el sector jurídico.
+                </p>
+              </Link>
+            </li>
+            <li className="border-l-2 border-divider pl-6">
+              <Link to="/noticias" className="block group">
+                <h3 className="font-serif text-lg text-foreground group-hover:text-muted-foreground transition-colors">
+                  Noticias contextualizadas
+                </h3>
+                <p className="text-body mt-1">
+                  Actualidad sobre IA y Derecho con análisis y perspectiva editorial.
+                </p>
+              </Link>
+            </li>
+          </ul>
         </div>
       </section>
 
       {/* Editorial Closing */}
       <section className="section-spacing">
-        <div className="container-editorial text-center">
-          <blockquote className="font-serif text-2xl md:text-3xl text-foreground italic leading-relaxed">
-            "La tecnología avanza, pero las preguntas fundamentales permanecen: 
-            ¿qué es justo? ¿qué es debido? ¿qué es humano?"
-          </blockquote>
-          <p className="mt-8 text-body">
-            En Derecho Artificial creemos que la respuesta a estas preguntas 
-            no puede delegarse a algoritmos. Nuestra labor es contribuir a una 
-            conversación informada, rigurosa y accesible sobre el futuro que estamos construyendo.
-          </p>
+        <div className="container-editorial">
+          <div className="prose-editorial">
+            <p>
+              En un entorno donde la inmediatez prevalece sobre la precisión y el entusiasmo 
+              tecnológico sustituye al análisis crítico, Derecho Artificial apuesta por el 
+              rigor sobre la rapidez, la responsabilidad sobre la promoción, y la reflexión 
+              sobre el ruido.
+            </p>
+            <p className="text-caption">
+              Este proyecto no acepta patrocinios ni acuerdos comerciales que comprometan 
+              su independencia editorial.
+            </p>
+          </div>
           <div className="mt-10">
             <Link 
-              to="/sobre" 
+              to="/manifiesto" 
               className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors"
             >
-              Conocer más sobre este proyecto →
+              Leer nuestro manifiesto editorial →
             </Link>
           </div>
         </div>
