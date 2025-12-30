@@ -21,32 +21,29 @@ export function Footer() {
           </div>
 
           {/* Navigation */}
-          <div className="md:col-span-1">
+          <div className="md:col-span-2">
             <h4 className="font-sans text-sm font-medium uppercase tracking-wider text-caption mb-4">
               Navegación
             </h4>
-            <nav className="flex flex-col gap-3">
+            <nav className="grid grid-cols-2 gap-x-8 gap-y-3">
+              <Link to="/" className="text-sm text-body hover:text-foreground transition-colors">
+                Inicio
+              </Link>
               <Link to="/analisis" className="text-sm text-body hover:text-foreground transition-colors">
                 Análisis
               </Link>
               <Link to="/documentos" className="text-sm text-body hover:text-foreground transition-colors">
                 Documentos
               </Link>
+              <Link to="/software-ia-legal" className="text-sm text-body hover:text-foreground transition-colors">
+                Software IA legal
+              </Link>
               <Link to="/noticias" className="text-sm text-body hover:text-foreground transition-colors">
                 Noticias
               </Link>
               <Link to="/manifiesto" className="text-sm text-body hover:text-foreground transition-colors">
-                Manifiesto Editorial
+                Manifiesto editorial
               </Link>
-            </nav>
-          </div>
-
-          {/* About */}
-          <div className="md:col-span-1">
-            <h4 className="font-sans text-sm font-medium uppercase tracking-wider text-caption mb-4">
-              Proyecto
-            </h4>
-            <nav className="flex flex-col gap-3">
               <Link to="/sobre" className="text-sm text-body hover:text-foreground transition-colors">
                 Sobre Derecho Artificial
               </Link>
