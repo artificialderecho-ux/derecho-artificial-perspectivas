@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Manifiesto from "./pages/Manifiesto";
 import Analisis from "./pages/Analisis";
 import Documentos from "./pages/Documentos";
+import SoftwareIALegal from "./pages/SoftwareIALegal";
 import Noticias from "./pages/Noticias";
 import Sobre from "./pages/Sobre";
 import Contacto from "./pages/Contacto";
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/manifiesto" element={<Manifiesto />} />
           <Route path="/analisis" element={<Analisis />} />
           <Route path="/documentos" element={<Documentos />} />
+          <Route path="/software-ia-legal" element={<SoftwareIALegal />} />
           <Route path="/noticias" element={<Noticias />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contacto" element={<Contacto />} />

@@ -4,11 +4,12 @@ import { Menu, X } from "lucide-react";
 
 const navigation = [
   { name: "Inicio", href: "/" },
-  { name: "Manifiesto", href: "/manifiesto" },
   { name: "Análisis", href: "/analisis" },
   { name: "Documentos", href: "/documentos" },
+  { name: "Software IA legal", href: "/software-ia-legal" },
   { name: "Noticias", href: "/noticias" },
-  { name: "Sobre", href: "/sobre" },
+  { name: "Manifiesto editorial", href: "/manifiesto" },
+  { name: "Sobre Derecho Artificial", href: "/sobre" },
   { name: "Contacto", href: "/contacto" },
 ];
 
