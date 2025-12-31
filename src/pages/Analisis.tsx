@@ -4,6 +4,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const articles = [
   {
+    title: "Reglamento Europeo de Inteligencia Artificial (AI Act): análisis jurídico y claves para el sector legal",
+    excerpt: "El AI Act establece el primer marco regulatorio integral para la inteligencia artificial en la Unión Europea. Analizamos su arquitectura normativa basada en el riesgo, las obligaciones para sistemas de alto riesgo y sus implicaciones directas para abogados, despachos y administraciones públicas.",
+    date: "31 de diciembre, 2024",
+    category: "Regulación",
+    href: "/analisis/ai-act-reglamento-europeo",
+  },
+  {
     title: "La opacidad algorítmica como obstáculo al derecho de defensa",
     excerpt: "Cuando un sistema de IA influye en decisiones que afectan derechos fundamentales, la imposibilidad de conocer su funcionamiento interno plantea serios problemas constitucionales. Analizamos las tensiones entre secreto empresarial y garantías procesales.",
     date: "15 de diciembre, 2024",

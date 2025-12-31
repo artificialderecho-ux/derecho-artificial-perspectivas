@@ -37,6 +37,27 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Análisis Destacado */}
+      <section className="section-spacing border-b border-divider">
+        <div className="container-editorial">
+          <p className="text-sm uppercase tracking-widest text-caption mb-8">
+            Análisis destacado
+          </p>
+          <Link to="/analisis/ai-act-reglamento-europeo" className="block group">
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight group-hover:text-muted-foreground transition-colors duration-300 mb-6">
+              Reglamento Europeo de Inteligencia Artificial (AI Act): análisis jurídico y claves para el sector legal
+            </h2>
+            <p className="text-body text-lg leading-relaxed mb-6 max-w-3xl">
+              El AI Act establece el primer marco regulatorio integral para la inteligencia artificial en la Unión Europea. Analizamos su arquitectura normativa basada en el riesgo, las obligaciones para sistemas de alto riesgo y sus implicaciones directas para abogados, despachos y administraciones públicas.
+            </p>
+            <span className="inline-flex items-center text-sm text-caption group-hover:text-foreground transition-colors duration-300">
+              Leer análisis completo
+              <span className="ml-2">→</span>
+            </span>
+          </Link>
+        </div>
+      </section>
+
       {/* Ámbitos de Análisis */}
       <section className="section-spacing border-b border-divider">
         <div className="container-wide">
