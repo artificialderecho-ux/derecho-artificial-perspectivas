@@ -83,41 +83,35 @@ const Index = () => {
               </p>
             </Link>
             
-            <Link 
-              to="/documentos" 
-              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
-            >
-              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+            <div className="bg-background p-10 md:p-14">
+              <h3 className="font-serif text-xl md:text-2xl text-muted-foreground mb-4">
                 Documentos y marcos normativos
               </h3>
               <p className="text-body leading-relaxed">
                 Recopilación comentada de normativas, directrices y documentos de referencia.
               </p>
-            </Link>
+              <p className="text-caption text-sm mt-4 italic">Próximamente</p>
+            </div>
             
-            <Link 
-              to="/software-ia-legal" 
-              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
-            >
-              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+            <div className="bg-background p-10 md:p-14">
+              <h3 className="font-serif text-xl md:text-2xl text-muted-foreground mb-4">
                 Software de IA legal
               </h3>
               <p className="text-body leading-relaxed">
                 Evaluación crítica de herramientas de inteligencia artificial para el sector jurídico.
               </p>
-            </Link>
+              <p className="text-caption text-sm mt-4 italic">Próximamente</p>
+            </div>
             
-            <Link 
-              to="/noticias" 
-              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
-            >
-              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+            <div className="bg-background p-10 md:p-14">
+              <h3 className="font-serif text-xl md:text-2xl text-muted-foreground mb-4">
                 Noticias contextualizadas
               </h3>
               <p className="text-body leading-relaxed">
                 Actualidad sobre IA y Derecho con análisis y perspectiva editorial.
               </p>
-            </Link>
+              <p className="text-caption text-sm mt-4 italic">Próximamente</p>
+            </div>
           </div>
         </div>
       </section>

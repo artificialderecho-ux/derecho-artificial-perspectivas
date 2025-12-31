@@ -25,27 +25,18 @@ export function Footer() {
             <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-caption mb-6">
               Navegación
             </h4>
-            <nav className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-4">
+            <nav className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
               <Link to="/" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                 Inicio
               </Link>
               <Link to="/analisis" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                 Análisis
               </Link>
-              <Link to="/documentos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Documentos
-              </Link>
-              <Link to="/software-ia-legal" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Software IA legal
-              </Link>
-              <Link to="/noticias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Noticias
-              </Link>
               <Link to="/manifiesto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                 Manifiesto editorial
               </Link>
               <Link to="/sobre" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Sobre nosotros
+                Sobre Derecho Artificial
               </Link>
               <Link to="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                 Contacto
