@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 const navigation = [
   { name: "Inicio", href: "/" },
   { name: "Análisis", href: "/analisis" },
+  { name: "Software IA legal", href: "/software-ia-legal" },
   { name: "Manifiesto editorial", href: "/manifiesto" },
   { name: "Sobre Derecho Artificial", href: "/sobre" },
   { name: "Contacto", href: "/contacto" },
