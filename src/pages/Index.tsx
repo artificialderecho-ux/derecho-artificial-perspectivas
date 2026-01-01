@@ -105,15 +105,17 @@ const Index = () => {
               </p>
             </Link>
             
-            <div className="bg-background p-10 md:p-14">
-              <h3 className="font-serif text-xl md:text-2xl text-muted-foreground mb-4">
-                Noticias contextualizadas
+            <Link 
+              to="/noticias" 
+              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
+            >
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+                Noticias y novedades
               </h3>
               <p className="text-body leading-relaxed">
-                Actualidad sobre IA y Derecho con análisis y perspectiva editorial.
+                Seguimiento editorial de desarrollos regulatorios y tecnológicos con relevancia jurídica.
               </p>
-              <p className="text-caption text-sm mt-4 italic">Próximamente</p>
-            </div>
+            </Link>
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
 
-const Noticias = () => {
+export default function News() {
   return (
     <Layout>
       {/* Hero */}
@@ -9,21 +9,21 @@ const Noticias = () => {
         <div className="container-narrow">
           <div className="flex justify-between items-start mb-6">
             <p className="text-xs uppercase tracking-[0.2em] text-caption">
-              Actualidad jurídica
+              Legal News
             </p>
             <Link 
-              to="/en/news" 
+              to="/noticias" 
               className="text-xs uppercase tracking-[0.15em] text-caption hover:text-foreground transition-colors duration-300"
             >
-              English version →
+              ← Versión en español
             </Link>
           </div>
           <h1 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-8 leading-tight">
-            Noticias y novedades sobre inteligencia artificial y Derecho
+            News and Developments in Artificial Intelligence and Law
           </h1>
           <p className="text-xl text-body leading-relaxed max-w-3xl">
-            Seguimiento editorial de los desarrollos regulatorios, institucionales y tecnológicos 
-            relevantes para el ámbito jurídico.
+            Editorial coverage of regulatory, institutional and technological developments 
+            relevant to the legal sector.
           </p>
         </div>
       </section>
@@ -33,17 +33,17 @@ const Noticias = () => {
         <div className="container-narrow">
           <div className="prose-editorial">
             <p>
-              Esta sección ofrece una selección editorial de noticias sobre inteligencia artificial 
-              y Derecho. No se trata de un agregador automatizado ni de un servicio de noticias en 
-              tiempo real, sino de una curación consciente de aquellos desarrollos que merecen 
-              atención desde una perspectiva jurídica crítica.
+              This section provides an editorial selection of news on artificial intelligence 
+              and law. It is not an automated aggregator nor a real-time news service, but a 
+              conscious curation of developments that merit attention from a critical legal 
+              perspective.
             </p>
             
             <p>
-              Cada publicación incluye contexto editorial que permite comprender la relevancia 
-              jurídica del acontecimiento, más allá de la mera reproducción de comunicados de prensa 
-              o notas institucionales. El objetivo es proporcionar un seguimiento informado que 
-              facilite la reflexión profesional.
+              Each publication includes editorial context that enables understanding of the 
+              legal relevance of the event, beyond mere reproduction of press releases or 
+              institutional notes. The objective is to provide informed coverage that 
+              facilitates professional reflection.
             </p>
           </div>
         </div>
@@ -54,13 +54,12 @@ const Noticias = () => {
         <div className="container-narrow">
           <div className="bg-surface p-8 md:p-10">
             <h2 className="font-serif text-xl text-foreground mb-4">
-              Nota editorial
+              Editorial Notice
             </h2>
             <p className="text-body leading-relaxed">
-              Esta sección <strong>no es un servicio de noticias en tiempo real</strong> ni un 
-              sistema de publicación automatizada. Aunque herramientas de IA pueden asistir en 
-              la detección de fuentes relevantes, la selección final y la publicación son siempre 
-              humanas y editoriales.
+              This section <strong>is not a real-time news service</strong> and is not an 
+              automated publication system. While AI tools may assist in detecting relevant 
+              sources, final selection and publication are always human and editorial.
             </p>
           </div>
         </div>
@@ -70,48 +69,47 @@ const Noticias = () => {
       <section className="py-12 border-t border-divider">
         <div className="container-narrow">
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
-            Contenido publicado
+            Published Content
           </h2>
           
           <div className="prose-editorial mb-10">
             <p>
-              Las noticias y novedades incluidas en esta sección responden a criterios 
-              editoriales definidos, orientados a la relevancia jurídica y la utilidad 
-              profesional.
+              The news and developments included in this section respond to defined editorial 
+              criteria, oriented towards legal relevance and professional utility.
             </p>
           </div>
           
           <div className="space-y-8">
             <div className="border-l-2 border-foreground pl-6">
               <h3 className="font-serif text-lg text-foreground mb-2">
-                Desarrollos regulatorios e institucionales
+                Regulatory and Institutional Developments
               </h3>
               <p className="text-body leading-relaxed">
-                Normativas europeas e internacionales, resoluciones judiciales, directrices de 
-                autoridades de protección de datos, posicionamientos de organismos públicos y 
-                publicaciones académicas de referencia.
+                European and international regulations, judicial decisions, guidelines from 
+                data protection authorities, positions of public bodies and reference 
+                academic publications.
               </p>
             </div>
             
             <div className="border-l-2 border-foreground pl-6">
               <h3 className="font-serif text-lg text-foreground mb-2">
-                Desarrollos tecnológicos con impacto jurídico real
+                Technological Developments with Real Legal Impact
               </h3>
               <p className="text-body leading-relaxed">
-                Avances tecnológicos que plantean cuestiones jurídicas concretas, casos de uso 
-                documentados y análisis de herramientas cuyo despliegue afecta a derechos 
-                fundamentales o responsabilidades profesionales.
+                Technological advances that raise concrete legal questions, documented use 
+                cases and analysis of tools whose deployment affects fundamental rights or 
+                professional responsibilities.
               </p>
             </div>
             
             <div className="border-l-2 border-foreground pl-6">
               <h3 className="font-serif text-lg text-foreground mb-2">
-                Informes, directrices y documentación relevante
+                Reports, Guidelines and Relevant Documentation
               </h3>
               <p className="text-body leading-relaxed">
-                Publicaciones de organismos internacionales, universidades, colegios profesionales 
-                y centros de investigación que aportan perspectiva fundamentada sobre la 
-                intersección entre IA y Derecho.
+                Publications from international organisations, universities, professional 
+                associations and research centres that provide well-founded perspective on 
+                the intersection of AI and law.
               </p>
             </div>
           </div>
@@ -122,44 +120,44 @@ const Noticias = () => {
       <section className="py-12 border-t border-divider">
         <div className="container-narrow">
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
-            Contenido excluido
+            Excluded Content
           </h2>
           
           <div className="prose-editorial mb-10">
             <p>
-              Determinados tipos de contenido quedan explícitamente fuera del ámbito de esta 
-              sección, con independencia de su difusión en otros medios.
+              Certain types of content are explicitly outside the scope of this section, 
+              regardless of their dissemination in other media.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 bg-surface">
               <h3 className="font-serif text-lg text-foreground mb-2">
-                Contenido promocional
+                Promotional Content
               </h3>
               <p className="text-body text-sm leading-relaxed">
-                Notas de prensa corporativas, lanzamientos de productos o comunicaciones 
-                con finalidad comercial.
+                Corporate press releases, product launches or communications with 
+                commercial purposes.
               </p>
             </div>
             
             <div className="p-6 bg-surface">
               <h3 className="font-serif text-lg text-foreground mb-2">
-                Comunicados sin relevancia jurídica
+                Statements Without Legal Relevance
               </h3>
               <p className="text-body text-sm leading-relaxed">
-                Informaciones institucionales o empresariales que no aportan contenido 
-                sustantivo para el análisis legal.
+                Institutional or corporate information that does not provide substantive 
+                content for legal analysis.
               </p>
             </div>
             
             <div className="p-6 bg-surface">
               <h3 className="font-serif text-lg text-foreground mb-2">
-                Noticias especulativas
+                Speculative News
               </h3>
               <p className="text-body text-sm leading-relaxed">
-                Contenido basado en rumores, predicciones no fundamentadas o tendencias 
-                impulsadas por ciclos de hype tecnológico.
+                Content based on rumours, unfounded predictions or trends driven by 
+                technological hype cycles.
               </p>
             </div>
           </div>
@@ -170,14 +168,14 @@ const Noticias = () => {
       <section className="py-12 border-t border-divider">
         <div className="container-narrow">
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
-            Últimas novedades
+            Latest Updates
           </h2>
           
           <div className="bg-surface p-8 md:p-10 text-center">
             <p className="text-body leading-relaxed">
-              Las noticias y novedades se incorporarán progresivamente a esta sección, 
-              conforme a los estándares de rigor e independencia que definen la línea 
-              editorial de Derecho Artificial.
+              News and developments will be progressively incorporated into this section, 
+              in accordance with the standards of rigour and independence that define the 
+              editorial line of Derecho Artificial.
             </p>
           </div>
         </div>
@@ -187,28 +185,26 @@ const Noticias = () => {
       <section className="py-16 border-t border-divider">
         <div className="container-narrow">
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">
-            Posicionamiento editorial
+            Editorial Positioning
           </h2>
           
           <div className="prose-editorial">
             <p>
-              Esta sección adopta una posición deliberadamente crítica y no promocional. Su 
-              objetivo no es competir con agencias de noticias ni agregar contenido sin filtro, 
-              sino ofrecer un espacio de seguimiento informado donde los profesionales del Derecho 
-              puedan encontrar información verificada y contextualizada.
+              This section adopts a deliberately critical and non-promotional stance. Its 
+              objective is not to compete with news agencies or aggregate content without 
+              filtering, but to offer a space for informed coverage where legal professionals 
+              can find verified and contextualised information.
             </p>
             
             <p>
-              Derecho Artificial no mantiene acuerdos comerciales con empresas tecnológicas, 
-              no incluye enlaces de afiliado y no participa en ciclos de difusión de contenido 
-              promocional. La selección de noticias responde exclusivamente a criterios de 
-              relevancia jurídica y utilidad profesional.
+              Derecho Artificial maintains no commercial agreements with technology companies, 
+              includes no affiliate links and does not participate in promotional content 
+              dissemination cycles. News selection responds exclusively to criteria of legal 
+              relevance and professional utility.
             </p>
           </div>
         </div>
       </section>
     </Layout>
   );
-};
-
-export default Noticias;
+}

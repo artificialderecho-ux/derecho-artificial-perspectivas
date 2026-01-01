@@ -1,11 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 
 const navigation = [
   { name: "Inicio", href: "/" },
   { name: "Análisis", href: "/analisis" },
   { name: "Software IA legal", href: "/software-ia-legal" },
+  { name: "Noticias", href: "/noticias" },
   { name: "Manifiesto editorial", href: "/manifiesto" },
   { name: "Sobre Derecho Artificial", href: "/sobre" },
   { name: "Contacto", href: "/contacto" },
@@ -30,21 +31,34 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden xl:flex items-center gap-10">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`text-sm tracking-wide transition-colors duration-300 ${
-                  location.pathname === item.href
-                    ? "text-foreground"
-                    : "text-caption hover:text-foreground"
-                }`}
+          <div className="hidden xl:flex items-center gap-10">
+            <nav className="flex items-center gap-10">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-sm tracking-wide transition-colors duration-300 ${
+                    location.pathname === item.href
+                      ? "text-foreground"
+                      : "text-caption hover:text-foreground"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+            
+            {/* Language switcher */}
+            <div className="flex items-center gap-2 pl-6 border-l border-divider">
+              <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
+              <Link 
+                to="/en/legal-ai-software" 
+                className="text-xs uppercase tracking-wider text-caption hover:text-foreground transition-colors duration-300"
               >
-                {item.name}
+                EN
               </Link>
-            ))}
-          </nav>
+            </div>
+          </div>
 
           {/* Mobile menu button */}
           <button
@@ -79,6 +93,20 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Mobile language switcher */}
+              <div className="pt-4 mt-2 border-t border-divider">
+                <div className="flex items-center gap-2">
+                  <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
+                  <Link 
+                    to="/en/legal-ai-software" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-sm text-caption hover:text-foreground transition-colors duration-300"
+                  >
+                    English version
+                  </Link>
+                </div>
+              </div>
             </div>
           </nav>
         )}
