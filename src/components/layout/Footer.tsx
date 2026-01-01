@@ -35,6 +35,9 @@ export function Footer() {
               <Link to="/software-ia-legal" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                 Software IA legal
               </Link>
+              <Link to="/noticias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                Noticias
+              </Link>
               <Link to="/manifiesto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                 Manifiesto editorial
               </Link>
