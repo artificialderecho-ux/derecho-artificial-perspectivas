@@ -9,6 +9,7 @@ import Analisis from "./pages/Analisis";
 import AIActReglamentoEuropeo from "./pages/analisis/AIActReglamentoEuropeo";
 import Documentos from "./pages/Documentos";
 import SoftwareIALegal from "./pages/SoftwareIALegal";
+import LegalAISoftware from "./pages/en/LegalAISoftware";
 import Noticias from "./pages/Noticias";
 import Sobre from "./pages/Sobre";
 import Contacto from "./pages/Contacto";
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/analisis/ai-act-reglamento-europeo" element={<AIActReglamentoEuropeo />} />
           <Route path="/documentos" element={<Documentos />} />
           <Route path="/software-ia-legal" element={<SoftwareIALegal />} />
+          <Route path="/en/legal-ai-software" element={<LegalAISoftware />} />
           <Route path="/noticias" element={<Noticias />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contacto" element={<Contacto />} />
