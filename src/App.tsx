@@ -11,6 +11,8 @@ import Documentos from "./pages/Documentos";
 import SoftwareIALegal from "./pages/SoftwareIALegal";
 import LegalAISoftware from "./pages/en/LegalAISoftware";
 import News from "./pages/en/News";
+import IndexEN from "./pages/en/Index";
+import About from "./pages/en/About";
 import Noticias from "./pages/Noticias";
 import Sobre from "./pages/Sobre";
 import Contacto from "./pages/Contacto";
@@ -31,11 +33,14 @@ const App = () => (
           <Route path="/analisis/ai-act-reglamento-europeo" element={<AIActReglamentoEuropeo />} />
           <Route path="/documentos" element={<Documentos />} />
           <Route path="/software-ia-legal" element={<SoftwareIALegal />} />
-          <Route path="/en/legal-ai-software" element={<LegalAISoftware />} />
           <Route path="/noticias" element={<Noticias />} />
-          <Route path="/en/news" element={<News />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contacto" element={<Contacto />} />
+          {/* English routes */}
+          <Route path="/en" element={<IndexEN />} />
+          <Route path="/en/legal-ai-software" element={<LegalAISoftware />} />
+          <Route path="/en/news" element={<News />} />
+          <Route path="/en/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

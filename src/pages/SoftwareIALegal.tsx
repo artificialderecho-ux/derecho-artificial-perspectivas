@@ -80,9 +80,9 @@ export default function SoftwareIALegal() {
           <div className="prose-editorial">
             <p>
               El mercado de software de inteligencia artificial aplicado al Derecho abarca 
-              diversas categorías funcionales. A continuación se presentan algunas de las 
-              más relevantes, junto con ejemplos de herramientas que operan en cada ámbito. 
-              La mención de estas herramientas no constituye recomendación alguna.
+              diversas categorías funcionales. A continuación se presentan las más relevantes, 
+              junto con ejemplos de herramientas que operan en cada ámbito. La mención de 
+              estas herramientas no constituye recomendación alguna.
             </p>
           </div>
           
@@ -110,6 +110,62 @@ export default function SoftwareIALegal() {
               </p>
               <p className="text-caption text-sm">
                 Ejemplos: Robin AI
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-divider pl-6">
+              <h3 className="font-serif text-lg text-foreground mb-2">
+                Automatización documental
+              </h3>
+              <p className="text-body leading-relaxed mb-3">
+                Sistemas de generación y gestión de documentos jurídicos mediante plantillas 
+                inteligentes, ensamblaje automático y flujos de trabajo estandarizados.
+              </p>
+              <p className="text-caption text-sm">
+                Categoría en desarrollo editorial
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-divider pl-6">
+              <h3 className="font-serif text-lg text-foreground mb-2">
+                Justicia predictiva
+              </h3>
+              <p className="text-body leading-relaxed mb-3">
+                Herramientas que analizan resoluciones judiciales históricas para estimar 
+                probabilidades de éxito procesal o anticipar criterios jurisprudenciales. 
+                Categoría de alto riesgo según el AI Act.
+              </p>
+              <p className="text-caption text-sm">
+                Categoría en desarrollo editorial
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-divider pl-6">
+              <h3 className="font-serif text-lg text-foreground mb-2">
+                E-discovery y revisión documental
+              </h3>
+              <p className="text-body leading-relaxed mb-3">
+                Plataformas de análisis masivo de documentos para litigios y procedimientos 
+                de investigación, con capacidades de clasificación, etiquetado y priorización 
+                mediante aprendizaje automático.
+              </p>
+              <p className="text-caption text-sm">
+                Categoría en desarrollo editorial
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-divider pl-6">
+              <h3 className="font-serif text-lg text-foreground mb-2">
+                IA generativa para profesionales del Derecho
+              </h3>
+              <p className="text-body leading-relaxed mb-3">
+                Modelos de lenguaje y asistentes conversacionales diseñados o adaptados para 
+                tareas jurídicas: redacción de escritos, síntesis de expedientes, generación 
+                de borradores contractuales. Plantean cuestiones específicas de responsabilidad 
+                y supervisión humana.
+              </p>
+              <p className="text-caption text-sm">
+                Categoría en desarrollo editorial
               </p>
             </div>
             

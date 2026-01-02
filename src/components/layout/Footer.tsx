@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const isEnglish = location.pathname.startsWith("/en");
 
   return (
     <footer className="border-t border-divider bg-background">
@@ -9,44 +11,71 @@ export function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-5">
-            <Link to="/" className="inline-block">
+            <Link to={isEnglish ? "/en" : "/"} className="inline-block">
               <span className="font-serif text-2xl font-medium text-foreground">
                 Derecho Artificial
               </span>
             </Link>
             <p className="mt-6 text-body leading-relaxed max-w-sm">
-              Análisis crítico e independiente sobre la intersección del Derecho, 
-              la Ética y la Inteligencia Artificial para el mundo hispanohablante.
+              {isEnglish 
+                ? "Independent critical analysis of the intersection of Law, Ethics and Artificial Intelligence."
+                : "Análisis crítico e independiente sobre la intersección del Derecho, la Ética y la Inteligencia Artificial para el mundo hispanohablante."
+              }
             </p>
           </div>
 
           {/* Navigation */}
           <div className="lg:col-span-7">
             <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-caption mb-6">
-              Navegación
+              {isEnglish ? "Navigation" : "Navegación"}
             </h4>
             <nav className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
-              <Link to="/" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Inicio
-              </Link>
-              <Link to="/analisis" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Análisis
-              </Link>
-              <Link to="/software-ia-legal" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Software IA legal
-              </Link>
-              <Link to="/noticias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Noticias
-              </Link>
-              <Link to="/manifiesto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Manifiesto editorial
-              </Link>
-              <Link to="/sobre" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Sobre Derecho Artificial
-              </Link>
-              <Link to="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                Contacto
-              </Link>
+              {isEnglish ? (
+                <>
+                  <Link to="/en" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Home
+                  </Link>
+                  <Link to="/en/legal-ai-software" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Legal AI Software
+                  </Link>
+                  <Link to="/en/news" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    News
+                  </Link>
+                  <Link to="/en/about" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    About
+                  </Link>
+                  <Link to="/" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Versión en español
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Inicio
+                  </Link>
+                  <Link to="/analisis" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Análisis
+                  </Link>
+                  <Link to="/software-ia-legal" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Software IA legal
+                  </Link>
+                  <Link to="/noticias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Noticias
+                  </Link>
+                  <Link to="/manifiesto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Manifiesto editorial
+                  </Link>
+                  <Link to="/sobre" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Sobre Derecho Artificial
+                  </Link>
+                  <Link to="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Contacto
+                  </Link>
+                  <Link to="/en" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    English version
+                  </Link>
+                </>
+              )}
             </nav>
           </div>
         </div>
@@ -58,7 +87,7 @@ export function Footer() {
               © {currentYear} Derecho Artificial
             </p>
             <p className="text-xs text-caption tracking-wide">
-              Un proyecto editorial independiente
+              {isEnglish ? "An independent editorial project" : "Un proyecto editorial independiente"}
             </p>
           </div>
         </div>

@@ -78,7 +78,7 @@ export default function LegalAISoftware() {
           <div className="prose-editorial">
             <p>
               The market for artificial intelligence software applied to law encompasses 
-              various functional categories. Below are some of the most relevant, along with 
+              various functional categories. Below are the most relevant, along with 
               examples of tools operating in each area. The mention of these tools does not 
               constitute any recommendation.
             </p>
@@ -108,6 +108,61 @@ export default function LegalAISoftware() {
               </p>
               <p className="text-caption text-sm">
                 Examples: Robin AI
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-divider pl-6">
+              <h3 className="font-serif text-lg text-foreground mb-2">
+                Document Automation
+              </h3>
+              <p className="text-body leading-relaxed mb-3">
+                Systems for generating and managing legal documents through intelligent 
+                templates, automatic assembly and standardised workflows.
+              </p>
+              <p className="text-caption text-sm">
+                Category under editorial development
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-divider pl-6">
+              <h3 className="font-serif text-lg text-foreground mb-2">
+                Predictive Justice
+              </h3>
+              <p className="text-body leading-relaxed mb-3">
+                Tools that analyse historical judicial decisions to estimate probabilities 
+                of procedural success or anticipate jurisprudential criteria. High-risk 
+                category under the AI Act.
+              </p>
+              <p className="text-caption text-sm">
+                Category under editorial development
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-divider pl-6">
+              <h3 className="font-serif text-lg text-foreground mb-2">
+                E-discovery and Document Review
+              </h3>
+              <p className="text-body leading-relaxed mb-3">
+                Platforms for mass document analysis in litigation and investigation 
+                proceedings, with classification, tagging and prioritisation capabilities 
+                through machine learning.
+              </p>
+              <p className="text-caption text-sm">
+                Category under editorial development
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-divider pl-6">
+              <h3 className="font-serif text-lg text-foreground mb-2">
+                Generative AI for Legal Professionals
+              </h3>
+              <p className="text-body leading-relaxed mb-3">
+                Language models and conversational assistants designed or adapted for 
+                legal tasks: drafting briefs, summarising case files, generating contract 
+                drafts. These raise specific questions of liability and human oversight.
+              </p>
+              <p className="text-caption text-sm">
+                Category under editorial development
               </p>
             </div>
             
