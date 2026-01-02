@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 
-const navigation = [
+const navigationES = [
   { name: "Inicio", href: "/" },
   { name: "Análisis", href: "/analisis" },
   { name: "Software IA legal", href: "/software-ia-legal" },
@@ -12,21 +12,59 @@ const navigation = [
   { name: "Contacto", href: "/contacto" },
 ];
 
+const navigationEN = [
+  { name: "Home", href: "/en" },
+  { name: "Legal AI Software", href: "/en/legal-ai-software" },
+  { name: "News", href: "/en/news" },
+  { name: "About", href: "/en/about" },
+];
+
+// Map Spanish routes to English equivalents
+const esEnRouteMap: Record<string, string> = {
+  "/": "/en",
+  "/software-ia-legal": "/en/legal-ai-software",
+  "/noticias": "/en/news",
+  "/sobre": "/en/about",
+  "/analisis": "/en",
+  "/manifiesto": "/en/about",
+  "/contacto": "/en/about",
+  "/documentos": "/en",
+};
+
+// Map English routes to Spanish equivalents  
+const enEsRouteMap: Record<string, string> = {
+  "/en": "/",
+  "/en/legal-ai-software": "/software-ia-legal",
+  "/en/news": "/noticias",
+  "/en/about": "/sobre",
+};
+
 export function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const isEnglish = location.pathname.startsWith("/en");
+  const navigation = isEnglish ? navigationEN : navigationES;
+  
+  // Get the equivalent route in the other language
+  const getAlternateRoute = () => {
+    if (isEnglish) {
+      return enEsRouteMap[location.pathname] || "/";
+    }
+    return esEnRouteMap[location.pathname] || "/en";
+  };
 
   return (
     <header className="border-b border-divider bg-background">
       <div className="container-wide">
         <div className="flex items-center justify-between py-8 md:py-10">
           {/* Logo */}
-          <Link to="/" className="flex flex-col">
+          <Link to={isEnglish ? "/en" : "/"} className="flex flex-col">
             <span className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-foreground">
               Derecho Artificial
             </span>
             <span className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-caption mt-1">
-              Ley · Ética · Inteligencia Artificial
+              {isEnglish ? "Law · Ethics · Artificial Intelligence" : "Ley · Ética · Inteligencia Artificial"}
             </span>
           </Link>
 
@@ -49,11 +87,22 @@ export function Header() {
             </nav>
             
             {/* Language switcher */}
-            <div className="flex items-center gap-2 pl-6 border-l border-divider">
+            <div className="flex items-center gap-3 pl-6 border-l border-divider">
               <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
               <Link 
-                to="/en/legal-ai-software" 
-                className="text-xs uppercase tracking-wider text-caption hover:text-foreground transition-colors duration-300"
+                to={isEnglish ? getAlternateRoute() : getAlternateRoute()}
+                className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
+                  !isEnglish ? "text-foreground font-medium" : "text-caption hover:text-foreground"
+                }`}
+              >
+                ES
+              </Link>
+              <span className="text-caption">|</span>
+              <Link 
+                to={isEnglish ? location.pathname : getAlternateRoute()}
+                className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
+                  isEnglish ? "text-foreground font-medium" : "text-caption hover:text-foreground"
+                }`}
               >
                 EN
               </Link>
@@ -65,7 +114,7 @@ export function Header() {
             type="button"
             className="xl:hidden p-2 -mr-2 text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Abrir menú"
+            aria-label={isEnglish ? "Open menu" : "Abrir menú"}
           >
             {mobileMenuOpen ? (
               <X className="h-5 w-5" strokeWidth={1.5} />
@@ -96,14 +145,14 @@ export function Header() {
               
               {/* Mobile language switcher */}
               <div className="pt-4 mt-2 border-t border-divider">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
                   <Link 
-                    to="/en/legal-ai-software" 
+                    to={getAlternateRoute()}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-sm text-caption hover:text-foreground transition-colors duration-300"
                   >
-                    English version
+                    {isEnglish ? "Versión en español" : "English version"}
                   </Link>
                 </div>
               </div>
