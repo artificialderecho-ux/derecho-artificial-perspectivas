@@ -1,9 +1,16 @@
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
     <Layout>
+      <SEOHead 
+        title="Derecho Artificial | Análisis jurídico y ético de la inteligencia artificial"
+        description="Proyecto editorial independiente dedicado al análisis crítico del Derecho, la ética y la práctica jurídica en la era de la inteligencia artificial."
+        canonical="https://derechoartificial.com"
+      />
+
       {/* Hero Section */}
       <section className="section-spacing border-b border-divider">
         <div className="container-editorial text-center">
@@ -11,7 +18,7 @@ const Index = () => {
             Derecho Artificial
           </h1>
           <p className="text-xl md:text-2xl text-body leading-relaxed max-w-2xl mx-auto font-serif italic">
-            Derecho, ética y práctica jurídica en la era de la inteligencia artificial.
+            Análisis jurídico y ético independiente sobre la inteligencia artificial en el ámbito legal.
           </p>
         </div>
       </section>
@@ -22,16 +29,18 @@ const Index = () => {
           <div className="prose-editorial">
             <p className="text-lg md:text-xl leading-[1.9] first-letter:text-5xl first-letter:font-serif first-letter:font-medium first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-foreground">
               Derecho Artificial es un proyecto editorial independiente dedicado al análisis 
-              crítico de la inteligencia artificial en el ámbito jurídico. Nuestro propósito 
-              es ofrecer un espacio de reflexión rigurosa, alejado de modas tecnológicas y 
-              discursos promocionales, donde profesionales del Derecho y ciudadanos informados 
-              puedan encontrar análisis fundamentados, documentación relevante y perspectivas 
-              éticas sobre las transformaciones que la IA introduce en la práctica legal.
+              crítico de la inteligencia artificial en el ámbito jurídico. Su propósito 
+              es ofrecer un espacio de reflexión rigurosa, alejado del entusiasmo tecnológico 
+              y de los discursos promocionales, donde profesionales del Derecho y ciudadanos 
+              informados puedan encontrar análisis fundamentados sobre las transformaciones 
+              que la IA introduce en la regulación, la ética y la práctica legal.
             </p>
             <p className="text-lg md:text-xl leading-[1.9]">
-              No buscamos celebrar ni demonizar la tecnología. Buscamos comprenderla, 
-              contextualizarla y someterla al escrutinio que exige su creciente influencia 
-              en decisiones que afectan derechos y libertades fundamentales.
+              Este proyecto no pretende celebrar ni demonizar la tecnología. Pretende 
+              comprenderla, contextualizarla jurídicamente y someterla al escrutinio crítico 
+              que exige su creciente influencia en decisiones que afectan a derechos 
+              y libertades fundamentales. La independencia editorial es el fundamento 
+              de toda la actividad de análisis.
             </p>
           </div>
         </div>
@@ -45,13 +54,16 @@ const Index = () => {
           </p>
           <Link to="/analisis/ai-act-reglamento-europeo" className="block group">
             <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight group-hover:text-muted-foreground transition-colors duration-300 mb-6">
-              Reglamento Europeo de Inteligencia Artificial (AI Act): análisis jurídico y claves para el sector legal
+              Reglamento Europeo de Inteligencia Artificial (AI Act): análisis jurídico
             </h2>
             <p className="text-body text-lg leading-relaxed mb-6 max-w-3xl">
-              El AI Act establece el primer marco regulatorio integral para la inteligencia artificial en la Unión Europea. Analizamos su arquitectura normativa basada en el riesgo, las obligaciones para sistemas de alto riesgo y sus implicaciones directas para abogados, despachos y administraciones públicas.
+              El AI Act establece el primer marco regulatorio integral para la inteligencia 
+              artificial en la Unión Europea. Este análisis examina su arquitectura normativa 
+              basada en el riesgo, las obligaciones para sistemas de alto riesgo y sus 
+              implicaciones para la práctica jurídica y las administraciones públicas.
             </p>
             <span className="inline-flex items-center text-sm text-caption group-hover:text-foreground transition-colors duration-300">
-              Leer análisis completo
+              Acceder al análisis
               <span className="ml-2">→</span>
             </span>
           </Link>
@@ -66,7 +78,7 @@ const Index = () => {
               Ámbitos de análisis
             </h2>
             <p className="text-body text-lg max-w-xl mx-auto">
-              Las áreas donde el Derecho y la inteligencia artificial convergen.
+              Áreas de convergencia entre el Derecho y la inteligencia artificial.
             </p>
           </div>
           
@@ -79,19 +91,23 @@ const Index = () => {
                 Análisis jurídico
               </h3>
               <p className="text-body leading-relaxed">
-                Estudios en profundidad sobre las implicaciones legales de la IA en distintas ramas del Derecho.
+                Estudios en profundidad sobre las implicaciones legales de la IA: responsabilidad, 
+                propiedad intelectual, protección de datos y regulación sectorial.
               </p>
             </Link>
             
-            <div className="bg-background p-10 md:p-14">
-              <h3 className="font-serif text-xl md:text-2xl text-muted-foreground mb-4">
+            <Link 
+              to="/documentos" 
+              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
+            >
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
                 Documentos y marcos normativos
               </h3>
               <p className="text-body leading-relaxed">
-                Recopilación comentada de normativas, directrices y documentos de referencia.
+                Recopilación comentada de normativas, directrices y documentos de referencia 
+                sobre inteligencia artificial en el ámbito europeo e internacional.
               </p>
-              <p className="text-caption text-sm mt-4 italic">Próximamente</p>
-            </div>
+            </Link>
             
             <Link 
               to="/software-ia-legal" 
@@ -101,7 +117,8 @@ const Index = () => {
                 Software de IA legal
               </h3>
               <p className="text-body leading-relaxed">
-                Evaluación crítica de herramientas de inteligencia artificial para el sector jurídico.
+                Evaluación crítica de herramientas de inteligencia artificial para el sector 
+                jurídico desde una perspectiva de auditoría y cumplimiento normativo.
               </p>
             </Link>
             
@@ -113,7 +130,8 @@ const Index = () => {
                 Noticias y novedades
               </h3>
               <p className="text-body leading-relaxed">
-                Seguimiento editorial de desarrollos regulatorios y tecnológicos con relevancia jurídica.
+                Seguimiento editorial de desarrollos regulatorios, institucionales y 
+                tecnológicos con relevancia jurídica en el ámbito de la IA.
               </p>
             </Link>
           </div>
@@ -145,7 +163,7 @@ const Index = () => {
               to="/manifiesto" 
               className="inline-flex items-center text-sm font-medium tracking-wide text-caption hover:text-foreground transition-colors duration-300 uppercase"
             >
-              Leer nuestro manifiesto editorial
+              Manifiesto editorial
               <span className="ml-2">→</span>
             </Link>
           </div>
