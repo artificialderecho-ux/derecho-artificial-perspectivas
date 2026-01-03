@@ -16,6 +16,9 @@ import About from "./pages/en/About";
 import Noticias from "./pages/Noticias";
 import Sobre from "./pages/Sobre";
 import Contacto from "./pages/Contacto";
+import AvisoLegal from "./pages/AvisoLegal";
+import Privacidad from "./pages/Privacidad";
+import Cookies from "./pages/Cookies";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +39,9 @@ const App = () => (
           <Route path="/noticias" element={<Noticias />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contacto" element={<Contacto />} />
+          <Route path="/aviso-legal" element={<AvisoLegal />} />
+          <Route path="/privacidad" element={<Privacidad />} />
+          <Route path="/cookies" element={<Cookies />} />
           {/* English routes */}
           <Route path="/en" element={<IndexEN />} />
           <Route path="/en/legal-ai-software" element={<LegalAISoftware />} />
