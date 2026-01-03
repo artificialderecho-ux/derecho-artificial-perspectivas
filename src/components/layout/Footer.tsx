@@ -80,8 +80,19 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-20 pt-10 border-t border-divider">
+        {/* Legal links */}
+        <div className="mt-12 pt-8 border-t border-divider">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
+            <Link to="/aviso-legal" className="text-xs text-caption hover:text-foreground transition-colors">
+              Aviso legal
+            </Link>
+            <Link to="/privacidad" className="text-xs text-caption hover:text-foreground transition-colors">
+              Privacidad
+            </Link>
+            <Link to="/cookies" className="text-xs text-caption hover:text-foreground transition-colors">
+              Cookies
+            </Link>
+          </nav>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <p className="text-xs text-caption tracking-wide">
               © {currentYear} Derecho Artificial
