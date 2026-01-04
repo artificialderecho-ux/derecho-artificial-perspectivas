@@ -35,11 +35,14 @@ export function Footer() {
                   <Link to="/en" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Home
                   </Link>
-                  <Link to="/en/legal-ai-software" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Legal AI Software
+                  <Link to="/en/software" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Software
                   </Link>
                   <Link to="/en/news" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     News
+                  </Link>
+                  <Link to="/en/manifesto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Manifesto
                   </Link>
                   <Link to="/en/about" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     About

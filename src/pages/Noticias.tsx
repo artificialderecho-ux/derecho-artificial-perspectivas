@@ -3,30 +3,51 @@ import { SEOHead } from "@/components/SEOHead";
 import { NewsCard } from "@/components/ui/NewsCard";
 import { Link } from "react-router-dom";
 
-const noticias = [
+interface NoticiaEditorial {
+  title: string;
+  date: string;
+  source: string;
+  sourceUrl: string;
+  tags: string[];
+  context: string;
+  keyContent: string;
+  legalRelevance: string;
+  editorialNote: string;
+}
+
+const noticias: NoticiaEditorial[] = [
   {
-    title: "El AI Act: claves del primer marco legal europeo sobre inteligencia artificial",
-    summary: "El Reglamento (UE) 2024/1689, conocido como AI Act, establece el primer marco normativo integral sobre inteligencia artificial en la Unión Europea. Su arquitectura basada en niveles de riesgo —inaceptable, alto, limitado y mínimo— determina obligaciones diferenciadas para proveedores y operadores de sistemas de IA. Para los profesionales del Derecho, el Reglamento implica nuevas responsabilidades de cumplimiento, especialmente en el uso de sistemas de alto riesgo como los destinados a la administración de justicia o la interpretación jurídica. El texto entró en vigor el 1 de agosto de 2024, con aplicación gradual hasta 2027.",
-    date: "Diciembre 2024",
-    source: "EUR-Lex",
+    title: "El AI Act entra en vigor: primeras obligaciones para operadores de sistemas de IA",
+    date: "Enero 2025",
+    source: "EUR-Lex / Diario Oficial de la Unión Europea",
     sourceUrl: "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32024R1689",
-    tags: ["AI Act", "Regulación UE", "Alto riesgo", "Cumplimiento normativo"],
+    tags: ["AI Act", "Regulación UE", "Cumplimiento normativo"],
+    context: "El Reglamento (UE) 2024/1689, conocido como AI Act, entró en vigor el 1 de agosto de 2024. A partir de febrero de 2025 comienzan a aplicarse las primeras prohibiciones sobre sistemas de IA de riesgo inaceptable, iniciando así el calendario de aplicación gradual que culminará en 2027.",
+    keyContent: "Las primeras obligaciones afectan a los sistemas de IA prohibidos por el artículo 5 del Reglamento: manipulación subliminal, explotación de vulnerabilidades, puntuación social y predicción criminal individual. Los proveedores y operadores deben cesar el uso de estos sistemas o acreditar que no incurren en las conductas proscritas.",
+    legalRelevance: "Para despachos de abogados y departamentos jurídicos, esta fase inicial exige una auditoría de las herramientas de IA actualmente en uso para verificar que ninguna incurra en prácticas prohibidas. Los sistemas de alto riesgo tendrán obligaciones adicionales a partir de agosto de 2025, lo que aconseja preparar ya los procesos de evaluación de conformidad.",
+    editorialNote: "La aplicación gradual del AI Act no debe confundirse con una moratoria. Las prohibiciones del artículo 5 son de aplicación inmediata y su incumplimiento puede generar sanciones de hasta 35 millones de euros o el 7% del volumen de negocio global.",
   },
   {
-    title: "Guías oficiales sobre el uso responsable de la IA en el ámbito jurídico",
-    summary: "Diversas instituciones europeas y nacionales han publicado directrices sobre el uso de sistemas de inteligencia artificial en la práctica jurídica. La Carta Ética del CEPEJ (Consejo de Europa) establece cinco principios fundamentales: respeto a los derechos fundamentales, no discriminación, calidad y seguridad, transparencia y control por el usuario. Estas guías, aunque no vinculantes, configuran un marco de soft law que orienta la interpretación del deber de diligencia profesional y anticipa futuras exigencias regulatorias. Su conocimiento resulta imprescindible para abogados, jueces y operadores jurídicos que incorporan herramientas de IA en su actividad.",
-    date: "Diciembre 2024",
+    title: "CEPEJ publica directrices actualizadas sobre IA en sistemas judiciales",
+    date: "Enero 2025",
     source: "CEPEJ / Consejo de Europa",
     sourceUrl: "https://www.coe.int/en/web/cepej/cepej-european-ethical-charter-on-the-use-of-artificial-intelligence-ai-in-judicial-systems-and-their-environment",
-    tags: ["Ética", "Soft law", "Práctica jurídica", "CEPEJ"],
+    tags: ["Ética", "Soft law", "Administración de justicia", "CEPEJ"],
+    context: "La Comisión Europea para la Eficacia de la Justicia (CEPEJ) del Consejo de Europa continúa desarrollando el marco ético para el uso de inteligencia artificial en la administración de justicia, complementando su Carta Ética de 2018 con nuevas orientaciones prácticas.",
+    keyContent: "Los cinco principios fundamentales de la Carta Ética —respeto a derechos fundamentales, no discriminación, calidad y seguridad, transparencia y control por el usuario— se desarrollan ahora con indicadores concretos de implementación. Se refuerza especialmente la exigencia de supervisión humana en decisiones que afecten a derechos individuales.",
+    legalRelevance: "Aunque estas directrices no son vinculantes, configuran un estándar de soft law que puede influir en la interpretación del deber de diligencia profesional de jueces, fiscales y abogados. Además, anticipan criterios que podrían incorporarse a futuras reformas procesales en Estados miembros del Consejo de Europa.",
+    editorialNote: "Las guías de la CEPEJ representan el consenso europeo más avanzado sobre ética judicial e IA. Su conocimiento resulta imprescindible para cualquier profesional que trabaje con herramientas de justicia predictiva o análisis jurisprudencial automatizado.",
   },
   {
-    title: "La Unión Europea financia proyectos de IA con impacto legal y ético",
-    summary: "El programa Horizonte Europa y otros instrumentos de financiación de la UE impulsan proyectos de investigación que abordan las dimensiones jurídicas y éticas de la inteligencia artificial. A través de CORDIS (Servicio de Información Comunitario sobre Investigación y Desarrollo), es posible acceder a iniciativas que estudian gobernanza algorítmica, sistemas de IA explicable, evaluación de impacto en derechos fundamentales y herramientas de cumplimiento normativo. Estos proyectos generan conocimiento científico y metodologías que alimentan el debate regulatorio y ofrecen recursos para profesionales interesados en la intersección entre tecnología y Derecho.",
-    date: "Diciembre 2024",
-    source: "CORDIS",
+    title: "Convocatoria europea para proyectos de IA responsable en el ámbito jurídico",
+    date: "Enero 2025",
+    source: "CORDIS / Comisión Europea",
     sourceUrl: "https://cordis.europa.eu/",
-    tags: ["Investigación", "Horizonte Europa", "Financiación UE", "Gobernanza"],
+    tags: ["Investigación", "Horizonte Europa", "Financiación UE", "Gobernanza algorítmica"],
+    context: "El programa Horizonte Europa mantiene abiertas líneas de financiación para proyectos de investigación sobre inteligencia artificial ética y responsable, con especial atención a aplicaciones en sectores de alto impacto como la justicia y la administración pública.",
+    keyContent: "Entre los proyectos actualmente financiados figuran iniciativas sobre explicabilidad de algoritmos de decisión judicial, detección de sesgos en modelos de lenguaje aplicados al Derecho, y desarrollo de marcos de gobernanza algorítmica para instituciones públicas. Los resultados de estos proyectos alimentan directamente el debate regulatorio y ofrecen metodologías transferibles al sector privado.",
+    legalRelevance: "El seguimiento de proyectos CORDIS permite a profesionales jurídicos anticipar tendencias regulatorias, acceder a herramientas de evaluación de impacto y conocer buenas prácticas validadas por la investigación académica. Los consorcios suelen publicar guías y recursos de acceso abierto.",
+    editorialNote: "La financiación pública europea de proyectos de IA ética representa una alternativa al modelo de desarrollo dominado exclusivamente por intereses comerciales. Los resultados de estos proyectos merecen atención prioritaria frente a white papers corporativos.",
   },
 ];
 

@@ -10,7 +10,9 @@ import AIActReglamentoEuropeo from "./pages/analisis/AIActReglamentoEuropeo";
 import Documentos from "./pages/Documentos";
 import SoftwareIALegal from "./pages/SoftwareIALegal";
 import LegalAISoftware from "./pages/en/LegalAISoftware";
-import News from "./pages/en/News";
+import NewsEN from "./pages/en/NewsEN";
+import Software from "./pages/en/Software";
+import Manifesto from "./pages/en/Manifesto";
 import IndexEN from "./pages/en/Index";
 import About from "./pages/en/About";
 import Noticias from "./pages/Noticias";
@@ -44,8 +46,10 @@ const App = () => (
           <Route path="/cookies" element={<Cookies />} />
           {/* English routes */}
           <Route path="/en" element={<IndexEN />} />
+          <Route path="/en/software" element={<Software />} />
           <Route path="/en/legal-ai-software" element={<LegalAISoftware />} />
-          <Route path="/en/news" element={<News />} />
+          <Route path="/en/news" element={<NewsEN />} />
+          <Route path="/en/manifesto" element={<Manifesto />} />
           <Route path="/en/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
