@@ -13,19 +13,20 @@ const navigationES = [
 
 const navigationEN = [
   { name: "Home", href: "/en" },
-  { name: "Legal AI Software", href: "/en/legal-ai-software" },
+  { name: "Software", href: "/en/software" },
   { name: "News", href: "/en/news" },
+  { name: "Manifesto", href: "/en/manifesto" },
   { name: "About", href: "/en/about" },
 ];
 
 // Map Spanish routes to English equivalents
 const esEnRouteMap: Record<string, string> = {
   "/": "/en",
-  "/software-ia-legal": "/en/legal-ai-software",
+  "/software-ia-legal": "/en/software",
   "/noticias": "/en/news",
   "/sobre": "/en/about",
   "/analisis": "/en",
-  "/manifiesto": "/en/about",
+  "/manifiesto": "/en/manifesto",
   "/contacto": "/en/about",
   "/documentos": "/en",
 };
@@ -33,9 +34,10 @@ const esEnRouteMap: Record<string, string> = {
 // Map English routes to Spanish equivalents  
 const enEsRouteMap: Record<string, string> = {
   "/en": "/",
-  "/en/legal-ai-software": "/software-ia-legal",
+  "/en/software": "/software-ia-legal",
   "/en/news": "/noticias",
   "/en/about": "/sobre",
+  "/en/manifesto": "/manifiesto",
 };
 
 export function Header() {

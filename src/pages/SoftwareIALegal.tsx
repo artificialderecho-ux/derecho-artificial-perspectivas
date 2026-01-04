@@ -15,6 +15,54 @@ interface SoftwareProfile {
   humanOversight: string;
 }
 
+interface GenerativeAIProfile {
+  title: string;
+  description: string;
+  systemType: string[];
+  useCases: string[];
+  legalRisks: string[];
+  regulatoryConsiderations: string[];
+  rgpdConsiderations: string[];
+  editorialNote: string;
+}
+
+const generativeAIProfile: GenerativeAIProfile = {
+  title: "Herramientas de IA generativa para análisis documental jurídico",
+  description: "Sistemas basados en modelos de lenguaje de gran escala (LLM) que permiten el análisis, resumen y procesamiento de documentos jurídicos. Su uso típico en despachos incluye análisis de contratos, elaboración de resúmenes de expedientes, apoyo a la investigación normativa y jurisprudencial, y asistencia en la redacción de escritos. Estas herramientas prometen acelerar tareas documentales, aunque su fiabilidad depende críticamente de la calidad de los prompts, la actualización del modelo y la supervisión humana aplicada.",
+  systemType: [
+    "IA generativa basada en modelos de lenguaje (LLM)",
+    "Procesamiento de lenguaje natural (NLP)",
+    "Uso profesional jurídico",
+  ],
+  useCases: [
+    "Revisión y análisis de contratos",
+    "Preparación de escritos y borradores jurídicos",
+    "Investigación normativa y jurisprudencial",
+    "Síntesis de expedientes y documentación procesal",
+    "Extracción de cláusulas y obligaciones contractuales",
+  ],
+  legalRisks: [
+    "Alucinaciones jurídicas: generación de citas falsas, jurisprudencia inexistente o interpretaciones erróneas",
+    "Tratamiento de datos confidenciales en servidores externos sin garantías de seguridad",
+    "Falta de trazabilidad sobre el origen de las respuestas generadas",
+    "Sesgos algorítmicos que pueden orientar incorrectamente el análisis",
+    "Responsabilidad profesional por errores derivados de outputs no verificados",
+  ],
+  regulatoryConsiderations: [
+    "Posible clasificación como sistema de alto riesgo según AI Act si se utiliza en contextos de administración de justicia o interpretación jurídica (Anexo III del Reglamento)",
+    "Obligación de supervisión humana significativa en aplicaciones de alto riesgo",
+    "Requisitos de gobernanza de datos y documentación técnica para proveedores",
+    "Obligaciones de transparencia frente al cliente sobre el uso de herramientas de IA",
+  ],
+  rgpdConsiderations: [
+    "Riesgo de tratamiento de datos personales sin base jurídica clara",
+    "Posible transferencia internacional de datos a proveedores ubicados fuera del EEE",
+    "Necesidad de evaluar la realización de Evaluación de Impacto (DPIA) en determinados contextos",
+    "Obligación de información al interesado cuando se procesan sus datos mediante IA",
+  ],
+  editorialNote: "Estas herramientas deben entenderse como apoyo técnico, nunca como sustitución del criterio jurídico profesional. La responsabilidad sobre el contenido final permanece íntegramente en el profesional que firma el trabajo. Se recomienda verificar todas las citas, referencias y conclusiones generadas antes de su incorporación a documentos definitivos.",
+};
+
 const softwareProfiles: SoftwareProfile[] = [
   {
     name: "Sistemas de investigación jurídica asistida por IA",
@@ -130,11 +178,121 @@ export default function SoftwareIALegal() {
         </div>
       </section>
 
-      {/* Software Profiles */}
+      {/* Generative AI Profile - Main Feature */}
       <section className="py-12 border-t border-divider">
         <div className="container-narrow">
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-10">
-            Fichas de análisis
+            Análisis destacado
+          </h2>
+
+          <article className="mb-16">
+            <div className="border border-divider">
+              {/* Header */}
+              <div className="p-8 border-b border-divider bg-surface">
+                <p className="text-xs uppercase tracking-[0.2em] text-caption mb-2">
+                  IA generativa · Análisis documental
+                </p>
+                <h3 className="font-serif text-2xl text-foreground">
+                  {generativeAIProfile.title}
+                </h3>
+              </div>
+
+              {/* Description */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  1. Descripción funcional
+                </h4>
+                <p className="text-body leading-relaxed">
+                  {generativeAIProfile.description}
+                </p>
+              </div>
+
+              {/* System type */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  2. Tipo de sistema
+                </h4>
+                <ul className="space-y-2">
+                  {generativeAIProfile.systemType.map((type) => (
+                    <li key={type} className="text-body text-sm">• {type}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Use cases */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  3. Contextos de uso habituales
+                </h4>
+                <ul className="space-y-2">
+                  {generativeAIProfile.useCases.map((useCase) => (
+                    <li key={useCase} className="text-body text-sm">• {useCase}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Legal risks */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  4. Riesgos jurídicos potenciales
+                </h4>
+                <ul className="space-y-2">
+                  {generativeAIProfile.legalRisks.map((risk) => (
+                    <li key={risk} className="text-body text-sm">• {risk}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Regulatory considerations */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  5. Consideraciones regulatorias (UE)
+                </h4>
+                <ul className="space-y-2">
+                  {generativeAIProfile.regulatoryConsiderations.map((consideration) => (
+                    <li key={consideration} className="text-body text-sm">• {consideration}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* RGPD considerations */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  6. Relación con RGPD
+                </h4>
+                <ul className="space-y-2">
+                  {generativeAIProfile.rgpdConsiderations.map((consideration) => (
+                    <li key={consideration} className="text-body text-sm">• {consideration}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Editorial note */}
+              <div className="p-8 bg-surface">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  7. Observación editorial
+                </h4>
+                <p className="text-body leading-relaxed">
+                  {generativeAIProfile.editorialNote}
+                </p>
+              </div>
+            </div>
+          </article>
+
+          {/* Disclaimer */}
+          <div className="bg-surface border border-divider p-6 md:p-8">
+            <p className="text-body text-sm leading-relaxed">
+              <strong>Derecho Artificial no mantiene relación comercial con los proveedores analizados.</strong> Esta ficha tiene carácter exclusivamente informativo y no constituye recomendación, asesoramiento ni evaluación certificada de ningún producto o servicio.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Additional Software Profiles */}
+      <section className="py-12 border-t border-divider">
+        <div className="container-narrow">
+          <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-10">
+            Otras fichas de análisis
           </h2>
 
           {softwareProfiles.map((profile) => (
