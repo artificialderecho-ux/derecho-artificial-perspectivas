@@ -49,12 +49,15 @@ export function Footer() {
                   </Link>
                 </>
               ) : (
-                <>
+              <>
                   <Link to="/" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Inicio
                   </Link>
                   <Link to="/analisis" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Análisis
+                  </Link>
+                  <Link to="/documentos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Documentos
                   </Link>
                   <Link to="/software-ia-legal" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Software IA legal
@@ -63,10 +66,10 @@ export function Footer() {
                     Noticias
                   </Link>
                   <Link to="/manifiesto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Manifiesto editorial
+                    Manifiesto
                   </Link>
                   <Link to="/sobre" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Sobre Derecho Artificial
+                    Sobre
                   </Link>
                   <Link to="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Contacto
