@@ -15,6 +15,7 @@ import Software from "./pages/en/Software";
 import Manifesto from "./pages/en/Manifesto";
 import IndexEN from "./pages/en/Index";
 import About from "./pages/en/About";
+import Analysis from "./pages/en/Analysis";
 import Noticias from "./pages/Noticias";
 import Sobre from "./pages/Sobre";
 import Contacto from "./pages/Contacto";
@@ -46,10 +47,12 @@ const App = () => (
           <Route path="/cookies" element={<Cookies />} />
           {/* English routes */}
           <Route path="/en" element={<IndexEN />} />
+          <Route path="/en/analysis" element={<Analysis />} />
           <Route path="/en/software" element={<Software />} />
           <Route path="/en/legal-ai-software" element={<LegalAISoftware />} />
           <Route path="/en/news" element={<NewsEN />} />
           <Route path="/en/manifesto" element={<Manifesto />} />
+          <Route path="/en/about" element={<About />} />
           <Route path="/en/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
