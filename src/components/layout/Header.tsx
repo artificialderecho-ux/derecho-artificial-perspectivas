@@ -13,6 +13,7 @@ const navigationES = [
 
 const navigationEN = [
   { name: "Home", href: "/en" },
+  { name: "Analysis", href: "/en/analysis" },
   { name: "Software", href: "/en/software" },
   { name: "News", href: "/en/news" },
   { name: "Manifesto", href: "/en/manifesto" },
@@ -25,7 +26,7 @@ const esEnRouteMap: Record<string, string> = {
   "/software-ia-legal": "/en/software",
   "/noticias": "/en/news",
   "/sobre": "/en/about",
-  "/analisis": "/en",
+  "/analisis": "/en/analysis",
   "/manifiesto": "/en/manifesto",
   "/contacto": "/en/about",
   "/documentos": "/en",
@@ -34,6 +35,7 @@ const esEnRouteMap: Record<string, string> = {
 // Map English routes to Spanish equivalents  
 const enEsRouteMap: Record<string, string> = {
   "/en": "/",
+  "/en/analysis": "/analisis",
   "/en/software": "/software-ia-legal",
   "/en/news": "/noticias",
   "/en/about": "/sobre",

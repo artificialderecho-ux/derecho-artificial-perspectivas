@@ -35,6 +35,9 @@ export function Footer() {
                   <Link to="/en" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Home
                   </Link>
+                  <Link to="/en/analysis" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Analysis
+                  </Link>
                   <Link to="/en/software" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Software
                   </Link>
