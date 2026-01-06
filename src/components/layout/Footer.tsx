@@ -93,10 +93,10 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-divider">
           <nav className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
             <Link to="/aviso-legal" className="text-xs text-caption hover:text-foreground transition-colors">
-              Aviso legal
+              Aviso Legal
             </Link>
-            <Link to="/privacidad" className="text-xs text-caption hover:text-foreground transition-colors">
-              Privacidad
+            <Link to="/politica-de-privacidad" className="text-xs text-caption hover:text-foreground transition-colors">
+              Política de Privacidad
             </Link>
             <Link to="/cookies" className="text-xs text-caption hover:text-foreground transition-colors">
               Cookies
