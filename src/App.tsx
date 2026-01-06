@@ -20,7 +20,7 @@ import Noticias from "./pages/Noticias";
 import Sobre from "./pages/Sobre";
 import Contacto from "./pages/Contacto";
 import AvisoLegal from "./pages/AvisoLegal";
-import Privacidad from "./pages/Privacidad";
+import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import Cookies from "./pages/Cookies";
 import NotFound from "./pages/NotFound";
 
@@ -43,7 +43,7 @@ const App = () => (
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/aviso-legal" element={<AvisoLegal />} />
-          <Route path="/privacidad" element={<Privacidad />} />
+          <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
           <Route path="/cookies" element={<Cookies />} />
           {/* English routes */}
           <Route path="/en" element={<IndexEN />} />
@@ -52,7 +52,6 @@ const App = () => (
           <Route path="/en/legal-ai-software" element={<LegalAISoftware />} />
           <Route path="/en/news" element={<NewsEN />} />
           <Route path="/en/manifesto" element={<Manifesto />} />
-          <Route path="/en/about" element={<About />} />
           <Route path="/en/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
