@@ -164,15 +164,21 @@ export default function SoftwareIALegal() {
         <div className="container-narrow">
           <div className="bg-surface p-8 md:p-10">
             <h2 className="font-serif text-xl text-foreground mb-4">
-              Aviso editorial
+              Enfoque editorial
             </h2>
-            <p className="text-body leading-relaxed">
-              Los análisis publicados en esta sección tienen carácter exclusivamente informativo 
-              y divulgativo. <strong>No constituyen recomendación, asesoramiento ni evaluación 
-              certificada de ningún producto o servicio</strong>. No existe relación comercial, 
-              de afiliación ni de patrocinio con ningún proveedor de software. La inclusión de 
-              una herramienta en esta sección no implica valoración positiva ni negativa sobre 
-              su idoneidad para casos concretos.
+            <p className="text-body leading-relaxed mb-4">
+              Las herramientas analizadas en esta sección se examinan exclusivamente desde la 
+              perspectiva del <strong>cumplimiento normativo europeo, los riesgos jurídicos y 
+              las implicaciones éticas</strong>, no desde su rendimiento comercial ni su 
+              funcionalidad técnica.
+            </p>
+            <p className="text-body leading-relaxed mb-4">
+              Este análisis <strong>no constituye una review comercial, una recomendación de uso 
+              ni una evaluación certificada</strong>. No existe relación comercial, de afiliación 
+              ni de patrocinio con ningún proveedor de software.
+            </p>
+            <p className="text-body leading-relaxed text-sm text-caption">
+              Derecho Artificial no mantiene relación comercial con los proveedores analizados.
             </p>
           </div>
         </div>

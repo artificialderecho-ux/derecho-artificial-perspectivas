@@ -28,19 +28,19 @@ const Index = () => {
         <div className="container-editorial">
           <div className="prose-editorial">
             <p className="text-lg md:text-xl leading-[1.9] first-letter:text-5xl first-letter:font-serif first-letter:font-medium first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-foreground">
-              Derecho Artificial es un proyecto editorial independiente dedicado al análisis 
-              crítico de la inteligencia artificial en el ámbito jurídico. Su propósito 
-              es ofrecer un espacio de reflexión rigurosa, alejado del entusiasmo tecnológico 
-              y de los discursos promocionales, donde profesionales del Derecho y ciudadanos 
-              informados puedan encontrar análisis fundamentados sobre las transformaciones 
-              que la IA introduce en la regulación, la ética y la práctica legal.
+              Derecho Artificial es un proyecto editorial jurídico independiente, centrado 
+              en el análisis normativo y regulatorio de la inteligencia artificial en Europa. 
+              No es un medio de noticias tecnológicas, un blog de opinión ni un escaparate 
+              comercial de herramientas. Es un espacio de reflexión rigurosa donde profesionales 
+              del Derecho y ciudadanos informados pueden encontrar análisis fundamentados 
+              sobre las implicaciones jurídicas, éticas y regulatorias de la IA.
             </p>
             <p className="text-lg md:text-xl leading-[1.9]">
-              Este proyecto no pretende celebrar ni demonizar la tecnología. Pretende 
-              comprenderla, contextualizarla jurídicamente y someterla al escrutinio crítico 
-              que exige su creciente influencia en decisiones que afectan a derechos 
-              y libertades fundamentales. La independencia editorial es el fundamento 
-              de toda la actividad de análisis.
+              El proyecto se enmarca en el ordenamiento jurídico europeo, con especial 
+              atención al Reglamento de Inteligencia Artificial (AI Act), el RGPD y el 
+              ecosistema normativo de la Unión Europea. La independencia editorial y la 
+              ausencia de vínculos comerciales son el fundamento de toda la actividad 
+              de análisis.
             </p>
           </div>
         </div>
