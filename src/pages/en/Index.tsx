@@ -36,17 +36,18 @@ const IndexEN = () => {
         <div className="container-editorial">
           <div className="prose-editorial">
             <p className="text-lg md:text-xl leading-[1.9] first-letter:text-5xl first-letter:font-serif first-letter:font-medium first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-foreground">
-              Derecho Artificial is an independent editorial project dedicated to critical 
-              analysis of artificial intelligence within the European legal framework. Its 
-              purpose is to provide rigorous, well-founded analysis of how AI regulation, 
-              ethics, and legal practice intersect—free from technological enthusiasm, 
-              commercial promotion, or hype-driven discourse.
+              Derecho Artificial is an independent legal editorial project focused on the 
+              regulatory and normative analysis of artificial intelligence in Europe. It is 
+              not a technology news outlet, an opinion blog, or a commercial showcase. It is 
+              a space for rigorous reflection where legal professionals and informed citizens 
+              can find well-founded analysis of the legal, ethical, and regulatory implications 
+              of AI systems.
             </p>
             <p className="text-lg md:text-xl leading-[1.9]">
-              The project focuses on the EU regulatory model, particularly the AI Act 
-              (Regulation 2024/1689), and its implications for legal professionals, 
-              public administrations, and organisations deploying AI systems in high-risk 
-              contexts. Editorial independence is the foundation of all analytical work.
+              The project is grounded in the European legal order, with particular attention 
+              to the AI Act (Regulation 2024/1689), the GDPR, and the broader EU regulatory 
+              ecosystem. Editorial independence and the absence of commercial ties are the 
+              foundation of all analytical work.
             </p>
           </div>
         </div>

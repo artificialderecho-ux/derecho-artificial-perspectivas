@@ -90,33 +90,48 @@ const Noticias = () => {
           <div className="prose-editorial">
             <p>
               Esta sección ofrece una selección editorial de noticias sobre inteligencia artificial 
-              y Derecho. No se trata de un agregador automatizado ni de un servicio de noticias en 
-              tiempo real, sino de una curación consciente de aquellos desarrollos que merecen 
-              atención desde una perspectiva jurídica crítica.
+              y Derecho. No es un agregador automatizado, un servicio de noticias en tiempo real 
+              ni un canal de difusión de notas de prensa. Es una curación consciente de aquellos 
+              desarrollos que merecen atención desde una perspectiva jurídica crítica.
             </p>
             
             <p>
               Cada publicación incluye contexto editorial que permite comprender la relevancia 
-              jurídica del acontecimiento, más allá de la mera reproducción de comunicados de prensa 
-              o notas institucionales.
+              jurídica del acontecimiento, más allá de la mera reproducción de comunicados 
+              institucionales o corporativos.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Editorial notice */}
+      {/* Editorial criteria */}
       <section className="py-12 border-t border-divider">
         <div className="container-narrow">
           <div className="bg-surface p-8 md:p-10">
-            <h2 className="font-serif text-xl text-foreground mb-4">
-              Nota editorial
+            <h2 className="font-serif text-xl text-foreground mb-6">
+              Criterios editoriales de esta sección
             </h2>
-            <p className="text-body leading-relaxed">
-              Esta sección <strong>no es un servicio de noticias en tiempo real</strong> ni un 
-              sistema de publicación automatizada. Aunque herramientas de IA pueden asistir en 
-              la detección de fuentes relevantes, la selección final y la publicación son siempre 
-              humanas y editoriales.
-            </p>
+            
+            <div className="mb-6">
+              <h3 className="text-sm uppercase tracking-wider text-caption mb-3">Se incluye</h3>
+              <ul className="space-y-2 text-body text-sm">
+                <li>• Normativa europea y española (AI Act, RGPD, directrices institucionales)</li>
+                <li>• Posicionamientos de instituciones públicas (UE, AEPD, Parlamento Europeo)</li>
+                <li>• Jurisprudencia relevante sobre IA y derechos fundamentales</li>
+                <li>• Informes técnicos de organismos oficiales</li>
+                <li>• Investigación académica con rigor metodológico</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-sm uppercase tracking-wider text-caption mb-3">Se excluye</h3>
+              <ul className="space-y-2 text-body text-sm">
+                <li>• Notas de prensa y comunicados promocionales</li>
+                <li>• Lanzamientos comerciales de productos o servicios</li>
+                <li>• Opinión sin base jurídica o doctrinal</li>
+                <li>• Contenido especulativo o basado en ciclos de hype</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
