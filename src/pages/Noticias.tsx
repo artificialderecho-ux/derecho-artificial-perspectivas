@@ -49,6 +49,28 @@ const noticias: NoticiaEditorial[] = [
     legalRelevance: "El seguimiento de proyectos CORDIS permite a profesionales jurídicos anticipar tendencias regulatorias, acceder a herramientas de evaluación de impacto y conocer buenas prácticas validadas por la investigación académica. Los consorcios suelen publicar guías y recursos de acceso abierto.",
     editorialNote: "La financiación pública europea de proyectos de IA ética representa una alternativa al modelo de desarrollo dominado exclusivamente por intereses comerciales. Los resultados de estos proyectos merecen atención prioritaria frente a white papers corporativos.",
   },
+  {
+    title: "Guías institucionales europeas sobre inteligencia artificial y derechos fundamentales",
+    date: "Enero 2025",
+    source: "Comisión Europea / EDPB",
+    sourceUrl: "https://commission.europa.eu/strategy-and-policy/priorities-2019-2024/europe-fit-digital-age/artificial-intelligence_es",
+    tags: ["Derechos fundamentales", "Guías institucionales", "EDPB", "Carta de Derechos Fundamentales"],
+    context: "Las instituciones europeas continúan publicando orientaciones sobre la relación entre inteligencia artificial y derechos fundamentales. Estas guías complementan el marco normativo del AI Act y ofrecen criterios interpretativos para su aplicación práctica en contextos donde confluyen tecnología y derechos de los ciudadanos.",
+    keyContent: "Las guías abordan cuestiones como la evaluación del impacto de los sistemas de IA sobre derechos fundamentales, la aplicación del principio de no discriminación algorítmica, las garantías de transparencia en decisiones automatizadas y los mecanismos de recurso efectivo para afectados. Se establecen criterios sobre cómo documentar y justificar el uso de IA en contextos sensibles.",
+    legalRelevance: "Para administraciones públicas, estas guías orientan la contratación y despliegue de sistemas de IA. Para despachos y departamentos jurídicos, ofrecen parámetros para evaluar el cumplimiento de clientes que desarrollan o utilizan IA. La conexión con la Carta de Derechos Fundamentales de la UE refuerza su carácter vinculante interpretativo.",
+    editorialNote: "Estas orientaciones institucionales, aunque no siempre vinculantes por sí mismas, configuran el estándar de diligencia debida esperable en el uso de IA. Su conocimiento resulta imprescindible para cualquier profesional que asesore sobre implementación de sistemas automatizados.",
+  },
+  {
+    title: "Contratación pública y sistemas de inteligencia artificial en la Unión Europea",
+    date: "Enero 2025",
+    source: "TED / Comisión Europea",
+    sourceUrl: "https://ted.europa.eu/",
+    tags: ["Contratación pública", "Administración", "Transparencia", "AI Act"],
+    context: "El uso de sistemas de inteligencia artificial en la contratación pública europea plantea cuestiones jurídicas específicas. Desde la automatización de procesos de evaluación de ofertas hasta el uso de algoritmos predictivos para detectar irregularidades, las administraciones públicas incorporan progresivamente herramientas de IA que requieren un marco jurídico claro.",
+    keyContent: "Los principales retos jurídicos incluyen la garantía de igualdad de trato entre licitadores, la transparencia en los criterios de adjudicación automatizados, la trazabilidad de las decisiones algorítmicas y la protección de datos personales de los participantes. El AI Act establece obligaciones específicas para sistemas de IA utilizados en el acceso a servicios públicos esenciales.",
+    legalRelevance: "Las administraciones contratantes deben garantizar que el uso de IA no vulnere los principios de contratación pública establecidos en las Directivas europeas. Los operadores económicos pueden impugnar decisiones basadas en algoritmos opacos. La documentación técnica y la supervisión humana son requisitos ineludibles.",
+    editorialNote: "La incorporación de IA en contratación pública debe equilibrar eficiencia administrativa con garantías jurídicas. La tendencia hacia la automatización no exime del cumplimiento estricto de los principios de transparencia, no discriminación y control efectivo.",
+  },
 ];
 
 const Noticias = () => {
