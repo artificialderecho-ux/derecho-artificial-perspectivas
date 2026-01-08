@@ -63,6 +63,55 @@ const generativeAIProfile: GenerativeAIProfile = {
   editorialNote: "Estas herramientas deben entenderse como apoyo técnico, nunca como sustitución del criterio jurídico profesional. La responsabilidad sobre el contenido final permanece íntegramente en el profesional que firma el trabajo. Se recomienda verificar todas las citas, referencias y conclusiones generadas antes de su incorporación a documentos definitivos.",
 };
 
+interface EDiscoveryProfile {
+  title: string;
+  description: string;
+  systemType: string[];
+  useCases: string[];
+  legalRisks: string[];
+  regulatoryConsiderations: string[];
+  rgpdConsiderations: string[];
+  editorialNote: string;
+}
+
+const eDiscoveryProfile: EDiscoveryProfile = {
+  title: "Sistemas de IA para e-discovery y revisión masiva de documentos",
+  description: "Sistemas de inteligencia artificial diseñados para el análisis y clasificación de grandes volúmenes de documentación jurídica. Estas herramientas permiten procesar miles o millones de documentos en procedimientos judiciales complejos, investigaciones internas, procesos de cumplimiento normativo y operaciones de due diligence. Utilizan técnicas de procesamiento de lenguaje natural y aprendizaje automático para identificar, clasificar y priorizar documentos relevantes.",
+  systemType: [
+    "Procesamiento de lenguaje natural (NLP)",
+    "Sistemas de clasificación y búsqueda avanzada",
+    "Aprendizaje automático supervisado y no supervisado",
+    "Uso profesional jurídico",
+  ],
+  useCases: [
+    "Procedimientos judiciales complejos con volúmenes documentales elevados",
+    "Investigaciones internas corporativas",
+    "Cumplimiento normativo y auditorías regulatorias",
+    "Due diligence en operaciones de M&A",
+    "Respuesta a requerimientos de autoridades supervisoras",
+  ],
+  legalRisks: [
+    "Errores de clasificación que pueden omitir documentos relevantes o privilegiados",
+    "Sesgos algorítmicos en la priorización de resultados",
+    "Falta de explicabilidad en los criterios de clasificación",
+    "Riesgo sobre confidencialidad y secreto profesional al procesar documentos sensibles",
+    "Responsabilidad profesional por omisiones derivadas de fallos del sistema",
+  ],
+  regulatoryConsiderations: [
+    "Posible clasificación como sistema de alto riesgo según el AI Act si se utiliza en contextos de administración de justicia",
+    "Necesidad de supervisión humana efectiva en todas las fases del proceso",
+    "Requisitos de documentación técnica y trazabilidad de las decisiones algorítmicas",
+    "Obligaciones de transparencia sobre el uso de IA en procedimientos judiciales",
+  ],
+  rgpdConsiderations: [
+    "Tratamiento de datos personales en volúmenes masivos",
+    "Principio de minimización de datos en la revisión documental",
+    "Necesidad de Evaluación de Impacto (DPIA) en determinados contextos",
+    "Posibles transferencias internacionales de datos a proveedores ubicados fuera del EEE",
+  ],
+  editorialNote: "Estas herramientas deben considerarse instrumentos de apoyo técnico, nunca sustitutos del juicio jurídico profesional. La responsabilidad sobre la exhaustividad y corrección de la revisión documental permanece íntegramente en el profesional que supervisa el proceso. Se recomienda validación humana de muestras representativas y documentación de los criterios de configuración.",
+};
+
 const softwareProfiles: SoftwareProfile[] = [
   {
     name: "Sistemas de investigación jurídica asistida por IA",
@@ -285,7 +334,101 @@ export default function SoftwareIALegal() {
             </div>
           </article>
 
-          {/* Disclaimer */}
+          {/* E-Discovery Profile */}
+          <article className="mb-16">
+            <div className="border border-divider">
+              {/* Header */}
+              <div className="p-8 border-b border-divider bg-surface">
+                <p className="text-xs uppercase tracking-[0.2em] text-caption mb-2">
+                  E-discovery · Revisión documental
+                </p>
+                <h3 className="font-serif text-2xl text-foreground">
+                  {eDiscoveryProfile.title}
+                </h3>
+              </div>
+
+              {/* Description */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  1. Descripción funcional
+                </h4>
+                <p className="text-body leading-relaxed">
+                  {eDiscoveryProfile.description}
+                </p>
+              </div>
+
+              {/* System type */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  2. Tipo de sistema
+                </h4>
+                <ul className="space-y-2">
+                  {eDiscoveryProfile.systemType.map((type) => (
+                    <li key={type} className="text-body text-sm">• {type}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Use cases */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  3. Contextos de uso habituales
+                </h4>
+                <ul className="space-y-2">
+                  {eDiscoveryProfile.useCases.map((useCase) => (
+                    <li key={useCase} className="text-body text-sm">• {useCase}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Legal risks */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  4. Riesgos jurídicos potenciales
+                </h4>
+                <ul className="space-y-2">
+                  {eDiscoveryProfile.legalRisks.map((risk) => (
+                    <li key={risk} className="text-body text-sm">• {risk}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Regulatory considerations */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  5. Consideraciones regulatorias (UE)
+                </h4>
+                <ul className="space-y-2">
+                  {eDiscoveryProfile.regulatoryConsiderations.map((consideration) => (
+                    <li key={consideration} className="text-body text-sm">• {consideration}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* RGPD considerations */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  6. Relación con RGPD
+                </h4>
+                <ul className="space-y-2">
+                  {eDiscoveryProfile.rgpdConsiderations.map((consideration) => (
+                    <li key={consideration} className="text-body text-sm">• {consideration}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Editorial note */}
+              <div className="p-8 bg-surface">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  7. Observación editorial
+                </h4>
+                <p className="text-body leading-relaxed">
+                  {eDiscoveryProfile.editorialNote}
+                </p>
+              </div>
+            </div>
+          </article>
+
           <div className="bg-surface border border-divider p-6 md:p-8">
             <p className="text-body text-sm leading-relaxed">
               <strong>Derecho Artificial no mantiene relación comercial con los proveedores analizados.</strong> Esta ficha tiene carácter exclusivamente informativo y no constituye recomendación, asesoramiento ni evaluación certificada de ningún producto o servicio.
