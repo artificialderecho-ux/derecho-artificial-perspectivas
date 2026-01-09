@@ -6,13 +6,13 @@ export function Footer() {
   const isEnglish = location.pathname.startsWith("/en");
 
   return (
-    <footer className="border-t border-divider bg-background">
+    <footer className="border-t border-border bg-card shadow-nav">
       <div className="container-wide section-spacing-sm">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-5">
-            <Link to={isEnglish ? "/en" : "/"} className="inline-block">
-              <span className="font-serif text-2xl font-medium text-foreground">
+            <Link to={isEnglish ? "/en" : "/"} className="inline-block group">
+              <span className="font-serif text-2xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                 Derecho Artificial
               </span>
             </Link>
@@ -92,13 +92,13 @@ export function Footer() {
         {/* Legal links */}
         <div className="mt-12 pt-8 border-t border-divider">
           <nav className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
-            <Link to="/aviso-legal" className="text-xs text-caption hover:text-foreground transition-colors">
+            <Link to="/aviso-legal" className="text-xs text-caption hover:text-primary transition-colors duration-300">
               Aviso Legal
             </Link>
-            <Link to="/politica-de-privacidad" className="text-xs text-caption hover:text-foreground transition-colors">
+            <Link to="/politica-de-privacidad" className="text-xs text-caption hover:text-primary transition-colors duration-300">
               Política de Privacidad
             </Link>
-            <Link to="/cookies" className="text-xs text-caption hover:text-foreground transition-colors">
+            <Link to="/cookies" className="text-xs text-caption hover:text-primary transition-colors duration-300">
               Cookies
             </Link>
           </nav>

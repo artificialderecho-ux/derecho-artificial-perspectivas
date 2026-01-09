@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Globe } from "lucide-react";
 
 const navigationES = [
@@ -45,9 +45,20 @@ const enEsRouteMap: Record<string, string> = {
 export function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   
   const isEnglish = location.pathname.startsWith("/en");
   const navigation = isEnglish ? navigationEN : navigationES;
+  
+  // Handle scroll for sticky header
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // Get the equivalent route in the other language
   const getAlternateRoute = () => {
@@ -58,12 +69,18 @@ export function Header() {
   };
 
   return (
-    <header className="border-b border-divider bg-background">
+    <header 
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-card/95 backdrop-blur-md shadow-nav border-b border-border' 
+          : 'bg-transparent border-b border-divider'
+      }`}
+    >
       <div className="container-wide">
-        <div className="flex items-center justify-between py-8 md:py-10">
+        <div className="flex items-center justify-between py-5 md:py-6">
           {/* Logo */}
-          <Link to={isEnglish ? "/en" : "/"} className="flex flex-col">
-            <span className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-foreground">
+          <Link to={isEnglish ? "/en" : "/"} className="flex flex-col group">
+            <span className="font-serif text-2xl md:text-3xl font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
               Derecho Artificial
             </span>
             <span className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-caption mt-1">
@@ -73,18 +90,21 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-10">
-            <nav className="flex items-center gap-10">
+            <nav className="flex items-center gap-8">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`text-sm tracking-wide transition-colors duration-300 ${
+                  className={`text-sm tracking-wide transition-all duration-300 relative ${
                     location.pathname === item.href
-                      ? "text-foreground"
+                      ? "text-primary font-medium"
                       : "text-caption hover:text-foreground"
                   }`}
                 >
                   {item.name}
+                  {location.pathname === item.href && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />
+                  )}
                 </Link>
               ))}
             </nav>
@@ -95,7 +115,7 @@ export function Header() {
               <Link 
                 to={isEnglish ? getAlternateRoute() : getAlternateRoute()}
                 className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
-                  !isEnglish ? "text-foreground font-medium" : "text-caption hover:text-foreground"
+                  !isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                 }`}
               >
                 ES
@@ -104,7 +124,7 @@ export function Header() {
               <Link 
                 to={isEnglish ? location.pathname : getAlternateRoute()}
                 className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
-                  isEnglish ? "text-foreground font-medium" : "text-caption hover:text-foreground"
+                  isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                 }`}
               >
                 EN
@@ -115,7 +135,7 @@ export function Header() {
           {/* Mobile menu button */}
           <button
             type="button"
-            className="xl:hidden p-2 -mr-2 text-foreground"
+            className="xl:hidden p-2 -mr-2 text-foreground hover:text-primary transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={isEnglish ? "Open menu" : "Abrir menú"}
           >
@@ -129,7 +149,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="xl:hidden border-t border-divider py-8">
+          <nav className="xl:hidden border-t border-divider py-8 animate-fade-in">
             <div className="flex flex-col gap-6">
               {navigation.map((item) => (
                 <Link
@@ -138,7 +158,7 @@ export function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-base transition-colors duration-300 ${
                     location.pathname === item.href
-                      ? "text-foreground"
+                      ? "text-primary font-medium"
                       : "text-caption hover:text-foreground"
                   }`}
                 >
@@ -153,7 +173,7 @@ export function Header() {
                   <Link 
                     to={getAlternateRoute()}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm text-caption hover:text-foreground transition-colors duration-300"
+                    className="text-sm text-primary hover:text-primary/80 transition-colors duration-300"
                   >
                     {isEnglish ? "Versión en español" : "English version"}
                   </Link>
