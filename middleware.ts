@@ -1,22 +1,22 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+// middleware.ts - Protección con usuario y contraseña (compatible con Vite + Vercel)
 
-export function middleware(request: NextRequest) {
+export default function middleware(request: Request) {
   const basicAuth = request.headers.get("authorization");
 
   if (basicAuth) {
     const authValue = basicAuth.split(" ")[1];
     const [user, pwd] = atob(authValue).split(":");
 
+    // Cambia aquí el usuario y contraseña si quieres otros
     if (user === "acceso" && pwd === "derechoartificial") {
-      return NextResponse.next();
+      return fetch(request);
     }
   }
 
-  return new NextResponse("Acceso restringido", {
+  return new Response("Acceso restringido", {
     status: 401,
     headers: {
-      "WWW-Authenticate": 'Basic realm="Protected Area"',
+      "WWW-Authenticate": 'Basic realm="Área protegida"',
     },
   });
 }
