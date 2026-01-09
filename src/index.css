@@ -5,88 +5,103 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 /* Derecho Artificial - Institutional Editorial Design System
-   Refined, sober, law firm aesthetic
+   Professional law firm aesthetic with visual depth
    All colors in HSL */
 
 @layer base {
   :root {
-    /* Pure, clean off-white background */
-    --background: 45 15% 98%;
-    --foreground: 220 15% 12%;
+    /* Gradient background: subtle gray to white */
+    --background: 210 20% 98%;
+    --background-gradient-start: 210 15% 97%;
+    --background-gradient-end: 0 0% 100%;
+    --foreground: 210 25% 10%;
 
-    /* Cards with subtle warmth */
-    --card: 45 10% 96%;
-    --card-foreground: 220 15% 12%;
+    /* Cards with elevation */
+    --card: 0 0% 100%;
+    --card-foreground: 210 25% 10%;
 
-    --popover: 45 15% 98%;
-    --popover-foreground: 220 15% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 25% 10%;
 
-    /* Primary: deep institutional charcoal */
-    --primary: 220 10% 18%;
-    --primary-foreground: 45 15% 98%;
+    /* Primary: deep navy blue institutional */
+    --primary: 210 100% 20%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary: refined warm gray */
-    --secondary: 45 8% 93%;
-    --secondary-foreground: 220 10% 25%;
+    /* Secondary: institutional green */
+    --secondary: 170 100% 15%;
+    --secondary-foreground: 0 0% 100%;
 
     /* Muted tones for sections */
-    --muted: 45 10% 94%;
-    --muted-foreground: 220 8% 45%;
+    --muted: 210 15% 95%;
+    --muted-foreground: 210 15% 40%;
 
-    /* Accent: subtle institutional tone */
-    --accent: 45 12% 91%;
-    --accent-foreground: 220 10% 18%;
+    /* Accent: subtle warm tone */
+    --accent: 210 20% 93%;
+    --accent-foreground: 210 25% 15%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 98%;
 
     /* Borders: refined subtle lines */
-    --border: 45 8% 88%;
-    --input: 45 8% 88%;
-    --ring: 220 10% 40%;
+    --border: 210 15% 88%;
+    --input: 210 15% 88%;
+    --ring: 210 100% 30%;
 
-    --radius: 0.125rem;
+    --radius: 0.375rem;
 
     /* Custom editorial tokens */
-    --text-body: 220 10% 30%;
-    --text-caption: 220 8% 55%;
-    --divider: 45 6% 85%;
-    --highlight: 45 20% 96%;
+    --text-body: 210 15% 30%;
+    --text-caption: 210 12% 50%;
+    --divider: 210 10% 90%;
+    --highlight: 210 25% 97%;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 31, 63, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 31, 63, 0.08);
+    --shadow-lg: 0 10px 25px rgba(0, 31, 63, 0.12);
+    --shadow-xl: 0 20px 40px rgba(0, 31, 63, 0.15);
   }
 
   .dark {
-    --background: 220 15% 7%;
-    --foreground: 45 8% 92%;
+    --background: 210 25% 7%;
+    --background-gradient-start: 210 25% 7%;
+    --background-gradient-end: 210 20% 10%;
+    --foreground: 210 15% 92%;
 
-    --card: 220 12% 10%;
-    --card-foreground: 45 8% 92%;
+    --card: 210 20% 10%;
+    --card-foreground: 210 15% 92%;
 
-    --popover: 220 15% 7%;
-    --popover-foreground: 45 8% 92%;
+    --popover: 210 25% 7%;
+    --popover-foreground: 210 15% 92%;
 
-    --primary: 45 8% 92%;
-    --primary-foreground: 220 15% 7%;
+    --primary: 210 80% 60%;
+    --primary-foreground: 210 25% 7%;
 
-    --secondary: 220 10% 14%;
-    --secondary-foreground: 45 6% 80%;
+    --secondary: 170 60% 40%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 10% 14%;
-    --muted-foreground: 45 5% 55%;
+    --muted: 210 20% 14%;
+    --muted-foreground: 210 10% 55%;
 
-    --accent: 220 10% 16%;
-    --accent-foreground: 45 8% 92%;
+    --accent: 210 20% 16%;
+    --accent-foreground: 210 15% 92%;
 
     --destructive: 0 60% 45%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 10% 18%;
-    --input: 220 10% 18%;
-    --ring: 45 8% 65%;
+    --border: 210 20% 18%;
+    --input: 210 20% 18%;
+    --ring: 210 80% 65%;
 
-    --text-body: 45 5% 70%;
-    --text-caption: 45 4% 50%;
-    --divider: 220 8% 22%;
-    --highlight: 220 10% 11%;
+    --text-body: 210 10% 70%;
+    --text-caption: 210 8% 50%;
+    --divider: 210 15% 22%;
+    --highlight: 210 20% 11%;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.35);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.45);
   }
 }
 
@@ -102,36 +117,50 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply font-sans;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--background-gradient-start)) 0%,
+      hsl(var(--background-gradient-end)) 100%
+    );
+    background-attachment: fixed;
+    color: hsl(var(--foreground));
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     text-rendering: optimizeLegibility;
     letter-spacing: -0.01em;
+    min-height: 100vh;
   }
 
   /* Refined typography scale */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-medium;
+    @apply font-serif font-semibold;
     letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl leading-[1.1];
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    line-height: 1.1;
   }
 
   h2 {
-    @apply text-2xl md:text-3xl lg:text-4xl leading-[1.15];
+    @apply text-2xl md:text-3xl lg:text-4xl;
+    line-height: 1.15;
   }
 
   h3 {
-    @apply text-xl md:text-2xl leading-[1.2];
+    @apply text-xl md:text-2xl;
+    line-height: 1.25;
   }
 
   h4 {
-    @apply text-lg md:text-xl leading-[1.25];
+    @apply text-lg md:text-xl;
+    line-height: 1.3;
   }
 
   p {
-    @apply leading-[1.8];
+    @apply leading-relaxed;
+    line-height: 1.7;
   }
 
   /* Editorial prose styling - refined */
@@ -158,7 +187,7 @@
   }
 
   .prose-editorial blockquote {
-    @apply border-l border-divider pl-8 italic text-muted-foreground my-10;
+    @apply border-l-2 border-primary/30 pl-8 italic text-muted-foreground my-10;
   }
 
   .prose-editorial ul {
@@ -190,6 +219,41 @@
 
   .bg-highlight {
     background-color: hsl(var(--highlight));
+  }
+
+  /* Institutional shadows */
+  .shadow-card {
+    box-shadow: var(--shadow-md);
+  }
+
+  .shadow-card-hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .shadow-nav {
+    box-shadow: 0 1px 3px rgba(0, 31, 63, 0.06);
+  }
+
+  /* Card with depth */
+  .card-elevated {
+    @apply bg-card rounded-md border border-border;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-elevated:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Interactive hover effects */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
   }
 
   /* Generous institutional spacing */
@@ -226,7 +290,58 @@
 
   /* Institutional link style */
   .link-editorial {
-    @apply text-caption hover:text-foreground transition-colors duration-300;
+    @apply text-primary hover:text-primary/80 transition-colors duration-300;
     text-underline-offset: 4px;
+  }
+
+  /* Fade in animation */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Staggered animation delays */
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+
+  /* Hero background overlay */
+  .hero-overlay {
+    position: relative;
+  }
+
+  .hero-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--background-gradient-start) / 0.85) 0%,
+      hsl(var(--background-gradient-end) / 0.95) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero-overlay > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Section with subtle background */
+  .section-muted {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--muted) / 0.5) 0%,
+      hsl(var(--background)) 100%
+    );
   }
 }
