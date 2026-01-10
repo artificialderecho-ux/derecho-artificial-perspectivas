@@ -131,21 +131,23 @@
     min-height: 100vh;
   }
 
-  /* Refined typography scale */
+  /* Refined typography scale - Law Firm Editorial 2026 */
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif font-semibold;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
     line-height: 1.2;
   }
 
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl;
-    line-height: 1.1;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
   }
 
   h2 {
     @apply text-2xl md:text-3xl lg:text-4xl;
     line-height: 1.15;
+    letter-spacing: 0.01em;
   }
 
   h3 {
@@ -234,26 +236,26 @@
     box-shadow: 0 1px 3px rgba(0, 31, 63, 0.06);
   }
 
-  /* Card with depth */
+  /* Card with depth - Enhanced 2026 */
   .card-elevated {
     @apply bg-card rounded-md border border-border;
-    box-shadow: var(--shadow-md);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 31, 63, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .card-elevated:hover {
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 31, 63, 0.14);
   }
 
   /* Interactive hover effects */
   .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-xl);
   }
 
   /* Generous institutional spacing */
@@ -294,27 +296,27 @@
     text-underline-offset: 4px;
   }
 
-  /* Fade in animation */
+  /* Fade in on scroll animation */
   .fade-in-section {
     opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* Staggered animation delays */
-  .delay-100 { animation-delay: 0.1s; }
-  .delay-200 { animation-delay: 0.2s; }
-  .delay-300 { animation-delay: 0.3s; }
-  .delay-400 { animation-delay: 0.4s; }
+  .delay-100 { transition-delay: 0.1s; }
+  .delay-200 { transition-delay: 0.2s; }
+  .delay-300 { transition-delay: 0.3s; }
+  .delay-400 { transition-delay: 0.4s; }
+  .delay-500 { transition-delay: 0.5s; }
 
-  /* Hero background overlay */
+  /* Hero background overlay - reduced opacity */
   .hero-overlay {
     position: relative;
   }
@@ -325,8 +327,8 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      hsl(var(--background-gradient-start) / 0.85) 0%,
-      hsl(var(--background-gradient-end) / 0.95) 100%
+      hsl(var(--background-gradient-start) / 0.65) 0%,
+      hsl(var(--background-gradient-end) / 0.85) 100%
     );
     z-index: 1;
   }
@@ -343,5 +345,19 @@
       hsl(var(--muted) / 0.5) 0%,
       hsl(var(--background)) 100%
     );
+  }
+
+  /* CTA Button - Editorial */
+  .btn-cta-primary {
+    @apply inline-flex items-center px-8 py-4 font-sans font-medium text-sm tracking-wide uppercase;
+    @apply bg-primary text-primary-foreground rounded;
+    @apply transition-all duration-300;
+    box-shadow: 0 4px 14px rgba(0, 31, 63, 0.25);
+  }
+
+  .btn-cta-primary:hover {
+    @apply bg-primary/90;
+    box-shadow: 0 6px 20px rgba(0, 31, 63, 0.35);
+    transform: translateY(-2px);
   }
 }
