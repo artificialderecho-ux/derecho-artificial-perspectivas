@@ -10,34 +10,34 @@
 
 @layer base {
   :root {
-    /* Gradient background: subtle gray to white */
+    /* ECIJA-inspired: clean, modern, corporate-tech */
     --background: 210 20% 98%;
     --background-gradient-start: 210 15% 97%;
     --background-gradient-end: 0 0% 100%;
-    --foreground: 210 25% 10%;
+    --foreground: 210 40% 8%;
 
     /* Cards with elevation */
     --card: 0 0% 100%;
-    --card-foreground: 210 25% 10%;
+    --card-foreground: 210 40% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 25% 10%;
+    --popover-foreground: 210 40% 8%;
 
-    /* Primary: deep navy blue institutional */
-    --primary: 210 100% 20%;
+    /* Primary: deep navy blue #001F3F */
+    --primary: 210 100% 12%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: institutional green */
-    --secondary: 170 100% 15%;
+    /* Secondary: tech green accent */
+    --secondary: 160 100% 25%;
     --secondary-foreground: 0 0% 100%;
 
     /* Muted tones for sections */
     --muted: 210 15% 95%;
     --muted-foreground: 210 15% 40%;
 
-    /* Accent: subtle warm tone */
-    --accent: 210 20% 93%;
-    --accent-foreground: 210 25% 15%;
+    /* Accent: subtle tech tone */
+    --accent: 160 40% 94%;
+    --accent-foreground: 210 40% 10%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 98%;
@@ -45,21 +45,26 @@
     /* Borders: refined subtle lines */
     --border: 210 15% 88%;
     --input: 210 15% 88%;
-    --ring: 210 100% 30%;
+    --ring: 160 100% 30%;
 
-    --radius: 0.375rem;
+    --radius: 0.25rem;
 
     /* Custom editorial tokens */
-    --text-body: 210 15% 30%;
+    --text-body: 210 20% 28%;
     --text-caption: 210 12% 50%;
     --divider: 210 10% 90%;
-    --highlight: 210 25% 97%;
+    --highlight: 160 30% 97%;
 
-    /* Shadows */
+    /* Hero dark section */
+    --hero-bg: 210 100% 6%;
+    --hero-overlay: 210 100% 8%;
+
+    /* Shadows - more pronounced */
     --shadow-sm: 0 1px 2px 0 rgba(0, 31, 63, 0.05);
-    --shadow-md: 0 4px 12px rgba(0, 31, 63, 0.08);
-    --shadow-lg: 0 10px 25px rgba(0, 31, 63, 0.12);
-    --shadow-xl: 0 20px 40px rgba(0, 31, 63, 0.15);
+    --shadow-md: 0 4px 16px rgba(0, 31, 63, 0.08);
+    --shadow-lg: 0 12px 32px rgba(0, 31, 63, 0.12);
+    --shadow-xl: 0 24px 48px rgba(0, 31, 63, 0.16);
+    --shadow-2xl: 0 32px 64px rgba(0, 31, 63, 0.2);
   }
 
   .dark {
@@ -236,26 +241,28 @@
     box-shadow: 0 1px 3px rgba(0, 31, 63, 0.06);
   }
 
-  /* Card with depth - Enhanced 2026 */
+  /* Card with depth - ECIJA style 2026 */
   .card-elevated {
-    @apply bg-card rounded-md border border-border;
-    box-shadow: 0 10px 30px rgba(0, 31, 63, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    @apply bg-card rounded border border-border/60;
+    box-shadow: var(--shadow-md);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .card-elevated:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0, 31, 63, 0.14);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-2xl);
+    background: hsl(var(--highlight));
+    border-color: hsl(var(--secondary) / 0.3);
   }
 
   /* Interactive hover effects */
   .hover-lift {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .hover-lift:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: var(--shadow-2xl);
   }
 
   /* Generous institutional spacing */
@@ -347,17 +354,46 @@
     );
   }
 
-  /* CTA Button - Editorial */
+  /* CTA Button - ECIJA style */
   .btn-cta-primary {
-    @apply inline-flex items-center px-8 py-4 font-sans font-medium text-sm tracking-wide uppercase;
-    @apply bg-primary text-primary-foreground rounded;
+    @apply inline-flex items-center px-10 py-5 font-sans font-semibold text-base tracking-wider uppercase;
+    @apply bg-secondary text-secondary-foreground rounded-sm;
     @apply transition-all duration-300;
-    box-shadow: 0 4px 14px rgba(0, 31, 63, 0.25);
+    box-shadow: 0 6px 20px rgba(0, 80, 60, 0.35);
   }
 
   .btn-cta-primary:hover {
-    @apply bg-primary/90;
-    box-shadow: 0 6px 20px rgba(0, 31, 63, 0.35);
+    @apply bg-secondary/90;
+    box-shadow: 0 10px 30px rgba(0, 80, 60, 0.45);
+    transform: translateY(-3px);
+  }
+
+  .btn-cta-secondary {
+    @apply inline-flex items-center px-8 py-4 font-sans font-medium text-sm tracking-wide uppercase;
+    @apply bg-transparent text-primary-foreground border-2 border-primary-foreground/40 rounded-sm;
+    @apply transition-all duration-300;
+  }
+
+  .btn-cta-secondary:hover {
+    @apply bg-primary-foreground/10 border-primary-foreground/70;
     transform: translateY(-2px);
+  }
+
+  /* Hero section - dark corporate */
+  .hero-dark {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--hero-bg)) 0%,
+      hsl(var(--hero-overlay)) 50%,
+      hsl(210 80% 12%) 100%
+    );
+  }
+
+  .hero-dark-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 20, 40, 0.7) 0%,
+      rgba(0, 31, 63, 0.85) 100%
+    );
   }
 }
