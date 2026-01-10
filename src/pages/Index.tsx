@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
-import { Scale, FileText, Cpu, Newspaper } from "lucide-react";
+import { Scale, FileText, Cpu, Newspaper, ArrowRight } from "lucide-react";
 import heroBackground from "@/assets/hero-abstract-bg.jpg";
 
 // Hook for fade-in on scroll
@@ -42,40 +42,81 @@ const Index = () => {
       />
 
       <div ref={containerRef}>
-        {/* Hero Section with Background - Enhanced */}
+        {/* Hero Section - ECIJA style: dark, corporate-tech */}
         <section 
-          className="relative py-28 md:py-36 lg:py-44 overflow-hidden"
+          className="relative min-h-[85vh] flex items-center justify-center overflow-hidden"
           style={{
             backgroundImage: `url(${heroBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background/90" />
-          <div className="container-editorial text-center relative z-10">
-            <div className="fade-in-section visible">
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.02] mb-6 tracking-wide">
-                Derecho Artificial
+          <div className="absolute inset-0 hero-dark-overlay" />
+          <div className="container-wide text-center relative z-10 py-20">
+            <div className="fade-in-section visible max-w-4xl mx-auto">
+              <p className="text-sm md:text-base uppercase tracking-[0.3em] text-white/60 mb-6 font-sans">
+                Proyecto editorial independiente
+              </p>
+              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white leading-[0.95] mb-8 tracking-tight">
+                Derecho<br />
+                <span className="text-white/90">Artificial</span>
               </h1>
-              <p className="text-lg md:text-xl text-body leading-relaxed max-w-xl mx-auto mb-4 font-sans tracking-wide uppercase opacity-80">
-                Reflexión rigurosa sobre IA y Derecho
+              <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed max-w-2xl mx-auto font-serif italic mb-12">
+                La reflexión jurídica sobre IA del futuro, hoy
               </p>
-              <p className="text-xl md:text-2xl text-body leading-relaxed max-w-2xl mx-auto font-serif italic mb-10">
-                Análisis jurídico y ético independiente sobre la inteligencia artificial en el ámbito legal.
-              </p>
-              <Link 
-                to="/analisis/ai-act-reglamento-europeo" 
-                className="btn-cta-primary"
-              >
-                Explorar el AI Act
-                <span className="ml-3">→</span>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link 
+                  to="/analisis" 
+                  className="btn-cta-primary"
+                >
+                  Explorar análisis
+                  <ArrowRight className="ml-3 h-5 w-5" />
+                </Link>
+                <Link 
+                  to="/manifiesto" 
+                  className="btn-cta-secondary"
+                >
+                  Nuestro manifiesto
+                </Link>
+              </div>
+            </div>
+          </div>
+          {/* Gradient fade to content */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+        </section>
+
+        {/* Manifesto/Vision Section - Post-hero highlight */}
+        <section className="section-spacing-sm border-b border-divider">
+          <div className="container-wide">
+            <div className="fade-in-section grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+              <div>
+                <p className="text-sm uppercase tracking-[0.2em] text-secondary font-semibold mb-4">
+                  Nuestra visión
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
+                  Rigor jurídico en la era de la inteligencia artificial
+                </h2>
+              </div>
+              <div className="prose-editorial">
+                <p className="text-lg leading-[1.9]">
+                  Derecho Artificial es un espacio de reflexión independiente donde el análisis 
+                  normativo prevalece sobre el ruido mediático. Sin afiliaciones comerciales, 
+                  sin rankings patrocinados, sin promociones encubiertas.
+                </p>
+                <Link 
+                  to="/manifiesto" 
+                  className="inline-flex items-center text-secondary font-medium mt-6 group"
+                >
+                  Leer el manifiesto completo
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-transform duration-300" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Editorial Introduction */}
-        <section className="section-spacing-sm border-b border-divider">
+        <section className="section-spacing-sm border-b border-divider section-muted">
           <div className="container-editorial">
             <div className="fade-in-section card-elevated p-8 md:p-12">
               <div className="prose-editorial">
@@ -100,29 +141,29 @@ const Index = () => {
         </section>
 
         {/* Análisis Destacado */}
-        <section className="section-spacing border-b border-divider section-muted">
+        <section className="section-spacing border-b border-divider">
           <div className="container-editorial">
             <div className="fade-in-section">
-              <p className="text-sm uppercase tracking-widest text-caption mb-8 flex items-center gap-2">
-                <Scale className="h-4 w-4 text-primary" strokeWidth={1.5} />
+              <p className="text-sm uppercase tracking-[0.2em] text-secondary font-semibold mb-8 flex items-center gap-3">
+                <Scale className="h-5 w-5" strokeWidth={1.5} />
                 Análisis destacado
               </p>
               <Link 
                 to="/analisis/ai-act-reglamento-europeo" 
-                className="block group card-elevated p-8 md:p-10"
+                className="block group card-elevated p-8 md:p-12"
               >
                 <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground leading-tight group-hover:text-primary transition-all duration-300 mb-6">
                   Reglamento Europeo de Inteligencia Artificial (AI Act): análisis jurídico
                 </h2>
-                <p className="text-body text-lg leading-relaxed mb-6 max-w-3xl">
+                <p className="text-body text-lg leading-relaxed mb-8 max-w-3xl">
                   El AI Act establece el primer marco regulatorio integral para la inteligencia 
                   artificial en la Unión Europea. Este análisis examina su arquitectura normativa 
                   basada en el riesgo, las obligaciones para sistemas de alto riesgo y sus 
                   implicaciones para la práctica jurídica y las administraciones públicas.
                 </p>
-                <span className="inline-flex items-center text-sm text-primary font-medium group-hover:text-primary/80 transition-all duration-300">
+                <span className="inline-flex items-center text-sm text-secondary font-semibold group-hover:text-secondary/80 transition-all duration-300 uppercase tracking-wide">
                   Acceder al análisis
-                  <span className="ml-2 group-hover:translate-x-2 transition-transform duration-300">→</span>
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
               </Link>
             </div>
@@ -130,10 +171,13 @@ const Index = () => {
         </section>
 
         {/* Ámbitos de Análisis */}
-        <section className="section-spacing border-b border-divider">
+        <section className="section-spacing border-b border-divider section-muted">
           <div className="container-wide">
             <div className="fade-in-section text-center mb-16 md:mb-20">
-              <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
+              <p className="text-sm uppercase tracking-[0.2em] text-secondary font-semibold mb-4">
+                Áreas de especialización
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
                 Ámbitos de análisis
               </h2>
               <p className="text-body text-lg max-w-xl mx-auto">
@@ -142,20 +186,20 @@ const Index = () => {
             </div>
             
             {/* Asymmetric Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
               <Link 
                 to="/analisis" 
-                className="fade-in-section delay-100 card-elevated p-8 md:p-10 group md:row-span-2"
+                className="fade-in-section delay-100 card-elevated p-8 md:p-10 lg:p-12 group md:row-span-2"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20">
-                    <Scale className="h-6 w-6 text-primary" strokeWidth={1.5} />
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="p-4 rounded bg-primary/10 transition-all duration-300 group-hover:bg-secondary/20">
+                    <Scale className="h-7 w-7 text-primary group-hover:text-secondary transition-colors duration-300" strokeWidth={1.5} />
                   </div>
                 </div>
-                <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-all duration-300">
+                <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-5 group-hover:text-primary transition-all duration-300">
                   Análisis jurídico
                 </h3>
-                <p className="text-body leading-relaxed">
+                <p className="text-body leading-relaxed text-lg">
                   Estudios en profundidad sobre las implicaciones legales de la IA: responsabilidad, 
                   propiedad intelectual, protección de datos y regulación sectorial.
                 </p>
@@ -166,7 +210,7 @@ const Index = () => {
                 className="fade-in-section delay-200 card-elevated p-8 md:p-10 group"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-lg bg-secondary/10 transition-all duration-300 group-hover:bg-secondary/20">
+                  <div className="p-3 rounded bg-secondary/10 transition-all duration-300 group-hover:bg-secondary/20">
                     <FileText className="h-6 w-6 text-secondary" strokeWidth={1.5} />
                   </div>
                 </div>
@@ -184,8 +228,8 @@ const Index = () => {
                 className="fade-in-section delay-300 card-elevated p-8 md:p-10 group"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary/20">
-                    <Cpu className="h-6 w-6 text-primary" strokeWidth={1.5} />
+                  <div className="p-3 rounded bg-primary/10 transition-all duration-300 group-hover:bg-secondary/20">
+                    <Cpu className="h-6 w-6 text-primary group-hover:text-secondary transition-colors duration-300" strokeWidth={1.5} />
                   </div>
                 </div>
                 <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-all duration-300">
@@ -199,10 +243,10 @@ const Index = () => {
               
               <Link 
                 to="/noticias" 
-                className="fade-in-section delay-400 card-elevated p-8 md:p-10 group md:col-span-2"
+                className="fade-in-section delay-400 card-elevated p-8 md:p-10 lg:p-12 group md:col-span-2"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-lg bg-secondary/10 transition-all duration-300 group-hover:bg-secondary/20">
+                  <div className="p-4 rounded bg-secondary/10 transition-all duration-300 group-hover:bg-secondary/20">
                     <Newspaper className="h-6 w-6 text-secondary" strokeWidth={1.5} />
                   </div>
                 </div>
@@ -222,7 +266,7 @@ const Index = () => {
         <section className="section-spacing">
           <div className="container-narrow text-center">
             <div className="fade-in-section mb-12">
-              <p className="font-serif text-2xl md:text-3xl text-foreground leading-[1.4] italic">
+              <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground leading-[1.3] italic">
                 "El rigor sobre la rapidez, la responsabilidad sobre la promoción, 
                 la reflexión sobre el ruido."
               </p>
@@ -243,10 +287,10 @@ const Index = () => {
             <div className="fade-in-section delay-300 mt-14">
               <Link 
                 to="/manifiesto" 
-                className="inline-flex items-center text-sm font-medium tracking-wide text-primary hover:text-primary/80 transition-all duration-300 uppercase group"
+                className="inline-flex items-center text-sm font-semibold tracking-wide text-secondary hover:text-secondary/80 transition-all duration-300 uppercase group"
               >
                 Manifiesto editorial
-                <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-transform duration-300" />
               </Link>
             </div>
           </div>
