@@ -241,18 +241,18 @@
     box-shadow: 0 1px 3px rgba(0, 31, 63, 0.06);
   }
 
-  /* Card with depth - ECIJA style 2026 */
+  /* Card with depth - ECIJA style 2026 max elegance */
   .card-elevated {
-    @apply bg-card rounded border border-border/60;
+    @apply bg-card rounded border border-border/50;
     box-shadow: var(--shadow-md);
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .card-elevated:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-6px) scale(1.02);
     box-shadow: var(--shadow-2xl);
     background: hsl(var(--highlight));
-    border-color: hsl(var(--secondary) / 0.3);
+    border-color: hsl(var(--secondary) / 0.35);
   }
 
   /* Interactive hover effects */
@@ -379,7 +379,7 @@
     transform: translateY(-2px);
   }
 
-  /* Hero section - dark corporate */
+  /* Hero section - dark corporate ECIJA style */
   .hero-dark {
     background: linear-gradient(
       135deg,
@@ -392,8 +392,8 @@
   .hero-dark-overlay {
     background: linear-gradient(
       180deg,
-      rgba(0, 20, 40, 0.7) 0%,
-      rgba(0, 31, 63, 0.85) 100%
+      rgba(0, 20, 40, 0.72) 0%,
+      rgba(0, 31, 63, 0.78) 100%
     );
   }
 }

@@ -54,12 +54,12 @@ const Index = () => {
           <div className="absolute inset-0 hero-dark-overlay" />
           <div className="container-wide text-center relative z-10 py-20">
             <div className="fade-in-section visible max-w-4xl mx-auto">
-              <p className="text-sm md:text-base uppercase tracking-[0.3em] text-white/60 mb-6 font-sans">
+              <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50 mb-8 font-sans font-medium">
                 Proyecto editorial independiente
               </p>
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white leading-[0.95] mb-8 tracking-tight">
+              <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-white leading-[0.9] mb-10 tracking-[-0.03em]">
                 Derecho<br />
-                <span className="text-white/90">Artificial</span>
+                <span className="text-white/85">Artificial</span>
               </h1>
               <p className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed max-w-2xl mx-auto font-serif italic mb-12">
                 La reflexión jurídica sobre IA del futuro, hoy
@@ -85,30 +85,30 @@ const Index = () => {
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
         </section>
 
-        {/* Manifesto/Vision Section - Post-hero highlight */}
-        <section className="section-spacing-sm border-b border-divider">
+        {/* Manifesto/Vision Section - Post-hero highlight with max whitespace */}
+        <section className="py-24 md:py-32 lg:py-40 border-b border-divider">
           <div className="container-wide">
-            <div className="fade-in-section grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-              <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-secondary font-semibold mb-4">
+            <div className="fade-in-section grid md:grid-cols-12 gap-16 md:gap-20 items-start">
+              <div className="md:col-span-5">
+                <p className="text-xs uppercase tracking-[0.25em] text-secondary font-semibold mb-5">
                   Nuestra visión
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
+                <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground leading-[1.1] tracking-[-0.02em]">
                   Rigor jurídico en la era de la inteligencia artificial
                 </h2>
               </div>
-              <div className="prose-editorial">
-                <p className="text-lg leading-[1.9]">
+              <div className="md:col-span-7 md:pt-4">
+                <p className="text-lg md:text-xl leading-[1.95] text-body">
                   Derecho Artificial es un espacio de reflexión independiente donde el análisis 
                   normativo prevalece sobre el ruido mediático. Sin afiliaciones comerciales, 
                   sin rankings patrocinados, sin promociones encubiertas.
                 </p>
                 <Link 
                   to="/manifiesto" 
-                  className="inline-flex items-center text-secondary font-medium mt-6 group"
+                  className="inline-flex items-center text-secondary font-semibold mt-10 group tracking-wide text-sm uppercase"
                 >
                   Leer el manifiesto completo
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-transform duration-300" />
+                  <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-3 transition-transform duration-300" />
                 </Link>
               </div>
             </div>
