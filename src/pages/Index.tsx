@@ -296,6 +296,28 @@ const Index = () => {
         </section>
 
 
+        {/* Criterio Editorial - Bloque discreto */}
+        <section className="fade-in-section py-16 md:py-20 border-t border-border/50">
+          <div className="container mx-auto px-6 md:px-8 lg:px-12">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-6">
+                Criterio editorial
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  Derecho Artificial analiza la inteligencia artificial desde el derecho positivo 
+                  europeo, la ética institucional y la regulación vigente.
+                </p>
+                <p>
+                  El proyecto prioriza el análisis jurídico riguroso, las fuentes públicas y los 
+                  textos normativos frente a discursos comerciales, especulativos o tecnológicos 
+                  sin base jurídica.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Editorial Closing */}
         <section className="fade-in-section py-20 md:py-28 border-t border-border/50 bg-muted/20">
 

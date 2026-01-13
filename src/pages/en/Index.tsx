@@ -6,8 +6,8 @@ const IndexEN = () => {
   return (
     <Layout>
       <SEOHead 
-        title="Derecho Artificial | Legal and Ethical Analysis of Artificial Intelligence"
-        description="Independent European editorial project on AI regulation, ethics, and legal practice. Critical analysis of the EU AI Act and its implications for the legal sector."
+        title="Artificial Intelligence & Law – Independent European Analysis"
+        description="Independent editorial project focused on the legal, ethical and regulatory impact of artificial intelligence, with a particular emphasis on European Union law and governance."
         canonical="https://derechoartificial.com/en"
       />
 
@@ -23,31 +23,28 @@ const IndexEN = () => {
             </Link>
           </div>
           <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.05] mb-8">
-            Derecho Artificial
+            Artificial Intelligence & Law
           </h1>
-          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-2xl mx-auto font-serif italic">
-            Independent legal and ethical analysis of artificial intelligence regulation in Europe.
+          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-2xl mx-auto">
+            Independent European Analysis
           </p>
         </div>
       </section>
 
-      {/* Editorial Introduction */}
+      {/* Mission Statement */}
       <section className="section-spacing border-b border-divider">
         <div className="container-editorial">
           <div className="prose-editorial">
             <p className="text-lg md:text-xl leading-[1.9] first-letter:text-5xl first-letter:font-serif first-letter:font-medium first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-foreground">
-              Derecho Artificial is an independent legal editorial project focused on the 
-              regulatory and normative analysis of artificial intelligence in Europe. It is 
-              not a technology news outlet, an opinion blog, or a commercial showcase. It is 
-              a space for rigorous reflection where legal professionals and informed citizens 
-              can find well-founded analysis of the legal, ethical, and regulatory implications 
-              of AI systems.
+              Derecho Artificial is an independent editorial project focused on the legal, 
+              ethical and regulatory impact of artificial intelligence, with a particular 
+              emphasis on European Union law and governance.
             </p>
             <p className="text-lg md:text-xl leading-[1.9]">
-              The project is grounded in the European legal order, with particular attention 
-              to the AI Act (Regulation 2024/1689), the GDPR, and the broader EU regulatory 
-              ecosystem. Editorial independence and the absence of commercial ties are the 
-              foundation of all analytical work.
+              The project prioritizes legal rigor, institutional sources and critical 
+              analysis over technological hype or commercial interests. It is not a 
+              technology news outlet, an opinion blog, or a commercial showcase. It is 
+              a space for rigorous reflection grounded in the European legal order.
             </p>
           </div>
         </div>
@@ -100,7 +97,20 @@ const IndexEN = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-divider">
             <Link 
-              to="/en/legal-ai-software" 
+              to="/en/analysis" 
+              className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
+            >
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
+                Legal Analysis
+              </h3>
+              <p className="text-body leading-relaxed">
+                In-depth legal studies on AI regulation, liability frameworks, 
+                data protection, and fundamental rights within the European context.
+              </p>
+            </Link>
+            
+            <Link 
+              to="/en/software" 
               className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
             >
               <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
@@ -108,8 +118,7 @@ const IndexEN = () => {
               </h3>
               <p className="text-body leading-relaxed">
                 Critical evaluation of artificial intelligence tools for the legal sector 
-                from an audit, ethics, and regulatory compliance perspective. No rankings, 
-                no commercial recommendations.
+                from an audit, ethics, and regulatory compliance perspective.
               </p>
             </Link>
             
@@ -121,33 +130,23 @@ const IndexEN = () => {
                 News and Developments
               </h3>
               <p className="text-body leading-relaxed">
-                Editorial coverage of regulatory, institutional, and technological 
-                developments with legal relevance. Curated, not automated.
+                Editorial coverage of regulatory, institutional, and legal 
+                developments in AI governance. Curated, not automated.
               </p>
             </Link>
             
             <Link 
-              to="/en/about" 
+              to="/en/manifesto" 
               className="bg-background p-10 md:p-14 group hover:bg-highlight transition-colors duration-300"
             >
               <h3 className="font-serif text-xl md:text-2xl text-foreground mb-4 group-hover:text-primary transition-colors">
-                About the Project
+                Editorial Manifesto
               </h3>
               <p className="text-body leading-relaxed">
-                Editorial principles, methodology, and positioning of Derecho Artificial 
-                as an independent legal analysis publication.
+                Our commitment to rigorous analysis, editorial independence, 
+                and the defence of fundamental rights in the digital age.
               </p>
             </Link>
-            
-            <div className="bg-background p-10 md:p-14">
-              <h3 className="font-serif text-xl md:text-2xl text-caption mb-4">
-                Additional Content
-              </h3>
-              <p className="text-body leading-relaxed">
-                Extended content is available in the Spanish version, including detailed 
-                regulatory analysis, document repository, and editorial manifesto.
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -170,11 +169,6 @@ const IndexEN = () => {
               The AI Act, together with the GDPR, the proposed AI Liability Directive, and 
               sector-specific regulations, creates a comprehensive legal ecosystem that 
               legal professionals must understand to advise clients and ensure compliance.
-            </p>
-            <p>
-              Derecho Artificial aims to make this regulatory framework accessible to an 
-              international audience, providing analysis that bridges the gap between 
-              technical AI terminology and legal requirements.
             </p>
           </div>
         </div>
@@ -202,10 +196,10 @@ const IndexEN = () => {
           </div>
           <div className="mt-14">
             <Link 
-              to="/en/about" 
+              to="/en/manifesto" 
               className="inline-flex items-center text-sm font-medium tracking-wide text-caption hover:text-foreground transition-colors duration-300 uppercase"
             >
-              About the project
+              Read our manifesto
               <span className="ml-2">→</span>
             </Link>
           </div>
