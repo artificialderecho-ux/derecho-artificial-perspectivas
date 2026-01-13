@@ -97,11 +97,14 @@ const Noticias = () => {
             </Link>
           </div>
           <h1 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-8 leading-tight">
-            Noticias y novedades sobre inteligencia artificial y Derecho
+            Noticias y desarrollos en Derecho e Inteligencia Artificial
           </h1>
           <p className="text-xl text-body leading-relaxed max-w-3xl">
-            Seguimiento editorial de los desarrollos regulatorios, institucionales y tecnológicos 
-            relevantes para el ámbito jurídico.
+            Seguimiento editorial de desarrollos normativos, institucionales y técnicos con 
+            relevancia jurídica en el ámbito de la inteligencia artificial.
+          </p>
+          <p className="text-body leading-relaxed max-w-3xl mt-4 text-caption">
+            No se publican notas de prensa, contenidos promocionales ni opiniones sin base jurídica.
           </p>
         </div>
       </section>
@@ -137,21 +140,20 @@ const Noticias = () => {
             <div className="mb-6">
               <h3 className="text-sm uppercase tracking-wider text-caption mb-3">Se incluye</h3>
               <ul className="space-y-2 text-body text-sm">
-                <li>• Normativa europea y española (AI Act, RGPD, directrices institucionales)</li>
-                <li>• Posicionamientos de instituciones públicas (UE, AEPD, Parlamento Europeo)</li>
-                <li>• Jurisprudencia relevante sobre IA y derechos fundamentales</li>
+                <li>• Normativa europea y española (AI Act, RGPD, directrices)</li>
+                <li>• Instituciones públicas (UE, Parlamento Europeo, AEPD, autoridades supervisoras)</li>
+                <li>• Jurisprudencia relevante</li>
                 <li>• Informes técnicos de organismos oficiales</li>
-                <li>• Investigación académica con rigor metodológico</li>
+                <li>• Investigación académica</li>
               </ul>
             </div>
             
             <div>
               <h3 className="text-sm uppercase tracking-wider text-caption mb-3">Se excluye</h3>
               <ul className="space-y-2 text-body text-sm">
-                <li>• Notas de prensa y comunicados promocionales</li>
-                <li>• Lanzamientos comerciales de productos o servicios</li>
-                <li>• Opinión sin base jurídica o doctrinal</li>
-                <li>• Contenido especulativo o basado en ciclos de hype</li>
+                <li>• Marketing de proveedores</li>
+                <li>• Casos de uso comerciales</li>
+                <li>• Opinión personal no fundamentada</li>
               </ul>
             </div>
           </div>
