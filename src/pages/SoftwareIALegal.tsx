@@ -63,7 +63,7 @@ const generativeAIProfile: GenerativeAIProfile = {
   editorialNote: "Estas herramientas deben entenderse como apoyo técnico, nunca como sustitución del criterio jurídico profesional. La responsabilidad sobre el contenido final permanece íntegramente en el profesional que firma el trabajo. Se recomienda verificar todas las citas, referencias y conclusiones generadas antes de su incorporación a documentos definitivos.",
 };
 
-interface CaseManagementProfile {
+interface JurisprudentialResearchProfile {
   title: string;
   description: string;
   systemType: string[];
@@ -74,42 +74,43 @@ interface CaseManagementProfile {
   editorialNote: string;
 }
 
-const caseManagementProfile: CaseManagementProfile = {
-  title: "Sistemas de IA para clasificación y priorización de expedientes legales",
-  description: "Sistemas de inteligencia artificial analítica y predictiva diseñados para la gestión, clasificación y priorización de casos jurídicos. Estas herramientas aplican algoritmos de aprendizaje automático para analizar expedientes entrantes, asignar niveles de urgencia o complejidad, distribuir cargas de trabajo y predecir plazos o resultados probables. Su uso típico se encuentra en despachos con alto volumen de casos, departamentos jurídicos corporativos y administraciones públicas.",
+const jurisprudentialResearchProfile: JurisprudentialResearchProfile = {
+  title: "Sistemas de apoyo algorítmico a la investigación jurisprudencial",
+  description: "Sistemas de inteligencia artificial diseñados para asistir en la búsqueda, análisis y síntesis de jurisprudencia y doctrina legal. Estas herramientas emplean técnicas de procesamiento del lenguaje natural (NLP) y aprendizaje automático para identificar resoluciones relevantes, detectar líneas interpretativas, analizar la evolución de criterios jurisprudenciales y facilitar la fundamentación de escritos. Su uso se extiende a despachos de abogados, departamentos jurídicos corporativos, academias de oposiciones y administraciones públicas.",
   systemType: [
-    "IA analítica y predictiva",
-    "Sistemas de clasificación automática",
-    "Aprendizaje automático supervisado",
+    "IA analítica basada en procesamiento del lenguaje natural",
+    "Sistemas de búsqueda semántica",
+    "Aprendizaje automático para clasificación y ordenación de resultados",
     "Uso profesional jurídico",
   ],
   useCases: [
-    "Clasificación automática de expedientes según materia jurídica",
-    "Priorización de casos por urgencia, complejidad o valor económico",
-    "Distribución de cargas de trabajo entre profesionales",
-    "Predicción de plazos de resolución",
-    "Identificación temprana de casos con riesgo elevado",
+    "Búsqueda de jurisprudencia aplicable a un caso concreto",
+    "Identificación de líneas jurisprudenciales y cambios de criterio",
+    "Análisis de la evolución interpretativa de una norma",
+    "Localización de doctrina relevante para fundamentar escritos",
+    "Verificación de la vigencia y aplicabilidad de precedentes",
+    "Síntesis de resoluciones judiciales extensas",
   ],
   legalRisks: [
-    "Errores de clasificación que pueden retrasar casos urgentes",
-    "Sesgos algorítmicos en la priorización que afecten a determinados tipos de clientes o materias",
-    "Falta de transparencia en los criterios de asignación automática",
-    "Responsabilidad profesional por decisiones derivadas de clasificaciones erróneas",
-    "Riesgo de discriminación indirecta en el acceso a la justicia",
+    "Omisión de resoluciones relevantes no indexadas o incorrectamente clasificadas",
+    "Sesgo en la priorización de resultados que puede orientar incorrectamente el análisis",
+    "Falta de actualización que conduzca a citar jurisprudencia superada",
+    "Dependencia excesiva que erosiona las competencias de investigación del profesional",
+    "Posible responsabilidad profesional por errores derivados de resultados incompletos o parciales",
   ],
   regulatoryConsiderations: [
-    "Posible clasificación como sistema de alto riesgo según AI Act si se utiliza en contextos de administración de justicia o acceso a servicios esenciales (Anexo III)",
-    "Obligación de supervisión humana significativa en decisiones que afecten a derechos individuales",
-    "Requisitos de documentación técnica sobre los criterios de clasificación",
-    "Necesidad de evaluación de impacto sobre derechos fundamentales antes del despliegue",
+    "Clasificación como sistema de riesgo limitado o bajo según el AI Act, salvo uso en contextos de administración de justicia directa",
+    "Obligaciones de transparencia sobre los criterios de ordenación y priorización de resultados",
+    "Necesidad de documentar las fuentes consultadas y los parámetros de búsqueda",
+    "Verificación del cumplimiento del proveedor con las obligaciones de los artículos 50 y siguientes del AI Act",
   ],
   rgpdConsiderations: [
-    "Tratamiento de datos personales para perfilado y toma de decisiones automatizadas",
-    "Obligación de información bajo el artículo 22 RGPD sobre decisiones automatizadas con efectos significativos",
-    "Necesidad de Evaluación de Impacto (DPIA) cuando el tratamiento implique evaluación sistemática",
-    "Derecho del interesado a obtener intervención humana y a impugnar la decisión",
+    "Generalmente, estas herramientas procesan textos jurídicos públicos con datos anonimizados",
+    "Riesgo de tratamiento de datos personales si se introducen documentos propios del usuario",
+    "Verificación de las condiciones de tratamiento de datos del proveedor",
+    "Consideración de transferencias internacionales de datos en servicios cloud",
   ],
-  editorialNote: "Estos sistemas deben entenderse como apoyo técnico para la organización del trabajo, nunca como sustitución del criterio profesional en la gestión de casos. La responsabilidad sobre la priorización y asignación de recursos permanece íntegramente en los profesionales responsables. Se recomienda auditoría periódica de los resultados de clasificación para detectar sesgos o errores sistemáticos.",
+  editorialNote: "Estas herramientas constituyen un apoyo valioso para la investigación jurídica, pero no sustituyen el criterio profesional en la selección e interpretación de la jurisprudencia. La responsabilidad sobre la fundamentación del análisis jurídico permanece íntegramente en el profesional. Se recomienda contrastar siempre los resultados con las bases de datos oficiales y verificar la vigencia de las resoluciones citadas.",
 };
 
 const softwareProfiles: SoftwareProfile[] = [
@@ -334,16 +335,16 @@ export default function SoftwareIALegal() {
             </div>
           </article>
 
-          {/* Case Management Profile */}
+          {/* Jurisprudential Research Profile */}
           <article className="mb-16">
             <div className="border border-divider">
               {/* Header */}
               <div className="p-8 border-b border-divider bg-surface">
                 <p className="text-xs uppercase tracking-[0.2em] text-caption mb-2">
-                  IA analítica · Gestión de expedientes
+                  IA analítica · Investigación jurisprudencial
                 </p>
                 <h3 className="font-serif text-2xl text-foreground">
-                  {caseManagementProfile.title}
+                  {jurisprudentialResearchProfile.title}
                 </h3>
               </div>
 
@@ -353,7 +354,7 @@ export default function SoftwareIALegal() {
                   1. Descripción funcional
                 </h4>
                 <p className="text-body leading-relaxed">
-                  {caseManagementProfile.description}
+                  {jurisprudentialResearchProfile.description}
                 </p>
               </div>
 
@@ -363,7 +364,7 @@ export default function SoftwareIALegal() {
                   2. Tipo de sistema
                 </h4>
                 <ul className="space-y-2">
-                  {caseManagementProfile.systemType.map((type) => (
+                  {jurisprudentialResearchProfile.systemType.map((type) => (
                     <li key={type} className="text-body text-sm">• {type}</li>
                   ))}
                 </ul>
@@ -375,7 +376,7 @@ export default function SoftwareIALegal() {
                   3. Contextos de uso habituales
                 </h4>
                 <ul className="space-y-2">
-                  {caseManagementProfile.useCases.map((useCase) => (
+                  {jurisprudentialResearchProfile.useCases.map((useCase) => (
                     <li key={useCase} className="text-body text-sm">• {useCase}</li>
                   ))}
                 </ul>
@@ -387,7 +388,7 @@ export default function SoftwareIALegal() {
                   4. Riesgos jurídicos potenciales
                 </h4>
                 <ul className="space-y-2">
-                  {caseManagementProfile.legalRisks.map((risk) => (
+                  {jurisprudentialResearchProfile.legalRisks.map((risk) => (
                     <li key={risk} className="text-body text-sm">• {risk}</li>
                   ))}
                 </ul>
@@ -399,7 +400,7 @@ export default function SoftwareIALegal() {
                   5. Consideraciones regulatorias (UE)
                 </h4>
                 <ul className="space-y-2">
-                  {caseManagementProfile.regulatoryConsiderations.map((consideration) => (
+                  {jurisprudentialResearchProfile.regulatoryConsiderations.map((consideration) => (
                     <li key={consideration} className="text-body text-sm">• {consideration}</li>
                   ))}
                 </ul>
@@ -411,7 +412,7 @@ export default function SoftwareIALegal() {
                   6. Relación con RGPD
                 </h4>
                 <ul className="space-y-2">
-                  {caseManagementProfile.rgpdConsiderations.map((consideration) => (
+                  {jurisprudentialResearchProfile.rgpdConsiderations.map((consideration) => (
                     <li key={consideration} className="text-body text-sm">• {consideration}</li>
                   ))}
                 </ul>
@@ -423,7 +424,7 @@ export default function SoftwareIALegal() {
                   7. Observación editorial
                 </h4>
                 <p className="text-body leading-relaxed">
-                  {caseManagementProfile.editorialNote}
+                  {jurisprudentialResearchProfile.editorialNote}
                 </p>
               </div>
             </div>
