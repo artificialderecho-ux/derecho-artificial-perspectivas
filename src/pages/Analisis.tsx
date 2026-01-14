@@ -4,6 +4,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const articles = [
   {
+    title: "El AI Act y la práctica jurídica en Europa: obligaciones reales, zonas grises y riesgos operativos",
+    excerpt: "Un análisis jurídico del Reglamento Europeo de Inteligencia Artificial desde la perspectiva de su aplicación práctica en despachos, departamentos legales e instituciones públicas. Más allá del texto normativo: obligaciones operativas, interacción con el RGPD y cuestiones pendientes de desarrollo.",
+    date: "14 de enero, 2025",
+    category: "Regulación",
+    href: "/analisis/ai-act-practica-juridica",
+  },
+  {
     title: "Reglamento Europeo de Inteligencia Artificial (AI Act): análisis jurídico y claves para el sector legal",
     excerpt: "El AI Act establece el primer marco regulatorio integral para la inteligencia artificial en la Unión Europea. Analizamos su arquitectura normativa basada en el riesgo, las obligaciones para sistemas de alto riesgo y sus implicaciones directas para abogados, despachos y administraciones públicas.",
     date: "31 de diciembre, 2024",
