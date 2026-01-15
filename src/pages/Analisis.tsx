@@ -85,6 +85,30 @@ const Analisis = () => {
               title="Análisis"
               subtitle="Artículos en profundidad sobre las cuestiones más relevantes en la intersección del Derecho, la Ética y la Inteligencia Artificial. Análisis riguroso, independiente y accesible."
             />
+            
+            <div className="mt-8 prose-editorial">
+              <p className="text-body leading-relaxed">
+                Los análisis publicados en esta sección abordan cuestiones jurídicas, regulatorias y éticas relacionadas con la inteligencia artificial, desde una perspectiva doctrinal y normativa.
+              </p>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <span className="px-3 py-1.5 text-xs font-medium bg-surface border border-divider text-foreground rounded-sm">
+                Regulación UE
+              </span>
+              <span className="px-3 py-1.5 text-xs font-medium bg-surface border border-divider text-foreground rounded-sm">
+                Derechos fundamentales
+              </span>
+              <span className="px-3 py-1.5 text-xs font-medium bg-surface border border-divider text-foreground rounded-sm">
+                Gobernanza algorítmica
+              </span>
+              <span className="px-3 py-1.5 text-xs font-medium bg-surface border border-divider text-foreground rounded-sm">
+                Riesgo legal
+              </span>
+              <span className="px-3 py-1.5 text-xs font-medium bg-surface border border-divider text-foreground rounded-sm">
+                Sector público
+              </span>
+            </div>
           </header>
 
           <div className="space-y-12">

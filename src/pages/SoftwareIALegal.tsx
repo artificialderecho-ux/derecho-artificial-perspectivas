@@ -187,22 +187,8 @@ export default function SoftwareIALegal() {
       <section className="py-12 border-t border-divider">
         <div className="container-narrow">
           <div className="prose-editorial">
-            <p>
-              La incorporación progresiva de sistemas de inteligencia artificial en el ejercicio 
-              del Derecho constituye una de las transformaciones más relevantes del sector 
-              jurídico contemporáneo. Desde asistentes de investigación jurisprudencial hasta 
-              herramientas de análisis contractual, pasando por sistemas de automatización 
-              documental y plataformas de gestión del conocimiento, el ecosistema de software 
-              legal basado en IA se expande con rapidez y ambición comercial creciente.
-            </p>
-            
-            <p>
-              Sin embargo, esta proliferación de herramientas no siempre va acompañada de un 
-              análisis riguroso sobre sus implicaciones jurídicas, éticas y profesionales. 
-              En un mercado dominado por promesas tecnológicas y afirmaciones exageradas, 
-              resulta imprescindible contar con espacios de reflexión crítica que evalúen 
-              estas soluciones desde criterios de responsabilidad profesional, cumplimiento 
-              normativo y protección de los derechos fundamentales.
+            <p className="text-lg leading-relaxed">
+              Esta sección analiza herramientas de inteligencia artificial aplicadas al sector jurídico desde una perspectiva de cumplimiento normativo, ética y riesgo legal. No se realizan recomendaciones comerciales.
             </p>
           </div>
         </div>
@@ -226,7 +212,7 @@ export default function SoftwareIALegal() {
               ni una evaluación certificada</strong>. No existe relación comercial, de afiliación 
               ni de patrocinio con ningún proveedor de software.
             </p>
-            <p className="text-body leading-relaxed text-sm text-caption">
+            <p className="text-body leading-relaxed font-medium">
               Derecho Artificial no mantiene relación comercial con los proveedores analizados.
             </p>
           </div>
@@ -329,6 +315,111 @@ export default function SoftwareIALegal() {
                 </h4>
                 <p className="text-body leading-relaxed">
                   {generativeAIProfile.editorialNote}
+                </p>
+              </div>
+            </div>
+          </article>
+
+          {/* FICHA 2 - Sistemas de IA para apoyo a decisiones jurídicas */}
+          <article className="mb-16">
+            <div className="border border-divider">
+              {/* Header */}
+              <div className="p-8 border-b border-divider bg-surface">
+                <p className="text-xs uppercase tracking-[0.2em] text-caption mb-2">
+                  IA analítica · Apoyo a decisiones
+                </p>
+                <h3 className="font-serif text-2xl text-foreground">
+                  Sistemas de IA para apoyo a decisiones jurídicas
+                </h3>
+              </div>
+
+              {/* Description */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  1. Descripción funcional
+                </h4>
+                <p className="text-body leading-relaxed">
+                  Sistemas de inteligencia artificial diseñados para asistir a profesionales del Derecho en la toma de decisiones mediante análisis de datos, evaluación de casos similares, estimación de probabilidades de éxito y recomendaciones basadas en patrones identificados en jurisprudencia o documentación jurídica. Estos sistemas pueden aplicarse en contextos como evaluación de riesgos procesales, estimación de indemnizaciones, análisis de precedentes y apoyo a decisiones estratégicas en litigios o negociaciones.
+                </p>
+              </div>
+
+              {/* System type */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  2. Tipo de sistema
+                </h4>
+                <ul className="space-y-2">
+                  <li className="text-body text-sm">• IA analítica y predictiva</li>
+                  <li className="text-body text-sm">• Sistemas de aprendizaje automático supervisado</li>
+                  <li className="text-body text-sm">• Análisis de datos estructurados y no estructurados</li>
+                  <li className="text-body text-sm">• Uso profesional jurídico</li>
+                </ul>
+              </div>
+
+              {/* Use cases */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  3. Contextos de uso
+                </h4>
+                <ul className="space-y-2">
+                  <li className="text-body text-sm">• Evaluación de probabilidades de éxito en litigios</li>
+                  <li className="text-body text-sm">• Estimación de cuantías indemnizatorias</li>
+                  <li className="text-body text-sm">• Análisis de riesgos contractuales</li>
+                  <li className="text-body text-sm">• Apoyo a decisiones estratégicas en negociaciones</li>
+                  <li className="text-body text-sm">• Evaluación de la fuerza de argumentos jurídicos</li>
+                </ul>
+              </div>
+
+              {/* Legal risks */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  4. Riesgos jurídicos potenciales
+                </h4>
+                <ul className="space-y-2">
+                  <li className="text-body text-sm">• Errores en la evaluación que pueden llevar a decisiones estratégicas incorrectas</li>
+                  <li className="text-body text-sm">• Sesgos algorítmicos que pueden discriminar indirectamente a determinados tipos de clientes o casos</li>
+                  <li className="text-body text-sm">• Falta de transparencia en los criterios de evaluación y ponderación</li>
+                  <li className="text-body text-sm">• Responsabilidad profesional por decisiones basadas en recomendaciones no verificadas</li>
+                  <li className="text-body text-sm">• Riesgo de delegación indebida del criterio profesional en sistemas automatizados</li>
+                  <li className="text-body text-sm">• Posible vulneración del deber de diligencia profesional si se confía ciegamente en los outputs del sistema</li>
+                </ul>
+              </div>
+
+              {/* Regulatory considerations */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  5. Consideraciones regulatorias (AI Act)
+                </h4>
+                <ul className="space-y-2">
+                  <li className="text-body text-sm">• Clasificación como sistema de alto riesgo si se utiliza en administración de justicia o interpretación jurídica (Anexo III del Reglamento)</li>
+                  <li className="text-body text-sm">• Obligación de supervisión humana significativa en aplicaciones de alto riesgo</li>
+                  <li className="text-body text-sm">• Requisitos de evaluación de conformidad y documentación técnica para sistemas de alto riesgo</li>
+                  <li className="text-body text-sm">• Obligaciones de transparencia y explicabilidad según el nivel de riesgo</li>
+                  <li className="text-body text-sm">• Necesidad de evaluación de impacto sobre derechos fundamentales antes del despliegue</li>
+                </ul>
+              </div>
+
+              {/* RGPD considerations */}
+              <div className="p-8 border-b border-divider">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  6. Relación con RGPD
+                </h4>
+                <ul className="space-y-2">
+                  <li className="text-body text-sm">• Tratamiento de datos personales para perfilado y toma de decisiones automatizadas</li>
+                  <li className="text-body text-sm">• Obligación de información bajo el artículo 22 RGPD sobre decisiones automatizadas con efectos significativos</li>
+                  <li className="text-body text-sm">• Necesidad de Evaluación de Impacto (DPIA) cuando el tratamiento implique evaluación sistemática</li>
+                  <li className="text-body text-sm">• Derecho del interesado a obtener intervención humana y a impugnar la decisión</li>
+                  <li className="text-body text-sm">• Garantía de base jurídica adecuada para el tratamiento de datos personales</li>
+                </ul>
+              </div>
+
+              {/* Editorial note */}
+              <div className="p-8 bg-surface">
+                <h4 className="text-sm uppercase tracking-wider text-caption mb-4">
+                  7. Observación editorial
+                </h4>
+                <p className="text-body leading-relaxed">
+                  Estos sistemas deben entenderse exclusivamente como herramientas de apoyo técnico que requieren supervisión humana constante. La responsabilidad sobre las decisiones finales permanece íntegramente en el profesional que las adopta. Se recomienda verificar sistemáticamente las recomendaciones del sistema, comprender sus limitaciones y mantener siempre el control efectivo sobre el proceso de toma de decisiones.
                 </p>
               </div>
             </div>

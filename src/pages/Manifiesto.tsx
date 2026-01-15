@@ -19,125 +19,60 @@ const Manifiesto = () => {
           </header>
 
           {/* Content */}
-          <div className="prose-editorial">
-            <section className="mb-16">
-              <h2>Independencia editorial</h2>
+          <div className="prose-editorial space-y-12">
+            <section>
+              <h2 className="font-serif text-2xl text-foreground mb-4">1. Independencia editorial</h2>
               <p>
-                Derecho Artificial es un proyecto editorial independiente. No aceptamos 
-                financiación de empresas tecnológicas, despachos de abogados ni instituciones 
-                que puedan comprometer nuestra capacidad de análisis crítico. Nuestra única 
-                lealtad es hacia la verdad jurídica y el interés público.
-              </p>
-              <p>
-                Esta independencia nos permite abordar temas controvertidos sin 
-                autocensura: desde la crítica a regulaciones insuficientes hasta el 
-                cuestionamiento de prácticas empresariales que afectan derechos fundamentales.
-              </p>
-            </section>
-
-            <section className="mb-16">
-              <h2>Ética y responsabilidad</h2>
-              <p>
-                Creemos que el desarrollo de la inteligencia artificial debe estar guiado 
-                por principios éticos sólidos y por el respeto a los derechos humanos. 
-                Rechazamos la visión tecno-optimista que minimiza riesgos y consecuencias.
-              </p>
-              <p>
-                Nuestro análisis parte de una premisa fundamental: la tecnología no es 
-                neutral. Los sistemas de IA incorporan valores, sesgos y decisiones de 
-                diseño que tienen consecuencias jurídicas y sociales reales. Es 
-                responsabilidad de juristas y reguladores comprender estas implicaciones.
-              </p>
-            </section>
-
-            <section className="mb-16">
-              <h2>Límites de la IA en el Derecho</h2>
-              <p>
-                Reconocemos el potencial de la inteligencia artificial para mejorar 
-                ciertos aspectos de la práctica jurídica. Sin embargo, mantenemos una 
-                posición crítica sobre sus límites:
-              </p>
-              <ul className="list-disc pl-6 space-y-3 my-6">
-                <li>
-                  La IA no puede sustituir el juicio humano en decisiones que afectan 
-                  derechos fundamentales.
-                </li>
-                <li>
-                  Los sistemas automatizados de decisión judicial plantean problemas 
-                  constitucionales graves relacionados con el debido proceso.
-                </li>
-                <li>
-                  La opacidad algorítmica es incompatible con los principios de 
-                  transparencia y motivación de las resoluciones judiciales.
-                </li>
-                <li>
-                  El uso de IA en la administración de justicia debe estar sujeto a 
-                  supervisión humana efectiva, no meramente formal.
-                </li>
-              </ul>
-            </section>
-
-            <section className="mb-16">
-              <h2>Integridad profesional</h2>
-              <p>
-                Dirigimos nuestra atención especialmente a la comunidad jurídica profesional. 
-                Los abogados, jueces, fiscales y académicos del Derecho tienen una 
-                responsabilidad particular en este momento histórico: comprender las 
-                herramientas que están transformando su profesión y mantener los 
-                estándares éticos que la definen.
-              </p>
-              <p>
-                Esto implica resistir la tentación de adoptar tecnologías sin reflexión 
-                crítica, cuestionar las promesas comerciales de proveedores de legaltech, 
-                y priorizar siempre el deber hacia el cliente y hacia la justicia por 
-                encima de la eficiencia.
-              </p>
-            </section>
-
-            <section className="mb-16">
-              <h2>Enfoque crítico y humano</h2>
-              <p>
-                Nuestra metodología combina el rigor académico con la accesibilidad. 
-                Evitamos tanto el tecnicismo impenetrable como la simplificación excesiva. 
-                Buscamos un equilibrio que permita a profesionales del Derecho y a 
-                ciudadanos informados participar en el debate.
-              </p>
-              <p>
-                Rechazamos el discurso del "progreso inevitable" que presenta la 
-                adopción de IA como una fuerza irresistible. Las sociedades pueden y 
-                deben elegir cómo, cuándo y si implementar estas tecnologías. El Derecho 
-                es precisamente el instrumento para canalizar estas decisiones colectivas.
-              </p>
-            </section>
-
-            <section className="mb-16">
-              <h2>Compromiso con el mundo hispanohablante</h2>
-              <p>
-                Derecho Artificial nace para servir a la comunidad jurídica de habla 
-                hispana en su conjunto. Reconocemos la diversidad de sistemas jurídicos, 
-                desde la tradición civilista europea hasta las particularidades de los 
-                ordenamientos latinoamericanos.
-              </p>
-              <p>
-                Esta perspectiva amplia nos permite analizar cómo las regulaciones 
-                desarrolladas en otros contextos—principalmente anglosajones y europeos—pueden 
-                o no ser apropiadas para nuestra realidad. Promovemos un diálogo jurídico 
-                transnacional que respete las especificidades locales.
+                Derecho Artificial es un proyecto editorial independiente, sin financiación comercial ni vínculos que comprometan el análisis crítico. No aceptamos patrocinios, acuerdos comerciales ni relaciones de afiliación con proveedores tecnológicos o instituciones.
               </p>
             </section>
 
             <section>
-              <h2>Una invitación al diálogo</h2>
+              <h2 className="font-serif text-2xl text-foreground mb-4">2. Centralidad del derecho</h2>
               <p>
-                Este manifiesto no pretende ser la última palabra, sino el inicio de 
-                una conversación. Invitamos a académicos, profesionales y ciudadanos a 
-                participar en la construcción de un marco jurídico y ético para la 
-                inteligencia artificial que sea verdaderamente humano.
+                El análisis jurídico, normativo y regulatorio prevalece sobre discursos tecnológicos, comerciales o especulativos. Priorizamos fuentes institucionales, textos normativos y análisis doctrinal fundamentado.
               </p>
+            </section>
+
+            <section>
+              <h2 className="font-serif text-2xl text-foreground mb-4">3. Primacía de fuentes institucionales</h2>
               <p>
-                Las páginas de Derecho Artificial están abiertas a voces diversas, 
-                siempre que compartan nuestro compromiso con el rigor, la honestidad 
-                intelectual y el respeto por los derechos fundamentales.
+                Las instituciones públicas, organismos reguladores, jurisprudencia y documentación oficial constituyen la base de nuestro análisis. Las fuentes corporativas o comerciales se citan con contexto crítico y nunca como autoridad primaria.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-serif text-2xl text-foreground mb-4">4. Supervisión humana</h2>
+              <p>
+                La inteligencia artificial no puede sustituir el juicio profesional en decisiones que afectan derechos fundamentales. Defendemos la supervisión humana efectiva, no meramente formal, como requisito ineludible en contextos jurídicos sensibles.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-serif text-2xl text-foreground mb-4">5. Enfoque europeo</h2>
+              <p>
+                El marco normativo europeo—AI Act, RGPD, Carta de Derechos Fundamentales—constituye el eje de nuestro análisis. Priorizamos la perspectiva regulatoria europea sobre modelos más permisivos de otras jurisdicciones.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-serif text-2xl text-foreground mb-4">6. Prudencia frente a automatización</h2>
+              <p>
+                Rechazamos el determinismo tecnológico y la aceleración sin reflexión. La adopción de sistemas de IA en el ámbito jurídico requiere evaluación crítica de riesgos, cumplimiento normativo y preservación de garantías procesales.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-serif text-2xl text-foreground mb-4">7. Rigor sobre velocidad</h2>
+              <p>
+                Priorizamos la precisión, la profundidad y el análisis fundamentado sobre la inmediatez o la publicación por calendario. El rigor jurídico exige tiempo y reflexión, no reacciones precipitadas.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-serif text-2xl text-foreground mb-4">8. Neutralidad institucional</h2>
+              <p>
+                Mantenemos neutralidad respecto a instituciones, empresas y proveedores. El análisis se fundamenta en criterios jurídicos objetivos, no en preferencias institucionales o relaciones comerciales.
               </p>
             </section>
           </div>

@@ -28,15 +28,16 @@ export default function AvisoLegal() {
         <div className="container-narrow">
           <div className="prose-editorial space-y-12">
             
-            {/* Identificación del titular */}
+            {/* Identificación del responsable */}
             <div>
               <h2 className="font-serif text-2xl text-foreground mb-4">
-                1. Identificación del titular
+                1. Identificación del responsable
               </h2>
               <p>
                 En cumplimiento de lo establecido en la Ley 34/2002, de 11 de julio, de 
                 Servicios de la Sociedad de la Información y de Comercio Electrónico 
-                (LSSI-CE), se facilita la siguiente información:
+                (LSSI-CE), y del Reglamento (UE) 2016/679, General de Protección de Datos 
+                (RGPD), se facilita la siguiente información:
               </p>
               <ul className="list-none space-y-3 mt-4 pl-0">
                 <li>
@@ -48,14 +49,19 @@ export default function AvisoLegal() {
                 </li>
                 <li>
                   <strong>Objeto:</strong> Divulgación y análisis jurídico, ético y 
-                  regulatorio de la inteligencia artificial
+                  regulatorio de la inteligencia artificial desde una perspectiva europea
+                </li>
+                <li>
+                  <strong>Finalidad:</strong> Editorial, no comercial. El proyecto no 
+                  realiza actividades comerciales, no vende productos o servicios, 
+                  ni genera ingresos publicitarios
                 </li>
                 <li>
                   <strong>Ámbito territorial:</strong> España y Unión Europea
                 </li>
                 <li>
                   <strong>Contacto:</strong> A través del formulario disponible en la 
-                  sección de contacto del sitio web
+                  sección de contacto del sitio web o mediante correo electrónico
                 </li>
               </ul>
             </div>
@@ -129,11 +135,12 @@ export default function AvisoLegal() {
                 Los contenidos publicados en Derecho Artificial tienen carácter 
                 exclusivamente informativo, divulgativo y editorial.
               </p>
-              <p className="font-medium text-foreground">
-                En ningún caso constituyen asesoramiento jurídico profesional.
+              <p className="font-medium text-foreground mt-4">
+                En ningún caso constituyen asesoramiento jurídico profesional, 
+                consultoría legal ni recomendación de productos o servicios.
               </p>
-              <p>
-                El titular no se responsabiliza de:
+              <p className="mt-4">
+                El responsable del proyecto no se responsabiliza de:
               </p>
               <ul className="list-disc list-inside space-y-2 mt-4">
                 <li>
@@ -141,22 +148,30 @@ export default function AvisoLegal() {
                   información contenida en el sitio web.
                 </li>
                 <li>
-                  El uso que terceros puedan hacer de los contenidos publicados.
+                  El uso que terceros puedan hacer de los contenidos publicados, 
+                  incluyendo su reproducción, modificación o interpretación.
                 </li>
                 <li>
                   La exactitud, actualidad o integridad de la información en 
                   todo momento, dado el carácter dinámico del marco normativo 
-                  analizado.
+                  analizado y la evolución constante de la regulación europea.
                 </li>
                 <li>
                   Los contenidos, políticas de privacidad o prácticas de los 
                   sitios web de terceros enlazados, cuya inclusión tiene 
-                  finalidad exclusivamente informativa.
+                  finalidad exclusivamente informativa y no implica respaldo 
+                  ni relación alguna con dichos sitios.
+                </li>
+                <li>
+                  Los daños o perjuicios derivados del uso o imposibilidad de 
+                  uso del sitio web, incluyendo interrupciones técnicas o 
+                  errores en el acceso.
                 </li>
               </ul>
               <p className="mt-4">
                 Para cuestiones jurídicas concretas, se recomienda consultar 
-                con profesionales cualificados.
+                con profesionales cualificados. El contenido de este sitio web 
+                no sustituye el asesoramiento jurídico personalizado.
               </p>
             </div>
 

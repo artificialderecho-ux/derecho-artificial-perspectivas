@@ -99,13 +99,11 @@ const Noticias = () => {
           <h1 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-8 leading-tight">
             Noticias y desarrollos en Derecho e Inteligencia Artificial
           </h1>
-          <p className="text-xl text-body leading-relaxed max-w-3xl">
-            Seguimiento editorial de desarrollos normativos, institucionales y técnicos con 
-            relevancia jurídica en el ámbito de la inteligencia artificial.
-          </p>
-          <p className="text-body leading-relaxed max-w-3xl mt-4 text-caption">
-            No se publican notas de prensa, contenidos promocionales ni opiniones sin base jurídica.
-          </p>
+          <div className="prose-editorial max-w-3xl">
+            <p className="text-lg text-body leading-relaxed">
+              Seguimiento editorial de desarrollos regulatorios, institucionales y técnicos con relevancia jurídica en el ámbito de la inteligencia artificial. No se publican notas de prensa ni contenidos promocionales.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -37,6 +37,9 @@ export function SEOHead({
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
       
+      {/* Meta noindex temporal - eliminar cuando el sitio esté listo para indexación */}
+      <meta name="robots" content="noindex, nofollow" />
+      
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />

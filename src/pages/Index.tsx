@@ -7,7 +7,7 @@ import heroBackground from "@/assets/hero-abstract-bg.jpg";
 
 // Hook for fade-in on scroll - OPTIMIZADO
 const useFadeInOnScroll = () => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,336 +36,248 @@ const Index = () => {
 
   return (
     <Layout>
-      <SEOHead />
+      <SEOHead 
+        title="Derecho Artificial | Análisis jurídico y ético de la inteligencia artificial"
+        description="Proyecto editorial independiente dedicado al análisis crítico del Derecho, la ética y la práctica jurídica en la era de la inteligencia artificial."
+        canonical="https://derechoartificial.com"
+      />
 
-      {/* Skip to main content para accesibilidad */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded">
-        Saltar al contenido principal
-      </a>
+      <div ref={containerRef}>
 
-      <main id="main-content" ref={containerRef} className="min-h-screen">
-
-        {/* Hero Section - ECIJA style: dark, corporate-tech */}
-        <section className="hero-section relative min-h-[90vh] flex items-center justify-center overflow-hidden" aria-label="Introducción a Derecho Artificial">
-
-          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroBackground})` }} aria-hidden="true" />
-
-          <div className="hero-dark-overlay absolute inset-0 bg-gradient-to-b from-black/80 via-black/75 to-black/85" aria-hidden="true" /> {/* Baja a 80 para ver más fondo */}
-
-          <div className="relative z-10 container mx-auto px-6 md:px-8 lg:px-12 text-center">
-
-            <div className="max-w-5xl mx-auto space-y-8">
-
-              <span className="inline-block text-white/70 text-sm tracking-[0.25em] uppercase font-medium">
-                Proyecto editorial independiente
-              </span>
-
-              <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-white leading-[0.9] tracking-[-0.03em]">
-                Derecho
-                <br />
-                Artificial
+        {/* Hero Section - Adapted from Apple: Large title, subtitle, CTAs, minimal background */}
+        <section 
+          className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white text-black"
+          style={{
+            backgroundImage: `url(${heroBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.95
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-white/0" />
+          <div className="container-wide text-center relative z-10 py-20">
+            <div className="fade-in-section visible max-w-4xl mx-auto">
+              <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-light text-black leading-[0.9] mb-6 tracking-wide">
+                Derecho Artificial
               </h1>
-
-              <p className="text-xl md:text-2xl text-white/80 font-light max-w-2xl mx-auto leading-relaxed">
+              <p className="text-2xl md:text-3xl text-gray-800 leading-relaxed max-w-2xl mx-auto font-sans mb-12">
                 La reflexión jurídica sobre IA del futuro, hoy
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                <Link to="/analisis" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-8 py-4 rounded-sm hover:bg-white/90 transition-all duration-300 group">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link 
+                  to="/analisis" 
+                  className="bg-black text-white px-8 py-3 rounded-full font-sans text-lg hover:bg-gray-800 transition-colors"
+                >
                   Explorar análisis
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <Link to="/manifiesto" className="inline-flex items-center justify-center gap-2 border-2 border-white/50 text-white font-medium px-8 py-4 rounded-sm hover:bg-white/10 hover:border-white transition-all duration-300">
+                <Link 
+                  to="/manifiesto" 
+                  className="border border-black text-black px-8 py-3 rounded-full font-sans text-lg hover:bg-black hover:text-white transition-colors"
+                >
                   Nuestro manifiesto
                 </Link>
               </div>
-
             </div>
-
           </div>
-
           {/* Gradient fade to content */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" aria-hidden="true" />
-
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
         </section>
 
 
-        {/* Manifesto/Vision Section - Post-hero highlight with max whitespace */}
-        <section className="fade-in-section py-28 md:py-36 lg:py-44 bg-muted/30" aria-labelledby="vision-heading">
-
-          <div className="container mx-auto px-6 md:px-8 lg:px-12">
-
-            <div className="grid md:grid-cols-12 gap-16 md:gap-20 items-start">
-
+        {/* Vision Section - Apple-style: Clean text block with large heading */}
+        <section className="py-24 md:py-32 lg:py-40 border-b border-gray-200 bg-white">
+          <div className="container-wide">
+            <div className="fade-in-section grid md:grid-cols-12 gap-16 md:gap-20 items-start">
               <div className="md:col-span-5">
-
-                <span className="text-secondary text-sm tracking-[0.2em] uppercase font-medium block mb-4">
+                <p className="text-xs uppercase tracking-[0.25em] text-gray-500 font-sans mb-5">
                   Nuestra visión
-                </span>
-
-                <h2 id="vision-heading" className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-black leading-[1.1] tracking-tight font-light">
                   Rigor jurídico en la era de la inteligencia artificial
                 </h2>
-
               </div>
-
-              <div className="md:col-span-7 space-y-6">
-
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              <div className="md:col-span-7 md:pt-4">
+                <p className="text-lg md:text-xl leading-[1.95] text-gray-600 font-sans">
                   Derecho Artificial es un espacio de reflexión independiente donde el análisis 
                   normativo prevalece sobre el ruido mediático. Sin afiliaciones comerciales, 
                   sin rankings patrocinados, sin promociones encubiertas.
                 </p>
-
-                <Link to="/manifiesto" className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 font-medium transition-colors group">
+                <Link 
+                  to="/manifiesto" 
+                  className="inline-flex items-center text-gray-800 font-sans mt-10 group tracking-wide text-sm uppercase hover:text-black"
+                >
                   Leer el manifiesto completo
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </div>
-
             </div>
-
           </div>
-
         </section>
 
 
-        {/* Editorial Introduction */}
-        <section className="fade-in-section py-20 md:py-28 border-t border-border/50">
-
-          <div className="container mx-auto px-6 md:px-8 lg:px-12">
-
-            <div className="max-w-4xl mx-auto">
-
-              <div className="prose prose-lg md:prose-xl prose-neutral max-w-none">
-
-                <p className="text-muted-foreground leading-relaxed first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-primary first-letter:mr-2 first-letter:float-left">
-                  Derecho Artificial es un proyecto editorial jurídico independiente, centrado 
-                  en el análisis normativo y regulatorio de la inteligencia artificial en Europa. 
-                  No es un medio de noticias tecnológicas, un blog de opinión ni un escaparate 
-                  comercial de herramientas. Es un espacio de reflexión rigurosa donde profesionales 
-                  del Derecho y ciudadanos informados pueden encontrar análisis fundamentados 
-                  sobre las implicaciones jurídicas, éticas y regulatorias de la IA.
-                </p>
-
-                <p className="text-muted-foreground leading-relaxed mt-6">
-                  El proyecto se enmarca en el ordenamiento jurídico europeo, con especial 
-                  atención al Reglamento de Inteligencia Artificial (AI Act), el RGPD y el 
-                  ecosistema normativo de la Unión Europea. La independencia editorial y la 
-                  ausencia de vínculos comerciales son el fundamento de toda la actividad 
-                  de análisis.
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        {/* Análisis Destacado */}
-        <section className="fade-in-section py-20 md:py-28 bg-primary/5" aria-labelledby="featured-analysis-heading">
-
-          <div className="container mx-auto px-6 md:px-8 lg:px-12">
-
-            <div className="text-center mb-12">
-              <span className="text-secondary text-sm tracking-[0.2em] uppercase font-medium block mb-4">
-                Análisis destacado
-              </span>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Exploración profunda de temas clave en el derecho de la IA.
+        {/* Editorial Introduction - Apple-style: Sequential text with bold emphasis */}
+        <section className="py-24 md:py-32 border-b border-gray-200 bg-white">
+          <div className="container-editorial">
+            <div className="fade-in-section max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl text-gray-600 leading-relaxed font-sans mb-8">
+                Derecho Artificial es un proyecto editorial jurídico independiente, centrado 
+                en el análisis normativo y regulatorio de la inteligencia artificial en Europa.
+              </p>
+              <p className="text-xl md:text-2xl text-gray-600 leading-relaxed font-sans">
+                No es un medio de noticias tecnológicas, un blog de opinión ni un escaparate 
+                comercial de herramientas. Es un espacio de reflexión rigurosa donde profesionales 
+                del Derecho y ciudadanos informados pueden encontrar análisis fundamentados 
+                sobre las implicaciones jurídicas, éticas y regulatorias de la IA.
               </p>
             </div>
+          </div>
+        </section>
 
-            <div className="max-w-4xl mx-auto">
 
-              <article className="card-elevated bg-card p-8 md:p-12 rounded-sm border border-border/50">
-
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-primary/10 rounded-sm">
-                    <Scale className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-
-                <h3 id="featured-analysis-heading" className="font-serif text-2xl md:text-3xl font-semibold text-foreground mb-4 leading-tight">
+        {/* Análisis Destacado - Apple-style: Highlighted section with clean layout */}
+        <section className="py-24 md:py-32 border-b border-gray-200 bg-white">
+          <div className="container-editorial">
+            <div className="fade-in-section">
+              <p className="text-sm uppercase tracking-widest text-gray-500 mb-8 flex items-center gap-2 font-sans">
+                <Scale className="h-4 w-4 text-black" strokeWidth={1.5} />
+                Análisis destacado
+              </p>
+              <Link 
+                to="/analisis/ai-act-reglamento-europeo" 
+                className="block group transition-all duration-300"
+              >
+                <h2 className="font-serif text-3xl md:text-4xl text-black leading-tight group-hover:text-gray-800 transition-colors duration-300 mb-6 font-light">
                   Reglamento Europeo de Inteligencia Artificial (AI Act): análisis jurídico
-                </h3>
-
-                <p className="text-muted-foreground leading-relaxed mb-6">
+                </h2>
+                <p className="text-lg text-gray-600 leading-relaxed mb-6 max-w-3xl font-sans">
                   El AI Act establece el primer marco regulatorio integral para la inteligencia 
                   artificial en la Unión Europea. Este análisis examina su arquitectura normativa 
                   basada en el riesgo, las obligaciones para sistemas de alto riesgo y sus 
                   implicaciones para la práctica jurídica y las administraciones públicas.
                 </p>
-
-                <Link to="/analisis/ai-act-reglamento-europeo" className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 font-medium transition-colors group">
+                <span className="inline-flex items-center text-sm text-black font-sans group-hover:text-gray-800 transition-colors duration-300 uppercase tracking-wide">
                   Acceder al análisis
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-
-              </article>
-
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
+              </Link>
             </div>
-
           </div>
-
         </section>
 
 
-        {/* Ámbitos de Análisis */}
-        <section className="fade-in-section py-20 md:py-28" aria-labelledby="domains-heading">
-
-          <div className="container mx-auto px-6 md:px-8 lg:px-12">
-
-            <div className="text-center mb-16">
-              <h2 id="domains-heading" className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">
+        {/* Ámbitos de Análisis - Apple-style: Grid with clean cards, minimal borders */}
+        <section className="py-24 md:py-32 border-b border-gray-200 bg-white">
+          <div className="container-wide">
+            <div className="text-center mb-16 md:mb-20 fade-in-section">
+              <h2 className="font-serif text-3xl md:text-4xl text-black mb-4 font-light">
                 Ámbitos de análisis
               </h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              <p className="text-lg text-gray-600 max-w-xl mx-auto font-sans">
                 Áreas de convergencia entre el Derecho y la inteligencia artificial.
               </p>
             </div>
-
-            <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-
-              <Link to="/analisis" className="card-elevated group p-8 bg-card border border-border/50 rounded-sm block">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-primary/10 rounded-sm group-hover:bg-primary/20 transition-colors">
-                    <Scale className="w-6 h-6 text-primary" />
-                  </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <Link 
+                to="/analisis" 
+                className="group p-8 border border-gray-200 hover:border-gray-300 transition-colors duration-300 rounded-sm"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <Scale className="h-6 w-6 text-black" strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                <h3 className="font-serif text-xl text-black mb-4 group-hover:text-gray-800 transition-colors">
                   Análisis jurídico
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-gray-600 leading-relaxed font-sans">
                   Estudios en profundidad sobre las implicaciones legales de la IA: responsabilidad, 
                   propiedad intelectual, protección de datos y regulación sectorial.
                 </p>
               </Link>
               
-              <Link to="/documentos" className="card-elevated group p-8 bg-card border border-border/50 rounded-sm block">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-secondary/10 rounded-sm group-hover:bg-secondary/20 transition-colors">
-                    <FileText className="w-6 h-6 text-secondary" />
-                  </div>
+              <Link 
+                to="/documentos" 
+                className="group p-8 border border-gray-200 hover:border-gray-300 transition-colors duration-300 rounded-sm"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <FileText className="h-6 w-6 text-black" strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-xl font-semibold text-foreground mb-3 group-hover:text-secondary transition-colors">
+                <h3 className="font-serif text-xl text-black mb-4 group-hover:text-gray-800 transition-colors">
                   Documentos y marcos normativos
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-gray-600 leading-relaxed font-sans">
                   Recopilación comentada de normativas, directrices y documentos de referencia 
                   sobre inteligencia artificial en el ámbito europeo e internacional.
                 </p>
               </Link>
               
-              <Link to="/software-ia-legal" className="card-elevated group p-8 bg-card border border-border/50 rounded-sm block">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-primary/10 rounded-sm group-hover:bg-primary/20 transition-colors">
-                    <Cpu className="w-6 h-6 text-primary" />
-                  </div>
+              <Link 
+                to="/software-ia-legal" 
+                className="group p-8 border border-gray-200 hover:border-gray-300 transition-colors duration-300 rounded-sm"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <Cpu className="h-6 w-6 text-black" strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                <h3 className="font-serif text-xl text-black mb-4 group-hover:text-gray-800 transition-colors">
                   Software de IA legal
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-gray-600 leading-relaxed font-sans">
                   Evaluación crítica de herramientas de inteligencia artificial para el sector 
                   jurídico desde una perspectiva de auditoría y cumplimiento normativo.
                 </p>
               </Link>
               
-              <Link to="/noticias" className="card-elevated group p-8 bg-card border border-border/50 rounded-sm block">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-secondary/10 rounded-sm group-hover:bg-secondary/20 transition-colors">
-                    <Newspaper className="w-6 h-6 text-secondary" />
-                  </div>
+              <Link 
+                to="/noticias" 
+                className="group p-8 border border-gray-200 hover:border-gray-300 transition-colors duration-300 rounded-sm md:col-span-2"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <Newspaper className="h-6 w-6 text-black" strokeWidth={1.5} />
                 </div>
-                <h3 className="font-serif text-xl font-semibold text-foreground mb-3 group-hover:text-secondary transition-colors">
+                <h3 className="font-serif text-xl text-black mb-4 group-hover:text-gray-800 transition-colors">
                   Noticias y novedades
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-gray-600 leading-relaxed max-w-2xl font-sans">
                   Seguimiento editorial de desarrollos regulatorios, institucionales y 
                   tecnológicos con relevancia jurídica en el ámbito de la IA.
                 </p>
               </Link>
             </div>
-
-          </div>
-
-        </section>
-
-
-        {/* Criterio Editorial - Bloque discreto */}
-        <section className="fade-in-section py-16 md:py-20 border-t border-border/50">
-          <div className="container mx-auto px-6 md:px-8 lg:px-12">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-6">
-                Criterio editorial
-              </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Derecho Artificial analiza la inteligencia artificial desde el derecho positivo 
-                  europeo, la ética institucional y la regulación vigente.
-                </p>
-                <p>
-                  El proyecto prioriza el análisis jurídico riguroso, las fuentes públicas y los 
-                  textos normativos frente a discursos comerciales, especulativos o tecnológicos 
-                  sin base jurídica.
-                </p>
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* Editorial Closing */}
-        <section className="fade-in-section py-20 md:py-28 border-t border-border/50 bg-muted/20">
 
-          <div className="container mx-auto px-6 md:px-8 lg:px-12">
-
-            <div className="max-w-4xl mx-auto">
-
-              <blockquote className="border-l-4 border-secondary pl-8 py-4 mb-12">
-                <p className="font-serif text-2xl md:text-3xl text-foreground italic leading-relaxed">
-                  "El rigor sobre la rapidez, la responsabilidad sobre la promoción, 
-                  la reflexión sobre el ruido."
-                </p>
-              </blockquote>
-
+        {/* Editorial Closing - Apple-style: Clean, centered quote and text */}
+        <section className="py-24 md:py-32 bg-white">
+          <div className="container-narrow text-center">
+            <div className="fade-in-section mb-12">
+              <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-black leading-[1.3] italic font-light">
+                "El rigor sobre la rapidez, la responsabilidad sobre la promoción, 
+                la reflexión sobre el ruido."
+              </p>
             </div>
-
-            <div className="max-w-3xl mx-auto">
-
-              <div className="space-y-6 text-center">
-
-                <p className="text-muted-foreground leading-relaxed">
-                  En un entorno donde la inmediatez prevalece sobre la precisión y el entusiasmo 
-                  tecnológico sustituye al análisis crítico, Derecho Artificial apuesta por un 
-                  enfoque sereno y fundamentado ante las transformaciones del sector jurídico.
-                </p>
-
-                <p className="text-muted-foreground leading-relaxed">
-                  Este proyecto no acepta patrocinios ni acuerdos comerciales que comprometan 
-                  su independencia editorial.
-                </p>
-
-              </div>
-
+            <div className="fade-in-section delay-200 text-left max-w-2xl mx-auto">
+              <p className="text-gray-600 leading-relaxed font-sans mb-6">
+                En un entorno donde la inmediatez prevalece sobre la precisión y el entusiasmo 
+                tecnológico sustituye al análisis crítico, Derecho Artificial apuesta por un 
+                enfoque sereno y fundamentado ante las transformaciones del sector jurídico.
+              </p>
+              <p className="text-gray-600 leading-relaxed font-sans text-sm">
+                Este proyecto no acepta patrocinios ni acuerdos comerciales que comprometan 
+                su independencia editorial.
+              </p>
             </div>
-
-            <div className="text-center mt-12">
-              <Link to="/manifiesto" className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-sm hover:bg-primary/90 transition-all duration-300 group">
+            <div className="fade-in-section delay-300 mt-14">
+              <Link 
+                to="/manifiesto" 
+                className="inline-flex items-center text-sm font-sans tracking-wide text-black hover:text-gray-800 transition-colors uppercase group"
+              >
                 Manifiesto editorial
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </div>
-
           </div>
-
         </section>
-
-      </main>
-
+      </div>
       
       {/* Estilos globales para reduced-motion y fallback */}
       <style>{`

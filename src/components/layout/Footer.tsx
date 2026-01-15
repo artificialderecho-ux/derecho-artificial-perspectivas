@@ -92,14 +92,14 @@ export function Footer() {
         {/* Legal links */}
         <div className="mt-12 pt-8 border-t border-divider">
           <nav className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
-            <Link to="/aviso-legal" className="text-xs text-caption hover:text-primary transition-colors duration-300">
-              Aviso Legal
+            <Link to={isEnglish ? "/aviso-legal" : "/aviso-legal"} className="text-xs text-caption hover:text-primary transition-colors duration-300">
+              {isEnglish ? "Legal Notice" : "Aviso Legal"}
             </Link>
-            <Link to="/politica-de-privacidad" className="text-xs text-caption hover:text-primary transition-colors duration-300">
-              Política de Privacidad
+            <Link to={isEnglish ? "/politica-de-privacidad" : "/politica-de-privacidad"} className="text-xs text-caption hover:text-primary transition-colors duration-300">
+              {isEnglish ? "Privacy Policy" : "Política de Privacidad"}
             </Link>
-            <Link to="/cookies" className="text-xs text-caption hover:text-primary transition-colors duration-300">
-              Cookies
+            <Link to={isEnglish ? "/cookies" : "/cookies"} className="text-xs text-caption hover:text-primary transition-colors duration-300">
+              {isEnglish ? "Cookies" : "Cookies"}
             </Link>
           </nav>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">

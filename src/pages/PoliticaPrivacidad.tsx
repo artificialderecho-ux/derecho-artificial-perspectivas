@@ -32,7 +32,11 @@ export default function PoliticaPrivacidad() {
               </h2>
               <p>
                 El responsable del tratamiento de los datos personales es el titular del 
-                sitio Derecho Artificial.
+                proyecto editorial independiente Derecho Artificial.
+              </p>
+              <p className="mt-4">
+                <strong>Contacto:</strong> A través del formulario disponible en la 
+                sección de contacto del sitio web.
               </p>
             </div>
 
@@ -43,10 +47,25 @@ export default function PoliticaPrivacidad() {
               </h2>
               <p>
                 Este sitio web no recoge datos personales de forma activa, salvo aquellos 
-                que el usuario facilite voluntariamente mediante correo electrónico.
+                que el usuario facilite voluntariamente mediante el formulario de contacto 
+                o correo electrónico.
               </p>
-              <p>
-                No se realizan registros de usuarios ni perfiles automatizados.
+              <p className="mt-4">
+                Los datos que pueden ser tratados incluyen:
+              </p>
+              <ul className="list-disc list-inside space-y-2 mt-4">
+                <li>Nombre y apellidos (si se facilitan)</li>
+                <li>Dirección de correo electrónico</li>
+                <li>Mensaje o consulta remitida</li>
+              </ul>
+              <p className="mt-4">
+                <strong>No se realizan:</strong> registros de usuarios, perfiles automatizados, 
+                seguimiento comercial, ni tratamiento de datos para finalidades distintas a 
+                la respuesta a consultas editoriales o de contacto.
+              </p>
+              <p className="mt-4">
+                <strong>No se venden ni se ceden datos personales</strong> a terceros para 
+                finalidades comerciales, publicitarias o de marketing.
               </p>
             </div>
 
@@ -56,19 +75,40 @@ export default function PoliticaPrivacidad() {
                 3. Finalidad del tratamiento
               </h2>
               <p>
-                Los datos facilitados se utilizarán únicamente para responder a consultas 
-                editoriales o de contacto.
+                Los datos personales facilitados se utilizarán exclusivamente para las 
+                siguientes finalidades:
+              </p>
+              <ul className="list-disc list-inside space-y-2 mt-4">
+                <li>Responder a consultas editoriales o de contacto remitidas por el usuario</li>
+                <li>Mantener comunicación necesaria para atender las solicitudes recibidas</li>
+                <li>Gestionar, en su caso, colaboraciones o propuestas editoriales</li>
+              </ul>
+              <p className="mt-4">
+                <strong>No se utilizarán los datos</strong> para finalidades comerciales, 
+                publicitarias, de marketing, envío de comunicaciones promocionales ni para 
+                elaborar perfiles de usuario.
               </p>
             </div>
 
             {/* Base jurídica */}
             <div>
               <h2 className="font-serif text-2xl text-foreground mb-4">
-                4. Base jurídica
+                4. Base jurídica del tratamiento
               </h2>
               <p>
-                La base legal del tratamiento es el consentimiento del interesado, conforme 
-                al artículo 6.1.a del Reglamento General de Protección de Datos (RGPD).
+                La base legal del tratamiento de los datos personales es el consentimiento 
+                del interesado, conforme al artículo 6.1.a del Reglamento (UE) 2016/679, 
+                General de Protección de Datos (RGPD).
+              </p>
+              <p className="mt-4">
+                El usuario consiente el tratamiento de sus datos personales al remitir 
+                voluntariamente una consulta o mensaje a través del formulario de contacto 
+                o correo electrónico.
+              </p>
+              <p className="mt-4">
+                El consentimiento puede ser retirado en cualquier momento mediante 
+                comunicación al responsable, sin que ello afecte a la licitud del 
+                tratamiento basado en el consentimiento previo a su retirada.
               </p>
             </div>
 
@@ -78,30 +118,132 @@ export default function PoliticaPrivacidad() {
                 5. Conservación de los datos
               </h2>
               <p>
-                Los datos se conservarán únicamente durante el tiempo necesario para atender 
-                la finalidad para la que fueron recabados.
+                Los datos personales se conservarán únicamente durante el tiempo necesario 
+                para atender la finalidad para la que fueron recabados y, en todo caso, 
+                durante los plazos legalmente establecidos.
+              </p>
+              <p className="mt-4">
+                En general, los datos se conservarán mientras exista una relación 
+                comunicativa activa con el usuario y, una vez finalizada, durante el 
+                plazo de prescripción de acciones que pudieran derivarse de dicha relación.
+              </p>
+              <p className="mt-4">
+                Transcurrido el plazo de conservación, los datos serán suprimidos de forma 
+                segura, garantizando que no puedan ser recuperados ni accedidos.
               </p>
             </div>
 
-            {/* Cesión de datos */}
+            {/* Cesión y transferencias de datos */}
             <div>
               <h2 className="font-serif text-2xl text-foreground mb-4">
-                6. Cesión de datos
+                6. Cesión y transferencias internacionales de datos
               </h2>
               <p>
-                No se cederán datos personales a terceros ni se realizarán transferencias 
-                internacionales de datos.
+                <strong>No se ceden datos personales a terceros</strong> para finalidades 
+                distintas a las indicadas en esta política, salvo obligación legal.
+              </p>
+              <p className="mt-4">
+                <strong>No se realizan transferencias internacionales de datos</strong> 
+                fuera del Espacio Económico Europeo (EEE). Todos los datos se procesan 
+                y almacenan dentro del territorio de la Unión Europea.
+              </p>
+              <p className="mt-4">
+                En caso de que fuera necesario recurrir a servicios de terceros para el 
+                funcionamiento técnico del sitio web (por ejemplo, servicios de hosting), 
+                se garantizará que dichos proveedores cumplan con las obligaciones del RGPD 
+                y no utilicen los datos para finalidades distintas a las estrictamente 
+                necesarias para la prestación del servicio.
               </p>
             </div>
 
             {/* Derechos del usuario */}
             <div>
               <h2 className="font-serif text-2xl text-foreground mb-4">
-                7. Derechos del usuario
+                7. Derechos del interesado
               </h2>
               <p>
-                El usuario puede ejercer los derechos de acceso, rectificación, supresión, 
-                limitación y oposición mediante comunicación al correo de contacto del sitio.
+                El usuario, como interesado, tiene derecho a ejercer los siguientes derechos 
+                reconocidos en el RGPD:
+              </p>
+              <ul className="list-disc list-inside space-y-2 mt-4">
+                <li>
+                  <strong>Derecho de acceso</strong> (art. 15 RGPD): obtener información sobre 
+                  si se están tratando sus datos personales y, en su caso, acceder a los mismos.
+                </li>
+                <li>
+                  <strong>Derecho de rectificación</strong> (art. 16 RGPD): solicitar la 
+                  corrección de datos inexactos o incompletos.
+                </li>
+                <li>
+                  <strong>Derecho de supresión</strong> (art. 17 RGPD): solicitar la eliminación 
+                  de sus datos cuando, entre otros supuestos, ya no sean necesarios para las 
+                  finalidades que motivaron su recogida.
+                </li>
+                <li>
+                  <strong>Derecho de limitación del tratamiento</strong> (art. 18 RGPD): 
+                  solicitar la limitación del tratamiento en determinadas circunstancias.
+                </li>
+                <li>
+                  <strong>Derecho de oposición</strong> (art. 21 RGPD): oponerse al tratamiento 
+                  de sus datos personales.
+                </li>
+                <li>
+                  <strong>Derecho a la portabilidad de los datos</strong> (art. 20 RGPD): 
+                  recibir los datos personales en un formato estructurado y de uso común.
+                </li>
+                <li>
+                  <strong>Derecho a retirar el consentimiento</strong> en cualquier momento, 
+                  sin que afecte a la licitud del tratamiento basado en el consentimiento 
+                  previo a su retirada.
+                </li>
+              </ul>
+              <p className="mt-4">
+                Para ejercer estos derechos, el usuario puede dirigirse al responsable 
+                mediante el formulario de contacto disponible en el sitio web o mediante 
+                correo electrónico, indicando claramente el derecho que desea ejercer y 
+                aportando los datos necesarios para su identificación.
+              </p>
+              <p className="mt-4">
+                El usuario tiene también derecho a presentar una reclamación ante la 
+                <a 
+                  href="https://www.aepd.es/es" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline ml-1"
+                >
+                  Agencia Española de Protección de Datos (AEPD)
+                </a> si considera que el tratamiento de sus datos personales vulnera 
+                la normativa de protección de datos.
+              </p>
+            </div>
+
+            {/* Medidas de seguridad */}
+            <div>
+              <h2 className="font-serif text-2xl text-foreground mb-4">
+                8. Medidas de seguridad
+              </h2>
+              <p>
+                El responsable ha adoptado las medidas técnicas y organizativas necesarias 
+                para garantizar la seguridad de los datos personales y evitar su alteración, 
+                pérdida, tratamiento o acceso no autorizado, conforme a lo establecido en 
+                el artículo 32 del RGPD.
+              </p>
+            </div>
+
+            {/* Modificaciones */}
+            <div>
+              <h2 className="font-serif text-2xl text-foreground mb-4">
+                9. Modificaciones de la política de privacidad
+              </h2>
+              <p>
+                El responsable se reserva el derecho de modificar esta Política de Privacidad 
+                para adaptarla a cambios normativos, jurisprudenciales o técnicos. Cualquier 
+                modificación será publicada en esta página con indicación de la fecha de 
+                última actualización.
+              </p>
+              <p className="mt-4">
+                Se recomienda a los usuarios revisar periódicamente esta política para estar 
+                informados sobre cómo se protegen sus datos personales.
               </p>
             </div>
 

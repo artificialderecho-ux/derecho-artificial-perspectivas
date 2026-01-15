@@ -42,64 +42,60 @@ export default function Manifesto() {
             Core principles
           </h2>
           
-          <div className="space-y-10">
-            <div className="border-l-2 border-foreground pl-6">
-              <h3 className="font-serif text-xl text-foreground mb-3">
-                Rigour over speed
-              </h3>
-              <p className="text-body leading-relaxed">
-                We prioritise accuracy, depth and careful analysis over the urgency of breaking news. 
-                Legal and regulatory matters demand thoughtful consideration, not reactive commentary. 
-                We publish when we have something substantive to contribute, not to meet arbitrary 
-                publishing schedules.
+          <div className="prose-editorial space-y-12">
+            <div>
+              <h3 className="font-serif text-2xl text-foreground mb-4">1. Editorial independence</h3>
+              <p>
+                Derecho Artificial is an independent editorial project, without commercial funding or relationships that compromise critical analysis. We do not accept sponsorships, commercial agreements or affiliate relationships with technology providers or institutions.
               </p>
             </div>
             
-            <div className="border-l-2 border-foreground pl-6">
-              <h3 className="font-serif text-xl text-foreground mb-3">
-                Independence over influence
-              </h3>
-              <p className="text-body leading-relaxed">
-                Derecho Artificial operates without commercial partnerships, sponsorships, 
-                affiliate arrangements or vendor relationships. This independence is not merely 
-                a preference but a fundamental condition for credible analysis of a sector 
-                dominated by commercial interests and promotional narratives.
+            <div>
+              <h3 className="font-serif text-2xl text-foreground mb-4">2. Centrality of law</h3>
+              <p>
+                Legal, regulatory and normative analysis prevails over technological, commercial or speculative discourse. We prioritise institutional sources, regulatory texts and well-founded doctrinal analysis.
               </p>
             </div>
             
-            <div className="border-l-2 border-foreground pl-6">
-              <h3 className="font-serif text-xl text-foreground mb-3">
-                Institutional sources over corporate claims
-              </h3>
-              <p className="text-body leading-relaxed">
-                We favour official regulatory documents, academic research, court decisions 
-                and institutional publications over press releases, white papers or marketing 
-                materials. When we reference industry sources, we do so critically and with 
-                appropriate context.
+            <div>
+              <h3 className="font-serif text-2xl text-foreground mb-4">3. Primacy of institutional sources</h3>
+              <p>
+                Public institutions, regulatory bodies, case law and official documentation constitute the basis of our analysis. Corporate or commercial sources are cited with critical context and never as primary authority.
               </p>
             </div>
             
-            <div className="border-l-2 border-foreground pl-6">
-              <h3 className="font-serif text-xl text-foreground mb-3">
-                European legal framework
-              </h3>
-              <p className="text-body leading-relaxed">
-                Our analysis centres on the European Union's regulatory approach to artificial 
-                intelligence, with particular attention to the AI Act, GDPR, and related 
-                frameworks. We approach these matters from a legal tradition that prioritises 
-                fundamental rights, democratic accountability and human oversight.
+            <div>
+              <h3 className="font-serif text-2xl text-foreground mb-4">4. Human oversight</h3>
+              <p>
+                Artificial intelligence cannot substitute professional judgment in decisions affecting fundamental rights. We defend effective human supervision, not merely formal, as an inescapable requirement in sensitive legal contexts.
               </p>
             </div>
             
-            <div className="border-l-2 border-foreground pl-6">
-              <h3 className="font-serif text-xl text-foreground mb-3">
-                Critical engagement, not promotion
-              </h3>
-              <p className="text-body leading-relaxed">
-                We analyse AI systems and their legal implications with a critical lens. 
-                We do not promote products, recommend vendors or participate in the 
-                technology industry's promotional cycles. Our role is to inform and 
-                analyse, not to advocate for adoption.
+            <div>
+              <h3 className="font-serif text-2xl text-foreground mb-4">5. European approach</h3>
+              <p>
+                The European regulatory framework—AI Act, GDPR, Charter of Fundamental Rights—constitutes the axis of our analysis. We prioritise the European regulatory perspective over more permissive models from other jurisdictions.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="font-serif text-2xl text-foreground mb-4">6. Prudence regarding automation</h3>
+              <p>
+                We reject technological determinism and acceleration without reflection. The adoption of AI systems in the legal sphere requires critical risk assessment, regulatory compliance and preservation of procedural guarantees.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="font-serif text-2xl text-foreground mb-4">7. Rigour over speed</h3>
+              <p>
+                We prioritise accuracy, depth and well-founded analysis over immediacy or publication by schedule. Legal rigour demands time and reflection, not hasty reactions.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="font-serif text-2xl text-foreground mb-4">8. Institutional neutrality</h3>
+              <p>
+                We maintain neutrality regarding institutions, companies and providers. Analysis is based on objective legal criteria, not institutional preferences or commercial relationships.
               </p>
             </div>
           </div>
