@@ -3,6 +3,13 @@ import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import libraryDocs from "../data/library-docs.json";
 
+const copyLink = (id: string) => {
+  if (typeof window === "undefined") return;
+  const url = `${window.location.origin}${window.location.pathname}#${id}`;
+  navigator.clipboard.writeText(url);
+  alert("Enlace de sección copiado");
+};
+
 // Estructura por categorías
 const documentosPorCategoria = {
   aesia: libraryDocs.filter(d => d.source === 'AESIA').map(d => ({
@@ -241,13 +248,19 @@ const Documentos = () => {
           <p className="text-xs uppercase tracking-[0.2em] text-caption mb-6">
             Base de conocimiento
           </p>
-          <SectionHeading 
-            level="h1" 
-            anchorId="documentos" 
-            className="font-serif text-4xl md:text-5xl text-foreground mb-8 leading-tight"
-          >
-            Documentos y recursos sobre inteligencia artificial y Derecho
-          </SectionHeading>
+          <div className="flex items-center gap-2 mb-8">
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+              Documentos y recursos sobre inteligencia artificial y Derecho
+            </h1>
+            <button
+              type="button"
+              onClick={() => copyLink("documentos")}
+              className="text-muted-foreground hover:text-foreground transition-colors text-base"
+              aria-label="Copiar enlace de sección"
+            >
+              🔗
+            </button>
+          </div>
           <p className="text-xl text-body max-w-2xl">
             Recopilación curada de normativa, directrices, informes y fuentes de datos institucionales esenciales para comprender el marco jurídico de la inteligencia artificial en Europa.
           </p>

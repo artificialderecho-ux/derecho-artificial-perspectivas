@@ -6,6 +6,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useLocation } from "react-router-dom";
 
+const copyLink = (id: string) => {
+  if (typeof window === "undefined") return;
+  const url = `${window.location.origin}${window.location.pathname}#${id}`;
+  navigator.clipboard.writeText(url);
+  alert("Enlace de sección copiado");
+};
+
 const Contacto = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -25,13 +32,19 @@ const Contacto = () => {
             <p className="text-sm uppercase tracking-widest text-caption mb-4">
               Contacto
             </p>
-            <SectionHeading 
-              level="h1" 
-              anchorId="contacto" 
-              className="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6"
-            >
-              Póngase en contacto
-            </SectionHeading>
+            <div className="flex items-center gap-2 mb-6">
+              <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+                Póngase en contacto
+              </h1>
+              <button
+                type="button"
+                onClick={() => copyLink("contacto")}
+                className="text-muted-foreground hover:text-foreground transition-colors text-base"
+                aria-label="Copiar enlace de sección"
+              >
+                🔗
+              </button>
+            </div>
             <p className="text-lg text-body max-w-2xl">
               Agradecemos sugerencias, correcciones, propuestas de colaboración 
               y cualquier comentario constructivo sobre nuestro trabajo.

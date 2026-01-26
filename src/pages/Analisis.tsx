@@ -1,7 +1,12 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { ArticleCard } from "@/components/ui/ArticleCard";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+const copyLink = (id: string) => {
+  if (typeof window === "undefined") return;
+  const url = `${window.location.origin}${window.location.pathname}#${id}`;
+  navigator.clipboard.writeText(url);
+  alert("Enlace de sección copiado");
+};
 
 // Lista actualizada con tu nuevo artículo incluido
 const articles = [
@@ -67,13 +72,19 @@ const Analisis = () => {
 
       <section id="perspectivas" className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
-          <SectionHeading 
-            level="h1" 
-            anchorId="perspectivas" 
-            className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-8 leading-tight"
-          >
-            Análisis
-          </SectionHeading>
+          <div className="flex items-center gap-2 mb-8">
+            <h1 className="font-serif text-4xl md:text-5xl font-medium text-foreground leading-tight">
+              Análisis
+            </h1>
+            <button
+              type="button"
+              onClick={() => copyLink("perspectivas")}
+              className="text-muted-foreground hover:text-foreground transition-colors text-base"
+              aria-label="Copiar enlace de sección"
+            >
+              🔗
+            </button>
+          </div>
           <p className="text-xl text-body max-w-2xl">
             Estudios en profundidad sobre las cuestiones más relevantes en la intersección del Derecho, la Ética y la Inteligencia Artificial.
           </p>

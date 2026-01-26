@@ -1,6 +1,11 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+const copyLink = (id: string) => {
+  if (typeof window === "undefined") return;
+  const url = `${window.location.origin}${window.location.pathname}#${id}`;
+  navigator.clipboard.writeText(url);
+  alert("Enlace de sección copiado");
+};
 
 const Sobre = () => {
   return (
@@ -18,13 +23,19 @@ const Sobre = () => {
             <p className="text-sm uppercase tracking-widest text-caption mb-4">
               Sobre el proyecto
             </p>
-            <SectionHeading 
-              level="h1" 
-              anchorId="mision" 
-              className="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6"
-            >
-              Sobre Derecho Artificial
-            </SectionHeading>
+            <div className="flex items-center gap-2 mb-6">
+              <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+                Sobre Derecho Artificial
+              </h1>
+              <button
+                type="button"
+                onClick={() => copyLink("mision")}
+                className="text-muted-foreground hover:text-foreground transition-colors text-base"
+                aria-label="Copiar enlace de sección"
+              >
+                🔗
+              </button>
+            </div>
             <p className="text-lg text-body">
               Un espacio para la reflexión jurídica rigurosa en la era de la inteligencia artificial.
             </p>

@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Scale, FileText, Cpu, Newspaper, ArrowRight } from "lucide-react";
 import heroBackground from "@/assets/hero-abstract-bg.jpg";
@@ -30,6 +29,13 @@ const useFadeInOnScroll = () => {
   }, []);
 
   return ref;
+};
+
+const copyLink = (id: string) => {
+  if (typeof window === "undefined") return;
+  const url = `${window.location.origin}${window.location.pathname}#${id}`;
+  navigator.clipboard.writeText(url);
+  alert("Enlace de sección copiado");
 };
 
 const Index = () => {
@@ -67,13 +73,19 @@ const Index = () => {
               <p className="text-xs uppercase tracking-[0.3em] text-caption mb-6">
                 Proyecto editorial independiente
               </p>
-              <SectionHeading 
-                level="h1" 
-                anchorId="inicio" 
-                className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-black to-gray-800 leading-[1.05] mb-10 mx-auto"
-              >
-                Inteligencia Artificial y Derecho: El Nuevo Paradigma Legal
-              </SectionHeading>
+              <div className="flex items-center justify-center gap-2 mb-10">
+                <h1 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-black to-gray-800 leading-[1.05]">
+                  Inteligencia Artificial y Derecho: El Nuevo Paradigma Legal
+                </h1>
+                <button
+                  type="button"
+                  onClick={() => copyLink("inicio")}
+                  className="text-muted-foreground hover:text-foreground transition-colors text-base"
+                  aria-label="Copiar enlace de sección"
+                >
+                  🔗
+                </button>
+              </div>
               <p className="text-xl md:text-2xl text-body leading-relaxed mb-10 mx-auto text-gray-700">
                 Análisis independiente sobre el Reglamento Europeo de IA, ética digital y los retos de la abogacía en la era de los algoritmos.
               </p>
