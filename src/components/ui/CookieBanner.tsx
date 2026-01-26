@@ -35,7 +35,12 @@ export function CookieBanner() {
       }
     };
 
-    checkConsent();
+    // Force visible for debugging
+    setShouldRender(true);
+    setTimeout(() => setIsVisible(true), 100);
+    
+    // checkConsent();
+    // Debug enabled: Banner forced visible
   }, []);
 
   const saveConsent = (type: 'all' | 'essential') => {
