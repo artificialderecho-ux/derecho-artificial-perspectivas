@@ -86,11 +86,12 @@ export function Header() {
       <div className="container-wide">
         <div className="flex items-center justify-between py-4">
           <Link to={isEnglish ? "/en" : "/"} className="flex flex-col group">
-            <img 
-            src="/logo-principal.png" 
-            alt="Derecho Artificial" 
-            className="h-[80px] md:h-[120px] w-auto object-contain"
-          />
+            <img
+              src="/logo-principal.png"
+              alt="Derecho Artificial"
+              className="h-[45px] w-auto object-contain"
+              style={{ mixBlendMode: "multiply" }}
+            />
           </Link>
 
           <div className="hidden xl:flex items-center gap-10">
