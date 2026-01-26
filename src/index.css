@@ -116,6 +116,18 @@
     @apply border-border;
   }
 
+  /* Global Button Transitions and Hover Effects */
+  button, a.inline-flex {
+    transition: all 0.3s ease !important;
+  }
+  
+  /* Primary Button Hover */
+  .bg-primary:hover {
+    background-color: #333333 !important; /* Lighter Graphite */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;

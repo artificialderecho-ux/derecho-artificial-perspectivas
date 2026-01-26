@@ -57,11 +57,11 @@ const Index = () => {
               <p className="text-xs uppercase tracking-[0.3em] text-caption mb-6">
                 Proyecto editorial independiente
               </p>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.05] mb-8">
-                Derecho Artificial: El Futuro del Sector Legal y la Inteligencia Artificial en Europa
+              <h1 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-black to-gray-800 leading-[1.05] mb-8">
+                Navegando el futuro legal de la Inteligencia Artificial
               </h1>
-              <p className="text-xl md:text-2xl text-body leading-relaxed mb-10 max-w-2xl">
-                Exploramos la regulación, la tecnología legal y la transformación digital que están redefiniendo la práctica jurídica.
+              <p className="text-xl md:text-2xl text-body leading-relaxed mb-10 max-w-2xl text-gray-700">
+                Perspectivas críticas y soluciones jurídicas para la era digital.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
