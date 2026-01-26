@@ -277,7 +277,7 @@
 
   /* Generous institutional spacing */
   .section-spacing {
-    @apply py-24 md:py-32;
+    @apply py-20 md:py-32;
   }
 
   .section-spacing-sm {
@@ -286,15 +286,15 @@
 
   /* Editorial containers with refined max-widths */
   .container-editorial {
-    @apply max-w-3xl mx-auto px-6 md:px-8 lg:px-10;
+    @apply max-w-3xl mx-auto px-8;
   }
 
   .container-wide {
-    @apply max-w-5xl mx-auto px-6 md:px-8 lg:px-10;
+    @apply max-w-5xl mx-auto px-8;
   }
 
   .container-narrow {
-    @apply max-w-2xl mx-auto px-6 md:px-8;
+    @apply max-w-2xl mx-auto px-8;
   }
 
   /* Section heading styles */

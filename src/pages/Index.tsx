@@ -47,23 +47,23 @@ const Index = () => {
       />
 
       <main ref={containerRef}>
-        <header className="relative section-spacing border-b border-divider overflow-hidden bg-background">
+        <header className="relative section-spacing overflow-hidden bg-background">
           <div className="absolute inset-0">
             <img src={heroBackground} alt="" className="h-full w-full object-cover opacity-15" />
             <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
           </div>
           <div className="container-wide relative z-10">
-            <div className="fade-in-section max-w-3xl">
+            <div className="fade-in-section max-w-[700px] mx-auto text-center">
               <p className="text-xs uppercase tracking-[0.3em] text-caption mb-6">
                 Proyecto editorial independiente
               </p>
-              <h1 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-black to-gray-800 leading-[1.05] mb-8">
-                Navegando el futuro legal de la Inteligencia Artificial
+              <h1 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-black to-gray-800 leading-[1.05] mb-10">
+                Inteligencia Artificial y Derecho: El Nuevo Paradigma Legal
               </h1>
-              <p className="text-xl md:text-2xl text-body leading-relaxed mb-10 max-w-2xl text-gray-700">
-                Perspectivas críticas y soluciones jurídicas para la era digital.
+              <p className="text-xl md:text-2xl text-body leading-relaxed mb-10 mx-auto text-gray-700">
+                Análisis independiente sobre el Reglamento Europeo de IA, ética digital y los retos de la abogacía en la era de los algoritmos.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center">
                 <Link
                   to="/analisis"
                   className="inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground transition-colors hover:bg-primary/90"
@@ -169,18 +169,18 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="section-spacing border-b border-divider bg-background">
+        <section className="section-spacing bg-background">
           <div className="container-wide">
             <div className="fade-in-section grid gap-8 lg:grid-cols-2">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-caption mb-5">
                   Tecnología
                 </p>
-                <h2 className="font-bold text-3xl md:text-4xl text-foreground leading-[1.15] mb-6">
-                  Legaltech: Herramientas de IA para Abogados y Despachos
+                <h2 className="font-bold text-3xl md:text-4xl text-foreground leading-[1.2] mb-10">
+                  Legaltech e Innovación Jurídica
                 </h2>
-                <p className="text-lg md:text-xl leading-relaxed text-body">
-                  Panorama de soluciones tecnológicas que optimizan la práctica legal, con foco en impacto, riesgos y eficiencia operativa.
+                <p className="text-lg md:text-xl leading-relaxed text-body max-w-[700px]">
+                  Evaluación de herramientas de IA generativa y predictiva. Transformación digital de despachos, automatización de procesos y nuevos modelos de negocio.
                 </p>
               </div>
               <div className="grid gap-6">
