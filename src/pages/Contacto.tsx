@@ -4,8 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useLocation } from "react-router-dom";
 
 const Contacto = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const hasSuccess = searchParams.get("enviado") === "1";
 
   return (
     <Layout>
@@ -32,12 +36,19 @@ const Contacto = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             <div className="lg:col-span-2">
+              {hasSuccess && (
+                <div className="mb-8 rounded-md bg-green-50 px-4 py-3 border border-green-200">
+                  <p className="text-sm text-green-800">
+                    Gracias por tu mensaje. Hemos recibido correctamente tu consulta y responderemos en los próximos días hábiles.
+                  </p>
+                </div>
+              )}
               <form
-                action="https://formspree.io/f/artificialderecho@gmail.com"
+                action="https://formspree.io/f/mbdoyvje"
                 method="POST"
                 className="space-y-6"
               >
-                <input type="hidden" name="_next" value="https://www.derechoartificial.com/contacto" />
+                <input type="hidden" name="_next" value="https://www.derechoartificial.com/contacto?enviado=1" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-medium text-foreground">
