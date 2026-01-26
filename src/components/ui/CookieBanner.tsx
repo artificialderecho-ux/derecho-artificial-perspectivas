@@ -8,6 +8,7 @@ export function CookieBanner() {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
+    console.log("El banner se está cargando");
     // Check localStorage for existing consent
     const checkConsent = () => {
       try {

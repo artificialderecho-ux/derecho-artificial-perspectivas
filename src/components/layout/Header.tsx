@@ -86,10 +86,10 @@ export function Header() {
         <div className="flex items-center justify-between py-5 md:py-6">
           <Link to={isEnglish ? "/en" : "/"} className="flex flex-col group">
             <img 
-              src="/logo-principal.png" 
-              alt="Derecho Artificial" 
-              className="h-10 md:h-12 w-auto object-contain mb-1"
-            />
+            src="/logo-principal.png" 
+            alt="Derecho Artificial" 
+            className="h-10 md:h-12 w-auto object-contain mb-1"
+          />
           </Link>
 
           <div className="hidden xl:flex items-center gap-10">
