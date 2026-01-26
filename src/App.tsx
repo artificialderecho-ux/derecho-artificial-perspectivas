@@ -45,7 +45,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToHash />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/manifiesto" element={<Manifiesto />} />
