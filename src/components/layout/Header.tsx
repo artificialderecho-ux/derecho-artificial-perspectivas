@@ -83,12 +83,12 @@ export function Header() {
       }`}
     >
       <div className="container-wide">
-        <div className="flex items-center justify-between py-5 md:py-6">
+        <div className="flex items-center justify-between py-4">
           <Link to={isEnglish ? "/en" : "/"} className="flex flex-col group">
             <img 
             src="/logo-principal.png" 
             alt="Derecho Artificial" 
-            className="h-16 md:h-20 w-auto object-contain mb-1"
+            className="h-[80px] md:h-[120px] w-auto object-contain"
           />
           </Link>
 
