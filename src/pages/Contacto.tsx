@@ -19,15 +19,19 @@ const Contacto = () => {
         canonical="https://derechoartificial.com/contacto"
       />
 
-      <section className="section-spacing">
+      <section className="section-spacing" id="contacto">
         <div className="container-editorial">
           <header className="mb-16">
             <p className="text-sm uppercase tracking-widest text-caption mb-4">
               Contacto
             </p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6">
+            <SectionHeading 
+              level="h1" 
+              anchorId="contacto" 
+              className="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6"
+            >
               Póngase en contacto
-            </h1>
+            </SectionHeading>
             <p className="text-lg text-body max-w-2xl">
               Agradecemos sugerencias, correcciones, propuestas de colaboración 
               y cualquier comentario constructivo sobre nuestro trabajo.

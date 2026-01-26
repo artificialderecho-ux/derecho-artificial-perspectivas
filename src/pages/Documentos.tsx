@@ -236,14 +236,18 @@ const Documentos = () => {
       </script>
 
       {/* Hero */}
-      <section className="py-16 md:py-24">
+      <section id="documentos" className="py-16 md:py-24">
         <div className="container-narrow">
           <p className="text-xs uppercase tracking-[0.2em] text-caption mb-6">
             Base de conocimiento
           </p>
-          <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-8 leading-tight">
+          <SectionHeading 
+            level="h1" 
+            anchorId="documentos" 
+            className="font-serif text-4xl md:text-5xl text-foreground mb-8 leading-tight"
+          >
             Documentos y recursos sobre inteligencia artificial y Derecho
-          </h1>
+          </SectionHeading>
           <p className="text-xl text-body max-w-2xl">
             Recopilación curada de normativa, directrices, informes y fuentes de datos institucionales esenciales para comprender el marco jurídico de la inteligencia artificial en Europa.
           </p>

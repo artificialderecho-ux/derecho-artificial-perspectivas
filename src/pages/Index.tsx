@@ -1,9 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
-import { Link } from "react-router-dom";
-import { Scale, FileText, Cpu, Newspaper, ArrowRight } from "lucide-react";
-import heroBackground from "@/assets/hero-abstract-bg.jpg";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 // Hook for fade-in on scroll - OPTIMIZADO
 const useFadeInOnScroll = () => {
@@ -33,6 +31,15 @@ const useFadeInOnScroll = () => {
 
 const Index = () => {
   const containerRef = useFadeInOnScroll();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === '#mision') navigate('/sobre#mision');
+    if (location.hash === '#perspectivas') navigate('/analisis#perspectivas');
+    if (location.hash === '#documentos') navigate('/documentos#documentos');
+    if (location.hash === '#contacto') navigate('/contacto#contacto');
+  }, [location.hash, navigate]);
 
   return (
     <Layout>
@@ -47,7 +54,7 @@ const Index = () => {
       />
 
       <main ref={containerRef}>
-        <header className="relative section-spacing overflow-hidden bg-background">
+        <header id="inicio" className="relative section-spacing overflow-hidden bg-background">
           <div className="absolute inset-0">
             <img src={heroBackground} alt="" className="h-full w-full object-cover opacity-15" />
             <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
@@ -57,9 +64,13 @@ const Index = () => {
               <p className="text-xs uppercase tracking-[0.3em] text-caption mb-6">
                 Proyecto editorial independiente
               </p>
-              <h1 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-black to-gray-800 leading-[1.05] mb-10">
+              <SectionHeading 
+                level="h1" 
+                anchorId="inicio" 
+                className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-black to-gray-800 leading-[1.05] mb-10 mx-auto"
+              >
                 Inteligencia Artificial y Derecho: El Nuevo Paradigma Legal
-              </h1>
+              </SectionHeading>
               <p className="text-xl md:text-2xl text-body leading-relaxed mb-10 mx-auto text-gray-700">
                 Análisis independiente sobre el Reglamento Europeo de IA, ética digital y los retos de la abogacía en la era de los algoritmos.
               </p>

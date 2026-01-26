@@ -1,5 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const Sobre = () => {
   return (
@@ -10,16 +11,20 @@ const Sobre = () => {
         canonical="https://derechoartificial.com/sobre"
       />
 
-      <article className="section-spacing">
+      <article id="mision" className="section-spacing">
         <div className="container-editorial">
           {/* Header */}
           <header className="mb-16">
             <p className="text-sm uppercase tracking-widest text-caption mb-4">
               Sobre el proyecto
             </p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6">
+            <SectionHeading 
+              level="h1" 
+              anchorId="mision" 
+              className="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6"
+            >
               Sobre Derecho Artificial
-            </h1>
+            </SectionHeading>
             <p className="text-lg text-body">
               Un espacio para la reflexión jurídica rigurosa en la era de la inteligencia artificial.
             </p>

@@ -1,5 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const Manifiesto = () => {
   return (
@@ -11,16 +12,20 @@ const Manifiesto = () => {
         canonical="https://derechoartificial.com/manifiesto"
       />
 
-      <article className="section-spacing">
+      <article id="mision" className="section-spacing">
         <div className="container-editorial">
           {/* Header */}
           <header className="mb-16">
             <p className="text-sm uppercase tracking-widest text-caption mb-4">
               Manifiesto Editorial
             </p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6">
+            <SectionHeading 
+              level="h1" 
+              anchorId="mision" 
+              className="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6"
+            >
               Principios para un análisis riguroso del Derecho y la Inteligencia Artificial
-            </h1>
+            </SectionHeading>
             <p className="text-lg text-body">
               Nuestro compromiso con la independencia, la ética y el pensamiento crítico.
             </p>

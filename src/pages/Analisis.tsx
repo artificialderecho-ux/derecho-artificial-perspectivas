@@ -65,11 +65,15 @@ const Analisis = () => {
         canonical="https://derechoartificial.com/analisis"
       />
 
-      <section className="py-16 md:py-24 bg-surface">
+      <section id="perspectivas" className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
-          <h1 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-8 leading-tight">
+          <SectionHeading 
+            level="h1" 
+            anchorId="perspectivas" 
+            className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-8 leading-tight"
+          >
             Análisis
-          </h1>
+          </SectionHeading>
           <p className="text-xl text-body max-w-2xl">
             Estudios en profundidad sobre las cuestiones más relevantes en la intersección del Derecho, la Ética y la Inteligencia Artificial.
           </p>

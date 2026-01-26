@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import { Menu, X, Globe } from "lucide-react";
 
 const navigationES = [
-  { name: "Inicio", href: "/" },
-  { name: "Análisis", href: "/analisis" },
-  { name: "Documentos", href: "/documentos" },
+  { name: "Inicio", href: "/#inicio" },
+  { name: "Análisis", href: "/analisis#perspectivas" },
+  { name: "Documentos", href: "/documentos#documentos" },
   { name: "Software IA legal", href: "/software-ia-legal" },
   { name: "Noticias", href: "/noticias" },
-  { name: "Manifiesto", href: "/manifiesto" },
+  { name: "Manifiesto", href: "/manifiesto#mision" },
+  { name: "Contacto", href: "/contacto#contacto" },
 ];
 
 const navigationEN = [
