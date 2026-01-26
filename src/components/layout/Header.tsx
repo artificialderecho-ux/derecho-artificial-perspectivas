@@ -88,7 +88,7 @@ export function Header() {
             <img 
             src="/logo-principal.png" 
             alt="Derecho Artificial" 
-            className="h-10 md:h-12 w-auto object-contain mb-1"
+            className="h-16 md:h-20 w-auto object-contain mb-1"
           />
           </Link>
 
