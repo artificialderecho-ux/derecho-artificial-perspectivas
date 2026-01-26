@@ -1,49 +1,14 @@
 import { Layout } from "@/components/layout/Layout";
-import { SEOHead } from "@/components/SEOHead"; // Importante para SEO
-import { useState } from "react";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
 
 const Contacto = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // NOTA TÉCNICA: Actualmente esto es una simulación. 
-    // El mensaje NO se envía por email real todavía.
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Mensaje enviado",
-      description: "Gracias por contactarnos. Responderemos a la brevedad posible.",
-    });
-    
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
 
   return (
     <Layout>
-      {/* SEO Optimizado para transmitir Confianza y Profesionalidad */}
       <SEOHead 
         title="Contacto | Consultas y Colaboraciones - Derecho Artificial"
         description="Formulario de contacto para consultas jurídicas sobre IA, correcciones y colaboraciones editoriales. Tiempos de respuesta y normativa de privacidad."
@@ -66,9 +31,13 @@ const Contacto = () => {
           </header>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {/* Form */}
             <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                action="https://formspree.io/f/artificialderecho@gmail.com"
+                method="POST"
+                className="space-y-6"
+              >
+                <input type="hidden" name="_next" value="https://www.derechoartificial.com/contacto" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -76,12 +45,10 @@ const Contacto = () => {
                     </Label>
                     <Input
                       id="name"
-                      name="name"
+                      name="nombre"
                       type="text"
                       required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="bg-background border-divider focus:border-foreground"
+                      className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                       placeholder="Su nombre"
                     />
                   </div>
@@ -94,9 +61,7 @@ const Contacto = () => {
                       name="email"
                       type="email"
                       required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="bg-background border-divider focus:border-foreground"
+                      className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                       placeholder="correo@ejemplo.com"
                     />
                   </div>
@@ -108,12 +73,10 @@ const Contacto = () => {
                   </Label>
                   <Input
                     id="subject"
-                    name="subject"
+                    name="asunto"
                     type="text"
                     required
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="bg-background border-divider focus:border-foreground"
+                    className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                     placeholder="Motivo de su mensaje"
                   />
                 </div>
@@ -124,27 +87,26 @@ const Contacto = () => {
                   </Label>
                   <Textarea
                     id="message"
-                    name="message"
+                    name="mensaje"
                     required
                     rows={8}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="bg-background border-divider focus:border-foreground resize-none"
+                    className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none resize-none"
                     placeholder="Escriba su mensaje aquí..."
                   />
                 </div>
 
                 <Button 
                   type="submit" 
-                  disabled={isSubmitting}
-                  className="px-8 py-3 bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="w-full md:w-auto px-8 py-4 bg-primary text-primary-foreground hover:bg-primary/90"
                 >
-                  {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+                  Enviar mensaje
                 </Button>
+                <p className="text-xs text-caption mt-4">
+                  Al enviar este formulario, aceptas que Derecho Artificial trate tus datos para responder a tu consulta.
+                </p>
               </form>
             </div>
 
-            {/* Sidebar info */}
             <div className="lg:col-span-1">
               <div className="space-y-8">
                 <div>
