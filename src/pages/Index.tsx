@@ -88,14 +88,14 @@ const Index = () => {
                 <p className="text-xs uppercase tracking-[0.3em] text-caption mb-5">
                   Normativa
                 </p>
-                <h2 className="font-bold text-3xl md:text-4xl text-foreground leading-[1.15] mb-6">
-                  Todo sobre el Reglamento de IA Europeo (EU AI Act)
+                <h2 className="font-bold text-3xl md:text-4xl text-foreground leading-[1.2] mb-8">
+                  Reglamento Europeo de IA: Impacto y Cumplimiento
                 </h2>
-                <p className="text-lg md:text-xl leading-relaxed text-body mb-6">
-                  Seguimiento editorial sobre cómo el <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">EU AI Act (Reglamento 2024/1689)</a> redefine la seguridad jurídica, la transparencia y la gobernanza de la inteligencia artificial.
+                <p className="text-lg md:text-xl leading-relaxed text-body mb-8">
+                  Análisis exhaustivo del <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">EU AI Act (Reglamento 2024/1689)</a>. Claves sobre seguridad jurídica, gobernanza de datos y obligaciones en el mercado único digital.
                 </p>
                 <div className="bg-white p-6 border border-divider rounded-sm">
-                  <h3 className="font-serif text-xl mb-4 text-foreground">Preguntas Frecuentes sobre el AI Act</h3>
+                  <h3 className="font-bold text-xl mb-4 text-foreground">Preguntas Frecuentes sobre el AI Act</h3>
                   <div className="space-y-4">
                     <details className="group">
                       <summary className="flex cursor-pointer items-center justify-between font-medium text-foreground">
@@ -191,6 +191,9 @@ const Index = () => {
                   <p className="text-body leading-relaxed">
                     Flujos de trabajo para revisión, generación y control de contratos con IA supervisada.
                   </p>
+                  <Link to="#" className="group inline-flex items-center text-sm font-medium text-primary mt-4">
+                    Leer más <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </article>
                 <article className="card-elevated p-6">
                   <h3 className="font-bold text-xl text-foreground mb-3">
@@ -199,6 +202,9 @@ const Index = () => {
                   <p className="text-body leading-relaxed">
                     Casos de uso en atención jurídica, litigación estratégica y modelos de predicción de resultados.
                   </p>
+                  <Link to="#" className="group inline-flex items-center text-sm font-medium text-primary mt-4">
+                    Leer más <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </article>
               </div>
             </div>
@@ -212,21 +218,24 @@ const Index = () => {
                 <p className="text-xs uppercase tracking-[0.3em] text-caption mb-5">
                   Análisis
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-[1.15] mb-6">
-                  Análisis de Ética Digital, Robots y Responsabilidad Civil
+                <h2 className="font-bold text-3xl md:text-4xl text-foreground leading-[1.2] mb-8">
+                  Ética Digital y Responsabilidad Civil
                 </h2>
                 <p className="text-lg md:text-xl leading-relaxed text-body">
-                  Estudios críticos sobre los dilemas jurídicos y éticos que emergen con la adopción de sistemas autónomos.
+                  Investigación crítica sobre los dilemas éticos de los sistemas autónomos, sesgos algorítmicos y los retos de la responsabilidad civil en la era de la IA.
                 </p>
               </div>
               <div className="grid gap-6">
                 <article className="card-elevated p-6">
-                  <h3 className="font-serif text-xl text-foreground mb-3">
+                  <h3 className="font-bold text-xl text-foreground mb-3">
                     Protección de datos (RGPD) y sesgos algorítmicos
                   </h3>
                   <p className="text-body leading-relaxed">
                     Gobernanza de datos, evaluación de impacto y estrategias para mitigar riesgos discriminatorios.
                   </p>
+                  <Link to="#" className="group inline-flex items-center text-sm font-medium text-primary mt-4">
+                    Leer más <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </article>
                 <article className="card-elevated p-6">
                   <h3 className="font-bold text-xl text-foreground mb-3">
@@ -235,6 +244,9 @@ const Index = () => {
                   <p className="text-body leading-relaxed">
                     Derechos de autor, licencias y protección de activos creativos frente a modelos generativos.
                   </p>
+                  <Link to="#" className="group inline-flex items-center text-sm font-medium text-primary mt-4">
+                    Leer más <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </article>
               </div>
             </div>
