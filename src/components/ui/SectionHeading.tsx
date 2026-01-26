@@ -24,6 +24,10 @@ export const SectionHeading = ({
     // Construct URL with hash
     // Handle root path specifically to avoid double slashes if needed, though browsers handle it.
     // window.location.pathname usually starts with /
+    
+    // Simplification for safety
+    if (typeof window === "undefined") return;
+
     const path = window.location.pathname === '/' ? '' : window.location.pathname;
     const url = `${window.location.origin}${path}#${anchorId}`;
     

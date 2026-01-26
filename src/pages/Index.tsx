@@ -2,6 +2,9 @@ import { useEffect, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Scale, FileText, Cpu, Newspaper, ArrowRight } from "lucide-react";
+import heroBackground from "@/assets/hero-abstract-bg.jpg";
 
 // Hook for fade-in on scroll - OPTIMIZADO
 const useFadeInOnScroll = () => {
