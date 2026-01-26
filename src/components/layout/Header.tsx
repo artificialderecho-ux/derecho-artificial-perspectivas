@@ -84,12 +84,12 @@ export function Header() {
       }`}
     >
       <div className="container-wide">
-        <div className="flex items-center justify-between py-3 md:py-4 min-h-[84px]">
+        <div className="flex items-center justify-between py-3 md:py-4 min-h-[120px]">
           <Link to={isEnglish ? "/en" : "/"} className="flex items-center group">
             <img
               src="/logo-principal.png"
               alt="Derecho Artificial"
-              className="h-[70px] w-auto object-contain"
+              className="h-[100px] w-auto object-contain"
               style={{ mixBlendMode: "multiply" }}
             />
           </Link>
