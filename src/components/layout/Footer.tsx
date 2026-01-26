@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
           <div className="lg:col-span-5">
             <Link to={isEnglish ? "/en" : "/"} className="inline-block group">
-              <span className="font-serif text-2xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+              <span className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                 Derecho Artificial
               </span>
             </Link>

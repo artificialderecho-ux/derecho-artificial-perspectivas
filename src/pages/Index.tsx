@@ -88,7 +88,7 @@ const Index = () => {
                 <p className="text-xs uppercase tracking-[0.3em] text-caption mb-5">
                   Normativa
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-[1.15] mb-6">
+                <h2 className="font-bold text-3xl md:text-4xl text-foreground leading-[1.15] mb-6">
                   Todo sobre el Reglamento de IA Europeo (EU AI Act)
                 </h2>
                 <p className="text-lg md:text-xl leading-relaxed text-body mb-6">
@@ -157,7 +157,7 @@ const Index = () => {
                   </p>
                 </article>
                 <article className="card-elevated p-6">
-                  <h3 className="font-serif text-xl text-foreground mb-3">
+                  <h3 className="font-bold text-xl text-foreground mb-3">
                     Guía de cumplimiento para empresas y desarrolladores
                   </h3>
                   <p className="text-body leading-relaxed">
@@ -176,7 +176,7 @@ const Index = () => {
                 <p className="text-xs uppercase tracking-[0.3em] text-caption mb-5">
                   Tecnología
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-[1.15] mb-6">
+                <h2 className="font-bold text-3xl md:text-4xl text-foreground leading-[1.15] mb-6">
                   Legaltech: Herramientas de IA para Abogados y Despachos
                 </h2>
                 <p className="text-lg md:text-xl leading-relaxed text-body">
@@ -185,7 +185,7 @@ const Index = () => {
               </div>
               <div className="grid gap-6">
                 <article className="card-elevated p-6">
-                  <h3 className="font-serif text-xl text-foreground mb-3">
+                  <h3 className="font-bold text-xl text-foreground mb-3">
                     Automatización documental y contratos inteligentes
                   </h3>
                   <p className="text-body leading-relaxed">
@@ -193,7 +193,7 @@ const Index = () => {
                   </p>
                 </article>
                 <article className="card-elevated p-6">
-                  <h3 className="font-serif text-xl text-foreground mb-3">
+                  <h3 className="font-bold text-xl text-foreground mb-3">
                     Chatbots jurídicos y análisis predictivo de sentencias
                   </h3>
                   <p className="text-body leading-relaxed">
@@ -229,7 +229,7 @@ const Index = () => {
                   </p>
                 </article>
                 <article className="card-elevated p-6">
-                  <h3 className="font-serif text-xl text-foreground mb-3">
+                  <h3 className="font-bold text-xl text-foreground mb-3">
                     Propiedad intelectual en la era de la IA Generativa
                   </h3>
                   <p className="text-body leading-relaxed">
