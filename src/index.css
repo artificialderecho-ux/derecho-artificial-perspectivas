@@ -10,54 +10,54 @@
 
 @layer base {
   :root {
-    /* ECIJA-inspired: clean, modern, corporate-tech */
-    --background: 210 40% 98%; /* #F8FAFC */
-    --background-gradient-start: 210 40% 98%;
-    --background-gradient-end: 210 40% 98%;
-    --foreground: 222 47% 11%; /* #0F172A */
+    /* Derecho Artificial - Rebranding: Minimalist Black & White */
+    --background: 0 0% 100%; /* #FFFFFF */
+    --background-gradient-start: 0 0% 100%;
+    --background-gradient-end: 0 0% 98%;
+    --foreground: 0 0% 10%; /* #1A1A1A - Dark Graphite */
 
     /* Cards with elevation */
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 0 0% 10%;
 
-    /* Primary: professional blue - Matches Logo Navy Blue */
-    --primary: 222 47% 11%; /* #0F172A */
+    /* Primary: Black - Elegant and Strong */
+    --primary: 0 0% 10%; /* #1A1A1A or #000000 */
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: tech green accent */
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    /* Secondary: Ash Grey */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
 
     /* Muted tones for sections */
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    /* Accent: subtle tech tone */
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
+    /* Accent: subtle grey tone */
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 98%;
 
     /* Borders: refined subtle lines */
-    --border: 214 32% 91%; /* #E2E8F0 */
-    --input: 214 32% 91%;
-    --ring: 226 71% 40%;
+    --border: 0 0% 90%; /* #E5E5E5 */
+    --input: 0 0% 90%;
+    --ring: 0 0% 10%;
 
-    --radius: 0.25rem; /* 4px for a more formal look */
+    --radius: 0rem; /* 0px for sharp elegant look, or keep 0.25rem */
 
     /* Custom editorial tokens */
-    --text-body: 222 47% 11%;
-    --text-caption: 215 16% 47%;
-    --divider: 214 32% 91%;
-    --highlight: 210 40% 96%;
+    --text-body: 0 0% 20%;
+    --text-caption: 0 0% 45%;
+    --divider: 0 0% 90%;
+    --highlight: 0 0% 96%;
 
     /* Hero dark section */
-    --hero-bg: 210 40% 98%;
-    --hero-overlay: 210 40% 96%;
+    --hero-bg: 0 0% 98%;
+    --hero-overlay: 0 0% 96%;
 
     /* Shadows - more pronounced */
     --shadow-sm: 0 0 0 rgba(0, 0, 0, 0);
@@ -68,35 +68,35 @@
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --background-gradient-start: 222 47% 11%;
-    --background-gradient-end: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 5%; /* Very Dark Grey */
+    --background-gradient-start: 0 0% 5%;
+    --background-gradient-end: 0 0% 0%;
+    --foreground: 0 0% 98%;
 
-    --card: 222 40% 13%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222 40% 13%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 225 71% 62%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 0 0% 98%; /* White text on dark */
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 222 25% 20%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 222 25% 16%;
-    --muted-foreground: 215 16% 65%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 222 25% 16%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 60% 45%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 222 25% 22%;
-    --input: 222 25% 22%;
-    --ring: 225 71% 62%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 80%;
 
     --text-body: 210 40% 98%;
     --text-caption: 215 16% 65%;
@@ -181,11 +181,11 @@
   }
 
   .prose-editorial h2 {
-    @apply mt-16 mb-8 font-serif text-foreground;
+    @apply mt-16 mb-8 font-sans text-foreground;
   }
 
   .prose-editorial h3 {
-    @apply mt-12 mb-6 font-serif text-foreground;
+    @apply mt-12 mb-6 font-sans text-foreground;
   }
 
   .prose-editorial blockquote {

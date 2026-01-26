@@ -69,15 +69,15 @@ export default {
         caption: "hsl(var(--text-caption))",
         divider: "hsl(var(--divider))",
         highlight: "hsl(var(--highlight))",
-        // Institutional colors
+        // Institutional colors - Updated to Monochrome
         navy: {
-          DEFAULT: "#0F172A", // Slate-900 - Brand Navy Blue
-          dark: "#020617",    // Slate-950
-          light: "#1E293B",   // Slate-800
+          DEFAULT: "#1A1A1A", // Dark Graphite
+          dark: "#000000",    // Pure Black
+          light: "#333333",   // Light Graphite
         },
         institutional: {
-          green: "hsl(170, 100%, 15%)",
-          "green-light": "hsl(170, 80%, 25%)",
+          green: "#1A1A1A",   // Replaced with Graphite
+          "green-light": "#333333", // Replaced with Light Graphite
         },
       },
       borderRadius: {
