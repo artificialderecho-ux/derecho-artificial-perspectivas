@@ -267,6 +267,35 @@ const Documentos = () => {
         </div>
       </section>
 
+      <section className="py-12 border-t border-divider">
+        <div className="container-editorial">
+          <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">
+            Informes de Derecho Artificial
+          </h2>
+          <div className="card-elevated p-6 md:p-8">
+            <div className="mb-3 flex items-center gap-3">
+              <span className="text-xs uppercase tracking-wider text-primary font-medium px-2 py-1 bg-primary/10 rounded">
+                Informe técnico
+              </span>
+              <span className="text-caption">·</span>
+              <time className="text-xs text-caption">2026</time>
+            </div>
+            <h3 className="font-serif text-xl md:text-2xl text-foreground mb-3">
+              Clawdbot y la Ilusión de la Privacidad: Riesgos Críticos del RGPD
+            </h3>
+            <p className="text-body leading-relaxed mb-4">
+              Análisis crítico sobre la responsabilidad del tratamiento y los riesgos de incumplimiento del RGPD cuando se integran proveedores externos desde arquitecturas de IA autoalojadas.
+            </p>
+            <a
+              href="/informe-clawdbot-rgpd.pdf"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+            >
+              📥 Descargar PDF
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Introduction */}
       <section className="py-12 border-t border-divider">
         <div className="container-narrow">

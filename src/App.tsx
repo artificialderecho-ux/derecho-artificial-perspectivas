@@ -35,6 +35,7 @@ import IAAlucinaTribunales from "./pages/analisis/IAAlucinaTribunales";
 import GlosarioIALegal from "./pages/GlosarioIALegal";
 import GuiaReglamentoIA2026 from "./pages/blog/GuiaReglamentoIA2026";
 import AnalisisRiaEstrategico from "./pages/analisis/analisis-ria-estrategico";
+import ClawdbotIlusionPrivacidad from "./pages/analisis/ClawdbotIlusionPrivacidad";
 import { CookieBanner } from "./components/ui/CookieBanner";
 
 const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ const App = () => (
           <Route path="/analisis/ia-sector-legal" element={<IaSectorLegal />} />
           <Route path="/analisis/ia-alucina-tribunales-quien-paga-el-precio" element={<IAAlucinaTribunales />} />
           <Route path="/analisis/analisis-ria-estrategico" element={<AnalisisRiaEstrategico />} />
+          <Route path="/analisis/clawdbot-ilusion-privacidad" element={<ClawdbotIlusionPrivacidad />} />
           <Route path="/guia-reglamento-ia-2026" element={<GuiaReglamentoIA2026 />} />
           <Route path="/glosario-ia-legal" element={<GlosarioIALegal />} />
           <Route path="/documentos" element={<Documentos />} />

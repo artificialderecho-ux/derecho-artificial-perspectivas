@@ -11,6 +11,13 @@ const copyLink = (id: string) => {
 // Lista actualizada con tu nuevo artículo incluido
 const articles = [
   {
+    title: "Clawdbot y la Ilusión de la Privacidad: Riesgos Críticos del RGPD",
+    excerpt: "Arquitectura, responsabilidad del tratamiento y riesgos de incumplimiento cuando se integran modelos externos desde soluciones autoalojadas.",
+    date: "27 de enero, 2026",
+    category: "Privacidad & Cumplimiento",
+    href: "/analisis/clawdbot-ilusion-privacidad",
+  },
+  {
     title: "Informe Estratégico: El Nuevo Orden de la IA en la UE (Reglamento 2024/1689)",
     excerpt: "Análisis profundo sobre el cumplimiento del EU AI Act, arquitectura de riesgos, modelos GPAI y el papel de la AESIA en España.",
     date: "24 de enero, 2026",
