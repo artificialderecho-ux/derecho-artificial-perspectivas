@@ -4,48 +4,44 @@ import { Menu, X, Globe } from "lucide-react";
 
 const navigationES = [
   { name: "Firma Scarpa", href: "/firma-scarpa" },
+  { name: "Jurisprudencia", href: "/jurisprudencia" },
   { name: "Actualidad IA", href: "/actualidad-ia" },
   { name: "Legislación", href: "/legislacion" },
-  { name: "Jurisprudencia", href: "/jurisprudencia" },
   { name: "Guías y Protocolos", href: "/guias-protocolos" },
   { name: "Quiénes somos", href: "/quienes-somos" },
+  { name: "Contacto", href: "mailto:contacto@derechoartificial.com" },
 ];
 
 const navigationEN = [
-  { name: "Home", href: "/en" },
-  { name: "Analysis", href: "/en/analysis" },
-  { name: "Documents", href: "/en/documents" },
-  { name: "Software", href: "/en/software" },
-  { name: "News", href: "/en/news" },
-  { name: "Manifesto", href: "/en/manifesto" },
-  { name: "About", href: "/en/about" },
+  { name: "Scarpa Firm", href: "/en/scarpa-firm" },
+  { name: "Jurisprudence", href: "/en/jurisprudence" },
+  { name: "AI News", href: "/en/ai-news" },
+  { name: "Legislation", href: "/en/legislation" },
+  { name: "Guides & Protocols", href: "/en/guides-protocols" },
+  { name: "About Us", href: "/en/about-us" },
+  { name: "Contact", href: "mailto:contact@derechoartificial.com" },
 ];
 
 // Map Spanish routes to English equivalents
 const esEnRouteMap: Record<string, string> = {
   "/": "/en",
-  "/software-ia-legal": "/en/software",
-  "/noticias": "/en/news",
-  "/sobre": "/en/about",
-  "/analisis": "/en/analysis",
-  "/manifiesto": "/en/manifesto",
-  "/contacto": "/en/about",
-  "/documentos": "/en/documents",
-  "/glosario-ia-legal": "/en/legal-ai-glossary",
-  "/guia-reglamento-ia-2026": "/en/blog/eu-ai-act-guide-2026",
+  "/firma-scarpa": "/en/scarpa-firm",
+  "/jurisprudencia": "/en/jurisprudence",
+  "/actualidad-ia": "/en/ai-news",
+  "/legislacion": "/en/legislation",
+  "/guias-protocolos": "/en/guides-protocols",
+  "/quienes-somos": "/en/about-us",
 };
 
 // Map English routes to Spanish equivalents  
 const enEsRouteMap: Record<string, string> = {
   "/en": "/",
-  "/en/analysis": "/analisis",
-  "/en/software": "/software-ia-legal",
-  "/en/news": "/noticias",
-  "/en/about": "/sobre",
-  "/en/manifesto": "/manifiesto",
-  "/en/documents": "/documentos",
-  "/en/legal-ai-glossary": "/glosario-ia-legal",
-  "/en/blog/eu-ai-act-guide-2026": "/guia-reglamento-ia-2026",
+  "/en/scarpa-firm": "/firma-scarpa",
+  "/en/jurisprudence": "/jurisprudencia",
+  "/en/ai-news": "/actualidad-ia",
+  "/en/legislation": "/legislacion",
+  "/en/guides-protocols": "/guias-protocolos",
+  "/en/about-us": "/quienes-somos",
 };
 
 export function Header() {

@@ -15,7 +15,6 @@ interface NewsItem {
   image?: string;
 }
 
-// Extended interface for Editorial News (compatible with NewsCard)
 interface EditorialNews extends NewsItem {
   context: string;
   keyContent: string;
@@ -23,46 +22,44 @@ interface EditorialNews extends NewsItem {
   editorialNote: string;
 }
 
-// Static Editorial Content (High value content with full analysis)
+// Static Editorial Content (English)
 const EDITORIAL_NEWS: EditorialNews[] = [
   {
     id: 'ed-1',
-    title: "El AI Act entra en vigor: primeras obligaciones para operadores",
+    title: "AI Act Enters into Force: First Obligations for Operators",
     source: 'EUR-Lex',
-    date: "Enero 2025",
-    url: "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32024R1689",
-    summary: "Entrada en vigor del Reglamento de IA.",
-    tags: ["AI Act", "Compliance", "UE"],
-    context: "Tras su aprobación final y publicación en el Diario Oficial, el Reglamento de Inteligencia Artificial (AI Act) marca el inicio del cronograma de cumplimiento escalonado para todos los Estados miembros.",
-    keyContent: "Se activa la prohibición inmediata de prácticas de riesgo inaceptable (plazo de 6 meses) y se establecen las bases para la gobernanza de modelos de IA de propósito general (12 meses).",
-    legalRelevance: "Las empresas y entidades públicas deben iniciar auditorías de inventario de sistemas de IA para determinar su clasificación de riesgo bajo el nuevo marco regulatorio.",
-    editorialNote: "Es crucial no esperar a los plazos finales; la adaptación de sistemas complejos requiere meses de preparación técnica y legal. La vigilancia regulatoria será estricta desde el primer día."
+    date: "January 2025",
+    url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
+    summary: "Entry into force of the AI Regulation.",
+    tags: ["AI Act", "Compliance", "EU"],
+    context: "Following its final approval and publication in the Official Journal, the Artificial Intelligence Act (AI Act) marks the beginning of the staggered compliance schedule for all Member States.",
+    keyContent: "Immediate prohibition of unacceptable risk practices is activated (6-month deadline) and foundations for general-purpose AI model governance are established (12 months).",
+    legalRelevance: "Companies and public entities must initiate AI system inventory audits to determine their risk classification under the new regulatory framework.",
+    editorialNote: "It is crucial not to wait for final deadlines; adapting complex systems requires months of technical and legal preparation. Regulatory surveillance will be strict from day one."
   },
   {
     id: 'ed-2',
-    title: "Publicación de la obra colectiva 'Inteligencia Artificial y Filosofía del Derecho'",
+    title: "Publication of Collective Work 'Artificial Intelligence and Philosophy of Law'",
     source: 'Other',
-    date: "23 de enero, 2025",
-    url: "/firma-scarpa/filosofia-derecho-inteligencia-artificial", // Updated internal link if applicable, or keep as is if it redirects
-    summary: "Publicación académica sobre el impacto de la IA.",
-    tags: ["Filosofía del Derecho", "Investigación", "IA"],
-    context: "Lanzamiento de una obra colaborativa que reúne a expertos juristas y filósofos para debatir sobre los retos ontológicos y éticos de la IA.",
-    keyContent: "Análisis sobre la agencia moral de los algoritmos, la responsabilidad civil en sistemas autónomos y la interpretación algorítmica de la ley.",
-    legalRelevance: "Provee el marco teórico necesario para interpretar las lagunas legales que la normativa actual aún no cubre.",
-    editorialNote: "Lectura recomendada para juristas que buscan comprender el 'por qué' detrás de las nuevas regulaciones."
+    date: "January 23, 2025",
+    url: "/en/scarpa-firm/philosophy-law-ai",
+    summary: "Academic publication on the impact of AI.",
+    tags: ["Philosophy of Law", "Research", "AI"],
+    context: "Launch of a collaborative work bringing together legal experts and philosophers to debate the ontological and ethical challenges of AI.",
+    keyContent: "Analysis on the moral agency of algorithms, civil liability in autonomous systems, and algorithmic interpretation of the law.",
+    legalRelevance: "Provides the necessary theoretical framework to interpret legal gaps that current regulations do not yet cover.",
+    editorialNote: "Recommended reading for jurists seeking to understand the 'why' behind new regulations."
   }
 ];
 
-const ActualidadIA = () => {
-  // Static data import for better performance (SSG-like behavior)
+const AiNews = () => {
   const apiNews: NewsItem[] = latestNews as NewsItem[];
 
-  // Helper for source colors
   const getSourceColor = (source: string) => {
     switch(source) {
       case 'AESIA': return 'bg-blue-600';
       case 'EUR-Lex': return 'bg-indigo-600';
-      case 'Comisión Europea': return 'bg-[#003399]'; // Azul Europa
+      case 'Comisión Europea': return 'bg-[#003399]';
       default: return 'bg-slate-500';
     }
   };
@@ -70,9 +67,9 @@ const ActualidadIA = () => {
   return (
     <Layout>
       <SEOHead 
-        title="Actualidad IA: Noticias y Análisis Regulatorio | Derecho Artificial"
-        description="Seguimiento en tiempo real del Reglamento de IA, AESIA y novedades legislativas sobre inteligencia artificial en España y Europa."
-        canonical="https://derechoartificial.com/actualidad-ia"
+        title="AI News: Regulatory Analysis & Updates | Derecho Artificial"
+        description="Real-time tracking of the AI Act, AESIA, and legislative news on artificial intelligence in Spain and Europe."
+        canonical="https://derechoartificial.com/en/ai-news"
         hreflangs={[
           { lang: "es", href: "https://derechoartificial.com/actualidad-ia" },
           { lang: "en", href: "https://derechoartificial.com/en/ai-news" }
@@ -84,14 +81,14 @@ const ActualidadIA = () => {
         <div className="container-narrow">
           <div className="flex justify-between items-start mb-6">
             <p className="text-xs uppercase tracking-[0.2em] text-caption mb-4">
-              Actualidad y Noticias
+              News & Updates
             </p>
           </div>
           <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
-            Monitor Regulatorio y Novedades IA
+            Regulatory Monitor & AI News
           </h1>
           <p className="text-xl text-body leading-relaxed max-w-2xl">
-            Seguimiento de la actividad legislativa, sentencias relevantes y movimientos de la AESIA y la Comisión Europea.
+            Tracking legislative activity, relevant rulings, and movements from AESIA and the European Commission.
           </p>
         </div>
       </section>
@@ -101,7 +98,7 @@ const ActualidadIA = () => {
         <div className="container-narrow">
           <h2 className="text-2xl font-serif text-foreground mb-8 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-primary"></span>
-            Análisis Editorial
+            Editorial Analysis
           </h2>
           <div className="space-y-12">
             {EDITORIAL_NEWS.map((item) => (
@@ -123,18 +120,18 @@ const ActualidadIA = () => {
                     
                     <div className="grid md:grid-cols-2 gap-6 mt-6 p-4 bg-surface/50 border-l-2 border-primary/20">
                       <div>
-                        <h4 className="text-xs font-bold uppercase text-caption mb-2">Claves</h4>
+                        <h4 className="text-xs font-bold uppercase text-caption mb-2">Key Points</h4>
                         <p className="text-sm text-body">{item.keyContent}</p>
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold uppercase text-caption mb-2">Impacto Legal</h4>
+                        <h4 className="text-xs font-bold uppercase text-caption mb-2">Legal Impact</h4>
                         <p className="text-sm text-body">{item.legalRelevance}</p>
                       </div>
                     </div>
                     
                     <div className="mt-4 pt-4 border-t border-border/50">
                       <p className="text-sm italic text-muted-foreground">
-                        <span className="font-semibold not-italic text-primary">Nota editorial: </span>
+                        <span className="font-semibold not-italic text-primary">Editorial Note: </span>
                         {item.editorialNote}
                       </p>
                     </div>
@@ -151,7 +148,7 @@ const ActualidadIA = () => {
         <div className="container-narrow">
           <h2 className="text-2xl font-serif text-foreground mb-8 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-primary"></span>
-            Últimas Actualizaciones Oficiales
+            Latest Official Updates
           </h2>
           <div className="grid gap-6">
             {apiNews.map((item) => (
@@ -172,4 +169,4 @@ const ActualidadIA = () => {
   );
 };
 
-export default ActualidadIA;
+export default AiNews;

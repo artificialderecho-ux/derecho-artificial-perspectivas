@@ -37,57 +37,54 @@ export function Footer() {
             <nav className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
               {isEnglish ? (
                 <>
-                  <Link to="/en" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Home
+                  <Link to="/en/scarpa-firm" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Scarpa Firm
                   </Link>
-                  <Link to="/en/analysis" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Analysis
+                  <Link to="/en/jurisprudence" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Jurisprudence
                   </Link>
-                  <Link to="/en/documents" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Documents
+                  <Link to="/en/ai-news" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    AI News
                   </Link>
-                  <Link to="/en/software" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Software
+                  <Link to="/en/legislation" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Legislation
                   </Link>
-                  <Link to="/en/news" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    News
+                  <Link to="/en/guides-protocols" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Guides & Protocols
                   </Link>
-                  <Link to="/en/manifesto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Manifesto
+                  <Link to="/en/about-us" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    About Us
                   </Link>
-                  <Link to="/en/about" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    About
-                  </Link>
+                  <a href="mailto:contact@derechoartificial.com" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Contact
+                  </a>
                   <Link to="/" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Versión en español
                   </Link>
                 </>
               ) : (
               <>
-                  <Link to="/" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Inicio
+                  <Link to="/firma-scarpa" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Firma Scarpa
                   </Link>
-                  <Link to="/analisis" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Análisis
+                  <Link to="/jurisprudencia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Jurisprudencia
                   </Link>
-                  <Link to="/documentos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Documentos
+                  <Link to="/actualidad-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Actualidad IA
                   </Link>
-                  <Link to="/software-ia-legal" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Software IA legal
+                  <Link to="/legislacion" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Legislación
                   </Link>
-                  <Link to="/noticias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Noticias
+                  <Link to="/guias-protocolos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Guías y Protocolos
                   </Link>
-                  <Link to="/manifiesto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Manifiesto
+                  <Link to="/quienes-somos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Quiénes somos
                   </Link>
-                  <Link to="/sobre" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Sobre
-                  </Link>
-                  <Link to="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <a href="mailto:contacto@derechoartificial.com" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Contacto
-                  </Link>
+                  </a>
                   <Link to="/en" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     English version
                   </Link>

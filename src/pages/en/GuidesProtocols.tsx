@@ -1,43 +1,43 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
-import libraryDocs from "../data/library-docs.json";
+import libraryDocs from "../../data/library-docs.json";
 
 // Helper for source colors
 const getSourceColor = (source: string) => {
   switch(source) {
     case 'AESIA': return 'bg-blue-600';
-    case 'Comisión Europea': return 'bg-[#003399]'; // Azul Europa
+    case 'Comisión Europea': return 'bg-[#003399]';
     default: return 'bg-slate-500';
   }
 };
 
-const GuiasProtocolos = () => {
+const GuidesProtocols = () => {
   // Filter documents
   const aesiaDocs = libraryDocs.filter(d => d.source === 'AESIA');
   const ecDocs = libraryDocs.filter(d => d.source === 'Comisión Europea');
   
-  // Static content for Soft Law / Guias (from Documentos.tsx)
+  // Static content for Soft Law (English)
   const softLawDocs = [
     {
-      title: "Carta Ética Europea sobre el uso de la IA en sistemas judiciales",
-      description: "Cinco principios fundamentales del CEPEJ para el uso de IA en la administración de justicia: respeto a derechos fundamentales, no discriminación, calidad y seguridad, transparencia y control por el usuario.",
-      source: "CEPEJ - Consejo de Europa",
+      title: "European Ethical Charter on the Use of AI in Judicial Systems",
+      description: "Five fundamental CEPEJ principles for AI use in justice administration: respect for fundamental rights, non-discrimination, quality and security, transparency, and user control.",
+      source: "CEPEJ - Council of Europe",
       year: "2018",
       url: "https://www.coe.int/en/web/cepej/cepej-european-ethical-charter-on-the-use-of-artificial-intelligence-ai-in-judicial-systems-and-their-environment",
     },
     {
-      title: "Directrices éticas para una IA fiable",
-      description: "Marco ético del Grupo de Expertos de Alto Nivel de la Comisión Europea. Establece siete requisitos clave: agencia humana, robustez técnica, privacidad, transparencia, diversidad, bienestar social y rendición de cuentas.",
-      source: "Comisión Europea",
+      title: "Ethics Guidelines for Trustworthy AI",
+      description: "Ethical framework from the EU High-Level Expert Group. Establishes seven key requirements: human agency, technical robustness, privacy, transparency, diversity, social well-being, and accountability.",
+      source: "European Commission",
       year: "2019",
       url: "https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai",
     },
     {
-      title: "Recomendación sobre la Ética de la Inteligencia Artificial",
-      description: "Primera normativa mundial sobre ética de la IA adoptada por los 193 Estados miembros de la UNESCO. Establece valores y principios comunes para guiar la construcción de marcos jurídicos.",
+      title: "Recommendation on the Ethics of Artificial Intelligence",
+      description: "First global standard on AI ethics adopted by 193 UNESCO Member States. Establishes common values and principles to guide the construction of legal frameworks.",
       source: "UNESCO",
       year: "2021",
-      url: "https://www.unesco.org/es/artificial-intelligence/recommendation-ethics",
+      url: "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
     }
   ];
 
@@ -64,7 +64,7 @@ const GuiasProtocolos = () => {
         {doc.description}
       </p>
       <div className="flex items-center text-xs font-medium text-primary uppercase tracking-wider">
-        Acceder al documento <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+        Access Document <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
       </div>
     </a>
   );
@@ -72,9 +72,9 @@ const GuiasProtocolos = () => {
   return (
     <Layout>
       <SEOHead 
-        title="Guías y Protocolos | Biblioteca AESIA y Comisión Europea"
-        description="Hub central de documentación oficial: Guías de la AESIA, documentos de la Comisión Europea, Soft Law y protocolos de actuación."
-        canonical="https://derechoartificial.com/guias-protocolos"
+        title="Guides & Protocols | AESIA Library & European Commission"
+        description="Central hub for official documentation: AESIA Guides, European Commission documents, Soft Law, and action protocols."
+        canonical="https://derechoartificial.com/en/guides-protocols"
         hreflangs={[
           { lang: "es", href: "https://derechoartificial.com/guias-protocolos" },
           { lang: "en", href: "https://derechoartificial.com/en/guides-protocols" }
@@ -84,13 +84,13 @@ const GuiasProtocolos = () => {
       <section className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
           <p className="text-xs uppercase tracking-[0.2em] text-caption mb-4">
-            Biblioteca Digital
+            Digital Library
           </p>
           <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
-            Guías, Protocolos y Soft Law
+            Guides, Protocols & Soft Law
           </h1>
           <p className="text-xl text-body leading-relaxed max-w-2xl">
-            Repositorio centralizado de documentación técnica y ética de la AESIA, la Comisión Europea y organismos internacionales.
+            Centralized repository of technical and ethical documentation from AESIA, the European Commission, and international bodies.
           </p>
         </div>
       </section>
@@ -101,11 +101,11 @@ const GuiasProtocolos = () => {
         <section>
           <h2 className="text-2xl font-serif text-foreground mb-8 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-primary"></span>
-            Agencia Española de Supervisión de la IA (AESIA)
+            Spanish AI Supervision Agency (AESIA)
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {aesiaDocs.length > 0 ? aesiaDocs.map(renderDocCard) : (
-              <p className="text-muted-foreground italic col-span-full">No hay documentos disponibles por el momento.</p>
+              <p className="text-muted-foreground italic col-span-full">No documents available at the moment.</p>
             )}
           </div>
         </section>
@@ -114,11 +114,11 @@ const GuiasProtocolos = () => {
         <section>
           <h2 className="text-2xl font-serif text-foreground mb-8 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-primary"></span>
-            Comisión Europea
+            European Commission
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
              {ecDocs.length > 0 ? ecDocs.map(renderDocCard) : (
-              <p className="text-muted-foreground italic col-span-full">No hay documentos disponibles por el momento.</p>
+              <p className="text-muted-foreground italic col-span-full">No documents available at the moment.</p>
             )}
           </div>
         </section>
@@ -127,7 +127,7 @@ const GuiasProtocolos = () => {
         <section>
           <h2 className="text-2xl font-serif text-foreground mb-8 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-primary"></span>
-            Soft Law y Estándares Internacionales
+            Soft Law & International Standards
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {softLawDocs.map(renderDocCard)}
@@ -139,4 +139,4 @@ const GuiasProtocolos = () => {
   );
 };
 
-export default GuiasProtocolos;
+export default GuidesProtocols;
