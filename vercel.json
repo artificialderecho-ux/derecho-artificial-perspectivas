@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/sobre",
+      "destination": "/quienes-somos",
+      "permanent": true
+    },
+    {
+      "source": "/manifiesto",
+      "destination": "/quienes-somos",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

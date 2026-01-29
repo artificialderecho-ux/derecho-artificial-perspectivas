@@ -1,10 +1,11 @@
+import { useState, type FormEvent } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const copyLink = (id: string) => {
   if (typeof window === "undefined") return;
@@ -15,8 +16,62 @@ const copyLink = (id: string) => {
 
 const Contact = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const hasSuccess = searchParams.get("sent") === "1";
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const validate = () => {
+    if (!values.name.trim()) return "Name is required.";
+    if (!values.email.trim()) return "Email is required.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+      return "Email is not valid.";
+    }
+    if (!values.subject.trim()) return "Subject is required.";
+    if (!values.message.trim()) return "Message is required.";
+    return null;
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitError(null);
+
+    const validationError = validate();
+    if (validationError) {
+      setSubmitError(validationError);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("https://formspree.io/f/mbdoyvje", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) {
+        setSubmitError("Message could not be sent. Please try again.");
+        return;
+      }
+
+      navigate("/en/contact?sent=1", { replace: true });
+    } catch {
+      setSubmitError("Message could not be sent. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Layout>
@@ -64,12 +119,15 @@ const Contact = () => {
                   </p>
                 </div>
               )}
+              {submitError && (
+                <div className="mb-8 rounded-md bg-red-50 px-4 py-3 border border-red-200">
+                  <p className="text-sm text-red-800">{submitError}</p>
+                </div>
+              )}
               <form
-                action="https://formspree.io/f/mbdoyvje"
-                method="POST"
+                onSubmit={handleSubmit}
                 className="space-y-6"
               >
-                <input type="hidden" name="_next" value="https://www.derechoartificial.com/en/contact?sent=1" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -80,6 +138,8 @@ const Contact = () => {
                       name="name"
                       type="text"
                       required
+                      value={values.name}
+                      onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
                       className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                       placeholder="Your name"
                     />
@@ -93,6 +153,8 @@ const Contact = () => {
                       name="email"
                       type="email"
                       required
+                      value={values.email}
+                      onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
                       className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                       placeholder="email@example.com"
                     />
@@ -108,6 +170,8 @@ const Contact = () => {
                     name="subject"
                     type="text"
                     required
+                    value={values.subject}
+                    onChange={(e) => setValues((v) => ({ ...v, subject: e.target.value }))}
                     className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                     placeholder="Reason for your message"
                   />
@@ -122,6 +186,8 @@ const Contact = () => {
                     name="message"
                     required
                     rows={8}
+                    value={values.message}
+                    onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
                     className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none resize-none"
                     placeholder="Write your message here..."
                   />
@@ -129,9 +195,10 @@ const Contact = () => {
 
                 <Button 
                   type="submit" 
+                  disabled={isSubmitting}
                   className="w-full md:w-auto px-8 py-4 bg-primary text-primary-foreground hover:bg-primary/90"
                 >
-                  Send message
+                  {isSubmitting ? "Sending..." : "Send message"}
                 </Button>
                 <p className="text-xs text-caption mt-4">
                   By sending this form, you agree that Derecho Artificial may process your data to respond to your inquiry.

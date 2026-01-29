@@ -1,10 +1,11 @@
+import { useState, type FormEvent } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const copyLink = (id: string) => {
   if (typeof window === "undefined") return;
@@ -15,8 +16,62 @@ const copyLink = (id: string) => {
 
 const Contacto = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const hasSuccess = searchParams.get("enviado") === "1";
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [values, setValues] = useState({
+    nombre: "",
+    email: "",
+    asunto: "",
+    mensaje: "",
+  });
+
+  const validate = () => {
+    if (!values.nombre.trim()) return "El nombre es obligatorio.";
+    if (!values.email.trim()) return "El correo electrónico es obligatorio.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+      return "El correo electrónico no es válido.";
+    }
+    if (!values.asunto.trim()) return "El asunto es obligatorio.";
+    if (!values.mensaje.trim()) return "El mensaje es obligatorio.";
+    return null;
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitError(null);
+
+    const validationError = validate();
+    if (validationError) {
+      setSubmitError(validationError);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("https://formspree.io/f/mbdoyvje", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) {
+        setSubmitError("No se ha podido enviar el mensaje. Inténtalo de nuevo.");
+        return;
+      }
+
+      navigate("/contacto?enviado=1", { replace: true });
+    } catch {
+      setSubmitError("No se ha podido enviar el mensaje. Inténtalo de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Layout>
@@ -26,7 +81,7 @@ const Contacto = () => {
         canonical="https://derechoartificial.com/contacto"
         hreflangs={[
           { lang: "es", href: "https://derechoartificial.com/contacto" },
-          { lang: "en", href: "https://derechoartificial.com/en/about" }
+          { lang: "en", href: "https://derechoartificial.com/en/contact" }
         ]}
       />
 
@@ -64,12 +119,15 @@ const Contacto = () => {
                   </p>
                 </div>
               )}
+              {submitError && (
+                <div className="mb-8 rounded-md bg-red-50 px-4 py-3 border border-red-200">
+                  <p className="text-sm text-red-800">{submitError}</p>
+                </div>
+              )}
               <form
-                action="https://formspree.io/f/mbdoyvje"
-                method="POST"
+                onSubmit={handleSubmit}
                 className="space-y-6"
               >
-                <input type="hidden" name="_next" value="https://www.derechoartificial.com/contacto?enviado=1" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -80,6 +138,8 @@ const Contacto = () => {
                       name="nombre"
                       type="text"
                       required
+                      value={values.nombre}
+                      onChange={(e) => setValues((v) => ({ ...v, nombre: e.target.value }))}
                       className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                       placeholder="Su nombre"
                     />
@@ -93,6 +153,8 @@ const Contacto = () => {
                       name="email"
                       type="email"
                       required
+                      value={values.email}
+                      onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
                       className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                       placeholder="correo@ejemplo.com"
                     />
@@ -108,6 +170,8 @@ const Contacto = () => {
                     name="asunto"
                     type="text"
                     required
+                    value={values.asunto}
+                    onChange={(e) => setValues((v) => ({ ...v, asunto: e.target.value }))}
                     className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none"
                     placeholder="Motivo de su mensaje"
                   />
@@ -122,6 +186,8 @@ const Contacto = () => {
                     name="mensaje"
                     required
                     rows={8}
+                    value={values.mensaje}
+                    onChange={(e) => setValues((v) => ({ ...v, mensaje: e.target.value }))}
                     className="bg-background border border-[#e5e7eb] focus:border-[#1a1a1a] focus:ring-0 focus:outline-none resize-none"
                     placeholder="Escriba su mensaje aquí..."
                   />
@@ -129,9 +195,10 @@ const Contacto = () => {
 
                 <Button 
                   type="submit" 
+                  disabled={isSubmitting}
                   className="w-full md:w-auto px-8 py-4 bg-primary text-primary-foreground hover:bg-primary/90"
                 >
-                  Enviar mensaje
+                  {isSubmitting ? "Enviando..." : "Enviar mensaje"}
                 </Button>
                 <p className="text-xs text-caption mt-4">
                   Al enviar este formulario, aceptas que Derecho Artificial trate tus datos para responder a tu consulta.

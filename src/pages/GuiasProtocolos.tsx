@@ -11,13 +11,24 @@ const getSourceColor = (source: string) => {
   }
 };
 
+type DocCard = {
+  title: string;
+  description: string;
+  source: string;
+  url: string;
+  date?: string;
+  year?: string;
+};
+
 const GuiasProtocolos = () => {
+  const docs = libraryDocs as DocCard[];
+
   // Filter documents
-  const aesiaDocs = libraryDocs.filter(d => d.source === 'AESIA');
-  const ecDocs = libraryDocs.filter(d => d.source === 'Comisión Europea');
+  const aesiaDocs = docs.filter(d => d.source === 'AESIA');
+  const ecDocs = docs.filter(d => d.source === 'Comisión Europea');
   
   // Static content for Soft Law / Guias (from Documentos.tsx)
-  const softLawDocs = [
+  const softLawDocs: DocCard[] = [
     {
       title: "Carta Ética Europea sobre el uso de la IA en sistemas judiciales",
       description: "Cinco principios fundamentales del CEPEJ para el uso de IA en la administración de justicia: respeto a derechos fundamentales, no discriminación, calidad y seguridad, transparencia y control por el usuario.",
@@ -41,7 +52,7 @@ const GuiasProtocolos = () => {
     }
   ];
 
-  const renderDocCard = (doc: any) => (
+  const renderDocCard = (doc: DocCard) => (
     <a 
       key={doc.url} 
       href={doc.url} 

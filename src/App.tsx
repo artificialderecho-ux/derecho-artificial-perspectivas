@@ -25,6 +25,7 @@ const AiNews = lazy(() => import("./pages/en/AiNews"));
 const Legislation = lazy(() => import("./pages/en/Legislation"));
 const GuidesProtocolsEN = lazy(() => import("./pages/en/GuidesProtocols"));
 const AboutUs = lazy(() => import("./pages/en/AboutUs"));
+const ContactEN = lazy(() => import("./pages/en/Contact"));
 
 // Articles & Specific Pages (Keep for compatibility/content)
 const AIActReglamentoEuropeo = lazy(() => import("./pages/analisis/AIActReglamentoEuropeo"));
@@ -82,7 +83,7 @@ const App = () => (
             <Route path="/en/contact" element={<ContactEN />} />
             
             {/* Redirections for Old Spanish Routes */}
-            <Route path="/manifiesto" element={<Navigate to="/quienes-somos#manifiesto" replace />} />
+            <Route path="/manifiesto" element={<Navigate to="/quienes-somos" replace />} />
             <Route path="/sobre" element={<Navigate to="/quienes-somos" replace />} />
             <Route path="/noticias" element={<Navigate to="/actualidad-ia" replace />} />
             <Route path="/documentos" element={<Navigate to="/guias-protocolos" replace />} />

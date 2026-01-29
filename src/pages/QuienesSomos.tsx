@@ -13,7 +13,7 @@ const QuienesSomos = () => {
     <Layout>
       <SEOHead 
         title="Quiénes Somos | Manifiesto y Misión - Derecho Artificial"
-        description="Conoce el proyecto editorial independiente Derecho Artificial. Principios de independencia, rigor jurídico y nuestro Manifiesto Editorial."
+        description="Conoce el proyecto editorial independiente Derecho Artificial. Misión, enfoque metodológico, trayectoria editorial y Manifiesto Editorial."
         canonical="https://derechoartificial.com/quienes-somos"
         hreflangs={[
           { lang: "es", href: "https://derechoartificial.com/quienes-somos" },
@@ -21,9 +21,8 @@ const QuienesSomos = () => {
         ]}
       />
 
-      <article className="section-spacing">
+      <article className="section-spacing" id="mision">
         <div className="container-editorial">
-          {/* Header */}
           <header className="mb-16">
             <p className="text-sm uppercase tracking-widest text-caption mb-4">
               Sobre el proyecto
@@ -38,7 +37,6 @@ const QuienesSomos = () => {
             </p>
           </header>
 
-          {/* Content from Sobre.tsx */}
           <div className="prose-editorial mb-24">
             <section className="mb-16">
               <h2>Qué es Derecho Artificial</h2>
@@ -86,9 +84,111 @@ const QuienesSomos = () => {
                 atento a las realidades locales.
               </p>
             </section>
+
+            <section className="mb-16">
+              <h2>A quién nos dirigimos</h2>
+              <p>
+                Nuestros contenidos están diseñados para:
+              </p>
+              <ul className="list-disc pl-6 space-y-3 my-6">
+                <li>
+                  <strong>Profesionales del Derecho</strong>: Abogados, jueces,
+                  fiscales y notarios que necesitan comprender las herramientas
+                  de IA que afectan su práctica.
+                </li>
+                <li>
+                  <strong>Académicos e investigadores</strong>: Profesores y
+                  estudiantes de Derecho que estudian la intersección con la tecnología.
+                </li>
+                <li>
+                  <strong>Reguladores y decisores políticos</strong>: Funcionarios
+                  que diseñan e implementan marcos normativos para la IA.
+                </li>
+                <li>
+                  <strong>Ciudadanos informados</strong>: Personas interesadas en
+                  comprender cómo la IA afecta sus derechos.
+                </li>
+              </ul>
+            </section>
+
+            <section className="mb-16">
+              <h2>Nuestro enfoque</h2>
+              <p>
+                Nos guiamos por los siguientes principios metodológicos:
+              </p>
+              <ul className="list-disc pl-6 space-y-3 my-6">
+                <li>
+                  <strong>Rigor académico</strong>: Basamos nuestros análisis en
+                  fuentes primarias, jurisprudencia y doctrina actualizada.
+                </li>
+                <li>
+                  <strong>Independencia editorial</strong>: No aceptamos contenido
+                  patrocinado ni publicidad que comprometa nuestra línea editorial.
+                </li>
+                <li>
+                  <strong>Accesibilidad</strong>: Evitamos la jerga innecesaria sin
+                  sacrificar precisión técnica.
+                </li>
+                <li>
+                  <strong>Perspectiva crítica</strong>: Cuestionamos tanto el
+                  tecno-optimismo como el catastrofismo injustificado.
+                </li>
+                <li>
+                  <strong>Enfoque práctico</strong>: Conectamos el análisis teórico
+                  con implicaciones concretas para la práctica jurídica.
+                </li>
+              </ul>
+            </section>
+
+            <section className="mb-16">
+              <h2>Cómo trabajamos</h2>
+              <p>
+                Todos nuestros contenidos pasan por un proceso de revisión editorial
+                que incluye verificación de fuentes y revisión por pares cuando es
+                apropiado. Publicamos correcciones cuando identificamos errores y
+                mantenemos transparencia sobre nuestras fuentes de financiación.
+              </p>
+              <p>
+                Actualmente, Derecho Artificial es un proyecto sin ánimo de lucro
+                sostenido por contribuciones voluntarias. No utilizamos publicidad
+                intrusiva ni vendemos datos de usuarios. Nuestra única fuente de
+                ingresos son donaciones de lectores y ocasionales proyectos de
+                consultoría académica.
+              </p>
+            </section>
           </div>
 
-          {/* Manifiesto Section (Highlighted) */}
+          <section className="mb-24 p-8 bg-surface border border-divider rounded-lg">
+            <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">
+              Sobre el responsable editorial
+            </h2>
+            <p className="text-lg text-body mb-6">
+              Este proyecto editorial está dirigido y coordinado por <strong>Ricardo S. C.</strong>
+            </p>
+
+            <div className="space-y-4 text-body leading-relaxed">
+              <p>
+                <strong>Formación Académica</strong>
+              </p>
+              <ul className="list-disc pl-6 space-y-1 my-2 text-body">
+                <li>Licenciado en Derecho por la Universidad Europea de Madrid.</li>
+                <li>Máster en Informática Jurídica por la Universidad Nacional de Educación a Distancia (UNED).</li>
+                <li>Máster en Dirección de Empresas Audiovisuales por el Instituto de Empresa (IE) de Madrid.</li>
+              </ul>
+
+              <p className="mt-6">
+                <strong>Equipo Editorial Multidisciplinar</strong>
+              </p>
+              <p>
+                Para abordar la complejidad de la Inteligencia Artificial, este proyecto
+                cuenta con la colaboración activa de expertos de primer nivel en cada especialidad.
+                Las aportaciones externas se nutren de ingenieros en Inteligencia Artificial,
+                programadores especialistas y filósofos del Derecho, garantizando una visión
+                integral, técnica y humanista de los desafíos jurídicos actuales.
+              </p>
+            </div>
+          </section>
+
           <div id="manifiesto" className="bg-surface/50 p-8 md:p-12 rounded-lg border border-border my-20">
              <header className="mb-12 text-center">
               <p className="text-sm uppercase tracking-widest text-primary mb-4 font-bold">
@@ -153,15 +253,20 @@ const QuienesSomos = () => {
               </section>
             </div>
           </div>
-          
+
           <div className="prose-editorial">
-             <section>
-              <h2>A quién nos dirigimos</h2>
+            <section>
+              <h2>Participe</h2>
               <p>
-                Nuestros contenidos están diseñados para abogados, jueces, académicos, 
-                estudiantes de Derecho, responsables de políticas públicas y cualquier 
-                persona interesada en entender cómo la tecnología está redefiniendo 
-                las reglas de nuestra sociedad.
+                Derecho Artificial es un proyecto abierto a la colaboración. Si
+                comparte nuestros valores y desea contribuir —como autor, revisor,
+                traductor o de cualquier otra forma— le invitamos a ponerse en
+                contacto con nosotros.
+              </p>
+              <p>
+                También agradecemos sugerencias de temas, correcciones de errores
+                y comentarios constructivos sobre nuestros contenidos. La calidad
+                de este proyecto depende del diálogo con nuestra comunidad de lectores.
               </p>
             </section>
           </div>

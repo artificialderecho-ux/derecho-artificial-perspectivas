@@ -21,13 +21,13 @@ export function Footer() {
                 : "Análisis crítico e independiente sobre la intersección del Derecho, la Ética y la Inteligencia Artificial para el mundo hispanohablante."
               }
             </p>
-            {!isEnglish && (
-              <div className="mt-8 pt-6 border-t border-border">
-                <p className="text-xs font-semibold uppercase tracking-wider text-caption mb-2">Dirección Editorial</p>
-                <p className="text-sm font-medium text-foreground">R.S.C.</p>
-                <p className="text-xs text-muted-foreground mt-1">UEM · UNED · IE Business School</p>
-              </div>
-            )}
+            <div className="mt-8 pt-6 border-t border-border">
+              <p className="text-xs font-semibold uppercase tracking-wider text-caption mb-2">
+                {isEnglish ? "Editorial Direction" : "Dirección Editorial"}
+              </p>
+              <p className="text-sm font-medium text-foreground">R.S.C.</p>
+              <p className="text-xs text-muted-foreground mt-1">UEM · UNED · IE Business School</p>
+            </div>
           </div>
 
           <div className="lg:col-span-7">
@@ -55,11 +55,8 @@ export function Footer() {
                   <Link to="/en/about-us" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     About Us
                   </Link>
-                  <a href="mailto:contact@derechoartificial.com" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link to="/en/contact" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Contact
-                  </a>
-                  <Link to="/" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Versión en español
                   </Link>
                 </>
               ) : (
@@ -84,9 +81,6 @@ export function Footer() {
                   </Link>
                   <Link to="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Contacto
-                  </Link>
-                  <Link to="/en" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    English version
                   </Link>
                 </>
               )}

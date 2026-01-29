@@ -11,13 +11,24 @@ const getSourceColor = (source: string) => {
   }
 };
 
+type DocCard = {
+  title: string;
+  description: string;
+  source: string;
+  url: string;
+  date?: string;
+  year?: string;
+};
+
 const GuidesProtocols = () => {
+  const docs = libraryDocs as DocCard[];
+
   // Filter documents
-  const aesiaDocs = libraryDocs.filter(d => d.source === 'AESIA');
-  const ecDocs = libraryDocs.filter(d => d.source === 'Comisión Europea');
+  const aesiaDocs = docs.filter(d => d.source === 'AESIA');
+  const ecDocs = docs.filter(d => d.source === 'Comisión Europea');
   
   // Static content for Soft Law (English)
-  const softLawDocs = [
+  const softLawDocs: DocCard[] = [
     {
       title: "European Ethical Charter on the Use of AI in Judicial Systems",
       description: "Five fundamental CEPEJ principles for AI use in justice administration: respect for fundamental rights, non-discrimination, quality and security, transparency, and user control.",
@@ -41,7 +52,7 @@ const GuidesProtocols = () => {
     }
   ];
 
-  const renderDocCard = (doc: any) => (
+  const renderDocCard = (doc: DocCard) => (
     <a 
       key={doc.url} 
       href={doc.url} 
