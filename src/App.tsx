@@ -65,7 +65,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             
             {/* New Architecture Routes */}
-            <Route path="/firma-scarpa" element={<FirmaScarpa />} />
+            <Route path="/firma-scarpa" element={<FirmaScarpaPage />} />
             <Route path="/actualidad-ia" element={<ActualidadIA />} />
             <Route path="/legislacion" element={<Legislacion />} />
             <Route path="/jurisprudencia" element={<Jurisprudencia />} />
