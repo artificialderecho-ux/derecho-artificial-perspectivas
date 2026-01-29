@@ -38,7 +38,6 @@ const ClawdbotIlusionPrivacidad = lazy(() => import("./pages/analisis/ClawdbotIl
 
 const GuiaReglamentoIA2026 = lazy(() => import("./pages/blog/GuiaReglamentoIA2026"));
 const GlosarioIALegal = lazy(() => import("./pages/GlosarioIALegal"));
-const SoftwareIALegal = lazy(() => import("./pages/SoftwareIALegal"));
 
 // Legal Pages
 const AvisoLegal = lazy(() => import("./pages/AvisoLegal"));
@@ -134,9 +133,7 @@ const App = () => (
             {/* English Content Pages */}
             <Route path="/en/blog/eu-ai-act-guide-2026" element={<EUAIActGuide2026 />} />
             <Route path="/en/analysis/strategic-report-ai-act" element={<StrategicReportAIAct />} />
-            <Route path="/en/legal-ai-software" element={<LegalAISoftware />} />
             <Route path="/en/legal-ai-glossary" element={<LegalAIGlossary />} />
-            <Route path="/en/software" element={<Software />} />
 
             {/* 404 */}
             <Route path="*" element={<NotFound />} />

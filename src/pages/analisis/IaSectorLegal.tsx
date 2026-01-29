@@ -148,7 +148,7 @@ const IaSectorLegal = () => {
               Compliance Práctico
             </h3>
             <p className="text-lg leading-relaxed mb-8 text-body">
-              Guías AESIA riesgos/transparencia/checklists proporcionan matrices para mitigación (Anexo D controles, E indicadores), integrando con analítica de Ashley para evaluación conformidad. Análisis: Facilita gobernanza práctica, pero subjetividad cualitativa diluye rigor ético (Presno Linera). Internal link a <Link to="/software-ia-legal" className="text-primary hover:text-foreground transition-colors">Software de IA Legal</Link>.
+              Guías AESIA riesgos/transparencia/checklists proporcionan matrices para mitigación (Anexo D controles, E indicadores), integrando con analítica de Ashley para evaluación conformidad. Análisis: Facilita gobernanza práctica, pero subjetividad cualitativa diluye rigor ético (Presno Linera).
             </p>
             <h3 className="font-serif text-3xl mb-4 text-foreground">
               Geopolítica
