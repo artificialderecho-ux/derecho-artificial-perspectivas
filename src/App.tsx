@@ -56,6 +56,20 @@ const App = () => (
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
             <Route path="/" element={<Index />} />
+            
+            {/* New Architecture Routes */}
+            <Route path="/firma-scarpa" element={<FirmaScarpa />} />
+            <Route path="/actualidad-ia" element={<ActualidadIA />} />
+            <Route path="/legislacion" element={<Legislacion />} />
+            <Route path="/jurisprudencia" element={<Jurisprudencia />} />
+            <Route path="/guias-protocolos" element={<GuiasProtocolos />} />
+            <Route path="/quienes-somos" element={<QuienesSomos />} />
+
+            {/* Legacy/Redirects or Specific Article Routes mapped to Firma Scarpa */}
+            {/* We keep old paths for compatibility or update them? User asked to map them to Firma Scarpa */}
+            <Route path="/firma-scarpa/neuroderechos" element={<Neuroderechos />} />
+            <Route path="/firma-scarpa/clawdbot-ilusion-privacidad" element={<ClawdbotIlusionPrivacidad />} />
+            
             <Route path="/manifiesto" element={<Manifiesto />} />
             <Route path="/analisis" element={<Analisis />} />
             <Route path="/analisis/ai-act-reglamento-europeo" element={<AIActReglamentoEuropeo />} />

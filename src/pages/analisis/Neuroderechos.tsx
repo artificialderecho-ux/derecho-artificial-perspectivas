@@ -8,15 +8,16 @@ const Neuroderechos = () => {
       <SEOHead 
         title="Neuroderechos y Protección Penal | Derecho Artificial"
         description="Análisis jurídico de los riesgos penales del uso directo de neurotecnologías. Responsabilidad, indemnidad mental y tutela de la autonomía."
-        canonical="https://derechoartificial.com/analisis/neuroderechos"
+        canonical="https://derechoartificial.com/firma-scarpa/neuroderechos"
         type="article"
         publishedTime="2025-01-23"
       />
 
+      <article className="section-spacing">
       <section className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
-          <Link to="/analisis" className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors duration-300 mb-8">
-            ← Volver a Análisis
+          <Link to="/firma-scarpa" className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors duration-300 mb-8">
+            ← Volver a Firma Scarpa
           </Link>
           <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
             Neuroderechos y protección penal: riesgos del uso directo de neurotecnologías

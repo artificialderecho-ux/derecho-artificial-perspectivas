@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 import { Menu, X, Globe } from "lucide-react";
 
 const navigationES = [
-  { name: "Inicio", href: "/#inicio" },
-  { name: "Análisis", href: "/analisis#perspectivas" },
-  { name: "Documentos", href: "/documentos#documentos" },
-  { name: "Software IA legal", href: "/software-ia-legal" },
-  { name: "Noticias", href: "/noticias" },
-  { name: "Manifiesto", href: "/manifiesto#mision" },
-  { name: "Contacto", href: "/contacto#contacto" },
+  { name: "Firma Scarpa", href: "/firma-scarpa" },
+  { name: "Actualidad IA", href: "/actualidad-ia" },
+  { name: "Legislación", href: "/legislacion" },
+  { name: "Jurisprudencia", href: "/jurisprudencia" },
+  { name: "Guías y Protocolos", href: "/guias-protocolos" },
+  { name: "Quiénes somos", href: "/quienes-somos" },
 ];
 
 const navigationEN = [

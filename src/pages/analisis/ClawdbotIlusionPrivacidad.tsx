@@ -15,7 +15,7 @@ export default function ClawdbotIlusionPrivacidad() {
       <SEOHead
         title="Clawdbot y la Ilusión de la Privacidad: Riesgos Críticos del RGPD"
         description="Análisis crítico de la arquitectura de Clawdbot y sus implicaciones legales: responsabilidad del tratamiento, incumplimientos específicos del RGPD y conclusiones operativas."
-        canonical="https://derechoartificial.com/analisis/clawdbot-ilusion-privacidad"
+        canonical="https://derechoartificial.com/firma-scarpa/clawdbot-ilusion-privacidad"
         type="article"
         publishedTime={new Date().toISOString().split("T")[0]}
       />
@@ -132,10 +132,10 @@ export default function ClawdbotIlusionPrivacidad() {
       <section className="py-12 border-t border-divider">
         <div className="container-narrow">
           <Link
-            to="/analisis"
+            to="/firma-scarpa"
             className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors duration-300"
           >
-            ← Volver a Análisis
+            ← Volver a Firma Scarpa
           </Link>
         </div>
       </section>
