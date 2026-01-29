@@ -20,6 +20,7 @@ export default function ClawdbotIlusionPrivacidad() {
         publishedTime={new Date().toISOString().split("T")[0]}
       />
 
+      <article className="section-spacing">
       <section className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
           <div className="flex items-start justify-between gap-6 mb-6">

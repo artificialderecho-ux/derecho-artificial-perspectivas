@@ -6,14 +6,15 @@ const FilosofiaDerechoIA = () => {
   return (
     <Layout>
       <SEOHead 
-        title="Filosofía del Derecho e IA: Revisión Doctrinal - Derecho Artificial"
-        description="Análisis crítico de la obra 'Inteligencia Artificial y Filosofía del Derecho' (Ediciones Laborum, 2022). Identidad, neuroderechos y automatización en la era digital."
-        canonical="https://derechoartificial.com/analisis/filosofia-derecho-inteligencia-artificial"
-        type="article"
-        publishedTime="2025-01-22"
-      />
+    title="Filosofía del Derecho e IA: Revisión Doctrinal - Derecho Artificial"
+    description="Análisis crítico de la obra 'Inteligencia Artificial y Filosofía del Derecho' (Ediciones Laborum, 2022). Identidad, neuroderechos y automatización en la era digital."
+    canonical="https://derechoartificial.com/analisis/filosofia-derecho-inteligencia-artificial"
+    type="article"
+    publishedTime="2025-01-22"
+  />
 
-      <section className="py-16 md:py-24 bg-surface">
+  <article className="section-spacing">
+  <section className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
           <Link to="/analisis" className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors duration-300 mb-8">
             ← Volver a Análisis
