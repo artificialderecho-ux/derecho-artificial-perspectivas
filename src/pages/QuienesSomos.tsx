@@ -22,7 +22,8 @@ const QuienesSomos = () => {
         ]}
       />
 
-      <article id="mision" className="section-spacing">
+      <main className="flex-1">
+        <article id="mision" className="section-spacing">
         <div className="container-editorial">
           {/* Header */}
           <header className="mb-16">
