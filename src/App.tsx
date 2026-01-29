@@ -48,9 +48,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 // English Articles (Legacy/Specific)
 const EUAIActGuide2026 = lazy(() => import("./pages/en/blog/EUAIActGuide2026"));
 const StrategicReportAIAct = lazy(() => import("./pages/en/analysis/StrategicReportAIAct"));
-const LegalAISoftware = lazy(() => import("./pages/en/LegalAISoftware"));
 const LegalAIGlossary = lazy(() => import("./pages/en/LegalAIGlossary"));
-const Software = lazy(() => import("./pages/en/Software"));
 
 const queryClient = new QueryClient();
 
@@ -125,7 +123,6 @@ const App = () => (
             {/* Other Pages */}
             <Route path="/guia-reglamento-ia-2026" element={<GuiaReglamentoIA2026 />} />
             <Route path="/glosario-ia-legal" element={<GlosarioIALegal />} />
-            <Route path="/software-ia-legal" element={<SoftwareIALegal />} />
             <Route path="/aviso-legal" element={<AvisoLegal />} />
             <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
             <Route path="/cookies" element={<Cookies />} />
