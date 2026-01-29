@@ -1,23 +1,7 @@
-# Permitir buscadores principales
-User-agent: Googlebot
+User-agent: *
 Allow: /
 
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-# Bloquear bots de entrenamiento de IA y scrapers agresivos
+# Block AI crawlers to protect editorial content
 User-agent: GPTBot
 Disallow: /
 
@@ -27,7 +11,7 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 
-User-agent: Anthropic-ai
+User-agent: anthropic-ai
 Disallow: /
 
 User-agent: Claude-Web
@@ -36,19 +20,4 @@ Disallow: /
 User-agent: Google-Extended
 Disallow: /
 
-User-agent: OAI-SearchBot
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-# Bloquear acceso a archivos sensibles o de sistema si los hubiera
-User-agent: *
-Disallow: /private/
-Disallow: /admin/
-
-# Ubicación del sitemap
 Sitemap: https://www.derechoartificial.com/sitemap.xml
