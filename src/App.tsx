@@ -41,7 +41,7 @@ const GlosarioIALegal = lazy(() => import("./pages/GlosarioIALegal"));
 const GuiaReglamentoIA2026 = lazy(() => import("./pages/blog/GuiaReglamentoIA2026"));
 const AnalisisRiaEstrategico = lazy(() => import("./pages/analisis/analisis-ria-estrategico"));
 const ClawdbotIlusionPrivacidad = lazy(() => import("./pages/analisis/ClawdbotIlusionPrivacidad"));
-const FirmaScarpa = lazy(() => import("./pages/FirmaScarpa"));
+const FirmaScarpaPage = lazy(() => import("./pages/FirmaScarpa"));
 const ActualidadIA = lazy(() => import("./pages/ActualidadIA"));
 const Legislacion = lazy(() => import("./pages/Legislacion"));
 const Jurisprudencia = lazy(() => import("./pages/Jurisprudencia"));
