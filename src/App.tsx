@@ -50,6 +50,7 @@ const QuienesSomos = lazy(() => import("./pages/QuienesSomos"));
 
 import { HelmetProvider } from "react-helmet-async";
 
+// v1.0.1 - Fix FirmaScarpa ReferenceError
 const queryClient = new QueryClient();
 
 const App = () => (
