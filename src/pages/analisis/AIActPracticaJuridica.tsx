@@ -12,7 +12,8 @@ const AIActPracticaJuridica = () => {
         type="article"
         publishedTime="2025-01-14"
       />
-      <article className="section-spacing">
+      <main>
+        <article className="section-spacing">
         <div className="container-narrow">
           {/* Article Header */}
           <header className="mb-16">
@@ -304,7 +305,8 @@ const AIActPracticaJuridica = () => {
             </Link>
           </footer>
         </div>
-      </article>
+        </article>
+      </main>
     </Layout>
   );
 };

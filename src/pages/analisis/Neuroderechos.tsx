@@ -13,7 +13,8 @@ const Neuroderechos = () => {
         publishedTime="2025-01-23"
       />
 
-      <article className="section-spacing">
+      <main>
+        <article className="section-spacing">
       <section className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
           <Link to="/firma-scarpa" className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors duration-300 mb-8">
@@ -140,7 +141,8 @@ const Neuroderechos = () => {
           </div>
         </div>
       </section>
-      </article>
+        </article>
+      </main>
     </Layout>
   );
 };

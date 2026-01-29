@@ -12,7 +12,8 @@ const AIActReglamentoEuropeo = () => {
         type="article"
         publishedTime="2024-12-31"
       />
-      <article className="section-spacing">
+      <main>
+        <article className="section-spacing">
         <div className="container-narrow">
           {/* Article Header */}
           <header className="mb-16">
@@ -233,7 +234,8 @@ const AIActReglamentoEuropeo = () => {
             </footer>
           </div>
         </div>
-      </article>
+        </article>
+      </main>
     </Layout>
   );
 };

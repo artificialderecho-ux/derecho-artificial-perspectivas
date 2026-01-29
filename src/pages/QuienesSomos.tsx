@@ -107,6 +107,7 @@ const QuienesSomos = () => {
           </div>
         </div>
       </article>
+      </main>
     </Layout>
   );
 };

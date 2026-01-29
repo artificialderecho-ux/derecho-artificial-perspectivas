@@ -14,6 +14,7 @@ const IaSectorLegal = () => {
       />
 
       <main className="min-h-screen bg-background text-foreground font-sans">
+        <article className="section-spacing">
         {/* Hero Section */}
         <section className="py-20 md:py-32 border-b border-divider">
           <div className="container mx-auto px-6 text-center">
@@ -246,7 +247,8 @@ const IaSectorLegal = () => {
             </p>
           </div>
         </section>
-      </article>
+        </article>
+      </main>
     </Layout>
   );
 };

@@ -13,7 +13,8 @@ const FilosofiaDerechoIA = () => {
     publishedTime="2025-01-22"
   />
 
-  <article className="section-spacing">
+  <main>
+        <article className="section-spacing">
   <section className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
           <Link to="/analisis" className="inline-flex items-center text-sm text-caption hover:text-foreground transition-colors duration-300 mb-8">
@@ -138,7 +139,8 @@ const FilosofiaDerechoIA = () => {
           </div>
         </div>
       </section>
-      </article>
+        </article>
+      </main>
     </Layout>
   );
 };
