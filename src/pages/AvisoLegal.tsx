@@ -8,6 +8,7 @@ export default function AvisoLegal() {
         title="Aviso Legal | Información Legal y Titular - Derecho Artificial"
         description="Aviso legal del proyecto editorial independiente Derecho Artificial. Información sobre titularidad, uso de contenidos, propiedad intelectual y exención de responsabilidad."
         canonical="https://derechoartificial.com/aviso-legal"
+        lang="es"
       />
 
       <section className="py-16 md:py-24">

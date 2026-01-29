@@ -138,6 +138,7 @@ export default function ClawdbotIlusionPrivacidad() {
           </Link>
         </div>
       </section>
+      </article>
     </Layout>
   );
 }

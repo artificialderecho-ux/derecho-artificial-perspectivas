@@ -229,8 +229,8 @@ const Documentos = () => {
   return (
     <Layout>
       <SEOHead 
-        title="Documentos y Recursos sobre Derecho de la IA | Derecho Artificial"
-        description="Biblioteca esencial sobre regulación de Inteligencia Artificial. Guías oficiales de la AESIA, AI Act, jurisprudencia y estudios académicos."
+        title="Biblioteca Legal IA | Documentación Oficial y Guías - Derecho Artificial"
+        description="Recopilación exhaustiva de documentos oficiales: Reglamento IA (AI Act), guías de AESIA, directrices éticas europeas y normativa sobre protección de datos."
         canonical="https://derechoartificial.com/documentos"
         hreflangs={[
           { lang: "es", href: "https://derechoartificial.com/documentos" },

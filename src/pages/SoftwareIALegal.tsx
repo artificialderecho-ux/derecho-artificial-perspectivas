@@ -154,13 +154,17 @@ export default function SoftwareIALegal() {
   return (
     <Layout>
       <SEOHead 
-        title="Software de IA Legal | Auditoría y Cumplimiento - Derecho Artificial"
-        description="Evaluación crítica e independiente de herramientas de inteligencia artificial para abogados. Riesgos legales, éticos y cumplimiento normativo (AI Act/RGPD)."
+        title="Software IA Legal | Herramientas para Abogados - Derecho Artificial"
+        description="Análisis de software jurídico basado en inteligencia artificial. Clasificación de riesgos según AI Act, casos de uso y evaluación ética para despachos."
         canonical="https://derechoartificial.com/software-ia-legal"
+        hreflangs={[
+          { lang: "es", href: "https://derechoartificial.com/software-ia-legal" },
+          { lang: "en", href: "https://derechoartificial.com/en/legal-ai-software" }
+        ]}
       />
 
       {/* Hero */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 bg-surface">
         <div className="container-narrow">
           <div className="flex justify-between items-start mb-6">
             <p className="text-xs uppercase tracking-[0.2em] text-caption">

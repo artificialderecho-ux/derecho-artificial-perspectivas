@@ -139,6 +139,7 @@ const Neuroderechos = () => {
           </div>
         </div>
       </section>
+      </article>
     </Layout>
   );
 };

@@ -130,6 +130,7 @@ const IAAlucinaTribunales = () => {
           </div>
         </div>
       </section>
+      </article>
     </Layout>
   );
 };

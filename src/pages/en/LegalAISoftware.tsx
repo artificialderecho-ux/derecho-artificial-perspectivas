@@ -1,9 +1,20 @@
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 
 export default function LegalAISoftware() {
   return (
     <Layout>
+      <SEOHead 
+        title="Legal AI Software & Legaltech Analysis | Derecho Artificial"
+        description="Independent analysis of AI tools in legal practice. Ethical implications, regulatory framework, and professional responsibility in the age of AI."
+        canonical="https://derechoartificial.com/en/legal-ai-software"
+        lang="en"
+        hreflangs={[
+          { lang: "es", href: "https://derechoartificial.com/software-ia-legal" },
+          { lang: "en", href: "https://derechoartificial.com/en/legal-ai-software" }
+        ]}
+      />
       {/* Hero */}
       <section className="py-16 md:py-24">
         <div className="container-narrow">

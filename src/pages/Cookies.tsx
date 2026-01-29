@@ -10,21 +10,22 @@ export default function Cookies() {
         canonical="https://derechoartificial.com/cookies"
       />
 
-      <section className="py-16 md:py-24">
-        <div className="container-narrow">
-          <p className="text-xs uppercase tracking-[0.2em] text-caption mb-6">
-            Información técnica
-          </p>
-          <h1 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-8 leading-tight">
-            Política de Cookies
-          </h1>
-          <p className="text-body-large text-muted-foreground">
-            Última actualización: enero de 2025
-          </p>
-        </div>
-      </section>
+      <article>
+        <header className="py-16 md:py-24">
+          <div className="container-narrow">
+            <p className="text-xs uppercase tracking-[0.2em] text-caption mb-6">
+              Información técnica
+            </p>
+            <h1 className="font-serif text-4xl md:text-5xl font-medium text-foreground mb-8 leading-tight">
+              Política de Cookies
+            </h1>
+            <p className="text-body-large text-muted-foreground">
+              Última actualización: enero de 2025
+            </p>
+          </div>
+        </header>
 
-      <section className="py-12 border-t border-divider">
+        <section className="py-12 border-t border-divider">
         <div className="container-narrow">
           <div className="prose-editorial space-y-12">
             
@@ -229,7 +230,8 @@ export default function Cookies() {
 
           </div>
         </div>
-      </section>
+        </section>
+      </article>
     </Layout>
   );
 }

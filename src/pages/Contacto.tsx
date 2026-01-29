@@ -24,6 +24,10 @@ const Contacto = () => {
         title="Contacto | Consultas y Colaboraciones - Derecho Artificial"
         description="Formulario de contacto para consultas jurídicas sobre IA, correcciones y colaboraciones editoriales. Tiempos de respuesta y normativa de privacidad."
         canonical="https://derechoartificial.com/contacto"
+        hreflangs={[
+          { lang: "es", href: "https://derechoartificial.com/contacto" },
+          { lang: "en", href: "https://derechoartificial.com/en/about" }
+        ]}
       />
 
       <section className="section-spacing" id="contacto">

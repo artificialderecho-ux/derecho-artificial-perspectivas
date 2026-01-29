@@ -15,6 +15,10 @@ const Manifiesto = () => {
         title="Manifiesto Editorial | Derecho Artificial: Independencia y Ética"
         description="Principios rectores de Derecho Artificial: independencia editorial, centralidad del Derecho, enfoque europeo y rigor en el análisis de la Inteligencia Artificial."
         canonical="https://derechoartificial.com/manifiesto"
+        hreflangs={[
+          { lang: "es", href: "https://derechoartificial.com/manifiesto" },
+          { lang: "en", href: "https://derechoartificial.com/en/manifesto" }
+        ]}
       />
 
       <article id="mision" className="section-spacing">

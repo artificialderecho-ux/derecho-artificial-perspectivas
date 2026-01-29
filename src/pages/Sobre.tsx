@@ -14,6 +14,10 @@ const Sobre = () => {
         title="Sobre Nosotros | Quiénes Somos - Derecho Artificial"
         description="Conoce el proyecto editorial independiente Derecho Artificial. Principios de independencia, rigor jurídico y metodología en el análisis de la inteligencia artificial."
         canonical="https://derechoartificial.com/sobre"
+        hreflangs={[
+          { lang: "es", href: "https://derechoartificial.com/sobre" },
+          { lang: "en", href: "https://derechoartificial.com/en/about" }
+        ]}
       />
 
       <article id="mision" className="section-spacing">

@@ -8,6 +8,7 @@ export default function PoliticaPrivacidad() {
         title="Política de Privacidad | Protección de Datos - Derecho Artificial"
         description="Política de privacidad sin tracking ni cookies comerciales. Información sobre el tratamiento de datos personales conforme al RGPD en el proyecto editorial Derecho Artificial."
         canonical="https://derechoartificial.com/politica-de-privacidad"
+        lang="es"
       />
 
       <section className="py-16 md:py-24">

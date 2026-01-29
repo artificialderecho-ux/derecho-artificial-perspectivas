@@ -1,9 +1,20 @@
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 
 const About = () => {
   return (
     <Layout>
+      <SEOHead 
+        title="About Us | Legal & Ethical Reflection on AI - Derecho Artificial"
+        description="Derecho Artificial is an independent editorial project dedicated to analyzing the legal and ethical implications of AI from a European perspective."
+        canonical="https://derechoartificial.com/en/about"
+        lang="en"
+        hreflangs={[
+          { lang: "es", href: "https://derechoartificial.com/sobre" },
+          { lang: "en", href: "https://derechoartificial.com/en/about" }
+        ]}
+      />
       <article className="section-spacing">
         <div className="container-editorial">
           {/* Header */}

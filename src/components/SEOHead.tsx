@@ -10,6 +10,7 @@ interface SEOHeadProps {
   publishedTime?: string;
   author?: string;
   hreflangs?: { lang: string; href: string }[];
+  noIndex?: boolean;
 }
 
 export function SEOHead({
@@ -22,6 +23,7 @@ export function SEOHead({
   publishedTime,
   author = "Derecho Artificial",
   hreflangs = [],
+  noIndex = false,
 }: SEOHeadProps) {
   let siteUrl = canonical;
   try {
@@ -117,7 +119,7 @@ export function SEOHead({
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
       
-      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="robots" content={noIndex ? "noindex, nofollow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
       <meta name="author" content={author} />
       
       <meta property="og:title" content={title} />
@@ -127,20 +129,21 @@ export function SEOHead({
       <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
       
       {hreflangs.map((h) => (
-        <link key={h.lang} rel="alternate" hreflang={h.lang} href={h.href} />
+        <link key={h.lang} rel="alternate" hrefLang={h.lang} href={h.href} />
       ))}
 
       <meta property="og:site_name" content="Derecho Artificial" />
-      
-      {/* Twitter */}
       <meta property="og:image" content={image || `${siteUrl}/logo-principal.png`} />
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {type === "article" && <meta property="article:author" content={author} />}
       
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@derechoIA" />
+      <meta name="twitter:creator" content="@derechoIA" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      {image && <meta name="twitter:image" content={image} />}
+      <meta name="twitter:image" content={image || `${siteUrl}/logo-principal.png`} />
       
       <script type="application/ld+json">
         {JSON.stringify(schemaOrg)}

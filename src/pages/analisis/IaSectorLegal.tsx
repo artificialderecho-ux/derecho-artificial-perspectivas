@@ -246,7 +246,7 @@ const IaSectorLegal = () => {
             </p>
           </div>
         </section>
-      </main>
+      </article>
     </Layout>
   );
 };

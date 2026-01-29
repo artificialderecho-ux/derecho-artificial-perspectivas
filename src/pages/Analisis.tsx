@@ -75,6 +75,10 @@ const Analisis = () => {
         title="Análisis Jurídicos de IA | Estudios y Artículos - Derecho Artificial"
         description="Repositorio de artículos jurídicos en profundidad sobre Inteligencia Artificial. Análisis del AI Act y su impacto práctico en el sector legal."
         canonical="https://derechoartificial.com/analisis"
+        hreflangs={[
+          { lang: "es", href: "https://derechoartificial.com/analisis" },
+          { lang: "en", href: "https://derechoartificial.com/en/analysis" }
+        ]}
       />
 
       <section id="perspectivas" className="py-16 md:py-24 bg-surface">

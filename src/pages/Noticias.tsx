@@ -19,6 +19,7 @@ interface NewsItem {
   url: string;
   summary: string;
   tags: string[];
+  image?: string;
 }
 
 // Extended interface for Editorial News (compatible with NewsCard)
@@ -86,6 +87,10 @@ const Noticias = () => {
         title="Noticias y Actualidad Jurídica IA | Derecho Artificial"
         description="Seguimiento de desarrollos regulatorios (AESIA, UE) y análisis editorial sobre inteligencia artificial y Derecho."
         canonical="https://derechoartificial.com/noticias"
+        hreflangs={[
+          { lang: "es", href: "https://derechoartificial.com/noticias" },
+          { lang: "en", href: "https://derechoartificial.com/en/news" }
+        ]}
       />
 
       {/* Hero */}

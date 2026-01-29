@@ -137,6 +137,7 @@ const FilosofiaDerechoIA = () => {
           </div>
         </div>
       </section>
+      </article>
     </Layout>
   );
 };

@@ -62,7 +62,7 @@ const Index = () => {
         ]}
       />
 
-      <main ref={containerRef}>
+      <div ref={containerRef}>
         <header id="inicio" className="relative section-spacing overflow-hidden bg-background">
           <div className="absolute inset-0">
             <img src={heroBackground} alt="" className="h-full w-full object-cover opacity-15" />
@@ -278,7 +278,7 @@ const Index = () => {
             </div>
           </div>
         </section>
-      </main>
+      </div>
       
       {/* Estilos globales para reduced-motion y fallback */}
       <style>{`
