@@ -9,7 +9,7 @@ const navigationES = [
   { name: "Legislación", href: "/legislacion" },
   { name: "Guías y Protocolos", href: "/guias-protocolos" },
   { name: "Quiénes somos", href: "/quienes-somos" },
-  { name: "Contacto", href: "mailto:contacto@derechoartificial.com" },
+  { name: "Contacto", href: "/contacto" },
 ];
 
 const navigationEN = [
@@ -19,7 +19,7 @@ const navigationEN = [
   { name: "Legislation", href: "/en/legislation" },
   { name: "Guides & Protocols", href: "/en/guides-protocols" },
   { name: "About Us", href: "/en/about-us" },
-  { name: "Contact", href: "mailto:contact@derechoartificial.com" },
+  { name: "Contact", href: "/en/contact" },
 ];
 
 // Map Spanish routes to English equivalents
@@ -31,6 +31,7 @@ const esEnRouteMap: Record<string, string> = {
   "/legislacion": "/en/legislation",
   "/guias-protocolos": "/en/guides-protocols",
   "/quienes-somos": "/en/about-us",
+  "/contacto": "/en/contact",
 };
 
 // Map English routes to Spanish equivalents  
@@ -42,6 +43,7 @@ const enEsRouteMap: Record<string, string> = {
   "/en/legislation": "/legislacion",
   "/en/guides-protocols": "/guias-protocolos",
   "/en/about-us": "/quienes-somos",
+  "/en/contact": "/contacto",
 };
 
 export function Header() {

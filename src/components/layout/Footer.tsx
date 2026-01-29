@@ -82,9 +82,9 @@ export function Footer() {
                   <Link to="/quienes-somos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Quiénes somos
                   </Link>
-                  <a href="mailto:contacto@derechoartificial.com" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link to="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Contacto
-                  </a>
+                  </Link>
                   <Link to="/en" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     English version
                   </Link>

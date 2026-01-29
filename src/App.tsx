@@ -79,6 +79,7 @@ const App = () => (
             <Route path="/en/legislation" element={<Legislation />} />
             <Route path="/en/guides-protocols" element={<GuidesProtocolsEN />} />
             <Route path="/en/about-us" element={<AboutUs />} />
+            <Route path="/en/contact" element={<ContactEN />} />
             
             {/* Redirections for Old Spanish Routes */}
             <Route path="/manifiesto" element={<Navigate to="/quienes-somos#manifiesto" replace />} />
