@@ -4,6 +4,35 @@ export const metadata: Metadata = {
   title: "Quiénes somos",
   description:
     "Conoce el proyecto editorial Derecho Artificial, la trayectoria del responsable editorial y el Manifiesto Editorial.",
+  keywords: [
+    "Derecho Artificial",
+    "proyecto editorial",
+    "manifiesto editorial",
+    "Ricardo Scarpa",
+    "derecho e inteligencia artificial",
+    "ética",
+    "regulación",
+  ],
+  alternates: {
+    canonical: "/quienes-somos",
+    languages: {
+      "es-ES": "/quienes-somos",
+      "en-US": "/en/about-us",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Quiénes somos",
+    description:
+      "Conoce el proyecto editorial Derecho Artificial, la trayectoria del responsable editorial y el Manifiesto Editorial.",
+    url: "/quienes-somos",
+    locale: "es_ES",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function QuienesSomosPage() {
@@ -252,4 +281,3 @@ export default function QuienesSomosPage() {
     </main>
   );
 }
-

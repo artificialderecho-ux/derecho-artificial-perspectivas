@@ -4,6 +4,35 @@ export const metadata: Metadata = {
   title: "Actualidad IA",
   description:
     "Monitor editorial de novedades regulatorias, institucionales y jurisprudenciales sobre inteligencia artificial.",
+  keywords: [
+    "actualidad IA",
+    "regulación IA",
+    "AI Act",
+    "AESIA",
+    "AEPD",
+    "cumplimiento IA",
+    "noticias derecho digital",
+  ],
+  alternates: {
+    canonical: "/actualidad-ia",
+    languages: {
+      "es-ES": "/actualidad-ia",
+      "en-US": "/en/ai-news",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Actualidad IA",
+    description:
+      "Monitor editorial de novedades regulatorias, institucionales y jurisprudenciales sobre inteligencia artificial.",
+    url: "/actualidad-ia",
+    locale: "es_ES",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function ActualidadIAPage() {
@@ -23,4 +52,3 @@ export default function ActualidadIAPage() {
     </main>
   );
 }
-

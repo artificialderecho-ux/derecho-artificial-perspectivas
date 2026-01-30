@@ -4,6 +4,34 @@ export const metadata: Metadata = {
   title: "About Us",
   description:
     "Independent observatory analyzing the impact of AI on Law. Mission, editorial direction, and Editorial Manifesto.",
+  keywords: [
+    "about Derecho Artificial",
+    "editorial manifesto",
+    "AI law",
+    "AI ethics",
+    "AI regulation",
+    "EU perspective",
+  ],
+  alternates: {
+    canonical: "/en/about-us",
+    languages: {
+      "es-ES": "/quienes-somos",
+      "en-US": "/en/about-us",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "About Us",
+    description:
+      "Independent observatory analyzing the impact of AI on Law. Mission, editorial direction, and Editorial Manifesto.",
+    url: "/en/about-us",
+    locale: "en_US",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function AboutUsPage() {
@@ -131,4 +159,3 @@ export default function AboutUsPage() {
     </main>
   );
 }
-

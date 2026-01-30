@@ -5,6 +5,32 @@ import { ContactForm } from "@/app/contacto/ui/ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description: "Contact form for inquiries, corrections, and editorial collaborations.",
+  keywords: [
+    "contact",
+    "AI law",
+    "editorial collaboration",
+    "corrections",
+    "AI compliance",
+  ],
+  alternates: {
+    canonical: "/en/contact",
+    languages: {
+      "es-ES": "/contacto",
+      "en-US": "/en/contact",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Contact",
+    description: "Contact form for inquiries, corrections, and editorial collaborations.",
+    url: "/en/contact",
+    locale: "en_US",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function ContactPage() {

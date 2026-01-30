@@ -1,4 +1,40 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Derecho, ética y regulación de la IA",
+  description:
+    "Análisis jurídico y editorial independiente sobre inteligencia artificial: normativa, jurisprudencia, cumplimiento y práctica jurídica.",
+  keywords: [
+    "derecho artificial",
+    "inteligencia artificial",
+    "regulación IA",
+    "AI Act",
+    "RGPD",
+    "jurisprudencia",
+    "cumplimiento",
+  ],
+  alternates: {
+    canonical: "/",
+    languages: {
+      "es-ES": "/",
+      "en-US": "/en",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Derecho, ética y regulación de la IA",
+    description:
+      "Análisis jurídico y editorial independiente sobre inteligencia artificial: normativa, jurisprudencia, cumplimiento y práctica jurídica.",
+    url: "/",
+    locale: "es_ES",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
+};
 
 export default function HomePage() {
   const sections = [
@@ -51,4 +87,3 @@ export default function HomePage() {
     </main>
   );
 }
-

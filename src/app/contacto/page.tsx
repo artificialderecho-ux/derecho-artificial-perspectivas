@@ -6,6 +6,34 @@ export const metadata: Metadata = {
   title: "Contacto",
   description:
     "Formulario de contacto para consultas jurídicas sobre IA, correcciones y colaboraciones editoriales.",
+  keywords: [
+    "contacto",
+    "Derecho Artificial",
+    "consultas jurídicas IA",
+    "colaboración editorial",
+    "correcciones",
+    "cumplimiento IA",
+  ],
+  alternates: {
+    canonical: "/contacto",
+    languages: {
+      "es-ES": "/contacto",
+      "en-US": "/en/contact",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Contacto",
+    description:
+      "Formulario de contacto para consultas jurídicas sobre IA, correcciones y colaboraciones editoriales.",
+    url: "/contacto",
+    locale: "es_ES",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function ContactoPage() {

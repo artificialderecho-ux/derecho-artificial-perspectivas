@@ -4,6 +4,35 @@ export const metadata: Metadata = {
   title: "Jurisprudencia",
   description:
     "Selección y análisis de resoluciones relevantes sobre tecnología, datos e inteligencia artificial.",
+  keywords: [
+    "jurisprudencia IA",
+    "derecho digital",
+    "protección de datos",
+    "RGPD",
+    "decisiones judiciales",
+    "algoritmos",
+    "responsabilidad",
+  ],
+  alternates: {
+    canonical: "/jurisprudencia",
+    languages: {
+      "es-ES": "/jurisprudencia",
+      "en-US": "/en/jurisprudence",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Jurisprudencia",
+    description:
+      "Selección y análisis de resoluciones relevantes sobre tecnología, datos e inteligencia artificial.",
+    url: "/jurisprudencia",
+    locale: "es_ES",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function JurisprudenciaPage() {
@@ -23,4 +52,3 @@ export default function JurisprudenciaPage() {
     </main>
   );
 }
-

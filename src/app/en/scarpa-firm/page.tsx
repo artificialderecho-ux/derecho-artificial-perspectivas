@@ -3,6 +3,33 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Scarpa Firm",
   description: "In-depth legal analysis, critical opinion, and regulatory foresight.",
+  keywords: [
+    "Ricardo Scarpa",
+    "legal analysis",
+    "AI regulation",
+    "EU AI Act",
+    "AI compliance",
+    "editorial opinion",
+  ],
+  alternates: {
+    canonical: "/en/scarpa-firm",
+    languages: {
+      "es-ES": "/firma-scarpa",
+      "en-US": "/en/scarpa-firm",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Scarpa Firm",
+    description: "In-depth legal analysis, critical opinion, and regulatory foresight.",
+    url: "/en/scarpa-firm",
+    locale: "en_US",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function ScarpaFirmPage() {
@@ -18,4 +45,3 @@ export default function ScarpaFirmPage() {
     </main>
   );
 }
-

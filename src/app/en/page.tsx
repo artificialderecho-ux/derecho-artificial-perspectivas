@@ -2,8 +2,38 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "Independent legal and editorial analysis on artificial intelligence.",
+  title: "Law, ethics and AI regulation",
+  description:
+    "Independent legal and editorial analysis on artificial intelligence: compliance, jurisprudence, and the EU regulatory framework.",
+  keywords: [
+    "artificial intelligence law",
+    "AI regulation",
+    "EU AI Act",
+    "GDPR",
+    "AI compliance",
+    "AI jurisprudence",
+    "law and technology",
+  ],
+  alternates: {
+    canonical: "/en",
+    languages: {
+      "es-ES": "/",
+      "en-US": "/en",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Law, ethics and AI regulation",
+    description:
+      "Independent legal and editorial analysis on artificial intelligence: compliance, jurisprudence, and the EU regulatory framework.",
+    url: "/en",
+    locale: "en_US",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function EnglishHomePage() {
@@ -51,4 +81,3 @@ export default function EnglishHomePage() {
     </main>
   );
 }
-

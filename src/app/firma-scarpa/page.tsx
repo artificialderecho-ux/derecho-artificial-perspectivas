@@ -4,6 +4,35 @@ export const metadata: Metadata = {
   title: "Firma Scarpa",
   description:
     "Textos y análisis firmados por el responsable editorial sobre Derecho e Inteligencia Artificial.",
+  keywords: [
+    "Ricardo Scarpa",
+    "derecho artificial",
+    "análisis jurídico IA",
+    "opinión jurídica",
+    "regulación IA",
+    "AI Act",
+    "cumplimiento",
+  ],
+  alternates: {
+    canonical: "/firma-scarpa",
+    languages: {
+      "es-ES": "/firma-scarpa",
+      "en-US": "/en/scarpa-firm",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "Firma Scarpa",
+    description:
+      "Textos y análisis firmados por el responsable editorial sobre Derecho e Inteligencia Artificial.",
+    url: "/firma-scarpa",
+    locale: "es_ES",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function FirmaScarpaPage() {
@@ -23,4 +52,3 @@ export default function FirmaScarpaPage() {
     </main>
   );
 }
-

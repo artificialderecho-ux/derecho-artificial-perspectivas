@@ -3,6 +3,33 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "AI News",
   description: "Editorial monitoring of regulatory, institutional and jurisprudential AI updates.",
+  keywords: [
+    "AI regulation news",
+    "EU AI Act",
+    "AI compliance",
+    "data protection",
+    "AI jurisprudence",
+    "law and technology",
+  ],
+  alternates: {
+    canonical: "/en/ai-news",
+    languages: {
+      "es-ES": "/actualidad-ia",
+      "en-US": "/en/ai-news",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: "AI News",
+    description: "Editorial monitoring of regulatory, institutional and jurisprudential AI updates.",
+    url: "/en/ai-news",
+    locale: "en_US",
+    images: [
+      {
+        url: "/logo-principal.png",
+      },
+    ],
+  },
 };
 
 export default function AiNewsPage() {
@@ -18,4 +45,3 @@ export default function AiNewsPage() {
     </main>
   );
 }
-
