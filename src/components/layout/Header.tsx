@@ -1,5 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 
 const navigationES = [
@@ -47,11 +50,11 @@ const enEsRouteMap: Record<string, string> = {
 };
 
 export function Header() {
-  const location = useLocation();
+  const pathname = usePathname() ?? "/";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   
-  const isEnglish = location.pathname.startsWith("/en");
+  const isEnglish = pathname.startsWith("/en");
   const navigation = isEnglish ? navigationEN : navigationES;
   
   // Handle scroll for sticky header
@@ -67,9 +70,9 @@ export function Header() {
   // Get the equivalent route in the other language
   const getAlternateRoute = () => {
     if (isEnglish) {
-      return enEsRouteMap[location.pathname] || "/";
+      return enEsRouteMap[pathname] || "/";
     }
-    return esEnRouteMap[location.pathname] || "/en";
+    return esEnRouteMap[pathname] || "/en";
   };
 
   return (
@@ -82,7 +85,7 @@ export function Header() {
     >
       <div className="container-wide">
         <div className="flex items-center justify-between py-3 md:py-4 min-h-[120px]">
-          <Link to={isEnglish ? "/en" : "/"} className="flex items-center group">
+          <Link href={isEnglish ? "/en" : "/"} className="flex items-center group">
             <img
               src="/logo-principal.png"
               alt="Derecho Artificial"
@@ -96,15 +99,15 @@ export function Header() {
               {navigation.map((item) => (
                 <Link
                   key={item.name}
-                  to={item.href}
+                  href={item.href}
                   className={`text-sm tracking-wide transition-all duration-300 relative ${
-                    location.pathname === item.href
+                    pathname === item.href
                       ? "text-primary font-medium"
                       : "text-caption hover:text-foreground"
                   }`}
                 >
                   {item.name}
-                  {location.pathname === item.href && (
+                  {pathname === item.href && (
                     <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />
                   )}
                 </Link>
@@ -113,8 +116,8 @@ export function Header() {
             
             <div className="flex items-center gap-3 pl-6 border-l border-divider">
               <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
-              <Link 
-                to={isEnglish ? getAlternateRoute() : location.pathname}
+              <Link
+                href={isEnglish ? getAlternateRoute() : pathname}
                 className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
                   !isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                 }`}
@@ -122,8 +125,8 @@ export function Header() {
                 ES
               </Link>
               <span className="text-caption">|</span>
-              <Link 
-                to={isEnglish ? location.pathname : getAlternateRoute()}
+              <Link
+                href={isEnglish ? pathname : getAlternateRoute()}
                 className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
                   isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                 }`}
@@ -153,10 +156,10 @@ export function Header() {
               {navigation.map((item) => (
                 <Link
                   key={item.name}
-                  to={item.href}
+                  href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-base transition-colors duration-300 ${
-                    location.pathname === item.href
+                    pathname === item.href
                       ? "text-primary font-medium"
                       : "text-caption hover:text-foreground"
                   }`}
@@ -168,8 +171,8 @@ export function Header() {
               <div className="pt-4 mt-2 border-t border-divider">
                 <div className="flex items-center gap-3">
                   <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
-                  <Link 
-                    to={getAlternateRoute()}
+                  <Link
+                    href={getAlternateRoute()}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-sm text-primary hover:text-primary/80 transition-colors duration-300"
                   >
