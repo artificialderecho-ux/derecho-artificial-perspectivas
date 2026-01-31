@@ -127,18 +127,7 @@ export default function GuiaReglamentoIA2026() {
               </script>
             </div>
 
-            <div className="mt-16 p-8 bg-highlight rounded-[4px] border border-[#E2E8F0]">
-              <h4 className="font-serif text-xl mb-4 text-[#0F172A]">¿Necesita asesoramiento especializado?</h4>
-              <p className="mb-6 text-body">
-                Nuestro equipo de expertos en Legaltech y regulación digital puede ayudarle a auditar sus sistemas de IA.
-              </p>
-              <Link 
-                to="/contacto" 
-                className="text-[#1E40AF] hover:opacity-80 font-medium underline underline-offset-4 transition-opacity"
-              >
-                Contactar con un especialista →
-              </Link>
-            </div>
+            
           </div>
         </div>
       </section>

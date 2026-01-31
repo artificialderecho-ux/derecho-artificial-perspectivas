@@ -127,18 +127,7 @@ export default function EUAIActGuide2026() {
               </script>
             </div>
 
-            <div className="mt-16 p-8 bg-highlight rounded-[4px] border border-[#E2E8F0]">
-              <h4 className="font-serif text-xl mb-4 text-[#0F172A]">Need specialized advice?</h4>
-              <p className="mb-6 text-body">
-                Our team of Legaltech and digital regulation experts can help you audit your AI systems.
-              </p>
-              <Link 
-                to="/contacto" 
-                className="text-[#1E40AF] hover:opacity-80 font-medium underline underline-offset-4 transition-opacity"
-              >
-                Contact a specialist →
-              </Link>
-            </div>
+
           </div>
         </div>
       </section>

@@ -142,18 +142,6 @@ export default function GuiaReglamentoIAPage() {
               />
             </div>
 
-            <div className="mt-16 p-8 bg-muted/50 rounded-lg border border-border">
-              <h4 className="font-serif text-xl mb-4 text-foreground">¿Necesita asesoramiento especializado?</h4>
-              <p className="mb-6 text-muted-foreground">
-                Nuestro equipo de expertos en Legaltech y regulación digital puede ayudarle a auditar sus sistemas de IA.
-              </p>
-              <Link 
-                href="/contacto" 
-                className="text-primary hover:opacity-80 font-medium underline underline-offset-4 transition-opacity"
-              >
-                Contactar con un especialista →
-              </Link>
-            </div>
           </div>
         </div>
       </section>
