@@ -10,11 +10,5 @@
       "destination": "/quienes-somos",
       "permanent": true
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
   ]
 }
