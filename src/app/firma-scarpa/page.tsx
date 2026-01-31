@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import type { ResolvedContentEntry } from "@/lib/content";
+import { getContentEntry, listContentSlugs } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Firma Scarpa",
@@ -35,7 +38,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FirmaScarpaPage() {
+export default async function FirmaScarpaPage() {
+  const slugs = await listContentSlugs("firma-scarpa");
+  const entries = await Promise.all(slugs.map((slug) => getContentEntry("firma-scarpa", slug)));
+  const resolvedEntries = entries.filter((entry): entry is ResolvedContentEntry => Boolean(entry));
+  const sortedEntries = resolvedEntries.sort((a, b) => {
+    const aTime = new Date(a.datePublished).getTime();
+    const bTime = new Date(b.datePublished).getTime();
+    if (Number.isNaN(aTime) || Number.isNaN(bTime)) return 0;
+    return bTime - aTime;
+  });
+
+  const formatDate = (value: string) => {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+    return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+  };
+
   return (
     <main className="section-spacing">
       <div className="container-editorial">
@@ -48,6 +67,32 @@ export default function FirmaScarpaPage() {
             Artículos y ensayos con enfoque jurídico, ético y regulatorio.
           </p>
         </header>
+
+        <section className="grid gap-6 md:grid-cols-2">
+          {sortedEntries.map((entry) => (
+            <Link
+              key={entry.slug}
+              href={entry.urlPath}
+              className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+            >
+              <p className="text-xs uppercase tracking-widest text-caption mb-3">Ensayo</p>
+              <h2 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h2>
+              <p className="text-body mb-6">{entry.description}</p>
+              <div className="text-sm text-caption">
+                {formatDate(entry.datePublished)} · {entry.author}
+              </div>
+            </Link>
+          ))}
+        </section>
+
+        <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+          <p className="text-xs uppercase tracking-widest text-caption mb-3">Enfoque editorial</p>
+          <p className="text-body max-w-3xl">
+            La firma aborda el impacto jurídico de la IA desde la práctica profesional: cumplimiento normativo,
+            responsabilidad y diseño de garantías. Cada texto se construye a partir de fuentes verificables y
+            experiencias de implementación en entornos regulatorios complejos.
+          </p>
+        </section>
       </div>
     </main>
   );

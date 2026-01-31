@@ -49,12 +49,49 @@ export default function LegislacionPage() {
           </p>
         </header>
 
-        <section className="rounded-lg border border-divider bg-surface p-8">
-          <p className="text-sm uppercase tracking-widest text-caption mb-3">Repositorio</p>
-          <h2 className="font-serif text-2xl text-foreground">En actualización</h2>
-          <p className="text-body mt-4 max-w-2xl">
-            Repositorio en actualización bajo el nuevo plan de acción 2026. Estamos reorganizando normativa,
-            guías institucionales y notas prácticas.
+        <section className="grid gap-6 md:grid-cols-2">
+          <div className="card-elevated p-6">
+            <p className="text-xs uppercase tracking-widest text-caption mb-3">Marco europeo</p>
+            <h2 className="font-serif text-2xl text-foreground mb-4">AI Act</h2>
+            <p className="text-body">
+              Referencia principal para la gobernanza del riesgo en sistemas de IA. Seguimos su despliegue en España,
+              los estándares técnicos y los calendarios de cumplimiento sectoriales.
+            </p>
+          </div>
+
+          <div className="card-elevated p-6">
+            <p className="text-xs uppercase tracking-widest text-caption mb-3">Protección de datos</p>
+            <h2 className="font-serif text-2xl text-foreground mb-4">RGPD y LOPDGDD</h2>
+            <p className="text-body">
+              Base jurídica para el tratamiento algorítmico y la adopción de garantías. Incluimos criterios de la AEPD,
+              resoluciones y buenas prácticas aplicables a IA.
+            </p>
+          </div>
+
+          <div className="card-elevated p-6">
+            <p className="text-xs uppercase tracking-widest text-caption mb-3">Transparencia</p>
+            <h2 className="font-serif text-2xl text-foreground mb-4">LTAIBG y acceso a la información</h2>
+            <p className="text-body">
+              Normativa clave para evaluar transparencia algorítmica en el sector público y el derecho de acceso a
+              código fuente cuando impacta en derechos sociales.
+            </p>
+          </div>
+
+          <div className="card-elevated p-6">
+            <p className="text-xs uppercase tracking-widest text-caption mb-3">Responsabilidad</p>
+            <h2 className="font-serif text-2xl text-foreground mb-4">Marco de riesgos y sanciones</h2>
+            <p className="text-body">
+              Lectura combinada de la normativa sectorial, régimen sancionador y obligaciones de diligencia para
+              proveedores y usuarios de IA.
+            </p>
+          </div>
+        </section>
+
+        <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+          <p className="text-xs uppercase tracking-widest text-caption mb-3">Estructura 2026</p>
+          <p className="text-body max-w-3xl">
+            El repositorio normativo se organiza por bloques: marco europeo, derecho nacional y guías institucionales.
+            Cada ficha incluirá síntesis ejecutiva, implicaciones prácticas y enlaces a fuentes oficiales.
           </p>
         </section>
       </div>
