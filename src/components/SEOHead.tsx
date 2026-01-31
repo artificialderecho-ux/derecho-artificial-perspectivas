@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import Head from "next/head";
 
 interface SEOHeadProps {
   title?: string;
@@ -113,7 +113,7 @@ export function SEOHead({
   };
 
   return (
-    <Helmet>
+    <Head>
       <html lang={lang} />
       <title>{title}</title>
       <meta name="description" content={description} />
@@ -148,6 +148,6 @@ export function SEOHead({
       <script type="application/ld+json">
         {JSON.stringify(schemaOrg)}
       </script>
-    </Helmet>
+    </Head>
   );
 }

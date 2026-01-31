@@ -11,7 +11,7 @@ const navigationES = [
   { name: "Jurisprudencia", href: "/jurisprudencia" },
   { name: "Actualidad IA", href: "/actualidad-ia" },
   { name: "Normativa", href: "/normativa/reglamento-ia" },
-  { name: "Guías", href: "/guias" },
+  { name: "Guías", href: "/guias-protocolos" },
   { name: "Quiénes somos", href: "/quienes-somos" },
   { name: "Contacto", href: "/contacto" },
 ];
@@ -33,7 +33,7 @@ const esEnRouteMap: Record<string, string> = {
   "/jurisprudencia": "/en/jurisprudence",
   "/actualidad-ia": "/en/ai-news",
   "/normativa/reglamento-ia": "/en/legislation",
-  "/guias": "/en/guides-protocols",
+  "/guias-protocolos": "/en/guides-protocols",
   "/quienes-somos": "/en/about-us",
   "/contacto": "/en/contact",
 };
@@ -45,7 +45,7 @@ const enEsRouteMap: Record<string, string> = {
   "/en/jurisprudence": "/jurisprudencia",
   "/en/ai-news": "/actualidad-ia",
   "/en/legislation": "/normativa/reglamento-ia",
-  "/en/guides-protocols": "/guias",
+  "/en/guides-protocols": "/guias-protocolos",
   "/en/about-us": "/quienes-somos",
   "/en/contact": "/contacto",
 };

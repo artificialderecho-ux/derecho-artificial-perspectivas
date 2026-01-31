@@ -6,9 +6,9 @@ export const metadata: Metadata = {
   title: "Guías, Protocolos y Soft Law | Biblioteca AESIA y Comisión Europea",
   description: "Hub central de documentación oficial: Guías de la AESIA, documentos de la Comisión Europea, Soft Law y protocolos de actuación.",
   alternates: {
-    canonical: "https://derechoartificial.com/guias",
+    canonical: "https://derechoartificial.com/guias-protocolos",
     languages: {
-      es: "https://derechoartificial.com/guias",
+      es: "https://derechoartificial.com/guias-protocolos",
       en: "https://derechoartificial.com/en/guides-protocols",
     },
   },
