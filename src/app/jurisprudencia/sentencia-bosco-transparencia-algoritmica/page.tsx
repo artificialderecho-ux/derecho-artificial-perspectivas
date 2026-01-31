@@ -80,7 +80,7 @@ export default function BoscoSentenciaPage() {
             </p>
             <h3>3. Análisis del Iter Procesal</h3>
             <p>
-              El recorrido del "caso BOSCO" a través de las distintas instancias administrativas y judiciales es un claro exponente de la resistencia inicial de la Administración y de los tribunales inferiores a aplicar los principios de transparencia a los nuevos entornos algorítmicos. El análisis cronológico de este iter procesal resulta crucial para comprender la evolución de los argumentos esgrimidos por las partes y la progresiva consolidación de la cuestión jurídica que finalmente resolvió el Tribunal Supremo.
+              El recorrido del &quot;caso BOSCO&quot; a través de las distintas instancias administrativas y judiciales es un claro exponente de la resistencia inicial de la Administración y de los tribunales inferiores a aplicar los principios de transparencia a los nuevos entornos algorítmicos. El análisis cronológico de este iter procesal resulta crucial para comprender la evolución de los argumentos esgrimidos por las partes y la progresiva consolidación de la cuestión jurídica que finalmente resolvió el Tribunal Supremo.
             </p>
             <h4>3.1. Vía Administrativa</h4>
             <p>
@@ -119,9 +119,9 @@ export default function BoscoSentenciaPage() {
             <p>
               El Tribunal fundamenta su decisión en una interpretación amplia y expansiva del derecho de acceso a la información pública del artículo 105.b) CE. Lejos de considerarlo un mero derecho procedimental, lo vincula directamente con principios estructurales del Derecho Público moderno, como el derecho a una buena administración (reconocido en el artículo 41 de la Carta de los Derechos Fundamentales de la Unión Europea) y la necesidad ineludible de un control democrático de la actuación administrativa. El Alto Tribunal recalca que este derecho es instrumental para el ejercicio de otros derechos fundamentales, y que, por tanto, cualquier límite a su ejercicio debe ser interpretado de forma restrictiva.
             </p>
-            <h3>4.3. Calificación Jurídica de BOSCO como "Actuación Automatizada"</h3>
+            <h3>4.3. Calificación Jurídica de BOSCO como &quot;Actuación Automatizada&quot;</h3>
             <p>
-              El Tribunal articula su doctrina sobre un pilar fundamental: la correcta calificación jurídica del programa BOSCO, que despoja de su aparente neutralidad instrumental para someterlo plenamente a las garantías del Derecho Administrativo. La sentencia descarta que se trate de una mera herramienta auxiliar; por el contrario, lo califica inequívocamente como una «actuación automatizada de la Administración». El Tribunal razona que, a través de BOSCO, «se adopta una decisión con evidente impacto en los derechos de los ciudadanos», adquiriendo una «relevancia decisiva». Esta calificación es crucial, pues impide que la Administración cree una categoría de actuaciones "pre-administrativas" que escapen al control judicial y al principio de legalidad, sometiendo al programa y a su lógica interna a las mismas exigencias de transparencia que cualquier otra actuación administrativa con efectos ad extra (STS 1119/2025, de 11 de septiembre, FJ 8).
+              El Tribunal articula su doctrina sobre un pilar fundamental: la correcta calificación jurídica del programa BOSCO, que despoja de su aparente neutralidad instrumental para someterlo plenamente a las garantías del Derecho Administrativo. La sentencia descarta que se trate de una mera herramienta auxiliar; por el contrario, lo califica inequívocamente como una «actuación automatizada de la Administración». El Tribunal razona que, a través de BOSCO, «se adopta una decisión con evidente impacto en los derechos de los ciudadanos», adquiriendo una «relevancia decisiva». Esta calificación es crucial, pues impide que la Administración cree una categoría de actuaciones &quot;pre-administrativas&quot; que escapen al control judicial y al principio de legalidad, sometiendo al programa y a su lógica interna a las mismas exigencias de transparencia que cualquier otra actuación administrativa con efectos ad extra (STS 1119/2025, de 11 de septiembre, FJ 8).
             </p>
             <h3>4.4. Ponderación del Límite de Propiedad Intelectual (Art. 14.1.j LTAIBG)</h3>
             <p>
@@ -157,7 +157,7 @@ export default function BoscoSentenciaPage() {
                 Refutación: Aunque no sea un acto administrativo en sentido estricto, es la herramienta mediante la cual se ejecuta una «actuación administrativa automatizada» que produce efectos jurídicos directos. Dado que BOSCO es un sistema determinista que se limita a traducir la ley a código, su lógica interna es parte esencial de la motivación de dicha actuación. Un error en el código no es una desviación probabilística, sino una directa y flagrante inaplicación de la norma, lo que convierte la auditoría pública en una forma esencial de verificación de la legalidad.
               </li>
             </ul>
-            <h3>5.3. Implicaciones para la Transparencia Algorítmica y la "Democracia Digital"</h3>
+            <h3>5.3. Implicaciones para la Transparencia Algorítmica y la &quot;Democracia Digital&quot;</h3>
             <p>
               La sentencia consagra de manera inequívoca el principio de «transparencia algorítmica» en el ordenamiento jurídico español. El Tribunal Supremo actualiza la interpretación del artículo 105.b) de la Constitución, entendiendo que el derecho de acceso a los «archivos y registros administrativos» debe extenderse, en el entorno digital, a los algoritmos y códigos fuente que materializan la voluntad de la Administración.
             </p>
