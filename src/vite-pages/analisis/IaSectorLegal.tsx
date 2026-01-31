@@ -1,6 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
+import Image from "next/image";
 
 const IaSectorLegal = () => {
   return (
@@ -179,19 +180,19 @@ const IaSectorLegal = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="group bg-background p-10 md:p-14 hover:bg-highlight transition-colors duration-300">
-                <img src="/assets/finocchiaro-cover.jpg" alt="Portada del libro El nuevo derecho de la Inteligencia Artificial de Giusella Finocchiaro" className="w-full h-auto mb-4" />
+                <Image src="/assets/finocchiaro-cover.jpg" alt="Portada del libro El nuevo derecho de la Inteligencia Artificial de Giusella Finocchiaro" width={400} height={600} className="w-full h-auto mb-4" />
                 <p className="text-center text-body group-hover:text-primary transition-colors">Finocchiaro</p>
               </div>
               <div className="group bg-background p-10 md:p-14 hover:bg-highlight transition-colors duration-300">
-                <img src="/assets/ashley-cover.jpg" alt="Portada del libro Inteligencia Artificial y Analítica Jurídica de Kevin D. Ashley" className="w-full h-auto mb-4" />
+                <Image src="/assets/ashley-cover.jpg" alt="Portada del libro Inteligencia Artificial y Analítica Jurídica de Kevin D. Ashley" width={400} height={600} className="w-full h-auto mb-4" />
                 <p className="text-center text-body group-hover:text-primary transition-colors">Ashley</p>
               </div>
               <div className="group bg-background p-10 md:p-14 hover:bg-highlight transition-colors duration-300">
-                <img src="/assets/granero-cover.jpg" alt="Portada del libro Inteligencia Artificial y Derecho, un reto social de Horacio R. Granero" className="w-full h-auto mb-4" />
+                <Image src="/assets/granero-cover.jpg" alt="Portada del libro Inteligencia Artificial y Derecho, un reto social de Horacio R. Granero" width={400} height={600} className="w-full h-auto mb-4" />
                 <p className="text-center text-body group-hover:text-primary transition-colors">Granero</p>
               </div>
               <div className="group bg-background p-10 md:p-14 hover:bg-highlight transition-colors duration-300">
-                <img src="/assets/llano-cover.jpg" alt="Portada del libro Inteligencia Artificial y Filosofía del Derecho de Fernando H. Llano Alonso" className="w-full h-auto mb-4" />
+                <Image src="/assets/llano-cover.jpg" alt="Portada del libro Inteligencia Artificial y Filosofía del Derecho de Fernando H. Llano Alonso" width={400} height={600} className="w-full h-auto mb-4" />
                 <p className="text-center text-body group-hover:text-primary transition-colors">Llano Alonso</p>
               </div>
             </div>

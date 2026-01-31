@@ -63,8 +63,10 @@ export default async function ActualidadIAPage() {
           <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
             Actualidad IA
           </h1>
-          <p className="text-lg text-body mt-6">
-            Novedades institucionales y análisis con foco en cumplimiento y práctica jurídica.
+          <p className="lead mt-6 text-justify max-w-3xl">
+            Monitor de novedades regulatorias e institucionales. Seguimos el pulso de la AESIA, 
+            el Comité Europeo de IA y los desarrollos legislativos clave para ofrecer un briefing 
+            actualizado y curado para profesionales del derecho y el cumplimiento normativo.
           </p>
         </header>
 

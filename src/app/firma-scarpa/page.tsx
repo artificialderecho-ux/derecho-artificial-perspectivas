@@ -63,8 +63,10 @@ export default async function FirmaScarpaPage() {
           <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
             Firma Scarpa
           </h1>
-          <p className="text-lg text-body mt-6">
-            Artículos y ensayos con enfoque jurídico, ético y regulatorio.
+          <p className="lead mt-6 text-justify max-w-3xl">
+            Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión 
+            profunda sobre la intersección entre tecnología y ley, abordando desde la ética del algoritmo 
+            hasta las implicaciones prácticas del Reglamento de IA en el sector legal.
           </p>
         </header>
 

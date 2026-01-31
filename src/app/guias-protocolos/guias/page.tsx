@@ -1,0 +1,196 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import libraryDocs from "../../../data/library-docs.json";
+
+export const metadata: Metadata = {
+  title: "Guías, Protocolos y Soft Law | Biblioteca AESIA y Comisión Europea",
+  description: "Hub central de documentación oficial: Guías de la AESIA, documentos de la Comisión Europea, Soft Law y protocolos de actuación.",
+  alternates: {
+    canonical: "https://derechoartificial.com/guias",
+    languages: {
+      es: "https://derechoartificial.com/guias",
+      en: "https://derechoartificial.com/en/guides-protocols",
+    },
+  },
+};
+
+type DocCard = {
+  id: string;
+  title: string;
+  description: string;
+  source: string;
+  url: string;
+  date: string;
+  year?: string;
+  language?: string;
+  tags?: string[];
+};
+
+// Static content for Soft Law / Guias
+const softLawDocs = [
+  {
+    id: "sl-1",
+    title: "Carta Ética Europea sobre el uso de la IA en sistemas judiciales",
+    description: "Cinco principios fundamentales del CEPEJ para el uso de IA en la administración de justicia: respeto a derechos fundamentales, no discriminación, calidad y seguridad, transparencia y control por el usuario.",
+    source: "CEPEJ - Consejo de Europa",
+    year: "2018",
+    url: "https://www.coe.int/en/web/cepej/cepej-european-ethical-charter-on-the-use-of-artificial-intelligence-ai-in-judicial-systems-and-their-environment",
+  },
+  {
+    id: "sl-2",
+    title: "Directrices éticas para una IA fiable",
+    description: "Marco ético del Grupo de Expertos de Alto Nivel de la Comisión Europea. Establece siete requisitos clave: agencia humana, robustez técnica, privacidad, transparencia, diversidad, bienestar social y rendición de cuentas.",
+    source: "Comisión Europea",
+    year: "2019",
+    url: "https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai",
+  },
+  {
+    id: "sl-3",
+    title: "Recomendación sobre la Ética de la Inteligencia Artificial",
+    description: "Primera normativa mundial sobre ética de la IA adoptada por los 193 Estados miembros de la UNESCO. Establece valores y principios comunes para guiar la construcción de marcos jurídicos.",
+    source: "UNESCO",
+    year: "2021",
+    url: "https://www.unesco.org/es/artificial-intelligence/recommendation-ethics",
+  }
+];
+
+export default function GuidesPage() {
+  const docs = libraryDocs as DocCard[];
+  const aesiaDocs = docs.filter((d) => d.source === "AESIA");
+  const ecDocs = docs.filter((d) => d.source === "Comisión Europea");
+
+  return (
+    <main className="section-spacing">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <header className="mb-16 text-center max-w-3xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+            Biblioteca Digital
+          </p>
+          <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
+            Guías, Protocolos y Soft Law
+          </h1>
+          <p className="lead text-muted-foreground">
+            Repositorio centralizado de documentación técnica y ética de la AESIA, la Comisión Europea y organismos internacionales.
+          </p>
+        </header>
+
+        <div className="space-y-20">
+          
+          {/* AESIA Section */}
+          <section id="aesia">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-12 h-[1px] bg-primary"></span>
+              <h2 className="text-2xl font-serif text-foreground">
+                Agencia Española de Supervisión de la IA (AESIA)
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {aesiaDocs.length > 0 ? (
+                aesiaDocs.map((doc) => (
+                  <DocCardItem key={doc.id} doc={doc} color="bg-blue-600" />
+                ))
+              ) : (
+                <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
+                  No hay documentos disponibles por el momento.
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Soft Law Section */}
+          <section id="soft-law">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-12 h-[1px] bg-primary"></span>
+              <h2 className="text-2xl font-serif text-foreground">
+                Soft Law y Marcos Éticos
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {softLawDocs.map((doc) => (
+                <a
+                  key={doc.id}
+                  href={doc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block bg-card p-6 border border-border rounded-sm hover:border-primary transition-all duration-300 hover:shadow-md"
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="px-2 py-1 text-[10px] uppercase tracking-wider text-white font-medium rounded-sm bg-slate-500">
+                      {doc.source}
+                    </span>
+                    <span className="text-xs text-muted-foreground font-mono">
+                      {doc.year}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-lg text-foreground mb-3 group-hover:text-primary transition-colors">
+                    {doc.title}
+                  </h3>
+                  <p className="text-sm text-body leading-relaxed mb-4">
+                    {doc.description}
+                  </p>
+                  <div className="flex items-center text-xs font-medium text-primary uppercase tracking-wider">
+                    Acceder al documento{" "}
+                    <span className="ml-2 group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          {/* European Commission Section */}
+          <section id="comision-europea">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-12 h-[1px] bg-primary"></span>
+              <h2 className="text-2xl font-serif text-foreground">
+                Comisión Europea
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+               {ecDocs.length > 0 ? (
+                 ecDocs.map((doc) => (
+                   <DocCardItem key={doc.id} doc={doc} color="bg-[#003399]" />
+                 ))
+               ) : (
+                <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
+                  No hay documentos disponibles por el momento.
+                </div>
+              )}
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function DocCardItem({ doc, color }: { doc: DocCard; color: string }) {
+  return (
+    <a 
+      href={doc.url} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="group flex flex-col h-full bg-card p-6 border border-border rounded-lg hover:border-primary transition-all duration-300 hover:shadow-md"
+    >
+      <div className="flex justify-between items-start mb-4">
+        <span className={`px-2 py-1 text-[10px] uppercase tracking-wider text-white font-medium rounded-sm ${color}`}>
+          {doc.source}
+        </span>
+        <span className="text-xs text-muted-foreground font-mono">
+          {doc.year || doc.date?.split('-')[0]}
+        </span>
+      </div>
+      <h3 className="font-serif text-lg text-foreground mb-3 group-hover:text-primary transition-colors">
+        {doc.title}
+      </h3>
+      <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-grow">
+        {doc.description}
+      </p>
+      <div className="flex items-center text-xs font-medium text-primary uppercase tracking-wider mt-auto">
+        Acceder al documento <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+      </div>
+    </a>
+  );
+}

@@ -10,8 +10,8 @@ const navigationES = [
   { name: "Firma Scarpa", href: "/firma-scarpa" },
   { name: "Jurisprudencia", href: "/jurisprudencia" },
   { name: "Actualidad IA", href: "/actualidad-ia" },
-  { name: "Legislación", href: "/legislacion" },
-  { name: "Guías y Protocolos", href: "/guias-protocolos" },
+  { name: "Normativa", href: "/normativa/reglamento-ia" },
+  { name: "Guías", href: "/guias" },
   { name: "Quiénes somos", href: "/quienes-somos" },
   { name: "Contacto", href: "/contacto" },
 ];
@@ -32,8 +32,8 @@ const esEnRouteMap: Record<string, string> = {
   "/firma-scarpa": "/en/scarpa-firm",
   "/jurisprudencia": "/en/jurisprudence",
   "/actualidad-ia": "/en/ai-news",
-  "/legislacion": "/en/legislation",
-  "/guias-protocolos": "/en/guides-protocols",
+  "/normativa/reglamento-ia": "/en/legislation",
+  "/guias": "/en/guides-protocols",
   "/quienes-somos": "/en/about-us",
   "/contacto": "/en/contact",
 };
@@ -44,8 +44,8 @@ const enEsRouteMap: Record<string, string> = {
   "/en/scarpa-firm": "/firma-scarpa",
   "/en/jurisprudence": "/jurisprudencia",
   "/en/ai-news": "/actualidad-ia",
-  "/en/legislation": "/legislacion",
-  "/en/guides-protocols": "/guias-protocolos",
+  "/en/legislation": "/normativa/reglamento-ia",
+  "/en/guides-protocols": "/guias",
   "/en/about-us": "/quienes-somos",
   "/en/contact": "/contacto",
 };

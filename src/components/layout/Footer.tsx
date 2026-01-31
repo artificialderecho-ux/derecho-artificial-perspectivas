@@ -73,10 +73,10 @@ export function Footer() {
                   <Link href="/actualidad-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Actualidad IA
                   </Link>
-                  <Link href="/legislacion" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Legislación
+                  <Link href="/normativa/reglamento-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Normativa
                   </Link>
-                  <Link href="/guias-protocolos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link href="/guias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Guías y Protocolos
                   </Link>
                   <Link href="/quienes-somos" className="text-sm text-body hover:text-foreground transition-colors duration-300">

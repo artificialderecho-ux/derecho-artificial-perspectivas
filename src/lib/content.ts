@@ -197,6 +197,16 @@ export function renderMarkdownToHtml(markdown: string) {
       continue;
     }
 
+    const imgMatch = /^!\[([^\]]*)\]\(([^)]+)\)$/.exec(line);
+    if (imgMatch) {
+      flushList();
+      flushQuote();
+      const alt = escapeHtml(imgMatch[1]);
+      const src = escapeHtml(imgMatch[2]);
+      html += `<figure class="my-8"><img src="${src}" alt="${alt}" class="rounded-lg w-full h-auto shadow-md" loading="lazy" /><figcaption class="text-center text-sm text-caption mt-2">${alt}</figcaption></figure>`;
+      continue;
+    }
+
     const ulMatch = /^[-*]\s+(.*)$/.exec(line);
     if (ulMatch) {
       const content = formatInline(ulMatch[1].trim());

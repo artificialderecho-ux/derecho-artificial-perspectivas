@@ -12,6 +12,29 @@
   * {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Global Justification for editorial feel */
+  p {
+    @apply text-justify hyphens-auto;
+  }
+
+  /* Specific override for prose to ensure articles are justified */
+  .prose p {
+    @apply text-justify hyphens-auto;
+  }
+
+  .lead {
+    @apply text-xl text-body leading-relaxed;
+  }
+
   :root {
     /* Derecho Artificial - Rebranding: Minimalist Black & White */
     --background: 0 0% 100%; /* #FFFFFF */
@@ -100,289 +123,80 @@
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 0 0% 80%;
-
-    --text-body: 210 40% 98%;
-    --text-caption: 215 16% 65%;
-    --divider: 222 25% 22%;
-    --highlight: 222 25% 16%;
-
-    --shadow-sm: 0 0 0 rgba(0, 0, 0, 0);
-    --shadow-md: 0 0 0 rgba(0, 0, 0, 0);
-    --shadow-lg: 0 0 0 rgba(0, 0, 0, 0);
-    --shadow-xl: 0 0 0 rgba(0, 0, 0, 0);
-    --shadow-2xl: 0 0 0 rgba(0, 0, 0, 0);
+    
+    --text-body: 0 0% 80%;
+    --text-caption: 0 0% 60%;
+    --divider: 0 0% 20%;
+    --highlight: 0 0% 15%;
+    
+    --hero-bg: 0 0% 10%;
+    --hero-overlay: 0 0% 15%;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  /* Global Button Transitions and Hover Effects */
-  button, a.inline-flex {
-    transition: all 0.3s ease !important;
+@layer components {
+  .section-spacing {
+    @apply py-16 md:py-24;
   }
   
-  /* Primary Button Hover */
-  .bg-primary:hover {
-    background-color: #333333 !important; /* Lighter Graphite */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-1px);
+  .container-narrow {
+    @apply container mx-auto px-6 max-w-3xl;
   }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  
+  .container-wide {
+    @apply container mx-auto px-6 max-w-7xl;
   }
-
-  body {
-    @apply font-sans;
-    background: hsl(var(--background));
-    color: hsl(var(--foreground));
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
-    text-rendering: optimizeLegibility;
-    letter-spacing: -0.01em;
-    line-height: 1.6;
-    min-height: 100vh;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  
+  .container-editorial {
+    @apply container mx-auto px-6 max-w-4xl;
   }
-
-  /* Refined typography scale - Law Firm Editorial 2026 */
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-semibold;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-    line-height: 1.1;
-  }
-
-  h2 {
-    @apply text-2xl md:text-3xl lg:text-4xl;
-    line-height: 1.2;
-  }
-
-  h3 {
-    @apply text-xl md:text-2xl;
-    line-height: 1.25;
-  }
-
-  h4 {
-    @apply text-lg md:text-xl;
-    line-height: 1.3;
-  }
-
-  p {
-    @apply leading-relaxed;
-    line-height: 1.6;
-  }
-
-  /* Editorial prose styling - refined */
+  
   .prose-editorial {
-    @apply text-body;
-    font-size: 1.0625rem;
-    line-height: 1.85;
+    @apply prose prose-neutral dark:prose-invert max-w-none 
+    prose-headings:font-serif prose-headings:font-normal prose-h1:text-4xl prose-h2:text-3xl
+    prose-p:text-lg prose-p:leading-relaxed prose-p:text-body prose-p:text-justify
+    prose-a:text-primary prose-a:no-underline prose-a:border-b prose-a:border-primary/30 hover:prose-a:border-primary
+    prose-blockquote:border-l-2 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic
+    prose-img:rounded-sm;
   }
 
-  .prose-editorial p {
-    @apply mb-7;
+  .nav-link {
+    @apply text-sm font-medium transition-colors hover:text-primary relative py-2;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[1px] bg-primary scale-x-0 transition-transform duration-300 origin-right;
+  }
+  
+  .nav-link:hover::after {
+    @apply scale-x-100 origin-left;
   }
 
-  .prose-editorial p:last-child {
-    @apply mb-0;
-  }
-
-  .prose-editorial h2 {
-    @apply mt-16 mb-8 font-sans text-foreground;
-  }
-
-  .prose-editorial h3 {
-    @apply mt-12 mb-6 font-sans text-foreground;
-  }
-
-  .prose-editorial blockquote {
-    @apply border-l-2 border-primary/30 pl-8 italic text-muted-foreground my-10;
-  }
-
-  .prose-editorial ul {
-    @apply my-6 ml-6 space-y-3;
-  }
-
-  .prose-editorial li {
-    @apply relative pl-4;
-  }
-
-  .prose-editorial li::before {
-    content: "—";
-    @apply absolute left-0 text-caption;
+  .nav-link.active::after {
+    @apply scale-x-100;
   }
 }
 
-@layer utilities {
-  .text-body {
-    color: hsl(var(--text-body));
-  }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-  .text-caption {
-    color: hsl(var(--text-caption));
-  }
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  .border-divider {
-    border-color: hsl(var(--divider));
-  }
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
+}
 
-  .bg-highlight {
-    background-color: hsl(var(--highlight));
-  }
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  /* Institutional shadows */
-  .shadow-card {
-    box-shadow: var(--shadow-md);
-  }
-
-  .shadow-card-hover {
-    box-shadow: var(--shadow-lg);
-  }
-
-  .shadow-nav {
-    box-shadow: 0 1px 3px rgba(0, 31, 63, 0.06);
-  }
-
-  /* Card with depth - ECIJA style 2026 max elegance */
-  .card-elevated {
-    @apply bg-card rounded-[4px] border border-[#E2E8F0];
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .card-elevated:hover {
-    @apply border-primary/20;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
-  }
-
-  /* Interactive hover effects */
-  .hover-lift {
-    transition: all 0.3s ease;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-2px);
-  }
-
-  /* Generous institutional spacing */
-  .section-spacing {
-    @apply py-20 md:py-32;
-  }
-
-  .section-spacing-sm {
-    @apply py-14 md:py-20 lg:py-24;
-  }
-
-  /* Editorial containers with refined max-widths */
-  .container-editorial {
-    @apply max-w-3xl mx-auto px-8;
-  }
-
-  .container-wide {
-    @apply max-w-5xl mx-auto px-8;
-  }
-
-  .container-narrow {
-    @apply max-w-2xl mx-auto px-8;
-  }
-
-  /* Section heading styles */
-  .section-title {
-    @apply font-serif text-foreground mb-4;
-    letter-spacing: -0.02em;
-  }
-
-  .section-subtitle {
-    @apply text-body font-sans text-base md:text-lg leading-relaxed;
-  }
-
-  /* Institutional link style */
-  .link-editorial {
-    @apply text-primary hover:text-primary/80 transition-colors duration-200;
-    text-underline-offset: 4px;
-  }
-
-  /* Fade in on scroll animation */
-  .fade-in-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .fade-in-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Staggered animation delays */
-  .delay-100 { transition-delay: 0.1s; }
-  .delay-200 { transition-delay: 0.2s; }
-  .delay-300 { transition-delay: 0.3s; }
-  .delay-400 { transition-delay: 0.4s; }
-  .delay-500 { transition-delay: 0.5s; }
-
-  /* Hero background overlay - reduced opacity */
-  .hero-overlay {
-    position: relative;
-  }
-
-  .hero-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: hsl(var(--background));
-    z-index: 1;
-  }
-
-  .hero-overlay > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Section with subtle background */
-  .section-muted {
-    background: hsl(var(--muted));
-  }
-
-  /* CTA Button - ECIJA style */
-  .btn-cta-primary {
-    @apply inline-flex items-center px-10 py-5 font-sans font-semibold text-base tracking-wider uppercase;
-    @apply bg-primary text-primary-foreground rounded-md;
-    @apply transition-colors duration-200;
-  }
-
-  .btn-cta-primary:hover {
-    @apply bg-primary/90;
-  }
-
-  .btn-cta-secondary {
-    @apply inline-flex items-center px-8 py-4 font-sans font-medium text-sm tracking-wide uppercase;
-    @apply bg-transparent text-primary border border-primary/30 rounded-md;
-    @apply transition-colors duration-200;
-  }
-
-  .btn-cta-secondary:hover {
-    @apply bg-primary/10 border-primary/50;
-  }
-
-  /* Hero section - dark corporate ECIJA style */
-  .hero-dark {
-    background: hsl(var(--hero-bg));
-  }
-
-  .hero-dark-overlay {
-    background: hsl(var(--hero-overlay));
-  }
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
 }

@@ -45,8 +45,10 @@ export default function JurisprudenciaPage() {
           <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
             Jurisprudencia
           </h1>
-          <p className="text-lg text-body mt-6">
-            Resoluciones y criterios judiciales con impacto en IA, datos y garantías.
+          <p className="lead mt-6 text-justify max-w-3xl">
+            Repositorio crítico de resoluciones judiciales y administrativas que definen el Derecho de la IA. 
+            Analizamos sentencias que sientan precedente sobre transparencia algorítmica, responsabilidad civil 
+            y protección de derechos fundamentales en la era digital.
           </p>
         </header>
 

@@ -46,6 +46,17 @@ export default function BoscoSentenciaPage() {
             <p>
               Para comprender en toda su dimensión la doctrina sentada por el Alto Tribunal, resulta indispensable examinar con detenimiento los antecedentes fácticos y el marco normativo que dieron origen a este litigio fundamental para el Estado de Derecho en la era digital.
             </p>
+
+            <div className="my-8 p-6 bg-slate-50 border border-slate-200 rounded-lg not-prose">
+              <h4 className="font-serif text-lg text-slate-900 mb-2">Marco Regulatorio Europeo (2026)</h4>
+              <p className="text-sm text-slate-700 mb-3">
+                La transparencia exigida en el caso BOSCO se alinea con las nuevas obligaciones del Reglamento Europeo de IA. Consulte nuestra guía completa para conocer los requisitos de cumplimiento.
+              </p>
+              <Link href="/normativa/reglamento-ia" className="text-blue-600 font-medium hover:underline flex items-center gap-2">
+                Ver Guía del Reglamento de IA 2026
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
           </section>
 
           <section id="antecedentes">
