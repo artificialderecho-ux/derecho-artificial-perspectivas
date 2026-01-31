@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 
 interface NewsCardProps {
   title: string;
@@ -14,7 +15,7 @@ export function NewsCard({ title, date, source, url, summary, tags, image }: New
   const isInternal = url.startsWith("/");
 
   const TitleLink = isInternal ? (
-    <Link to={url} className="hover:text-primary transition-colors">
+    <Link href={url} className="hover:text-primary transition-colors">
       {title}
     </Link>
   ) : (
@@ -24,7 +25,7 @@ export function NewsCard({ title, date, source, url, summary, tags, image }: New
   );
 
   const SourceLink = isInternal ? (
-    <Link to={url} className="text-body hover:text-foreground transition-colors underline underline-offset-4">
+    <Link href={url} className="text-body hover:text-foreground transition-colors underline underline-offset-4">
       {source} →
     </Link>
   ) : (
@@ -41,8 +42,14 @@ export function NewsCard({ title, date, source, url, summary, tags, image }: New
   return (
     <article className="border border-divider mb-10 last:mb-0 bg-card shadow-sm rounded-lg overflow-hidden">
       {image && (
-        <div className="aspect-video w-full overflow-hidden border-b border-divider">
-          <img src={image} alt="" className="w-full h-full object-cover" />
+        <div className="aspect-video w-full overflow-hidden border-b border-divider relative">
+          <Image 
+            src={image} 
+            alt="" 
+            fill 
+            className="object-cover" 
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
       )}
 

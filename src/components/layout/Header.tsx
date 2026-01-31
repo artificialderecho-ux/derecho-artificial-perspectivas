@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
@@ -86,11 +87,14 @@ export function Header() {
       <div className="container-wide">
         <div className="flex items-center justify-between py-3 md:py-4 min-h-[120px]">
           <Link href={isEnglish ? "/en" : "/"} className="flex items-center group">
-            <img
+            <Image
               src="/logo-principal.png"
               alt="Derecho Artificial"
+              width={300}
+              height={100}
               className="h-[100px] w-auto object-contain"
               style={{ mixBlendMode: "multiply" }}
+              priority
             />
           </Link>
 
