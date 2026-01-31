@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/en/guides-protocols",
     languages: {
-      "es-ES": "/guias-protocolos",
+      "es-ES": "/recursos/guias",
       "en-US": "/en/guides-protocols",
     },
   },

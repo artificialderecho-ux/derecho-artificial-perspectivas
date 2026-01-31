@@ -3,6 +3,7 @@ import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Scale, FileText, Cpu, Newspaper, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import heroBackground from "@/assets/hero-abstract-bg.jpg";
 
 // Hook for fade-in on scroll - OPTIMIZADO
@@ -63,9 +64,18 @@ const Index = () => {
       />
 
       <div ref={containerRef}>
-        <header id="inicio" className="relative section-spacing overflow-hidden bg-background">
+        <header
+          id="inicio"
+          className="relative section-spacing overflow-hidden bg-background"
+        >
           <div className="absolute inset-0">
-            <img src={heroBackground} alt="" className="h-full w-full object-cover opacity-15" />
+            <Image
+              src={heroBackground}
+              alt=""
+              fill
+              priority
+              className="object-cover opacity-15"
+            />
             <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
           </div>
           <div className="container-wide relative z-10">

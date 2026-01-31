@@ -76,9 +76,9 @@ export function Footer() {
                   <Link href="/normativa/reglamento-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Normativa
                   </Link>
-                  <Link href="/guias-protocolos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    Guías y Protocolos
-                  </Link>
+                  <Link href="/recursos/guias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+            Guías y Protocolos
+          </Link>
                   <Link href="/quienes-somos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Quiénes somos
                   </Link>

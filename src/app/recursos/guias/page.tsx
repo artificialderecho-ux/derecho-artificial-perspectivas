@@ -3,12 +3,14 @@ import Link from "next/link";
 import libraryDocs from "../../../data/library-docs.json";
 
 export const metadata: Metadata = {
-  title: "Guías, Protocolos y Soft Law | Biblioteca AESIA y Comisión Europea",
-  description: "Hub central de documentación oficial: Guías de la AESIA, documentos de la Comisión Europea, Soft Law y protocolos de actuación.",
+  title:
+    "Guías, Protocolos y Soft Law | Biblioteca AESIA y Comisión Europea",
+  description:
+    "Hub central de documentación oficial: Guías de la AESIA, documentos de la Comisión Europea, Soft Law y protocolos de actuación.",
   alternates: {
-    canonical: "https://derechoartificial.com/guias-protocolos",
+    canonical: "https://derechoartificial.com/recursos/guias",
     languages: {
-      es: "https://derechoartificial.com/guias-protocolos",
+      es: "https://derechoartificial.com/recursos/guias",
       en: "https://derechoartificial.com/en/guides-protocols",
     },
   },
@@ -26,7 +28,6 @@ type DocCard = {
   tags?: string[];
 };
 
-// Static content for Soft Law / Guias
 const softLawDocs = [
   {
     id: "sl-1",
@@ -58,6 +59,7 @@ export default function GuidesPage() {
   const docs = libraryDocs as DocCard[];
   const aesiaDocs = docs.filter((d) => d.source === "AESIA");
   const ecDocs = docs.filter((d) => d.source === "Comisión Europea");
+  const mainAesiaDoc = aesiaDocs[0];
 
   return (
     <main className="section-spacing">
@@ -84,6 +86,44 @@ export default function GuidesPage() {
                 Agencia Española de Supervisión de la IA (AESIA)
               </h2>
             </div>
+            {mainAesiaDoc && (
+              <div className="mb-10 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+                <h3 className="font-serif text-2xl text-slate-900 mb-4">
+                  Summary: Guías Prácticas de la AESIA
+                </h3>
+                <p className="text-slate-700 mb-6 leading-relaxed text-justify hyphens-auto">
+                  La Agencia Española de Supervisión de la IA publica guías y
+                  protocolos para ayudar a organizaciones públicas y privadas a
+                  gestionar riesgos, documentar sistemas de IA y cumplir con las
+                  obligaciones del Reglamento Europeo de IA. Este repositorio
+                  reúne los documentos clave, con foco en notificación de
+                  incidentes, gobernanza y buenas prácticas de transparencia.
+                </p>
+                <a
+                  href={mainAesiaDoc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-sm hover:bg-primary/90 transition-all duration-300 shadow-sm hover:shadow-md"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  DESCARGAR DOCUMENTO ORIGINAL
+                </a>
+              </div>
+            )}
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {aesiaDocs.length > 0 ? (
                 aesiaDocs.map((doc) => (
@@ -167,19 +207,23 @@ export default function GuidesPage() {
 }
 
 function DocCardItem({ doc, color }: { doc: DocCard; color: string }) {
+  const isAesia = doc.source === "AESIA";
+
   return (
-    <a 
-      href={doc.url} 
-      target="_blank" 
+    <a
+      href={doc.url}
+      target="_blank"
       rel="noopener noreferrer"
       className="group flex flex-col h-full bg-card p-6 border border-border rounded-lg hover:border-primary transition-all duration-300 hover:shadow-md"
     >
       <div className="flex justify-between items-start mb-4">
-        <span className={`px-2 py-1 text-[10px] uppercase tracking-wider text-white font-medium rounded-sm ${color}`}>
+        <span
+          className={`px-2 py-1 text-[10px] uppercase tracking-wider text-white font-medium rounded-sm ${color}`}
+        >
           {doc.source}
         </span>
         <span className="text-xs text-muted-foreground font-mono">
-          {doc.year || doc.date?.split('-')[0]}
+          {doc.year || doc.date?.split("-")[0]}
         </span>
       </div>
       <h3 className="font-serif text-lg text-foreground mb-3 group-hover:text-primary transition-colors">
@@ -189,7 +233,10 @@ function DocCardItem({ doc, color }: { doc: DocCard; color: string }) {
         {doc.description}
       </p>
       <div className="flex items-center text-xs font-medium text-primary uppercase tracking-wider mt-auto">
-        Acceder al documento <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+        {isAesia ? "Descargar documento original" : "Acceder al documento"}{" "}
+        <span className="ml-2 group-hover:translate-x-1 transition-transform">
+          →
+        </span>
       </div>
     </a>
   );

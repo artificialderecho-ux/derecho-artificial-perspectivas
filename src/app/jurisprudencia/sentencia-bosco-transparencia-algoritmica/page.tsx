@@ -1,35 +1,71 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { StructuredData, createLegalArticleJsonLd } from '@/components/seo/StructuredData';
+import { Metadata } from "next";
+import Link from "next/link";
+import {
+  StructuredData,
+  createLegalDecisionJsonLd,
+} from "@/components/seo/StructuredData";
+import { LegalLayout } from "@/components/layout/LegalLayout";
 
 export const metadata: Metadata = {
-  title: 'Sentencia BOSCO: Transparencia Algorítmica y Código Fuente | DerechoArtificial',
-  description: 'Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO. Un hito en transparencia administrativa comentado por Ricardo Scarpa.',
+  title:
+    "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente | DerechoArtificial",
+  description:
+    "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO. Un hito en transparencia administrativa comentado por Ricardo Scarpa.",
 };
 
 export default function BoscoSentenciaPage() {
-  const jsonLd = createLegalArticleJsonLd({
-    url: 'https://derechoartificial.com/jurisprudencia/sentencia-bosco-transparencia-algoritmica',
-    headline: 'Sentencia BOSCO: Transparencia Algorítmica y Código Fuente',
-    description: 'Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO.',
-    datePublished: '2026-01-30',
-    authorName: 'Ricardo Scarpa',
+  const jsonLd = createLegalDecisionJsonLd({
+    url: "https://derechoartificial.com/jurisprudencia/sentencia-bosco-transparencia-algoritmica",
+    name: "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",
+    description:
+      "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO.",
+    datePublished: "2026-01-30",
+    courtName: "Tribunal Supremo (Sala de lo Contencioso-Administrativo)",
   });
 
   return (
     <>
       <StructuredData data={jsonLd} />
-      <article className="max-w-4xl mx-auto px-4 py-12">
-        <header className="mb-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 leading-tight">
-            Sentencia BOSCO: Transparencia Algorítmica y Código Fuente
-          </h1>
-          <div className="flex items-center justify-center gap-4 text-slate-600 mb-8">
-            <span className="font-medium">Ricardo Scarpa</span>
-            <span>•</span>
-            <time dateTime="2026-01-30">30 de Enero, 2026</time>
-          </div>
-        </header>
+      <LegalLayout
+        title="Sentencia BOSCO: Transparencia Algorítmica y Código Fuente"
+        category="Jurisprudencia"
+        date="2026-01-30"
+      >
+        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+          <h2 className="font-serif text-2xl text-slate-900 mb-4">
+            Resumen de la Sentencia
+          </h2>
+          <p className="text-slate-700 mb-6 leading-relaxed text-justify hyphens-auto">
+            La STS 1119/2025 reconoce el derecho de acceso al código fuente del
+            programa BOSCO cuando un algoritmo público determina el acceso a
+            prestaciones sociales como el bono social eléctrico. La sentencia
+            consolida la transparencia algorítmica como exigencia estructural
+            del Derecho Administrativo, reforzando el control ciudadano sobre
+            las decisiones automatizadas de la Administración.
+          </p>
+          <a
+            href="https://www.poderjudicial.es/search"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-sm hover:bg-primary/90 transition-all duration-300 shadow-sm hover:shadow-md"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            DESCARGAR DOCUMENTO ORIGINAL
+          </a>
+        </div>
 
         <div className="prose prose-slate lg:prose-xl mx-auto">
           <section id="introduccion">
@@ -215,7 +251,10 @@ export default function BoscoSentenciaPage() {
             </ul>
           </section>
 
-          <section id="reflexion-final" className="bg-slate-50 p-8 rounded-lg mt-12 border-l-4 border-slate-800">
+          <section
+            id="reflexion-final"
+            className="bg-slate-50 p-8 rounded-lg mt-12 border-l-4 border-slate-800"
+          >
             <h2>6. Reflexión Final</h2>
             <p>
               En última instancia, la sentencia BOSCO no solo resuelve una controversia tecnológica, sino que reafirma un principio intemporal del Estado de Derecho: el poder, con independencia de la forma que adopte, debe estar siempre sujeto al control y escrutinio de los ciudadanos a los que sirve.
@@ -230,7 +269,7 @@ export default function BoscoSentenciaPage() {
             </p>
           </section>
         </div>
-      </article>
+      </LegalLayout>
     </>
   );
 }

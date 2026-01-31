@@ -58,27 +58,93 @@ export function createArticleJsonLd(params: {
   headline: string;
   description: string;
   datePublished: string;
+  dateModified?: string;
   authorName?: string;
+  image?: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    mainEntityOfPage: params.url,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": params.url
+    },
     headline: params.headline,
+    description: params.description,
+    image: params.image ? [params.image] : [`${siteUrl}/logo-principal.png`],
+    datePublished: params.datePublished,
+    dateModified: params.dateModified ?? params.datePublished,
+    author: {
+      "@type": "Person",
+      name: params.authorName ?? "Ricardo Scarpa",
+      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa"
+    },
+    publisher: {
+      "@id": `${siteUrl}/#organization`
+    },
+  };
+}
+
+export function createLegalDecisionJsonLd(params: {
+  url: string;
+  name: string;
+  description: string;
+  datePublished: string;
+  courtName?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LegalDecision",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": params.url
+    },
+    name: params.name,
+    headline: params.name,
     description: params.description,
     datePublished: params.datePublished,
     author: {
       "@type": "Person",
-      name: params.authorName ?? "Ricardo Scarpa",
+      name: "Ricardo Scarpa",
+      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa"
     },
     publisher: {
-      "@type": "Organization",
-      name: "Derecho Artificial",
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/logo-principal.png`,
-      },
+      "@id": `${siteUrl}/#organization`
     },
+    ...(params.courtName && { creator: { "@type": "Organization", name: params.courtName } })
+  };
+}
+
+export function createLegislationJsonLd(params: {
+  url: string;
+  name: string;
+  description: string;
+  datePublished: string;
+  jurisdiction?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Legislation",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": params.url
+    },
+    name: params.name,
+    headline: params.name,
+    description: params.description,
+    datePublished: params.datePublished,
+    author: {
+      "@type": "Person",
+      name: "Ricardo Scarpa",
+      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa"
+    },
+    publisher: {
+      "@id": `${siteUrl}/#organization`
+    },
+    ...(params.jurisdiction && { legislationJurisdiction: params.jurisdiction })
   };
 }
 
@@ -120,6 +186,8 @@ export function createLegalArticleJsonLd(params: {
     author: {
       "@type": "Person",
       name: params.authorName ?? "Ricardo Scarpa",
+      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa"
     },
     publisher: {
       "@type": "Organization",
