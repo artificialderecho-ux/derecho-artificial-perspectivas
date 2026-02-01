@@ -47,8 +47,8 @@ const SECTION_CONFIGS: ResourceSectionConfig[] = [
   },
   {
     id: "actualidad-ia",
-    analysisSubdir: "Actualidad-IA",
-    fuentesSubdir: "Actualidad-IA",
+    analysisSubdir: "actualidad-ia",
+    fuentesSubdir: "actualidad-ia",
     categoryLabel: "Actualidad IA",
     basePath: "/actualidad-ia",
   },

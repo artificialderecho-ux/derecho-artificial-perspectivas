@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
+import type { ResourceEntry } from "@/lib/resources";
+import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 export const metadata: Metadata = {
   title: "Actualidad IA",
@@ -38,6 +40,15 @@ export const metadata: Metadata = {
   },
 };
 
+type NovedadItem = {
+  id: string;
+  href: string;
+  title: string;
+  description: string;
+  meta: string;
+  dateMs: number;
+};
+
 export default async function ActualidadIAPage() {
   const slugs = await listContentSlugs("actualidad-ia");
   const entries = await Promise.all(slugs.map((slug) => getContentEntry("actualidad-ia", slug)));
@@ -55,6 +66,68 @@ export default async function ActualidadIAPage() {
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const resourceSlugs = await listSectionResourceSlugs("actualidad-ia");
+  const resourceEntries = await Promise.all(
+    resourceSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug)),
+  );
+  const resolvedResourceEntries = resourceEntries.filter(
+    (entry): entry is ResourceEntry => Boolean(entry),
+  );
+
+  const contentItems: NovedadItem[] = sortedEntries.map((entry) => {
+    const time = new Date(entry.datePublished).getTime();
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const parts: string[] = [];
+    parts.push(formatDate(entry.datePublished));
+    if (entry.author) {
+      parts.push(entry.author);
+    }
+    return {
+      id: `content-${entry.slug}`,
+      href: entry.urlPath,
+      title: entry.title,
+      description: entry.description,
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const resourceItems: NovedadItem[] = resolvedResourceEntries.map((entry) => {
+    const time = entry.dateMs ?? 0;
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const date =
+      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+    const dateLabel =
+      date && !Number.isNaN(date.getTime())
+        ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
+        : null;
+
+    const plainSummary = entry.summaryHtml
+      ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
+      : "";
+
+    const parts: string[] = [];
+    if (dateLabel) {
+      parts.push(dateLabel);
+    }
+    if (entry.sourceUrl) {
+      parts.push("Incluye descarga del documento original");
+    }
+
+    return {
+      id: `resource-${entry.slug}`,
+      href: `/actualidad-ia/${entry.slug}`,
+      title: entry.title,
+      description: plainSummary,
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const items: NovedadItem[] = [...contentItems, ...resourceItems].sort(
+    (a, b) => b.dateMs - a.dateMs,
+  );
+
   return (
     <main className="section-spacing">
       <div className="container-editorial">
@@ -71,19 +144,17 @@ export default async function ActualidadIAPage() {
         </header>
 
         <section className="grid gap-6 md:grid-cols-2">
-          {sortedEntries.length ? (
-            sortedEntries.map((entry) => (
+          {items.length ? (
+            items.map((item) => (
               <Link
-                key={entry.slug}
-                href={entry.urlPath}
+                key={item.id}
+                href={item.href}
                 className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
               >
-                <p className="text-xs uppercase tracking-widest text-caption mb-3">Briefing editorial</p>
-                <h2 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h2>
-                <p className="text-body mb-6">{entry.description}</p>
-                <div className="text-sm text-caption">
-                  {formatDate(entry.datePublished)} · {entry.author}
-                </div>
+                <p className="text-xs uppercase tracking-widest text-caption mb-3">Novedad</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                {item.description && <p className="text-body mb-6">{item.description}</p>}
+                {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
               </Link>
             ))
           ) : (
