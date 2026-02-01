@@ -41,7 +41,7 @@ const Legislacion = () => {
   return (
     <Layout>
       <SEOHead 
-        title="Legislación IA y Normativa Digital | Derecho Artificial"
+        title="Normativa IA y Derecho Digital | Derecho Artificial"
         description="Repositorio de normativa primaria europea y nacional: AI Act, RGPD, Directivas de responsabilidad y legislación sobre tecnología."
         canonical="https://derechoartificial.com/legislacion"
         hreflangs={[
@@ -56,7 +56,7 @@ const Legislacion = () => {
             Marco Normativo
           </p>
           <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
-            Legislación y Normativa Primaria
+            Normativa primaria sobre IA y entorno digital
           </h1>
           <p className="text-xl text-body leading-relaxed max-w-2xl">
             Acceso directo a los textos legales fundamentales que regulan la inteligencia artificial y el entorno digital en Europa.

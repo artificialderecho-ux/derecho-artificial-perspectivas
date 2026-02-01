@@ -41,7 +41,7 @@ export default function HomePage() {
     { name: "Firma Scarpa", href: "/firma-scarpa" },
     { name: "Jurisprudencia", href: "/jurisprudencia" },
     { name: "Actualidad IA", href: "/actualidad-ia" },
-    { name: "Legislación", href: "/legislacion" },
+    { name: "Normativa", href: "/legislacion" },
     { name: "Guías y Protocolos", href: "/recursos/guias" },
     { name: "Quiénes somos", href: "/quienes-somos" },
     { name: "Contacto", href: "/contacto" },
