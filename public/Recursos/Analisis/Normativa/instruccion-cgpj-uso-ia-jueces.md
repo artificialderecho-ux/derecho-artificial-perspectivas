@@ -1,0 +1,11 @@
+Análisis de la Instrucción 2/2026 del CGPJ: el primer marco regulatorio detallado sobre el uso de la Inteligencia Artificial por parte de jueces y magistrados en España. Este documento establece las líneas rojas para garantizar que la IA sea una herramienta de apoyo y nunca un sustituto de la función jurisdiccional, protegiendo los derechos fundamentales y el principio de transparencia.
+
+La Instrucción 2/2026, aprobada por el Pleno del Consejo General del Poder Judicial el 28 de enero de 2026, marca un hito en la digitalización de la Justicia. Alineada con el Reglamento (UE) 2024/1689 (AI Act), esta norma define los sistemas de IA judicial como de "alto riesgo" y establece protocolos estrictos de supervisión humana.
+
+### Aspectos fundamentales de la Instrucción:
+* **Principio de Exclusividad Jurisdiccional:** La IA solo puede asistir en la investigación e interpretación de hechos, pero la decisión final recae exclusivamente en el juez.
+* **Transparencia Algorítmica:** Obligación de informar sobre qué sistemas se utilizan y bajo qué parámetros han sido entrenados.
+* **Protección de Datos:** Medidas específicas para el tratamiento de datos personales en el ámbito jurisdiccional bajo control del CGPJ.
+* **Supervisión y Control:** Se otorga al CGPJ la función de vigilancia activa sobre cualquier sistema de IA implementado en los juzgados.
+
+Este acuerdo es esencial para abogados y operadores jurídicos que necesiten impugnar o auditar resoluciones donde se sospeche la intervención de sistemas automatizados de soporte a la decisión.

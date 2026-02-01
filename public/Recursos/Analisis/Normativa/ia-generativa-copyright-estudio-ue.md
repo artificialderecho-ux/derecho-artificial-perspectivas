@@ -1,0 +1,11 @@
+Estudio exhaustivo del Parlamento Europeo (2025) sobre los desafíos que la IA generativa plantea al Derecho de Autor en la Unión Europea. El informe analiza la desalineación entre las prácticas de entrenamiento de IA y las excepciones actuales de minería de textos y datos (TDM), proponiendo reformas estructurales para proteger la creatividad y la remuneración de los autores.
+
+Este estudio, encargado por la Comisión JURI del Parlamento Europeo, examina la incertidumbre jurídica del contenido generado por máquinas y los riesgos para el patrimonio cultural europeo. Es un documento clave para entender la dirección de las futuras reformas legislativas que complementarán el AI Act.
+
+### Puntos clave del estudio:
+* **Entrenamiento y Excepciones:** Análisis del desajuste entre el uso masivo de datos para IA y las excepciones de los artículos 3 y 4 de la Directiva de Derechos de Autor.
+* **Estatus de la Creación por IA:** Debate sobre la autoría humana y la protección (o falta de ella) de las obras generadas íntegramente por algoritmos.
+* **Transparencia y Opt-out:** Propuestas para armonizar los mecanismos de exclusión de datos y las obligaciones de transparencia en los "inputs" de entrenamiento.
+* **Modelos de Licencia:** Exploración de licencias equitativas para equilibrar la innovación tecnológica con los derechos morales y patrimoniales.
+
+Un recurso indispensable para despachos especializados en IP, empresas tecnológicas y entidades de gestión de derechos que busquen anticiparse a la próxima ola regulatoria europea.
