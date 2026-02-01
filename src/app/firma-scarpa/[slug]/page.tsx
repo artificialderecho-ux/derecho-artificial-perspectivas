@@ -107,11 +107,14 @@ export default async function FirmaScarpaSlugPage({
               <Link href="/firma-scarpa">Volver a Firma Scarpa</Link>
             </Button>
             {pdfFile && (
-              <Button asChild variant="default" size="sm">
-                <a href={`/assets/docs/${pdfFile}`} target="_blank" rel="noopener noreferrer">
-                  Consultar Fuente Original
-                </a>
-              </Button>
+              <a
+                href={`/assets/docs/${pdfFile}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition"
+              >
+                Descargar documento original
+              </a>
             )}
           </div>
 
@@ -122,28 +125,31 @@ export default async function FirmaScarpaSlugPage({
           {pdfFile && (
             <div className="mt-8 pt-6 border-t border-border">
               <h3 className="text-xl font-semibold mb-4">Documentación Original</h3>
-              <Button asChild variant="outline" className="gap-2">
-                <a href={`/assets/docs/${pdfFile}`} target="_blank" rel="noopener noreferrer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-4 h-4"
-                  >
-                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <path d="M12 18v-6" />
-                    <path d="m9 15 3 3 3-3" />
-                  </svg>
-                  Descargar Documento PDF
-                </a>
-              </Button>
+            <a
+              href={`/assets/docs/${pdfFile}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-4 h-4"
+              >
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                <polyline points="14 2 14 8 20 8" />
+                <path d="M12 18v-6" />
+                <path d="m9 15 3 3 3-3" />
+              </svg>
+              Descargar documento original
+            </a>
             </div>
           )}
         </LegalLayout>
@@ -181,11 +187,14 @@ export default async function FirmaScarpaSlugPage({
             <Link href="/firma-scarpa">Volver a Firma Scarpa</Link>
           </Button>
           {entry.sourceUrl && (
-            <Button asChild variant="default" size="sm">
-              <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">
-                Consultar Fuente Original
-              </a>
-            </Button>
+            <a
+              href={entry.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition"
+            >
+              Descargar documento original
+            </a>
           )}
         </div>
 
@@ -202,28 +211,31 @@ export default async function FirmaScarpaSlugPage({
             <h3 className="text-xl font-semibold mb-4">
               Documentación Original
             </h3>
-            <Button asChild variant="outline" className="gap-2">
-              <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-4 h-4"
-                >
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <path d="M12 18v-6" />
-                  <path d="m9 15 3 3 3-3" />
-                </svg>
-                Descargar Documento PDF
-              </a>
-            </Button>
+            <a
+              href={entry.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-4 h-4"
+              >
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                <polyline points="14 2 14 8 20 8" />
+                <path d="M12 18v-6" />
+                <path d="m9 15 3 3 3-3" />
+              </svg>
+              Descargar documento original
+            </a>
           </div>
         )}
       </LegalLayout>

@@ -100,9 +100,7 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
             </a>
           ) : null}
         </div>
-        {entry.bodyHtml ? (
-          <div className="prose prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} />
-        ) : null}
+        {entry.bodyHtml ? <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} /> : null}
       </LegalLayout>
     </>
   );

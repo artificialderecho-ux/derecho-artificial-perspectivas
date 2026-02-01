@@ -49,14 +49,46 @@ async function readEntryFile(section: ContentSection, slug: string) {
   }
 }
 
+async function getContentFileDateMs(dir: string, fileName: string) {
+  const filePath = path.join(dir, fileName);
+
+  try {
+    const raw = await fs.readFile(filePath, "utf8");
+    const parsed = JSON.parse(raw) as { datePublished?: string } | null;
+    if (parsed && typeof parsed.datePublished === "string") {
+      const date = new Date(parsed.datePublished);
+      if (!Number.isNaN(date.getTime())) {
+        return date.getTime();
+      }
+    }
+  } catch {
+  }
+
+  try {
+    const stats = await fs.stat(filePath);
+    return stats.birthtimeMs || stats.ctimeMs || stats.mtimeMs;
+  } catch {
+    return Date.now();
+  }
+}
+
 export async function listContentSlugs(section: ContentSection): Promise<string[]> {
   try {
     const dir = await resolveContentDir(section);
     const entries = await fs.readdir(dir, { withFileTypes: true });
-    return entries
-      .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
-      .map((entry) => entry.name.replace(/\.json$/, ""))
-      .sort((a, b) => a.localeCompare(b, "es"));
+    const files = entries.filter((entry) => entry.isFile() && entry.name.endsWith(".json"));
+
+    const withDates = await Promise.all(
+      files.map(async (entry) => {
+        const slug = entry.name.replace(/\.json$/, "");
+        const dateMs = await getContentFileDateMs(dir, entry.name);
+        return { slug, dateMs };
+      }),
+    );
+
+    withDates.sort((a, b) => b.dateMs - a.dateMs);
+
+    return withDates.map((item) => item.slug);
   } catch {
     return [];
   }

@@ -150,20 +150,71 @@ async function listAnalysisFiles(): Promise<AnalysisFile[]> {
   }
 }
 
+async function getFileDateMs(filePath: string) {
+  const markdown = await readTextFile(filePath);
+  let frontmatterDate: number | null = null;
+
+  if (markdown.startsWith("---")) {
+    const endIndex = markdown.indexOf("\n---", 3);
+    if (endIndex !== -1) {
+      const frontmatterLines = markdown.slice(3, endIndex).split("\n");
+      for (const line of frontmatterLines) {
+        const match = line.match(/^date\s*:\s*(.+)$/i);
+        if (match) {
+          const date = new Date(match[1].trim());
+          if (!Number.isNaN(date.getTime())) {
+            frontmatterDate = date.getTime();
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  if (frontmatterDate != null) {
+    return frontmatterDate;
+  }
+
+  try {
+    const stats = await fs.stat(filePath);
+    return stats.birthtimeMs || stats.ctimeMs || stats.mtimeMs;
+  } catch {
+    return Date.now();
+  }
+}
+
 export async function listSectionResourceSlugs(section: ResourceSection): Promise<string[]> {
   const config = getSectionConfig(section);
   const sectionDir = path.join(analisisDir, config.analysisSubdir);
   try {
     const entries = await fs.readdir(sectionDir, { withFileTypes: true });
-    return entries
-      .filter((entry) => {
-        if (!entry.isFile()) return false;
-        const lower = entry.name.toLowerCase();
-        return lower.endsWith(".md") || lower.endsWith(".markdown") || lower.endsWith(".txt");
-      })
-      .map((entry) => slugifyBaseName(entry.name.replace(/\.[^/.]+$/, "")))
-      .filter((slug, index, all) => slug && all.indexOf(slug) === index)
-      .sort((a, b) => a.localeCompare(b, "es"));
+    const fileEntries = await Promise.all(
+      entries
+        .filter((entry) => {
+          if (!entry.isFile()) return false;
+          const lower = entry.name.toLowerCase();
+          return lower.endsWith(".md") || lower.endsWith(".markdown") || lower.endsWith(".txt");
+        })
+        .map(async (entry) => {
+          const filePath = path.join(sectionDir, entry.name);
+          const dateMs = await getFileDateMs(filePath);
+          const slug = slugifyBaseName(entry.name.replace(/\.[^/.]+$/, ""));
+          return { slug, dateMs };
+        }),
+    );
+
+    fileEntries.sort((a, b) => b.dateMs - a.dateMs);
+
+    const seen = new Set<string>();
+    const slugs: string[] = [];
+
+    for (const item of fileEntries) {
+      if (!item.slug || seen.has(item.slug)) continue;
+      seen.add(item.slug);
+      slugs.push(item.slug);
+    }
+
+    return slugs;
   } catch {
     return [];
   }

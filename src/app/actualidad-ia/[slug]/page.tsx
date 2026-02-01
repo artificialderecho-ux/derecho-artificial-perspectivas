@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
 import { createNewsArticleJsonLd } from "@/components/seo/StructuredData";
+import { LegalLayout } from "@/components/layout/LegalLayout";
 import { Button } from "@/components/ui/button";
 
 export async function generateStaticParams() {
@@ -42,11 +43,6 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
   const entry = await getContentEntry("actualidad-ia", slug);
   if (!entry) notFound();
 
-  const date = new Date(entry.datePublished);
-  const formattedDate = Number.isNaN(date.getTime())
-    ? entry.datePublished
-    : date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
-
   const jsonLd = createNewsArticleJsonLd({
     url: entry.url,
     headline: entry.title,
@@ -60,27 +56,20 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
       <Script id={`ld-article-actualidad-ia-${slug}`} type="application/ld+json" strategy="beforeInteractive">
         {JSON.stringify(jsonLd)}
       </Script>
-      <main className="section-spacing">
-        <div className="container-editorial">
-          <div className="mb-10">
-            <Button asChild variant="outline" size="sm">
-              <Link href="/actualidad-ia">Volver a Actualidad IA</Link>
-            </Button>
-          </div>
-
-          <header className="mb-12">
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">{entry.title}</h1>
-            <p className="text-sm text-caption mt-4">
-              {formattedDate} · {entry.author}
-            </p>
-            <p className="text-lg text-body mt-6 max-w-3xl">{entry.description}</p>
-          </header>
-
-          <div className="max-w-3xl">
-            <div className="prose prose-neutral max-w-none" dangerouslySetInnerHTML={{ __html: entry.html }} />
-          </div>
+      <LegalLayout
+        title={entry.title}
+        category="Actualidad IA"
+        date={entry.datePublished}
+        author={{ name: entry.author }}
+      >
+        <div className="mb-10">
+          <Button asChild variant="outline" size="sm">
+            <Link href="/actualidad-ia">Volver a Actualidad IA</Link>
+          </Button>
         </div>
-      </main>
+        <p className="lead text-muted-foreground mb-8">{entry.description}</p>
+        <div dangerouslySetInnerHTML={{ __html: entry.html }} />
+      </LegalLayout>
     </>
   );
 }

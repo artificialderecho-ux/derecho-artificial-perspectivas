@@ -70,11 +70,8 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
             </a>
           ) : null}
         </div>
-        {entry.bodyHtml ? (
-          <div className="prose prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} />
-        ) : null}
+        {entry.bodyHtml ? <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} /> : null}
       </LegalLayout>
     </>
   );
 }
-

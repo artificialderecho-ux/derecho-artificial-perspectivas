@@ -11,7 +11,7 @@ const navigationES = [
   { name: "Jurisprudencia", href: "/jurisprudencia" },
   { name: "Actualidad IA", href: "/actualidad-ia" },
   { name: "Normativa", href: "/normativa/reglamento-ia" },
-  { name: "Guías", href: "/recursos/guias" },
+  { name: "Guías y Protocolos", href: "/recursos/guias" },
   { name: "Quiénes somos", href: "/quienes-somos" },
   { name: "Contacto", href: "/contacto" },
 ];
