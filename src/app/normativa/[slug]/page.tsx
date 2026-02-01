@@ -1,87 +1,57 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
-import {
-  StructuredData,
-  createArticleJsonLd,
-  createLegislationJsonLd,
-  createLegalDecisionJsonLd,
-  createNewsArticleJsonLd,
-} from "@/components/seo/StructuredData";
-import { getResourceEntry, listResourceSlugs } from "@/lib/resources";
+import { StructuredData, createLegislationJsonLd } from "@/components/seo/StructuredData";
+import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 type Params = {
   slug: string;
 };
 
 export async function generateStaticParams() {
-  const slugs = await listResourceSlugs();
+  const slugs = await listSectionResourceSlugs("normativa");
   return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
-  const entry = await getResourceEntry(slug);
+  const entry = await getSectionResourceEntry("normativa", slug);
   if (!entry) return {};
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
   return {
     title: entry.title,
     description,
     alternates: {
-      canonical: `/recursos/${entry.slug}`,
+      canonical: `/normativa/${entry.slug}`,
     },
     openGraph: {
       type: "article",
       title: entry.title,
       description,
-      url: `/recursos/${entry.slug}`,
+      url: `/normativa/${entry.slug}`,
     },
   };
 }
 
-export default async function RecursoPage({ params }: { params: Promise<Params> }) {
+export default async function NormativaSlugPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
-  const entry = await getResourceEntry(slug);
+  const entry = await getSectionResourceEntry("normativa", slug);
   if (!entry) notFound();
 
-  const url = `https://derechoartificial.com/recursos/${entry.slug}`;
+  const url = `https://derechoartificial.com/normativa/${entry.slug}`;
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
 
-  const today = new Date().toISOString().slice(0, 10);
-
-  const jsonLd =
-    entry.kind === "Legislation"
-      ? createLegislationJsonLd({
-          url,
-          name: entry.title,
-          description,
-          datePublished: today,
-        })
-      : entry.kind === "LegalDecision"
-        ? createLegalDecisionJsonLd({
-            url,
-            name: entry.title,
-            description,
-            datePublished: today,
-          })
-        : entry.kind === "NewsArticle"
-          ? createNewsArticleJsonLd({
-              url,
-              headline: entry.title,
-              description,
-              datePublished: today,
-            })
-          : createArticleJsonLd({
-              url,
-              headline: entry.title,
-              description,
-              datePublished: today,
-            });
+  const jsonLd = createLegislationJsonLd({
+    url,
+    name: entry.title,
+    description,
+    datePublished: new Date().toISOString().slice(0, 10),
+  });
 
   return (
     <>
       <StructuredData data={jsonLd} />
-      <LegalLayout title={entry.title} category="Recursos">
+      <LegalLayout title={entry.title} category="Normativa">
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
           {entry.summaryHtml ? (
             <div
@@ -107,3 +77,4 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
     </>
   );
 }
+

@@ -86,6 +86,39 @@ export function createArticleJsonLd(params: {
   };
 }
 
+export function createNewsArticleJsonLd(params: {
+  url: string;
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName?: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": params.url,
+    },
+    headline: params.headline,
+    description: params.description,
+    image: params.image ? [params.image] : [`${siteUrl}/logo-principal.png`],
+    datePublished: params.datePublished,
+    dateModified: params.dateModified ?? params.datePublished,
+    author: {
+      "@type": "Person",
+      name: params.authorName ?? "Ricardo Scarpa",
+      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+    },
+    publisher: {
+      "@id": `${siteUrl}/#organization`,
+    },
+  };
+}
+
 export function createLegalDecisionJsonLd(params: {
   url: string;
   name: string;

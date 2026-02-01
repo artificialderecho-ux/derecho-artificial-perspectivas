@@ -6,7 +6,63 @@ const recursosBaseDir = path.join(process.cwd(), "public", "Recursos");
 const analisisDir = path.join(recursosBaseDir, "Analisis");
 const fuentesDir = path.join(recursosBaseDir, "Fuentes");
 
-export type ResourceKind = "Article" | "Legislation";
+export type ResourceSection = "normativa" | "jurisprudencia" | "guias" | "firma-scarpa" | "actualidad-ia";
+
+type ResourceSectionConfig = {
+  id: ResourceSection;
+  analysisSubdir: string;
+  fuentesSubdir: string;
+  categoryLabel: string;
+  basePath: string;
+};
+
+const SECTION_CONFIGS: ResourceSectionConfig[] = [
+  {
+    id: "normativa",
+    analysisSubdir: "Normativa",
+    fuentesSubdir: "Normativa",
+    categoryLabel: "Normativa",
+    basePath: "/normativa",
+  },
+  {
+    id: "jurisprudencia",
+    analysisSubdir: "Jurisprudencia",
+    fuentesSubdir: "Jurisprudencia",
+    categoryLabel: "Jurisprudencia",
+    basePath: "/jurisprudencia",
+  },
+  {
+    id: "guias",
+    analysisSubdir: "Guias-y-Protocolos",
+    fuentesSubdir: "Guias-y-Protocolos",
+    categoryLabel: "Guías y Protocolos",
+    basePath: "/recursos/guias",
+  },
+  {
+    id: "firma-scarpa",
+    analysisSubdir: "Firma-Scarpa",
+    fuentesSubdir: "Firma-Scarpa",
+    categoryLabel: "Firma Scarpa",
+    basePath: "/firma-scarpa",
+  },
+  {
+    id: "actualidad-ia",
+    analysisSubdir: "Actualidad-IA",
+    fuentesSubdir: "Actualidad-IA",
+    categoryLabel: "Actualidad IA",
+    basePath: "/actualidad-ia",
+  },
+];
+
+function getSectionConfig(section: ResourceSection): ResourceSectionConfig {
+  const config = SECTION_CONFIGS.find((c) => c.id === section);
+  if (!config) {
+    throw new Error(`Unknown resource section: ${section}`);
+  }
+  return config;
+}
+
+export type ResourceKind = "Article" | "Legislation" | "LegalDecision" | "NewsArticle";
 
 export type ResourceEntry = {
   slug: string;
@@ -94,6 +150,25 @@ async function listAnalysisFiles(): Promise<AnalysisFile[]> {
   }
 }
 
+export async function listSectionResourceSlugs(section: ResourceSection): Promise<string[]> {
+  const config = getSectionConfig(section);
+  const sectionDir = path.join(analisisDir, config.analysisSubdir);
+  try {
+    const entries = await fs.readdir(sectionDir, { withFileTypes: true });
+    return entries
+      .filter((entry) => {
+        if (!entry.isFile()) return false;
+        const lower = entry.name.toLowerCase();
+        return lower.endsWith(".md") || lower.endsWith(".markdown") || lower.endsWith(".txt");
+      })
+      .map((entry) => slugifyBaseName(entry.name.replace(/\.[^/.]+$/, "")))
+      .filter((slug, index, all) => slug && all.indexOf(slug) === index)
+      .sort((a, b) => a.localeCompare(b, "es"));
+  } catch {
+    return [];
+  }
+}
+
 export async function listResourceSlugs(): Promise<string[]> {
   const files = await listAnalysisFiles();
   return files
@@ -121,7 +196,7 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
         : path.join(analisisDir, entry.relativeDir, entry.fileName);
     const markdown = await readTextFile(filePath);
     const title = inferTitleFromFileName(entry.fileName);
-    const sourceFileName = await findMatchingSourceFileName(baseName);
+    const sourceFileName = await findMatchingSourceFileName(baseName, entry.relativeDir || null);
     return {
       slug,
       title,
@@ -132,36 +207,35 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
   return null;
 }
 
-async function findMatchingSourceFileName(baseName: string) {
-  try {
-    const entries = await fs.readdir(fuentesDir, { withFileTypes: true });
-    const normalizedTarget = slugifyBaseName(baseName);
-    for (const entry of entries) {
-      if (entry.isFile()) {
+async function findMatchingSourceFileName(baseName: string, relativeDir: string | null) {
+  const normalizedTarget = slugifyBaseName(baseName);
+  const searchDirs: { base: string; prefix?: string }[] = [];
+
+  if (relativeDir) {
+    const sectionSubdir = path.join(fuentesDir, relativeDir);
+    searchDirs.push({ base: sectionSubdir, prefix: relativeDir });
+  }
+
+  searchDirs.push({ base: fuentesDir });
+
+  for (const dir of searchDirs) {
+    try {
+      const entries = await fs.readdir(dir.base, { withFileTypes: true });
+      for (const entry of entries) {
+        if (!entry.isFile()) continue;
         const sourceBaseName = entry.name.replace(/\.[^/.]+$/, "");
         const normalizedSource = slugifyBaseName(sourceBaseName);
         if (normalizedSource === normalizedTarget) {
+          if (dir.prefix) {
+            return `${dir.prefix}/${entry.name}`;
+          }
           return entry.name;
         }
-      } else if (entry.isDirectory()) {
-        const subDirPath = path.join(fuentesDir, entry.name);
-        try {
-          const subEntries = await fs.readdir(subDirPath, { withFileTypes: true });
-          for (const subEntry of subEntries) {
-            if (!subEntry.isFile()) continue;
-            const sourceBaseName = subEntry.name.replace(/\.[^/.]+$/, "");
-            const normalizedSource = slugifyBaseName(sourceBaseName);
-            if (normalizedSource === normalizedTarget) {
-              return `${entry.name}/${subEntry.name}`;
-            }
-          }
-        } catch {
-        }
       }
+    } catch {
     }
-  } catch {
-    return null;
   }
+
   return null;
 }
 
@@ -187,6 +261,79 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
   if (!raw) return null;
   const { summary, body } = splitSummaryAndBody(raw.markdown);
   const kind = inferKindFromTitle(raw.title);
+  const summaryHtml = summary ? renderMarkdownToHtml(summary) : "";
+  const bodyHtml = body ? renderMarkdownToHtml(body) : "";
+  const sourceUrl =
+    raw.sourceFileName != null
+      ? `/Recursos/Fuentes/${encodeURIComponent(raw.sourceFileName).replace(/%2F/g, "/")}`
+      : null;
+  return {
+    slug,
+    title: raw.title,
+    summaryHtml,
+    bodyHtml,
+    kind,
+    sourceUrl,
+  };
+}
+
+type RawSectionAnalysis = {
+  slug: string;
+  title: string;
+  markdown: string;
+  sourceFileName: string | null;
+};
+
+async function resolveSectionRawAnalysis(section: ResourceSection, slug: string): Promise<RawSectionAnalysis | null> {
+  const config = getSectionConfig(section);
+  const sectionDir = path.join(analisisDir, config.analysisSubdir);
+  try {
+    const entries = await fs.readdir(sectionDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isFile()) continue;
+      const lower = entry.name.toLowerCase();
+      if (!lower.endsWith(".md") && !lower.endsWith(".markdown") && !lower.endsWith(".txt")) continue;
+      const baseName = entry.name.replace(/\.[^/.]+$/, "");
+      const fileSlug = slugifyBaseName(baseName);
+      if (fileSlug !== slug) continue;
+      const filePath = path.join(sectionDir, entry.name);
+      const markdown = await readTextFile(filePath);
+      const title = inferTitleFromFileName(entry.name);
+      const sourceFileName = await findMatchingSourceFileName(baseName, config.fuentesSubdir);
+      return {
+        slug,
+        title,
+        markdown,
+        sourceFileName,
+      };
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function kindForSection(section: ResourceSection): ResourceKind {
+  if (section === "normativa") {
+    return "Legislation";
+  }
+  if (section === "jurisprudencia") {
+    return "LegalDecision";
+  }
+  if (section === "actualidad-ia") {
+    return "NewsArticle";
+  }
+  return "Article";
+}
+
+export async function getSectionResourceEntry(
+  section: ResourceSection,
+  slug: string,
+): Promise<ResourceEntry | null> {
+  const raw = await resolveSectionRawAnalysis(section, slug);
+  if (!raw) return null;
+  const { summary, body } = splitSummaryAndBody(raw.markdown);
+  const kind = kindForSection(section);
   const summaryHtml = summary ? renderMarkdownToHtml(summary) : "";
   const bodyHtml = body ? renderMarkdownToHtml(body) : "";
   const sourceUrl =

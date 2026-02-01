@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
-import { createArticleJsonLd } from "@/components/seo/StructuredData";
+import { createNewsArticleJsonLd } from "@/components/seo/StructuredData";
 import { Button } from "@/components/ui/button";
 
 export async function generateStaticParams() {
@@ -47,7 +47,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     ? entry.datePublished
     : date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
 
-  const jsonLd = createArticleJsonLd({
+  const jsonLd = createNewsArticleJsonLd({
     url: entry.url,
     headline: entry.title,
     description: entry.description,
