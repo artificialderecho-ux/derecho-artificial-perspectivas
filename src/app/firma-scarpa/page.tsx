@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
+import type { ResourceEntry } from "@/lib/resources";
+import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 export const metadata: Metadata = {
   title: "Firma Scarpa",
@@ -55,6 +57,14 @@ export default async function FirmaScarpaPage() {
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const resourceSlugs = await listSectionResourceSlugs("firma-scarpa");
+  const resourceEntries = await Promise.all(
+    resourceSlugs.map((slug) => getSectionResourceEntry("firma-scarpa", slug)),
+  );
+  const resolvedResourceEntries = resourceEntries.filter(
+    (entry): entry is ResourceEntry => Boolean(entry),
+  );
+
   return (
     <main className="section-spacing">
       <div className="container-editorial">
@@ -86,6 +96,40 @@ export default async function FirmaScarpaPage() {
             </Link>
           ))}
         </section>
+
+        {resolvedResourceEntries.length > 0 && (
+          <section className="mt-12">
+            <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">
+              Análisis y documentos de referencia
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2">
+              {resolvedResourceEntries.map((entry) => (
+                <Link
+                  key={entry.slug}
+                  href={`/firma-scarpa/${entry.slug}`}
+                  className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+                >
+                  <p className="text-xs uppercase tracking-widest text-caption mb-3">
+                    Documento
+                  </p>
+                  <h3 className="font-serif text-xl text-foreground mb-4">
+                    {entry.title}
+                  </h3>
+                  {entry.summaryHtml && (
+                    <p className="text-body mb-4">
+                      {entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
+                    </p>
+                  )}
+                  {entry.sourceUrl && (
+                    <span className="text-xs text-caption">
+                      Incluye descarga del documento original
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
           <p className="text-xs uppercase tracking-widest text-caption mb-3">Enfoque editorial</p>

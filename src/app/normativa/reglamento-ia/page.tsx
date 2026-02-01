@@ -6,6 +6,8 @@ import {
   createArticleJsonLd,
   createLegislationJsonLd,
 } from "@/components/seo/StructuredData";
+import type { ResourceEntry } from "@/lib/resources";
+import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 export const metadata: Metadata = {
   title:
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function GuiaReglamentoIAPage() {
+export default async function GuiaReglamentoIAPage() {
   const articleJsonLd = createArticleJsonLd({
     url: "https://derechoartificial.com/normativa/reglamento-ia",
     headline: "Guía del Reglamento de IA en 2026: Cumplimiento para Empresas",
@@ -39,6 +41,14 @@ export default function GuiaReglamentoIAPage() {
     datePublished: "2024-07-12",
     jurisdiction: "Unión Europea",
   });
+
+  const slugs = await listSectionResourceSlugs("normativa");
+  const entries = await Promise.all(
+    slugs.map((slug) => getSectionResourceEntry("normativa", slug)),
+  );
+  const resolvedEntries = entries.filter(
+    (entry): entry is ResourceEntry => Boolean(entry),
+  );
 
   return (
     <>
@@ -157,6 +167,35 @@ export default function GuiaReglamentoIAPage() {
             </details>
           </div>
         </div>
+
+        {resolvedEntries.length > 0 && (
+          <section className="mt-12">
+            <h3 className="font-serif text-2xl text-foreground mb-6">
+              Otros documentos normativos relacionados
+            </h3>
+            <div className="grid gap-6 md:grid-cols-2">
+              {resolvedEntries.map((entry) => (
+                <Link
+                  key={entry.slug}
+                  href={`/normativa/${entry.slug}`}
+                  className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+                >
+                  <p className="text-xs uppercase tracking-widest text-caption mb-3">
+                    Documento
+                  </p>
+                  <h4 className="font-serif text-xl text-foreground mb-4">
+                    {entry.title}
+                  </h4>
+                  {entry.summaryHtml && (
+                    <p className="text-body">
+                      {entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
+                    </p>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </LegalLayout>
     </>
   );
