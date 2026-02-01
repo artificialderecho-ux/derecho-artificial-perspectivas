@@ -88,7 +88,7 @@ export default function BoscoSentenciaPage() {
               <p className="text-sm text-slate-700 mb-3">
                 La transparencia exigida en el caso BOSCO se alinea con las nuevas obligaciones del Reglamento Europeo de IA. Consulte nuestra guía completa para conocer los requisitos de cumplimiento.
               </p>
-              <Link href="/normativa/reglamento-ia" className="text-blue-600 font-medium hover:underline flex items-center gap-2">
+              <Link href="/normativa" className="text-blue-600 font-medium hover:underline flex items-center gap-2">
                 Ver Guía del Reglamento de IA 2026
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
               </Link>
