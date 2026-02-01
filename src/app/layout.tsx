@@ -8,6 +8,7 @@ import {
   createPersonJsonLd,
   createWebSiteJsonLd,
 } from "@/components/seo/StructuredData";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://derechoartificial.com"),
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   );
