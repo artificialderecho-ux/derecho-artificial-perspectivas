@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 export const metadata: Metadata = {
   title: "Jurisprudencia",
@@ -36,7 +37,70 @@ export const metadata: Metadata = {
   },
 };
 
-export default function JurisprudenciaPage() {
+type SentenciaItem = {
+  id: string;
+  href: string;
+  title: string;
+  description: string;
+  meta: string;
+  dateMs: number;
+};
+
+export default async function JurisprudenciaPage() {
+  const resourceSlugs = await listSectionResourceSlugs("jurisprudencia");
+  const resourceEntries = await Promise.all(
+    resourceSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug)),
+  );
+  const resolvedResourceEntries = resourceEntries.filter(
+    (entry): entry is NonNullable<typeof entry> => Boolean(entry),
+  );
+
+  const boscoDateString = "2026-01-30";
+  const boscoTime = new Date(boscoDateString).getTime();
+  const boscoItem: SentenciaItem = {
+    id: "bosco",
+    href: "/jurisprudencia/sentencia-bosco-transparencia-algoritmica",
+    title: "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",
+    description:
+      "Análisis jurídico de la STS 1119/2025 que consolida el derecho de acceso al código fuente cuando un algoritmo determina prestaciones sociales.",
+    meta: "STS 1119/2025 · 11 de septiembre de 2025",
+    dateMs: Number.isNaN(boscoTime) ? 0 : boscoTime,
+  };
+
+  const resourceItems: SentenciaItem[] = resolvedResourceEntries.map((entry) => {
+    const time = entry.dateMs ?? 0;
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const date =
+      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+    const dateLabel =
+      date && !Number.isNaN(date.getTime())
+        ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
+        : null;
+
+    const plainSummary = entry.summaryHtml
+      ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
+      : "";
+
+    const parts: string[] = [];
+    if (dateLabel) {
+      parts.push(dateLabel);
+    }
+    if (entry.sourceUrl) {
+      parts.push("Incluye descarga del documento original");
+    }
+
+    return {
+      id: `resource-${entry.slug}`,
+      href: `/jurisprudencia/${entry.slug}`,
+      title: entry.title,
+      description: plainSummary,
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const items: SentenciaItem[] = [boscoItem, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+
   return (
     <main className="section-spacing">
       <div className="container-editorial">
@@ -53,39 +117,18 @@ export default function JurisprudenciaPage() {
         </header>
 
         <section className="grid gap-6 md:grid-cols-2">
-          <Link
-            href="/jurisprudencia/sentencia-bosco-transparencia-algoritmica"
-            className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-          >
-            <p className="text-xs uppercase tracking-widest text-caption mb-3">Sentencia clave</p>
-            <h2 className="font-serif text-2xl text-foreground mb-4">
-              Sentencia BOSCO: Transparencia Algorítmica y Código Fuente
-            </h2>
-            <p className="text-body mb-6">
-              Análisis jurídico de la STS 1119/2025 que consolida el derecho de acceso al código fuente cuando un
-              algoritmo determina prestaciones sociales.
-            </p>
-            <div className="text-sm text-caption">STS 1119/2025 · 11 de septiembre de 2025</div>
-          </Link>
-
-          <div className="card-elevated p-6">
-            <p className="text-xs uppercase tracking-widest text-caption mb-3">Enfoque</p>
-            <h3 className="font-serif text-2xl text-foreground mb-4">Criterios de lectura</h3>
-            <ul className="list-disc pl-6 text-body space-y-3">
-              <li>Impacto directo sobre derechos y garantías fundamentales.</li>
-              <li>Razonamiento judicial sobre transparencia y rendición de cuentas.</li>
-              <li>Consecuencias prácticas para cumplimiento y diseño de sistemas.</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
-          <p className="text-xs uppercase tracking-widest text-caption mb-3">Líneas de seguimiento</p>
-          <p className="text-body max-w-3xl">
-            Seguimos de cerca la evolución de la jurisprudencia sobre automatización administrativa, protección de
-            datos y responsabilidad por sistemas algorítmicos. Las nuevas resoluciones se incorporarán a esta sección
-            con análisis comparado y notas prácticas.
-          </p>
+          {items.map((item) => (
+            <Link
+              key={item.id}
+              href={item.href}
+              className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+            >
+              <p className="text-xs uppercase tracking-widest text-caption mb-3">Sentencia</p>
+              <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+              {item.description && <p className="text-body mb-6">{item.description}</p>}
+              {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
+            </Link>
+          ))}
         </section>
       </div>
     </main>
