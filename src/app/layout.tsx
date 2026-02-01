@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../index.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 import {
   StructuredData,
   createOrganizationJsonLd,
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );

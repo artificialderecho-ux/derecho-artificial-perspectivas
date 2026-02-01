@@ -42,7 +42,6 @@
     "dist",
     "src/vite-pages",
     "src/main.tsx",
-    "src/App.tsx",
-    "src/vite-env.d.ts"
+    "src/App.tsx"
   ]
 }
