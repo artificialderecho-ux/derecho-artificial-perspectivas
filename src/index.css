@@ -21,14 +21,12 @@
     @apply bg-background text-foreground antialiased;
   }
 
-  /* Global Justification for editorial feel */
   p {
-    @apply text-justify hyphens-auto;
+    @apply text-justify hyphens-none;
   }
 
-  /* Specific override for prose to ensure articles are justified */
   .prose p {
-    @apply text-justify hyphens-auto;
+    @apply text-justify hyphens-none;
   }
 
   .lead {

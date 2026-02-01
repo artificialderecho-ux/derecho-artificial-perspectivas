@@ -65,6 +65,69 @@ export default async function FirmaScarpaPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
+  type UnifiedItem = {
+    id: string;
+    href: string;
+    title: string;
+    description: string;
+    badge: string;
+    meta: string;
+    dateMs: number;
+  };
+
+  const contentItems: UnifiedItem[] = sortedEntries.map((entry) => {
+    const time = new Date(entry.datePublished).getTime();
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const parts: string[] = [];
+    parts.push(formatDate(entry.datePublished));
+    if (entry.author) {
+      parts.push(entry.author);
+    }
+    return {
+      id: `content-${entry.slug}`,
+      href: entry.urlPath,
+      title: entry.title,
+      description: entry.description,
+      badge: "Análisis",
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const resourceItems: UnifiedItem[] = resolvedResourceEntries.map((entry) => {
+    const time = entry.dateMs ?? 0;
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const date =
+      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+    const dateLabel =
+      date && !Number.isNaN(date.getTime())
+        ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
+        : null;
+    const plainSummary = entry.summaryHtml
+      ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
+      : "";
+    const parts: string[] = [];
+    if (dateLabel) {
+      parts.push(dateLabel);
+    }
+    if (entry.sourceUrl) {
+      parts.push("Incluye descarga del documento original");
+    }
+    return {
+      id: `resource-${entry.slug}`,
+      href: `/firma-scarpa/${entry.slug}`,
+      title: entry.title,
+      description: plainSummary,
+      badge: "Análisis",
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const allItems: UnifiedItem[] = [...contentItems, ...resourceItems].sort(
+    (a, b) => b.dateMs - a.dateMs,
+  );
+
   return (
     <main className="section-spacing">
       <div className="container-editorial">
@@ -81,55 +144,19 @@ export default async function FirmaScarpaPage() {
         </header>
 
         <section className="grid gap-6 md:grid-cols-2">
-          {sortedEntries.map((entry) => (
+          {allItems.map((item) => (
             <Link
-              key={entry.slug}
-              href={entry.urlPath}
+              key={item.id}
+              href={item.href}
               className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
             >
-              <p className="text-xs uppercase tracking-widest text-caption mb-3">Ensayo</p>
-              <h2 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h2>
-              <p className="text-body mb-6">{entry.description}</p>
-              <div className="text-sm text-caption">
-                {formatDate(entry.datePublished)} · {entry.author}
-              </div>
+              <p className="text-xs uppercase tracking-widest text-caption mb-3">Análisis</p>
+              <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+              {item.description && <p className="text-body mb-6">{item.description}</p>}
+              {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
             </Link>
           ))}
         </section>
-
-        {resolvedResourceEntries.length > 0 && (
-          <section className="mt-12">
-            <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">
-              Análisis y documentos de referencia
-            </h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              {resolvedResourceEntries.map((entry) => (
-                <Link
-                  key={entry.slug}
-                  href={`/firma-scarpa/${entry.slug}`}
-                  className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-                >
-                  <p className="text-xs uppercase tracking-widest text-caption mb-3">
-                    Documento
-                  </p>
-                  <h3 className="font-serif text-xl text-foreground mb-4">
-                    {entry.title}
-                  </h3>
-                  {entry.summaryHtml && (
-                    <p className="text-body mb-4">
-                      {entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
-                    </p>
-                  )}
-                  {entry.sourceUrl && (
-                    <span className="text-xs text-caption">
-                      Incluye descarga del documento original
-                    </span>
-                  )}
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
 
         <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
           <p className="text-xs uppercase tracking-widest text-caption mb-3">Enfoque editorial</p>

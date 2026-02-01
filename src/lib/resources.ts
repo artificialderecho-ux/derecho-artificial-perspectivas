@@ -71,6 +71,7 @@ export type ResourceEntry = {
   bodyHtml: string;
   kind: ResourceKind;
   sourceUrl: string | null;
+  dateMs: number | null;
 };
 
 function slugifyBaseName(baseName: string) {
@@ -233,6 +234,7 @@ type RawAnalysis = {
   title: string;
   markdown: string;
   sourceFileName: string | null;
+  dateMs: number | null;
 };
 
 async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | null> {
@@ -248,11 +250,13 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
     const markdown = await readTextFile(filePath);
     const title = inferTitleFromFileName(entry.fileName);
     const sourceFileName = await findMatchingSourceFileName(baseName, entry.relativeDir || null);
+    const dateMs = await getFileDateMs(filePath);
     return {
       slug,
       title,
       markdown,
       sourceFileName,
+      dateMs: Number.isNaN(dateMs) ? null : dateMs,
     };
   }
   return null;
@@ -325,6 +329,7 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
     bodyHtml,
     kind,
     sourceUrl,
+    dateMs: raw.dateMs,
   };
 }
 
@@ -333,6 +338,7 @@ type RawSectionAnalysis = {
   title: string;
   markdown: string;
   sourceFileName: string | null;
+  dateMs: number | null;
 };
 
 async function resolveSectionRawAnalysis(section: ResourceSection, slug: string): Promise<RawSectionAnalysis | null> {
@@ -351,11 +357,13 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
       const markdown = await readTextFile(filePath);
       const title = inferTitleFromFileName(entry.name);
       const sourceFileName = await findMatchingSourceFileName(baseName, config.fuentesSubdir);
+      const dateMs = await getFileDateMs(filePath);
       return {
         slug,
         title,
         markdown,
         sourceFileName,
+        dateMs: Number.isNaN(dateMs) ? null : dateMs,
       };
     }
   } catch {
@@ -398,5 +406,6 @@ export async function getSectionResourceEntry(
     bodyHtml,
     kind,
     sourceUrl,
+     dateMs: raw.dateMs,
   };
 }
