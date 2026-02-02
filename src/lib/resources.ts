@@ -246,6 +246,19 @@ function inferTitleFromMarkdown(markdown: string) {
   return sentence.replace(/\s+/g, " ").trim();
 }
 
+function stripFrontmatter(markdown: string) {
+  const normalized = markdown.replace(/\r\n/g, "\n");
+  if (!normalized.startsWith("---")) {
+    return normalized;
+  }
+  const endIndex = normalized.indexOf("\n---", 3);
+  if (endIndex === -1) {
+    return normalized;
+  }
+  const rest = normalized.slice(endIndex + 4);
+  return rest.replace(/^\s+/, "");
+}
+
 export async function listSectionResourceSlugs(section: ResourceSection): Promise<string[]> {
   const config = getSectionConfig(section);
   const sectionDir = path.join(analisisDir, config.analysisSubdir);
@@ -366,7 +379,7 @@ async function findMatchingSourceFileName(baseName: string, relativeDir: string 
 }
 
 function splitSummaryAndBody(markdown: string) {
-  const normalized = markdown.replace(/\r\n/g, "\n").trim();
+  const normalized = stripFrontmatter(markdown).trim();
   if (!normalized) {
     return { summary: "", body: "" };
   }

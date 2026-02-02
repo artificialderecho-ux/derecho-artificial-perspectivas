@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Linkedin, Twitter } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,10 +20,9 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-6 text-body leading-relaxed max-w-sm">
-              {isEnglish 
+              {isEnglish
                 ? "Independent critical analysis of the intersection of Law, Ethics and Artificial Intelligence."
-                : "Análisis crítico e independiente sobre la intersección del Derecho, la Ética y la Inteligencia Artificial para el mundo hispanohablante."
-              }
+                : "Análisis crítico e independiente sobre la intersección del Derecho, la Ética y la Inteligencia Artificial para el mundo hispanohablante."}
             </p>
             <div className="mt-8 pt-6 border-t border-border">
               <p className="text-xs font-semibold uppercase tracking-wider text-caption mb-2">
@@ -40,49 +40,91 @@ export function Footer() {
             <nav className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
               {isEnglish ? (
                 <>
-                  <Link href="/en/scarpa-firm" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/en/scarpa-firm"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Scarpa Firm
                   </Link>
-                  <Link href="/en/jurisprudence" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/en/jurisprudence"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Jurisprudence
                   </Link>
-                  <Link href="/en/ai-news" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/en/ai-news"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     AI News
                   </Link>
-                  <Link href="/en/legislation" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/en/legislation"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Legislation
                   </Link>
-                  <Link href="/en/guides-protocols" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/en/guides-protocols"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Guides & Protocols
                   </Link>
-                  <Link href="/en/about-us" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/en/about-us"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     About Us
                   </Link>
-                  <Link href="/en/contact" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/en/contact"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Contact
                   </Link>
                 </>
               ) : (
-              <>
-                  <Link href="/firma-scarpa" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                <>
+                  <Link
+                    href="/firma-scarpa"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Firma Scarpa
                   </Link>
-                  <Link href="/jurisprudencia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/jurisprudencia"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Jurisprudencia
                   </Link>
-                  <Link href="/actualidad-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/actualidad-ia"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Actualidad IA
                   </Link>
-                  <Link href="/normativa" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/normativa"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Normativa
                   </Link>
-                  <Link href="/recursos/guias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-            Guías y Protocolos
-          </Link>
-                  <Link href="/quienes-somos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/recursos/guias"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Guías y Protocolos
+                  </Link>
+                  <Link
+                    href="/quienes-somos"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Quiénes somos
                   </Link>
-                  <Link href="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link
+                    href="/contacto"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
                     Contacto
                   </Link>
                 </>
@@ -93,13 +135,22 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-divider">
           <nav className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
-            <Link href="/aviso-legal" className="text-xs text-caption hover:text-primary transition-colors duration-300">
+            <Link
+              href="/aviso-legal"
+              className="text-xs text-caption hover:text-primary transition-colors duration-300"
+            >
               {isEnglish ? "Legal Notice" : "Aviso Legal"}
             </Link>
-            <Link href="/politica-de-privacidad" className="text-xs text-caption hover:text-primary transition-colors duration-300">
+            <Link
+              href="/politica-de-privacidad"
+              className="text-xs text-caption hover:text-primary transition-colors duration-300"
+            >
               {isEnglish ? "Privacy Policy" : "Política de Privacidad"}
             </Link>
-            <Link href="/cookies" className="text-xs text-caption hover:text-primary transition-colors duration-300">
+            <Link
+              href="/cookies"
+              className="text-xs text-caption hover:text-primary transition-colors duration-300"
+            >
               {isEnglish ? "Cookies" : "Cookies"}
             </Link>
           </nav>
@@ -107,6 +158,26 @@ export function Footer() {
             <p className="text-xs text-caption tracking-wide">
               © {currentYear} Derecho Artificial
             </p>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://x.com/DArtificia59954"
+                target="_blank"
+                rel="noreferrer"
+                aria-label={isEnglish ? "X profile (Twitter)" : "Perfil en X (Twitter)"}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
+              >
+                <Twitter className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/derecho-artificial/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label={isEnglish ? "LinkedIn profile" : "Perfil en LinkedIn"}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+            </div>
             <p className="text-xs text-caption tracking-wide">
               {isEnglish ? "An independent editorial project" : "Un proyecto editorial independiente"}
             </p>
