@@ -184,6 +184,31 @@ async function getFileDateMs(filePath: string) {
   }
 }
 
+function extractFrontmatterTitle(markdown: string) {
+  if (!markdown.startsWith("---")) {
+    return "";
+  }
+  const endIndex = markdown.indexOf("\n---", 3);
+  if (endIndex === -1) {
+    return "";
+  }
+  const frontmatterLines = markdown.slice(3, endIndex).split("\n");
+  for (const line of frontmatterLines) {
+    const match = line.match(/^title\s*:\s*(.+)$/i);
+    if (match) {
+      let value = match[1].trim();
+      if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+      ) {
+        value = value.slice(1, -1).trim();
+      }
+      return value;
+    }
+  }
+  return "";
+}
+
 export async function listSectionResourceSlugs(section: ResourceSection): Promise<string[]> {
   const config = getSectionConfig(section);
   const sectionDir = path.join(analisisDir, config.analysisSubdir);
@@ -248,7 +273,7 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
         ? path.join(analisisDir, entry.fileName)
         : path.join(analisisDir, entry.relativeDir, entry.fileName);
     const markdown = await readTextFile(filePath);
-    const title = inferTitleFromFileName(entry.fileName);
+    const title = extractFrontmatterTitle(markdown);
     const sourceFileName = await findMatchingSourceFileName(baseName, entry.relativeDir || null);
     const dateMs = await getFileDateMs(filePath);
     return {
@@ -355,7 +380,7 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
       if (fileSlug !== slug) continue;
       const filePath = path.join(sectionDir, entry.name);
       const markdown = await readTextFile(filePath);
-      const title = inferTitleFromFileName(entry.name);
+      const title = extractFrontmatterTitle(markdown);
       const sourceFileName = await findMatchingSourceFileName(baseName, config.fuentesSubdir);
       const dateMs = await getFileDateMs(filePath);
       return {
