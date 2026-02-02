@@ -5,6 +5,7 @@ import { getContentEntry, listContentSlugs } from "@/lib/content";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import latestNews from "@/data/latest-news.json";
 
 export const metadata: Metadata = {
   title: "Actualidad IA",
@@ -48,6 +49,16 @@ type NovedadItem = {
   description: string;
   meta: string;
   dateMs: number;
+};
+
+type NewsItem = {
+  id: string;
+  title: string;
+  source: string;
+  date: string;
+  url: string;
+  summary: string;
+  tags: string[];
 };
 
 export default async function ActualidadIAPage() {
@@ -129,6 +140,43 @@ export default async function ActualidadIAPage() {
     (a, b) => b.dateMs - a.dateMs,
   );
 
+  const apiNews: NewsItem[] = latestNews as NewsItem[];
+
+  const getSourceColor = (source: string) => {
+    switch (source) {
+      case "AESIA":
+        return "bg-blue-600";
+      case "EUR-Lex":
+        return "bg-indigo-600";
+      case "Comisión Europea":
+        return "bg-[#003399]";
+      case "CEPEJ":
+        return "bg-purple-600";
+      case "Abogacía Española":
+        return "bg-red-700";
+      default:
+        return "bg-slate-500";
+    }
+  };
+
+  const groupedNews: Record<string, NewsItem[]> = apiNews.reduce(
+    (acc, item) => {
+      if (!acc[item.source]) {
+        acc[item.source] = [];
+      }
+      acc[item.source].push(item);
+      return acc;
+    },
+    {} as Record<string, NewsItem[]>,
+  );
+
+  const orderedSources = ["Comisión Europea", "AESIA", "EUR-Lex", "CEPEJ", "Abogacía Española"];
+
+  const sources = [
+    ...orderedSources.filter((source) => groupedNews[source]?.length),
+    ...Object.keys(groupedNews).filter((source) => !orderedSources.includes(source)),
+  ];
+
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       {
@@ -193,6 +241,52 @@ export default async function ActualidadIAPage() {
               fuentes y la aplicación práctica en entornos profesionales.
             </p>
           </section>
+
+          {sources.length > 0 && (
+            <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
+                Actualizaciones oficiales
+              </p>
+              <div className="space-y-10">
+                {sources.map((source) => (
+                  <div key={source} className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-white font-medium ${getSourceColor(
+                          source,
+                        )}`}
+                      >
+                        {source}
+                      </span>
+                    </div>
+                    <div className="space-y-4">
+                      {groupedNews[source]?.slice(0, 2).map((item) => (
+                        <div key={item.id} className="border border-divider/60 bg-card p-4 rounded-sm">
+                          <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-serif text-lg text-foreground hover:text-primary transition-colors"
+                          >
+                            {item.title}
+                          </a>
+                          <div className="text-xs text-caption mt-1">
+                            <span>{item.date}</span>
+                            {item.tags && item.tags.length > 0 && (
+                              <span className="ml-2">{item.tags.join(" · ")}</span>
+                            )}
+                          </div>
+                          {item.summary && (
+                            <p className="text-sm text-body mt-2">{item.summary}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </main>
     </>
