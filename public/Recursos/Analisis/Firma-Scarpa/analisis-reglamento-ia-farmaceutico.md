@@ -1,7 +1,7 @@
 ---
 title: "Análisis del Reglamento de IA: Impacto y Obligaciones en el Sector Farmacéutico"
 jurisdiction: "UE"
-date: 2024-12-04
+date: 2026-02-02
 ---
 
 
