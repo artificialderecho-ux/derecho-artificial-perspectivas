@@ -1,3 +1,10 @@
+---
+title: "Instrucción 2/2026 del CGPJ: Uso de la IA por Jueces y Magistrados"
+jurisdiction: "España"
+---
+
+# Instrucción 2/2026 del CGPJ: Uso de la IA por Jueces y Magistrados
+
 Análisis de la Instrucción 2/2026 del CGPJ: el primer marco regulatorio detallado sobre el uso de la Inteligencia Artificial por parte de jueces y magistrados en España. Este documento establece las líneas rojas para garantizar que la IA sea una herramienta de apoyo y nunca un sustituto de la función jurisdiccional, protegiendo los derechos fundamentales y el principio de transparencia.
 
 La Instrucción 2/2026, aprobada por el Pleno del Consejo General del Poder Judicial el 28 de enero de 2026, marca un hito en la digitalización de la Justicia. Alineada con el Reglamento (UE) 2024/1689 (AI Act), esta norma define los sistemas de IA judicial como de "alto riesgo" y establece protocolos estrictos de supervisión humana.

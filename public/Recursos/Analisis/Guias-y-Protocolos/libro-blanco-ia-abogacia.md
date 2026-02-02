@@ -1,3 +1,9 @@
+---
+title: "La Inteligencia Artificial y la Abogacía: Análisis del Libro Blanco del CGAE e ICAV"
+---
+
+# La Inteligencia Artificial y la Abogacía: Análisis del Libro Blanco del CGAE e ICAV
+
 Análisis detallado del Libro Blanco sobre Inteligencia Artificial y Abogacía, una hoja de ruta esencial editada por el Consejo General de la Abogacía Española y el ICAV. Este documento técnico disecciona el impacto de la IA generativa en el ejercicio del Derecho, la ética profesional y los nuevos riesgos digitales para los despachos.
 
 El Libro Blanco sobre Inteligencia Artificial y Abogacía no es solo un manual técnico, es un manifiesto sobre el futuro de nuestra profesión. Financiado por la Unión Europea (NextGenerationEU), este trabajo cuenta con la colaboración de expertos de las principales universidades españolas y organismos como ODISEIA y la Fundación COTEC.

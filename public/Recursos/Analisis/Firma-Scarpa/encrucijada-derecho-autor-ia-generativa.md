@@ -1,4 +1,9 @@
-# La Encrucijada del Derecho de Autor y la IA Generativa: Un Análisis Doctrinal
+---
+title: "La Encrucijada del Derecho de Autor y la IA Generativa: Análisis del Marco Regulatorio Europeo"
+jurisdiction: "UE"
+---
+
+# La Encrucijada del Derecho de Autor y la IA Generativa: Análisis del Marco Regulatorio Europeo
 
 El vertiginoso desarrollo de la IA generativa ha provocado una colisión frontal con los fundamentos del derecho de autor. Este análisis examina el choque entre el entrenamiento masivo de modelos (input) y la competencia desleal de los contenidos sintéticos (output), planteando la necesidad de un nuevo equilibrio en el ecosistema cultural europeo.
 

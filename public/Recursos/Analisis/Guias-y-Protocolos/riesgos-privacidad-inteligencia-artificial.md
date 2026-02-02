@@ -1,12 +1,14 @@
-Análisis de Riesgos y Recomendaciones para el Uso Seguro de la Inteligencia Artificial
+---
+title: "Recomendaciones de la AEPD en relación con el uso de IAs"
+---
 
-/riesgos-privacidad-inteligencia-artificial
+# Recomendaciones de la AEPD en relación con el uso de IAs
 
 Análisis de directrices clave para proteger la información personal y profesional al interactuar con IA, mitigando riesgos de filtración y privacidad.
 
 Datos personales, información sensible, privacidad, prompt, cookies
 
-Contexto: La Privacidad en la Nueva Era de la Inteligencia Artificial
+### Contexto: La Privacidad en la Nueva Era de la Inteligencia Artificial
 
 La interacción masiva de los usuarios con herramientas de inteligencia artificial generativa ha inaugurado una nueva etapa en la gestión de la información digital. La aparente simplicidad de estas plataformas oculta complejidades significativas en cuanto a la privacidad y la seguridad de los datos. En este escenario, comprender los riesgos inherentes a estas tecnologías se convierte en una necesidad estratégica tanto para individuos como para organizaciones. Este análisis pivota sobre una advertencia fundamental: CUIDADO CON LO QUE LE CONFÍAS. La confianza ciega en estos sistemas puede exponer información sensible a riesgos imprevistos. Por ello, es imperativo adoptar un conjunto de directrices técnicas claras para navegar este ecosistema de forma segura y responsable.
 

@@ -1,3 +1,10 @@
+---
+title: "La IA en la Abogacía: Integración Estratégica, Ética y Competitividad"
+jurisdiction: "España"
+---
+
+# La IA en la Abogacía: Integración Estratégica, Ética y Competitividad
+
 Un análisis profundo sobre la integración de la IA en el ejercicio profesional. Este artículo explora cómo la IA no es una tendencia pasajera, sino un imperativo estratégico que redefine la competitividad y la ética en los despachos modernos.
 
 La simbiosis entre el abogado y el algoritmo exige una evolución en la formación jurídica. En este análisis, Ricardo Scarpa desgrana los límites deontológicos y las oportunidades de eficiencia que ofrece esta tecnología.

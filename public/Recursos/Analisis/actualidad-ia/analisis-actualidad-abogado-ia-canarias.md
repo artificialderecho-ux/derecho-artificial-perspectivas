@@ -1,4 +1,9 @@
-# El TSJ de Canarias investiga el uso de sentencias inexistentes generadas por IA
+---
+title: "Sentencia 126/2025 del TSJ de Canarias: El deber de veracidad y la IA"
+jurisdiction: "España"
+---
+
+# Sentencia 126/2025 del TSJ de Canarias: El deber de veracidad y la IA
 
 El Tribunal Superior de Justicia de Canarias ha dictado una resolución histórica al acordar la apertura de una pieza separada para investigar la responsabilidad de un letrado que incluyó en su recurso citas jurisprudenciales inexistentes, presuntamente generadas por inteligencia artificial.
 

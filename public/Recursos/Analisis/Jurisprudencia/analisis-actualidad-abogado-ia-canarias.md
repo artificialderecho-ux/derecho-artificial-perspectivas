@@ -1,4 +1,10 @@
-# Análisis Sentencia 126/2025 TSJ Canarias: El deber de veracidad y la IA
+---
+title: "Análisis de la Sentencia 126/2025 del TSJ de Canarias: El deber de veracidad y la IA"
+jurisdiction: "España"
+court: "TSJ Canarias"
+---
+
+# Análisis de la Sentencia 126/2025 del TSJ de Canarias: El deber de veracidad y la IA
 
 Análisis técnico de la Sentencia del TSJ de Canarias (Sala de lo Penal) que aborda el uso fraudulento o negligente de herramientas de IA en la redacción de recursos. El tribunal advierte que la delegación de la técnica jurídica en algoritmos no exime al profesional de su responsabilidad sobre la veracidad de las fuentes citadas.
 

@@ -1,3 +1,10 @@
+---
+title: "IA Generativa y Derecho de Autor en la UE: Estudio del Parlamento Europeo"
+jurisdiction: "UE"
+---
+
+# IA Generativa y Derecho de Autor en la UE: Estudio del Parlamento Europeo
+
 Estudio exhaustivo del Parlamento Europeo (2025) sobre los desafíos que la IA generativa plantea al Derecho de Autor en la Unión Europea. El informe analiza la desalineación entre las prácticas de entrenamiento de IA y las excepciones actuales de minería de textos y datos (TDM), proponiendo reformas estructurales para proteger la creatividad y la remuneración de los autores.
 
 Este estudio, encargado por la Comisión JURI del Parlamento Europeo, examina la incertidumbre jurídica del contenido generado por máquinas y los riesgos para el patrimonio cultural europeo. Es un documento clave para entender la dirección de las futuras reformas legislativas que complementarán el AI Act.
