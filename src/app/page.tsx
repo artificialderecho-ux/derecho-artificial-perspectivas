@@ -39,21 +39,12 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const sections = [
-    { name: "Firma Scarpa", href: "/firma-scarpa" },
-    { name: "Jurisprudencia", href: "/jurisprudencia" },
-    { name: "Actualidad IA", href: "/actualidad-ia" },
-    { name: "Normativa", href: "/normativa" },
-    { name: "Guías y Protocolos", href: "/recursos/guias" },
-    { name: "Quiénes somos", href: "/quienes-somos" },
-    { name: "Contacto", href: "/contacto" },
-  ];
-
-  const [actualidadSlugs, firmaSlugs, normativaSlugs, jurisprudenciaSlugs] = await Promise.all([
+  const [actualidadSlugs, firmaSlugs, normativaSlugs, jurisprudenciaSlugs, guiasSlugs] = await Promise.all([
     listContentSlugs("actualidad-ia"),
     listContentSlugs("firma-scarpa"),
     listSectionResourceSlugs("normativa"),
     listSectionResourceSlugs("jurisprudencia"),
+    listSectionResourceSlugs("guias"),
   ]);
 
   const [actualidadEntries, firmaEntries] = await Promise.all([
@@ -81,9 +72,10 @@ export default async function HomePage() {
   const latestActualidad = resolvedActualidad[0] ?? null;
   const latestFirma = resolvedFirma[0] ?? null;
 
-  const [latestNormativa, latestJurisprudencia] = await Promise.all([
+  const [latestNormativa, latestJurisprudencia, latestGuias] = await Promise.all([
     normativaSlugs[0] ? getSectionResourceEntry("normativa", normativaSlugs[0]) : Promise.resolve(null),
     jurisprudenciaSlugs[0] ? getSectionResourceEntry("jurisprudencia", jurisprudenciaSlugs[0]) : Promise.resolve(null),
+    guiasSlugs[0] ? getSectionResourceEntry("guias", guiasSlugs[0]) : Promise.resolve(null),
   ]);
 
   const formatDate = (value: string) => {
@@ -91,6 +83,73 @@ export default async function HomePage() {
     if (Number.isNaN(date.getTime())) return value;
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
+
+  const sectionCards = [
+    {
+      key: "firma-scarpa",
+      label: "Firma Scarpa",
+      href: "/firma-scarpa",
+      latestTitle: latestFirma?.title ?? null,
+      latestHref: latestFirma?.urlPath ?? null,
+      latestDescription: latestFirma?.description ?? "",
+      latestMeta:
+        latestFirma != null ? `${formatDate(latestFirma.datePublished)} · ${latestFirma.author}` : "",
+    },
+    {
+      key: "jurisprudencia",
+      label: "Jurisprudencia",
+      href: "/jurisprudencia",
+      latestTitle: latestJurisprudencia?.title ?? null,
+      latestHref: latestJurisprudencia ? `/jurisprudencia/${latestJurisprudencia.slug}` : null,
+      latestDescription:
+        latestJurisprudencia?.summaryHtml
+          ? latestJurisprudencia.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
+          : "",
+      latestMeta: latestJurisprudencia ? "Resoluciones clave sobre algoritmos y derechos" : "",
+    },
+    {
+      key: "actualidad-ia",
+      label: "Actualidad IA",
+      href: "/actualidad-ia",
+      latestTitle: latestActualidad?.title ?? null,
+      latestHref: latestActualidad?.urlPath ?? null,
+      latestDescription: latestActualidad?.description ?? "",
+      latestMeta:
+        latestActualidad != null ? `${formatDate(latestActualidad.datePublished)} · ${latestActualidad.author}` : "",
+    },
+    {
+      key: "normativa",
+      label: "Normativa",
+      href: "/normativa",
+      latestTitle: latestNormativa?.title ?? null,
+      latestHref: latestNormativa ? `/normativa/${latestNormativa.slug}` : null,
+      latestDescription:
+        latestNormativa?.summaryHtml
+          ? latestNormativa.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
+          : "",
+      latestMeta: latestNormativa ? "Análisis normativo con fuentes oficiales" : "",
+    },
+    {
+      key: "guias",
+      label: "Guías y Protocolos",
+      href: "/recursos/guias",
+      latestTitle: latestGuias?.title ?? null,
+      latestHref: latestGuias ? `/recursos/guias/${latestGuias.slug}` : null,
+      latestDescription:
+        latestGuias?.summaryHtml ? latestGuias.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
+      latestMeta: latestGuias ? "Repositorio de documentación técnica y ética" : "",
+    },
+    {
+      key: "quienes-somos",
+      label: "Quiénes somos",
+      href: "/quienes-somos",
+    },
+    {
+      key: "contacto",
+      label: "Contacto",
+      href: "/contacto",
+    },
+  ];
 
   return (
     <main>
@@ -219,18 +278,42 @@ export default async function HomePage() {
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
             Secciones
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sections.map((s) => (
-              <Link
-                key={s.href}
-                href={s.href}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+          <div className="space-y-6">
+            {sectionCards.map((section) => (
+              <div
+                key={section.key}
+                className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-base font-medium text-foreground">{s.name}</span>
-                  <span className="text-primary">→</span>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Sección</p>
+                    <h3 className="font-serif text-xl md:text-2xl text-foreground">{section.label}</h3>
+                  </div>
+                  <Link
+                    href={section.href}
+                    className="text-sm font-medium text-primary inline-flex items-center gap-1"
+                  >
+                    Ver sección <span>→</span>
+                  </Link>
                 </div>
-              </Link>
+                {section.latestTitle && section.latestHref && (
+                  <Link
+                    href={section.latestHref}
+                    className="mt-2 border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                  >
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-caption mb-2">
+                      Última publicación
+                    </p>
+                    <p className="font-medium text-sm text-foreground mb-1">{section.latestTitle}</p>
+                    {section.latestDescription && (
+                      <p className="text-sm text-body line-clamp-2">{section.latestDescription}</p>
+                    )}
+                    {section.latestMeta && (
+                      <p className="mt-2 text-xs text-caption">{section.latestMeta}</p>
+                    )}
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
         </div>

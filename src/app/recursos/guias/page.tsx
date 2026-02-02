@@ -3,10 +3,9 @@ import Link from "next/link";
 import libraryDocs from "../../../data/library-docs.json";
 
 export const metadata: Metadata = {
-  title:
-    "Guías, Protocolos y Soft Law | Biblioteca AESIA y Comisión Europea",
+  title: "Guías y Protocolos | Biblioteca AESIA y Comisión Europea",
   description:
-    "Hub central de documentación oficial: Guías de la AESIA, documentos de la Comisión Europea, Soft Law y protocolos de actuación.",
+    "Hub central de documentación oficial: Guías de la AESIA, documentos de la Comisión Europea y protocolos de actuación.",
   alternates: {
     canonical: "https://derechoartificial.com/recursos/guias",
     languages: {
@@ -22,7 +21,7 @@ type DocCard = {
   description: string;
   source: string;
   url: string;
-  date: string;
+  date?: string;
   year?: string;
   language?: string;
   tags?: string[];
@@ -59,6 +58,12 @@ export default function GuidesPage() {
   const docs = libraryDocs as DocCard[];
   const aesiaDocs = docs.filter((d) => d.source === "AESIA");
   const ecDocs = docs.filter((d) => d.source === "Comisión Europea");
+  const cepejDocs = softLawDocs.filter((d) => d.source.startsWith("CEPEJ"));
+  const softLawEcDocs = softLawDocs.filter((d) => d.source === "Comisión Europea");
+  const otherDocs = softLawDocs.filter(
+    (d) => d.source !== "Comisión Europea" && !d.source.startsWith("CEPEJ"),
+  );
+  const commissionDocs: DocCard[] = [...ecDocs, ...softLawEcDocs];
   const mainAesiaDoc = aesiaDocs[0];
 
   return (
@@ -69,7 +74,7 @@ export default function GuidesPage() {
             Biblioteca Digital
           </p>
           <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
-            Guías, Protocolos y Soft Law
+            Guías y Protocolos
           </h1>
           <p className="lead text-muted-foreground">
             Repositorio centralizado de documentación técnica y ética de la AESIA, la Comisión Europea y organismos internacionales.
@@ -137,45 +142,23 @@ export default function GuidesPage() {
             </div>
           </section>
 
-          {/* Soft Law Section */}
-          <section id="soft-law">
+          <section id="cepej">
             <div className="flex items-center gap-4 mb-8">
               <span className="w-12 h-[1px] bg-primary"></span>
               <h2 className="text-2xl font-serif text-foreground">
-                Soft Law y Marcos Éticos
+                CEPEJ (Consejo de Europa)
               </h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {softLawDocs.map((doc) => (
-                <a
-                  key={doc.id}
-                  href={doc.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block bg-card p-6 border border-border rounded-sm hover:border-primary transition-all duration-300 hover:shadow-md"
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="px-2 py-1 text-[10px] uppercase tracking-wider text-white font-medium rounded-sm bg-slate-500">
-                      {doc.source}
-                    </span>
-                    <span className="text-xs text-muted-foreground font-mono">
-                      {doc.year}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-lg text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {doc.title}
-                  </h3>
-                  <p className="text-sm text-body leading-relaxed mb-4">
-                    {doc.description}
-                  </p>
-                  <div className="flex items-center text-xs font-medium text-primary uppercase tracking-wider">
-                    Acceder al documento{" "}
-                    <span className="ml-2 group-hover:translate-x-1 transition-transform">
-                      →
-                    </span>
-                  </div>
-                </a>
-              ))}
+              {cepejDocs.length > 0 ? (
+                cepejDocs.map((doc) => (
+                  <DocCardItem key={doc.id} doc={doc} color="bg-slate-500" />
+                ))
+              ) : (
+                <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
+                  No hay documentos disponibles por el momento.
+                </div>
+              )}
             </div>
           </section>
 
@@ -188,11 +171,31 @@ export default function GuidesPage() {
               </h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-               {ecDocs.length > 0 ? (
-                 ecDocs.map((doc) => (
+               {commissionDocs.length > 0 ? (
+                 commissionDocs.map((doc) => (
                    <DocCardItem key={doc.id} doc={doc} color="bg-[#003399]" />
                  ))
                ) : (
+                <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
+                  No hay documentos disponibles por el momento.
+                </div>
+              )}
+            </div>
+          </section>
+
+          <section id="otros-organismos">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="w-12 h-[1px] bg-primary"></span>
+              <h2 className="text-2xl font-serif text-foreground">
+                Otros organismos
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {otherDocs.length > 0 ? (
+                otherDocs.map((doc) => (
+                  <DocCardItem key={doc.id} doc={doc} color="bg-slate-500" />
+                ))
+              ) : (
                 <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
                   No hay documentos disponibles por el momento.
                 </div>

@@ -1,3 +1,7 @@
+---
+title: Análisis profundo de la Instrucción 2/2026 del CGPJ
+---
+
 Análisis profundo de la Instrucción 2/2026 del CGPJ, que define el marco proactivo para la inteligencia artificial en la Administración de Justicia en España. Este documento desglosa cómo la normativa equilibra la modernización judicial con salvaguardas infranqueables para la independencia judicial.
 
 

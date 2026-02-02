@@ -9,8 +9,7 @@ import { Button } from "@/components/ui/button";
 
 export async function generateStaticParams() {
   const slugs = await listContentSlugs("actualidad-ia");
-  const seed = slugs.length ? slugs : ["primer-briefing"];
-  return seed.map((slug) => ({ slug }));
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
