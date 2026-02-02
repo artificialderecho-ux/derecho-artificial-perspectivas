@@ -6,7 +6,7 @@ import path from 'path';
 interface NewsItem {
   id: string;
   title: string;
-  source: 'AESIA' | 'EUR-Lex' | 'Comisión Europea' | 'Other';
+  source: 'AESIA' | 'EUR-Lex' | 'Comisión Europea' | 'CEPEJ' | 'Abogacía Española' | 'Other';
   date: string;
   url: string;
   summary: string;
@@ -26,7 +26,7 @@ async function scrapeEuropeanCommission(): Promise<NewsItem[]> {
 
     // Generic selector for EU digital strategy library items
     // Targeting typical ECL (European Commission Library) components
-    $('.ecl-u-d-flex, .ecl-list-item, article, .listing__item').slice(0, 3).each((_, element) => {
+    $('.ecl-u-d-flex, .ecl-list-item, article, .listing__item').slice(0, 2).each((_, element) => {
       const title = $(element).find('.ecl-link, h3, .ecl-heading, .listing__title').text().trim();
       const link = $(element).find('a').attr('href');
       const dateText = $(element).find('.ecl-meta__item, .date, .listing__meta').text().trim();
@@ -90,7 +90,7 @@ async function scrapeAESIA(): Promise<NewsItem[]> {
     // Adapting selectors to generic/likely structures as per inspection
     // Assuming standard Drupal/CMS structure often used in Spanish gov sites
     // Selectors: .view-content .views-row, article, .news-teaser
-    $('.views-row, article, .news-item, .card').slice(0, 3).each((_, element) => {
+    $('.views-row, article, .news-item, .card').slice(0, 2).each((_, element) => {
       const title = $(element).find('h2, h3, .title, .card-title').text().trim();
       const link = $(element).find('a').attr('href');
       const dateText = $(element).find('.date, time, .created').text().trim();
@@ -152,7 +152,7 @@ async function scrapeEURLex(): Promise<NewsItem[]> {
     const news: NewsItem[] = [];
 
     // Selectors for EUR-Lex search results
-    $('.SearchResult').slice(0, 3).each((_, element) => {
+    $('.SearchResult').slice(0, 2).each((_, element) => {
        const title = $(element).find('.title, h2').first().text().trim();
        const link = $(element).find('a.title, h2 a').attr('href');
        
@@ -203,20 +203,163 @@ async function scrapeEURLex(): Promise<NewsItem[]> {
   }
 }
 
+async function scrapeCEPEJ(): Promise<NewsItem[]> {
+  try {
+    const { data } = await axios.get('https://www.coe.int/en/web/cepej/home/newsroom', {
+      timeout: 8000,
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+      },
+    });
+    const $ = cheerio.load(data);
+    const news: NewsItem[] = [];
+
+    $('article, .news-item, .media').slice(0, 2).each((_, element) => {
+      const title = $(element).find('h3, h2, .news-title, a').first().text().trim();
+      const link = $(element).find('a').first().attr('href');
+      const dateText = $(element).find('time, .date').first().text().trim();
+      const summaryText = $(element).find('p').first().text().trim();
+
+      if (title && link) {
+        news.push({
+          id: `cepej-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          title,
+          source: 'CEPEJ',
+          date: dateText || new Date().toISOString().split('T')[0],
+          url: link.startsWith('http') ? link : `https://www.coe.int${link}`,
+          summary:
+            summaryText ||
+            'Actualización del Consejo de Europa (CEPEJ) sobre justicia e inteligencia artificial.',
+          tags: ['#CEPEJ', '#ConsejoDeEuropa', '#Justicia'],
+        });
+      }
+    });
+
+    if (news.length === 0) {
+      return [
+        {
+          id: 'cepej-fallback-1',
+          title: 'CEPEJ: Newsroom sobre justicia e inteligencia artificial',
+          source: 'CEPEJ',
+          date: new Date().toISOString().split('T')[0],
+          url: 'https://www.coe.int/en/web/cepej/home/newsroom',
+          summary:
+            'Acceda a las últimas noticias del CEPEJ relacionadas con justicia digital e inteligencia artificial.',
+          tags: ['#CEPEJ', '#ConsejoDeEuropa', '#Justicia'],
+        },
+      ];
+    }
+
+    return news;
+  } catch (error) {
+    console.error('Error scraping CEPEJ:', error);
+    return [
+      {
+        id: 'cepej-error-fallback',
+        title: 'CEPEJ: Newsroom oficial',
+        source: 'CEPEJ',
+        date: new Date().toISOString().split('T')[0],
+        url: 'https://www.coe.int/en/web/cepej/home/newsroom',
+        summary:
+          'Consulte directamente en el portal del Consejo de Europa (CEPEJ) las últimas novedades.',
+        tags: ['#CEPEJ', '#ConsejoDeEuropa'],
+      },
+    ];
+  }
+}
+
+async function scrapeAbogacia(): Promise<NewsItem[]> {
+  try {
+    const { data } = await axios.get(
+      'https://www.abogacia.es/actualidad/noticias/?areas-tematicas%5B%5D=abogacia-innovacion-tic',
+      {
+        timeout: 8000,
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        },
+      },
+    );
+    const $ = cheerio.load(data);
+    const news: NewsItem[] = [];
+
+    $('article, .news-list__item, .card, .noticia').slice(0, 2).each((_, element) => {
+      const title = $(element).find('h2, h3, .news-title, .entry-title').first().text().trim();
+      const link = $(element).find('a').first().attr('href');
+      const dateText = $(element)
+        .find('time, .news-date, .entry-date')
+        .first()
+        .text()
+        .trim();
+      const summaryText = $(element).find('p, .excerpt').first().text().trim();
+
+      if (title && link) {
+        news.push({
+          id: `abogacia-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          title,
+          source: 'Abogacía Española',
+          date: dateText || new Date().toISOString().split('T')[0],
+          url: link.startsWith('http') ? link : `https://www.abogacia.es${link}`,
+          summary:
+            summaryText ||
+            'Noticia del Consejo General de la Abogacía Española sobre innovación tecnológica e IA.',
+          tags: ['#Abogacia', '#Innovacion', '#IA'],
+        });
+      }
+    });
+
+    if (news.length === 0) {
+      return [
+        {
+          id: 'abogacia-fallback-1',
+          title: 'Innovación y TIC en la Abogacía Española',
+          source: 'Abogacía Española',
+          date: new Date().toISOString().split('T')[0],
+          url: 'https://www.abogacia.es/actualidad/noticias/?areas-tematicas%5B%5D=abogacia-innovacion-tic',
+          summary:
+            'Acceda a las noticias de innovación tecnológica e inteligencia artificial del Consejo General de la Abogacía Española.',
+          tags: ['#Abogacia', '#Innovacion', '#IA'],
+        },
+      ];
+    }
+
+    return news;
+  } catch (error) {
+    console.error('Error scraping Abogacía Española:', error);
+    return [
+      {
+        id: 'abogacia-error-fallback',
+        title: 'Consejo General de la Abogacía Española: Innovación y TIC',
+        source: 'Abogacía Española',
+        date: new Date().toISOString().split('T')[0],
+        url: 'https://www.abogacia.es/actualidad/noticias/?areas-tematicas%5B%5D=abogacia-innovacion-tic',
+        summary:
+          'Consulte directamente en el portal de la Abogacía Española las últimas noticias sobre innovación e IA.',
+        tags: ['#Abogacia', '#Innovacion'],
+      },
+    ];
+  }
+}
+
 async function main() {
   console.log('Starting legal news sync...');
   
-  const [aesiaNews, eurLexNews, ecNews] = await Promise.all([
-      scrapeAESIA(),
-      scrapeEURLex(),
-      scrapeEuropeanCommission()
+  const [aesiaNews, eurLexNews, ecNews, cepejNews, abogaciaNews] = await Promise.all([
+    scrapeAESIA(),
+    scrapeEURLex(),
+    scrapeEuropeanCommission(),
+    scrapeCEPEJ(),
+    scrapeAbogacia(),
   ]);
 
   console.log(`Scraped ${aesiaNews.length} items from AESIA.`);
   console.log(`Scraped ${eurLexNews.length} items from EUR-Lex.`);
   console.log(`Scraped ${ecNews.length} items from European Commission.`);
+  console.log(`Scraped ${cepejNews.length} items from CEPEJ.`);
+  console.log(`Scraped ${abogaciaNews.length} items from Abogacía Española.`);
   
-  const allNews = [...aesiaNews, ...eurLexNews, ...ecNews].sort((a, b) => {
+  const allNews = [...aesiaNews, ...eurLexNews, ...ecNews, ...cepejNews, ...abogaciaNews].sort((a, b) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
   

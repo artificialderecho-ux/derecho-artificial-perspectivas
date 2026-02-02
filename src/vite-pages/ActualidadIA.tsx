@@ -63,9 +63,35 @@ const ActualidadIA = () => {
       case 'AESIA': return 'bg-blue-600';
       case 'EUR-Lex': return 'bg-indigo-600';
       case 'Comisión Europea': return 'bg-[#003399]'; // Azul Europa
+      case 'CEPEJ': return 'bg-purple-600';
+      case 'Abogacía Española': return 'bg-red-700';
       default: return 'bg-slate-500';
     }
   };
+
+  const groupedNews: Record<string, NewsItem[]> = apiNews.reduce(
+    (acc, item) => {
+      if (!acc[item.source]) {
+        acc[item.source] = [];
+      }
+      acc[item.source].push(item);
+      return acc;
+    },
+    {} as Record<string, NewsItem[]>,
+  );
+
+  const orderedSources = [
+    'Comisión Europea',
+    'AESIA',
+    'EUR-Lex',
+    'CEPEJ',
+    'Abogacía Española',
+  ];
+
+  const sources = [
+    ...orderedSources.filter((source) => groupedNews[source]?.length),
+    ...Object.keys(groupedNews).filter((source) => !orderedSources.includes(source)),
+  ];
 
   return (
     <Layout>
@@ -153,17 +179,32 @@ const ActualidadIA = () => {
             <span className="w-8 h-[1px] bg-primary"></span>
             Últimas Actualizaciones Oficiales
           </h2>
-          <div className="grid gap-6">
-            {apiNews.map((item) => (
-              <NewsCard 
-                key={item.id}
-                title={item.title}
-                source={item.source}
-                date={item.date}
-                url={item.url}
-                summary={item.summary}
-                tags={item.tags}
-              />
+          <div className="space-y-10">
+            {sources.map((source) => (
+              <div key={source} className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`px-2 py-1 text-[10px] uppercase tracking-wider text-white font-medium ${getSourceColor(
+                      source,
+                    )}`}
+                  >
+                    {source}
+                  </span>
+                </div>
+                <div className="grid gap-6">
+                  {groupedNews[source]?.slice(0, 2).map((item) => (
+                    <NewsCard
+                      key={item.id}
+                      title={item.title}
+                      source={item.source}
+                      date={item.date}
+                      url={item.url}
+                      summary={item.summary}
+                      tags={item.tags}
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>

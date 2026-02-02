@@ -3,7 +3,7 @@
     "id": "aesia-fallback-1",
     "title": "AESIA publica nuevas guías sobre IA Generativa",
     "source": "AESIA",
-    "date": "2026-01-24",
+    "date": "2026-02-02",
     "url": "https://aesia.digital.gob.es/es/actualidad",
     "summary": "Nueva guía comprensiva abordando el cumplimiento de modelos de IA generativa con el Reglamento de IA de la UE.",
     "tags": [
@@ -13,55 +13,54 @@
     ]
   },
   {
-    "id": "eurlex-1769266803483-8ns9n5los",
-    "title": "Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 laying down ...",
-    "source": "EUR-Lex",
-    "date": "2026-01-24",
-    "url": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:32024R1689&qid=1769266799315&rid=1",
-    "summary": "Documento legislativo o propuesta reciente sobre Inteligencia Artificial de la Unión Europea.",
-    "tags": [
-      "#UE",
-      "#Regulación",
-      "#AIAct"
-    ]
-  },
-  {
-    "id": "eurlex-1769266803487-o5j9jc3qp",
-    "title": "Regulation (EU) 2021/694 of the European Parliament and of the Council of 29 April 2021 establishing...",
-    "source": "EUR-Lex",
-    "date": "2026-01-24",
-    "url": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:32021R0694&qid=1769266799315&rid=2",
-    "summary": "Documento legislativo o propuesta reciente sobre Inteligencia Artificial de la Unión Europea.",
-    "tags": [
-      "#UE",
-      "#Regulación",
-      "#AIAct"
-    ]
-  },
-  {
-    "id": "eurlex-1769266803487-mk9wrnj27",
-    "title": "Regulation (EU) 2025/38 of the European Parliament and of the Council of 19 December 2024 laying dow...",
-    "source": "EUR-Lex",
-    "date": "2026-01-24",
-    "url": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:32025R0038&qid=1769266799315&rid=3",
-    "summary": "Documento legislativo o propuesta reciente sobre Inteligencia Artificial de la Unión Europea.",
-    "tags": [
-      "#UE",
-      "#Regulación",
-      "#AIAct"
-    ]
-  },
-  {
     "id": "ec-fallback-1",
     "title": "Paquete de innovación en IA: Ayudando a las startups europeas",
     "source": "Comisión Europea",
-    "date": "2026-01-24",
+    "date": "2026-02-02",
     "url": "https://digital-strategy.ec.europa.eu/es/library",
     "summary": "Nueva iniciativa para facilitar el acceso de las pymes a superordenadores dedicados a la IA.",
     "tags": [
       "#ComisiónEuropea",
       "#Pymes",
       "#Innovación"
+    ]
+  },
+  {
+    "id": "cepej-error-fallback",
+    "title": "CEPEJ: Newsroom oficial",
+    "source": "CEPEJ",
+    "date": "2026-02-02",
+    "url": "https://www.coe.int/en/web/cepej/home/newsroom",
+    "summary": "Consulte directamente en el portal del Consejo de Europa (CEPEJ) las últimas novedades.",
+    "tags": [
+      "#CEPEJ",
+      "#ConsejoDeEuropa"
+    ]
+  },
+  {
+    "id": "abogacia-fallback-1",
+    "title": "Innovación y TIC en la Abogacía Española",
+    "source": "Abogacía Española",
+    "date": "2026-02-02",
+    "url": "https://www.abogacia.es/actualidad/noticias/?areas-tematicas%5B%5D=abogacia-innovacion-tic",
+    "summary": "Acceda a las noticias de innovación tecnológica e inteligencia artificial del Consejo General de la Abogacía Española.",
+    "tags": [
+      "#Abogacia",
+      "#Innovacion",
+      "#IA"
+    ]
+  },
+  {
+    "id": "eurlex-fallback-1",
+    "title": "Reglamento (UE) 2024/1689 (Ley de IA) - Texto Completo",
+    "source": "EUR-Lex",
+    "date": "2024-07-12",
+    "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+    "summary": "El Reglamento de Inteligencia Artificial ha sido publicado en el Diario Oficial de la UE.",
+    "tags": [
+      "#UE",
+      "#AIAct",
+      "#Reglamento"
     ]
   }
 ]

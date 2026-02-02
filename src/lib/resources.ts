@@ -217,6 +217,35 @@ function extractFrontmatterTitle(markdown: string) {
   return extractFrontmatterField(markdown, "title");
 }
 
+function inferTitleFromMarkdown(markdown: string) {
+  const normalized = markdown.replace(/\r\n/g, "\n").trim();
+  if (!normalized) {
+    return "";
+  }
+  const lines = normalized.split("\n");
+  const blockLines: string[] = [];
+  for (const line of lines) {
+    if (!line.trim()) {
+      if (blockLines.length > 0) {
+        break;
+      }
+      continue;
+    }
+    blockLines.push(line.trim());
+  }
+  if (blockLines.length === 0) {
+    return "";
+  }
+  const joined = blockLines.join(" ");
+  const withoutHeading = joined.replace(/^#+\s*/, "").trim();
+  if (!withoutHeading) {
+    return "";
+  }
+  const sentenceMatch = withoutHeading.match(/^(.+?[.!?])(\s|$)/);
+  const sentence = sentenceMatch ? sentenceMatch[1] : withoutHeading;
+  return sentence.replace(/\s+/g, " ").trim();
+}
+
 export async function listSectionResourceSlugs(section: ResourceSection): Promise<string[]> {
   const config = getSectionConfig(section);
   const sectionDir = path.join(analisisDir, config.analysisSubdir);
@@ -283,7 +312,9 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
         ? path.join(analisisDir, entry.fileName)
         : path.join(analisisDir, entry.relativeDir, entry.fileName);
     const markdown = await readTextFile(filePath);
-    const title = extractFrontmatterTitle(markdown);
+    const frontmatterTitle = extractFrontmatterTitle(markdown);
+    const title =
+      frontmatterTitle || inferTitleFromMarkdown(markdown) || inferTitleFromFileName(baseName);
     const jurisdiction = extractFrontmatterField(markdown, "jurisdiction");
     const courtName = extractFrontmatterField(markdown, "court");
     const sourceFileName = await findMatchingSourceFileName(baseName, entry.relativeDir || null);
@@ -399,7 +430,9 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
       if (fileSlug !== slug) continue;
       const filePath = path.join(sectionDir, entry.name);
       const markdown = await readTextFile(filePath);
-      const title = extractFrontmatterTitle(markdown);
+      const frontmatterTitle = extractFrontmatterTitle(markdown);
+      const title =
+        frontmatterTitle || inferTitleFromMarkdown(markdown) || inferTitleFromFileName(baseName);
       const jurisdiction = extractFrontmatterField(markdown, "jurisdiction");
       const courtName = extractFrontmatterField(markdown, "court");
       const sourceFileName = await findMatchingSourceFileName(baseName, config.fuentesSubdir);
