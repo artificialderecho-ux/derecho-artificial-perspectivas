@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
   title: "Jurisprudencia",
@@ -101,36 +102,52 @@ export default async function JurisprudenciaPage() {
 
   const items: SentenciaItem[] = [boscoItem, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
 
-  return (
-    <main className="section-spacing">
-      <div className="container-editorial">
-        <header className="mb-12">
-          <p className="text-sm uppercase tracking-widest text-caption mb-4">Sección</p>
-          <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
-            Jurisprudencia
-          </h1>
-          <p className="lead mt-6 text-justify max-w-3xl">
-            Repositorio crítico de resoluciones judiciales y administrativas que definen el Derecho de la IA. 
-            Analizamos sentencias que sientan precedente sobre transparencia algorítmica, responsabilidad civil 
-            y protección de derechos fundamentales en la era digital.
-          </p>
-        </header>
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Jurisprudencia",
+        url: "https://derechoartificial.com/jurisprudencia",
+      },
+    ],
+  });
 
-        <section className="grid gap-6 md:grid-cols-2">
-          {items.map((item) => (
-            <Link
-              key={item.id}
-              href={item.href}
-              className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-            >
-              <p className="text-xs uppercase tracking-widest text-caption mb-3">Sentencia</p>
-              <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-              {item.description && <p className="text-body mb-6">{item.description}</p>}
-              {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
-            </Link>
-          ))}
-        </section>
-      </div>
-    </main>
+  return (
+    <>
+      <StructuredData data={breadcrumbJsonLd} />
+      <main className="section-spacing">
+        <div className="container-editorial">
+          <header className="mb-12">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Sección</p>
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+              Jurisprudencia
+            </h1>
+            <p className="lead mt-6 text-justify max-w-3xl">
+              Repositorio crítico de resoluciones judiciales y administrativas que definen el Derecho de la IA. 
+              Analizamos sentencias que sientan precedente sobre transparencia algorítmica, responsabilidad civil 
+              y protección de derechos fundamentales en la era digital.
+            </p>
+          </header>
+
+          <section className="grid gap-6 md:grid-cols-2">
+            {items.map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Sentencia</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                {item.description && <p className="text-body mb-6">{item.description}</p>}
+                {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
+              </Link>
+            ))}
+          </section>
+        </div>
+      </main>
+    </>
   );
 }

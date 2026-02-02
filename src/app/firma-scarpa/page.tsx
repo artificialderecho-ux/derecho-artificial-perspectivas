@@ -4,6 +4,7 @@ import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
   title: "Firma Scarpa",
@@ -128,45 +129,61 @@ export default async function FirmaScarpaPage() {
     (a, b) => b.dateMs - a.dateMs,
   );
 
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Firma Scarpa",
+        url: "https://derechoartificial.com/firma-scarpa",
+      },
+    ],
+  });
+
   return (
-    <main className="section-spacing">
-      <div className="container-editorial">
-        <header className="mb-12">
-          <p className="text-sm uppercase tracking-widest text-caption mb-4">Sección</p>
-          <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
-            Firma Scarpa
-          </h1>
-          <p className="lead mt-6 text-justify max-w-3xl">
-            Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión 
-            profunda sobre la intersección entre tecnología y ley, abordando desde la ética del algoritmo 
-            hasta las implicaciones prácticas del Reglamento de IA en el sector legal.
-          </p>
-        </header>
+    <>
+      <StructuredData data={breadcrumbJsonLd} />
+      <main className="section-spacing">
+        <div className="container-editorial">
+          <header className="mb-12">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Sección</p>
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+              Firma Scarpa
+            </h1>
+            <p className="lead mt-6 text-justify max-w-3xl">
+              Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión 
+              profunda sobre la intersección entre tecnología y ley, abordando desde la ética del algoritmo 
+              hasta las implicaciones prácticas del Reglamento de IA en el sector legal.
+            </p>
+          </header>
 
-        <section className="grid gap-6 md:grid-cols-2">
-          {allItems.map((item) => (
-            <Link
-              key={item.id}
-              href={item.href}
-              className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-            >
-              <p className="text-xs uppercase tracking-widest text-caption mb-3">Análisis</p>
-              <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-              {item.description && <p className="text-body mb-6">{item.description}</p>}
-              {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
-            </Link>
-          ))}
-        </section>
+          <section className="grid gap-6 md:grid-cols-2">
+            {allItems.map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Análisis</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                {item.description && <p className="text-body mb-6">{item.description}</p>}
+                {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
+              </Link>
+            ))}
+          </section>
 
-        <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
-          <p className="text-xs uppercase tracking-widest text-caption mb-3">Enfoque editorial</p>
-          <p className="text-body max-w-3xl">
-            La firma aborda el impacto jurídico de la IA desde la práctica profesional: cumplimiento normativo,
-            responsabilidad y diseño de garantías. Cada texto se construye a partir de fuentes verificables y
-            experiencias de implementación en entornos regulatorios complejos.
-          </p>
-        </section>
-      </div>
-    </main>
+          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Enfoque editorial</p>
+            <p className="text-body max-w-3xl">
+              La firma aborda el impacto jurídico de la IA desde la práctica profesional: cumplimiento normativo,
+              responsabilidad y diseño de garantías. Cada texto se construye a partir de fuentes verificables y
+              experiencias de implementación en entornos regulatorios complejos.
+            </p>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }

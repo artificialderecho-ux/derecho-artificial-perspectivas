@@ -4,13 +4,14 @@ import { LegalLayout } from "@/components/layout/LegalLayout";
 import {
   StructuredData,
   createArticleJsonLd,
+  createBreadcrumbJsonLd,
   createLegislationJsonLd,
 } from "@/components/seo/StructuredData";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 export const metadata: Metadata = {
-  title: "Guía del Reglamento de IA en 2026: Cumplimiento para Empresas | Derecho Artificial",
+  title: "Guía del Reglamento de IA en 2026: Cumplimiento para Empresas",
   description:
     "Análisis experto sobre el EU AI Act en 2026. Niveles de riesgo, sanciones y el papel de la AESIA en España para empresas y abogados.",
   alternates: {
@@ -41,13 +42,53 @@ export default async function NormativaPage() {
     jurisdiction: "Unión Europea",
   });
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "¿Qué empresas deben cumplir con el AI Act?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text:
+            "Todas aquellas que pongan en el mercado o utilicen sistemas de IA en la Unión Europea, " +
+            "incluyendo proveedores de fuera de la Unión si el output del sistema se usa en territorio europeo.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "¿Cuándo entra en vigor plenamente?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text:
+            "El Reglamento entra en vigor 20 días después de su publicación, pero su aplicabilidad es escalonada. " +
+            "Las prohibiciones de riesgo inaceptable aplican a los 6 meses, y la mayoría de las normas a los 24 meses (2026).",
+        },
+      },
+    ],
+  };
+
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Normativa",
+        url: "https://derechoartificial.com/normativa",
+      },
+    ],
+  });
+
   const slugs = await listSectionResourceSlugs("normativa");
   const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("normativa", slug)));
   const resolvedEntries = entries.filter((entry): entry is ResourceEntry => Boolean(entry));
 
   return (
     <>
-      <StructuredData data={[articleJsonLd, legislationJsonLd]} />
+      <StructuredData data={[articleJsonLd, legislationJsonLd, faqJsonLd, breadcrumbJsonLd]} />
       <LegalLayout
         title="Guía del Reglamento de IA en 2026: Cumplimiento para Empresas"
         category="Normativa"
@@ -230,8 +271,8 @@ export default async function NormativaPage() {
                   href={`/normativa/${entry.slug}`}
                   className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
                 >
-                  <p className="text-xs uppercase tracking-widest text-caption mb-3">Normativa</p>
-                  <h4 className="font-serif text-xl text-foreground mb-4">{entry.title}</h4>
+                  <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
+                  <h3 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h3>
                   {entry.summaryHtml && (
                     <p className="text-body">
                       {entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
@@ -246,4 +287,3 @@ export default async function NormativaPage() {
     </>
   );
 }
-

@@ -63,6 +63,7 @@ export function CookieBanner() {
     try {
       window.localStorage.setItem("da_cookie_consent", JSON.stringify(consentData));
     } catch {
+      void 0;
     }
 
     window.setTimeout(() => setShouldRender(false), 500);

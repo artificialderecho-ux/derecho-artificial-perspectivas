@@ -62,6 +62,7 @@ async function getContentFileDateMs(dir: string, fileName: string) {
       }
     }
   } catch {
+    void 0;
   }
 
   try {

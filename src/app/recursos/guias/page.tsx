@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import libraryDocs from "../../../data/library-docs.json";
+import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
   title: "Guías y Protocolos | Biblioteca AESIA y Comisión Europea",
@@ -66,146 +67,158 @@ export default function GuidesPage() {
   const commissionDocs: DocCard[] = [...ecDocs, ...softLawEcDocs];
   const mainAesiaDoc = aesiaDocs[0];
 
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Guías y Protocolos",
+        url: "https://derechoartificial.com/recursos/guias",
+      },
+    ],
+  });
+
   return (
-    <main className="section-spacing">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <header className="mb-16 text-center max-w-3xl mx-auto">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
-            Biblioteca Digital
-          </p>
-          <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
-            Guías y Protocolos
-          </h1>
-          <p className="lead text-muted-foreground">
-            Repositorio centralizado de documentación técnica y ética de la AESIA, la Comisión Europea y organismos internacionales.
-          </p>
-        </header>
+    <>
+      <StructuredData data={breadcrumbJsonLd} />
+      <main className="section-spacing">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <header className="mb-16 text-center max-w-3xl mx-auto">
+            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+              Biblioteca Digital
+            </p>
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
+              Guías y Protocolos
+            </h1>
+            <p className="lead text-muted-foreground">
+              Repositorio centralizado de documentación técnica y ética de la AESIA, la Comisión Europea y organismos internacionales.
+            </p>
+          </header>
 
-        <div className="space-y-20">
-          
-          {/* AESIA Section */}
-          <section id="aesia">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-[1px] bg-primary"></span>
-              <h2 className="text-2xl font-serif text-foreground">
-                Agencia Española de Supervisión de la IA (AESIA)
-              </h2>
-            </div>
-            {mainAesiaDoc && (
-              <div className="mb-10 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
-                <h3 className="font-serif text-2xl text-slate-900 mb-4">
-                  Summary: Guías Prácticas de la AESIA
-                </h3>
-                <p className="text-slate-700 mb-6 leading-relaxed text-justify hyphens-auto">
-                  La Agencia Española de Supervisión de la IA publica guías y
-                  protocolos para ayudar a organizaciones públicas y privadas a
-                  gestionar riesgos, documentar sistemas de IA y cumplir con las
-                  obligaciones del Reglamento Europeo de IA. Este repositorio
-                  reúne los documentos clave, con foco en notificación de
-                  incidentes, gobernanza y buenas prácticas de transparencia.
-                </p>
-                <a
-                  href={mainAesiaDoc.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-sm hover:bg-primary/90 transition-all duration-300 shadow-sm hover:shadow-md"
-                >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                  DESCARGAR DOCUMENTO ORIGINAL
-                </a>
+          <div className="space-y-20">
+            <section id="aesia">
+              <div className="flex items-center gap-4 mb-8">
+                <span className="w-12 h-[1px] bg-primary"></span>
+                <h2 className="text-2xl font-serif text-foreground">
+                  Agencia Española de Supervisión de la IA (AESIA)
+                </h2>
               </div>
-            )}
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {aesiaDocs.length > 0 ? (
-                aesiaDocs.map((doc) => (
-                  <DocCardItem key={doc.id} doc={doc} color="bg-blue-600" />
-                ))
-              ) : (
-                <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
-                  No hay documentos disponibles por el momento.
+              {mainAesiaDoc && (
+                <div className="mb-10 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+                  <h3 className="font-serif text-2xl text-slate-900 mb-4">
+                    Summary: Guías Prácticas de la AESIA
+                  </h3>
+                  <p className="text-slate-700 mb-6 leading-relaxed text-justify hyphens-auto">
+                    La Agencia Española de Supervisión de la IA publica guías y
+                    protocolos para ayudar a organizaciones públicas y privadas a
+                    gestionar riesgos, documentar sistemas de IA y cumplir con las
+                    obligaciones del Reglamento Europeo de IA. Este repositorio
+                    reúne los documentos clave, con foco en notificación de
+                    incidentes, gobernanza y buenas prácticas de transparencia.
+                  </p>
+                  <a
+                    href={mainAesiaDoc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-sm hover:bg-primary/90 transition-all duration-300 shadow-sm hover:shadow-md"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    DESCARGAR DOCUMENTO ORIGINAL
+                  </a>
                 </div>
               )}
-            </div>
-          </section>
 
-          <section id="cepej">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-[1px] bg-primary"></span>
-              <h2 className="text-2xl font-serif text-foreground">
-                CEPEJ (Consejo de Europa)
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {cepejDocs.length > 0 ? (
-                cepejDocs.map((doc) => (
-                  <DocCardItem key={doc.id} doc={doc} color="bg-slate-500" />
-                ))
-              ) : (
-                <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
-                  No hay documentos disponibles por el momento.
-                </div>
-              )}
-            </div>
-          </section>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {aesiaDocs.length > 0 ? (
+                  aesiaDocs.map((doc) => (
+                    <DocCardItem key={doc.id} doc={doc} color="bg-blue-600" />
+                  ))
+                ) : (
+                  <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
+                    No hay documentos disponibles por el momento.
+                  </div>
+                )}
+              </div>
+            </section>
 
-          {/* European Commission Section */}
-          <section id="comision-europea">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-[1px] bg-primary"></span>
-              <h2 className="text-2xl font-serif text-foreground">
-                Comisión Europea
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-               {commissionDocs.length > 0 ? (
-                 commissionDocs.map((doc) => (
-                   <DocCardItem key={doc.id} doc={doc} color="bg-[#003399]" />
-                 ))
-               ) : (
-                <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
-                  No hay documentos disponibles por el momento.
-                </div>
-              )}
-            </div>
-          </section>
+            <section id="cepej">
+              <div className="flex items-center gap-4 mb-8">
+                <span className="w-12 h-[1px] bg-primary"></span>
+                <h2 className="text-2xl font-serif text-foreground">
+                  CEPEJ (Consejo de Europa)
+                </h2>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {cepejDocs.length > 0 ? (
+                  cepejDocs.map((doc) => (
+                    <DocCardItem key={doc.id} doc={doc} color="bg-slate-500" />
+                  ))
+                ) : (
+                  <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
+                    No hay documentos disponibles por el momento.
+                  </div>
+                )}
+              </div>
+            </section>
 
-          <section id="otros-organismos">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="w-12 h-[1px] bg-primary"></span>
-              <h2 className="text-2xl font-serif text-foreground">
-                Otros organismos
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {otherDocs.length > 0 ? (
-                otherDocs.map((doc) => (
-                  <DocCardItem key={doc.id} doc={doc} color="bg-slate-500" />
-                ))
-              ) : (
-                <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
-                  No hay documentos disponibles por el momento.
-                </div>
-              )}
-            </div>
-          </section>
+            <section id="comision-europea">
+              <div className="flex items-center gap-4 mb-8">
+                <span className="w-12 h-[1px] bg-primary"></span>
+                <h2 className="text-2xl font-serif text-foreground">
+                  Comisión Europea
+                </h2>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {commissionDocs.length > 0 ? (
+                  commissionDocs.map((doc) => (
+                    <DocCardItem key={doc.id} doc={doc} color="bg-[#003399]" />
+                  ))
+                ) : (
+                  <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
+                    No hay documentos disponibles por el momento.
+                  </div>
+                )}
+              </div>
+            </section>
 
+            <section id="otros-organismos">
+              <div className="flex items-center gap-4 mb-8">
+                <span className="w-12 h-[1px] bg-primary"></span>
+                <h2 className="text-2xl font-serif text-foreground">
+                  Otros organismos
+                </h2>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {otherDocs.length > 0 ? (
+                  otherDocs.map((doc) => (
+                    <DocCardItem key={doc.id} doc={doc} color="bg-slate-500" />
+                  ))
+                ) : (
+                  <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
+                    No hay documentos disponibles por el momento.
+                  </div>
+                )}
+              </div>
+            </section>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
 

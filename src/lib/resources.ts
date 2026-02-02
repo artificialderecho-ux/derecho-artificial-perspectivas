@@ -72,6 +72,8 @@ export type ResourceEntry = {
   kind: ResourceKind;
   sourceUrl: string | null;
   dateMs: number | null;
+  jurisdiction?: string | null;
+  courtName?: string | null;
 };
 
 function slugifyBaseName(baseName: string) {
@@ -141,6 +143,7 @@ async function listAnalysisFiles(): Promise<AnalysisFile[]> {
             }
           }
         } catch {
+          void 0;
         }
       }
     }
@@ -184,7 +187,7 @@ async function getFileDateMs(filePath: string) {
   }
 }
 
-function extractFrontmatterTitle(markdown: string) {
+function extractFrontmatterField(markdown: string, field: string) {
   if (!markdown.startsWith("---")) {
     return "";
   }
@@ -193,8 +196,9 @@ function extractFrontmatterTitle(markdown: string) {
     return "";
   }
   const frontmatterLines = markdown.slice(3, endIndex).split("\n");
+  const regex = new RegExp(`^${field}\\s*:\\s*(.+)$`, "i");
   for (const line of frontmatterLines) {
-    const match = line.match(/^title\s*:\s*(.+)$/i);
+    const match = line.match(regex);
     if (match) {
       let value = match[1].trim();
       if (
@@ -207,6 +211,10 @@ function extractFrontmatterTitle(markdown: string) {
     }
   }
   return "";
+}
+
+function extractFrontmatterTitle(markdown: string) {
+  return extractFrontmatterField(markdown, "title");
 }
 
 export async function listSectionResourceSlugs(section: ResourceSection): Promise<string[]> {
@@ -260,6 +268,8 @@ type RawAnalysis = {
   markdown: string;
   sourceFileName: string | null;
   dateMs: number | null;
+  jurisdiction: string | null;
+  courtName: string | null;
 };
 
 async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | null> {
@@ -274,6 +284,8 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
         : path.join(analisisDir, entry.relativeDir, entry.fileName);
     const markdown = await readTextFile(filePath);
     const title = extractFrontmatterTitle(markdown);
+    const jurisdiction = extractFrontmatterField(markdown, "jurisdiction");
+    const courtName = extractFrontmatterField(markdown, "court");
     const sourceFileName = await findMatchingSourceFileName(baseName, entry.relativeDir || null);
     const dateMs = await getFileDateMs(filePath);
     return {
@@ -282,6 +294,8 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
       markdown,
       sourceFileName,
       dateMs: Number.isNaN(dateMs) ? null : dateMs,
+      jurisdiction: jurisdiction || null,
+      courtName: courtName || null,
     };
   }
   return null;
@@ -313,6 +327,7 @@ async function findMatchingSourceFileName(baseName: string, relativeDir: string 
         }
       }
     } catch {
+      void 0;
     }
   }
 
@@ -355,6 +370,8 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
     kind,
     sourceUrl,
     dateMs: raw.dateMs,
+    jurisdiction: raw.jurisdiction,
+    courtName: raw.courtName,
   };
 }
 
@@ -364,6 +381,8 @@ type RawSectionAnalysis = {
   markdown: string;
   sourceFileName: string | null;
   dateMs: number | null;
+  jurisdiction: string | null;
+  courtName: string | null;
 };
 
 async function resolveSectionRawAnalysis(section: ResourceSection, slug: string): Promise<RawSectionAnalysis | null> {
@@ -381,6 +400,8 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
       const filePath = path.join(sectionDir, entry.name);
       const markdown = await readTextFile(filePath);
       const title = extractFrontmatterTitle(markdown);
+      const jurisdiction = extractFrontmatterField(markdown, "jurisdiction");
+      const courtName = extractFrontmatterField(markdown, "court");
       const sourceFileName = await findMatchingSourceFileName(baseName, config.fuentesSubdir);
       const dateMs = await getFileDateMs(filePath);
       return {
@@ -389,6 +410,8 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
         markdown,
         sourceFileName,
         dateMs: Number.isNaN(dateMs) ? null : dateMs,
+        jurisdiction: jurisdiction || null,
+        courtName: courtName || null,
       };
     }
   } catch {
@@ -431,6 +454,8 @@ export async function getSectionResourceEntry(
     bodyHtml,
     kind,
     sourceUrl,
-     dateMs: raw.dateMs,
+    dateMs: raw.dateMs,
+    jurisdiction: raw.jurisdiction,
+    courtName: raw.courtName,
   };
 }

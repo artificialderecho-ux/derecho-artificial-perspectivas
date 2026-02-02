@@ -47,7 +47,10 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
   const url = `https://derechoartificial.com/recursos/${entry.slug}`;
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
 
-  const today = new Date().toISOString().slice(0, 10);
+  const datePublished =
+    entry.dateMs != null && !Number.isNaN(entry.dateMs)
+      ? new Date(entry.dateMs).toISOString().slice(0, 10)
+      : new Date().toISOString().slice(0, 10);
 
   const jsonLd =
     entry.kind === "Legislation"
@@ -55,27 +58,29 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
           url,
           name: entry.title,
           description,
-          datePublished: today,
+          datePublished,
+          jurisdiction: entry.jurisdiction ?? undefined,
         })
       : entry.kind === "LegalDecision"
         ? createLegalDecisionJsonLd({
             url,
             name: entry.title,
             description,
-            datePublished: today,
+            datePublished,
+            courtName: entry.courtName ?? undefined,
           })
         : entry.kind === "NewsArticle"
           ? createNewsArticleJsonLd({
               url,
               headline: entry.title,
               description,
-              datePublished: today,
+              datePublished,
             })
           : createArticleJsonLd({
               url,
               headline: entry.title,
               description,
-              datePublished: today,
+              datePublished,
             });
 
   return (

@@ -84,6 +84,13 @@ export default async function HomePage() {
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const formatDateFromMs = (value: number | null | undefined) => {
+    if (value == null) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+  };
+
   const sectionCards = [
     {
       key: "firma-scarpa",
@@ -105,7 +112,9 @@ export default async function HomePage() {
         latestJurisprudencia?.summaryHtml
           ? latestJurisprudencia.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
           : "",
-      latestMeta: latestJurisprudencia ? "Resoluciones clave sobre algoritmos y derechos" : "",
+      latestMeta: latestJurisprudencia
+        ? `${formatDateFromMs(latestJurisprudencia.dateMs)} · Resoluciones clave sobre algoritmos y derechos`
+        : "",
     },
     {
       key: "actualidad-ia",
@@ -127,7 +136,9 @@ export default async function HomePage() {
         latestNormativa?.summaryHtml
           ? latestNormativa.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
           : "",
-      latestMeta: latestNormativa ? "Análisis normativo con fuentes oficiales" : "",
+      latestMeta: latestNormativa
+        ? `${formatDateFromMs(latestNormativa.dateMs)} · Análisis normativo con fuentes oficiales`
+        : "",
     },
     {
       key: "guias",
@@ -137,7 +148,9 @@ export default async function HomePage() {
       latestHref: latestGuias ? `/recursos/guias/${latestGuias.slug}` : null,
       latestDescription:
         latestGuias?.summaryHtml ? latestGuias.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-      latestMeta: latestGuias ? "Repositorio de documentación técnica y ética" : "",
+      latestMeta: latestGuias
+        ? `${formatDateFromMs(latestGuias.dateMs)} · Repositorio de documentación técnica y ética`
+        : "",
     },
     {
       key: "quienes-somos",

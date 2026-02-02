@@ -35,6 +35,19 @@ export function createWebSiteJsonLd() {
   };
 }
 
+export function createBreadcrumbJsonLd(params: { items: { name: string; url: string }[] }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: params.items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
 export function createPersonJsonLd(params: {
   name: string;
   url: string;

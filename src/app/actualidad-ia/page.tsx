@@ -4,6 +4,7 @@ import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
   title: "Actualidad IA",
@@ -128,56 +129,72 @@ export default async function ActualidadIAPage() {
     (a, b) => b.dateMs - a.dateMs,
   );
 
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Actualidad IA",
+        url: "https://derechoartificial.com/actualidad-ia",
+      },
+    ],
+  });
+
   return (
-    <main className="section-spacing">
-      <div className="container-editorial">
-        <header className="mb-12">
-          <p className="text-sm uppercase tracking-widest text-caption mb-4">Sección</p>
-          <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
-            Actualidad IA
-          </h1>
-          <p className="lead mt-6 text-justify max-w-3xl">
-            Monitor de novedades regulatorias e institucionales. Seguimos el pulso de la AESIA, 
-            el Comité Europeo de IA y los desarrollos legislativos clave para ofrecer un briefing 
-            actualizado y curado para profesionales del derecho y el cumplimiento normativo.
-          </p>
-        </header>
+    <>
+      <StructuredData data={breadcrumbJsonLd} />
+      <main className="section-spacing">
+        <div className="container-editorial">
+          <header className="mb-12">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Sección</p>
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+              Actualidad IA
+            </h1>
+            <p className="lead mt-6 text-justify max-w-3xl">
+              Monitor de novedades regulatorias e institucionales. Seguimos el pulso de la AESIA, 
+              el Comité Europeo de IA y los desarrollos legislativos clave para ofrecer un briefing 
+              actualizado y curado para profesionales del derecho y el cumplimiento normativo.
+            </p>
+          </header>
 
-        <section className="grid gap-6 md:grid-cols-2">
-          {items.length ? (
-            items.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-              >
-                <p className="text-xs uppercase tracking-widest text-caption mb-3">Novedad</p>
-                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                {item.description && <p className="text-body mb-6">{item.description}</p>}
-                {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
-              </Link>
-            ))
-          ) : (
-            <div className="card-elevated p-6 md:col-span-2">
-              <p className="text-xs uppercase tracking-widest text-caption mb-3">Repositorio</p>
-              <h2 className="font-serif text-2xl text-foreground">Contenido en preparación</h2>
-              <p className="text-body mt-4 max-w-2xl">
-                Estamos organizando nuevos briefings sobre la agenda regulatoria de IA, criterios de cumplimiento
-                y referencias institucionales. Próximas publicaciones durante el primer trimestre de 2026.
-              </p>
-            </div>
-          )}
-        </section>
+          <section className="grid gap-6 md:grid-cols-2">
+            {items.length ? (
+              items.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+                >
+                  <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Novedad</p>
+                  <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                  {item.description && <p className="text-body mb-6">{item.description}</p>}
+                  {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
+                </Link>
+              ))
+            ) : (
+              <div className="card-elevated p-6 md:col-span-2">
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Repositorio</p>
+                <h2 className="font-serif text-2xl text-foreground">Contenido en preparación</h2>
+                <p className="text-body mt-4 max-w-2xl">
+                  Estamos organizando nuevos briefings sobre la agenda regulatoria de IA, criterios de cumplimiento
+                  y referencias institucionales. Próximas publicaciones durante el primer trimestre de 2026.
+                </p>
+              </div>
+            )}
+          </section>
 
-        <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
-          <p className="text-xs uppercase tracking-widest text-caption mb-3">Metodología editorial</p>
-          <p className="text-body max-w-3xl">
-            Cada briefing sintetiza documentos oficiales, posicionamientos regulatorios y criterios jurisprudenciales
-            relevantes para equipos jurídicos y responsables de cumplimiento. La prioridad es la trazabilidad de
-            fuentes y la aplicación práctica en entornos profesionales.
-          </p>
-        </section>
-      </div>
-    </main>
+          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Metodología editorial</p>
+            <p className="text-body max-w-3xl">
+              Cada briefing sintetiza documentos oficiales, posicionamientos regulatorios y criterios jurisprudenciales
+              relevantes para equipos jurídicos y responsables de cumplimiento. La prioridad es la trazabilidad de
+              fuentes y la aplicación práctica en entornos profesionales.
+            </p>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }

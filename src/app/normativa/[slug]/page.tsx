@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
-import { StructuredData, createLegislationJsonLd } from "@/components/seo/StructuredData";
+import {
+  StructuredData,
+  createBreadcrumbJsonLd,
+  createLegislationJsonLd,
+} from "@/components/seo/StructuredData";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 type Params = {
@@ -41,16 +45,39 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
   const url = `https://derechoartificial.com/normativa/${entry.slug}`;
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
 
+  const datePublished =
+    entry.dateMs != null && !Number.isNaN(entry.dateMs)
+      ? new Date(entry.dateMs).toISOString().slice(0, 10)
+      : new Date().toISOString().slice(0, 10);
+
   const jsonLd = createLegislationJsonLd({
     url,
     name: entry.title,
     description,
-    datePublished: new Date().toISOString().slice(0, 10),
+    datePublished,
+    jurisdiction: entry.jurisdiction ?? undefined,
+  });
+
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Normativa",
+        url: "https://derechoartificial.com/normativa",
+      },
+      {
+        name: entry.title,
+        url,
+      },
+    ],
   });
 
   return (
     <>
-      <StructuredData data={jsonLd} />
+      <StructuredData data={[jsonLd, breadcrumbJsonLd]} />
       <LegalLayout title={entry.title} category="Normativa">
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
           {entry.summaryHtml ? (

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
-import { StructuredData, createArticleJsonLd } from "@/components/seo/StructuredData";
+import {
+  StructuredData,
+  createArticleJsonLd,
+  createBreadcrumbJsonLd,
+} from "@/components/seo/StructuredData";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 type Params = {
@@ -41,16 +45,38 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
   const url = `https://derechoartificial.com/recursos/guias/${entry.slug}`;
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
 
+  const datePublished =
+    entry.dateMs != null && !Number.isNaN(entry.dateMs)
+      ? new Date(entry.dateMs).toISOString().slice(0, 10)
+      : new Date().toISOString().slice(0, 10);
+
   const jsonLd = createArticleJsonLd({
     url,
     headline: entry.title,
     description,
-    datePublished: new Date().toISOString().slice(0, 10),
+    datePublished,
+  });
+
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Guías y Protocolos",
+        url: "https://derechoartificial.com/recursos/guias",
+      },
+      {
+        name: entry.title,
+        url,
+      },
+    ],
   });
 
   return (
     <>
-      <StructuredData data={jsonLd} />
+      <StructuredData data={[jsonLd, breadcrumbJsonLd]} />
       <LegalLayout title={entry.title} category="Guías y Protocolos">
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
           {entry.summaryHtml ? (
@@ -77,4 +103,3 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
     </>
   );
 }
-

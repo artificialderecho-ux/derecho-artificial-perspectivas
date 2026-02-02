@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
   title: "Guides & Protocols",
@@ -33,59 +34,75 @@ export const metadata: Metadata = {
 };
 
 export default function GuidesProtocolsPage() {
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com/en",
+      },
+      {
+        name: "Guides & Protocols",
+        url: "https://derechoartificial.com/en/guides-protocols",
+      },
+    ],
+  });
+
   return (
-    <main className="section-spacing">
-      <div className="container-editorial">
-        <header className="mb-12">
-          <p className="text-sm uppercase tracking-widest text-caption mb-4">Section</p>
-          <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">Guides &amp; Protocols</h1>
-          <p className="text-lg text-body mt-6">Checklists, internal policies, and practical workflows.</p>
-        </header>
+    <>
+      <StructuredData data={breadcrumbJsonLd} />
+      <main className="section-spacing">
+        <div className="container-editorial">
+          <header className="mb-12">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Section</p>
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">Guides &amp; Protocols</h1>
+            <p className="text-lg text-body mt-6">Checklists, internal policies, and practical workflows.</p>
+          </header>
 
-        <section className="grid gap-6 md:grid-cols-2">
-          <div className="card-elevated p-6">
-            <p className="text-xs uppercase tracking-widest text-caption mb-3">Governance</p>
-            <h2 className="font-serif text-2xl text-foreground mb-4">Assessment protocols</h2>
-            <p className="text-body">
-              Operational frameworks to classify risks, document systems, and define internal ownership before
-              deployment.
+          <section className="grid gap-6 md:grid-cols-2">
+            <div className="card-elevated p-6">
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Governance</p>
+              <h2 className="font-serif text-2xl text-foreground mb-4">Assessment protocols</h2>
+              <p className="text-body">
+                Operational frameworks to classify risks, document systems, and define internal ownership before
+                deployment.
+              </p>
+            </div>
+
+            <div className="card-elevated p-6">
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Compliance</p>
+              <h2 className="font-serif text-2xl text-foreground mb-4">Legal checklists</h2>
+              <p className="text-body">
+                Verification lists for legal and compliance teams focused on GDPR, transparency, traceability, and
+                internal audits.
+              </p>
+            </div>
+
+            <div className="card-elevated p-6">
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Operations</p>
+              <h2 className="font-serif text-2xl text-foreground mb-4">Monitoring protocols</h2>
+              <p className="text-body">
+                Routines to monitor performance, bias, and drift, plus incident response and escalation guidelines.
+              </p>
+            </div>
+
+            <div className="card-elevated p-6">
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Documentation</p>
+              <h2 className="font-serif text-2xl text-foreground mb-4">Evidence templates</h2>
+              <p className="text-body">
+                Templates to document governance and compliance evidence for clients, regulators, and auditors.
+              </p>
+            </div>
+          </section>
+
+          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">2026 repository</p>
+            <p className="text-body max-w-3xl">
+              This repository prioritizes protocols that can be deployed immediately. Each guide includes objectives,
+              operational steps, ownership roles, and minimum metrics for adoption.
             </p>
-          </div>
-
-          <div className="card-elevated p-6">
-            <p className="text-xs uppercase tracking-widest text-caption mb-3">Compliance</p>
-            <h2 className="font-serif text-2xl text-foreground mb-4">Legal checklists</h2>
-            <p className="text-body">
-              Verification lists for legal and compliance teams focused on GDPR, transparency, traceability, and
-              internal audits.
-            </p>
-          </div>
-
-          <div className="card-elevated p-6">
-            <p className="text-xs uppercase tracking-widest text-caption mb-3">Operations</p>
-            <h2 className="font-serif text-2xl text-foreground mb-4">Monitoring protocols</h2>
-            <p className="text-body">
-              Routines to monitor performance, bias, and drift, plus incident response and escalation guidelines.
-            </p>
-          </div>
-
-          <div className="card-elevated p-6">
-            <p className="text-xs uppercase tracking-widest text-caption mb-3">Documentation</p>
-            <h2 className="font-serif text-2xl text-foreground mb-4">Evidence templates</h2>
-            <p className="text-body">
-              Templates to document governance and compliance evidence for clients, regulators, and auditors.
-            </p>
-          </div>
-        </section>
-
-        <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
-          <p className="text-xs uppercase tracking-widest text-caption mb-3">2026 repository</p>
-          <p className="text-body max-w-3xl">
-            This repository prioritizes protocols that can be deployed immediately. Each guide includes objectives,
-            operational steps, ownership roles, and minimum metrics for adoption.
-          </p>
-        </section>
-      </div>
-    </main>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }
