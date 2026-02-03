@@ -148,7 +148,7 @@ export default async function HomePage() {
       latestHref: latestFirma?.urlPath ?? null,
       latestDescription: latestFirma?.description ?? "",
       latestMeta:
-        latestFirma != null ? `${formatDate(latestFirma.datePublished)} · ${latestFirma.author}` : "",
+        latestFirma != null ? `${formatDate(latestFirma.date)} · ${latestFirma.author}` : "",
     },
     {
       key: "jurisprudencia",
@@ -172,7 +172,9 @@ export default async function HomePage() {
       latestHref: latestActualidad?.urlPath ?? null,
       latestDescription: latestActualidad?.description ?? "",
       latestMeta:
-        latestActualidad != null ? `${formatDate(latestActualidad.datePublished)} · ${latestActualidad.author}` : "",
+        latestActualidad != null
+          ? `${formatDate(latestActualidad.date)} · ${latestActualidad.author}`
+          : "",
     },
     {
       key: "normativa",
@@ -262,7 +264,7 @@ export default async function HomePage() {
                   {latestActualidad.description}
                 </p>
                 <p className="mt-auto text-xs text-caption">
-                  {formatDate(latestActualidad.datePublished)} · {latestActualidad.author}
+                  {formatDate(latestActualidad.date)} · {latestActualidad.author}
                 </p>
               </Link>
             )}
@@ -282,7 +284,7 @@ export default async function HomePage() {
                   {latestFirma.description}
                 </p>
                 <p className="mt-auto text-xs text-caption">
-                  {formatDate(latestFirma.datePublished)} · {latestFirma.author}
+                  {formatDate(latestFirma.date)} · {latestFirma.author}
                 </p>
               </Link>
             )}
