@@ -39,48 +39,96 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [actualidadSlugs, firmaSlugs, normativaSlugs, jurisprudenciaSlugs, guiasSlugs] = await Promise.all([
+  const [
+    actualidadJsonSlugs,
+    actualidadResourceSlugs,
+    firmaJsonSlugs,
+    firmaResourceSlugs,
+    normativaSlugs,
+    jurisprudenciaSlugs,
+    guiasSlugs,
+  ] = await Promise.all([
     listContentSlugs("actualidad-ia"),
+    listSectionResourceSlugs("actualidad-ia"),
     listContentSlugs("firma-scarpa"),
+    listSectionResourceSlugs("firma-scarpa"),
     listSectionResourceSlugs("normativa"),
     listSectionResourceSlugs("jurisprudencia"),
     listSectionResourceSlugs("guias"),
   ]);
 
-  const [actualidadEntries, firmaEntries] = await Promise.all([
-    Promise.all(actualidadSlugs.map((slug) => getContentEntry("actualidad-ia", slug))),
-    Promise.all(firmaSlugs.map((slug) => getContentEntry("firma-scarpa", slug))),
-  ]);
+  const [actualidadJsonEntries, actualidadResourceEntries, firmaJsonEntries, firmaResourceEntries] =
+    await Promise.all([
+      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("actualidad-ia", slug))),
+      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug))),
+      Promise.all(firmaJsonSlugs.map((slug) => getContentEntry("firma-scarpa", slug))),
+      Promise.all(firmaResourceSlugs.map((slug) => getSectionResourceEntry("firma-scarpa", slug))),
+    ]);
 
-  const resolvedActualidad = actualidadEntries.filter((e): e is NonNullable<typeof e> => Boolean(e));
-  const resolvedFirma = firmaEntries.filter((e): e is NonNullable<typeof e> => Boolean(e));
+  const resolvedActualidadJson = actualidadJsonEntries.filter(
+    (e): e is NonNullable<typeof e> => Boolean(e),
+  );
+  const resolvedActualidadResources = actualidadResourceEntries.filter(
+    (e): e is NonNullable<typeof e> => Boolean(e),
+  );
+  const resolvedFirmaJson = firmaJsonEntries.filter((e): e is NonNullable<typeof e> => Boolean(e));
+  const resolvedFirmaResources = firmaResourceEntries.filter(
+    (e): e is NonNullable<typeof e> => Boolean(e),
+  );
 
-  resolvedActualidad.sort((a, b) => {
-    const aTime = new Date(a.datePublished).getTime();
-    const bTime = new Date(b.datePublished).getTime();
-    if (Number.isNaN(aTime) || Number.isNaN(bTime)) return 0;
-    return bTime - aTime;
-  });
+  const unifiedActualidad = [
+    ...resolvedActualidadJson.map((e) => ({
+      title: e.title,
+      description: e.description,
+      date: new Date(e.datePublished).getTime(),
+      urlPath: e.urlPath,
+      author: e.author,
+    })),
+    ...resolvedActualidadResources.map((e) => ({
+      title: e.title,
+      description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+      date: e.dateMs ?? 0,
+      urlPath: `/actualidad-ia/${e.slug}`,
+      author: "Derecho Artificial",
+    })),
+  ];
 
-  resolvedFirma.sort((a, b) => {
-    const aTime = new Date(a.datePublished).getTime();
-    const bTime = new Date(b.datePublished).getTime();
-    if (Number.isNaN(aTime) || Number.isNaN(bTime)) return 0;
-    return bTime - aTime;
-  });
+  const unifiedFirma = [
+    ...resolvedFirmaJson.map((e) => ({
+      title: e.title,
+      description: e.description,
+      date: new Date(e.datePublished).getTime(),
+      urlPath: e.urlPath,
+      author: e.author,
+    })),
+    ...resolvedFirmaResources.map((e) => ({
+      title: e.title,
+      description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+      date: e.dateMs ?? 0,
+      urlPath: `/firma-scarpa/${e.slug}`,
+      author: "Derecho Artificial",
+    })),
+  ];
 
-  const latestActualidad = resolvedActualidad[0] ?? null;
-  const latestFirma = resolvedFirma[0] ?? null;
+  unifiedActualidad.sort((a, b) => b.date - a.date);
+  unifiedFirma.sort((a, b) => b.date - a.date);
+
+  const latestActualidad = unifiedActualidad[0] ?? null;
+  const latestFirma = unifiedFirma[0] ?? null;
 
   const [latestNormativa, latestJurisprudencia, latestGuias] = await Promise.all([
-    normativaSlugs[0] ? getSectionResourceEntry("normativa", normativaSlugs[0]) : Promise.resolve(null),
-    jurisprudenciaSlugs[0] ? getSectionResourceEntry("jurisprudencia", jurisprudenciaSlugs[0]) : Promise.resolve(null),
+    normativaSlugs[0]
+      ? getSectionResourceEntry("normativa", normativaSlugs[0])
+      : Promise.resolve(null),
+    jurisprudenciaSlugs[0]
+      ? getSectionResourceEntry("jurisprudencia", jurisprudenciaSlugs[0])
+      : Promise.resolve(null),
     guiasSlugs[0] ? getSectionResourceEntry("guias", guiasSlugs[0]) : Promise.resolve(null),
   ]);
 
-  const formatDate = (value: string) => {
+  const formatDate = (value: string | number) => {
     const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return value;
+    if (Number.isNaN(date.getTime())) return "";
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
