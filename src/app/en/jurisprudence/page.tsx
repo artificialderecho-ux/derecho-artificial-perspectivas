@@ -123,6 +123,35 @@ export default async function JurisprudencePage() {
               algorithmic transparency, civil liability, and protection of fundamental rights in the digital era.
             </p>
           </header>
+          
+          <section className="grid gap-6 md:grid-cols-3 mb-12">
+            <Link
+              href={boscoItem.href}
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Featured</p>
+              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">BOSCO Judgment</h2>
+              <p className="text-sm text-body">Algorithmic transparency and source code access.</p>
+              <div className="mt-4 text-xs text-caption">{boscoItem.meta}</div>
+            </Link>
+            <Link
+              href="/en/jurisprudence"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Activity</p>
+              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Latest decisions</h2>
+              <p className="text-sm text-body">Entries recorded in the section.</p>
+              <div className="mt-4 text-xs text-caption">Total: {items.length}</div>
+            </Link>
+            <Link
+              href="/en/legislation"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Context</p>
+              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Regulatory framework</h2>
+              <p className="text-sm text-body">Relation with the EU AI Act and applicable regulation.</p>
+            </Link>
+          </section>
 
           <section className="grid gap-6 md:grid-cols-2">
             {items.map((item) => (

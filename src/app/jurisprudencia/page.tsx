@@ -131,6 +131,35 @@ export default async function JurisprudenciaPage() {
               y protección de derechos fundamentales en la era digital.
             </p>
           </header>
+          
+          <section className="grid gap-6 md:grid-cols-3 mb-12">
+            <Link
+              href={boscoItem.href}
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Destacada</p>
+              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Sentencia BOSCO</h2>
+              <p className="text-sm text-body">Transparencia algorítmica y acceso al código fuente.</p>
+              <div className="mt-4 text-xs text-caption">{boscoItem.meta}</div>
+            </Link>
+            <Link
+              href="/jurisprudencia"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actividad</p>
+              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Últimas resoluciones</h2>
+              <p className="text-sm text-body">Entradas registradas en la sección.</p>
+              <div className="mt-4 text-xs text-caption">Total: {items.length}</div>
+            </Link>
+            <Link
+              href="/normativa"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Contexto</p>
+              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Marco regulatorio</h2>
+              <p className="text-sm text-body">Relación con el EU AI Act y normativa aplicable.</p>
+            </Link>
+          </section>
 
           <section className="grid gap-6 md:grid-cols-2">
             {items.map((item) => (
