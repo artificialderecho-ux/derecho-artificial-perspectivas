@@ -3,32 +3,34 @@ import fs from "fs";
 import path from "path";
 
 export const metadata: Metadata = {
-  title: "Glosario de IA Legal y Regulación Europea | Derecho Artificial",
-  description: "Diccionario especializado en términos de Inteligencia Artificial, EU AI Act, Legaltech y ética digital. Definiciones clave para abogados y empresas.",
+  title: "Legal AI Glossary | Derecho Artificial",
+  description:
+    "Comprehensive glossary of legal and technical terms related to Artificial Intelligence, regulation and compliance in the EU.",
   alternates: {
-    canonical: "https://derechoartificial.com/glosario-ia-legal",
+    canonical: "https://derechoartificial.com/en/legal-ai-glossary",
     languages: {
-      es: "https://derechoartificial.com/glosario-ia-legal",
-      en: "https://derechoartificial.com/en/legal-ai-glossary",
+      "es-ES": "https://derechoartificial.com/glosario-ia-legal",
+      "en-US": "https://derechoartificial.com/en/legal-ai-glossary",
     },
   },
 };
 
-export default function GlossaryPage() {
+export default function LegalAIGlossaryPage() {
   const filePath = path.join(process.cwd(), "public", "recursos", "glosario.html");
   const html = fs.readFileSync(filePath, "utf-8");
+
   return (
     <main className="min-h-screen pb-20 bg-slate-50">
       <section className="pt-24 pb-16 md:pt-32 md:pb-12 px-6 bg-background border-b border-border">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
-            Recursos · Diccionario Jurídico
+            Resources · Legal Dictionary
           </p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 leading-tight">
-            Glosario de IA Legal
+            Legal AI Glossary
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-sans mb-10">
-            Definiciones técnicas y jurídicas para comprender el marco regulatorio y doctrinal de la inteligencia artificial en Europa.
+            Definitions of legal and technical concepts used across AI regulation, compliance and doctrine in Europe.
           </p>
         </div>
       </section>

@@ -240,6 +240,11 @@ export default async function EnglishHomePage() {
       items: uniqueByHref(guiasItems).slice(0, 2),
     },
     {
+      key: "legal-ai-glossary",
+      label: "Legal AI Glossary",
+      href: "/en/legal-ai-glossary",
+    },
+    {
       key: "about-us",
       label: "About Us",
       href: "/en/about-us",

@@ -240,6 +240,11 @@ export default async function HomePage() {
       items: uniqueByHref(guiasItems).slice(0, 2),
     },
     {
+      key: "glosario",
+      label: "Glosario IA legal",
+      href: "/glosario-ia-legal",
+    },
+    {
       key: "quienes-somos",
       label: "Quiénes somos",
       href: "/quienes-somos",

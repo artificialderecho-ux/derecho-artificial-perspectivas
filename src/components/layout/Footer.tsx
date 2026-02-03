@@ -71,6 +71,12 @@ export function Footer() {
                     Guides & Protocols
                   </Link>
                   <Link
+                    href="/en/legal-ai-glossary"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Legal AI Glossary
+                  </Link>
+                  <Link
                     href="/en/about-us"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
@@ -114,6 +120,12 @@ export function Footer() {
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
                     Guías y Protocolos
+                  </Link>
+                  <Link
+                    href="/glosario-ia-legal"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Glosario IA legal
                   </Link>
                   <Link
                     href="/quienes-somos"
