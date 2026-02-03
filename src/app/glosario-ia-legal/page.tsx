@@ -15,8 +15,18 @@ export const metadata: Metadata = {
 };
 
 export default function GlossaryPage() {
-  const filePath = path.join(process.cwd(), "public", "recursos", "glosario.html");
-  const html = fs.readFileSync(filePath, "utf-8");
+  const candidates = ["Recursos", "recursos"];
+  let html = "";
+  for (const dir of candidates) {
+    const p = path.join(process.cwd(), "public", dir, "glosario.html");
+    if (fs.existsSync(p)) {
+      html = fs.readFileSync(p, "utf-8");
+      break;
+    }
+  }
+  if (!html) {
+    html = "<p>El glosario no está disponible en este momento.</p>";
+  }
   return (
     <main className="min-h-screen pb-20 bg-slate-50">
       <section className="pt-24 pb-16 md:pt-32 md:pb-12 px-6 bg-background border-b border-border">

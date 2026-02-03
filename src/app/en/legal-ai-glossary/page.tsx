@@ -16,8 +16,18 @@ export const metadata: Metadata = {
 };
 
 export default function LegalAIGlossaryPage() {
-  const filePath = path.join(process.cwd(), "public", "recursos", "glosario.html");
-  const html = fs.readFileSync(filePath, "utf-8");
+  const candidates = ["Recursos", "recursos"];
+  let html = "";
+  for (const dir of candidates) {
+    const p = path.join(process.cwd(), "public", dir, "glosario.html");
+    if (fs.existsSync(p)) {
+      html = fs.readFileSync(p, "utf-8");
+      break;
+    }
+  }
+  if (!html) {
+    html = "<p>The glossary is not available at the moment.</p>";
+  }
 
   return (
     <main className="min-h-screen pb-20 bg-slate-50">

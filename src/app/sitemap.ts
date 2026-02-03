@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${siteUrl}/aviso-legal`, lastModified, changeFrequency: "yearly", priority: 0.2 },
     { url: `${siteUrl}/politica-de-privacidad`, lastModified, changeFrequency: "yearly", priority: 0.2 },
     { url: `${siteUrl}/cookies`, lastModified, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${siteUrl}/glosario-ia-legal`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/en`, lastModified, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/en/scarpa-firm`, lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/en/jurisprudence`, lastModified, changeFrequency: "weekly", priority: 0.7 },
@@ -28,6 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${siteUrl}/en/guides-protocols`, lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/en/about-us`, lastModified, changeFrequency: "yearly", priority: 0.5 },
     { url: `${siteUrl}/en/contact`, lastModified, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${siteUrl}/en/legal-ai-glossary`, lastModified, changeFrequency: "monthly", priority: 0.7 },
   ];
 
   // Rutas dinámicas de Firma Scarpa
