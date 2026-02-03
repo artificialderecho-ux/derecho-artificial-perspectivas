@@ -1,8 +1,10 @@
+---
 title: "TSJ Canarias: negligencia disciplinaria por citas jurisprudenciales falsas generadas por IA en recurso de apelación"
 jurisdiction: "España · Canarias"
 court: "Tribunal Superior de Justicia de Canarias"
 date: 2026-02-03
-TSJ Canarias: negligencia disciplinaria por citas jurisprudenciales falsas generadas por IA en recurso de apelación
+---
+
 El Tribunal Superior de Justicia de Canarias ha acordado formar pieza separada para investigar la responsabilidad disciplinaria de un letrado que incorporó en un recurso de apelación penal múltiples citas de sentencias del Tribunal Supremo inexistentes o apócrifas, presumiblemente generadas por una herramienta de inteligencia artificial generativa sin verificación alguna. La Sala de lo Penal considera que esta conducta reiterada constituye una infracción grave al deber de veracidad y buena fe procesal (art. 247.3 LEC y art. 542.3 LOPJ), diferenciándola de un mero error aislado. El caso, resuelto en sentencia notificada a inicios de 2026, representa uno de los primeros pronunciamientos judiciales españoles que vincula explícitamente el uso negligente de IA con responsabilidad profesional del abogado.
 Contexto y alcance del documento
 La Sentencia 126/2025 de la Sala de lo Penal del TSJ de Canarias (ponente: presidente Juan Luis Lorenzo Bragado) confirma la absolución dictada por la Audiencia Provincial de Santa Cruz de Tenerife en un procedimiento por agresión sexual a menor. Al examinar el recurso de apelación interpuesto por la acusación particular, el tribunal detecta numerosas citas jurisprudenciales falsas: al menos siete resoluciones del Tribunal Supremo (con números, fechas y ponentes concretos) y un supuesto informe del CGPJ de 2019 sobre credibilidad del testimonio infantil, ninguno de los cuales existe en bases oficiales (CENDOJ, CURIA, etc.).

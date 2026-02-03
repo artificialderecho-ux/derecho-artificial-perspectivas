@@ -18,15 +18,15 @@
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased text-base md:text-lg;
   }
 
   p {
-    @apply text-justify hyphens-none;
+    @apply text-justify hyphens-none font-medium;
   }
 
   .prose p {
-    @apply text-justify hyphens-none;
+    @apply text-justify hyphens-none font-medium;
   }
 
   .lead {
@@ -152,7 +152,7 @@
   .prose-editorial {
     @apply prose prose-neutral dark:prose-invert max-w-none 
     prose-headings:font-serif prose-headings:font-normal prose-h1:text-4xl prose-h2:text-3xl
-    prose-p:text-lg prose-p:leading-relaxed prose-p:text-body prose-p:text-justify
+    prose-p:text-lg prose-p:leading-relaxed prose-p:text-body prose-p:text-justify prose-p:font-medium
     prose-a:text-primary prose-a:no-underline prose-a:border-b prose-a:border-primary/30 hover:prose-a:border-primary
     prose-blockquote:border-l-2 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic
     prose-img:rounded-sm;
