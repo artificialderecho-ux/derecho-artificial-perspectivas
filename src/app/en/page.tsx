@@ -258,6 +258,64 @@ export default async function EnglishHomePage() {
 
   return (
     <main>
+      <section className="section-spacing">
+        <div className="container-wide">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
+                Reference map
+              </p>
+              <h2 className="font-display text-2xl md:text-3xl text-foreground">
+                Law & AI at a glance
+              </h2>
+            </div>
+            <p className="text-sm text-caption max-w-xl">
+              Direct access to the project’s key areas with context and recent activity.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(160px,_auto)]">
+            <Link href="/en/legal-ai-glossary" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 lg:row-span-2 hover:border-primary/30 transition-all">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Glossary</p>
+              <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">Legal AI Glossary</h3>
+              <p className="text-sm text-body">Technical and legal dictionary for the EU ecosystem.</p>
+              <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
+                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
+                <span>Updated</span>
+              </div>
+            </Link>
+            <Link href="/en/ai-news" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 transition-all">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AI News</p>
+              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings & analysis</h3>
+              <p className="text-sm text-body">Latest entries and resources.</p>
+              <p className="mt-4 text-xs text-caption">Recent entries: {unifiedActualidad.length}</p>
+            </Link>
+            <Link href="/en/jurisprudence" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudence</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Key decisions</h3>
+              <p className="text-sm text-body">Selection on algorithms and rights.</p>
+              <p className="mt-4 text-xs text-caption">Entries: {jurisprudenciaSlugs.length}</p>
+            </Link>
+            <Link href="/en/legislation" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Legislation</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Regulatory framework</h3>
+              <p className="text-sm text-body">EU AI Act and applicable regulation.</p>
+              <p className="mt-4 text-xs text-caption">Entries: {normativaSlugs.length}</p>
+            </Link>
+            <Link href="/en/guides-protocols" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guides & Protocols</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Technical library</h3>
+              <p className="text-sm text-body">Official documentation and soft law.</p>
+              <p className="mt-4 text-xs text-caption">Documents: {guiasSlugs.length}</p>
+            </Link>
+            <Link href="/en/scarpa-firm" className="bg-card border border-border rounded-sm p-6 lg:col-span-4 hover:border-primary/30 transition-all">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Scarpa Firm</p>
+              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Essays and working notes</h3>
+              <p className="text-sm text-body">Original analysis and downloadable materials.</p>
+              <p className="mt-4 text-xs text-caption">Entries: {unifiedFirma.length}</p>
+            </Link>
+          </div>
+        </div>
+      </section>
       <section className="py-20 md:py-28 bg-surface border-b border-divider">
         <div className="container-narrow text-center">
           <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">
