@@ -13,6 +13,7 @@ import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resourc
 const PDF_MAPPING: Record<string, string> = {
   "clawdbot-ilusion-privacidad": "informe-clawdbot-rgpd.pdf",
   "informe-clawdbot": "informe-clawdbot.pdf",
+  "neuroderechos": "neuroderechos.pdf",
 };
 
 export async function generateStaticParams() {
