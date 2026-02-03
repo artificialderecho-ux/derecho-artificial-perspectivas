@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
+import type { ResourceEntry } from "@/lib/resources";
+import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import latestNews from "@/data/latest-news.json";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
@@ -53,6 +56,110 @@ export default async function AiNewsPage() {
     return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const resourceSlugs = await listSectionResourceSlugs("actualidad-ia");
+  const resourceEntries = await Promise.all(
+    resourceSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug)),
+  );
+  const resolvedResourceEntries = resourceEntries.filter(
+    (entry): entry is ResourceEntry => Boolean(entry),
+  );
+
+  const contentItems = sortedEntries.map((entry) => {
+    const time = new Date(entry.datePublished).getTime();
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const parts: string[] = [];
+    parts.push(formatDate(entry.datePublished));
+    if (entry.author) {
+      parts.push(entry.author);
+    }
+    return {
+      id: `content-${entry.slug}`,
+      href: entry.urlPath,
+      title: entry.title,
+      description: entry.description,
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const resourceItems = resolvedResourceEntries.map((entry) => {
+    const time = entry.dateMs ?? 0;
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const date =
+      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+    const dateLabel =
+      date && !Number.isNaN(date.getTime())
+        ? date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+        : null;
+
+    const plainSummary = entry.summaryHtml ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "";
+
+    const parts: string[] = [];
+    if (dateLabel) {
+      parts.push(dateLabel);
+    }
+    if (entry.sourceUrl) {
+      parts.push("Includes original document download");
+    }
+
+    return {
+      id: `resource-${entry.slug}`,
+      href: `/actualidad-ia/${entry.slug}`,
+      title: entry.title,
+      description: plainSummary,
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const items = [...contentItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+
+  type NewsItem = {
+    id: string;
+    title: string;
+    source: string;
+    date: string;
+    url: string;
+    summary: string;
+    tags: string[];
+  };
+
+  const apiNews: NewsItem[] = latestNews as NewsItem[];
+
+  const getSourceColor = (source: string) => {
+    switch (source) {
+      case "AESIA":
+        return "bg-blue-600";
+      case "EUR-Lex":
+        return "bg-indigo-600";
+      case "Comisión Europea":
+        return "bg-[#003399]";
+      case "CEPEJ":
+        return "bg-purple-600";
+      case "Abogacía Española":
+        return "bg-red-700";
+      default:
+        return "bg-slate-500";
+    }
+  };
+
+  const groupedNews: Record<string, NewsItem[]> = apiNews.reduce(
+    (acc, item) => {
+      if (!acc[item.source]) {
+        acc[item.source] = [];
+      }
+      acc[item.source].push(item);
+      return acc;
+    },
+    {} as Record<string, NewsItem[]>,
+  );
+
+  const orderedSources = ["Comisión Europea", "AESIA", "EUR-Lex", "CEPEJ", "Abogacía Española"];
+  const sources = [
+    ...orderedSources.filter((source) => groupedNews[source]?.length),
+    ...Object.keys(groupedNews).filter((source) => !orderedSources.includes(source)),
+  ];
+
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       {
@@ -78,19 +185,17 @@ export default async function AiNewsPage() {
           </header>
 
           <section className="grid gap-6 md:grid-cols-2">
-            {sortedEntries.length ? (
-              sortedEntries.map((entry) => (
+            {items.length ? (
+              items.map((item) => (
                 <Link
-                  key={entry.slug}
-                  href={entry.urlPath}
+                  key={item.id}
+                  href={item.href}
                   className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
                 >
-                  <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Editorial briefing</p>
-                  <h2 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h2>
-                  <p className="text-body mb-6">{entry.description}</p>
-                  <div className="text-sm text-caption">
-                    {formatDate(entry.datePublished)} · {entry.author}
-                  </div>
+                  <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Briefing</p>
+                  <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                  {item.description && <p className="text-body mb-6">{item.description}</p>}
+                  {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
                 </Link>
               ))
             ) : (
@@ -112,6 +217,46 @@ export default async function AiNewsPage() {
               legal teams and compliance leads. We prioritize traceability of sources and practical impact.
             </p>
           </section>
+
+          {sources.length > 0 && (
+            <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Official updates</p>
+              <div className="space-y-10">
+                {sources.map((source) => (
+                  <div key={source} className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-white font-medium ${getSourceColor(
+                          source,
+                        )}`}
+                      >
+                        {source}
+                      </span>
+                    </div>
+                    <div className="space-y-4">
+                      {groupedNews[source]?.slice(0, 2).map((item) => (
+                        <div key={item.id} className="border border-divider/60 bg-card p-4 rounded-sm">
+                          <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-serif text-lg text-foreground hover:text-primary transition-colors"
+                          >
+                            {item.title}
+                          </a>
+                          <div className="text-xs text-caption mt-1">
+                            <span>{item.date}</span>
+                            {item.tags && item.tags.length > 0 && <span className="ml-2">{item.tags.join(" · ")}</span>}
+                          </div>
+                          {item.summary && <p className="text-sm text-body mt-2">{item.summary}</p>}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </main>
     </>

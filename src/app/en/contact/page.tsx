@@ -35,6 +35,15 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const contactPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    mainEntityOfPage: "https://derechoartificial.com/en/contact",
+    name: "Contact - Derecho Artificial",
+    description:
+      "Contact form for inquiries, corrections, and editorial collaborations.",
+  };
+
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       {
@@ -50,7 +59,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <StructuredData data={breadcrumbJsonLd} />
+      <StructuredData data={[contactPageJsonLd, breadcrumbJsonLd]} />
       <main>
         <section className="section-spacing" id="contact">
           <div className="container-editorial">

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
+import type { ResourceEntry } from "@/lib/resources";
+import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
@@ -53,6 +55,70 @@ export default async function ScarpaFirmPage() {
     return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const resourceSlugs = await listSectionResourceSlugs("firma-scarpa");
+  const resourceEntries = await Promise.all(
+    resourceSlugs.map((slug) => getSectionResourceEntry("firma-scarpa", slug)),
+  );
+  const resolvedResourceEntries = resourceEntries.filter(
+    (entry): entry is ResourceEntry => Boolean(entry),
+  );
+
+  type UnifiedItem = {
+    id: string;
+    href: string;
+    title: string;
+    description: string;
+    meta: string;
+    dateMs: number;
+  };
+
+  const contentItems: UnifiedItem[] = sortedEntries.map((entry) => {
+    const time = new Date(entry.datePublished).getTime();
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const parts: string[] = [];
+    parts.push(formatDate(entry.datePublished));
+    if (entry.author) {
+      parts.push(entry.author);
+    }
+    return {
+      id: `content-${entry.slug}`,
+      href: entry.urlPath,
+      title: entry.title,
+      description: entry.description,
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const resourceItems: UnifiedItem[] = resolvedResourceEntries.map((entry) => {
+    const time = entry.dateMs ?? 0;
+    const safeTime = Number.isNaN(time) ? 0 : time;
+    const date =
+      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+    const dateLabel =
+      date && !Number.isNaN(date.getTime())
+        ? date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+        : null;
+    const plainSummary = entry.summaryHtml ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "";
+    const parts: string[] = [];
+    if (dateLabel) {
+      parts.push(dateLabel);
+    }
+    if (entry.sourceUrl) {
+      parts.push("Includes original document download");
+    }
+    return {
+      id: `resource-${entry.slug}`,
+      href: `/firma-scarpa/${entry.slug}`,
+      title: entry.title,
+      description: plainSummary,
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+    };
+  });
+
+  const allItems: UnifiedItem[] = [...contentItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       {
@@ -80,18 +146,16 @@ export default async function ScarpaFirmPage() {
           </header>
 
           <section className="grid gap-6 md:grid-cols-2">
-            {sortedEntries.map((entry) => (
+            {allItems.map((item) => (
               <Link
-                key={entry.slug}
-                href={entry.urlPath}
+                key={item.id}
+                href={item.href}
                 className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
               >
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Essay</p>
-                <h2 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h2>
-                <p className="text-body mb-6">{entry.description}</p>
-                <div className="text-sm text-caption">
-                  {formatDate(entry.datePublished)} · {entry.author}
-                </div>
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Analysis</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                {item.description && <p className="text-body mb-6">{item.description}</p>}
+                {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
               </Link>
             ))}
           </section>

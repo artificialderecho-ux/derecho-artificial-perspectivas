@@ -62,132 +62,227 @@ export default function AboutUsPage() {
     <>
       <StructuredData data={[aboutPageJsonLd, breadcrumbJsonLd]} />
       <main>
-        <section className="py-24 bg-surface">
-          <div className="container-narrow">
-            <p className="text-xs uppercase tracking-[0.2em] text-caption mb-4">About Us</p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-8 leading-tight">
-              Independent Observatory on Law & Artificial Intelligence
-            </h1>
-            <div className="prose prose-lg text-body">
-              <p>
-                Derecho Artificial is an independent initiative born from the intersection between legal technique and
-                technological reality. We do not just inform; we analyze, deconstruct, and project the future of
-                regulation in the era of algorithms.
+        <article className="section-spacing" id="mission">
+          <div className="container-editorial">
+            <header className="mb-16">
+              <p className="text-sm uppercase tracking-widest text-caption mb-4">About the project</p>
+              <div className="flex items-center gap-2 mb-6">
+                <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+                  About Derecho Artificial
+                </h1>
+              </div>
+              <p className="text-lg text-body">
+                A space for rigorous legal reflection in the age of artificial intelligence.
               </p>
-              <p>
-                Our mission is clear: to provide rigour in a noise-filled environment. We connect the EU AI Act with the
-                daily reality of firms, translate technical papers into legal risks, and oversee the actions of new
-                regulatory bodies like AESIA.
+            </header>
+
+            <div className="prose-editorial mb-24">
+              <section className="mb-16">
+                <h2>What is Derecho Artificial</h2>
+                <p>
+                  Derecho Artificial is an independent editorial publication dedicated to analyzing the legal, ethical
+                  and social implications of artificial intelligence. Our goal is to contribute to an informed debate
+                  on how Law should respond to the challenges posed by these technologies.
+                </p>
+                <p>
+                  Founded in 2024, the project stems from the conviction that the Spanish-speaking world needs a
+                  reference space where legal professionals, academics, regulators and citizens can find rigorous and
+                  accessible analysis on these topics.
+                </p>
+              </section>
+
+              <section className="mb-16">
+                <h2>Why we exist</h2>
+                <p>
+                  Artificial intelligence is transforming legal practice and raises fundamental questions about justice,
+                  responsibility and human rights. Yet much of the public debate is dominated by:
+                </p>
+                <ul className="list-disc pl-6 space-y-3 my-6">
+                  <li>Tech marketing narratives that downplay risks.</li>
+                  <li>Sensationalist storytelling that exaggerates threats without rigour.</li>
+                  <li>Technical analyses inaccessible to non‑specialists.</li>
+                  <li>English‑centric content overlooking Spanish‑language legal systems.</li>
+                </ul>
+                <p>
+                  Derecho Artificial aims for the middle ground: serious yet accessible analysis, critical yet
+                  constructive, global yet attentive to local realities.
+                </p>
+              </section>
+
+              <section className="mb-16">
+                <h2>Who we address</h2>
+                <p>Our content is designed for:</p>
+                <ul className="list-disc pl-6 space-y-3 my-6">
+                  <li>
+                    <strong>Legal professionals</strong>: Lawyers, judges, prosecutors and notaries who need to
+                    understand AI tools affecting their practice.
+                  </li>
+                  <li>
+                    <strong>Academics and researchers</strong>: Law professors and students studying the intersection
+                    with technology.
+                  </li>
+                  <li>
+                    <strong>Regulators and policymakers</strong>: Officials designing and implementing AI regulatory
+                    frameworks.
+                  </li>
+                  <li>
+                    <strong>Informed citizens</strong>: People interested in understanding how AI affects their rights.
+                  </li>
+                </ul>
+              </section>
+
+              <section className="mb-16">
+                <h2>Our approach</h2>
+                <p>We are guided by the following methodological principles:</p>
+                <ul className="list-disc pl-6 space-y-3 my-6">
+                  <li>
+                    <strong>Academic rigour</strong>: Analyses based on primary sources, case law and updated doctrine.
+                  </li>
+                  <li>
+                    <strong>Editorial independence</strong>: No sponsored content or advertising that compromises our
+                    line.
+                  </li>
+                  <li>
+                    <strong>Accessibility</strong>: We avoid unnecessary jargon without sacrificing technical precision.
+                  </li>
+                  <li>
+                    <strong>Critical perspective</strong>: We question both techno‑optimism and unjustified
+                    catastrophism.
+                  </li>
+                  <li>
+                    <strong>Practical focus</strong>: We connect theoretical analysis with concrete implications for
+                    legal practice.
+                  </li>
+                </ul>
+              </section>
+
+              <section className="mb-16">
+                <h2>How we work</h2>
+                <p>
+                  All content goes through an editorial review including source verification and peer review when
+                  appropriate. We publish corrections when errors are identified and maintain transparency about funding.
+                </p>
+                <p>
+                  Derecho Artificial is currently a non‑profit project sustained by voluntary contributions. We do not
+                  use intrusive advertising or sell user data. Our only income sources are reader donations and
+                  occasional academic consulting projects.
+                </p>
+              </section>
+            </div>
+
+            <section className="mb-24 p-8 bg-surface border border-divider rounded-lg">
+              <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">About the Editorial Lead</h2>
+              <p className="text-lg text-body mb-6">
+                This editorial project is directed and coordinated by <strong>Ricardo S. C.</strong>
               </p>
+
+              <div className="space-y-4 text-body leading-relaxed">
+                <p>
+                  <strong>Academic Background</strong>
+                </p>
+                <ul className="list-disc pl-6 space-y-1 my-2 text-body">
+                  <li>LL.B. in Law, Universidad Europea de Madrid.</li>
+                  <li>Master in Legal Informatics, Universidad Nacional de Educación a Distancia (UNED).</li>
+                  <li>Master in Audiovisual Business Management, Instituto de Empresa (IE), Madrid.</li>
+                </ul>
+
+                <p className="mt-6">
+                  <strong>Multidisciplinary Editorial Team</strong>
+                </p>
+                <p>
+                  To address the complexity of AI, this project collaborates with top‑tier experts. External
+                  contributions come from AI engineers, specialist programmers and legal philosophers, ensuring a
+                  comprehensive, technical and humanistic view of today’s legal challenges.
+                </p>
+              </div>
+            </section>
+
+            <div id="manifesto" className="bg-surface/50 p-8 md:p-12 rounded-lg border border-border my-20">
+              <header className="mb-12 text-center">
+                <p className="text-sm uppercase tracking-widest text-primary mb-4 font-bold">Our Principles</p>
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Editorial Manifesto</h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Commitment to independence, ethics and critical thinking.
+                </p>
+              </header>
+
+              <div className="grid gap-12 md:grid-cols-1">
+                <section>
+                  <h3 className="font-serif text-xl text-foreground mb-3 font-semibold">1. Editorial independence</h3>
+                  <p className="text-body">
+                    Derecho Artificial is an independent editorial project, without commercial funding or ties that
+                    compromise critical analysis. We do not accept sponsorships, commercial agreements or affiliation
+                    relationships with tech providers or institutions.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="font-serif text-xl text-foreground mb-3 font-semibold">2. Centrality of Law</h3>
+                  <p className="text-body">
+                    Legal and regulatory analysis prevails over technological, commercial or speculative discourse. We
+                    prioritize institutional sources, normative texts and grounded doctrinal analysis.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="font-serif text-xl text-foreground mb-3 font-semibold">3. Primacy of institutional sources</h3>
+                  <p className="text-body">
+                    Public institutions, regulators, case law and official documentation form the basis of our analysis.
+                    Corporate or commercial sources are cited with critical context and never as primary authority.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="font-serif text-xl text-foreground mb-3 font-semibold">4. Human oversight</h3>
+                  <p className="text-body">
+                    AI cannot replace professional judgment in decisions affecting fundamental rights. We defend
+                    effective human oversight—not merely formal—as a non‑negotiable requirement in sensitive legal
+                    contexts.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="font-serif text-xl text-foreground mb-3 font-semibold">5. European focus</h3>
+                  <p className="text-body">
+                    The European framework—AI Act, GDPR, Charter of Fundamental Rights—anchors our analysis. We
+                    prioritize the EU regulatory perspective over more permissive models in other jurisdictions.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="font-serif text-xl text-foreground mb-3 font-semibold">6. Prudence on automation</h3>
+                  <p className="text-body">
+                    We reject technological determinism and unchecked acceleration. Deploying AI systems in legal
+                    contexts requires critical risk evaluation, regulatory compliance and preservation of due process
+                    guarantees.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="font-serif text-xl text-foreground mb-3 font-semibold">7. Rigour over speed</h3>
+                  <p className="text-body">
+                    We prioritize accuracy, depth and grounded analysis over immediacy or calendar‑driven publishing.
+                    Legal rigour requires time and reflection, not rushed reactions.
+                  </p>
+                </section>
+              </div>
+            </div>
+
+            <div className="prose-editorial">
+              <section>
+                <h2>Participate</h2>
+                <p>
+                  Derecho Artificial is open to collaboration. If you share our values and wish to contribute—as author,
+                  reviewer, translator or otherwise—please get in touch.
+                </p>
+                <p>
+                  We also welcome topic suggestions, error corrections and constructive feedback. The quality of this
+                  project depends on dialogue with our reader community.
+                </p>
+              </section>
             </div>
           </div>
-        </section>
-
-        <div
-          id="manifesto"
-          className="bg-surface/50 p-8 md:p-12 rounded-lg border border-border my-20 container-narrow"
-        >
-          <header className="mb-12 text-center">
-            <p className="text-sm uppercase tracking-widest text-primary mb-4 font-bold">Our Principles</p>
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Editorial Manifesto</h2>
-            <p className="text-lg text-body max-w-2xl mx-auto">
-              Seven pillars defining our approach to information, analysis, and technology.
-            </p>
-          </header>
-
-          <div className="grid gap-12">
-            <article className="flex gap-6">
-              <span className="text-4xl font-serif text-primary/20 font-bold">01</span>
-              <div>
-                <h3 className="font-serif text-xl text-foreground mb-2">Technical Rigour</h3>
-                <p className="text-body">
-                  We do not confuse &apos;automation&apos; with &apos;intelligence&apos;. We distinguish between Machine
-                  Learning and Symbolic Logic. Legal analysis requires technical precision.
-                </p>
-              </div>
-            </article>
-
-            <article className="flex gap-6">
-              <span className="text-4xl font-serif text-primary/20 font-bold">02</span>
-              <div>
-                <h3 className="font-serif text-xl text-foreground mb-2">Critical Independence</h3>
-                <p className="text-body">
-                  We are not spokespersons for any Big Tech or lobby. We analyze regulation from the perspective of
-                  rights and legal security, not commercial hype.
-                </p>
-              </div>
-            </article>
-
-            <article className="flex gap-6">
-              <span className="text-4xl font-serif text-primary/20 font-bold">03</span>
-              <div>
-                <h3 className="font-serif text-xl text-foreground mb-2">Humanism by Design</h3>
-                <p className="text-body">
-                  Technology must serve the human being, not the other way around. We defend the supremacy of
-                  fundamental rights in the face of algorithmic efficiency.
-                </p>
-              </div>
-            </article>
-
-            <article className="flex gap-6">
-              <span className="text-4xl font-serif text-primary/20 font-bold">04</span>
-              <div>
-                <h3 className="font-serif text-xl text-foreground mb-2">Regulatory Anticipation</h3>
-                <p className="text-body">
-                  We don&apos;t wait for the law to be published. We analyze drafts, proposals, and trends to anticipate
-                  the regulatory future.
-                </p>
-              </div>
-            </article>
-
-            <article className="flex gap-6">
-              <span className="text-4xl font-serif text-primary/20 font-bold">05</span>
-              <div>
-                <h3 className="font-serif text-xl text-foreground mb-2">Transdisciplinary</h3>
-                <p className="text-body">
-                  Law cannot be understood in isolation. We integrate Philosophy, Ethics, and Computer Science into our
-                  legal analysis.
-                </p>
-              </div>
-            </article>
-
-            <article className="flex gap-6">
-              <span className="text-4xl font-serif text-primary/20 font-bold">06</span>
-              <div>
-                <h3 className="font-serif text-xl text-foreground mb-2">Clarity without Simplification</h3>
-                <p className="text-body">
-                  We explain complex concepts without losing nuance. We reject clickbait and alarmism.
-                </p>
-              </div>
-            </article>
-
-            <article className="flex gap-6">
-              <span className="text-4xl font-serif text-primary/20 font-bold">07</span>
-              <div>
-                <h3 className="font-serif text-xl text-foreground mb-2">Commitment to Truth</h3>
-                <p className="text-body">
-                  In the age of post-truth and generative AI, we verify sources, cross-check data, and rectify errors
-                  transparently.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <section className="py-24 border-t border-divider">
-          <div className="container-narrow text-center">
-            <h2 className="font-serif text-3xl text-foreground mb-6">Contact Us</h2>
-            <p className="text-body mb-8">
-              Do you have any questions, suggestions, or proposals? Write to us directly.
-            </p>
-            <a
-              href="mailto:contacto@derechoartificial.com"
-              className="inline-block bg-foreground text-background px-8 py-3 rounded-sm font-medium hover:bg-primary transition-colors"
-            >
-              contacto@derechoartificial.com
-            </a>
-          </div>
-        </section>
+        </article>
       </main>
     </>
   );
