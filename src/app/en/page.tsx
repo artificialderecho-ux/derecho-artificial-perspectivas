@@ -132,14 +132,123 @@ export default async function EnglishHomePage() {
     return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   };
 
-  const sections = [
-    { name: "Scarpa Firm", href: "/en/scarpa-firm" },
-    { name: "Jurisprudence", href: "/en/jurisprudence" },
-    { name: "AI News", href: "/en/ai-news" },
-    { name: "Legislation", href: "/en/legislation" },
-    { name: "Guides & Protocols", href: "/en/guides-protocols" },
-    { name: "About Us", href: "/en/about-us" },
-    { name: "Contact", href: "/en/contact" },
+  const formatDateFromMs = (value: number | null | undefined) => {
+    if (value == null) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  };
+
+  const [normativaTopEntries, jurisprudenciaTopEntries, guiasTopEntries] = await Promise.all([
+    Promise.all(
+      normativaSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("normativa", slug)),
+    ),
+    Promise.all(
+      jurisprudenciaSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("jurisprudencia", slug)),
+    ),
+    Promise.all(guiasSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("guias", slug))),
+  ]);
+
+  const normativaItems =
+    normativaTopEntries
+      .filter((e): e is NonNullable<typeof e> => Boolean(e))
+      .map((e) => ({
+        title: e.title,
+        href: `/normativa/${e.slug}`,
+        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
+        meta: `${formatDateFromMs(e.dateMs)} · Regulatory analysis with official sources`,
+      })) ?? [];
+
+  const jurisprudenciaItems =
+    jurisprudenciaTopEntries
+      .filter((e): e is NonNullable<typeof e> => Boolean(e))
+      .map((e) => ({
+        title: e.title,
+        href: `/jurisprudencia/${e.slug}`,
+        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
+        meta: `${formatDateFromMs(e.dateMs)} · Key decisions on algorithms and rights`,
+      })) ?? [];
+
+  const guiasItems =
+    guiasTopEntries
+      .filter((e): e is NonNullable<typeof e> => Boolean(e))
+      .map((e) => ({
+        title: e.title,
+        href: `/recursos/guias/${e.slug}`,
+        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
+        meta: `${formatDateFromMs(e.dateMs)} · Repository of technical and ethical documentation`,
+      })) ?? [];
+
+  const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
+    const seen = new Set<string>();
+    const res: T[] = [];
+    for (const it of arr) {
+      if (seen.has(it.href)) continue;
+      seen.add(it.href);
+      res.push(it);
+    }
+    return res;
+  };
+
+  const sectionCards = [
+    {
+      key: "scarpa-firm",
+      label: "Scarpa Firm",
+      href: "/en/scarpa-firm",
+      items: uniqueByHref(
+        [unifiedFirma[0], unifiedFirma[1]]
+          .filter((e): e is NonNullable<typeof e> => Boolean(e))
+          .map((e) => ({
+            title: e.title,
+            href: e.urlPath,
+            description: e.description ?? "",
+            meta: `${formatDate(e.date)} · ${e.author}`,
+          })),
+      ),
+    },
+    {
+      key: "jurisprudence",
+      label: "Jurisprudence",
+      href: "/en/jurisprudence",
+      items: uniqueByHref(jurisprudenciaItems).slice(0, 2),
+    },
+    {
+      key: "ai-news",
+      label: "AI News",
+      href: "/en/ai-news",
+      items: uniqueByHref(
+        [unifiedActualidad[0], unifiedActualidad[1]]
+          .filter((e): e is NonNullable<typeof e> => Boolean(e))
+          .map((e) => ({
+            title: e.title,
+            href: e.urlPath,
+            description: e.description ?? "",
+            meta: `${formatDate(e.date)} · ${e.author}`,
+          })),
+      ),
+    },
+    {
+      key: "legislation",
+      label: "Legislation",
+      href: "/en/legislation",
+      items: uniqueByHref(normativaItems).slice(0, 2),
+    },
+    {
+      key: "guides",
+      label: "Guides & Protocols",
+      href: "/en/guides-protocols",
+      items: uniqueByHref(guiasItems).slice(0, 2),
+    },
+    {
+      key: "about-us",
+      label: "About Us",
+      href: "/en/about-us",
+    },
+    {
+      key: "contact",
+      label: "Contact",
+      href: "/en/contact",
+    },
   ];
 
   return (
@@ -270,15 +379,19 @@ export default async function EnglishHomePage() {
             Sections
           </h2>
           <div className="space-y-6">
-            {sections.map((section) => (
+            {sectionCards.map((section) => (
               <div
-                key={section.href}
+                key={section.key}
                 className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Section</p>
-                    <h3 className="font-serif text-xl md:text-2xl text-foreground">{section.name}</h3>
+                    {section.items && section.items.length > 0 && (
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">
+                        Section
+                      </p>
+                    )}
+                    <h3 className="font-serif text-xl md:text-2xl text-foreground">{section.label}</h3>
                   </div>
                   <Link
                     href={section.href}
@@ -287,6 +400,25 @@ export default async function EnglishHomePage() {
                     View section <span>→</span>
                   </Link>
                 </div>
+                {section.items && section.items.length > 0 && (
+                  <div className="mt-2 flex flex-col gap-3">
+                    {section.items.slice(0, 2).map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                      >
+                        <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                        {item.description &&
+                          item.title &&
+                          item.description.trim().toLowerCase() !== item.title.trim().toLowerCase() && (
+                            <p className="text-sm text-body line-clamp-2">{item.description}</p>
+                          )}
+                        {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>

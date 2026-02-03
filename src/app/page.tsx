@@ -139,68 +139,105 @@ export default async function HomePage() {
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const [normativaTopEntries, jurisprudenciaTopEntries, guiasTopEntries] = await Promise.all([
+    Promise.all(
+      normativaSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("normativa", slug)),
+    ),
+    Promise.all(
+      jurisprudenciaSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("jurisprudencia", slug)),
+    ),
+    Promise.all(guiasSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("guias", slug))),
+  ]);
+
+  const normativaItems =
+    normativaTopEntries
+      .filter((e): e is NonNullable<typeof e> => Boolean(e))
+      .map((e) => ({
+        title: e.title,
+        href: `/normativa/${e.slug}`,
+        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
+        meta: `${formatDateFromMs(e.dateMs)} · Análisis normativo con fuentes oficiales`,
+      })) ?? [];
+
+  const jurisprudenciaItems =
+    jurisprudenciaTopEntries
+      .filter((e): e is NonNullable<typeof e> => Boolean(e))
+      .map((e) => ({
+        title: e.title,
+        href: `/jurisprudencia/${e.slug}`,
+        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
+        meta: `${formatDateFromMs(e.dateMs)} · Resoluciones clave sobre algoritmos y derechos`,
+      })) ?? [];
+
+  const guiasItems =
+    guiasTopEntries
+      .filter((e): e is NonNullable<typeof e> => Boolean(e))
+      .map((e) => ({
+        title: e.title,
+        href: `/recursos/guias/${e.slug}`,
+        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
+        meta: `${formatDateFromMs(e.dateMs)} · Repositorio de documentación técnica y ética`,
+      })) ?? [];
+
+  const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
+    const seen = new Set<string>();
+    const res: T[] = [];
+    for (const it of arr) {
+      if (seen.has(it.href)) continue;
+      seen.add(it.href);
+      res.push(it);
+    }
+    return res;
+  };
+
   const sectionCards = [
     {
       key: "firma-scarpa",
       label: "Firma Scarpa",
       href: "/firma-scarpa",
-      latestTitle: latestFirma?.title ?? null,
-      latestHref: latestFirma?.urlPath ?? null,
-      latestDescription: latestFirma?.description ?? "",
-      latestMeta:
-        latestFirma != null ? `${formatDate(latestFirma.date)} · ${latestFirma.author}` : "",
+      items: uniqueByHref(
+        [unifiedFirma[0], unifiedFirma[1]]
+          .filter((e): e is NonNullable<typeof e> => Boolean(e))
+          .map((e) => ({
+            title: e.title,
+            href: e.urlPath,
+            description: e.description ?? "",
+            meta: `${formatDate(e.date)} · ${e.author}`,
+          })),
+      ),
     },
     {
       key: "jurisprudencia",
       label: "Jurisprudencia",
       href: "/jurisprudencia",
-      latestTitle: latestJurisprudencia?.title ?? null,
-      latestHref: latestJurisprudencia ? `/jurisprudencia/${latestJurisprudencia.slug}` : null,
-      latestDescription:
-        latestJurisprudencia?.summaryHtml
-          ? latestJurisprudencia.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
-          : "",
-      latestMeta: latestJurisprudencia
-        ? `${formatDateFromMs(latestJurisprudencia.dateMs)} · Resoluciones clave sobre algoritmos y derechos`
-        : "",
+      items: uniqueByHref(jurisprudenciaItems).slice(0, 2),
     },
     {
       key: "actualidad-ia",
       label: "Actualidad IA",
       href: "/actualidad-ia",
-      latestTitle: latestActualidad?.title ?? null,
-      latestHref: latestActualidad?.urlPath ?? null,
-      latestDescription: latestActualidad?.description ?? "",
-      latestMeta:
-        latestActualidad != null
-          ? `${formatDate(latestActualidad.date)} · ${latestActualidad.author}`
-          : "",
+      items: uniqueByHref(
+        [unifiedActualidad[0], unifiedActualidad[1]]
+          .filter((e): e is NonNullable<typeof e> => Boolean(e))
+          .map((e) => ({
+            title: e.title,
+            href: e.urlPath,
+            description: e.description ?? "",
+            meta: `${formatDate(e.date)} · ${e.author}`,
+          })),
+      ),
     },
     {
       key: "normativa",
       label: "Normativa",
       href: "/normativa",
-      latestTitle: latestNormativa?.title ?? null,
-      latestHref: latestNormativa ? `/normativa/${latestNormativa.slug}` : null,
-      latestDescription:
-        latestNormativa?.summaryHtml
-          ? latestNormativa.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
-          : "",
-      latestMeta: latestNormativa
-        ? `${formatDateFromMs(latestNormativa.dateMs)} · Análisis normativo con fuentes oficiales`
-        : "",
+      items: uniqueByHref(normativaItems).slice(0, 2),
     },
     {
       key: "guias",
       label: "Guías y Protocolos",
       href: "/recursos/guias",
-      latestTitle: latestGuias?.title ?? null,
-      latestHref: latestGuias ? `/recursos/guias/${latestGuias.slug}` : null,
-      latestDescription:
-        latestGuias?.summaryHtml ? latestGuias.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-      latestMeta: latestGuias
-        ? `${formatDateFromMs(latestGuias.dateMs)} · Repositorio de documentación técnica y ética`
-        : "",
+      items: uniqueByHref(guiasItems).slice(0, 2),
     },
     {
       key: "quienes-somos",
@@ -349,7 +386,11 @@ export default async function HomePage() {
               >
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Sección</p>
+                    {section.items && section.items.length > 0 && (
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">
+                        Sección
+                      </p>
+                    )}
                     <h3 className="font-serif text-xl md:text-2xl text-foreground">{section.label}</h3>
                   </div>
                   <Link
@@ -359,22 +400,24 @@ export default async function HomePage() {
                     Ver sección <span>→</span>
                   </Link>
                 </div>
-                {section.latestTitle && section.latestHref && (
-                  <Link
-                    href={section.latestHref}
-                    className="mt-2 border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
-                  >
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-caption mb-2">
-                      Última publicación
-                    </p>
-                    <p className="font-medium text-sm text-foreground mb-1">{section.latestTitle}</p>
-                    {section.latestDescription && (
-                      <p className="text-sm text-body line-clamp-2">{section.latestDescription}</p>
-                    )}
-                    {section.latestMeta && (
-                      <p className="mt-2 text-xs text-caption">{section.latestMeta}</p>
-                    )}
-                  </Link>
+                {section.items && section.items.length > 0 && (
+                  <div className="mt-2 flex flex-col gap-3">
+                    {section.items.slice(0, 2).map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                      >
+                        <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                        {item.description &&
+                          item.title &&
+                          item.description.trim().toLowerCase() !== item.title.trim().toLowerCase() && (
+                            <p className="text-sm text-body line-clamp-2">{item.description}</p>
+                          )}
+                        {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                      </Link>
+                    ))}
+                  </div>
                 )}
               </div>
             ))}
