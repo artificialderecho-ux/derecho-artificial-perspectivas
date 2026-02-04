@@ -6,28 +6,28 @@ import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/Structu
 import { Badges, formatDateFromMs } from "@/lib/badges";
 
 export const metadata: Metadata = {
-  title: "Referencia | Derecho Artificial",
+  title: "Reference | Derecho Artificial",
   description:
-    "Mapa de valor y capacidades editoriales: legislación, jurisprudencia, actualidad y biblioteca técnica con señales dinámicas.",
+    "Value map and editorial capabilities: legislation, jurisprudence, news and technical library with dynamic signals.",
   alternates: {
-    canonical: "/referencia",
+    canonical: "/en/reference",
     languages: {
       "es-ES": "/referencia",
-      "en-US": "/en",
+      "en-US": "/en/reference",
     },
   },
   openGraph: {
     type: "website",
-    title: "Referencia | Derecho Artificial",
+    title: "Reference | Derecho Artificial",
     description:
-      "Mapa de valor y capacidades editoriales: legislación, jurisprudencia, actualidad y biblioteca técnica con señales dinámicas.",
-    url: "/referencia",
-    locale: "es_ES",
+      "Value map and editorial capabilities: legislation, jurisprudence, news and technical library with dynamic signals.",
+    url: "/en/reference",
+    locale: "en_US",
     images: [{ url: "/logo-principal.png" }],
   },
 };
 
-export default async function ReferenciaPage() {
+export default async function ReferencePage() {
   const [
     actualidadJsonSlugs,
     actualidadResourceSlugs,
@@ -65,7 +65,7 @@ export default async function ReferenciaPage() {
     (e): e is NonNullable<typeof e> => Boolean(e),
   );
 
-  const unifiedActualidad = [
+  const unifiedNews = [
     ...resolvedActualidadJson.map((e) => ({
       title: e.title,
       description: e.description,
@@ -81,7 +81,7 @@ export default async function ReferenciaPage() {
       author: "Derecho Artificial",
     })),
   ];
-  const unifiedFirma = [
+  const unifiedFirm = [
     ...resolvedFirmaJson.map((e) => ({
       title: e.title,
       description: e.description,
@@ -97,45 +97,43 @@ export default async function ReferenciaPage() {
       author: "Derecho Artificial",
     })),
   ];
-  unifiedActualidad.sort((a, b) => b.date - a.date);
-  unifiedFirma.sort((a, b) => b.date - a.date);
+  unifiedNews.sort((a, b) => b.date - a.date);
+  unifiedFirm.sort((a, b) => b.date - a.date);
 
-  const [normativaTopEntries, jurisprudenciaTopEntries, guiasTopEntries] = await Promise.all([
+  const [legislationTop, jurisprudenceTop, guidesTop] = await Promise.all([
     Promise.all(normativaSlugs.slice(0, 3).map((slug) => getSectionResourceEntry("normativa", slug))),
-    Promise.all(
-      jurisprudenciaSlugs.slice(0, 3).map((slug) => getSectionResourceEntry("jurisprudencia", slug)),
-    ),
+    Promise.all(jurisprudenciaSlugs.slice(0, 3).map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
     Promise.all(guiasSlugs.slice(0, 3).map((slug) => getSectionResourceEntry("guias", slug))),
   ]);
 
-  const normativaItems =
-    normativaTopEntries
+  const legislationItems =
+    legislationTop
       .filter((e): e is NonNullable<typeof e> => Boolean(e))
       .map((e) => ({
         title: e.title,
         href: `/normativa/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Análisis normativo con fuentes oficiales`,
+        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Regulatory analysis with official sources`,
         dateMs: e.dateMs ?? 0,
       })) ?? [];
-  const jurisprudenciaItems =
-    jurisprudenciaTopEntries
+  const jurisprudenceItems =
+    jurisprudenceTop
       .filter((e): e is NonNullable<typeof e> => Boolean(e))
       .map((e) => ({
         title: e.title,
         href: `/jurisprudencia/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
+        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Key decisions on algorithms and rights`,
         dateMs: e.dateMs ?? 0,
       })) ?? [];
-  const guiasItems =
-    guiasTopEntries
+  const guidesItems =
+    guidesTop
       .filter((e): e is NonNullable<typeof e> => Boolean(e))
       .map((e) => ({
         title: e.title,
         href: `/recursos/guias/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Biblioteca técnica y ética`,
+        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Technical and ethical documentation`,
         dateMs: e.dateMs ?? 0,
       })) ?? [];
 
@@ -152,13 +150,13 @@ export default async function ReferenciaPage() {
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
-      { name: "Derecho Artificial", url: "https://derechoartificial.com" },
-      { name: "Referencia", url: "https://derechoartificial.com/referencia" },
+      { name: "Derecho Artificial", url: "https://derechoartificial.com/en" },
+      { name: "Reference", url: "https://derechoartificial.com/en/reference" },
     ],
   });
 
-  const latestActualidadMs = unifiedActualidad[0]?.date ?? 0;
-  const latestFirmaMs = unifiedFirma[0]?.date ?? 0;
+  const latestNewsMs = unifiedNews[0]?.date ?? 0;
+  const latestFirmMs = unifiedFirm[0]?.date ?? 0;
 
   return (
     <>
@@ -167,10 +165,10 @@ export default async function ReferenciaPage() {
         data={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Referencia | Derecho Artificial",
+          name: "Reference | Derecho Artificial",
           description:
-            "Mapa de valor y capacidades editoriales: legislación, jurisprudencia, actualidad y biblioteca técnica.",
-          url: "https://derechoartificial.com/referencia",
+            "Value map and editorial capabilities: legislation, jurisprudence, news and technical library.",
+          url: "https://derechoartificial.com/en/reference",
         }}
       />
       <StructuredData
@@ -178,22 +176,22 @@ export default async function ReferenciaPage() {
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Derecho Artificial",
-          url: "https://derechoartificial.com",
+          url: "https://derechoartificial.com/en",
           logo: "https://derechoartificial.com/logo-principal.png",
-          sameAs: ["https://derechoartificial.com/quienes-somos"],
+          sameAs: ["https://derechoartificial.com/en/about-us"],
         }}
       />
       <StructuredData
         data={{
           "@context": "https://schema.org",
           "@type": "Service",
-          name: "Análisis jurídico de IA y biblioteca técnica",
+          name: "AI Law analysis and technical library",
           serviceType: "LegalAnalysis",
           areaServed: "EU",
           provider: {
             "@type": "Organization",
             name: "Derecho Artificial",
-            url: "https://derechoartificial.com",
+            url: "https://derechoartificial.com/en",
           },
         }}
       />
@@ -202,72 +200,168 @@ export default async function ReferenciaPage() {
           <div className="container-wide">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Referencia</p>
-                <h1 className="font-display text-2xl md:text-3xl text-foreground">
-                  Rigor editorial y señalización dinámica
-                </h1>
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Reference</p>
+                <h1 className="font-display text-2xl md:text-3xl text-foreground">Editorial rigor and dynamic signals</h1>
               </div>
               <div className="text-sm">
                 <Link
-                  href="/contacto"
+                  href="/en/contact"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
-                  Contacto
+                  Contact
                 </Link>
               </div>
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(160px,_auto)]">
               <Link
-                href="/actualidad-ia"
+                href="/en/ai-news"
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actualidad IA</p>
-                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings y análisis</h3>
-                <p className="text-sm text-body">Últimas entradas y recursos de actualidad.</p>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AI News</p>
+                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings & analysis</h3>
+                <p className="text-sm text-body">Latest entries and resources.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
-                  <Badges
-                    ms={latestActualidadMs}
-                    locale="es-ES"
-                    newLabel="Nuevo"
-                    updatedLabel="Actualizado"
-                  />
+                  <Badges ms={latestNewsMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
                 </div>
               </Link>
               <Link
-                href="/firma-scarpa"
+                href="/en/scarpa-firm"
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Firma Scarpa</p>
-                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Ensayos y notas</h3>
-                <p className="text-sm text-body">Análisis propios y materiales descargables.</p>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Scarpa Firm</p>
+                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Essays & working notes</h3>
+                <p className="text-sm text-body">Original analysis and downloadable materials.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
-                  <Badges ms={latestFirmaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                  <Badges ms={latestFirmMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
                 </div>
               </Link>
               <Link
-                href="/normativa"
+                href="/en/legislation"
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
-                <h3 className="font-display text-xl text-foreground mb-2">Marco regulatorio</h3>
-                <p className="text-sm text-body">EU AI Act y regulación aplicable.</p>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Legislation</p>
+                <h3 className="font-display text-xl text-foreground mb-2">Regulatory framework</h3>
+                <p className="text-sm text-body">EU AI Act and applicable regulation.</p>
               </Link>
               <Link
-                href="/jurisprudencia"
+                href="/en/jurisprudence"
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudencia</p>
-                <h3 className="font-display text-xl text-foreground mb-2">Resoluciones clave</h3>
-                <p className="text-sm text-body">Casos sobre algoritmos y derechos.</p>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudence</p>
+                <h3 className="font-display text-xl text-foreground mb-2">Key decisions</h3>
+                <p className="text-sm text-body">Selection on algorithms and rights.</p>
               </Link>
               <Link
-                href="/recursos/guias"
+                href="/en/guides-protocols"
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías y Protocolos</p>
-                <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica</h3>
-                <p className="text-sm text-body">Documentación oficial y soft law.</p>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guides & Protocols</p>
+                <h3 className="font-display text-xl text-foreground mb-2">Technical library</h3>
+                <p className="text-sm text-body">Official documentation and soft law.</p>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-spacing bento-surface">
+          <div className="container-wide">
+            <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">Sections</h2>
+            <div className="space-y-6">
+              <div className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Section</p>
+                    <h3 className="font-serif text-xl md:text-2xl text-foreground">Legislation</h3>
+                  </div>
+                  <Link href="/en/legislation" className="text-sm font-medium text-primary inline-flex items-center gap-1">
+                    View section <span>→</span>
+                  </Link>
+                </div>
+                <div className="mt-2 flex flex-col gap-3">
+                  {uniqueByHref(legislationItems).slice(0, 2).map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                    >
+                      <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                      <Badges
+                        ms={item.dateMs}
+                        locale="en-US"
+                        newLabel="New"
+                        updatedLabel="Updated"
+                        className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
+                      />
+                      {item.description && <p className="text-sm text-body line-clamp-2">{item.description}</p>}
+                      {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Section</p>
+                    <h3 className="font-serif text-xl md:text-2xl text-foreground">Jurisprudence</h3>
+                  </div>
+                  <Link href="/en/jurisprudence" className="text-sm font-medium text-primary inline-flex items-center gap-1">
+                    View section <span>→</span>
+                  </Link>
+                </div>
+                <div className="mt-2 flex flex-col gap-3">
+                  {uniqueByHref(jurisprudenceItems).slice(0, 2).map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                    >
+                      <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                      <Badges
+                        ms={item.dateMs}
+                        locale="en-US"
+                        newLabel="New"
+                        updatedLabel="Updated"
+                        className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
+                      />
+                      {item.description && <p className="text-sm text-body line-clamp-2">{item.description}</p>}
+                      {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Section</p>
+                    <h3 className="font-serif text-xl md:text-2xl text-foreground">Guides & Protocols</h3>
+                  </div>
+                  <Link href="/en/guides-protocols" className="text-sm font-medium text-primary inline-flex items-center gap-1">
+                    View section <span>→</span>
+                  </Link>
+                </div>
+                <div className="mt-2 flex flex-col gap-3">
+                  {uniqueByHref(guidesItems).slice(0, 2).map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                    >
+                      <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                      <Badges
+                        ms={item.dateMs}
+                        locale="en-US"
+                        newLabel="New"
+                        updatedLabel="Updated"
+                        className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
+                      />
+                      {item.description && <p className="text-sm text-body line-clamp-2">{item.description}</p>}
+                      {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -275,128 +369,25 @@ export default async function ReferenciaPage() {
         <section className="section-spacing bento-surface">
           <div className="container-wide">
             <div className="rounded-lg border border-divider bg-surface p-8">
-              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Método editorial</p>
-              <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-4">Rigor, fuentes y gobernanza</h2>
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Editorial method</p>
+              <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-4">Rigor, sources and governance</h2>
               <p className="text-sm text-body mb-6">
-                Priorizamos marcos regulatorios y documentación oficial verificable. Cada pieza enlaza fuentes, fechas y
-                contexto para asegurar trazabilidad y cumplimiento del Reglamento de IA.
+                We prioritize regulatory frameworks and verifiable official documentation. Each piece links sources,
+                dates and context to ensure traceability and compliance with the EU AI Act.
               </p>
               <div className="grid gap-4 md:grid-cols-3">
-                <Link href="/normativa" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Normativa</p>
-                  <p className="text-sm text-body">EU AI Act, RGPD y desarrollos regulatorios relevantes.</p>
+                <Link href="/en/legislation" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Legislation</p>
+                  <p className="text-sm text-body">EU AI Act, GDPR and related regulatory developments.</p>
                 </Link>
-                <Link href="/recursos/guias" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Guías y Protocolos</p>
-                  <p className="text-sm text-body">AESIA, CEPEJ, Comisión Europea y organismos internacionales.</p>
+                <Link href="/en/guides-protocols" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Guides & Protocols</p>
+                  <p className="text-sm text-body">AESIA, CEPEJ, European Commission and international bodies.</p>
                 </Link>
-                <Link href="/jurisprudencia" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Jurisprudencia</p>
-                  <p className="text-sm text-body">Resoluciones clave sobre transparencia, responsabilidad y derechos.</p>
+                <Link href="/en/jurisprudence" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Jurisprudence</p>
+                  <p className="text-sm text-body">Key decisions on transparency, liability and rights.</p>
                 </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section-spacing bento-surface">
-          <div className="container-wide">
-            <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">Secciones</h2>
-            <div className="space-y-6">
-              <div className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Sección</p>
-                    <h3 className="font-serif text-xl md:text-2xl text-foreground">Normativa</h3>
-                  </div>
-                  <Link href="/normativa" className="text-sm font-medium text-primary inline-flex items-center gap-1">
-                    Ver sección <span>→</span>
-                  </Link>
-                </div>
-                <div className="mt-2 flex flex-col gap-3">
-                  {uniqueByHref(normativaItems).slice(0, 2).map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
-                    >
-                      <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
-                      <Badges
-                        ms={item.dateMs}
-                        locale="es-ES"
-                        newLabel="Nuevo"
-                        updatedLabel="Actualizado"
-                        className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
-                      />
-                      {item.description && <p className="text-sm text-body line-clamp-2">{item.description}</p>}
-                      {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Sección</p>
-                    <h3 className="font-serif text-xl md:text-2xl text-foreground">Jurisprudencia</h3>
-                  </div>
-                  <Link href="/jurisprudencia" className="text-sm font-medium text-primary inline-flex items-center gap-1">
-                    Ver sección <span>→</span>
-                  </Link>
-                </div>
-                <div className="mt-2 flex flex-col gap-3">
-                  {uniqueByHref(jurisprudenciaItems).slice(0, 2).map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
-                    >
-                      <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
-                      <Badges
-                        ms={item.dateMs}
-                        locale="es-ES"
-                        newLabel="Nuevo"
-                        updatedLabel="Actualizado"
-                        className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
-                      />
-                      {item.description && <p className="text-sm text-body line-clamp-2">{item.description}</p>}
-                      {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Sección</p>
-                    <h3 className="font-serif text-xl md:text-2xl text-foreground">Guías y Protocolos</h3>
-                  </div>
-                  <Link href="/recursos/guias" className="text-sm font-medium text-primary inline-flex items-center gap-1">
-                    Ver sección <span>→</span>
-                  </Link>
-                </div>
-                <div className="mt-2 flex flex-col gap-3">
-                  {uniqueByHref(guiasItems).slice(0, 2).map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
-                    >
-                      <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
-                      <Badges
-                        ms={item.dateMs}
-                        locale="es-ES"
-                        newLabel="Nuevo"
-                        updatedLabel="Actualizado"
-                        className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
-                      />
-                      {item.description && <p className="text-sm text-body line-clamp-2">{item.description}</p>}
-                      {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
-                    </Link>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
@@ -406,17 +397,17 @@ export default async function ReferenciaPage() {
           <div className="container-wide">
             <div className="rounded-lg border border-divider bg-surface p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Contacto</p>
-                <h2 className="font-serif text-2xl md:text-3xl text-foreground">Colabora con el proyecto</h2>
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Contact</p>
+                <h2 className="font-serif text-2xl md:text-3xl text-foreground">Collaborate with the project</h2>
                 <p className="text-sm text-body mt-2">
-                  Enlaces verificables, análisis riguroso y señalización dinámica del ecosistema legal de la IA.
+                  Verifiable links, rigorous analysis and dynamic signaling for the AI legal ecosystem.
                 </p>
               </div>
               <Link
-                href="/contacto"
+                href="/en/contact"
                 className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
               >
-                Abrir formulario
+                Open form
               </Link>
             </div>
           </div>
