@@ -11,7 +11,7 @@
 /* Webfont: SF Pro Display served from /public/fonts/SFPro */
 @font-face {
   font-family: "SF Pro Display";
-  src: local("SF Pro Display"),
+  src: url("/fonts/SFPro/SFPRODISPLAYREGULAR.woff2") format("woff2"),
        url("/fonts/SFPro/SFPRODISPLAYREGULAR.OTF") format("opentype");
   font-weight: 400;
   font-style: normal;
@@ -19,7 +19,7 @@
 }
 @font-face {
   font-family: "SF Pro Display";
-  src: local("SF Pro Display Medium"),
+  src: url("/fonts/SFPro/SFPRODISPLAYMEDIUM.woff2") format("woff2"),
        url("/fonts/SFPro/SFPRODISPLAYMEDIUM.OTF") format("opentype");
   font-weight: 500;
   font-style: normal;
@@ -27,7 +27,7 @@
 }
 @font-face {
   font-family: "SF Pro Display";
-  src: local("SF Pro Display Bold"),
+  src: url("/fonts/SFPro/SFPRODISPLAYBOLD.woff2") format("woff2"),
        url("/fonts/SFPro/SFPRODISPLAYBOLD.OTF") format("opentype");
   font-weight: 700;
   font-style: normal;
