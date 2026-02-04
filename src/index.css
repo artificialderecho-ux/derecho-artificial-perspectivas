@@ -8,6 +8,32 @@
    Professional law firm aesthetic with visual depth
    All colors in HSL */
 
+/* Webfont: SF Pro Display served from /public/fonts/SFPro */
+@font-face {
+  font-family: "SF Pro Display";
+  src: local("SF Pro Display"),
+       url("/fonts/SFPro/SFPRODISPLAYREGULAR.OTF") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: local("SF Pro Display Medium"),
+       url("/fonts/SFPro/SFPRODISPLAYMEDIUM.OTF") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: local("SF Pro Display Bold"),
+       url("/fonts/SFPro/SFPRODISPLAYBOLD.OTF") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   html {
     @apply scroll-smooth;
@@ -18,7 +44,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: "SF Pro","SF Pro Text","SF Pro Display",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif !important;
+    font-family: "SF Pro Display","SF Pro","SF Pro Text",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif !important;
     font-weight: 700 !important;
   }
 
