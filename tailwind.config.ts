@@ -16,7 +16,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['Inter', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       fontSize: {

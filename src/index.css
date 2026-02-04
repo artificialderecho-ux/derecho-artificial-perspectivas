@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,16 +10,16 @@
    All colors in HSL */
 
 @layer base {
-  * {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  }
-  
   html {
     @apply scroll-smooth;
   }
   
   body {
-    @apply bg-background text-foreground antialiased text-base md:text-lg;
+    @apply font-sans bg-background text-foreground antialiased text-base md:text-lg;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif;
   }
 
   p {
