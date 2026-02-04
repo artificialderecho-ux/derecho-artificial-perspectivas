@@ -158,20 +158,12 @@ async function getFileDateMs(filePath: string) {
   const markdown = await readTextFile(filePath);
   let frontmatterDate: number | null = null;
 
-  if (markdown.startsWith("---")) {
-    const endIndex = markdown.indexOf("\n---", 3);
-    if (endIndex !== -1) {
-      const frontmatterLines = markdown.slice(3, endIndex).split("\n");
-      for (const line of frontmatterLines) {
-        const match = line.match(/^date\s*:\s*(.+)$/i);
-        if (match) {
-          const date = new Date(match[1].trim());
-          if (!Number.isNaN(date.getTime())) {
-            frontmatterDate = date.getTime();
-            break;
-          }
-        }
-      }
+  const normalized = markdown.replace(/\r\n/g, "\n");
+  const dateField = extractFrontmatterField(normalized, "date");
+  if (dateField) {
+    const date = new Date(dateField);
+    if (!Number.isNaN(date.getTime())) {
+      frontmatterDate = date.getTime();
     }
   }
 
@@ -188,16 +180,26 @@ async function getFileDateMs(filePath: string) {
 }
 
 function extractFrontmatterField(markdown: string, field: string) {
-  if (!markdown.startsWith("---")) {
-    return "";
+  const normalized = markdown.replace(/\r\n/g, "\n");
+  let lines: string[] = [];
+  if (normalized.startsWith("---")) {
+    const endIndex = normalized.indexOf("\n---", 3);
+    if (endIndex === -1) return "";
+    lines = normalized.slice(3, endIndex).split("\n");
+  } else {
+    const all = normalized.split("\n");
+    for (const line of all) {
+      const t = line.trim();
+      if (!t) break;
+      if (/^[a-zA-Z][\w-]*\s*:\s*.+$/.test(t)) {
+        lines.push(t);
+        continue;
+      }
+      break;
+    }
   }
-  const endIndex = markdown.indexOf("\n---", 3);
-  if (endIndex === -1) {
-    return "";
-  }
-  const frontmatterLines = markdown.slice(3, endIndex).split("\n");
   const regex = new RegExp(`^${field}\\s*:\\s*(.+)$`, "i");
-  for (const line of frontmatterLines) {
+  for (const line of lines) {
     const match = line.match(regex);
     if (match) {
       let value = match[1].trim();
@@ -248,15 +250,25 @@ function inferTitleFromMarkdown(markdown: string) {
 
 function stripFrontmatter(markdown: string) {
   const normalized = markdown.replace(/\r\n/g, "\n");
-  if (!normalized.startsWith("---")) {
-    return normalized;
+  if (normalized.startsWith("---")) {
+    const endIndex = normalized.indexOf("\n---", 3);
+    if (endIndex === -1) return normalized;
+    const rest = normalized.slice(endIndex + 4);
+    return rest.replace(/^\s+/, "");
   }
-  const endIndex = normalized.indexOf("\n---", 3);
-  if (endIndex === -1) {
-    return normalized;
+  const lines = normalized.split("\n");
+  let index = 0;
+  while (index < lines.length) {
+    const t = lines[index].trim();
+    if (!t) break;
+    if (/^[a-zA-Z][\w-]*\s*:\s*.+$/.test(t)) {
+      index += 1;
+      continue;
+    }
+    break;
   }
-  const rest = normalized.slice(endIndex + 4);
-  return rest.replace(/^\s+/, "");
+  if (index === 0) return normalized;
+  return lines.slice(index).join("\n").replace(/^\s+/, "");
 }
 
 export async function listSectionResourceSlugs(section: ResourceSection): Promise<string[]> {
