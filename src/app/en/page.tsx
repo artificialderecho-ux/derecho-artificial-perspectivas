@@ -350,11 +350,6 @@ export default async function EnglishHomePage() {
                   {isRecent(latestNewsMs) && (
                     <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
                   )}
-                  {newsWeeklyCount > 0 && (
-                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
-                      Activity: {newsWeeklyCount}
-                    </span>
-                  )}
                   <span>{formatDateFromMs(latestNewsMs, "en-US")}</span>
                 </div>
               )}
@@ -371,11 +366,6 @@ export default async function EnglishHomePage() {
                   )}
                   {isRecent(latestJurisprudenceMs) && (
                     <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
-                  )}
-                  {jurisprudenceWeeklyCount > 0 && (
-                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
-                      Activity: {jurisprudenceWeeklyCount}
-                    </span>
                   )}
                   <span>{formatDateFromMs(latestJurisprudenceMs, "en-US")}</span>
                 </div>
@@ -394,11 +384,6 @@ export default async function EnglishHomePage() {
                   {isRecent(latestLegislationMs) && (
                     <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
                   )}
-                  {legislationWeeklyCount > 0 && (
-                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
-                      Activity: {legislationWeeklyCount}
-                    </span>
-                  )}
                   <span>{formatDateFromMs(latestLegislationMs, "en-US")}</span>
                 </div>
               )}
@@ -416,11 +401,6 @@ export default async function EnglishHomePage() {
                   {isRecent(latestGuidesMs) && (
                     <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
                   )}
-                  {guidesWeeklyCount > 0 && (
-                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
-                      Activity: {guidesWeeklyCount}
-                    </span>
-                  )}
                   <span>{formatDateFromMs(latestGuidesMs, "en-US")}</span>
                 </div>
               )}
@@ -437,11 +417,6 @@ export default async function EnglishHomePage() {
                   )}
                   {isRecent(latestFirmMs) && (
                     <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
-                  )}
-                  {firmWeeklyCount > 0 && (
-                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
-                      Activity: {firmWeeklyCount}
-                    </span>
                   )}
                   <span>{formatDateFromMs(latestFirmMs, "en-US")}</span>
                 </div>
