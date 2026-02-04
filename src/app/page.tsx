@@ -286,6 +286,29 @@ export default async function HomePage() {
     },
   ];
 
+  const getCtaLabel = (key: string) => {
+    switch (key) {
+      case "normativa":
+        return "Ver normativa";
+      case "jurisprudencia":
+        return "Ver jurisprudencia";
+      case "guias":
+        return "Navegar guías";
+      case "actualidad-ia":
+        return "Leer actualidad";
+      case "firma-scarpa":
+        return "Conocer la firma";
+      case "glosario":
+        return "Ver glosario";
+      case "quienes-somos":
+        return "Conocer el proyecto";
+      case "contacto":
+        return "Contactar";
+      default:
+        return "Ver sección";
+    }
+  };
+
   return (
     <main>
       <section className="section-spacing bento-surface">
@@ -315,7 +338,7 @@ export default async function HomePage() {
             </Link>
             <Link href="/actualidad-ia" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actualidad IA</p>
-              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings y análisis</h3>
+                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings y análisis editoriales</h3>
               <p className="text-sm text-body">Últimas entradas y recursos de actualidad.</p>
               <p className="mt-4 text-xs text-caption">Entradas recientes: {unifiedActualidad.length}</p>
               {latestActualidadMs > 0 && (
@@ -381,7 +404,7 @@ export default async function HomePage() {
             </Link>
             <Link href="/recursos/guias" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías y Protocolos</p>
-              <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica</h3>
+              <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica y ética</h3>
               <p className="text-sm text-body">Documentación oficial y soft law.</p>
               <p className="mt-4 text-xs text-caption">Documentos: {guiasSlugs.length}</p>
               {latestGuiasMs > 0 && (
@@ -436,8 +459,7 @@ export default async function HomePage() {
             Derecho Artificial
           </h1>
           <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
-            Análisis jurídico y editorial independiente sobre inteligencia artificial, con foco en normativa,
-            jurisprudencia y práctica profesional.
+            Inteligencia Artificial, derecho y criterio. Referencia práctica para decisiones informadas.
           </p>
         </div>
       </section>
@@ -571,7 +593,7 @@ export default async function HomePage() {
                     href={section.href}
                     className="text-sm font-medium text-primary inline-flex items-center gap-1"
                   >
-                    Ver sección <span>→</span>
+                    {getCtaLabel(section.key)} <span>→</span>
                   </Link>
                 </div>
                 {section.items && section.items.length > 0 && (

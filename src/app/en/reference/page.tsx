@@ -206,7 +206,7 @@ export default async function ReferencePage() {
           "@type": "WebPage",
           name: "Reference | Derecho Artificial",
           description:
-            "Value map and editorial capabilities: legislation, jurisprudence, news and technical library.",
+            "Value map and editorial capabilities: legislation, jurisprudence, news and technical & ethical library.",
           url: "https://derechoartificial.com/en/reference",
         }}
       />
@@ -257,7 +257,7 @@ export default async function ReferencePage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AI News</p>
-                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings & analysis</h3>
+                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings & editorial analysis</h3>
                 <p className="text-sm text-body">Latest entries and resources.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestNewsMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
@@ -311,7 +311,7 @@ export default async function ReferencePage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guides & Protocols</p>
-                <h3 className="font-display text-xl text-foreground mb-2">Technical library</h3>
+                <h3 className="font-display text-xl text-foreground mb-2">Technical & ethical library</h3>
                 <p className="text-sm text-body">Official documentation and soft law.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestGuidesMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
@@ -331,7 +331,7 @@ export default async function ReferencePage() {
               <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Editorial method</p>
               <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-4">Rigor, sources and governance</h2>
               <p className="text-sm text-body mb-6">
-                We prioritize regulatory frameworks and verifiable official documentation. Each piece links sources,
+                We prioritize regulatory frameworks and verifiable official documentation. Each piece cites sources,
                 dates and context to ensure traceability and compliance with the EU AI Act.
               </p>
               <div className="grid gap-4 md:grid-cols-3">

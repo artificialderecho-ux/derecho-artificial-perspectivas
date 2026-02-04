@@ -287,6 +287,29 @@ export default async function EnglishHomePage() {
     },
   ];
 
+  const getCtaLabel = (key: string) => {
+    switch (key) {
+      case "legislation":
+        return "View legislation";
+      case "jurisprudence":
+        return "View jurisprudence";
+      case "guides":
+        return "Browse guides";
+      case "ai-news":
+        return "Read AI news";
+      case "scarpa-firm":
+        return "Explore the firm";
+      case "legal-ai-glossary":
+        return "View glossary";
+      case "about-us":
+        return "Learn about the project";
+      case "contact":
+        return "Get in touch";
+      default:
+        return "View section";
+    }
+  };
+
   return (
     <main>
       <section className="section-spacing bento-surface">
@@ -316,7 +339,7 @@ export default async function EnglishHomePage() {
             </Link>
             <Link href="/en/ai-news" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AI News</p>
-              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings & analysis</h3>
+                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings & editorial analysis</h3>
               <p className="text-sm text-body">Latest entries and resources.</p>
               <p className="mt-4 text-xs text-caption">Recent entries: {unifiedActualidad.length}</p>
               {latestNewsMs > 0 && (
@@ -382,7 +405,7 @@ export default async function EnglishHomePage() {
             </Link>
             <Link href="/en/guides-protocols" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guides & Protocols</p>
-              <h3 className="font-display text-xl text-foreground mb-2">Technical library</h3>
+              <h3 className="font-display text-xl text-foreground mb-2">Technical & ethical library</h3>
               <p className="text-sm text-body">Official documentation and soft law.</p>
               <p className="mt-4 text-xs text-caption">Documents: {guiasSlugs.length}</p>
               {latestGuidesMs > 0 && (
@@ -437,8 +460,7 @@ export default async function EnglishHomePage() {
             Derecho Artificial
           </h1>
           <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
-            Independent legal and editorial analysis on artificial intelligence, focused on regulation,
-            jurisprudence and professional practice.
+            AI, law and sound judgment. Practical reference for informed decisions.
           </p>
         </div>
       </section>
@@ -572,7 +594,7 @@ export default async function EnglishHomePage() {
                     href={section.href}
                     className="text-sm font-medium text-primary inline-flex items-center gap-1"
                   >
-                    View section <span>→</span>
+                    {getCtaLabel(section.key)} <span>→</span>
                   </Link>
                 </div>
                 {section.items && section.items.length > 0 && (

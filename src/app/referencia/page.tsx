@@ -208,7 +208,7 @@ export default async function ReferenciaPage() {
           "@type": "WebPage",
           name: "Referencia | Derecho Artificial",
           description:
-            "Mapa de valor y capacidades editoriales: legislación, jurisprudencia, actualidad y biblioteca técnica.",
+            "Mapa de valor y capacidades editoriales: legislación, jurisprudencia, actualidad y biblioteca técnica y ética.",
           url: "https://derechoartificial.com/referencia",
         }}
       />
@@ -261,7 +261,7 @@ export default async function ReferenciaPage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actualidad IA</p>
-                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings y análisis</h3>
+                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings y análisis editoriales</h3>
                 <p className="text-sm text-body">Últimas entradas y recursos de actualidad.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges
@@ -277,7 +277,7 @@ export default async function ReferenciaPage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Firma Scarpa</p>
-                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Ensayos y notas</h3>
+                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Ensayos y notas de trabajo</h3>
                 <p className="text-sm text-body">Análisis propios y materiales descargables.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestFirmaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
@@ -325,8 +325,8 @@ export default async function ReferenciaPage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías y Protocolos</p>
-                <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica</h3>
-                <p className="text-sm text-body">Documentación oficial y soft law.</p>
+                <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica y ética</h3>
+                <p className="text-sm text-body">Documentación oficial y soft law clave.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestGuiasMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
                   <span className="text-[10px]">Actividad semanal: {guiasWeeklyCount}</span>
@@ -371,7 +371,7 @@ export default async function ReferenciaPage() {
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Acceso rápido</p>
                 <p className="text-sm text-foreground">Guías y Protocolos</p>
-                <p className="text-xs text-caption mt-1">Biblioteca técnica</p>
+                <p className="text-xs text-caption mt-1">Biblioteca técnica y ética</p>
                 <div className="mt-2 text-[10px] text-caption">
                   Nuevas esta semana: {guiasWeeklyCount}
                 </div>
@@ -394,7 +394,7 @@ export default async function ReferenciaPage() {
               <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Método editorial</p>
               <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-4">Rigor, fuentes y gobernanza</h2>
               <p className="text-sm text-body mb-6">
-                Priorizamos marcos regulatorios y documentación oficial verificable. Cada pieza enlaza fuentes, fechas y
+                Priorizamos marcos regulatorios y documentación oficial verificable. Cada pieza cita fuentes, fechas y
                 contexto para asegurar trazabilidad y cumplimiento del Reglamento de IA.
               </p>
               <div className="grid gap-4 md:grid-cols-3">
