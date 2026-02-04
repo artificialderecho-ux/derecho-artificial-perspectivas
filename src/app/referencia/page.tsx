@@ -3,7 +3,8 @@ import Link from "next/link";
 import { listContentSlugs, getContentEntry } from "@/lib/content";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
-import { Badges, formatDateFromMs } from "@/lib/badges";
+import { Badges, formatDateFromMs, isNew } from "@/lib/badges";
+import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
 
 export const metadata: Metadata = {
   title: "Referencia | Derecho Artificial",
@@ -167,6 +168,16 @@ export default async function ReferenciaPage() {
         .map((e) => e.dateMs ?? 0),
     ) || 0;
 
+  const normativaWeeklyCount = normativaEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
+  const jurisprudenciaWeeklyCount = jurisprudenciaEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
+  const guiasWeeklyCount = guiasEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
+
   const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
     const seen = new Set<string>();
     const res: T[] = [];
@@ -281,6 +292,10 @@ export default async function ReferenciaPage() {
                 <p className="text-sm text-body">EU AI Act y regulación aplicable.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestNormativaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                  <span className="text-[10px]">Actividad semanal: {normativaWeeklyCount}</span>
+                  {latestNormativaMs > 0 && (
+                    <span className="text-[10px]">Última actualización: {formatDateFromMs(latestNormativaMs, "es-ES")}</span>
+                  )}
                 </div>
               </Link>
               <Link
@@ -297,6 +312,12 @@ export default async function ReferenciaPage() {
                     newLabel="Nuevo"
                     updatedLabel="Actualizado"
                   />
+                  <span className="text-[10px]">Actividad semanal: {jurisprudenciaWeeklyCount}</span>
+                  {latestJurisprudenciaMs > 0 && (
+                    <span className="text-[10px]">
+                      Última actualización: {formatDateFromMs(latestJurisprudenciaMs, "es-ES")}
+                    </span>
+                  )}
                 </div>
               </Link>
               <Link
@@ -308,7 +329,60 @@ export default async function ReferenciaPage() {
                 <p className="text-sm text-body">Documentación oficial y soft law.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestGuiasMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                  <span className="text-[10px]">Actividad semanal: {guiasWeeklyCount}</span>
+                  {latestGuiasMs > 0 && (
+                    <span className="text-[10px]">Última actualización: {formatDateFromMs(latestGuiasMs, "es-ES")}</span>
+                  )}
                 </div>
+              </Link>
+            </div>
+            <IndicatorsLegend locale="es-ES" />
+          </div>
+        </section>
+
+        <section className="section-spacing bento-surface">
+          <div className="container-wide">
+            <div className="grid gap-4 md:grid-cols-4">
+              <Link
+                href="/normativa"
+                className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors"
+              >
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Acceso rápido</p>
+                <p className="text-sm text-foreground">Normativa</p>
+                <p className="text-xs text-caption mt-1">EU AI Act y regulación aplicable</p>
+                <div className="mt-2 text-[10px] text-caption">
+                  Nuevas esta semana: {normativaWeeklyCount}
+                </div>
+              </Link>
+              <Link
+                href="/jurisprudencia"
+                className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors"
+              >
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Acceso rápido</p>
+                <p className="text-sm text-foreground">Jurisprudencia</p>
+                <p className="text-xs text-caption mt-1">Resoluciones clave</p>
+                <div className="mt-2 text-[10px] text-caption">
+                  Nuevas esta semana: {jurisprudenciaWeeklyCount}
+                </div>
+              </Link>
+              <Link
+                href="/recursos/guias"
+                className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors"
+              >
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Acceso rápido</p>
+                <p className="text-sm text-foreground">Guías y Protocolos</p>
+                <p className="text-xs text-caption mt-1">Biblioteca técnica</p>
+                <div className="mt-2 text-[10px] text-caption">
+                  Nuevas esta semana: {guiasWeeklyCount}
+                </div>
+              </Link>
+              <Link
+                href="/contacto"
+                className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors"
+              >
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Acceso rápido</p>
+                <p className="text-sm text-foreground">Contacto</p>
+                <p className="text-xs text-caption mt-1">Colabora con el proyecto</p>
               </Link>
             </div>
           </div>
@@ -351,9 +425,12 @@ export default async function ReferenciaPage() {
                     <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Sección</p>
                     <h3 className="font-serif text-xl md:text-2xl text-foreground">Normativa</h3>
                   </div>
-                  <Link href="/normativa" className="text-sm font-medium text-primary inline-flex items-center gap-1">
-                    Ver sección <span>→</span>
-                  </Link>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] text-caption">Actividad semanal: {normativaWeeklyCount}</span>
+                    <Link href="/normativa" className="text-sm font-medium text-primary inline-flex items-center gap-1">
+                      Ver sección <span>→</span>
+                    </Link>
+                  </div>
                 </div>
                 <div className="mt-2 flex flex-col gap-3">
                   {uniqueByHref(normativaItems).slice(0, 2).map((item) => (
@@ -383,9 +460,12 @@ export default async function ReferenciaPage() {
                     <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Sección</p>
                     <h3 className="font-serif text-xl md:text-2xl text-foreground">Jurisprudencia</h3>
                   </div>
-                  <Link href="/jurisprudencia" className="text-sm font-medium text-primary inline-flex items-center gap-1">
-                    Ver sección <span>→</span>
-                  </Link>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] text-caption">Actividad semanal: {jurisprudenciaWeeklyCount}</span>
+                    <Link href="/jurisprudencia" className="text-sm font-medium text-primary inline-flex items-center gap-1">
+                      Ver sección <span>→</span>
+                    </Link>
+                  </div>
                 </div>
                 <div className="mt-2 flex flex-col gap-3">
                   {uniqueByHref(jurisprudenciaItems).slice(0, 2).map((item) => (
@@ -415,9 +495,12 @@ export default async function ReferenciaPage() {
                     <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Sección</p>
                     <h3 className="font-serif text-xl md:text-2xl text-foreground">Guías y Protocolos</h3>
                   </div>
-                  <Link href="/recursos/guias" className="text-sm font-medium text-primary inline-flex items-center gap-1">
-                    Ver sección <span>→</span>
-                  </Link>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] text-caption">Actividad semanal: {guiasWeeklyCount}</span>
+                    <Link href="/recursos/guias" className="text-sm font-medium text-primary inline-flex items-center gap-1">
+                      Ver sección <span>→</span>
+                    </Link>
+                  </div>
                 </div>
                 <div className="mt-2 flex flex-col gap-3">
                   {uniqueByHref(guiasItems).slice(0, 2).map((item) => (

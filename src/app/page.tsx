@@ -3,6 +3,7 @@ import Link from "next/link";
 import { listContentSlugs, getContentEntry } from "@/lib/content";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
 import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/badges";
+import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
 
 export const metadata: Metadata = {
   title: "Derecho, ética y regulación de la IA",
@@ -423,6 +424,7 @@ export default async function HomePage() {
               )}
             </Link>
           </div>
+          <IndicatorsLegend locale="es-ES" />
         </div>
       </section>
       <section className="py-20 md:py-28 bg-surface border-b border-divider">
