@@ -431,7 +431,7 @@ export default async function EnglishHomePage() {
           <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">
             Law, ethics and AI regulation
           </p>
-          <h1 className="font-serif text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
+          <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
             Derecho Artificial
           </h1>
           <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">

@@ -240,7 +240,7 @@ export default async function ReferencePage() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Reference</p>
-                <h1 className="font-serif text-2xl md:text-3xl text-foreground">Editorial rigor and dynamic signals</h1>
+                <h1 className="font-sans text-2xl md:text-3xl text-foreground">Editorial rigor and dynamic signals</h1>
               </div>
               <div className="text-sm">
                 <Link

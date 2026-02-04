@@ -242,7 +242,7 @@ export default async function ReferenciaPage() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Referencia</p>
-                <h1 className="font-serif text-2xl md:text-3xl text-foreground">
+                <h1 className="font-sans text-2xl md:text-3xl text-foreground">
                   Rigor editorial y señalización dinámica
                 </h1>
               </div>

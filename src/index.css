@@ -18,7 +18,10 @@
     @apply font-sans bg-background text-foreground antialiased text-base md:text-lg;
   }
 
-  h1, h2, h3, h4 {
+  h1 {
+    @apply font-sans;
+  }
+  h2, h3, h4 {
     @apply font-serif;
   }
 
