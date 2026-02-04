@@ -121,7 +121,7 @@ export default async function LegislationPage() {
             className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
           >
             <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Official document</p>
-            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">AI Act Regulation (PDF)</h3>
+            <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">AI Act Regulation (PDF)</h3>
             <p className="text-sm text-body">Direct download from EUR-Lex.</p>
           </a>
           <Link
@@ -129,7 +129,7 @@ export default async function LegislationPage() {
             className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
           >
             <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Transparency</p>
-            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">BOSCO case</h3>
+            <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">BOSCO case</h3>
             <p className="text-sm text-body">Source code access for social benefits decisions.</p>
           </Link>
           <Link
@@ -137,7 +137,7 @@ export default async function LegislationPage() {
             className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
           >
             <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Activity</p>
-            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Legislative updates</h3>
+            <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Legislative updates</h3>
             <p className="text-sm text-body">Entries recorded: {resolvedEntries.length}</p>
           </Link>
         </section>

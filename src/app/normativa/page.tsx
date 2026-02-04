@@ -137,7 +137,7 @@ export default async function NormativaPage() {
             className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
           >
             <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Documento oficial</p>
-            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Reglamento de IA (PDF)</h3>
+            <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Reglamento de IA (PDF)</h3>
             <p className="text-sm text-body">Descarga directa desde EUR-Lex.</p>
           </a>
           <Link
@@ -145,7 +145,7 @@ export default async function NormativaPage() {
             className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
           >
             <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Transparencia</p>
-            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Caso BOSCO</h3>
+            <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Caso BOSCO</h3>
             <p className="text-sm text-body">Acceso a código fuente en prestaciones sociales.</p>
           </Link>
           <Link
@@ -153,7 +153,7 @@ export default async function NormativaPage() {
             className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
           >
             <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actividad</p>
-            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Novedades normativas</h3>
+            <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Novedades normativas</h3>
             <p className="text-sm text-body">Entradas registradas: {resolvedEntries.length}</p>
           </Link>
         </section>

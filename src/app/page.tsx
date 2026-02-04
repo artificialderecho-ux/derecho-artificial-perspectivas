@@ -318,7 +318,7 @@ export default async function HomePage() {
               <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
                 Mapa de referencia
               </p>
-              <h2 className="font-display text-2xl md:text-3xl text-foreground">
+              <h2 className="font-serif text-2xl md:text-3xl text-foreground">
                 Derecho e IA en un vistazo
               </h2>
             </div>
@@ -329,7 +329,7 @@ export default async function HomePage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(160px,_auto)]">
             <Link href="/glosario-ia-legal" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 lg:row-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Glosario</p>
-              <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">Glosario de IA legal</h3>
+              <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-2">Glosario de IA legal</h3>
               <p className="text-sm text-body">Diccionario técnico y jurídico del ecosistema europeo.</p>
               <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                 <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Nuevo</span>
@@ -338,7 +338,7 @@ export default async function HomePage() {
             </Link>
             <Link href="/actualidad-ia" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actualidad IA</p>
-                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings y análisis editoriales</h3>
+                <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Briefings y análisis editoriales</h3>
               <p className="text-sm text-body">Últimas entradas y recursos de actualidad.</p>
               <p className="mt-4 text-xs text-caption">Entradas recientes: {unifiedActualidad.length}</p>
               {latestActualidadMs > 0 && (
@@ -355,7 +355,7 @@ export default async function HomePage() {
             </Link>
             <Link href="/jurisprudencia" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudencia</p>
-              <h3 className="font-display text-xl text-foreground mb-2">Resoluciones clave</h3>
+              <h3 className="font-serif text-xl text-foreground mb-2">Resoluciones clave</h3>
               <p className="text-sm text-body">Selección de casos sobre algoritmos y derechos.</p>
               <p className="mt-4 text-xs text-caption">Entradas: {jurisprudenciaSlugs.length}</p>
               {latestJurisprudenciaMs > 0 && (
@@ -372,7 +372,7 @@ export default async function HomePage() {
             </Link>
             <Link href="/normativa" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
-              <h3 className="font-display text-xl text-foreground mb-2">Marco regulatorio</h3>
+              <h3 className="font-serif text-xl text-foreground mb-2">Marco regulatorio</h3>
               <p className="text-sm text-body">EU AI Act y regulación aplicable.</p>
               <p className="mt-4 text-xs text-caption">Entradas: {normativaSlugs.length}</p>
               {latestNormativaMs > 0 && (
@@ -389,7 +389,7 @@ export default async function HomePage() {
             </Link>
             <Link href="/recursos/guias" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías y Protocolos</p>
-              <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica y ética</h3>
+              <h3 className="font-serif text-xl text-foreground mb-2">Biblioteca técnica y ética</h3>
               <p className="text-sm text-body">Documentación oficial y soft law.</p>
               <p className="mt-4 text-xs text-caption">Documentos: {guiasSlugs.length}</p>
               {latestGuiasMs > 0 && (
@@ -406,7 +406,7 @@ export default async function HomePage() {
             </Link>
             <Link href="/firma-scarpa" className="bg-card border border-border rounded-sm p-6 lg:col-span-4 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Firma Scarpa</p>
-              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Ensayos y notas de trabajo</h3>
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Ensayos y notas de trabajo</h3>
               <p className="text-sm text-body">Análisis propios y materiales descargables.</p>
               <p className="mt-4 text-xs text-caption">Entradas: {unifiedFirma.length}</p>
               {latestFirmaMs > 0 && (

@@ -104,7 +104,7 @@ export default function GuidesPage() {
               className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AESIA</p>
-              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Documentos</h3>
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Documentos</h3>
               <p className="text-sm text-body">Publicaciones clave de la AESIA.</p>
               <div className="mt-4 text-xs text-caption">Total: {aesiaDocs.length}</div>
             </a>
@@ -113,7 +113,7 @@ export default function GuidesPage() {
               className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Comisión Europea</p>
-              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Documentos</h3>
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Documentos</h3>
               <p className="text-sm text-body">Guías y materiales oficiales.</p>
               <div className="mt-4 text-xs text-caption">Total: {commissionDocs.length}</div>
             </a>
@@ -122,7 +122,7 @@ export default function GuidesPage() {
               className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Otros</p>
-              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Soft law</h3>
+              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Soft law</h3>
               <p className="text-sm text-body">CEPEJ, UNESCO y organismos afines.</p>
               <div className="mt-4 text-xs text-caption">Total: {otherDocs.length + cepejDocs.length}</div>
             </a>

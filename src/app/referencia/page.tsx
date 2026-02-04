@@ -242,7 +242,7 @@ export default async function ReferenciaPage() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Referencia</p>
-                <h1 className="font-display text-2xl md:text-3xl text-foreground">
+                <h1 className="font-serif text-2xl md:text-3xl text-foreground">
                   Rigor editorial y señalización dinámica
                 </h1>
               </div>
@@ -261,7 +261,7 @@ export default async function ReferenciaPage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actualidad IA</p>
-                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings y análisis editoriales</h3>
+                <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Briefings y análisis editoriales</h3>
                 <p className="text-sm text-body">Últimas entradas y recursos de actualidad.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges
@@ -277,7 +277,7 @@ export default async function ReferenciaPage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Firma Scarpa</p>
-                <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Ensayos y notas de trabajo</h3>
+                <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Ensayos y notas de trabajo</h3>
                 <p className="text-sm text-body">Análisis propios y materiales descargables.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestFirmaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
@@ -288,7 +288,7 @@ export default async function ReferenciaPage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
-                <h3 className="font-display text-xl text-foreground mb-2">Marco regulatorio</h3>
+                <h3 className="font-serif text-xl text-foreground mb-2">Marco regulatorio</h3>
                 <p className="text-sm text-body">EU AI Act y regulación aplicable.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestNormativaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
@@ -303,7 +303,7 @@ export default async function ReferenciaPage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudencia</p>
-                <h3 className="font-display text-xl text-foreground mb-2">Resoluciones clave</h3>
+                <h3 className="font-serif text-xl text-foreground mb-2">Resoluciones clave</h3>
                 <p className="text-sm text-body">Casos sobre algoritmos y derechos.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges
@@ -325,7 +325,7 @@ export default async function ReferenciaPage() {
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías y Protocolos</p>
-                <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica y ética</h3>
+                <h3 className="font-serif text-xl text-foreground mb-2">Biblioteca técnica y ética</h3>
                 <p className="text-sm text-body">Documentación oficial y soft law clave.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
                   <Badges ms={latestGuiasMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />

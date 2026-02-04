@@ -133,7 +133,7 @@ export default async function JurisprudencePage() {
               className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Featured</p>
-              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">BOSCO Judgment</h2>
+              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">BOSCO Judgment</h2>
               <p className="text-sm text-body">Algorithmic transparency and source code access.</p>
               <div className="mt-4 text-xs text-caption">{boscoItem.meta}</div>
             </Link>
@@ -142,7 +142,7 @@ export default async function JurisprudencePage() {
               className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Activity</p>
-              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Latest decisions</h2>
+              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Latest decisions</h2>
               <p className="text-sm text-body">Entries recorded in the section.</p>
               <div className="mt-4 text-xs text-caption">Total: {items.length}</div>
             </Link>
@@ -151,7 +151,7 @@ export default async function JurisprudencePage() {
               className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Context</p>
-              <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Regulatory framework</h2>
+              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Regulatory framework</h2>
               <p className="text-sm text-body">Relation with the EU AI Act and applicable regulation.</p>
             </Link>
           </section>
