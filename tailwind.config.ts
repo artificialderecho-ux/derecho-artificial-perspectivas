@@ -16,8 +16,30 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['"Playfair Display"', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: [
+          '"SF Pro"',
+          '"SF Pro Text"',
+          '"SF Pro Display"',
+          'system-ui',
+          '-apple-system',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          'sans-serif',
+        ],
+        sans: [
+          '"SF Pro"',
+          '"SF Pro Text"',
+          '"SF Pro Display"',
+          'system-ui',
+          '-apple-system',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          'sans-serif',
+        ],
       },
       fontSize: {
         'xs': ['0.8125rem', { lineHeight: '1.6' }],
