@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import libraryDocs from "@/data/library-docs.json";
+import { Badges } from "@/lib/badges";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
@@ -109,8 +110,38 @@ export default function GuidesProtocolsPage() {
           <header className="mb-12">
             <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Section</p>
             <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">Guides &amp; Protocols</h1>
-            <p className="text-lg text-body mt-6">Checklists, internal policies, and practical workflows.</p>
+            <p className="text-lg text-body mt-6">Hub of technical and ethical documentation from AESIA, the European Commission, and international bodies.</p>
           </header>
+          
+          <section className="grid gap-6 md:grid-cols-3 not-prose mb-12 bento-surface">
+            <a
+              href="#aesia"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AESIA</p>
+              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Documents</h3>
+              <p className="text-sm text-body">Key publications from AESIA.</p>
+              <div className="mt-4 text-xs text-caption">Total: {aesiaDocs.length}</div>
+            </a>
+            <a
+              href="#european-commission"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">European Commission</p>
+              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Documents</h3>
+              <p className="text-sm text-body">Official guides and materials.</p>
+              <div className="mt-4 text-xs text-caption">Total: {commissionDocs.length}</div>
+            </a>
+            <a
+              href="#other-organizations"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Others</p>
+              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Soft law</h3>
+              <p className="text-sm text-body">CEPEJ, UNESCO and related bodies.</p>
+              <div className="mt-4 text-xs text-caption">Total: {otherDocs.length + cepejDocs.length}</div>
+            </a>
+          </section>
 
           <div className="space-y-20">
             <section id="aesia">
@@ -217,6 +248,13 @@ export default function GuidesProtocolsPage() {
 
 function DocCardItem({ doc, color }: { doc: DocCard; color: string }) {
   const isAesia = doc.source === "AESIA";
+  const toMs = (value?: string) => {
+    if (!value) return 0;
+    const d = new Date(value);
+    const ms = d.getTime();
+    return Number.isNaN(ms) ? 0 : ms;
+  };
+  const dateMs = toMs(doc.date);
 
   return (
     <a
@@ -229,7 +267,10 @@ function DocCardItem({ doc, color }: { doc: DocCard; color: string }) {
         <span className={`px-2 py-1 text-[10px] uppercase tracking-wider text-white font-medium rounded-sm ${color}`}>
           {doc.source}
         </span>
-        <span className="text-xs text-muted-foreground font-mono">{doc.year || doc.date?.split("-")[0]}</span>
+        <div className="text-xs text-muted-foreground font-mono inline-flex items-center gap-2">
+          <span>{doc.year || doc.date?.split("-")[0]}</span>
+          <Badges ms={dateMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+        </div>
       </div>
       <h3 className="font-serif text-lg text-foreground mb-3 group-hover:text-primary transition-colors">{doc.title}</h3>
       <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-grow">{doc.description}</p>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { listContentSlugs, getContentEntry } from "@/lib/content";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
+import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/badges";
 
 export const metadata: Metadata = {
   title: "Law, ethics and AI regulation",
@@ -132,12 +133,14 @@ export default async function EnglishHomePage() {
     return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   };
 
-  const formatDateFromMs = (value: number | null | undefined) => {
-    if (value == null) return "";
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "";
-    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  
+  const toMs = (value: string | number | Date | null | undefined) => {
+    if (value == null) return 0;
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return 0;
+    return d.getTime();
   };
+  
 
   const [normativaTopEntries, jurisprudenciaTopEntries, guiasTopEntries] = await Promise.all([
     Promise.all(
@@ -156,7 +159,8 @@ export default async function EnglishHomePage() {
         title: e.title,
         href: `/normativa/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs)} · Regulatory analysis with official sources`,
+        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Regulatory analysis with official sources`,
+        dateMs: e.dateMs ?? 0,
       })) ?? [];
 
   const jurisprudenciaItems =
@@ -166,7 +170,8 @@ export default async function EnglishHomePage() {
         title: e.title,
         href: `/jurisprudencia/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs)} · Key decisions on algorithms and rights`,
+        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Key decisions on algorithms and rights`,
+        dateMs: e.dateMs ?? 0,
       })) ?? [];
 
   const guiasItems =
@@ -176,8 +181,31 @@ export default async function EnglishHomePage() {
         title: e.title,
         href: `/recursos/guias/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs)} · Repository of technical and ethical documentation`,
+        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Repository of technical and ethical documentation`,
+        dateMs: e.dateMs ?? 0,
       })) ?? [];
+  const latestNewsMs = toMs(unifiedActualidad[0]?.date);
+  const latestJurisprudenceMs = jurisprudenciaTopEntries[0]?.dateMs ?? 0;
+  const latestLegislationMs = normativaTopEntries[0]?.dateMs ?? 0;
+  const latestGuidesMs = guiasTopEntries[0]?.dateMs ?? 0;
+  const latestFirmMs = toMs(unifiedFirma[0]?.date);
+  const newsWeeklyCount = unifiedActualidad.filter((e) => isNew(e.date)).length;
+  const firmWeeklyCount = unifiedFirma.filter((e) => isNew(e.date)).length;
+
+  const [legislationEntriesAll, jurisprudenceEntriesAll, guidesEntriesAll] = await Promise.all([
+    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
+    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
+    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
+  ]);
+  const legislationWeeklyCount = legislationEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
+  const jurisprudenceWeeklyCount = jurisprudenceEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
+  const guidesWeeklyCount = guidesEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
 
   const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
     const seen = new Set<string>();
@@ -203,6 +231,7 @@ export default async function EnglishHomePage() {
             href: e.urlPath,
             description: e.description ?? "",
             meta: `${formatDate(e.date)} · ${e.author}`,
+            dateMs: e.date,
           })),
       ),
     },
@@ -224,6 +253,7 @@ export default async function EnglishHomePage() {
             href: e.urlPath,
             description: e.description ?? "",
             meta: `${formatDate(e.date)} · ${e.author}`,
+            dateMs: e.date,
           })),
       ),
     },
@@ -274,7 +304,7 @@ export default async function EnglishHomePage() {
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(160px,_auto)]">
-            <Link href="/en/legal-ai-glossary" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 lg:row-span-2 hover:border-primary/30 transition-all">
+            <Link href="/en/legal-ai-glossary" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 lg:row-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Glossary</p>
               <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">Legal AI Glossary</h3>
               <p className="text-sm text-body">Technical and legal dictionary for the EU ecosystem.</p>
@@ -283,35 +313,115 @@ export default async function EnglishHomePage() {
                 <span>Updated</span>
               </div>
             </Link>
-            <Link href="/en/ai-news" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 transition-all">
+            <Link href="/en/ai-news" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AI News</p>
               <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings & analysis</h3>
               <p className="text-sm text-body">Latest entries and resources.</p>
               <p className="mt-4 text-xs text-caption">Recent entries: {unifiedActualidad.length}</p>
+              {latestNewsMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestNewsMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
+                  )}
+                  {isRecent(latestNewsMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
+                  )}
+                  {newsWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Activity: {newsWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestNewsMs, "en-US")}</span>
+                </div>
+              )}
             </Link>
-            <Link href="/en/jurisprudence" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+            <Link href="/en/jurisprudence" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudence</p>
               <h3 className="font-display text-xl text-foreground mb-2">Key decisions</h3>
               <p className="text-sm text-body">Selection on algorithms and rights.</p>
               <p className="mt-4 text-xs text-caption">Entries: {jurisprudenciaSlugs.length}</p>
+              {latestJurisprudenceMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestJurisprudenceMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
+                  )}
+                  {isRecent(latestJurisprudenceMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
+                  )}
+                  {jurisprudenceWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Activity: {jurisprudenceWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestJurisprudenceMs, "en-US")}</span>
+                </div>
+              )}
             </Link>
-            <Link href="/en/legislation" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+            <Link href="/en/legislation" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Legislation</p>
               <h3 className="font-display text-xl text-foreground mb-2">Regulatory framework</h3>
               <p className="text-sm text-body">EU AI Act and applicable regulation.</p>
               <p className="mt-4 text-xs text-caption">Entries: {normativaSlugs.length}</p>
+              {latestLegislationMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestLegislationMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
+                  )}
+                  {isRecent(latestLegislationMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
+                  )}
+                  {legislationWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Activity: {legislationWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestLegislationMs, "en-US")}</span>
+                </div>
+              )}
             </Link>
-            <Link href="/en/guides-protocols" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+            <Link href="/en/guides-protocols" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guides & Protocols</p>
               <h3 className="font-display text-xl text-foreground mb-2">Technical library</h3>
               <p className="text-sm text-body">Official documentation and soft law.</p>
               <p className="mt-4 text-xs text-caption">Documents: {guiasSlugs.length}</p>
+              {latestGuidesMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestGuidesMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
+                  )}
+                  {isRecent(latestGuidesMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
+                  )}
+                  {guidesWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Activity: {guidesWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestGuidesMs, "en-US")}</span>
+                </div>
+              )}
             </Link>
-            <Link href="/en/scarpa-firm" className="bg-card border border-border rounded-sm p-6 lg:col-span-4 hover:border-primary/30 transition-all">
+            <Link href="/en/scarpa-firm" className="bg-card border border-border rounded-sm p-6 lg:col-span-4 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Scarpa Firm</p>
               <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Essays and working notes</h3>
               <p className="text-sm text-body">Original analysis and downloadable materials.</p>
               <p className="mt-4 text-xs text-caption">Entries: {unifiedFirma.length}</p>
+              {latestFirmMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestFirmMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
+                  )}
+                  {isRecent(latestFirmMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
+                  )}
+                  {firmWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Activity: {firmWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestFirmMs, "en-US")}</span>
+                </div>
+              )}
             </Link>
           </div>
         </div>
@@ -472,6 +582,7 @@ export default async function EnglishHomePage() {
                         className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
                       >
                         <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                        <Badges ms={getItemDateMs(item)} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-2 inline-flex items-center gap-2 text-xs text-caption" />
                         {item.description &&
                           item.title &&
                           item.description.trim().toLowerCase() !== item.title.trim().toLowerCase() && (

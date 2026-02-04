@@ -44,6 +44,27 @@ export default function LegalAIGlossaryPage() {
           </p>
         </div>
       </section>
+      <section className="py-8 not-prose bento-surface">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="grid gap-6 md:grid-cols-3">
+            <a href="#A" className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Index</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Go to alphabetical index</h3>
+              <p className="text-sm text-body">Access terms from A to X.</p>
+            </a>
+            <a href="#M" className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Shortcut</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Section M</h3>
+              <p className="text-sm text-body">Quick access to frequent terms.</p>
+            </a>
+            <a href="/en/legislation" className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Context</p>
+              <h3 className="font-display text-xl text-foreground mb-2">AI Act Guide</h3>
+              <p className="text-sm text-body">Regulatory framework and obligations.</p>
+            </a>
+          </div>
+        </div>
+      </section>
       <section className="py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-6">
           <div

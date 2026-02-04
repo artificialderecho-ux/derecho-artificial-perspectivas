@@ -42,6 +42,27 @@ export default function GlossaryPage() {
           </p>
         </div>
       </section>
+      <section className="py-8 not-prose bento-surface">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="grid gap-6 md:grid-cols-3">
+            <a href="#A" className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Índice</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Ir al índice alfabético</h3>
+              <p className="text-sm text-body">Accede a los términos desde A hasta X.</p>
+            </a>
+            <a href="#M" className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Atajo</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Sección M</h3>
+              <p className="text-sm text-body">Acceso rápido a términos frecuentes.</p>
+            </a>
+            <a href="/normativa" className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Contexto</p>
+              <h3 className="font-display text-xl text-foreground mb-2">Guía del AI Act</h3>
+              <p className="text-sm text-body">Marco regulatorio y obligaciones.</p>
+            </a>
+          </div>
+        </div>
+      </section>
       <section className="py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-6">
           <div

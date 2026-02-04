@@ -9,6 +9,7 @@ import {
 } from "@/components/seo/StructuredData";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { Badges } from "@/lib/badges";
 
 export const metadata: Metadata = {
   title: "EU AI Act Guide 2026: Compliance for Organizations",
@@ -84,6 +85,8 @@ export default async function LegislationPage() {
   const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("normativa", slug)));
   const resolvedEntries = entries.filter((entry): entry is ResourceEntry => Boolean(entry));
 
+  
+
   return (
     <>
       <StructuredData data={[articleJsonLd, legislationJsonLd, faqJsonLd, breadcrumbJsonLd]} />
@@ -109,6 +112,35 @@ export default async function LegislationPage() {
             DOWNLOAD OFFICIAL REGULATION (PDF)
           </a>
         </div>
+
+        <section className="grid gap-6 md:grid-cols-3 not-prose mb-12 bento-surface">
+          <a
+            href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32024R1689"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+          >
+            <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Official document</p>
+            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">AI Act Regulation (PDF)</h3>
+            <p className="text-sm text-body">Direct download from EUR-Lex.</p>
+          </a>
+          <Link
+            href="/jurisprudencia/sentencia-bosco-transparencia-algoritmica"
+            className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+          >
+            <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Transparency</p>
+            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">BOSCO case</h3>
+            <p className="text-sm text-body">Source code access for social benefits decisions.</p>
+          </Link>
+          <Link
+            href="/en/legislation"
+            className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+          >
+            <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Activity</p>
+            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Legislative updates</h3>
+            <p className="text-sm text-body">Entries recorded: {resolvedEntries.length}</p>
+          </Link>
+        </section>
 
         <p className="lead">
           The full applicability of the{" "}
@@ -201,6 +233,7 @@ export default async function LegislationPage() {
                 >
                   <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Legislation</p>
                   <h3 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h3>
+                  <Badges ms={entry.dateMs} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                   {entry.summaryHtml && <p className="text-body">{entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}</p>}
                 </Link>
               ))}

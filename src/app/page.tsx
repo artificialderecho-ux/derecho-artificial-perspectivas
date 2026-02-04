@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { listContentSlugs, getContentEntry } from "@/lib/content";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
+import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/badges";
 
 export const metadata: Metadata = {
   title: "Derecho, ética y regulación de la IA",
@@ -132,11 +133,11 @@ export default async function HomePage() {
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
-  const formatDateFromMs = (value: number | null | undefined) => {
-    if (value == null) return "";
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "";
-    return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+  const toMs = (value: string | number | Date | null | undefined) => {
+    if (value == null) return 0;
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return 0;
+    return d.getTime();
   };
 
   const [normativaTopEntries, jurisprudenciaTopEntries, guiasTopEntries] = await Promise.all([
@@ -156,7 +157,8 @@ export default async function HomePage() {
         title: e.title,
         href: `/normativa/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs)} · Análisis normativo con fuentes oficiales`,
+        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Análisis normativo con fuentes oficiales`,
+        dateMs: e.dateMs ?? 0,
       })) ?? [];
 
   const jurisprudenciaItems =
@@ -166,7 +168,8 @@ export default async function HomePage() {
         title: e.title,
         href: `/jurisprudencia/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs)} · Resoluciones clave sobre algoritmos y derechos`,
+        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
+        dateMs: e.dateMs ?? 0,
       })) ?? [];
 
   const guiasItems =
@@ -176,8 +179,32 @@ export default async function HomePage() {
         title: e.title,
         href: `/recursos/guias/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs)} · Repositorio de documentación técnica y ética`,
+        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Repositorio de documentación técnica y ética`,
+        dateMs: e.dateMs ?? 0,
       })) ?? [];
+
+  const latestActualidadMs = toMs(unifiedActualidad[0]?.date);
+  const latestJurisprudenciaMs = jurisprudenciaTopEntries[0]?.dateMs ?? 0;
+  const latestNormativaMs = normativaTopEntries[0]?.dateMs ?? 0;
+  const latestGuiasMs = guiasTopEntries[0]?.dateMs ?? 0;
+  const latestFirmaMs = toMs(unifiedFirma[0]?.date);
+  const actualidadWeeklyCount = unifiedActualidad.filter((e) => isNew(e.date)).length;
+  const firmaWeeklyCount = unifiedFirma.filter((e) => isNew(e.date)).length;
+
+  const [normativaEntriesAll, jurisprudenciaEntriesAll, guiasEntriesAll] = await Promise.all([
+    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
+    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
+    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
+  ]);
+  const normativaWeeklyCount = normativaEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
+  const jurisprudenciaWeeklyCount = jurisprudenciaEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
+  const guiasWeeklyCount = guiasEntriesAll
+    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .filter((e) => isNew(e.dateMs ?? 0)).length;
 
   const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
     const seen = new Set<string>();
@@ -203,6 +230,7 @@ export default async function HomePage() {
             href: e.urlPath,
             description: e.description ?? "",
             meta: `${formatDate(e.date)} · ${e.author}`,
+            dateMs: e.date,
           })),
       ),
     },
@@ -224,6 +252,7 @@ export default async function HomePage() {
             href: e.urlPath,
             description: e.description ?? "",
             meta: `${formatDate(e.date)} · ${e.author}`,
+            dateMs: e.date,
           })),
       ),
     },
@@ -274,7 +303,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(160px,_auto)]">
-            <Link href="/glosario-ia-legal" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 lg:row-span-2 hover:border-primary/30 transition-all">
+            <Link href="/glosario-ia-legal" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 lg:row-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Glosario</p>
               <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">Glosario de IA legal</h3>
               <p className="text-sm text-body">Diccionario técnico y jurídico del ecosistema europeo.</p>
@@ -283,35 +312,115 @@ export default async function HomePage() {
                 <span>Actualizado</span>
               </div>
             </Link>
-            <Link href="/actualidad-ia" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 transition-all">
+            <Link href="/actualidad-ia" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actualidad IA</p>
               <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Briefings y análisis</h3>
               <p className="text-sm text-body">Últimas entradas y recursos de actualidad.</p>
               <p className="mt-4 text-xs text-caption">Entradas recientes: {unifiedActualidad.length}</p>
+              {latestActualidadMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestActualidadMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Nuevo</span>
+                  )}
+                  {isRecent(latestActualidadMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Actualizado</span>
+                  )}
+                  {actualidadWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Actividad: {actualidadWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestActualidadMs, "es-ES")}</span>
+                </div>
+              )}
             </Link>
-            <Link href="/jurisprudencia" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+            <Link href="/jurisprudencia" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudencia</p>
               <h3 className="font-display text-xl text-foreground mb-2">Resoluciones clave</h3>
               <p className="text-sm text-body">Selección de casos sobre algoritmos y derechos.</p>
               <p className="mt-4 text-xs text-caption">Entradas: {jurisprudenciaSlugs.length}</p>
+              {latestJurisprudenciaMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestJurisprudenciaMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Nuevo</span>
+                  )}
+                  {isRecent(latestJurisprudenciaMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Actualizado</span>
+                  )}
+                  {jurisprudenciaWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Actividad: {jurisprudenciaWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestJurisprudenciaMs, "es-ES")}</span>
+                </div>
+              )}
             </Link>
-            <Link href="/normativa" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+            <Link href="/normativa" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
               <h3 className="font-display text-xl text-foreground mb-2">Marco regulatorio</h3>
               <p className="text-sm text-body">EU AI Act y regulación aplicable.</p>
               <p className="mt-4 text-xs text-caption">Entradas: {normativaSlugs.length}</p>
+              {latestNormativaMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestNormativaMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Nuevo</span>
+                  )}
+                  {isRecent(latestNormativaMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Actualizado</span>
+                  )}
+                  {normativaWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Actividad: {normativaWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestNormativaMs, "es-ES")}</span>
+                </div>
+              )}
             </Link>
-            <Link href="/recursos/guias" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 transition-all">
+            <Link href="/recursos/guias" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías y Protocolos</p>
               <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica</h3>
               <p className="text-sm text-body">Documentación oficial y soft law.</p>
               <p className="mt-4 text-xs text-caption">Documentos: {guiasSlugs.length}</p>
+              {latestGuiasMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestGuiasMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Nuevo</span>
+                  )}
+                  {isRecent(latestGuiasMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Actualizado</span>
+                  )}
+                  {guiasWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Actividad: {guiasWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestGuiasMs, "es-ES")}</span>
+                </div>
+              )}
             </Link>
-            <Link href="/firma-scarpa" className="bg-card border border-border rounded-sm p-6 lg:col-span-4 hover:border-primary/30 transition-all">
+            <Link href="/firma-scarpa" className="bg-card border border-border rounded-sm p-6 lg:col-span-4 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Firma Scarpa</p>
               <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Ensayos y notas de trabajo</h3>
               <p className="text-sm text-body">Análisis propios y materiales descargables.</p>
               <p className="mt-4 text-xs text-caption">Entradas: {unifiedFirma.length}</p>
+              {latestFirmaMs > 0 && (
+                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                  {isNew(latestFirmaMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Nuevo</span>
+                  )}
+                  {isRecent(latestFirmaMs) && (
+                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Actualizado</span>
+                  )}
+                  {firmaWeeklyCount > 0 && (
+                    <span className="px-2 py-1 bg-highlight text-foreground rounded-sm">
+                      Actividad: {firmaWeeklyCount}
+                    </span>
+                  )}
+                  <span>{formatDateFromMs(latestFirmaMs, "es-ES")}</span>
+                </div>
+              )}
             </Link>
           </div>
         </div>
@@ -331,7 +440,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-spacing">
+      <section className="section-spacing bento-surface">
         <div className="container-wide">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div>
@@ -436,7 +545,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-spacing">
+      <section className="section-spacing bento-surface">
         <div className="container-wide">
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
             Secciones
@@ -472,6 +581,13 @@ export default async function HomePage() {
                         className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
                       >
                         <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                        <Badges
+                          ms={getItemDateMs(item)}
+                          locale="es-ES"
+                          newLabel="Nuevo"
+                          updatedLabel="Actualizado"
+                          className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
+                        />
                         {item.description &&
                           item.title &&
                           item.description.trim().toLowerCase() !== item.title.trim().toLowerCase() && (

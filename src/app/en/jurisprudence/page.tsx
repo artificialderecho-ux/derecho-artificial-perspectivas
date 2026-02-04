@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import { Badges } from "@/lib/badges";
 
 export const metadata: Metadata = {
   title: "Jurisprudence",
@@ -110,6 +111,8 @@ export default async function JurisprudencePage() {
     ],
   });
 
+  
+
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
@@ -124,10 +127,10 @@ export default async function JurisprudencePage() {
             </p>
           </header>
           
-          <section className="grid gap-6 md:grid-cols-3 mb-12">
+          <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
             <Link
               href={boscoItem.href}
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Featured</p>
               <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">BOSCO Judgment</h2>
@@ -136,7 +139,7 @@ export default async function JurisprudencePage() {
             </Link>
             <Link
               href="/en/jurisprudence"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Activity</p>
               <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Latest decisions</h2>
@@ -145,7 +148,7 @@ export default async function JurisprudencePage() {
             </Link>
             <Link
               href="/en/legislation"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
             >
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Context</p>
               <h2 className="font-display text-xl md:text-2xl text-foreground mb-2">Regulatory framework</h2>
@@ -162,6 +165,7 @@ export default async function JurisprudencePage() {
               >
                 <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Decision</p>
                 <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                <Badges ms={item.dateMs} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 {item.description && <p className="text-body mb-6">{item.description}</p>}
                 {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
               </Link>

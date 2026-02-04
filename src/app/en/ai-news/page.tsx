@@ -193,6 +193,24 @@ export default async function AiNewsPage() {
                   className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
                 >
                   <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Briefing</p>
+                  {item.dateMs > 0 && (
+                    <div className="mb-2 inline-flex items-center gap-2 text-xs text-caption">
+                      {(Date.now() - item.dateMs) / (1000 * 60 * 60 * 24) <= 7 && (
+                        <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
+                      )}
+                      {(Date.now() - item.dateMs) / (1000 * 60 * 60 * 24) <= 30 &&
+                        !((Date.now() - item.dateMs) / (1000 * 60 * 60 * 24) <= 7) && (
+                          <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
+                        )}
+                      <span>
+                        {new Date(item.dateMs).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </div>
+                  )}
                   <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
                   {item.description && <p className="text-body mb-6">{item.description}</p>}
                   {item.meta && <div className="text-sm text-caption">{item.meta}</div>}

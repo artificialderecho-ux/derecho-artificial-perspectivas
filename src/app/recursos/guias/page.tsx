@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Badges } from "@/lib/badges";
 import libraryDocs from "../../../data/library-docs.json";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 
@@ -96,6 +97,36 @@ export default function GuidesPage() {
               Repositorio centralizado de documentación técnica y ética de la AESIA, la Comisión Europea y organismos internacionales.
             </p>
           </header>
+
+          <section className="grid gap-6 md:grid-cols-3 not-prose mb-16 bento-surface">
+            <a
+              href="#aesia"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AESIA</p>
+              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Documentos</h3>
+              <p className="text-sm text-body">Publicaciones clave de la AESIA.</p>
+              <div className="mt-4 text-xs text-caption">Total: {aesiaDocs.length}</div>
+            </a>
+            <a
+              href="#comision-europea"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Comisión Europea</p>
+              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Documentos</h3>
+              <p className="text-sm text-body">Guías y materiales oficiales.</p>
+              <div className="mt-4 text-xs text-caption">Total: {commissionDocs.length}</div>
+            </a>
+            <a
+              href="#otros-organismos"
+              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Otros</p>
+              <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Soft law</h3>
+              <p className="text-sm text-body">CEPEJ, UNESCO y organismos afines.</p>
+              <div className="mt-4 text-xs text-caption">Total: {otherDocs.length + cepejDocs.length}</div>
+            </a>
+          </section>
 
           <div className="space-y-20">
             <section id="aesia">
@@ -224,6 +255,13 @@ export default function GuidesPage() {
 
 function DocCardItem({ doc, color }: { doc: DocCard; color: string }) {
   const isAesia = doc.source === "AESIA";
+  const toMs = (value?: string) => {
+    if (!value) return 0;
+    const d = new Date(value);
+    const ms = d.getTime();
+    return Number.isNaN(ms) ? 0 : ms;
+  };
+  const dateMs = toMs(doc.date);
 
   return (
     <a
@@ -238,9 +276,10 @@ function DocCardItem({ doc, color }: { doc: DocCard; color: string }) {
         >
           {doc.source}
         </span>
-        <span className="text-xs text-muted-foreground font-mono">
-          {doc.year || doc.date?.split("-")[0]}
-        </span>
+        <div className="text-xs text-muted-foreground font-mono inline-flex items-center gap-2">
+          <span>{doc.year || doc.date?.split("-")[0]}</span>
+          <Badges ms={dateMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+        </div>
       </div>
       <h3 className="font-serif text-lg text-foreground mb-3 group-hover:text-primary transition-colors">
         {doc.title}

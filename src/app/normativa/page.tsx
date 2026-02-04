@@ -9,6 +9,7 @@ import {
 } from "@/components/seo/StructuredData";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { Badges, isNew, isRecent, formatDateFromMs } from "@/lib/badges";
 
 export const metadata: Metadata = {
   title: "Guía del Reglamento de IA en 2026: Cumplimiento para Empresas",
@@ -85,6 +86,7 @@ export default async function NormativaPage() {
   const slugs = await listSectionResourceSlugs("normativa");
   const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("normativa", slug)));
   const resolvedEntries = entries.filter((entry): entry is ResourceEntry => Boolean(entry));
+  
 
   return (
     <>
@@ -126,6 +128,35 @@ export default async function NormativaPage() {
             DESCARGAR REGLAMENTO OFICIAL (PDF)
           </a>
         </div>
+
+        <section className="grid gap-6 md:grid-cols-3 not-prose mb-12 bento-surface">
+          <a
+            href="https://eur-lex.europa.eu/legal-content/ES/TXT/PDF/?uri=CELEX:32024R1689"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+          >
+            <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Documento oficial</p>
+            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Reglamento de IA (PDF)</h3>
+            <p className="text-sm text-body">Descarga directa desde EUR-Lex.</p>
+          </a>
+          <Link
+            href="/jurisprudencia/sentencia-bosco-transparencia-algoritmica"
+            className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+          >
+            <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Transparencia</p>
+            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Caso BOSCO</h3>
+            <p className="text-sm text-body">Acceso a código fuente en prestaciones sociales.</p>
+          </Link>
+          <Link
+            href="/normativa"
+            className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 transition-all"
+          >
+            <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actividad</p>
+            <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">Novedades normativas</h3>
+            <p className="text-sm text-body">Entradas registradas: {resolvedEntries.length}</p>
+          </Link>
+        </section>
 
         <p className="lead">
           La entrada en vigor plena del{" "}
@@ -273,6 +304,7 @@ export default async function NormativaPage() {
                 >
                   <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
                   <h3 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h3>
+                  <Badges ms={entry.dateMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                   {entry.summaryHtml && (
                     <p className="text-body">
                       {entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
