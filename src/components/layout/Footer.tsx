@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Linkedin, Twitter } from "lucide-react";
+import { Linkedin, Twitter, Facebook } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -179,6 +179,15 @@ export function Footer() {
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
               >
                 <Twitter className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61587246221582"
+                target="_blank"
+                rel="noreferrer"
+                aria-label={isEnglish ? "Facebook page" : "Página en Facebook"}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
+              >
+                <Facebook className="h-4 w-4" />
               </a>
               <a
                 href="https://www.linkedin.com/in/derecho-artificial/"
