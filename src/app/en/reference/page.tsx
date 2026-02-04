@@ -106,6 +106,12 @@ export default async function ReferencePage() {
     Promise.all(guiasSlugs.slice(0, 3).map((slug) => getSectionResourceEntry("guias", slug))),
   ]);
 
+  const [legislationAll, jurisprudenceAll, guidesAll] = await Promise.all([
+    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
+    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
+    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
+  ]);
+
   const legislationItems =
     legislationTop
       .filter((e): e is NonNullable<typeof e> => Boolean(e))
@@ -136,6 +142,28 @@ export default async function ReferencePage() {
         meta: `${formatDateFromMs(e.dateMs, "en-US")} · Technical and ethical documentation`,
         dateMs: e.dateMs ?? 0,
       })) ?? [];
+
+  const latestLegislationMs =
+    Math.max(
+      0,
+      ...legislationAll
+        .filter((e): e is NonNullable<typeof e> => Boolean(e))
+        .map((e) => e.dateMs ?? 0),
+    ) || 0;
+  const latestJurisprudenceMs =
+    Math.max(
+      0,
+      ...jurisprudenceAll
+        .filter((e): e is NonNullable<typeof e> => Boolean(e))
+        .map((e) => e.dateMs ?? 0),
+    ) || 0;
+  const latestGuidesMs =
+    Math.max(
+      0,
+      ...guidesAll
+        .filter((e): e is NonNullable<typeof e> => Boolean(e))
+        .map((e) => e.dateMs ?? 0),
+    ) || 0;
 
   const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
     const seen = new Set<string>();
@@ -242,6 +270,9 @@ export default async function ReferencePage() {
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Legislation</p>
                 <h3 className="font-display text-xl text-foreground mb-2">Regulatory framework</h3>
                 <p className="text-sm text-body">EU AI Act and applicable regulation.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
+                  <Badges ms={latestLegislationMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+                </div>
               </Link>
               <Link
                 href="/en/jurisprudence"
@@ -250,6 +281,9 @@ export default async function ReferencePage() {
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudence</p>
                 <h3 className="font-display text-xl text-foreground mb-2">Key decisions</h3>
                 <p className="text-sm text-body">Selection on algorithms and rights.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
+                  <Badges ms={latestJurisprudenceMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+                </div>
               </Link>
               <Link
                 href="/en/guides-protocols"
@@ -258,7 +292,36 @@ export default async function ReferencePage() {
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guides & Protocols</p>
                 <h3 className="font-display text-xl text-foreground mb-2">Technical library</h3>
                 <p className="text-sm text-body">Official documentation and soft law.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
+                  <Badges ms={latestGuidesMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+                </div>
               </Link>
+            </div>
+          </div>
+        </section>
+        <section className="section-spacing bento-surface">
+          <div className="container-wide">
+            <div className="rounded-lg border border-divider bg-surface p-8">
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Editorial method</p>
+              <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-4">Rigor, sources and governance</h2>
+              <p className="text-sm text-body mb-6">
+                We prioritize regulatory frameworks and verifiable official documentation. Each piece links sources,
+                dates and context to ensure traceability and compliance with the EU AI Act.
+              </p>
+              <div className="grid gap-4 md:grid-cols-3">
+                <Link href="/en/legislation" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Legislation</p>
+                  <p className="text-sm text-body">EU AI Act, GDPR and related regulatory developments.</p>
+                </Link>
+                <Link href="/en/guides-protocols" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Guides & Protocols</p>
+                  <p className="text-sm text-body">AESIA, CEPEJ, European Commission and international bodies.</p>
+                </Link>
+                <Link href="/en/jurisprudence" className="border border-border rounded-sm p-4 hover:border-primary/40 transition-colors">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">Jurisprudence</p>
+                  <p className="text-sm text-body">Key decisions on transparency, liability and rights.</p>
+                </Link>
+              </div>
             </div>
           </div>
         </section>

@@ -108,6 +108,12 @@ export default async function ReferenciaPage() {
     Promise.all(guiasSlugs.slice(0, 3).map((slug) => getSectionResourceEntry("guias", slug))),
   ]);
 
+  const [normativaEntriesAll, jurisprudenciaEntriesAll, guiasEntriesAll] = await Promise.all([
+    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
+    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
+    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
+  ]);
+
   const normativaItems =
     normativaTopEntries
       .filter((e): e is NonNullable<typeof e> => Boolean(e))
@@ -138,6 +144,28 @@ export default async function ReferenciaPage() {
         meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Biblioteca técnica y ética`,
         dateMs: e.dateMs ?? 0,
       })) ?? [];
+
+  const latestNormativaMs =
+    Math.max(
+      0,
+      ...normativaEntriesAll
+        .filter((e): e is NonNullable<typeof e> => Boolean(e))
+        .map((e) => e.dateMs ?? 0),
+    ) || 0;
+  const latestJurisprudenciaMs =
+    Math.max(
+      0,
+      ...jurisprudenciaEntriesAll
+        .filter((e): e is NonNullable<typeof e> => Boolean(e))
+        .map((e) => e.dateMs ?? 0),
+    ) || 0;
+  const latestGuiasMs =
+    Math.max(
+      0,
+      ...guiasEntriesAll
+        .filter((e): e is NonNullable<typeof e> => Boolean(e))
+        .map((e) => e.dateMs ?? 0),
+    ) || 0;
 
   const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
     const seen = new Set<string>();
@@ -251,6 +279,9 @@ export default async function ReferenciaPage() {
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
                 <h3 className="font-display text-xl text-foreground mb-2">Marco regulatorio</h3>
                 <p className="text-sm text-body">EU AI Act y regulación aplicable.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
+                  <Badges ms={latestNormativaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                </div>
               </Link>
               <Link
                 href="/jurisprudencia"
@@ -259,6 +290,14 @@ export default async function ReferenciaPage() {
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudencia</p>
                 <h3 className="font-display text-xl text-foreground mb-2">Resoluciones clave</h3>
                 <p className="text-sm text-body">Casos sobre algoritmos y derechos.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
+                  <Badges
+                    ms={latestJurisprudenciaMs}
+                    locale="es-ES"
+                    newLabel="Nuevo"
+                    updatedLabel="Actualizado"
+                  />
+                </div>
               </Link>
               <Link
                 href="/recursos/guias"
@@ -267,6 +306,9 @@ export default async function ReferenciaPage() {
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías y Protocolos</p>
                 <h3 className="font-display text-xl text-foreground mb-2">Biblioteca técnica</h3>
                 <p className="text-sm text-body">Documentación oficial y soft law.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
+                  <Badges ms={latestGuiasMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                </div>
               </Link>
             </div>
           </div>
