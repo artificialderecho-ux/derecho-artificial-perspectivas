@@ -397,7 +397,7 @@ export default async function HomePage() {
             {latestActualidad && (
               <Link
                 href={latestActualidad.urlPath}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Actualidad IA
@@ -408,16 +408,14 @@ export default async function HomePage() {
                 <p className="text-sm text-body mb-4 line-clamp-3">
                   {latestActualidad.description}
                 </p>
-                <p className="mt-auto text-xs text-caption">
-                  {formatDate(latestActualidad.date)} · {latestActualidad.author}
-                </p>
+                <p className="mt-auto text-xs text-caption">{formatDate(latestActualidad.date)}</p>
               </Link>
             )}
 
             {latestFirma && (
               <Link
                 href={latestFirma.urlPath}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Firma Scarpa
@@ -428,16 +426,14 @@ export default async function HomePage() {
                 <p className="text-sm text-body mb-4 line-clamp-3">
                   {latestFirma.description}
                 </p>
-                <p className="mt-auto text-xs text-caption">
-                  {formatDate(latestFirma.date)} · {latestFirma.author}
-                </p>
+                <p className="mt-auto text-xs text-caption">{formatDate(latestFirma.date)}</p>
               </Link>
             )}
 
             {latestNormativa && (
               <Link
                 href={`/normativa/${latestNormativa.slug}`}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Normativa
@@ -451,7 +447,7 @@ export default async function HomePage() {
                   </p>
                 )}
                 <p className="mt-auto text-xs text-caption">
-                  Análisis normativo con fuentes oficiales
+                  {latestNormativa.dateMs ? formatDateFromMs(latestNormativa.dateMs, "es-ES") : ""}
                 </p>
               </Link>
             )}
@@ -459,7 +455,7 @@ export default async function HomePage() {
             {latestJurisprudencia && (
               <Link
                 href={`/jurisprudencia/${latestJurisprudencia.slug}`}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Jurisprudencia
@@ -473,7 +469,9 @@ export default async function HomePage() {
                   </p>
                 )}
                 <p className="mt-auto text-xs text-caption">
-                  Resoluciones clave sobre algoritmos y derechos
+                  {latestJurisprudencia.dateMs
+                    ? formatDateFromMs(latestJurisprudencia.dateMs, "es-ES")
+                    : ""}
                 </p>
               </Link>
             )}
