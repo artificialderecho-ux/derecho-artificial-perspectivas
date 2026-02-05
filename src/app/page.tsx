@@ -326,7 +326,7 @@ export default async function HomePage() {
       </section>
       <section className="section-spacing bento-surface">
         <div className="container-wide">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 gap-6">
             <Link href="/firma-scarpa" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Firma Scarpa</h3>
               <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
@@ -364,12 +364,6 @@ export default async function HomePage() {
             </Link>
             <Link href="/glosario-ia-legal" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Glosario IA legal</h3>
-            </Link>
-            <Link href="/quienes-somos" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
-              <h3 className="font-serif text-xl text-foreground">Quiénes somos</h3>
-            </Link>
-            <Link href="/contacto" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
-              <h3 className="font-serif text-xl text-foreground">Contacto</h3>
             </Link>
           </div>
           <IndicatorsLegend locale="es-ES" />
