@@ -326,92 +326,50 @@ export default async function HomePage() {
       </section>
       <section className="section-spacing bento-surface">
         <div className="container-wide">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
-                Mapa de referencia
-              </p>
-              <h2 className="font-serif text-2xl md:text-3xl text-foreground">
-                Derecho e IA en un vistazo
-              </h2>
-            </div>
-            <p className="text-sm text-caption max-w-xl">
-              Acceso directo a las áreas clave del proyecto con contexto y actividad reciente.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(160px,_auto)]">
-            <Link href="/glosario-ia-legal" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 lg:row-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Glosario</p>
-              <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-2">Glosario de IA legal</h3>
-              <p className="text-sm text-body">Diccionario técnico y jurídico del ecosistema europeo.</p>
-              <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Nuevo</span>
-                <span>Actualizado</span>
-              </div>
-            </Link>
-            <Link href="/actualidad-ia" className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actualidad IA</p>
-                <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Briefings y análisis editoriales</h3>
-              <p className="text-sm text-body">Últimas entradas y recursos de actualidad.</p>
-              <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestActualidadMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Actividad semanal: {actualidadWeeklyCount}</span>
-                {latestActualidadMs > 0 && (
-                  <span className="text-[10px]">Última actualización: {formatDateFromMs(latestActualidadMs, "es-ES")}</span>
-                )}
-              </div>
-            </Link>
-            <Link href="/jurisprudencia" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudencia</p>
-              <h3 className="font-serif text-xl text-foreground mb-2">Resoluciones clave</h3>
-              <p className="text-sm text-body">Selección de casos sobre algoritmos y derechos.</p>
-              <p className="mt-4 text-xs text-caption">Entradas: {jurisprudenciaSlugs.length}</p>
-              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestJurisprudenciaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Actividad semanal: {jurisprudenciaWeeklyCount}</span>
-                {latestJurisprudenciaMs > 0 && (
-                  <span className="text-[10px]">Última actualización: {formatDateFromMs(latestJurisprudenciaMs, "es-ES")}</span>
-                )}
-              </div>
-            </Link>
-            <Link href="/normativa" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
-              <h3 className="font-serif text-xl text-foreground mb-2">Marco regulatorio</h3>
-              <p className="text-sm text-body">EU AI Act y regulación aplicable.</p>
-              <p className="mt-4 text-xs text-caption">Entradas: {normativaSlugs.length}</p>
-              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestNormativaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Actividad semanal: {normativaWeeklyCount}</span>
-                {latestNormativaMs > 0 && (
-                  <span className="text-[10px]">Última actualización: {formatDateFromMs(latestNormativaMs, "es-ES")}</span>
-                )}
-              </div>
-            </Link>
-            <Link href="/recursos/guias" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías y Protocolos</p>
-              <h3 className="font-serif text-xl text-foreground mb-2">Biblioteca técnica y ética</h3>
-              <p className="text-sm text-body">Documentación oficial y soft law.</p>
-              <p className="mt-4 text-xs text-caption">Documentos: {guiasSlugs.length}</p>
-              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestGuiasMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Actividad semanal: {guiasWeeklyCount}</span>
-                {latestGuiasMs > 0 && (
-                  <span className="text-[10px]">Última actualización: {formatDateFromMs(latestGuiasMs, "es-ES")}</span>
-                )}
-              </div>
-            </Link>
-            <Link href="/firma-scarpa" className="bg-card border border-border rounded-sm p-6 lg:col-span-4 hover:border-primary/30 hover:shadow-md transition-all duration-300">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Firma Scarpa</p>
-              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Ensayos y notas de trabajo</h3>
-              <p className="text-sm text-body">Análisis propios y materiales descargables.</p>
-              <p className="mt-4 text-xs text-caption">Entradas: {unifiedFirma.length}</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <Link href="/firma-scarpa" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <h3 className="font-serif text-xl text-foreground">Firma Scarpa</h3>
               <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
                 <Badges ms={latestFirmaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Actividad semanal: {firmaWeeklyCount}</span>
-                {latestFirmaMs > 0 && (
-                  <span className="text-[10px]">Última actualización: {formatDateFromMs(latestFirmaMs, "es-ES")}</span>
-                )}
+                <span className="text-[10px]">Entradas: {unifiedFirma.length}</span>
               </div>
+            </Link>
+            <Link href="/jurisprudencia" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <h3 className="font-serif text-xl text-foreground">Jurisprudencia</h3>
+              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestJurisprudenciaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                <span className="text-[10px]">Entradas: {jurisprudenciaSlugs.length}</span>
+              </div>
+            </Link>
+            <Link href="/actualidad-ia" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <h3 className="font-serif text-xl text-foreground">Actualidad IA</h3>
+              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestActualidadMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                <span className="text-[10px]">Entradas recientes: {unifiedActualidad.length}</span>
+              </div>
+            </Link>
+            <Link href="/normativa" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <h3 className="font-serif text-xl text-foreground">Normativa</h3>
+              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestNormativaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                <span className="text-[10px]">Entradas: {normativaSlugs.length}</span>
+              </div>
+            </Link>
+            <Link href="/recursos/guias" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <h3 className="font-serif text-xl text-foreground">Guías y Protocolos</h3>
+              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestGuiasMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
+                <span className="text-[10px]">Documentos: {guiasSlugs.length}</span>
+              </div>
+            </Link>
+            <Link href="/glosario-ia-legal" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <h3 className="font-serif text-xl text-foreground">Glosario IA legal</h3>
+            </Link>
+            <Link href="/quienes-somos" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <h3 className="font-serif text-xl text-foreground">Quiénes somos</h3>
+            </Link>
+            <Link href="/contacto" className="bg-card border border-border rounded-sm p-6 aspect-square hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+              <h3 className="font-serif text-xl text-foreground">Contacto</h3>
             </Link>
           </div>
           <IndicatorsLegend locale="es-ES" />
