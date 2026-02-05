@@ -328,7 +328,7 @@ export default async function EnglishHomePage() {
       <section className="section-spacing bento-surface">
         <div className="container-wide">
           <div className="grid grid-cols-2 gap-6">
-            <Link href="/en/scarpa-firm" className="bg-gray-100 border-2 border-black rounded-sm p-5 md:p-6 aspect-[4/3] hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/en/scarpa-firm" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Scarpa Firm</h3>
               <h2 className="text-sm md:text-base text-body">The Firm: Expert opinion and critical analysis of Digital Law</h2>
               <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
@@ -336,7 +336,7 @@ export default async function EnglishHomePage() {
                 <span className="text-[10px]">Entries: {unifiedFirma.length}</span>
               </div>
             </Link>
-            <Link href="/en/jurisprudence" className="bg-gray-100 border-2 border-black rounded-sm p-5 md:p-6 aspect-[4/3] hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/en/jurisprudence" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Jurisprudence</h3>
               <h2 className="text-sm md:text-base text-body">Jurisprudence Observatory: Case law and rulings on Artificial Intelligence</h2>
               <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
@@ -344,7 +344,7 @@ export default async function EnglishHomePage() {
                 <span className="text-[10px]">Entries: {jurisprudenciaSlugs.length}</span>
               </div>
             </Link>
-            <Link href="/en/ai-news" className="bg-gray-100 border-2 border-black rounded-sm p-5 md:p-6 aspect-[4/3] hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/en/ai-news" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">AI News</h3>
               <h2 className="text-sm md:text-base text-body">Legal Tech Updates: News and legal impact of technology</h2>
               <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
@@ -352,7 +352,7 @@ export default async function EnglishHomePage() {
                 <span className="text-[10px]">Recent entries: {unifiedActualidad.length}</span>
               </div>
             </Link>
-            <Link href="/en/legislation" className="bg-gray-100 border-2 border-black rounded-sm p-5 md:p-6 aspect-[4/3] hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/en/legislation" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Legislation</h3>
               <h2 className="text-sm md:text-base text-body">Regulatory Framework: Laws, regulations and AI Compliance</h2>
               <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
@@ -360,7 +360,7 @@ export default async function EnglishHomePage() {
                 <span className="text-[10px]">Entries: {normativaSlugs.length}</span>
               </div>
             </Link>
-            <Link href="/en/guides-protocols" className="bg-gray-100 border-2 border-black rounded-sm p-5 md:p-6 aspect-[4/3] hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/en/guides-protocols" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Guides & Protocols</h3>
               <h2 className="text-sm md:text-base text-body">Practical Guides and Professional Protocols</h2>
               <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
@@ -368,7 +368,7 @@ export default async function EnglishHomePage() {
                 <span className="text-[10px]">Documents: {guiasSlugs.length}</span>
               </div>
             </Link>
-            <Link href="/en/legal-ai-glossary" className="bg-gray-100 border-2 border-black rounded-sm p-5 md:p-6 aspect-[4/3] hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/en/legal-ai-glossary" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">AI Glossary</h3>
               <h2 className="text-sm md:text-base text-body">Dictionary of legal terms and concepts</h2>
             </Link>
