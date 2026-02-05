@@ -87,6 +87,7 @@ export function createArticleJsonLd(params: {
     image: params.image ? [params.image] : [`${siteUrl}/logo-principal.png`],
     datePublished: params.datePublished,
     dateModified: params.dateModified ?? params.datePublished,
+    license: `${siteUrl}/aviso-legal`,
     author: {
       "@type": "Person",
       name: params.authorName ?? "Ricardo Scarpa",
@@ -120,6 +121,7 @@ export function createNewsArticleJsonLd(params: {
     image: params.image ? [params.image] : [`${siteUrl}/logo-principal.png`],
     datePublished: params.datePublished,
     dateModified: params.dateModified ?? params.datePublished,
+    license: `${siteUrl}/aviso-legal`,
     author: {
       "@type": "Person",
       name: params.authorName ?? "Ricardo Scarpa",
@@ -150,6 +152,7 @@ export function createLegalDecisionJsonLd(params: {
     headline: params.name,
     description: params.description,
     datePublished: params.datePublished,
+    license: `${siteUrl}/aviso-legal`,
     author: {
       "@type": "Person",
       name: "Ricardo Scarpa",
@@ -181,6 +184,7 @@ export function createLegislationJsonLd(params: {
     headline: params.name,
     description: params.description,
     datePublished: params.datePublished,
+    license: `${siteUrl}/aviso-legal`,
     author: {
       "@type": "Person",
       name: "Ricardo Scarpa",
@@ -229,6 +233,7 @@ export function createLegalArticleJsonLd(params: {
     headline: params.headline,
     description: params.description,
     datePublished: params.datePublished,
+    license: `${siteUrl}/aviso-legal`,
     author: {
       "@type": "Person",
       name: params.authorName ?? "Ricardo Scarpa",

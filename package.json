@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "prebuild": "node scripts/convert-sfpro.mjs"
+    "prebuild": "node scripts/convert-sfpro.mjs",
+    "generate-md": "node scripts/generate-md-from-html.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
