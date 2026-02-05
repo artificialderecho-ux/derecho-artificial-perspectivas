@@ -4,7 +4,6 @@ import { listContentSlugs, getContentEntry } from "@/lib/content";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { Badges, formatDateFromMs, isNew } from "@/lib/badges";
-import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
 
 export const metadata: Metadata = {
   title: "Referencia | Derecho Artificial",
@@ -336,7 +335,7 @@ export default async function ReferenciaPage() {
                 </div>
               </Link>
             </div>
-            <IndicatorsLegend locale="es-ES" />
+            
           </div>
         </section>
 
