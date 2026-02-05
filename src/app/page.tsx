@@ -382,15 +382,14 @@ export default async function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div>
               <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
-                Novedades
+                Actualidad
               </p>
               <h2 className="font-serif text-2xl md:text-3xl text-foreground">
-                Lo último en Derecho e IA
+                Actualidad y Análisis: El pulso legal de la IA
               </h2>
             </div>
             <p className="text-sm text-caption max-w-xl">
-              Selección de los últimos briefings, ensayos y documentos críticos sobre inteligencia artificial,
-              ordenados de más reciente a más antiguo.
+              Explora nuestros últimos briefings, ensayos y documentos críticos. Una selección editorial diseñada para dotar de criterio técnico y jurídico a los profesionales que lideran la transformación digital.
             </p>
           </div>
 
