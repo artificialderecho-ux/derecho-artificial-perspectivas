@@ -4,6 +4,7 @@ import { listContentSlugs, getContentEntry } from "@/lib/content";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
 import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/badges";
 import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
+import { StructuredData } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
   title: "Law, ethics and AI regulation",
@@ -383,23 +384,72 @@ export default async function EnglishHomePage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div>
               <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
-                Highlights
+                AI News
               </p>
               <h2 className="font-serif text-2xl md:text-3xl text-foreground">
-                Latest in Law & AI
+                News & Analysis: The legal pulse of AI
               </h2>
             </div>
-            <p className="text-sm text-caption max-w-xl">
-              A selection of the latest briefings, essays and critical documents on artificial intelligence,
-              sorted from newest to oldest.
-            </p>
+            <div className="max-w-xl">
+              <p className="text-sm text-caption">
+                Explore our latest briefings, essays and critical documents. An editorial selection designed to equip digital transformation leaders with solid technical and legal judgement.
+              </p>
+              <div className="mt-3">
+                <Link
+                  href="/en/ai-news"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
+                >
+                  View all news
+                </Link>
+              </div>
+            </div>
           </div>
+          <StructuredData
+            data={{
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              itemListElement: [
+                latestActualidad && {
+                  "@type": "ListItem",
+                  position: 1,
+                  url: latestActualidad.urlPath,
+                  name: latestActualidad.title,
+                  datePublished: new Date(latestActualidad.date).toISOString(),
+                },
+                latestFirma && {
+                  "@type": "ListItem",
+                  position: 2,
+                  url: latestFirma.urlPath,
+                  name: latestFirma.title,
+                  datePublished: new Date(latestFirma.date).toISOString(),
+                },
+                latestNormativa && {
+                  "@type": "ListItem",
+                  position: 3,
+                  url: `/normativa/${latestNormativa.slug}`,
+                  name: latestNormativa.title,
+                  datePublished: latestNormativa.dateMs
+                    ? new Date(latestNormativa.dateMs).toISOString()
+                    : undefined,
+                },
+                latestJurisprudencia && {
+                  "@type": "ListItem",
+                  position: 4,
+                  url: `/jurisprudencia/${latestJurisprudencia.slug}`,
+                  name: latestJurisprudencia.title,
+                  datePublished: latestJurisprudencia.dateMs
+                    ? new Date(latestJurisprudencia.dateMs).toISOString()
+                    : undefined,
+                },
+              ].filter(Boolean),
+            }}
+          />
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {latestActualidad && (
               <Link
                 href={latestActualidad.urlPath}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   AI News
@@ -410,16 +460,14 @@ export default async function EnglishHomePage() {
                 <p className="text-sm text-body mb-4 line-clamp-3">
                   {latestActualidad.description}
                 </p>
-                <p className="mt-auto text-xs text-caption">
-                  {formatDate(latestActualidad.date)} · {latestActualidad.author}
-                </p>
+                <p className="mt-auto text-xs text-caption">{formatDate(latestActualidad.date)}</p>
               </Link>
             )}
 
             {latestFirma && (
               <Link
                 href={latestFirma.urlPath}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Scarpa Firm
@@ -430,16 +478,14 @@ export default async function EnglishHomePage() {
                 <p className="text-sm text-body mb-4 line-clamp-3">
                   {latestFirma.description}
                 </p>
-                <p className="mt-auto text-xs text-caption">
-                  {formatDate(latestFirma.date)} · {latestFirma.author}
-                </p>
+                <p className="mt-auto text-xs text-caption">{formatDate(latestFirma.date)}</p>
               </Link>
             )}
 
             {latestNormativa && (
               <Link
                 href={`/normativa/${latestNormativa.slug}`}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Legislation
@@ -453,7 +499,7 @@ export default async function EnglishHomePage() {
                   </p>
                 )}
                 <p className="mt-auto text-xs text-caption">
-                  Regulatory analysis with official sources
+                  {latestNormativa.dateMs ? formatDateFromMs(latestNormativa.dateMs, "en-US") : ""}
                 </p>
               </Link>
             )}
@@ -461,7 +507,7 @@ export default async function EnglishHomePage() {
             {latestJurisprudencia && (
               <Link
                 href={`/jurisprudencia/${latestJurisprudencia.slug}`}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Jurisprudence
@@ -475,7 +521,9 @@ export default async function EnglishHomePage() {
                   </p>
                 )}
                 <p className="mt-auto text-xs text-caption">
-                  Key decisions on algorithms and rights
+                  {latestJurisprudencia.dateMs
+                    ? formatDateFromMs(latestJurisprudencia.dateMs, "en-US")
+                    : ""}
                 </p>
               </Link>
             )}

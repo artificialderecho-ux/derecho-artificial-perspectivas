@@ -4,6 +4,7 @@ import { listContentSlugs, getContentEntry } from "@/lib/content";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
 import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/badges";
 import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
+import { StructuredData } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
   title: "Derecho, ética y regulación de la IA",
@@ -388,16 +389,66 @@ export default async function HomePage() {
                 Actualidad y Análisis: El pulso legal de la IA
               </h2>
             </div>
-            <p className="text-sm text-caption max-w-xl">
-              Explora nuestros últimos briefings, ensayos y documentos críticos. Una selección editorial diseñada para dotar de criterio técnico y jurídico a los profesionales que lideran la transformación digital.
-            </p>
+            <div className="max-w-xl">
+              <p className="text-sm text-caption">
+                Explora nuestros últimos briefings, ensayos y documentos críticos. Una selección editorial diseñada para dotar de criterio técnico y jurídico a los profesionales que lideran la transformación digital.
+              </p>
+              <div className="mt-3">
+                <Link
+                  href="/actualidad-ia"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
+                >
+                  Ver toda la actualidad
+                </Link>
+              </div>
+            </div>
           </div>
+          <StructuredData
+            data={{
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              itemListElement: [
+                latestActualidad && {
+                  "@type": "ListItem",
+                  position: 1,
+                  url: latestActualidad.urlPath,
+                  name: latestActualidad.title,
+                  datePublished: new Date(latestActualidad.date).toISOString(),
+                },
+                latestFirma && {
+                  "@type": "ListItem",
+                  position: 2,
+                  url: latestFirma.urlPath,
+                  name: latestFirma.title,
+                  datePublished: new Date(latestFirma.date).toISOString(),
+                },
+                latestNormativa && {
+                  "@type": "ListItem",
+                  position: 3,
+                  url: `/normativa/${latestNormativa.slug}`,
+                  name: latestNormativa.title,
+                  datePublished: latestNormativa.dateMs
+                    ? new Date(latestNormativa.dateMs).toISOString()
+                    : undefined,
+                },
+                latestJurisprudencia && {
+                  "@type": "ListItem",
+                  position: 4,
+                  url: `/jurisprudencia/${latestJurisprudencia.slug}`,
+                  name: latestJurisprudencia.title,
+                  datePublished: latestJurisprudencia.dateMs
+                    ? new Date(latestJurisprudencia.dateMs).toISOString()
+                    : undefined,
+                },
+              ].filter(Boolean),
+            }}
+          />
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {latestActualidad && (
               <Link
                 href={latestActualidad.urlPath}
-                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Actualidad IA
@@ -415,7 +466,7 @@ export default async function HomePage() {
             {latestFirma && (
               <Link
                 href={latestFirma.urlPath}
-                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Firma Scarpa
@@ -433,7 +484,7 @@ export default async function HomePage() {
             {latestNormativa && (
               <Link
                 href={`/normativa/${latestNormativa.slug}`}
-                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Normativa
@@ -455,7 +506,7 @@ export default async function HomePage() {
             {latestJurisprudencia && (
               <Link
                 href={`/jurisprudencia/${latestJurisprudencia.slug}`}
-                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Jurisprudencia
