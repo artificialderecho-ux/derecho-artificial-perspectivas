@@ -312,6 +312,19 @@ export default async function EnglishHomePage() {
 
   return (
     <main>
+      <section className="py-20 md:py-28 bg-surface border-b border-divider">
+        <div className="container-narrow text-center">
+          <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">
+            Law, ethics and AI regulation
+          </p>
+          <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
+            Derecho Artificial
+          </h1>
+          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
+            AI, law and sound judgment. Practical reference for informed decisions.
+          </p>
+        </div>
+      </section>
       <section className="section-spacing bento-surface">
         <div className="container-wide">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
@@ -341,104 +354,71 @@ export default async function EnglishHomePage() {
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AI News</p>
                 <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Briefings & editorial analysis</h3>
               <p className="text-sm text-body">Latest entries and resources.</p>
-              <p className="mt-4 text-xs text-caption">Recent entries: {unifiedActualidad.length}</p>
-              {latestNewsMs > 0 && (
-                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                  {isNew(latestNewsMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
-                  )}
-                  {isRecent(latestNewsMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
-                  )}
-                  <span>{formatDateFromMs(latestNewsMs, "en-US")}</span>
-                </div>
-              )}
+              <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestNewsMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+                <span className="text-[10px]">Weekly activity: {newsWeeklyCount}</span>
+                {latestNewsMs > 0 && (
+                  <span className="text-[10px]">Last updated: {formatDateFromMs(latestNewsMs, "en-US")}</span>
+                )}
+              </div>
             </Link>
             <Link href="/en/jurisprudence" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Jurisprudence</p>
               <h3 className="font-serif text-xl text-foreground mb-2">Key decisions</h3>
               <p className="text-sm text-body">Selection on algorithms and rights.</p>
               <p className="mt-4 text-xs text-caption">Entries: {jurisprudenciaSlugs.length}</p>
-              {latestJurisprudenceMs > 0 && (
-                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                  {isNew(latestJurisprudenceMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
-                  )}
-                  {isRecent(latestJurisprudenceMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
-                  )}
-                  <span>{formatDateFromMs(latestJurisprudenceMs, "en-US")}</span>
-                </div>
-              )}
+              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestJurisprudenceMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+                <span className="text-[10px]">Weekly activity: {jurisprudenceWeeklyCount}</span>
+                {latestJurisprudenceMs > 0 && (
+                  <span className="text-[10px]">Last updated: {formatDateFromMs(latestJurisprudenceMs, "en-US")}</span>
+                )}
+              </div>
             </Link>
             <Link href="/en/legislation" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Legislation</p>
               <h3 className="font-serif text-xl text-foreground mb-2">Regulatory framework</h3>
               <p className="text-sm text-body">EU AI Act and applicable regulation.</p>
               <p className="mt-4 text-xs text-caption">Entries: {normativaSlugs.length}</p>
-              {latestLegislationMs > 0 && (
-                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                  {isNew(latestLegislationMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
-                  )}
-                  {isRecent(latestLegislationMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
-                  )}
-                  <span>{formatDateFromMs(latestLegislationMs, "en-US")}</span>
-                </div>
-              )}
+              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestLegislationMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+                <span className="text-[10px]">Weekly activity: {legislationWeeklyCount}</span>
+                {latestLegislationMs > 0 && (
+                  <span className="text-[10px]">Last updated: {formatDateFromMs(latestLegislationMs, "en-US")}</span>
+                )}
+              </div>
             </Link>
             <Link href="/en/guides-protocols" className="bg-card border border-border rounded-sm p-6 lg:col-span-2 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guides & Protocols</p>
               <h3 className="font-serif text-xl text-foreground mb-2">Technical & ethical library</h3>
               <p className="text-sm text-body">Official documentation and soft law.</p>
               <p className="mt-4 text-xs text-caption">Documents: {guiasSlugs.length}</p>
-              {latestGuidesMs > 0 && (
-                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                  {isNew(latestGuidesMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
-                  )}
-                  {isRecent(latestGuidesMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
-                  )}
-                  <span>{formatDateFromMs(latestGuidesMs, "en-US")}</span>
-                </div>
-              )}
+              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestGuidesMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+                <span className="text-[10px]">Weekly activity: {guidesWeeklyCount}</span>
+                {latestGuidesMs > 0 && (
+                  <span className="text-[10px]">Last updated: {formatDateFromMs(latestGuidesMs, "en-US")}</span>
+                )}
+              </div>
             </Link>
             <Link href="/en/scarpa-firm" className="bg-card border border-border rounded-sm p-6 lg:col-span-4 hover:border-primary/30 hover:shadow-md transition-all duration-300">
               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Scarpa Firm</p>
               <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Essays and working notes</h3>
               <p className="text-sm text-body">Original analysis and downloadable materials.</p>
               <p className="mt-4 text-xs text-caption">Entries: {unifiedFirma.length}</p>
-              {latestFirmMs > 0 && (
-                <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                  {isNew(latestFirmMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">New</span>
-                  )}
-                  {isRecent(latestFirmMs) && (
-                    <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
-                  )}
-                  <span>{formatDateFromMs(latestFirmMs, "en-US")}</span>
-                </div>
-              )}
+              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
+                <Badges ms={latestFirmMs} locale="en-US" newLabel="New" updatedLabel="Updated" />
+                <span className="text-[10px]">Weekly activity: {firmWeeklyCount}</span>
+                {latestFirmMs > 0 && (
+                  <span className="text-[10px]">Last updated: {formatDateFromMs(latestFirmMs, "en-US")}</span>
+                )}
+              </div>
             </Link>
           </div>
           <IndicatorsLegend locale="en-US" />
         </div>
       </section>
-      <section className="py-20 md:py-28 bg-surface border-b border-divider">
-        <div className="container-narrow text-center">
-          <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">
-            Law, ethics and AI regulation
-          </p>
-          <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
-            Derecho Artificial
-          </h1>
-          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
-            AI, law and sound judgment. Practical reference for informed decisions.
-          </p>
-        </div>
-      </section>
+      
 
       <section className="section-spacing">
         <div className="container-wide">
