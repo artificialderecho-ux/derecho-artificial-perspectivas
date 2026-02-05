@@ -372,7 +372,7 @@ export default async function HomePage() {
               <h2 className="text-sm md:text-base text-body">Diccionario de términos y conceptos legales</h2>
             </Link>
           </div>
-          <IndicatorsLegend locale="es-ES" />
+          
         </div>
       </section>
       

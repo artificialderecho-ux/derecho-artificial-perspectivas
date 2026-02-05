@@ -373,7 +373,7 @@ export default async function EnglishHomePage() {
               <h2 className="text-sm md:text-base text-body">Dictionary of legal terms and concepts</h2>
             </Link>
           </div>
-          <IndicatorsLegend locale="en-US" />
+          
         </div>
       </section>
       
