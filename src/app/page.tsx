@@ -448,14 +448,16 @@ export default async function HomePage() {
             {latestActualidad && (
               <Link
                 href={latestActualidad.urlPath}
-                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Actualidad IA
                 </p>
-                <h3 className="font-serif text-lg text-foreground mb-3">
+                <h3 className="font-serif text-lg text-foreground mb-2">
                   {latestActualidad.title}
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                 </h3>
+                <Badges ms={latestActualidad.date} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 <p className="text-sm text-body mb-4 line-clamp-3">
                   {latestActualidad.description}
                 </p>
@@ -466,14 +468,16 @@ export default async function HomePage() {
             {latestFirma && (
               <Link
                 href={latestFirma.urlPath}
-                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Firma Scarpa
                 </p>
-                <h3 className="font-serif text-lg text-foreground mb-3">
+                <h3 className="font-serif text-lg text-foreground mb-2">
                   {latestFirma.title}
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                 </h3>
+                <Badges ms={latestFirma.date} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 <p className="text-sm text-body mb-4 line-clamp-3">
                   {latestFirma.description}
                 </p>
@@ -484,14 +488,16 @@ export default async function HomePage() {
             {latestNormativa && (
               <Link
                 href={`/normativa/${latestNormativa.slug}`}
-                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Normativa
                 </p>
-                <h3 className="font-serif text-lg text-foreground mb-3">
+                <h3 className="font-serif text-lg text-foreground mb-2">
                   {latestNormativa.title}
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                 </h3>
+                <Badges ms={latestNormativa.dateMs ?? 0} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 {latestNormativa.summaryHtml && (
                   <p className="text-sm text-body mb-4 line-clamp-3">
                     {latestNormativa.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
@@ -506,14 +512,16 @@ export default async function HomePage() {
             {latestJurisprudencia && (
               <Link
                 href={`/jurisprudencia/${latestJurisprudencia.slug}`}
-                className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
                   Jurisprudencia
                 </p>
-                <h3 className="font-serif text-lg text-foreground mb-3">
+                <h3 className="font-serif text-lg text-foreground mb-2">
                   {latestJurisprudencia.title}
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                 </h3>
+                <Badges ms={latestJurisprudencia.dateMs ?? 0} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 {latestJurisprudencia.summaryHtml && (
                   <p className="text-sm text-body mb-4 line-clamp-3">
                     {latestJurisprudencia.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
