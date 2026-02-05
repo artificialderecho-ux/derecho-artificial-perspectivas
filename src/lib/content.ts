@@ -166,6 +166,8 @@ export function renderMarkdownToHtml(markdown: string) {
   let listItems: string[] = [];
   let inQuote = false;
   let quoteLines: string[] = [];
+  let inRawHtml = false;
+  let rawHtmlLines: string[] = [];
 
   const flushList = () => {
     if (!listType) return;
@@ -187,12 +189,28 @@ export function renderMarkdownToHtml(markdown: string) {
     codeLines = [];
   };
 
+  const flushRawHtml = () => {
+    if (!inRawHtml) return;
+    html += rawHtmlLines.join("\n");
+    inRawHtml = false;
+    rawHtmlLines = [];
+  };
+
   for (const rawLine of lines) {
     const line = rawLine.trimEnd();
+
+    if (inRawHtml) {
+      rawHtmlLines.push(rawLine);
+      if (/<\/table>/.test(line)) {
+        flushRawHtml();
+      }
+      continue;
+    }
 
     if (line.startsWith("```")) {
       flushList();
       flushQuote();
+      flushRawHtml();
       if (inCode) {
         flushCode();
       } else {
@@ -209,6 +227,15 @@ export function renderMarkdownToHtml(markdown: string) {
     if (!line.trim()) {
       flushList();
       flushQuote();
+      flushRawHtml();
+      continue;
+    }
+
+    if (/^\s*<table[\s>]/i.test(line)) {
+      flushList();
+      flushQuote();
+      inRawHtml = true;
+      rawHtmlLines.push(rawLine);
       continue;
     }
 
@@ -224,6 +251,7 @@ export function renderMarkdownToHtml(markdown: string) {
     if (headingMatch) {
       flushList();
       flushQuote();
+      flushRawHtml();
       const level = headingMatch[1].length;
       const content = formatInline(headingMatch[2].trim());
       html += `<h${level}>${content}</h${level}>`;
@@ -234,6 +262,7 @@ export function renderMarkdownToHtml(markdown: string) {
     if (imgMatch) {
       flushList();
       flushQuote();
+      flushRawHtml();
       const alt = escapeHtml(imgMatch[1]);
       const src = escapeHtml(imgMatch[2]);
       html += `<figure class="my-8"><img src="${src}" alt="${alt}" class="rounded-lg w-full h-auto shadow-md" loading="lazy" /><figcaption class="text-center text-sm text-caption mt-2">${alt}</figcaption></figure>`;
@@ -260,12 +289,14 @@ export function renderMarkdownToHtml(markdown: string) {
 
     flushList();
     flushQuote();
+    flushRawHtml();
     html += `<p>${formatInline(line.trim())}</p>`;
   }
 
   if (inCode) flushCode();
   flushQuote();
   flushList();
+  flushRawHtml();
 
   return html;
 }

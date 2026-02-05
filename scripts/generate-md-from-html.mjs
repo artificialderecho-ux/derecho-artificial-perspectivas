@@ -118,6 +118,10 @@ function blockToMarkdown($, el) {
   if (tag === "h5") return `##### ${normalizeQuotes($(el).text().trim())}`;
   if (tag === "h6") return `###### ${normalizeQuotes($(el).text().trim())}`;
   if (tag === "p") return normalizeQuotes(htmlChildrenToInlineMd($, el));
+  if (tag === "table") {
+    const html = $.html(el);
+    return html.trim();
+  }
   if (tag === "blockquote") {
     const inner = normalizeQuotes($(el).text().trim());
     return inner

@@ -28,7 +28,53 @@ En el marco del Derecho Digital europeo, la voz y la imagen han dejado de ser me
 
 Resulta fundamental integrar la reciente jurisprudencia del**TJUE (asunto C-203/22, sentencia de 27 de febrero de 2025)**, que precisa el alcance del derecho de acceso a la "información significativa sobre la lógica aplicada" (Art. 15.1.h). En contextos de creación de contenido sintético basado en perfiles, el responsable debe proporcionar una explicación inteligible sobre cómo se han tratado los datos para llegar al resultado visual o sonoro, permitiendo al interesado comprender la influencia de sus datos en la decisión automatizada o en la réplica generada.
 
-Base Jurídica Requerida Riesgo de Infracción Grave Consentimiento Expreso (Art. 9.2.a): Acción clara e inequívoca del titular. No se admite el consentimiento tácito para fines de clonación. Sanciones Millonarias: Multas de hasta 20 millones de € o el 4% de la facturación global anual del ejercicio anterior del grupo empresarial (conforme al concepto de "unidad económica" del TJUE C-383/23). Lógica Aplicada (Art. 15.1.h): Deber de transparencia sobre los principios aplicados en el entrenamiento y perfilado para generar la réplica (STJUE C-203/22). Intromisión Ilegítima: Vulneración del derecho a la intimidad y propia imagen, con responsabilidad por daños morales incluso en accesos accidentales (STS 383/2025). Excepciones de Interés Público: Autorizaciones específicas para seguridad (búsqueda de víctimas de secuestro, amenazas terroristas o delitos graves >4 años). Invalidez de Defensa: El uso fuera de los supuestos del Anteproyecto de Ley de IA español o el RIA se considerará práctica prohibida.
+<table cellpadding="2" cellspacing="2">
+	<tbody><tr>
+		<td style="border-top: 1px double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding: 0.05cm"><p align="justify">
+			Base Jurídica Requerida</p>
+		</td>
+		<td style="border-top: 1px double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding: 0.05cm"><p align="justify">
+			Riesgo de Infracción Grave</p>
+		</td>
+	</tr>
+	<tr>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Consentimiento Expreso (Art. 9.2.a):</b> Acción clara e
+			inequívoca del titular. No se admite el consentimiento tácito
+			para fines de clonación.</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Sanciones Millonarias:</b> Multas de hasta 20 millones de € o
+			el <b>4% de la facturación global anual del ejercicio anterior
+			del grupo empresarial</b> (conforme al concepto de "unidad
+			económica" del TJUE C-383/23).</p>
+		</td>
+	</tr>
+	<tr>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Lógica Aplicada (Art. 15.1.h):</b> Deber de transparencia
+			sobre los principios aplicados en el entrenamiento y perfilado
+			para generar la réplica (STJUE C-203/22).</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Intromisión Ilegítima:</b> Vulneración del derecho a la
+			intimidad y propia imagen, con responsabilidad por daños morales
+			incluso en accesos accidentales (STS 383/2025).</p>
+		</td>
+	</tr>
+	<tr>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Excepciones de Interés Público:</b> Autorizaciones
+			específicas para seguridad (búsqueda de víctimas de secuestro,
+			amenazas terroristas o delitos graves &gt;4 años).</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Invalidez de Defensa:</b> El uso fuera de los supuestos del
+			Anteproyecto de Ley de IA español o el RIA se considerará
+			práctica prohibida.</p>
+		</td>
+	</tr>
+</tbody></table>
 
 Para profundizar en estas obligaciones, consulte el[Reglamento (UE) 2016/679 (RGPD)](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679).
 
@@ -54,7 +100,61 @@ La tensión operativa en las plataformas digitales se manifiesta en el despliegu
 
 El**TJUE (asunto C-401/19)**ha sido tajante: las medidas de protección no pueden derivar en un bloqueo sistemático de contenidos lícitos. El tribunal exige un equilibrio proporcional donde la tecnología de filtrado debe ser capaz de discernir entre la infracción manifiesta y el uso creativo.
 
-Derecho en Conflicto Riesgo de la Plataforma (Sobrebloqueo) Solución Jurisprudencial (Equilibrio Proporcional) Propiedad Intelectual: Exclusividad del titular. Responsabilidad específica por falta de diligencia profesional según las normas del sector si no se obtienen autorizaciones. Los sistemas deben diseñarse para distinguir usos lícitos (parodia/pastiche) sin intervención humana sistemática, evitando el filtrado generalizado e indiscriminado. Libertad de Expresión: Derecho al uso transformador. Eliminación de contenidos lícitos por algoritmos insensibles al contexto creativo. Implementación de mecanismos de reclamación y reparación rápidos y eficaces que garanticen la restauración inmediata del contenido bloqueado erróneamente. Seguridad Jurídica: Transparencia algorítmica. Pérdida de exenciones de responsabilidad al actuar como editor de facto. Obligación proactiva de informar a los usuarios sobre las excepciones aplicables y los límites del sistema de filtrado conforme al RIA.
+<table cellpadding="2" cellspacing="2">
+	<tbody><tr>
+		<td style="border-top: 1px double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding: 0.05cm"><p align="justify">
+			Derecho en Conflicto</p>
+		</td>
+		<td style="border-top: 1px double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding: 0.05cm"><p align="justify">
+			Riesgo de la Plataforma (Sobrebloqueo)</p>
+		</td>
+		<td style="border-top: 1px double #808080; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding: 0.05cm"><p align="justify">
+			Solución Jurisprudencial (Equilibrio Proporcional)</p>
+		</td>
+	</tr>
+	<tr>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Propiedad Intelectual:</b> Exclusividad del titular.</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			Responsabilidad específica por falta de diligencia profesional
+			según las normas del sector si no se obtienen autorizaciones.</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			Los sistemas deben diseñarse para <b>distinguir usos lícitos
+			(parodia/pastiche) sin intervención humana sistemática</b>,
+			evitando el filtrado generalizado e indiscriminado.</p>
+		</td>
+	</tr>
+	<tr>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Libertad de Expresión:</b> Derecho al uso transformador.</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			Eliminación de contenidos lícitos por algoritmos insensibles al
+			contexto creativo.</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			Implementación de mecanismos de reclamación y reparación
+			rápidos y eficaces que garanticen la restauración inmediata del
+			contenido bloqueado erróneamente.</p>
+		</td>
+	</tr>
+	<tr>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			<b>Seguridad Jurídica:</b> Transparencia algorítmica.</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			Pérdida de exenciones de responsabilidad al actuar como editor de
+			facto.</p>
+		</td>
+		<td style="border-top: none; border-bottom: 1px double #808080; border-left: 1px double #808080; border-right: 1px double #808080; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0.05cm"><p align="justify">
+			Obligación proactiva de informar a los usuarios sobre las
+			excepciones aplicables y los límites del sistema de filtrado
+			conforme al RIA.</p>
+		</td>
+	</tr>
+</tbody></table>
 
 Este equilibrio define la viabilidad de la cultura digital en la UE, asegurando que los derechos de autor no asfixien la innovación transformadora.
 
