@@ -317,11 +317,11 @@ export default async function HomePage() {
             Derecho, ética y regulación de la IA
           </p>
           <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
-            Derecho Artificial
+            Derecho Artificial, Ética y Regulación de la IA
           </h1>
-          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
-            Inteligencia Artificial, derecho y criterio. Referencia práctica para decisiones informadas.
-          </p>
+          <h2 className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
+            Más allá de las noticias: análisis jurídico independiente y criterio experto sobre el Reglamento de IA y su impacto legal. La referencia práctica para abogados y profesionales del compliance.
+          </h2>
         </div>
       </section>
       <section className="section-spacing bento-surface">

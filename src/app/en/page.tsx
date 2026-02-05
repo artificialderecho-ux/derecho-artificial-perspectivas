@@ -318,11 +318,11 @@ export default async function EnglishHomePage() {
             Law, ethics and AI regulation
           </p>
           <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
-            Derecho Artificial
+            Law, Ethics and AI Regulation
           </h1>
-          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
-            AI, law and sound judgment. Practical reference for informed decisions.
-          </p>
+          <h2 className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
+            Beyond the news: independent legal analysis and expert judgment on the AI Act and its legal impact. The practical reference for lawyers and compliance professionals.
+          </h2>
         </div>
       </section>
       <section className="section-spacing bento-surface">
