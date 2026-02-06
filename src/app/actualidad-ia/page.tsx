@@ -68,9 +68,8 @@ export default async function ActualidadIAPage() {
   const entries = await Promise.all(slugs.map((slug) => getContentEntry("actualidad-ia", slug)));
   const resolvedEntries = entries.filter((entry): entry is ResolvedContentEntry => Boolean(entry));
   const sortedEntries = resolvedEntries.sort((a, b) => {
-    const aTime = new Date(a.datePublished).getTime();
-    const bTime = new Date(b.datePublished).getTime();
-    if (Number.isNaN(aTime) || Number.isNaN(bTime)) return 0;
+    const aTime = typeof a.dateMs === "number" ? a.dateMs : 0;
+    const bTime = typeof b.dateMs === "number" ? b.dateMs : 0;
     return bTime - aTime;
   });
 
@@ -89,8 +88,11 @@ export default async function ActualidadIAPage() {
   );
 
   const contentItems: NovedadItem[] = sortedEntries.map((entry) => {
-    const time = new Date(entry.datePublished).getTime();
-    const safeTime = Number.isNaN(time) ? 0 : time;
+    const time = typeof entry.dateMs === "number" && !Number.isNaN(entry.dateMs) ? entry.dateMs : 0;
+    const displayMs = (() => {
+      const d = new Date(entry.datePublished).getTime();
+      return Number.isNaN(d) ? undefined : d;
+    })();
     const parts: string[] = [];
     parts.push(formatDate(entry.datePublished));
     if (entry.author) {
@@ -102,7 +104,8 @@ export default async function ActualidadIAPage() {
       title: entry.title,
       description: entry.description,
       meta: parts.join(" · "),
-      dateMs: safeTime,
+      dateMs: time,
+      displayDateMs: displayMs,
     };
   });
 
