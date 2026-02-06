@@ -328,7 +328,7 @@ export default async function EnglishHomePage() {
       </section>
       <section className="section-spacing bento-surface">
         <div className="container-wide">
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <Link href="/en/scarpa-firm" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Scarpa Firm</h3>
               <h2 className="text-sm md:text-base text-body">The Firm: Expert opinion and critical analysis of Digital Law</h2>
