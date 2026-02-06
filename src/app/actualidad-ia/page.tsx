@@ -238,7 +238,14 @@ export default async function ActualidadIAPage() {
                     </div>
                   )}
                   <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                  <Badges ms={item.dateMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-2 inline-flex items-center gap-2 text-xs text-caption" />
+                  <Badges
+                    recencyMs={item.dateMs}
+                    labelMs={item.displayDateMs ?? item.dateMs}
+                    locale="es-ES"
+                    newLabel="Nuevo"
+                    updatedLabel="Actualizado"
+                    className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
+                  />
                   {item.description && <p className="text-body mb-6">{item.description}</p>}
                   {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
                 </Link>

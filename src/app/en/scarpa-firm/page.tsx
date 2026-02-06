@@ -157,7 +157,14 @@ export default async function ScarpaFirmPage() {
               >
                 <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Analysis</p>
                 <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                <Badges ms={item.dateMs} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
+                <Badges
+                  recencyMs={item.dateMs}
+                  labelMs={item.displayDateMs ?? item.dateMs}
+                  locale="en-US"
+                  newLabel="New"
+                  updatedLabel="Updated"
+                  className="mb-3 inline-flex items-center gap-2 text-xs text-caption"
+                />
                 {item.description && <p className="text-body mb-6">{item.description}</p>}
                 {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
               </Link>

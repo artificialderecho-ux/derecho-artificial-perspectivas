@@ -32,26 +32,29 @@ export const getItemDateMs = (obj: unknown): number => {
 
 export function Badges(props: {
   ms?: number;
+  recencyMs?: number;
+  labelMs?: number;
   locale: "es-ES" | "en-US";
   newLabel: string;
   updatedLabel: string;
   className?: string;
 }) {
-  const ms = props.ms ?? 0;
-  if (!(ms > 0)) return null;
+  const recency = props.recencyMs ?? props.ms ?? 0;
+  const label = props.labelMs ?? props.ms ?? 0;
+  if (!(recency > 0) && !(label > 0)) return null;
   return (
     <div className={props.className ?? "inline-flex items-center gap-2 text-xs text-caption"}>
-      {isNew(ms) && (
+      {isNew(recency) && (
         <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">
           {props.newLabel}
         </span>
       )}
-      {isRecent(ms) && (
+      {isRecent(recency) && (
         <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">
           {props.updatedLabel}
         </span>
       )}
-      <span>{formatDateFromMs(ms, props.locale)}</span>
+      <span>{formatDateFromMs(label, props.locale)}</span>
     </div>
   );
 }
