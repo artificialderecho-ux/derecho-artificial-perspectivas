@@ -171,6 +171,117 @@ async function getFileDateMs(filePath: string) {
     return frontmatterDate;
   }
 
+  function parseHumanDateToMs(text: string): number | null {
+    const t = (text || "").toLowerCase();
+    const monthsEs: Record<string, number> = {
+      enero: 1,
+      febreo: 2,
+      febrero: 2,
+      ene: 1,
+      feb: 2,
+      mar: 3,
+      marzo: 3,
+      abr: 4,
+      abril: 4,
+      may: 5,
+      mayo: 5,
+      jun: 6,
+      junio: 6,
+      jul: 7,
+      julio: 7,
+      ago: 8,
+      agosto: 8,
+      sep: 9,
+      sept: 9,
+      setiembre: 9,
+      septiembre: 9,
+      oct: 10,
+      octubre: 10,
+      nov: 11,
+      noviembre: 11,
+      dic: 12,
+      diciembre: 12,
+    };
+    const monthsEn: Record<string, number> = {
+      january: 1,
+      jan: 1,
+      february: 2,
+      feb: 2,
+      march: 3,
+      mar: 3,
+      april: 4,
+      apr: 4,
+      may: 5,
+      june: 6,
+      jun: 6,
+      july: 7,
+      jul: 7,
+      august: 8,
+      aug: 8,
+      september: 9,
+      sept: 9,
+      sep: 9,
+      october: 10,
+      oct: 10,
+      november: 11,
+      nov: 11,
+      december: 12,
+      dec: 12,
+    };
+    function toMs(y: number, m: number, d: number) {
+      const date = new Date(`${String(y).padStart(4, "0")}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}T00:00:00Z`);
+      const ms = date.getTime();
+      return Number.isNaN(ms) ? null : ms;
+    }
+    let m = t.match(/(\d{1,2})\s+de\s+([a-záéíóú.]+)\s+de\s+(\d{4})/i);
+    if (m) {
+      const d = parseInt(m[1], 10);
+      let monKey = (m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+      monKey = monKey.endsWith(".") ? monKey.slice(0, -1) : monKey;
+      const mon = monthsEs[monKey];
+      const y = parseInt(m[3], 10);
+      if (mon) return toMs(y, mon, d);
+    }
+    m = t.match(/(\d{1,2})\s+([a-záéíóú.]+)\s+(\d{4})/i);
+    if (m) {
+      const d = parseInt(m[1], 10);
+      let monKey = (m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+      monKey = monKey.endsWith(".") ? monKey.slice(0, -1) : monKey;
+      const mon = monthsEs[monKey];
+      const y = parseInt(m[3], 10);
+      if (mon) return toMs(y, mon, d);
+    }
+    m = t.match(/([a-z.]+)\s+(\d{1,2}),\s*(\d{4})/i);
+    if (m) {
+      const raw = (m[1] || "");
+      const mon = monthsEn[raw.endsWith(".") ? raw.slice(0, -1) : raw];
+      const d = parseInt(m[2], 10);
+      const y = parseInt(m[3], 10);
+      if (mon) return toMs(y, mon, d);
+    }
+    m = t.match(/(\d{1,2})\s+([a-z.]+)\s+(\d{4})/i);
+    if (m) {
+      const d = parseInt(m[1], 10);
+      const raw = (m[2] || "");
+      const mon = monthsEn[raw.endsWith(".") ? raw.slice(0, -1) : raw];
+      const y = parseInt(m[3], 10);
+      if (mon) return toMs(y, mon, d);
+    }
+    m = t.match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
+    if (m) {
+      const y = parseInt(m[1], 10);
+      const mon = parseInt(m[2], 10);
+      const d = parseInt(m[3], 10);
+      const ms = toMs(y, mon, d);
+      if (ms != null) return ms;
+    }
+    return null;
+  }
+  const inferredMs = parseHumanDateToMs(normalized);
+  if (inferredMs != null) {
+    return inferredMs;
+  }
+ 
   try {
     const stats = await fs.stat(filePath);
     return stats.birthtimeMs || stats.ctimeMs || stats.mtimeMs;
