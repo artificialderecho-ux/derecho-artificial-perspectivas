@@ -1,5 +1,5 @@
 title: "La Inteligencia Artificial como Causa Objetiva de Despido: Análisis de la Sentencia del TSJ de Castilla y León de 15 de septiembre de 2025"
-date: 2026-02-05
+date: 2025-09-15
 
 # La Inteligencia Artificial como Causa Objetiva de Despido: Análisis de la Sentencia del TSJ de Castilla y León de 15 de septiembre de 2025
 

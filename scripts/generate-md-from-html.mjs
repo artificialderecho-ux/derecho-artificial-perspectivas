@@ -189,6 +189,91 @@ function extractDateFromHtml(html) {
   const text = $("body").text();
   const match = text.match(/date:\s*(\d{4}-\d{2}-\d{2})/i);
   if (match) return match[1];
+  // Try <time> inner text without datetime attribute
+  const timeText = $("time").first().text().trim();
+  const candidates = [timeText, text].filter(Boolean);
+  const monthsEs = {
+    enero: 1,
+    febrero: 2,
+    marzo: 3,
+    abril: 4,
+    mayo: 5,
+    junio: 6,
+    julio: 7,
+    agosto: 8,
+    septiembre: 9,
+    setiembre: 9,
+    octubre: 10,
+    noviembre: 11,
+    diciembre: 12,
+  };
+  const monthsEn = {
+    january: 1,
+    february: 2,
+    march: 3,
+    april: 4,
+    may: 5,
+    june: 6,
+    july: 7,
+    august: 8,
+    september: 9,
+    october: 10,
+    november: 11,
+    december: 12,
+  };
+  function toIso(y, m, d) {
+    const mm = String(m).padStart(2, "0");
+    const dd = String(d).padStart(2, "0");
+    return `${y}-${mm}-${dd}`;
+  }
+  function parseHumanDate(s) {
+    const t = (s || "").toLowerCase();
+    // Spanish: 6 de febrero de 2026
+    let m = t.match(/(\d{1,2})\s+de\s+([a-záéíóú]+)\s+de\s+(\d{4})/i);
+    if (m) {
+      const d = parseInt(m[1], 10);
+      const mon = monthsEs[(m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "")];
+      const y = parseInt(m[3], 10);
+      if (mon) return toIso(y, mon, d);
+    }
+    // Spanish variant: 6 febrero 2026
+    m = t.match(/(\d{1,2})\s+([a-záéíóú]+)\s+(\d{4})/i);
+    if (m) {
+      const d = parseInt(m[1], 10);
+      const mon = monthsEs[(m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "")];
+      const y = parseInt(m[3], 10);
+      if (mon) return toIso(y, mon, d);
+    }
+    // English: February 6, 2026
+    m = t.match(/([a-z]+)\s+(\d{1,2}),\s*(\d{4})/i);
+    if (m) {
+      const mon = monthsEn[(m[1] || "").toLowerCase()];
+      const d = parseInt(m[2], 10);
+      const y = parseInt(m[3], 10);
+      if (mon) return toIso(y, mon, d);
+    }
+    // English variant: 6 February 2026
+    m = t.match(/(\d{1,2})\s+([a-z]+)\s+(\d{4})/i);
+    if (m) {
+      const d = parseInt(m[1], 10);
+      const mon = monthsEn[(m[2] || "").toLowerCase()];
+      const y = parseInt(m[3], 10);
+      if (mon) return toIso(y, mon, d);
+    }
+    // ISO-like present in text: 2026-02-06
+    m = t.match(/(\d{4})[-/\.](\d{1,2})[-/\.](\d{1,2})/);
+    if (m) {
+      const y = parseInt(m[1], 10);
+      const mon = parseInt(m[2], 10);
+      const d = parseInt(m[3], 10);
+      if (y && mon && d) return toIso(y, mon, d);
+    }
+    return "";
+  }
+  for (const s of candidates) {
+    const iso = parseHumanDate(s);
+    if (iso) return iso;
+  }
   return "";
 }
 
@@ -246,6 +331,28 @@ async function processHtmlFile(htmlPath) {
   const existsMd = await exists(mdPath);
   if (!existsMd) {
     await fs.writeFile(mdPath, mdContent, "utf8");
+  } else {
+    // If MD exists, update its 'date:' frontmatter when we can extract a reliable date from HTML
+    if (dateFromHtml) {
+      try {
+        const currentMd = await fs.readFile(mdPath, "utf8");
+        let updatedMd;
+        if (/^date:\s*[^\n]*$/m.test(currentMd)) {
+          updatedMd = currentMd.replace(/^date:\s*[^\n]*$/m, `date: ${dateFromHtml}`);
+        } else {
+          // Insert date after title if present, or at the top
+          const lines = currentMd.split(/\r?\n/);
+          const titleIdx = lines.findIndex((l) => /^title:\s*/i.test(l));
+          const insertAt = titleIdx >= 0 ? titleIdx + 1 : 0;
+          lines.splice(insertAt, 0, `date: ${dateFromHtml}`);
+          updatedMd = lines.join("\n");
+        }
+        if (updatedMd !== currentMd) {
+          await fs.writeFile(mdPath, updatedMd, "utf8");
+        }
+      } catch {
+      }
+    }
   }
   const sectionDir = parts[1] ? parts[1] : "";
   const fuentesDir =

@@ -1,5 +1,5 @@
 title: "Análisis Jurídico de la Creación de Contenido Sintético: Identidad, Transparencia y Excepción de Parodia en la Unión Europea"
-date: 2026-02-05
+date: 2024-08-01
 
 # Análisis Jurídico de la Creación de Contenido Sintético: Identidad, Transparencia y Excepción de Parodia en la Unión Europea
 
