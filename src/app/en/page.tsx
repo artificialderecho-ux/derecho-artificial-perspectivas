@@ -83,7 +83,7 @@ export default async function EnglishHomePage() {
     ...resolvedActualidadJson.map((e) => ({
       title: e.title,
       description: e.description,
-      date: new Date(e.datePublished).getTime(),
+      date: typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0,
       urlPath: e.urlPath,
       author: e.author,
     })),
@@ -100,7 +100,7 @@ export default async function EnglishHomePage() {
     ...resolvedFirmaJson.map((e) => ({
       title: e.title,
       description: e.description,
-      date: new Date(e.datePublished).getTime(),
+      date: typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0,
       urlPath: e.urlPath,
       author: e.author,
     })),
