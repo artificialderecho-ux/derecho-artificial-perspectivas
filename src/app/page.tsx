@@ -331,42 +331,22 @@ export default async function HomePage() {
             <Link href="/firma-scarpa" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Firma Scarpa</h3>
               <h2 className="text-sm md:text-base text-body">La Firma: Opinión experta y análisis crítico del Derecho Digital</h2>
-              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestFirmaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Entradas: {unifiedFirma.length}</span>
-              </div>
             </Link>
             <Link href="/jurisprudencia" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Jurisprudencia</h3>
               <h2 className="text-sm md:text-base text-body">Observatorio de Jurisprudencia: Sentencias y fallos sobre Inteligencia Artificial</h2>
-              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestJurisprudenciaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Entradas: {jurisprudenciaSlugs.length}</span>
-              </div>
             </Link>
             <Link href="/actualidad-ia" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Actualidad IA</h3>
               <h2 className="text-sm md:text-base text-body">Actualidad Legal Tech: Novedades e impacto jurídico de la tecnología</h2>
-              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestActualidadMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Entradas recientes: {unifiedActualidad.length}</span>
-              </div>
             </Link>
             <Link href="/normativa" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Normativa</h3>
               <h2 className="text-sm md:text-base text-body">Marco Regulatorio: Leyes, reglamentos y Compliance en IA</h2>
-              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestNormativaMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Entradas: {normativaSlugs.length}</span>
-              </div>
             </Link>
             <Link href="/recursos/guias" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Guías y Protocolos</h3>
               <h2 className="text-sm md:text-base text-body">Guías Prácticas y Protocolos de actuación profesional</h2>
-              <div className="mt-2 inline-flex items-center gap-2 text-xs text-caption">
-                <Badges ms={latestGuiasMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-                <span className="text-[10px]">Documentos: {guiasSlugs.length}</span>
-              </div>
             </Link>
             <Link href="/glosario-ia-legal" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">Glosario IA</h3>
