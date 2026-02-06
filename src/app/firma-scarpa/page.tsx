@@ -79,8 +79,11 @@ export default async function FirmaScarpaPage() {
   };
 
   const contentItems: UnifiedItem[] = sortedEntries.map((entry) => {
-    const time = new Date(entry.datePublished).getTime();
-    const safeTime = Number.isNaN(time) ? 0 : time;
+    const safeTime = typeof entry.dateMs === "number" && !Number.isNaN(entry.dateMs) ? entry.dateMs : 0;
+    const displayMs = (() => {
+      const d = new Date(entry.datePublished).getTime();
+      return Number.isNaN(d) ? undefined : d;
+    })();
     const parts: string[] = [];
     parts.push(formatDate(entry.datePublished));
     if (entry.author) {
@@ -94,6 +97,7 @@ export default async function FirmaScarpaPage() {
       badge: "Análisis",
       meta: parts.join(" · "),
       dateMs: safeTime,
+      displayDateMs: displayMs,
     };
   });
 

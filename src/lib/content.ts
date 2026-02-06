@@ -16,6 +16,7 @@ export type ResolvedContentEntry = ContentEntry & {
   urlPath: string;
   url: string;
   html: string;
+  dateMs: number;
 };
 
 const siteUrl = "https://derechoartificial.com";
@@ -51,19 +52,6 @@ async function readEntryFile(section: ContentSection, slug: string) {
 
 async function getContentFileDateMs(dir: string, fileName: string) {
   const filePath = path.join(dir, fileName);
-
-  try {
-    const raw = await fs.readFile(filePath, "utf8");
-    const parsed = JSON.parse(raw) as { datePublished?: string } | null;
-    if (parsed && typeof parsed.datePublished === "string") {
-      const date = new Date(parsed.datePublished);
-      if (!Number.isNaN(date.getTime())) {
-        return date.getTime();
-      }
-    }
-  } catch {
-    void 0;
-  }
 
   try {
     const stats = await fs.stat(filePath);
@@ -117,6 +105,8 @@ export async function getContentEntry(
     if (!isValidEntry(parsed)) return null;
 
     const urlPath = `/${section}/${slug}`;
+    const dir = await resolveContentDir(section);
+    const dateMs = await getContentFileDateMs(dir, `${slug}.json`);
 
     return {
       slug,
@@ -128,6 +118,7 @@ export async function getContentEntry(
       urlPath,
       url: `${siteUrl}${urlPath}`,
       html: renderMarkdownToHtml(parsed.body),
+      dateMs: Number.isNaN(dateMs) ? 0 : dateMs,
     };
   } catch {
     return null;
