@@ -50,6 +50,7 @@ type NovedadItem = {
   description: string;
   meta: string;
   dateMs: number;
+  displayDateMs?: number;
 };
 
 type NewsItem = {
@@ -109,7 +110,7 @@ export default async function ActualidadIAPage() {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
     const date =
-      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? new Date(entry.displayDateMs) : null;
     const dateLabel =
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
@@ -134,6 +135,7 @@ export default async function ActualidadIAPage() {
       description: plainSummary,
       meta: parts.join(" · "),
       dateMs: safeTime,
+      displayDateMs: entry.displayDateMs ?? undefined,
     };
   });
 
@@ -227,7 +229,7 @@ export default async function ActualidadIAPage() {
                           <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Actualizado</span>
                         )}
                       <span>
-                        {new Date(item.dateMs).toLocaleDateString("es-ES", {
+                        {new Date(item.displayDateMs ?? item.dateMs).toLocaleDateString("es-ES", {
                           year: "numeric",
                           month: "long",
                           day: "numeric",

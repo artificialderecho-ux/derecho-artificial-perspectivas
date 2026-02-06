@@ -75,6 +75,7 @@ export default async function FirmaScarpaPage() {
     badge: string;
     meta: string;
     dateMs: number;
+    displayDateMs?: number;
   };
 
   const contentItems: UnifiedItem[] = sortedEntries.map((entry) => {
@@ -100,7 +101,7 @@ export default async function FirmaScarpaPage() {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
     const date =
-      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? new Date(entry.displayDateMs) : null;
     const dateLabel =
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
@@ -123,6 +124,7 @@ export default async function FirmaScarpaPage() {
       badge: "Análisis",
       meta: parts.join(" · "),
       dateMs: safeTime,
+      displayDateMs: entry.displayDateMs ?? undefined,
     };
   });
 

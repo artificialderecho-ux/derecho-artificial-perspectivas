@@ -72,6 +72,7 @@ export type ResourceEntry = {
   kind: ResourceKind;
   sourceUrl: string | null;
   dateMs: number | null;
+  displayDateMs: number | null;
   jurisdiction?: string | null;
   courtName?: string | null;
 };
@@ -164,6 +165,94 @@ async function getFileDateMs(filePath: string) {
   }
 }
 
+async function getDisplayDateMs(filePath: string) {
+  const markdown = await readTextFile(filePath);
+  const normalized = markdown.replace(/\r\n/g, "\n");
+  const dateField = extractFrontmatterField(normalized, "date");
+  if (dateField) {
+    const date = new Date(dateField);
+    const ms = date.getTime();
+    if (!Number.isNaN(ms)) return ms;
+  }
+  const t = normalized.toLowerCase();
+  const monthsEs: Record<string, number> = {
+    enero: 1,
+    febrero: 2,
+    marzo: 3,
+    abril: 4,
+    mayo: 5,
+    junio: 6,
+    julio: 7,
+    agosto: 8,
+    septiembre: 9,
+    setiembre: 9,
+    octubre: 10,
+    noviembre: 11,
+    diciembre: 12,
+  };
+  const monthsEn: Record<string, number> = {
+    january: 1,
+    february: 2,
+    march: 3,
+    april: 4,
+    may: 5,
+    june: 6,
+    july: 7,
+    august: 8,
+    september: 9,
+    october: 10,
+    november: 11,
+    december: 12,
+  };
+  function toMs(y: number, m: number, d: number) {
+    const date = new Date(`${String(y).padStart(4, "0")}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}T00:00:00Z`);
+    const ms = date.getTime();
+    return Number.isNaN(ms) ? null : ms;
+  }
+  let m = t.match(/(\d{1,2})\s+de\s+([a-záéíóú.]+)\s+de\s+(\d{4})/i);
+  if (m) {
+    const d = parseInt(m[1], 10);
+    let monKey = (m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+    monKey = monKey.endsWith(".") ? monKey.slice(0, -1) : monKey;
+    const mon = monthsEs[monKey];
+    const y = parseInt(m[3], 10);
+    if (mon) return toMs(y, mon, d);
+  }
+  m = t.match(/(\d{1,2})\s+([a-záéíóú.]+)\s+(\d{4})/i);
+  if (m) {
+    const d = parseInt(m[1], 10);
+    let monKey = (m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+    monKey = monKey.endsWith(".") ? monKey.slice(0, -1) : monKey;
+    const mon = monthsEs[monKey];
+    const y = parseInt(m[3], 10);
+    if (mon) return toMs(y, mon, d);
+  }
+  m = t.match(/([a-z.]+)\s+(\d{1,2}),\s*(\d{4})/i);
+  if (m) {
+    const raw = (m[1] || "");
+    const mon = monthsEn[raw.endsWith(".") ? raw.slice(0, -1) : raw];
+    const d = parseInt(m[2], 10);
+    const y = parseInt(m[3], 10);
+    if (mon) return toMs(y, mon, d);
+  }
+  m = t.match(/(\d{1,2})\s+([a-z.]+)\s+(\d{4})/i);
+  if (m) {
+    const d = parseInt(m[1], 10);
+    const raw = (m[2] || "");
+    const mon = monthsEn[raw.endsWith(".") ? raw.slice(0, -1) : raw];
+    const y = parseInt(m[3], 10);
+    if (mon) return toMs(y, mon, d);
+  }
+  m = t.match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
+  if (m) {
+    const y = parseInt(m[1], 10);
+    const mon = parseInt(m[2], 10);
+    const d = parseInt(m[3], 10);
+    const ms = toMs(y, mon, d);
+    if (ms != null) return ms;
+  }
+  return null;
+}
 function extractFrontmatterField(markdown: string, field: string) {
   const normalized = markdown.replace(/\r\n/g, "\n");
   let lines: string[] = [];
@@ -309,6 +398,7 @@ type RawAnalysis = {
   dateMs: number | null;
   jurisdiction: string | null;
   courtName: string | null;
+  filePath: string;
 };
 
 async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | null> {
@@ -337,6 +427,7 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
       dateMs: Number.isNaN(dateMs) ? null : dateMs,
       jurisdiction: jurisdiction || null,
       courtName: courtName || null,
+      filePath,
     };
   }
   return null;
@@ -403,6 +494,7 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
     raw.sourceFileName != null
       ? `/Recursos/Fuentes/${encodeURIComponent(raw.sourceFileName).replace(/%2F/g, "/")}`
       : null;
+  const displayDateMs = await getDisplayDateMs(raw.filePath);
   return {
     slug,
     title: raw.title,
@@ -411,6 +503,7 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
     kind,
     sourceUrl,
     dateMs: raw.dateMs,
+    displayDateMs: Number.isNaN(displayDateMs || NaN) ? (raw.dateMs ?? null) : (displayDateMs ?? null),
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,
   };
@@ -424,6 +517,7 @@ type RawSectionAnalysis = {
   dateMs: number | null;
   jurisdiction: string | null;
   courtName: string | null;
+  filePath: string;
 };
 
 async function resolveSectionRawAnalysis(section: ResourceSection, slug: string): Promise<RawSectionAnalysis | null> {
@@ -455,6 +549,7 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
         dateMs: Number.isNaN(dateMs) ? null : dateMs,
         jurisdiction: jurisdiction || null,
         courtName: courtName || null,
+        filePath,
       };
     }
   } catch {
@@ -490,6 +585,7 @@ export async function getSectionResourceEntry(
     raw.sourceFileName != null
       ? `/Recursos/Fuentes/${encodeURIComponent(raw.sourceFileName).replace(/%2F/g, "/")}`
       : null;
+  const displayDateMs = await getDisplayDateMs(raw.filePath);
   return {
     slug,
     title: raw.title,
@@ -498,6 +594,7 @@ export async function getSectionResourceEntry(
     kind,
     sourceUrl,
     dateMs: raw.dateMs,
+    displayDateMs: Number.isNaN(displayDateMs || NaN) ? (raw.dateMs ?? null) : (displayDateMs ?? null),
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,
   };

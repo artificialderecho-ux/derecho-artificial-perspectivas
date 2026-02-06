@@ -40,6 +40,15 @@ export const metadata: Metadata = {
 };
 
 export default async function AiNewsPage() {
+  type NovedadItem = {
+    id: string;
+    href: string;
+    title: string;
+    description: string;
+    meta: string;
+    dateMs: number;
+    displayDateMs?: number;
+  };
   const slugs = await listContentSlugs("actualidad-ia");
   const entries = await Promise.all(slugs.map((slug) => getContentEntry("actualidad-ia", slug)));
   const resolvedEntries = entries.filter((entry): entry is ResolvedContentEntry => Boolean(entry));
@@ -64,7 +73,7 @@ export default async function AiNewsPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
-  const contentItems = sortedEntries.map((entry) => {
+  const contentItems: NovedadItem[] = sortedEntries.map((entry) => {
     const time = new Date(entry.datePublished).getTime();
     const safeTime = Number.isNaN(time) ? 0 : time;
     const parts: string[] = [];
@@ -82,11 +91,11 @@ export default async function AiNewsPage() {
     };
   });
 
-  const resourceItems = resolvedResourceEntries.map((entry) => {
+  const resourceItems: NovedadItem[] = resolvedResourceEntries.map((entry) => {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
     const date =
-      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? new Date(entry.displayDateMs) : null;
     const dateLabel =
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
@@ -109,10 +118,11 @@ export default async function AiNewsPage() {
       description: plainSummary,
       meta: parts.join(" · "),
       dateMs: safeTime,
+      displayDateMs: entry.displayDateMs ?? undefined,
     };
   });
 
-  const items = [...contentItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+  const items: NovedadItem[] = [...contentItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
 
   type NewsItem = {
     id: string;
@@ -203,7 +213,7 @@ export default async function AiNewsPage() {
                           <span className="px-2 py-1 bg-accent text-accent-foreground rounded-sm">Updated</span>
                         )}
                       <span>
-                        {new Date(item.dateMs).toLocaleDateString("en-US", {
+                        {new Date(item.displayDateMs ?? item.dateMs).toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "long",
                           day: "numeric",
