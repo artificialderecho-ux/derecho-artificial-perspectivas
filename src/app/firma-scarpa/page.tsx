@@ -47,9 +47,8 @@ export default async function FirmaScarpaPage() {
   const entries = await Promise.all(slugs.map((slug) => getContentEntry("firma-scarpa", slug)));
   const resolvedEntries = entries.filter((entry): entry is ResolvedContentEntry => Boolean(entry));
   const sortedEntries = resolvedEntries.sort((a, b) => {
-    const aTime = new Date(a.datePublished).getTime();
-    const bTime = new Date(b.datePublished).getTime();
-    if (Number.isNaN(aTime) || Number.isNaN(bTime)) return 0;
+    const aTime = typeof a.dateMs === "number" ? a.dateMs : 0;
+    const bTime = typeof b.dateMs === "number" ? b.dateMs : 0;
     return bTime - aTime;
   });
 
