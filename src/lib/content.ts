@@ -70,8 +70,23 @@ export async function listContentSlugs(section: ContentSection): Promise<string[
     const withDates = await Promise.all(
       files.map(async (entry) => {
         const slug = entry.name.replace(/\.json$/, "");
-        const dateMs = await getContentFileDateMs(dir, entry.name);
-        return { slug, dateMs };
+        const filePath = path.join(dir, entry.name);
+        let dateMs = 0;
+        try {
+          const raw = await fs.readFile(filePath, "utf8");
+          const parsed: unknown = JSON.parse(raw);
+          if (parsed && typeof parsed === "object" && "datePublished" in (parsed as Record<string, unknown>)) {
+            const dp = (parsed as Record<string, unknown>).datePublished;
+            const t = new Date(String(dp)).getTime();
+            dateMs = Number.isNaN(t) ? 0 : t;
+          }
+        } catch {
+          dateMs = 0;
+        }
+        if (!dateMs) {
+          dateMs = await getContentFileDateMs(dir, entry.name);
+        }
+        return { slug, dateMs: Number.isNaN(dateMs) ? 0 : dateMs };
       }),
     );
 
@@ -106,7 +121,9 @@ export async function getContentEntry(
 
     const urlPath = `/${section}/${slug}`;
     const dir = await resolveContentDir(section);
-    const dateMs = await getContentFileDateMs(dir, `${slug}.json`);
+    const publishedMs = new Date(parsed.datePublished).getTime();
+    const statMs = await getContentFileDateMs(dir, `${slug}.json`);
+    const dateMs = Number.isNaN(publishedMs) ? statMs : publishedMs;
 
     return {
       slug,
