@@ -2,6 +2,7 @@
 title: "Análisis de la Sentencia 126/2025 del TSJ de Canarias: El deber de veracidad y la IA"
 jurisdiction: "España"
 court: "TSJ Canarias"
+date: 2026-02-01
 ---
 
 # Análisis de la Sentencia 126/2025 del TSJ de Canarias: El deber de veracidad y la IA

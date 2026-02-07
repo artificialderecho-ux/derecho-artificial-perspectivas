@@ -459,8 +459,8 @@ export default async function HomePage() {
                   position: 3,
                   url: `/normativa/${latestNormativa.slug}`,
                   name: latestNormativa.title,
-                  datePublished: latestNormativa.dateMs
-                    ? new Date(latestNormativa.dateMs).toISOString()
+                  datePublished: (latestNormativa.displayDateMs ?? latestNormativa.dateMs)
+                    ? new Date(latestNormativa.displayDateMs ?? latestNormativa.dateMs).toISOString()
                     : undefined,
                 },
                 latestJurisprudencia && {
@@ -468,8 +468,8 @@ export default async function HomePage() {
                   position: 4,
                   url: `/jurisprudencia/${latestJurisprudencia.slug}`,
                   name: latestJurisprudencia.title,
-                  datePublished: latestJurisprudencia.dateMs
-                    ? new Date(latestJurisprudencia.dateMs).toISOString()
+                  datePublished: (latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs)
+                    ? new Date(latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs).toISOString()
                     : undefined,
                 },
               ].filter(Boolean),
@@ -529,14 +529,16 @@ export default async function HomePage() {
                   {latestNormativa.title}
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                 </h3>
-                <Badges ms={latestNormativa.dateMs ?? 0} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
+                <Badges ms={(latestNormativa.displayDateMs ?? latestNormativa.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 {latestNormativa.summaryHtml && (
                   <p className="text-sm text-body mb-4 line-clamp-3">
                     {latestNormativa.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
                   </p>
                 )}
                 <p className="mt-auto text-xs text-caption">
-                  {latestNormativa.dateMs ? formatDateFromMs(latestNormativa.dateMs, "es-ES") : ""}
+                  {(latestNormativa.displayDateMs ?? latestNormativa.dateMs)
+                    ? formatDateFromMs(latestNormativa.displayDateMs ?? latestNormativa.dateMs ?? 0, "es-ES")
+                    : ""}
                 </p>
               </Link>
             )}
@@ -553,15 +555,15 @@ export default async function HomePage() {
                   {latestJurisprudencia.title}
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                 </h3>
-                <Badges ms={latestJurisprudencia.dateMs ?? 0} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
+                <Badges ms={(latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 {latestJurisprudencia.summaryHtml && (
                   <p className="text-sm text-body mb-4 line-clamp-3">
                     {latestJurisprudencia.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
                   </p>
                 )}
                 <p className="mt-auto text-xs text-caption">
-                  {latestJurisprudencia.dateMs
-                    ? formatDateFromMs(latestJurisprudencia.dateMs, "es-ES")
+                  {(latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs)
+                    ? formatDateFromMs(latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs ?? 0, "es-ES")
                     : ""}
                 </p>
               </Link>
