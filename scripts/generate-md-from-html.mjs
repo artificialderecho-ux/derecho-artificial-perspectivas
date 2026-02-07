@@ -320,31 +320,91 @@ async function processHtmlFile(htmlPath) {
   const mdPath = path.join(mdTargetDir, `${slug}.md`);
   const stat = await fs.stat(renamedHtmlPath).catch(() => null);
   const dateFromHtml = extractDateFromHtml(html);
+  // Try to find a matching source file in Fuentes to infer a stable date
+  const sectionDir = parts[1] ? parts[1] : "";
+  const fuentesDirPath =
+    isAnalisis
+      ? path.join(recursosBaseDir, "Fuentes", sectionDir)
+      : path.dirname(renamedHtmlPath);
+  let sourceDateIso = "";
+  const hasFuentesDirForDate = await exists(fuentesDirPath);
+  if (!dateFromHtml && hasFuentesDirForDate) {
+    try {
+      const entries = await fs.readdir(fuentesDirPath, { withFileTypes: true });
+      // Prefer exact basename match regardless of extension; if multiple, pick the earliest creation time
+      const candidates = entries
+        .filter((e) => e.isFile())
+        .map((e) => {
+          const nameNoExt = e.name.replace(/\.[^/.]+$/, "");
+          const s = slugifyBaseName(nameNoExt);
+          return { name: e.name, slug: s };
+        })
+        .filter((e) => e.slug === slug)
+        .map((e) => path.join(fuentesDirPath, e.name));
+      if (candidates.length > 0) {
+        let bestMs = Number.POSITIVE_INFINITY;
+        for (const p of candidates) {
+          try {
+            const st = await fs.stat(p);
+            const created = typeof st.birthtimeMs === "number" && !Number.isNaN(st.birthtimeMs) ? st.birthtimeMs : null;
+            const modified = typeof st.mtimeMs === "number" && !Number.isNaN(st.mtimeMs) ? st.mtimeMs : null;
+            const ms = created && created > 0 ? created : (modified || null);
+            if (ms != null && ms > 0 && ms < bestMs) {
+              bestMs = ms;
+            }
+          } catch {
+            // ignore
+          }
+        }
+        if (bestMs !== Number.POSITIVE_INFINITY) {
+          const d = new Date(bestMs);
+          if (!Number.isNaN(d.getTime())) {
+            sourceDateIso = d.toISOString().slice(0, 10);
+          }
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }
+  // If MD exists already, prefer preserving its existing frontmatter date
+  let existingMdDateIso = "";
+  const mdExistsAlready = await exists(mdPath);
+  if (mdExistsAlready) {
+    try {
+      const currentMd = await fs.readFile(mdPath, "utf8");
+      const m = currentMd.match(/^date:\s*([^\n]+)$/m);
+      if (m && m[1]) {
+        existingMdDateIso = m[1].trim();
+      }
+    } catch {
+      // ignore
+    }
+  }
   const fsDate =
     stat && stat.mtime instanceof Date ? new Date(stat.mtime).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10);
-  const dateIso = dateFromHtml || fsDate;
+  const dateIso = dateFromHtml || sourceDateIso || existingMdDateIso || fsDate;
   const frontmatterLines = [];
   if (title) frontmatterLines.push(`title: "${title.replace(/"/g, '\\"')}"`);
   frontmatterLines.push(`date: ${dateIso}`);
   const bodyMd = extractBodyMarkdown(html);
   const mdContent = `${frontmatterLines.join("\n")}\n\n${bodyMd}\n`;
-  const existsMd = await exists(mdPath);
-  if (!existsMd) {
+  if (!mdExistsAlready) {
     await fs.writeFile(mdPath, mdContent, "utf8");
   } else {
-    // If MD exists, update its 'date:' frontmatter when we can extract a reliable date from HTML
-    if (dateFromHtml) {
+    // If MD exists, update its 'date:' frontmatter when we can extract a reliable date from HTML or Fuentes
+    if (dateFromHtml || sourceDateIso) {
       try {
         const currentMd = await fs.readFile(mdPath, "utf8");
         let updatedMd;
         if (/^date:\s*[^\n]*$/m.test(currentMd)) {
-          updatedMd = currentMd.replace(/^date:\s*[^\n]*$/m, `date: ${dateFromHtml}`);
+          updatedMd = currentMd.replace(/^date:\s*[^\n]*$/m, `date: ${dateFromHtml || sourceDateIso}`);
         } else {
           // Insert date after title if present, or at the top
           const lines = currentMd.split(/\r?\n/);
           const titleIdx = lines.findIndex((l) => /^title:\s*/i.test(l));
           const insertAt = titleIdx >= 0 ? titleIdx + 1 : 0;
-          lines.splice(insertAt, 0, `date: ${dateFromHtml}`);
+          lines.splice(insertAt, 0, `date: ${dateFromHtml || sourceDateIso}`);
           updatedMd = lines.join("\n");
         }
         if (updatedMd !== currentMd) {
@@ -354,7 +414,6 @@ async function processHtmlFile(htmlPath) {
       }
     }
   }
-  const sectionDir = parts[1] ? parts[1] : "";
   const fuentesDir =
     isAnalisis
       ? path.join(recursosBaseDir, "Fuentes", sectionDir)

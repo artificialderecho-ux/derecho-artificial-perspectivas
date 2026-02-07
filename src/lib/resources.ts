@@ -365,8 +365,22 @@ export async function listSectionResourceSlugs(section: ResourceSection): Promis
         })
         .map(async (entry) => {
           const filePath = path.join(sectionDir, entry.name);
-          const dateMs = await getFileDateMs(filePath);
-          const slug = slugifyBaseName(entry.name.replace(/\.[^/.]+$/, ""));
+          const baseName = entry.name.replace(/\.[^/.]+$/, "");
+          const slug = slugifyBaseName(baseName);
+          // Prefer source file date if available; fallback to analysis file date
+          let dateMs = await getFileDateMs(filePath);
+          try {
+            const sourceFileName = await findMatchingSourceFileName(baseName, config.fuentesSubdir);
+            if (sourceFileName) {
+              const sourceFilePath = path.join(fuentesDir, sourceFileName);
+              const d = await getFileDateMs(sourceFilePath);
+              if (typeof d === "number" && !Number.isNaN(d) && d > 0) {
+                dateMs = d;
+              }
+            }
+          } catch {
+            // ignore
+          }
           return { slug, dateMs };
         }),
     );
