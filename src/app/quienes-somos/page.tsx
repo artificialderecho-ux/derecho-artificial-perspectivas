@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StructuredData } from "@/components/seo/StructuredData";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Quiénes somos",
@@ -39,6 +40,12 @@ export const metadata: Metadata = {
 export default function QuienesSomosPage() {
   return (
     <>
+      <Breadcrumbs 
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Quiénes Somos", href: "/quienes-somos" }
+        ]}
+      />
       <StructuredData
         data={{
           "@context": "https://schema.org",

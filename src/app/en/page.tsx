@@ -5,6 +5,7 @@ import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resourc
 import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/badges";
 import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
 import { StructuredData } from "@/components/seo/StructuredData";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Law, ethics and AI regulation",
@@ -312,7 +313,13 @@ export default async function EnglishHomePage() {
   };
 
   return (
-    <main>
+    <>
+      <Breadcrumbs 
+        items={[
+          { label: "Home", href: "/en" }
+        ]}
+      />
+      <main>
       <section className="py-20 md:py-28 bg-surface border-b border-divider">
         <div className="container-narrow text-center">
           <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">
@@ -572,5 +579,6 @@ export default async function EnglishHomePage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

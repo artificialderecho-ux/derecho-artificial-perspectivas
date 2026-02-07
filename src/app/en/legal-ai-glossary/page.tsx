@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Legal AI Glossary | Derecho Artificial",
@@ -30,7 +31,14 @@ export default function LegalAIGlossaryPage() {
   }
 
   return (
-    <main className="min-h-screen pb-20 bg-slate-50">
+    <>
+      <Breadcrumbs 
+        items={[
+          { label: "Home", href: "/en" },
+          { label: "Legal AI Glossary", href: "/en/legal-ai-glossary" }
+        ]}
+      />
+      <main className="min-h-screen pb-20 bg-slate-50">
       <section className="pt-24 pb-16 md:pt-32 md:pb-12 px-6 bg-background border-b border-border">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
@@ -74,5 +82,6 @@ export default function LegalAIGlossaryPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

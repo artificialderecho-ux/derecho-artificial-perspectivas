@@ -5,6 +5,7 @@ import {
   createLegalDecisionJsonLd,
 } from "@/components/seo/StructuredData";
 import { LegalLayout } from "@/components/layout/LegalLayout";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title:
@@ -25,6 +26,13 @@ export default function BoscoSentenciaPage() {
 
   return (
     <>
+      <Breadcrumbs 
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Jurisprudencia", href: "/jurisprudencia" },
+          { label: "Sentencia BOSCO", href: "/jurisprudencia/sentencia-bosco-transparencia-algoritmica" }
+        ]}
+      />
       <StructuredData data={jsonLd} />
       <LegalLayout
         title="Sentencia BOSCO: Transparencia Algorítmica y Código Fuente"

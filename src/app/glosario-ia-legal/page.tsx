@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Glosario de IA Legal y Regulación Europea | Derecho Artificial",
@@ -28,7 +29,14 @@ export default function GlossaryPage() {
     html = "<p>El glosario no está disponible en este momento.</p>";
   }
   return (
-    <main className="min-h-screen pb-20 bg-slate-50">
+    <>
+      <Breadcrumbs 
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Glosario IA Legal", href: "/glosario-ia-legal" }
+        ]}
+      />
+      <main className="min-h-screen pb-20 bg-slate-50">
       <section className="pt-24 pb-16 md:pt-32 md:pb-12 px-6 bg-background border-b border-border">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
@@ -72,5 +80,6 @@ export default function GlossaryPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }
