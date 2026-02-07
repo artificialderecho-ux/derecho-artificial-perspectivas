@@ -1,5 +1,6 @@
 ---
 title: "Recomendaciones de la AEPD en relación con el uso de IAs"
+date: "2026-02-01"
 ---
 
 # Recomendaciones de la AEPD en relación con el uso de IAs

@@ -1,6 +1,7 @@
 ---
 title: "La IA en la Abogacía: Integración Estratégica, Ética y Competitividad"
 jurisdiction: "España"
+date: "2026-02-01"
 ---
 
 # La IA en la Abogacía: Integración Estratégica, Ética y Competitividad

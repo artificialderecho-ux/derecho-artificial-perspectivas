@@ -634,7 +634,7 @@ export async function getSectionResourceEntry(
     kind,
     sourceUrl,
     dateMs: sourceDateMs ?? raw.dateMs,
-    displayDateMs: Number.isNaN(displayDateMs || NaN) ? (raw.dateMs ?? null) : (displayDateMs ?? null),
+    displayDateMs: displayDateMs ?? null,
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,
   };

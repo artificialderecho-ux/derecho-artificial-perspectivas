@@ -1,6 +1,7 @@
 ---
 title: "Instrucción 2/2026 del CGPJ: Uso de la IA por Jueces y Magistrados"
 jurisdiction: "España"
+date: "2026-01-28"
 ---
 
 # Instrucción 2/2026 del CGPJ: Uso de la IA por Jueces y Magistrados

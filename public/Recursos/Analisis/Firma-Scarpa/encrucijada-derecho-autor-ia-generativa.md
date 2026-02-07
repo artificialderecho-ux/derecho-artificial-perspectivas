@@ -1,6 +1,7 @@
 ---
 title: "La Encrucijada del Derecho de Autor y la IA Generativa: Análisis del Marco Regulatorio Europeo"
 jurisdiction: "UE"
+date: "2026-02-01"
 ---
 
 # La Encrucijada del Derecho de Autor y la IA Generativa: Análisis del Marco Regulatorio Europeo

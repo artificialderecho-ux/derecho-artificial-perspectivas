@@ -121,8 +121,8 @@ export default async function ReferenciaPage() {
         title: e.title,
         href: `/normativa/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Análisis normativo con fuentes oficiales`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Análisis normativo con fuentes oficiales`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
   const jurisprudenciaItems =
     jurisprudenciaTopEntries
@@ -131,8 +131,8 @@ export default async function ReferenciaPage() {
         title: e.title,
         href: `/jurisprudencia/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
   const guiasItems =
     guiasTopEntries
@@ -141,8 +141,8 @@ export default async function ReferenciaPage() {
         title: e.title,
         href: `/recursos/guias/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Biblioteca técnica y ética`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Biblioteca técnica y ética`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
   const latestNormativaMs =
@@ -150,32 +150,32 @@ export default async function ReferenciaPage() {
       0,
       ...normativaEntriesAll
         .filter((e): e is NonNullable<typeof e> => Boolean(e))
-        .map((e) => e.dateMs ?? 0),
+        .map((e) => e.displayDateMs ?? e.dateMs ?? 0),
     ) || 0;
   const latestJurisprudenciaMs =
     Math.max(
       0,
       ...jurisprudenciaEntriesAll
         .filter((e): e is NonNullable<typeof e> => Boolean(e))
-        .map((e) => e.dateMs ?? 0),
+        .map((e) => e.displayDateMs ?? e.dateMs ?? 0),
     ) || 0;
   const latestGuiasMs =
     Math.max(
       0,
       ...guiasEntriesAll
         .filter((e): e is NonNullable<typeof e> => Boolean(e))
-        .map((e) => e.dateMs ?? 0),
+        .map((e) => e.displayDateMs ?? e.dateMs ?? 0),
     ) || 0;
 
   const normativaWeeklyCount = normativaEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? e.dateMs ?? 0)).length;
   const jurisprudenciaWeeklyCount = jurisprudenciaEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? e.dateMs ?? 0)).length;
   const guiasWeeklyCount = guiasEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? e.dateMs ?? 0)).length;
 
   const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
     const seen = new Set<string>();

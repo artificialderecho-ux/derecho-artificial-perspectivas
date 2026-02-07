@@ -1,6 +1,7 @@
 ---
 title: "IA Generativa y Derecho de Autor en la UE: Estudio del Parlamento Europeo"
 jurisdiction: "UE"
+date: "2026-02-01"
 ---
 
 # IA Generativa y Derecho de Autor en la UE: Estudio del Parlamento Europeo

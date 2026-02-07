@@ -161,8 +161,8 @@ export default async function EnglishHomePage() {
         title: e.title,
         href: `/normativa/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Regulatory analysis with official sources`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "en-US")} · Regulatory analysis with official sources`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
   const jurisprudenciaItems =
@@ -172,8 +172,8 @@ export default async function EnglishHomePage() {
         title: e.title,
         href: `/jurisprudencia/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Key decisions on algorithms and rights`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "en-US")} · Key decisions on algorithms and rights`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
   const guiasItems =
@@ -183,13 +183,13 @@ export default async function EnglishHomePage() {
         title: e.title,
         href: `/recursos/guias/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "en-US")} · Repository of technical and ethical documentation`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "en-US")} · Repository of technical and ethical documentation`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
   const latestNewsMs = toMs(unifiedActualidad[0]?.date);
-  const latestJurisprudenceMs = jurisprudenciaTopEntries[0]?.dateMs ?? 0;
-  const latestLegislationMs = normativaTopEntries[0]?.dateMs ?? 0;
-  const latestGuidesMs = guiasTopEntries[0]?.dateMs ?? 0;
+  const latestJurisprudenceMs = jurisprudenciaTopEntries[0]?.displayDateMs ?? jurisprudenciaTopEntries[0]?.dateMs ?? 0;
+  const latestLegislationMs = normativaTopEntries[0]?.displayDateMs ?? normativaTopEntries[0]?.dateMs ?? 0;
+  const latestGuidesMs = guiasTopEntries[0]?.displayDateMs ?? guiasTopEntries[0]?.dateMs ?? 0;
   const latestFirmMs = toMs(unifiedFirma[0]?.date);
   const newsWeeklyCount = unifiedActualidad.filter((e) => isNew(e.date)).length;
   const firmWeeklyCount = unifiedFirma.filter((e) => isNew(e.date)).length;
@@ -201,13 +201,13 @@ export default async function EnglishHomePage() {
   ]);
   const legislationWeeklyCount = legislationEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? e.dateMs ?? 0)).length;
   const jurisprudenceWeeklyCount = jurisprudenceEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? e.dateMs ?? 0)).length;
   const guidesWeeklyCount = guidesEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? e.dateMs ?? 0)).length;
 
   const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
     const seen = new Set<string>();

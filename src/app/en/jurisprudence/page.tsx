@@ -70,7 +70,7 @@ export default async function JurisprudencePage() {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
     const date =
-      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? new Date(entry.displayDateMs) : null;
     const dateLabel =
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
@@ -92,7 +92,7 @@ export default async function JurisprudencePage() {
       title: entry.title,
       description: plainSummary,
       meta: parts.join(" · "),
-      dateMs: safeTime,
+      dateMs: entry.displayDateMs ?? safeTime,
     };
   });
 

@@ -90,7 +90,7 @@ export default async function ScarpaFirmPage() {
       title: entry.title,
       description: entry.description,
       meta: parts.join(" · "),
-      dateMs: safeTime,
+      dateMs: displayMs ?? safeTime,
       displayDateMs: displayMs,
     };
   });
@@ -118,7 +118,7 @@ export default async function ScarpaFirmPage() {
       title: entry.title,
       description: plainSummary,
       meta: parts.join(" · "),
-      dateMs: safeTime,
+      dateMs: entry.displayDateMs ?? safeTime,
       displayDateMs: entry.displayDateMs ?? undefined,
     };
   });

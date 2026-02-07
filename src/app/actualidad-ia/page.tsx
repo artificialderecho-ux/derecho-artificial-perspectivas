@@ -136,7 +136,7 @@ export default async function ActualidadIAPage() {
       title: entry.title,
       description: plainSummary,
       meta: parts.join(" · "),
-      dateMs: safeTime,
+      dateMs: entry.displayDateMs ?? safeTime,
       displayDateMs: entry.displayDateMs ?? undefined,
     };
   });

@@ -85,6 +85,7 @@ export async function listContentSlugs(section: ContentSection): Promise<string[
             }
           }
         } catch {
+          void 0;
         }
         return { slug, dateMs };
       }),

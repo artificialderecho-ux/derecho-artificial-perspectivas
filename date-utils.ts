@@ -29,13 +29,25 @@ export function formatDate(dateString: string | Date): string {
  * @param dateKey - Nombre de la propiedad que contiene la fecha (default: 'date')
  * @returns Array ordenado de más reciente a más antigua
  */
-export function sortByDateDescending<T extends Record<string, any>>(
+export function sortByDateDescending<T extends Record<string, unknown>>(
   items: T[],
   dateKey: keyof T = 'date' as keyof T
 ): T[] {
   return [...items].sort((a, b) => {
-    const dateA = new Date(a[dateKey] as string).getTime();
-    const dateB = new Date(b[dateKey] as string).getTime();
+    const valA = (a as Record<string, unknown>)[dateKey as string];
+    const valB = (b as Record<string, unknown>)[dateKey as string];
+    const dateA =
+      typeof valA === 'string'
+        ? new Date(valA).getTime()
+        : valA instanceof Date
+          ? valA.getTime()
+          : 0;
+    const dateB =
+      typeof valB === 'string'
+        ? new Date(valB).getTime()
+        : valB instanceof Date
+          ? valB.getTime()
+          : 0;
     return dateB - dateA; // Orden descendente (más reciente primero)
   });
 }

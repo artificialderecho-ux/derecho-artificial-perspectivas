@@ -1,5 +1,6 @@
 ---
 title: "La Inteligencia Artificial y la Abogacía: Análisis del Libro Blanco del CGAE e ICAV"
+date: "2026-02-01"
 ---
 
 # La Inteligencia Artificial y la Abogacía: Análisis del Libro Blanco del CGAE e ICAV
