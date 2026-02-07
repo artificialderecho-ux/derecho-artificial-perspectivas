@@ -88,8 +88,8 @@ export default async function NormativaPage() {
   const resolvedEntries = entries
     .filter((entry): entry is ResourceEntry => Boolean(entry))
     .sort((a, b) => {
-      const aMs = a.dateMs ?? 0;
-      const bMs = b.dateMs ?? 0;
+      const aMs = a.displayDateMs ?? a.dateMs ?? 0;
+      const bMs = b.displayDateMs ?? b.dateMs ?? 0;
       return bMs - aMs;
     });
   

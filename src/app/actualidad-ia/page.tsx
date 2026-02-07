@@ -141,7 +141,9 @@ export default async function ActualidadIAPage() {
     };
   });
 
-  const items: NovedadItem[] = [...contentItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+  const items: NovedadItem[] = [...contentItems, ...resourceItems].sort(
+  (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
+);
 
   const apiNews: NewsItem[] = latestNews as NewsItem[];
 

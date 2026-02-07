@@ -130,7 +130,9 @@ export default async function FirmaScarpaPage() {
     };
   });
 
-  const allItems: UnifiedItem[] = [...contentItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+  const allItems: UnifiedItem[] = [...contentItems, ...resourceItems].sort(
+  (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
+);
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [

@@ -74,7 +74,18 @@ export async function listContentSlugs(section: ContentSection): Promise<string[
     const withDates = await Promise.all(
       files.map(async (entry) => {
         const slug = entry.name.replace(/\.json$/, "");
-        const dateMs = await getContentFileDateMs(dir, entry.name);
+        let dateMs = await getContentFileDateMs(dir, entry.name);
+        try {
+          const raw = await fs.readFile(path.join(dir, entry.name), "utf8");
+          const parsed: unknown = JSON.parse(raw);
+          if (isValidEntry(parsed)) {
+            const d = new Date(parsed.datePublished).getTime();
+            if (!Number.isNaN(d)) {
+              dateMs = d;
+            }
+          }
+        } catch {
+        }
         return { slug, dateMs };
       }),
     );

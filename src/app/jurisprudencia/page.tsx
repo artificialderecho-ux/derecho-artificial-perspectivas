@@ -73,8 +73,8 @@ export default async function JurisprudenciaPage() {
   const resourceItems: SentenciaItem[] = resolvedResourceEntries.map((entry) => {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
-    const date =
-      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? new Date(entry.displayDateMs) : null;
+    const displayMs = entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? entry.displayDateMs : undefined;
+    const date = displayMs != null ? new Date(displayMs) : null;
     const dateLabel =
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
@@ -98,7 +98,7 @@ export default async function JurisprudenciaPage() {
       title: entry.title,
       description: plainSummary,
       meta: parts.join(" · "),
-      dateMs: safeTime,
+      dateMs: displayMs ?? safeTime,
     };
   });
 
