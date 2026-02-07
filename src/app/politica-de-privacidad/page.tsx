@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
+import { SEOHead } from "@/components/SEOHead";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata: Metadata = {
+export const metadata = SEOHead({
   title: "Política de Privacidad",
-  description:
-    "Política de privacidad sin tracking ni cookies comerciales. Información sobre tratamiento de datos conforme al RGPD en Derecho Artificial.",
-};
+  description: "Política de privacidad sin tracking ni cookies comerciales. Información sobre tratamiento de datos conforme al RGPD en Derecho Artificial.",
+  canonical: "/politica-de-privacidad",
+  ogType: "website"
+});
 
 export default function PoliticaPrivacidadPage() {
   return (
-    <main>
+    <>
+      <Breadcrumbs 
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Política de Privacidad", href: "/politica-de-privacidad" }
+        ]}
+      />
+      <main>
       <section className="py-16 md:py-24">
         <div className="container-narrow">
           <p className="text-xs uppercase tracking-[0.2em] text-caption mb-6">Protección de datos</p>
@@ -196,6 +206,7 @@ export default function PoliticaPrivacidadPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }
 

@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
+import { SEOHead } from "@/components/SEOHead";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata: Metadata = {
+export const metadata = SEOHead({
   title: "Cookies",
-  description:
-    "Política de cookies de Derecho Artificial. Uso exclusivo de cookies técnicas y de seguridad necesarias para el funcionamiento. Sin cookies de seguimiento ni publicidad.",
-};
+  description: "Política de cookies de Derecho Artificial. Uso exclusivo de cookies técnicas y de seguridad necesarias para el funcionamiento. Sin cookies de seguimiento ni publicidad.",
+  canonical: "/cookies",
+  ogType: "website"
+});
 
 export default function CookiesPage() {
   return (
-    <main>
+    <>
+      <Breadcrumbs 
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Cookies", href: "/cookies" }
+        ]}
+      />
+      <main>
       <article>
         <header className="py-16 md:py-24">
           <div className="container-narrow">
@@ -193,6 +203,6 @@ export default function CookiesPage() {
         </section>
       </article>
     </main>
+    </>
   );
 }
-

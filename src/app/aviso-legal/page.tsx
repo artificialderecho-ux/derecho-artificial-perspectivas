@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
+import { SEOHead } from "@/components/SEOHead";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata: Metadata = {
+export const metadata = SEOHead({
   title: "Aviso Legal",
-  description:
-    "Aviso legal del proyecto editorial independiente Derecho Artificial. Titularidad, condiciones de uso, propiedad intelectual y exención de responsabilidad.",
-};
+  description: "Aviso legal del proyecto editorial independiente Derecho Artificial. Titularidad, condiciones de uso, propiedad intelectual y exención de responsabilidad.",
+  canonical: "/aviso-legal",
+  ogType: "website"
+});
 
 export default function AvisoLegalPage() {
   return (
-    <main>
+    <>
+      <Breadcrumbs 
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Aviso Legal", href: "/aviso-legal" }
+        ]}
+      />
+      <main>
       <section className="py-16 md:py-24">
         <div className="container-narrow">
           <p className="text-xs uppercase tracking-[0.2em] text-caption mb-6">Información legal</p>
@@ -141,6 +151,7 @@ export default function AvisoLegalPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }
 

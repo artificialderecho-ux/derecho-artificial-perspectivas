@@ -1,45 +1,26 @@
 import type { Metadata } from "next";
+import { SEOHead } from "@/components/SEOHead";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Suspense } from "react";
 import { ContactForm } from "./ui/ContactForm";
 import { StructuredData } from "@/components/seo/StructuredData";
 
-export const metadata: Metadata = {
+export const metadata = SEOHead({
   title: "Contacto",
-  description:
-    "Formulario de contacto para consultas jurídicas sobre IA, correcciones y colaboraciones editoriales.",
-  keywords: [
-    "contacto",
-    "Derecho Artificial",
-    "consultas jurídicas IA",
-    "colaboración editorial",
-    "correcciones",
-    "cumplimiento IA",
-  ],
-  alternates: {
-    canonical: "/contacto",
-    languages: {
-      "es-ES": "/contacto",
-      "en-US": "/en/contact",
-    },
-  },
-  openGraph: {
-    type: "website",
-    title: "Contacto",
-    description:
-      "Formulario de contacto para consultas jurídicas sobre IA, correcciones y colaboraciones editoriales.",
-    url: "/contacto",
-    locale: "es_ES",
-    images: [
-      {
-        url: "/logo-principal.png",
-      },
-    ],
-  },
-};
+  description: "Formulario de contacto para consultas jurídicas sobre IA, correcciones y colaboraciones editoriales.",
+  canonical: "/contacto",
+  ogType: "website"
+});
 
 export default function ContactoPage() {
   return (
     <>
+      <Breadcrumbs 
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Contacto", href: "/contacto" }
+        ]}
+      />
       <StructuredData
         data={{
           "@context": "https://schema.org",
