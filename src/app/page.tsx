@@ -120,13 +120,21 @@ export default async function HomePage() {
   const latestFirma = unifiedFirma[0] ?? null;
 
   const [latestNormativa, latestJurisprudencia, latestGuias] = await Promise.all([
-    normativaSlugs[0]
-      ? getSectionResourceEntry("normativa", normativaSlugs[0])
-      : Promise.resolve(null),
-    jurisprudenciaSlugs[0]
-      ? getSectionResourceEntry("jurisprudencia", jurisprudenciaSlugs[0])
-      : Promise.resolve(null),
-    guiasSlugs[0] ? getSectionResourceEntry("guias", guiasSlugs[0]) : Promise.resolve(null),
+    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))).then((arr) => {
+      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
+      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      return items[0] ?? null;
+    }),
+    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))).then((arr) => {
+      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
+      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      return items[0] ?? null;
+    }),
+    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))).then((arr) => {
+      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
+      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      return items[0] ?? null;
+    }),
   ]);
 
   const formatDate = (value: string | number) => {
@@ -143,13 +151,21 @@ export default async function HomePage() {
   };
 
   const [normativaTopEntries, jurisprudenciaTopEntries, guiasTopEntries] = await Promise.all([
-    Promise.all(
-      normativaSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("normativa", slug)),
-    ),
-    Promise.all(
-      jurisprudenciaSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("jurisprudencia", slug)),
-    ),
-    Promise.all(guiasSlugs.slice(0, 2).map((slug) => getSectionResourceEntry("guias", slug))),
+    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))).then((arr) => {
+      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
+      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      return items.slice(0, 2);
+    }),
+    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))).then((arr) => {
+      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
+      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      return items.slice(0, 2);
+    }),
+    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))).then((arr) => {
+      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
+      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      return items.slice(0, 2);
+    }),
   ]);
 
   const normativaItems =

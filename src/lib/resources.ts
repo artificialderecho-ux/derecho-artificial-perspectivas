@@ -158,8 +158,14 @@ async function listAnalysisFiles(): Promise<AnalysisFile[]> {
 async function getFileDateMs(filePath: string) {
   try {
     const stats = await fs.stat(filePath);
-    const created = stats.birthtimeMs || stats.ctimeMs || stats.mtimeMs;
-    return created || Date.now();
+    const created = stats.birthtimeMs;
+    if (typeof created === "number" && !Number.isNaN(created) && created > 0) {
+      return created;
+    }
+    const modified = stats.mtimeMs;
+    return typeof modified === "number" && !Number.isNaN(modified) && modified > 0
+      ? modified
+      : Date.now();
   } catch {
     return Date.now();
   }

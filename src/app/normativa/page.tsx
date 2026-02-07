@@ -85,7 +85,13 @@ export default async function NormativaPage() {
 
   const slugs = await listSectionResourceSlugs("normativa");
   const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("normativa", slug)));
-  const resolvedEntries = entries.filter((entry): entry is ResourceEntry => Boolean(entry));
+  const resolvedEntries = entries
+    .filter((entry): entry is ResourceEntry => Boolean(entry))
+    .sort((a, b) => {
+      const aMs = a.dateMs ?? 0;
+      const bMs = b.dateMs ?? 0;
+      return bMs - aMs;
+    });
   
 
   return (

@@ -55,7 +55,11 @@ async function getContentFileDateMs(dir: string, fileName: string) {
 
   try {
     const stats = await fs.stat(filePath);
-    return stats.birthtimeMs || stats.ctimeMs || stats.mtimeMs;
+    const created = stats.birthtimeMs;
+    if (typeof created === "number" && !Number.isNaN(created) && created > 0) {
+      return created;
+    }
+    return stats.mtimeMs;
   } catch {
     return Date.now();
   }
