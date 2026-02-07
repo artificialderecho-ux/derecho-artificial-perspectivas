@@ -361,7 +361,12 @@ export async function listSectionResourceSlugs(section: ResourceSection): Promis
         .filter((entry) => {
           if (!entry.isFile()) return false;
           const lower = entry.name.toLowerCase();
-          return lower.endsWith(".md") || lower.endsWith(".markdown") || lower.endsWith(".txt");
+          return (
+            lower.endsWith(".md") ||
+            lower.endsWith(".markdown") ||
+            lower.endsWith(".txt") ||
+            lower.endsWith(".html")
+          );
         })
         .map(async (entry) => {
           const filePath = path.join(sectionDir, entry.name);
@@ -558,15 +563,24 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
     for (const entry of entries) {
       if (!entry.isFile()) continue;
       const lower = entry.name.toLowerCase();
-      if (!lower.endsWith(".md") && !lower.endsWith(".markdown") && !lower.endsWith(".txt")) continue;
+      if (
+        !lower.endsWith(".md") &&
+        !lower.endsWith(".markdown") &&
+        !lower.endsWith(".txt") &&
+        !lower.endsWith(".html")
+      )
+        continue;
       const baseName = entry.name.replace(/\.[^/.]+$/, "");
       const fileSlug = slugifyBaseName(baseName);
       if (fileSlug !== slug) continue;
       const filePath = path.join(sectionDir, entry.name);
       const markdown = await readTextFile(filePath);
       const frontmatterTitle = extractFrontmatterTitle(markdown);
+      const isHtml = lower.endsWith(".html");
       const title =
-        frontmatterTitle || inferTitleFromMarkdown(markdown) || inferTitleFromFileName(baseName);
+        frontmatterTitle ||
+        (isHtml ? inferTitleFromHtml(markdown) : inferTitleFromMarkdown(markdown)) ||
+        inferTitleFromFileName(baseName);
       const jurisdiction = extractFrontmatterField(markdown, "jurisdiction");
       const courtName = extractFrontmatterField(markdown, "court");
       const sourceFileName = await findMatchingSourceFileName(baseName, config.fuentesSubdir);
@@ -607,10 +621,11 @@ export async function getSectionResourceEntry(
 ): Promise<ResourceEntry | null> {
   const raw = await resolveSectionRawAnalysis(section, slug);
   if (!raw) return null;
-  const { summary, body } = splitSummaryAndBody(raw.markdown);
+  const isHtml = raw.filePath.toLowerCase().endsWith(".html");
+  const { summary, body } = isHtml ? { summary: "", body: raw.markdown } : splitSummaryAndBody(raw.markdown);
   const kind = kindForSection(section);
-  const summaryHtml = summary ? renderMarkdownToHtml(summary) : "";
-  const bodyHtml = body ? renderMarkdownToHtml(body) : "";
+  const summaryHtml = isHtml ? extractFirstParagraphHtml(raw.markdown) : summary ? renderMarkdownToHtml(summary) : "";
+  const bodyHtml = isHtml ? raw.markdown : body ? renderMarkdownToHtml(body) : "";
   const sourceUrl =
     raw.sourceFileName != null
       ? `/Recursos/Fuentes/${encodeURIComponent(raw.sourceFileName).replace(/%2F/g, "/")}`
@@ -638,4 +653,26 @@ export async function getSectionResourceEntry(
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,
   };
+}
+
+function extractFirstParagraphHtml(text: string) {
+  const m = text.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+  return m ? m[0] : "";
+}
+
+function inferTitleFromHtml(html: string) {
+  const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+  if (h1) {
+    const inner = h1[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    if (inner) return inner;
+  }
+  const titleTag = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  if (titleTag) {
+    const inner = titleTag[1].replace(/\s+/g, " ").trim();
+    if (inner) return inner;
+  }
+  const plain = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  if (!plain) return "";
+  const m = plain.match(/^(.+?[.!?])(\s|$)/);
+  return (m ? m[1] : plain).trim();
 }
