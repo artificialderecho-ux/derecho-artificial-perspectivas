@@ -209,7 +209,7 @@ export default async function HomePage() {
         title: e.title,
         href: `/normativa/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Análisis normativo con fuentes oficiales`,
+        meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Análisis normativo con fuentes oficiales`,
         dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
@@ -220,7 +220,7 @@ export default async function HomePage() {
         title: e.title,
         href: `/jurisprudencia/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
+        meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
         dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
@@ -231,7 +231,7 @@ export default async function HomePage() {
         title: e.title,
         href: `/recursos/guias/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Repositorio de documentación técnica y ética`,
+        meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Repositorio de documentación técnica y ética`,
         dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
@@ -252,13 +252,13 @@ export default async function HomePage() {
   ]);
   const normativaWeeklyCount = normativaEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? 0)).length;
   const jurisprudenciaWeeklyCount = jurisprudenciaEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? 0)).length;
   const guiasWeeklyCount = guiasEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.dateMs ?? 0)).length;
+    .filter((e) => isNew(e.displayDateMs ?? 0)).length;
 
   const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
     const seen = new Set<string>();

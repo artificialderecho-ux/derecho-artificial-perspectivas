@@ -533,7 +533,7 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
     kind,
     sourceUrl,
     dateMs: sourceDateMs ?? raw.dateMs,
-    displayDateMs: Number.isNaN(displayDateMs || NaN) ? (raw.dateMs ?? null) : (displayDateMs ?? null),
+    displayDateMs: displayDateMs ?? null,
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,
   };
