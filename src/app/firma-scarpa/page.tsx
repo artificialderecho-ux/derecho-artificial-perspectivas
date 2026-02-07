@@ -5,7 +5,6 @@ import { getContentEntry, listContentSlugs } from "@/lib/content";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
-import { Badges } from "@/lib/badges";
 
 export const metadata: Metadata = {
   title: "Firma Scarpa",
@@ -131,9 +130,7 @@ export default async function FirmaScarpaPage() {
     };
   });
 
-  const allItems: UnifiedItem[] = [...contentItems, ...resourceItems].sort(
-    (a, b) => b.dateMs - a.dateMs,
-  );
+  const allItems: UnifiedItem[] = [...contentItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -174,14 +171,6 @@ export default async function FirmaScarpaPage() {
               >
                 <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Análisis</p>
                 <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                <Badges
-                  recencyMs={item.dateMs}
-                  labelMs={item.displayDateMs ?? item.dateMs}
-                  locale="es-ES"
-                  newLabel="Nuevo"
-                  updatedLabel="Actualizado"
-                  className="mb-3 inline-flex items-center gap-2 text-xs text-caption"
-                />
                 {item.description && <p className="text-body mb-6">{item.description}</p>}
                 {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
               </Link>

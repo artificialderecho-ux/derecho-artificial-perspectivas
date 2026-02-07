@@ -495,6 +495,16 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
       ? `/Recursos/Fuentes/${encodeURIComponent(raw.sourceFileName).replace(/%2F/g, "/")}`
       : null;
   const displayDateMs = await getDisplayDateMs(raw.filePath);
+  let sourceDateMs: number | null = null;
+  if (raw.sourceFileName) {
+    try {
+      const sourceFilePath = path.join(fuentesDir, raw.sourceFileName);
+      const d = await getFileDateMs(sourceFilePath);
+      sourceDateMs = Number.isNaN(d) ? null : d;
+    } catch {
+      sourceDateMs = null;
+    }
+  }
   return {
     slug,
     title: raw.title,
@@ -502,7 +512,7 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
     bodyHtml,
     kind,
     sourceUrl,
-    dateMs: raw.dateMs,
+    dateMs: sourceDateMs ?? raw.dateMs,
     displayDateMs: Number.isNaN(displayDateMs || NaN) ? (raw.dateMs ?? null) : (displayDateMs ?? null),
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,
@@ -586,6 +596,16 @@ export async function getSectionResourceEntry(
       ? `/Recursos/Fuentes/${encodeURIComponent(raw.sourceFileName).replace(/%2F/g, "/")}`
       : null;
   const displayDateMs = await getDisplayDateMs(raw.filePath);
+  let sourceDateMs: number | null = null;
+  if (raw.sourceFileName) {
+    try {
+      const sourceFilePath = path.join(fuentesDir, raw.sourceFileName);
+      const d = await getFileDateMs(sourceFilePath);
+      sourceDateMs = Number.isNaN(d) ? null : d;
+    } catch {
+      sourceDateMs = null;
+    }
+  }
   return {
     slug,
     title: raw.title,
@@ -593,7 +613,7 @@ export async function getSectionResourceEntry(
     bodyHtml,
     kind,
     sourceUrl,
-    dateMs: raw.dateMs,
+    dateMs: sourceDateMs ?? raw.dateMs,
     displayDateMs: Number.isNaN(displayDateMs || NaN) ? (raw.dateMs ?? null) : (displayDateMs ?? null),
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
-import { Badges, isNew, isRecent, formatDateFromMs } from "@/lib/badges";
 
 export const metadata: Metadata = {
   title: "Jurisprudencia",
@@ -75,7 +74,7 @@ export default async function JurisprudenciaPage() {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
     const date =
-      entry.dateMs != null && !Number.isNaN(entry.dateMs) ? new Date(entry.dateMs) : null;
+      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? new Date(entry.displayDateMs) : null;
     const dateLabel =
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
@@ -173,7 +172,6 @@ export default async function JurisprudenciaPage() {
               >
                 <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Sentencia</p>
                 <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                <Badges ms={item.dateMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 {item.description && <p className="text-body mb-6">{item.description}</p>}
                 {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
               </Link>
