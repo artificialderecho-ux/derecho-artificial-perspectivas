@@ -83,14 +83,19 @@ export default async function HomePage() {
     ...resolvedActualidadJson.map((e) => ({
       title: e.title,
       description: e.description,
-      date: typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0,
+      date: (() => {
+        const publishedMs =
+          typeof e.datePublished === "string" ? new Date(e.datePublished).getTime() : NaN;
+        const fallback = typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0;
+        return Number.isNaN(publishedMs) ? fallback : publishedMs;
+      })(),
       urlPath: e.urlPath,
       author: e.author,
     })),
     ...resolvedActualidadResources.map((e) => ({
       title: e.title,
       description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-      date: e.dateMs ?? 0,
+      date: e.displayDateMs ?? e.dateMs ?? 0,
       urlPath: `/actualidad-ia/${e.slug}`,
       author: "Derecho Artificial",
     })),
@@ -100,14 +105,19 @@ export default async function HomePage() {
     ...resolvedFirmaJson.map((e) => ({
       title: e.title,
       description: e.description,
-      date: typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0,
+      date: (() => {
+        const publishedMs =
+          typeof e.datePublished === "string" ? new Date(e.datePublished).getTime() : NaN;
+        const fallback = typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0;
+        return Number.isNaN(publishedMs) ? fallback : publishedMs;
+      })(),
       urlPath: e.urlPath,
       author: e.author,
     })),
     ...resolvedFirmaResources.map((e) => ({
       title: e.title,
       description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-      date: e.dateMs ?? 0,
+      date: e.displayDateMs ?? e.dateMs ?? 0,
       urlPath: `/firma-scarpa/${e.slug}`,
       author: "Derecho Artificial",
     })),
@@ -122,17 +132,29 @@ export default async function HomePage() {
   const [latestNormativa, latestJurisprudencia, latestGuias] = await Promise.all([
     Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))).then((arr) => {
       const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      items.sort(
+        (a, b) =>
+          (b.displayDateMs ?? b.dateMs ?? 0) -
+          (a.displayDateMs ?? a.dateMs ?? 0),
+      );
       return items[0] ?? null;
     }),
     Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))).then((arr) => {
       const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      items.sort(
+        (a, b) =>
+          (b.displayDateMs ?? b.dateMs ?? 0) -
+          (a.displayDateMs ?? a.dateMs ?? 0),
+      );
       return items[0] ?? null;
     }),
     Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))).then((arr) => {
       const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      items.sort(
+        (a, b) =>
+          (b.displayDateMs ?? b.dateMs ?? 0) -
+          (a.displayDateMs ?? a.dateMs ?? 0),
+      );
       return items[0] ?? null;
     }),
   ]);
@@ -153,17 +175,29 @@ export default async function HomePage() {
   const [normativaTopEntries, jurisprudenciaTopEntries, guiasTopEntries] = await Promise.all([
     Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))).then((arr) => {
       const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      items.sort(
+        (a, b) =>
+          (b.displayDateMs ?? b.dateMs ?? 0) -
+          (a.displayDateMs ?? a.dateMs ?? 0),
+      );
       return items.slice(0, 2);
     }),
     Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))).then((arr) => {
       const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      items.sort(
+        (a, b) =>
+          (b.displayDateMs ?? b.dateMs ?? 0) -
+          (a.displayDateMs ?? a.dateMs ?? 0),
+      );
       return items.slice(0, 2);
     }),
     Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))).then((arr) => {
       const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort((a, b) => (b.dateMs ?? 0) - (a.dateMs ?? 0));
+      items.sort(
+        (a, b) =>
+          (b.displayDateMs ?? b.dateMs ?? 0) -
+          (a.displayDateMs ?? a.dateMs ?? 0),
+      );
       return items.slice(0, 2);
     }),
   ]);
@@ -175,8 +209,8 @@ export default async function HomePage() {
         title: e.title,
         href: `/normativa/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Análisis normativo con fuentes oficiales`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Análisis normativo con fuentes oficiales`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
   const jurisprudenciaItems =
@@ -186,8 +220,8 @@ export default async function HomePage() {
         title: e.title,
         href: `/jurisprudencia/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
   const guiasItems =
@@ -197,14 +231,16 @@ export default async function HomePage() {
         title: e.title,
         href: `/recursos/guias/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.dateMs, "es-ES")} · Repositorio de documentación técnica y ética`,
-        dateMs: e.dateMs ?? 0,
+        meta: `${formatDateFromMs(e.displayDateMs ?? e.dateMs ?? 0, "es-ES")} · Repositorio de documentación técnica y ética`,
+        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
       })) ?? [];
 
   const latestActualidadMs = toMs(unifiedActualidad[0]?.date);
-  const latestJurisprudenciaMs = jurisprudenciaTopEntries[0]?.dateMs ?? 0;
-  const latestNormativaMs = normativaTopEntries[0]?.dateMs ?? 0;
-  const latestGuiasMs = guiasTopEntries[0]?.dateMs ?? 0;
+  const latestJurisprudenciaMs =
+    jurisprudenciaTopEntries[0]?.displayDateMs ?? jurisprudenciaTopEntries[0]?.dateMs ?? 0;
+  const latestNormativaMs =
+    normativaTopEntries[0]?.displayDateMs ?? normativaTopEntries[0]?.dateMs ?? 0;
+  const latestGuiasMs = guiasTopEntries[0]?.displayDateMs ?? guiasTopEntries[0]?.dateMs ?? 0;
   const latestFirmaMs = toMs(unifiedFirma[0]?.date);
   const actualidadWeeklyCount = unifiedActualidad.filter((e) => isNew(e.date)).length;
   const firmaWeeklyCount = unifiedFirma.filter((e) => isNew(e.date)).length;
