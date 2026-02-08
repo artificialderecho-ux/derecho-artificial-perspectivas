@@ -31,6 +31,15 @@ type DocCard = {
 
 const softLawDocs = [
   {
+    id: "ai-act-guide-2026",
+    title: "Guía práctica Reglamento Europeo de IA 2026",
+    description: "Guía completa sobre el Reglamento Europeo de IA con análisis y recomendaciones para cumplimiento normativo.",
+    source: "Derecho Artificial",
+    year: "2026",
+    url: "/Recursos/Analisis/Guias-y-Protocolos/guia-ai-act.html",
+    tags: ["Reglamento IA", "Guía práctica", "2026"]
+  },
+  {
     id: "sl-1",
     title: "Carta Ética Europea sobre el uso de la IA en sistemas judiciales",
     description: "Cinco principios fundamentales del CEPEJ para el uso de IA en la administración de justicia: respeto a derechos fundamentales, no discriminación, calidad y seguridad, transparencia y control por el usuario.",
