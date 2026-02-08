@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Maestra del Reglamento de Inteligencia Artificial (AI Act): Implementación en el Mercado Único</title>
+    <meta name="description" content="Análisis completo del Reglamento IA (AI Act) 2024/1689. Descubre calendario de aplicación 2025-2027, prácticas prohibidas, obligaciones alto riesgo, sinergias RGPD, casos prácticos y checklist de cumplimiento para empresas. Guía definitiva para DPOs y compliance officers.">
+    <meta name="keywords" content="AI Act, Reglamento IA 2024/1689, cumplimiento AI Act, sistemas IA alto riesgo, RGPD, GPAI, FRIAS, prácticas prohibidas IA, calendario AI Act 2025, implementación AI Act España, AESIA">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .meta-info {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        nav h2 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        #toc ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+        
+        #toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        #toc a {
+            color: #2a5298;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        #toc a:hover {
+            color: #1e3c72;
+            text-decoration: underline;
+        }
+        
+        main {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        h2 {
+            color: #1e3c72;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        h3 {
+            color: #2a5298;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        h4 {
+            color: #495057;
+            font-size: 1.1rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .keyword {
+            background-color: #e3f2fd;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background-color: #1e3c72;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning-box {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .checklist {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #2a5298;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-to-top:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #dee2e6;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            header, nav, main {
+                padding: 1rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Guía Maestra del Reglamento de Inteligencia Artificial (AI Act)</h1>
+        <div class="subtitle">De la Teoría Jurídica a la Implementación en el Mercado Único</div>
+        <div class="meta-info">
+            <p><strong>Documento actualizado:</strong> Febrero 2024 | <strong>Vigencia normativa:</strong> Reglamento (UE) 2024/1689</p>
+            <p><strong>Palabras clave:</strong> AI Act, cumplimiento regulatorio, alto riesgo, RGPD, GPAI, FRIAS, calendario implementación 2025-2027</p>
+        </div>
+    </header>
+
+    <nav id="toc">
+        <h2>Tabla de Contenidos</h2>
+        <ul>
+            <li><a href="#resumen-ejecutivo">1. Resumen Ejecutivo</a></li>
+            <li><a href="#introduccion">2. Introducción: El Nuevo Paradigma del Capitalismo Cognitivo</a></li>
+            <li><a href="#cronograma">3. Cronograma de Aplicación Escalonada 2024-2027</a></li>
+            <li><a href="#definicion-ia">4. Definición y Ámbito de Aplicación</a></li>
+            <li><a href="#practicas-prohibidas">5. Prácticas de IA Prohibidas (Art. 5)</a></li>
+            <li><a href="#alto-riesgo">6. Sistemas de IA de Alto Riesgo</a></li>
+            <li><a href="#obligaciones-proveedores">7. Obligaciones Técnicas para Proveedores</a></li>
+            <li><a href="#responsabilidades-deployers">8. Responsabilidades de los "Deployers"</a></li>
+            <li><a href="#frias">9. Evaluación de Impacto en Derechos Fundamentales (FRIAS)</a></li>
+            <li><a href="#gpai">10. Modelos de IA de Uso General (GPAI)</a></li>
+            <li><a href="#biometrica">11. Identificación Biométrica: Excepciones</a></li>
+            <li><a href="#casos-practicos">12. Casos Prácticos y Jurisprudencia</a></li>
+            <li><a href="#sinergias-regulatorias">13. Sinergias Regulatorias: AI Act + RGPD + DSA</a></li>
+            <li><a href="#faq">14. FAQ: 12 Preguntas Críticas</a></li>
+            <li><a href="#checklist">15. Checklist de Implementación</a></li>
+            <li><a href="#glosario">16. Glosario de Términos</a></li>
+            <li><a href="#recursos">17. Recursos Adicionales</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="resumen-ejecutivo">
+            <h2>1. Resumen Ejecutivo</h2>
+            <p>El <span class="keyword">Reglamento (UE) 2024/1689 (AI Act)</span> constituye el marco normativo más ambicioso a nivel mundial para gobernar el desarrollo y uso de la Inteligencia Artificial. Promulgado el 12 de julio de 2024, representa la respuesta estratégica de la Unión Europea al advenimiento del "Capitalismo Cognitivo", donde el valor económico y social se genera a través del procesamiento masivo de información y la automatización de la cognición.</p>
+            
+            <p>Esta Guía Maestra desglosa el complejo entramado del AI Act, diseñado bajo el principio de "un continente, un mercado, una norma". Su aplicación escalonada entre 2024 y 2027 obliga a las empresas a una transición urgente. Los hitos son ineludibles: a partir del <strong>2 de febrero de 2025</strong>, quedan prohibidas prácticas de "riesgo inaceptable" como la manipulación subliminal o la puntuación social gubernamental.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Punto clave:</strong> El núcleo regulatorio gira en torno a una taxonomía de riesgos basada en la <strong>finalidad prevista</strong> del sistema. Los sistemas de "alto riesgo" (definidos en los Anexos II y III), que afectan a áreas críticas como empleo, educación, servicios públicos esenciales o seguridad de productos, están sujetos a obligaciones rigurosas de "calidad por diseño".</p>
+            </div>
+            
+            <p>El Reglamento introduce novedades cruciales: la regulación específica de <span class="keyword">Modelos de IA de Uso General (GPAI)</span> como GPT-4; la obligación de realizar una <span class="keyword">Evaluación de Impacto en Derechos Fundamentales (FRIAS)</span>; y un estricto aunque matizado régimen para la <span class="keyword">identificación biométrica remota</span>.</p>
+            
+            <p>Este documento no solo analiza la letra de la ley, sino que la contextualiza dentro del ecosistema digital europeo, destacando su <strong>sinergia crítica con el RGPD</strong> –el AI Act no es base legal para el tratamiento de datos personales– y con las nuevas Leyes de Servicios (DSA) y Mercados Digitales (DMA).</p>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="introduccion">
+            <h2>2. Introducción: El Nuevo Paradigma del Capitalismo Cognitivo</h2>
+            <p>Nos encontramos en un punto de inflexión histórico donde la tecnología ha trascendido su rol de herramienta para convertirse en el tejido inmanente de nuestra interacción social y económica. El <span class="keyword">Reglamento (UE) 2024/1689</span>, comúnmente denominado <span class="keyword">AI Act</span>, no debe ser interpretado meramente como un compendio de requisitos técnicos o una norma sectorial más.</p>
+            
+            <p>Representa, en su esencia, la respuesta estratégica y política de la Unión Europea ante el auge del "Capitalismo Cognitivo". En este nuevo escenario, el valor no reside primordialmente en el capital físico o financiero, sino en la capacidad de procesar información, generar inferencias y automatizar la cognición humana.</p>
+            
+            <h3>Cambio de Filosofía Legislativa</h3>
+            <p>El AI Act rompe con el pasado de directivas fragmentadas (como la Directiva 2000/31/CE de Comercio Electrónico) al adoptar la forma de Reglamento, imponiendo el axioma de <strong>"un continente, un mercado, una norma"</strong>. Esta estructura proporciona un régimen jurídico único, coherente y completo para todos los operadores en la cadena de valor de la IA.</p>
+            
+            <div class="warning-box">
+                <p><strong>Nota importante:</strong> El objetivo de armonización es claro: equilibrar la tutela de los derechos fundamentales de los ciudadanos con la promoción económica de la comunidad, permitiendo que las empresas tecnológicas europeas compitan en igualdad de condiciones bajo un marco de <strong>"IA fiable" (Trustworthy AI)</strong>.</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="cronograma">
+            <h2>3. Cronograma de Aplicación Escalonada 2024-2027</h2>
+            <p>La Comisión Europea ha diseñado una aplicación diferida y progresiva del <span class="keyword">AI Act</span> para permitir una transición ordenada del ecosistema empresarial hacia el <span class="keyword">cumplimiento regulatorio</span>. Ignorar estas fechas conlleva riesgos financieros y reputacionales sistémicos.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Fecha clave de entrada en vigor:</strong> El Reglamento fue publicado el 12 de julio de 2024 y entró en vigor 20 días después, concretamente el <strong>1 de agosto de 2024</strong>.</p>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha Clave</th>
+                        <th>Capítulos/Artículos Aplicables</th>
+                        <th>Acción Requerida para Empresas</th>
+                        <th>Impacto y Prioridad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2 de febrero de 2025</strong></td>
+                        <td>Capítulos I (Disposiciones generales) y II (Prácticas Prohibidas)</td>
+                        <td><strong>Cese inmediato</strong> de la comercialización o uso de sistemas con "riesgo inaceptable" (Art. 5). Auditoría urgente de cartera de productos/servicios.</td>
+                        <td><strong>ALTA PRIORIDAD</strong>. No admite prórrogas. Afecta a la licitud de operaciones.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2 de agosto de 2025</strong></td>
+                        <td>Capítulos III (Autoridades), V (Modelos GPAI), VII (Gobernanza) y XII (Sanciones)</td>
+                        <td>Cumplimiento de obligaciones para <strong>modelos de uso general (GPAI)</strong>. Estructuración de gobernanza interna y nombramiento de responsables ante la Oficina de IA de la UE.</td>
+                        <td><strong>PRIORIDAD MEDIA-ALTA</strong>. Preparar documentación, políticas de copyright y gobernanza.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2 de agosto de 2026</strong></td>
+                        <td>Aplicación General del Reglamento (Capítulos III, IV, VI, VIII, IX, X, XI)</td>
+                        <td><strong>Plena operatividad</strong> de las obligaciones para la mayoría de los sistemas de IA, incluyendo requisitos de transparencia, sistemas de alto riesgo y supervisión del mercado.</td>
+                        <td><strong>PRIORIDAD MÁXIMA (largo plazo)</strong>. Es la fecha clave para el grueso de los sistemas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2 de agosto de 2027</strong></td>
+                        <td>Artículo 6.1 (Sistemas de alto riesgo en productos regulados)</td>
+                        <td>Cumplimiento estricto para sistemas de IA que actúan como <strong>componentes de seguridad de productos</strong> sujetos al Anexo II (p. ej., dispositivos médicos, ascensores, maquinaria).</td>
+                        <td><strong>PRIORIDAD ESPECÍFICA</strong> para sectores industriales y de salud.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="warning-box">
+                <p><strong>Recomendación estratégica:</strong> Realizar <strong>auditorías técnicas inmediatas</strong> de los sistemas actuales. El hito de febrero de 2025 no admite prórrogas, ya que afecta directamente a la licitud de las operaciones que involucren prácticas prohibidas por su riesgo inmanente.</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="definicion-ia">
+            <h2>4. Definición y Ámbito de Aplicación: ¿Qué es (y qué no es) un Sistema de IA?</h2>
+            <p>La seguridad jurídica de la norma descansa sobre una definición de "sistema de IA" que debe ser tecnológicamente neutra pero lo suficientemente precisa para garantizar que no se incluya al software tradicional basado en reglas deterministas. El <strong>Art. 3</strong> del <span class="keyword">AI Act</span> deconstruye este concepto bajo tres pilares fundamentales:</p>
+            
+            <ol>
+                <li><strong>Capacidad de Inferencia:</strong> A diferencia de la programación convencional basada exclusivamente en reglas humanas ("if-then"), la IA deduce modelos o algoritmos a partir de datos de entrada para generar resultados (predicciones, recomendaciones o decisiones).</li>
+                <li><strong>Autonomía:</strong> El sistema opera con distintos niveles de independencia, pudiendo actuar sin intervención humana directa en entornos físicos o virtuales.</li>
+                <li><strong>Adaptabilidad:</strong> Capacidad del sistema para cambiar su funcionamiento tras el despliegue mediante el autoaprendizaje, lo que introduce una capa de complejidad técnica y legal en la evaluación de riesgos.</li>
+            </ol>
+            
+            <h3>¿Qué queda FUERA del ámbito de aplicación?</h3>
+            <ul>
+                <li>Sistemas de software que ejecutan operaciones automáticas predecibles definidas únicamente por reglas deterministas (ej: una macro de Excel, un termostato programable).</li>
+                <li>Herramientas estadísticas puras que no "aprenden" de los datos.</li>
+                <li>Sistemas utilizados <strong>exclusivamente</strong> para fines de I+D, previos a su puesta en el mercado.</li>
+            </ul>
+            
+            <h3>Alcance Extraterritorial: El "Efecto Bruselas"</h3>
+            <p>El Reglamento posee una ambición global. Su alcance afecta a:</p>
+            <ul>
+                <li><strong>Proveedores</strong> que introduzcan sistemas de IA en el mercado de la Unión, <strong>independientemente de si están establecidos en la UE o en terceros países</strong> (p. ej., EE. UU. o China).</li>
+                <li><strong>Responsables del despliegue (deployers)</strong> establecidos dentro de la Unión.</li>
+                <li><strong>Proveedores y responsables de terceros países</strong> cuando los <strong>resultados (outputs)</strong> generados por el sistema de IA estén destinados a ser utilizados en la Unión.</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p><strong>Consecuencia crucial:</strong> Si una IA entrenada en el extranjero toma decisiones que afectan a ciudadanos en Madrid o Berlín, está sujeta al <strong>AI Act</strong>. Este "efecto Bruselas" es comparable al del RGPD y redefine la competencia regulatoria global.</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="practicas-prohibidas">
+            <h2>5. Prácticas de IA Prohibidas: Análisis Completo del Artículo 5</h2>
+            <p>La Unión Europea ha establecido una frontera ética infranqueable bajo el concepto de <strong>"riesgo inaceptable"</strong>. Estas prácticas se consideran contrarias a la dignidad humana y los derechos fundamentales. Su prohibición es absoluta a partir del <strong>2 de febrero de 2025</strong>.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Práctica Prohibida (Art. 5)</th>
+                        <th>Elementos Clave</th>
+                        <th>Ejemplo Concreto</th>
+                        <th>Base Jurídica/Derecho Vulnerado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Manipulación Subliminal/Técnicas Engañosas</strong></td>
+                        <td>Estímulos que trascienden la percepción consciente. <strong>Daño significativo</strong> (físico, psicológico, financiero).</td>
+                        <td>Un chatbot de inversión que use tonos de voz subliminales para inducir a personas mayores a realizar operaciones de alto riesgo.</td>
+                        <td>Derecho a la integridad física y psíquica. Autonomía de la voluntad.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Explotación de Vulnerabilidades</strong></td>
+                        <td>Aprovechar debilidades por edad, discapacidad o situación socioeconómica.</td>
+                        <td>Juego con IA que use dinámicas adictivas dirigidas a menores, induciendo compras compulsivas.</td>
+                        <td>Protección de consumidores y menores.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Puntuación Social (Social Scoring)</strong> por autoridades públicas.</td>
+                        <td>Evaluación de solvencia moral/social. Contexto diverso. Trato desfavorable injustificado.</td>
+                        <td>Denegar una plaza de guardería pública porque los padres tienen multas de biblioteca sin pagar.</td>
+                        <td>No discriminación. Derecho a la buena administración.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Predicción Delictiva Individual</strong> basada en perfiles o rasgos.</td>
+                        <td>Evaluar riesgo de delito sin sospecha objetiva basada en hechos.</td>
+                        <td>Sistema policial que marque como "potencial delincuente" a personas de un código postal específico.</td>
+                        <td><strong>Presunción de inocencia</strong> (Art. 48 Carta de Derechos Fundamentales UE).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Extracción de Imágenes Faciales no selectiva (Scraping)</strong> para bases de datos de RF.</td>
+                        <td>Crear BD de RF mediante extracción masiva de internet/RRSS.</td>
+                        <td>Empresa que rastrea Flickr o Instagram para crear BD comercial de reconocimiento facial sin consentimiento.</td>
+                        <td>Derecho a la privacidad y protección de datos.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6. Inferencia de Emociones en Lugar de Trabajo/Educación</strong> (salvo excepciones).</td>
+                        <td>Deducir estado emocional en entornos que generan relaciones de poder.</td>
+                        <td>Software que analiza las expresiones faciales de empleados durante una reunión para evaluar "compromiso".</td>
+                        <td>Derechos fundamentales del trabajador. Intimidad.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7. Categorización Biométrica Sensible</strong> (raza, política, religión, orientación sexual).</td>
+                        <td>Clasificar personas según categorías sensibles.</td>
+                        <td>Cámara en centro comercial que clasifica a clientes por origen étnico para enviar publicidad diferenciada.</td>
+                        <td><strong>Prohibición de discriminación</strong> (Art. 21 Carta).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8. Identificación Biométrica Remota "en tiempo real"</strong> en espacios públicos (con excepciones estrictas).</td>
+                        <td>Identificar personas a distancia, en tiempo real, sin su conocimiento/interacción.</td>
+                        <td>Videovigilancia con RF en tiempo real en una estación de tren para identificar caras al azar.</td>
+                        <td>Libertad de circulación y anonimato en espacios públicos.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="warning-box">
+                <p><strong>Nota clave para compliance:</strong> No se requiere demostrar que el daño ya ocurrió, sino la <strong>probabilidad razonable</strong> de que ocurra debido al diseño del sistema. Esto cambia el enfoque de la evaluación de cumplimiento hacia un análisis preventivo y de diseño.</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="alto-riesgo">
+            <h2>6. Sistemas de IA de Alto Riesgo</h2>
+            <p>El concepto de <strong>"alto riesgo"</strong> constituye el núcleo operativo del Reglamento. Un sistema se clasifica como tal <strong>no por su complejidad algorítmica, sino por su finalidad prevista y el impacto potencial</strong> en la seguridad y los derechos fundamentales.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Regla clave:</strong> Si un sistema no está prohibido (Art. 5) pero opera en las áreas definidas en los Anexos II y III, automáticamente entra en el régimen de alto riesgo, exigiendo el cumplimiento de obligaciones técnicas severas.</p>
+            </div>
+            
+            <h3>Vías de Clasificación (Art. 6 y Anexos)</h3>
+            
+            <h4>A) Sistemas de Seguridad en Productos Regulados (Anexo II)</h4>
+            <p>IA integrada en productos que ya requieren evaluación de conformidad por terceros (marcado CE):</p>
+            <ul>
+                <li>Dispositivos médicos (ej: software de diagnóstico por imagen).</li>
+                <li>Juguetes interactivos.</li>
+                <li>Ascensores.</li>
+                <li>Maquinaria industrial.</li>
+                <li>Aparatos de radio.</li>
+            </ul>
+            
+            <h4>B) Sistemas Independientes en Áreas Críticas (Anexo III)</h4>
+            <ul>
+                <li><strong>Infraestructuras Críticas</strong> (gestión de tráfico, suministro de agua/energía).</li>
+                <li><strong>Educación y Formación Profesional</strong> (admisión, evaluación, supervisión de exámenes).</li>
+                <li><strong>Empleo, Gestión de Trabajadores y Acceso al Trabajo Autónomo</strong> (reclutamiento, evaluación de rendimiento, promoción, despido).</li>
+                <li><strong>Servicios Públicos y Prestaciones Esenciales</strong> (evaluación de elegibilidad para asistencia sanitaria, vivienda social, subsidios).</li>
+                <li><strong>Aplicación de la Ley</strong> (evaluación de la fiabilidad de pruebas, evaluación de riesgo de reincidencia, profiling).</li>
+                <li><strong>Migración, Asilo y Control Fronterizo</strong> (evaluación de riesgos, verificación de documentos).</li>
+                <li><strong>Administración de Justicia y Procesos Democráticos.</strong></li>
+            </ul>
+            
+            <div class="warning-box">
+                <p><strong>Consecuencia práctica:</strong> Los sistemas de alto riesgo deben cumplir <strong>obligaciones estrictas antes de su comercialización</strong> (evaluación de conformidad, registro en base de datos UE) y <strong>durante todo su ciclo de vida</strong> (gestión de riesgos continua, supervisión humana, etc.).</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="obligaciones-proveedores">
+            <h2>7. Obligaciones Técnicas y de Gestión para Proveedores</h2>
+            <p>La norma impone el axioma de <strong>"calidad por diseño"</strong>. El proveedor debe ser proactivo, estableciendo una infraestructura de cumplimiento antes de que el sistema toque el mercado.</p>
+            
+            <div class="warning-box">
+                <p><strong>Riesgo de incumplimiento:</strong> Multas de hasta <strong>35 millones de euros o el 7% de la facturación global anual</strong> (con proporcionalidad para PYMEs).</p>
+            </div>
+            
+            <h3>Obligaciones Principales (Capítulo III)</h3>
+            
+            <ol>
+                <li><strong>Sistema de Gestión de Riesgos (Art. 9):</strong> No es un trámite único, sino un <strong>proceso iterativo continuo</strong> durante todo el ciclo de vida del sistema. Requiere:
+                    <ul>
+                        <li>Identificación y evaluación de riesgos previsibles.</li>
+                        <li>Adopción de medidas de mitigación que tengan en cuenta el estado actual de la técnica.</li>
+                        <li>Evaluación de riesgos por "uso indebido razonablemente previsible".</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Gobernanza de Datos (Art. 10):</strong> Los conjuntos de datos de entrenamiento, validación y prueba deben ser:
+                    <ul>
+                        <li><strong>Pertinentes, representativos y libres de errores</strong> en la medida de lo posible.</li>
+                        <li><strong>Evaluados y documentados</strong> para detectar y corregir sesgos que puedan generar discriminación (racial, de género, etc.).</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Documentación Técnica (Anexo IV) y Registro de Eventos (Art. 12):</strong>
+                    <ul>
+                        <li>La documentación debe permitir a las autoridades evaluar la conformidad.</li>
+                        <li>El sistema debe generar <strong>registros automáticos (logs)</strong> que actúen como una "caja negra" legal, permitiendo la trazabilidad de su funcionamiento.</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Transparencia e Información al Usuario (Art. 13):</strong> Diseño que permita una comprensión clara de las capacidades y limitaciones del sistema por parte del deployer.</li>
+                
+                <li><strong>Supervisión Humana (Art. 14):</strong> El diseño debe permitir que personas físicas supervisen efectivamente el funcionamiento, con capacidad para <strong>intervenir o detener el sistema</strong> si detectan comportamientos anómalos o riesgos.</li>
+                
+                <li><strong>Robustez, Exactitud y Ciberseguridad (Art. 15):</strong> El sistema debe ser técnicamente robusto ante errores, incongruencias y ciberataques, manteniendo un nivel apropiado de exactitud.</li>
+            </ol>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="responsabilidades-deployers">
+            <h2>8. Responsabilidades de los "Deployers" (Usuarios Profesionales)</h2>
+            <p>El <strong>cumplimiento regulatorio</strong> no es responsabilidad exclusiva del fabricante. El <strong>"deployer"</strong> (empresa u organización que utiliza la IA en su actividad profesional) asume un rol de guardián operativo con obligaciones claras:</p>
+            
+            <ul>
+                <li><strong>Seguimiento de Instrucciones:</strong> Debe operar el sistema siguiendo rigurosamente las instrucciones de uso proporcionadas por el proveedor.</li>
+                <li><strong>Vigilancia del Funcionamiento:</strong> Designar <strong>personal capacitado</strong> para la supervisión humana, asegurando que entienden las limitaciones del sistema y pueden interpretar sus resultados.</li>
+                <li><strong>Deber de Información (Art. 52):</strong> Informar de manera clara y oportuna a:
+                    <ul>
+                        <li><strong>Los trabajadores</strong> (cuando un sistema de IA sea utilizado para tomar decisiones que les afecten).</li>
+                        <li><strong>Las personas afectadas</strong> (ciudadanos, usuarios, clientes) que están interactuando con un sistema de IA de alto riesgo o con un sistema que genere deepfakes.</li>
+                    </ul>
+                </li>
+                <li><strong>Notificación de Incidentes (Art. 62):</strong> Informar <strong>inmediatamente</strong> al proveedor y a las autoridades nacionales competentes si se detecta un <strong>incidente grave</strong> o un mal funcionamiento que pueda afectar a la salud, seguridad o derechos fundamentales.</li>
+                <li><strong>Realización de una FRIAS</strong> (para entidades públicas y ciertos deployers privados, ver sección 9).</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p><strong>Punto de atención para empresas usuarias:</strong> Incluso si usted no desarrolla la IA, como deployer tiene responsabilidades directas. La diligencia debida en la selección del proveedor y en la operación del sistema es fundamental para su compliance.</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="frias">
+            <h2>9. Evaluación de Impacto en Derechos Fundamentales (FRIAS)</h2>
+            <p>La <strong>FRIAS</strong> (Fundamental Rights Impact Assessment) es una <strong>obligación de control democrático ex-ante</strong> para:</p>
+            <ol>
+                <li>Organismos públicos.</li>
+                <li>Entidades privadas que presten servicios de interés público (ej: bancos en evaluación crediticia, empresas de servicios esenciales).</li>
+            </ol>
+            
+            <h3>Relación con el RGPD: Dualidad de Evaluaciones</h3>
+            <p>Es crucial entender que <strong>la FRIAS no sustituye a la EIPD</strong> (Evaluación de Impacto de Protección de Datos) del Art. 35 del RGPD, <strong>sino que la complementa</strong>.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>FRIAS (AI Act)</th>
+                        <th>EIPD (RGPD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Objeto Principal</strong></td>
+                        <td>Impacto en <strong>derechos fundamentales</strong> (no discriminación, libertad expresión, acceso justicia, etc.).</td>
+                        <td>Impacto en los <strong>derechos y libertades</strong> de los interesados, centrado en la <strong>privacidad y protección de datos</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Desencadenante</strong></td>
+                        <td>Uso de un sistema de IA de <strong>alto riesgo</strong> por parte de un deployer público o de servicios de interés público.</td>
+                        <td>Tratamiento que, por su naturaleza/alcance, pueda generar <strong>alto riesgo</strong> para derechos y libertades.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resultado</strong></td>
+                        <td>Medidas para mitigar riesgos en derechos fundamentales. Posible decisión de no desplegar.</td>
+                        <td>Medidas para mitigar riesgos de privacidad. Consulta a autoridad si riesgo alto permanece.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box">
+                <p><strong>Consejo práctico de cumplimiento:</strong> Las empresas deben <strong>integrar ambas evaluaciones</strong> en un único proceso de gobernanza para evitar duplicidades operativas y garantizar una visión holística de riesgos.</p>
+            </div>
+            
+            <h3>Pasos para una FRIAS Efectiva (Guía Metodológica)</h3>
+            <ol>
+                <li><strong>Descripción Detallada:</strong> Del sistema de IA, su proceso, periodo de uso y grupos de personas afectadas.</li>
+                <li><strong>Identificación de Colectivos Vulnerables:</strong> ¿Afecta a niños, migrantes, personas con discapacidad, minorías étnicas?</li>
+                <li><strong>Evaluación de Riesgos Específicos:</strong> Riesgo de discriminación, sesgo, opacidad, pérdida de autonomía, limitación de acceso a servicios.</li>
+                <li><strong>Implementación de Medidas de Mitigación:</strong> Supervisión humana reforzada, vías de recurso efectivas, auditorías de sesgo periódicas.</li>
+                <li><strong>Documentación y Publicidad:</strong> El resultado de la FRIAS debe documentarse y, en el caso de las administraciones públicas, hacerse público.</li>
+            </ol>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="gpai">
+            <h2>10. Modelos de IA de Uso General (GPAI) y Riesgo Sistémico</h2>
+            <p>La irrupción de modelos masivos como GPT-4 obligó al legislador a introducir regulaciones específicas para modelos de propósito general que, por su escala y capacidades, pueden generar riesgos sistémicos.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Requisito</th>
+                        <th>Modelos GPAI Estándar (Art. 53)</th>
+                        <th>Modelos GPAI con Riesgo Sistémico (Art. 55)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Criterio de Inclusión</strong></td>
+                        <td>Todos los modelos de IA de propósito general (capaces de realizar diversas tareas).</td>
+                        <td>Capacidad de cómputo de entrenamiento <strong>> 10^25 FLOPs</strong> (umbral revisable). Modelos que puedan generar riesgos graves para la salud, seguridad, derechos fundamentales o sociedad.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Documentación</strong></td>
+                        <td>1. <strong>Documentación técnica</strong> para autoridades.<br>2. <strong>Resumen del entrenamiento</strong> (origen y características de los datos).<br>3. <strong>Información para la cadena de valor</strong> (instrucciones de uso, limitaciones).</td>
+                        <td>Todo lo anterior, <strong>además</strong>:<br>4. <strong>Evaluación detallada de riesgos sistémicos.</strong><br>5. <strong>Realización de pruebas de adversarios (Red Teaming).</strong><br>6. <strong>Medidas de ciberseguridad reforzadas.</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Copyright (Art. 53)</strong></td>
+                        <td><strong>Política de cumplimiento</strong> con la Directiva (UE) 2019/790 sobre Derechos de Autor.<br>Respeto técnico del <strong>opt-out</strong> (reserva de derechos) para la minería de textos y datos (TDM).</td>
+                        <td>Todo lo anterior, con especial énfasis en la trazabilidad del uso de materiales con derechos de autor.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transparencia y Notificación</strong></td>
+                        <td>Hacer público el resumen del entrenamiento.</td>
+                        <td>Todo lo anterior, <strong>además</strong>:<br><strong>Notificación obligatoria</strong> a la <strong>Oficina de IA de la UE</strong> de cualquier incidente grave.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cumplimiento</strong></td>
+                        <td>Autoevaluación y declaración de conformidad del proveedor.</td>
+                        <td><strong>Evaluación de conformidad independiente</strong> por parte de entidades designadas.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="warning-box">
+                <p><strong>El Nudo Gordiano del Copyright (Art. 53):</strong> Los proveedores de GPAI deben implementar políticas para respetar el Derecho de Autor. Esto incluye el reconocimiento técnico del <em>opt-out</em> (reserva de derechos) para la minería de textos y datos (TDM). Las empresas deben ser capaces de detectar si un titular de derechos ha excluido sus contenidos del entrenamiento de modelos, tal y como se perfila en jurisprudencia como el <strong>Caso Kneschke vs. Laion e.V.</strong></p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="biometrica">
+            <h2>11. Identificación Biométrica: El Régimen Especial de Excepciones</h2>
+            <p>El Artículo 5.1(h) establece un complejo sistema de <strong>"No, pero Sí"</strong>. Aunque la identificación biométrica remota en tiempo real está prohibida en espacios públicos con carácter general, la seguridad pública permite <strong>tres excepciones taxativas</strong> para fines policiales, sujetas a garantías estrictas.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Excepción Permitida</th>
+                        <th>Finalidad</th>
+                        <th>Condiciones y Garantías (Art. 10 bis)</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Búsqueda de Víctimas</strong></td>
+                        <td>Localización de personas desaparecidas o víctimas de <strong>delitos graves</strong> (trata, secuestro).</td>
+                        <td>- Autorización judicial <strong>previa y motivada</strong>.<br>- Limitación temporal y geográfica.<br>- No barridos masivos.</td>
+                        <td>Buscar a una niña desaparecida en las cámaras de una estación de tren en las 2 horas posteriores a la desaparición.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Prevención de Amenazas Inminentes</strong></td>
+                        <td>Prevenir una <strong>amenaza real, actual y específica</strong> de ataque terrorista o amenaza a la vida/integridad.</td>
+                        <td>- Autorización judicial previa (salvo urgencia extrema, convalidación posterior en 24h).<br>- Proporcionalidad estricta.</td>
+                        <td>Identificar a un terrorista conocido que, según inteligencia, planea un ataque en un aeropuerto en las próximas horas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Localización de Sospechosos</strong></td>
+                        <td>Identificación de autores de <strong>delitos graves</strong> listados en el Anexo II (asesinato, violación, robo a mano armada) con penas <strong>≥ 4 años</strong>.</td>
+                        <td>- Autorización judicial previa.<br>- Limitación a la búsqueda de personas concretas, sospechosas de ese delito concreto.</td>
+                        <td>Identificar a un sospechoso de un robo violento captado por cámaras en la escena del crimen.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box">
+                <p><strong>Garantías Procedimentales Comunes:</strong> Cada despliegue requiere <strong>autorización judicial previa y motivada</strong>. El uso debe ser <strong>limitado temporal y geográficamente</strong>. No se permiten "barridos" generales de ciudades; el sistema debe centrarse en objetivos específicos. Los resultados deben ser verificados por personal humano antes de cualquier acción.</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="casos-practicos">
+            <h2>12. Casos Prácticos y Jurisprudencia</h2>
+            <p>La interpretación del <strong>AI Act</strong> no puede ser ajena a la <strong>jurisprudencia</strong> inmanente del TJUE y de los tribunales nacionales, que ya han ido perfilando principios aplicables.</p>
+            
+            <h3>Caso 1: Scoring Crediticio y Decisión Automatizada (SCHUFA, C-634/21)</h3>
+            <p><strong>Hechos:</strong> SCHUFA, una agencia de crédito alemana, proporcionaba puntuaciones de solvencia a terceros. Un consumidor alegó que la denegación de un préstamo se basó en una decisión automatizada.</p>
+            <p><strong>Norma/Aplicación (RGPD Art. 22):</strong> El TJUE determinó que el scoring crediticio constituye una "decisión automatizada" si el tercero que recibe la puntuación <strong>depende de ella de forma determinante</strong> para tomar su decisión (conceder o no el préstamo).</p>
+            <p><strong>Relevancia para el AI Act:</strong> El AI Act eleva los sistemas de scoring crediticio a la categoría de <strong>alto riesgo (Anexo III)</strong>. Ahora, además de los derechos del RGPD, el proveedor debe garantizar transparencia total sobre las variables utilizadas, documentación técnica y evaluación de sesgos.</p>
+            
+            <h3>Caso 2: PYME - Retail (Ejemplo Práctico)</h3>
+            <p><strong>Hechos:</strong> "ModaES", una tienda online española de moda, utiliza un sistema de IA para precios dinámicos y recomendaciones personalizadas. El sistema sugiere sistemáticamente productos más caros a usuarios que acceden desde dispositivos iOS.</p>
+            <p><strong>Cuestión Jurídica:</strong> ¿Es un sistema de alto riesgo? ¿Qué obligaciones de transparencia (Art. 52) aplican?</p>
+            <p><strong>Análisis AI Act:</strong></p>
+            <ul>
+                <li><strong>Clasificación:</strong> Probablemente <strong>NO es de alto riesgo</strong>, ya que no se encuadra en los Anexos II o III.</li>
+                <li><strong>Obligaciones:</strong> Sin embargo, como sistema de IA que <strong>interactúa con humanos</strong> (recomendaciones), está sujeto a las obligaciones de <strong>transparencia</strong> del Art. 52. "ModaES" debe informar claramente a los usuarios de que están recibiendo recomendaciones generadas por IA.</li>
+                <li><strong>Riesgo Adicional:</strong> Si el sesgo en las recomendaciones pudiera considerarse "explotación de vulnerabilidades" o técnica engañosa, podría acercarse a la prohibición del Art. 5.</li>
+            </ul>
+            
+            <h3>Caso 3: Sector Público - Ayuntamiento (Ejemplo Práctico)</h3>
+            <p><strong>Hechos:</strong> Un Ayuntamiento implementa un sistema de IA para priorizar recursos de mantenimiento urgente en viviendas sociales, basándose en datos de antigüedad del edificio, ingresos familiares y denuncias previas.</p>
+            <p><strong>Cuestión Jurídica:</strong> ¿Es un sistema de alto riesgo? ¿Se requiere FRIAS?</p>
+            <p><strong>Análisis AI Act:</strong></p>
+            <ul>
+                <li><strong>Clasificación:</strong> <strong>SÍ es un sistema de ALTO RIESGO</strong>. Se encuadra en el Anexo III, punto 4 (b): "Acceso y disfrute de servicios públicos y prestaciones esenciales".</li>
+                <li><strong>Obligaciones para el Ayuntamiento:</strong> Realizar una <strong>FRIAS</strong> exhaustiva antes del despliegue, evaluar riesgos de discriminación, garantizar supervisión humana e informar a los ciudadanos afectados.</li>
+            </ul>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="sinergias-regulatorias">
+            <h2>13. Sinergias Regulatorias: AI Act + RGPD + DSA</h2>
+            <p>El <strong>AI Act</strong> no opera en el vacío. Se integra en un <strong>ecosistema robusto y superpuesto</strong> junto al <strong>RGPD</strong>, la <strong>DSA</strong> (Ley de Servicios Digitales) y la <strong>DMA</strong> (Ley de Mercados Digitales). La clave para el cumplimiento es entender sus interacciones.</p>
+            
+            <h3>13.1. Mapa de Interconexiones</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto Regulatorio</th>
+                        <th>AI Act (Reg. 2024/1689)</th>
+                        <th>RGPD (Reg. 2016/679)</th>
+                        <th>DSA (Reg. 2022/2065)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Base Legal para Tratar Datos Personales</strong></td>
+                        <td><strong>NO PROPORCIONA BASE LEGAL.</strong> Añade requisitos de gobernanza, pero no legitima el tratamiento.</td>
+                        <td><strong>ART. 6 es la BASE LEGAL EXCLUSIVA</strong> (consentimiento, interés legítimo, contrato, etc.). Para datos biométricos, <strong>Art. 9</strong>.</td>
+                        <td>No regula específicamente la base legal para el tratamiento.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transparencia y Explicabilidad</strong></td>
+                        <td>Explica <strong>CÓMO funciona</strong> el sistema (lógica, capacidad, limitaciones).</td>
+                        <td>Informa <strong>QUÉ datos</strong> se tratan, <strong>POR QUÉ</strong> y <strong>CON QUIÉN</strong> se comparten.</td>
+                        <td>Para plataformas en línea: Informar sobre <strong>recomendaciones algorítmicas</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evaluación de Impacto / Gestión de Riesgos</strong></td>
+                        <td><strong>FRIAS</strong> para deployers públicos/privados de interés público con IA de alto riesgo.</td>
+                        <td><strong>EIPD</strong> cuando el tratamiento pueda generar <strong>alto riesgo</strong> para derechos y libertades.</td>
+                        <td><strong>Evaluación de Riesgos Sistémicos</strong> anual para Plataformas en Línea Muy Grandes.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alcance Territorial (Efecto Extraterritorial)</strong></td>
+                        <td><strong>"Efecto Bruselas":</strong> Aplica si el <strong>output</strong> del sistema se usa en la UE.</td>
+                        <td>Aplica si el responsable está en la UE, o si dirige actividades a ciudadanos de la UE.</td>
+                        <td>Aplica a servicios ofrecidos a receptores del servicio establecidos o ubicados en la UE.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box">
+                <p><strong>Conclusión práctica de cumplimiento:</strong> El AI Act añade una <strong>capa de regulación específica sobre la IA</strong> a los marcos existentes. Los equipos de compliance deben abandonar los silos y adoptar una visión holística "por producto" que verifique simultáneamente los requisitos de las cuatro normativas.</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="faq">
+            <h2>14. FAQ: 12 Preguntas Críticas para DPOs y Compliance Officers</h2>
+            
+            <h3>1. ¿Cuándo entra en vigor la prohibición de sistemas de manipulación y scoring social?</h3>
+            <p>El <strong>2 de febrero de 2025</strong>. Cualquier uso, comercialización o desarrollo de sistemas que caigan bajo las prácticas del Art. 5 será ilegal a partir de esa fecha.</p>
+            
+            <h3>2. ¿Qué ocurre si mi proveedor de IA está fuera de la UE?</h3>
+            <p>Está sujeto al Reglamento si los <strong>outputs</strong> del sistema se usan en la Unión. Debe <strong>designar un representante autorizado establecido en la UE</strong> (similar al RGPD).</p>
+            
+            <h3>3. ¿Es obligatorio registrar todos los sistemas de IA en la base de datos de la UE?</h3>
+            <p>No, solo los <strong>sistemas de IA de alto riesgo</strong> (antes de su comercialización) y los <strong>modelos de GPAI</strong>.</p>
+            
+            <h3>4. ¿Cuál es la diferencia entre identificación biométrica y verificación?</h3>
+            <p>La <strong>identificación</strong> es un proceso <strong>1:N</strong> ("quién es esta persona"). La <strong>verificación</strong> es un proceso <strong>1:1</strong> ("confirmar que es quien dice ser"). La verificación, en principio, <strong>no es de alto riesgo</strong> a menos que se use en contextos específicos.</p>
+            
+            <h3>5. ¿Cómo afectan las multas a las PYMEs y startups?</h3>
+            <p>Las sanciones pueden alcanzar hasta 35 millones de euros o el 7% de la facturación global, pero el Reglamento impone <strong>proporcionalidad</strong>. Las autoridades pueden imponer sanciones reducidas o plazos para el cumplimiento en el caso de PYMEs.</p>
+            
+            <h3>6. ¿Qué es un "uso indebido razonablemente previsible"?</h3>
+            <p>Comportamientos lógicos por parte de los usuarios que, aunque <strong>no fueron intencionados por el fabricante</strong>, son predecibles. Ejemplo: Un chatbot de servicio diseñado para responder preguntas, pero que usuarios podrían usar para generar discursos de odio.</p>
+            
+            <h3>7. ¿Se aplica a sistemas de IA usados solo para I+D internos?</h3>
+            <p>No, los sistemas dedicados <strong>exclusivamente a investigación, pruebas o desarrollo científico</strong> antes de su puesta en el mercado están <strong>exentos</strong>.</p>
+            
+            <h3>8. ¿Qué requisitos tienen los "deepfakes" o contenido generado por IA?</h3>
+            <p>Los usuarios deben revelar de manera clara y prominente que el contenido ha sido <strong>generado o manipulado artificialmente</strong> (Art. 52.3).</p>
+            
+            <h3>9. ¿Cómo afecta el "opt-out" de minería de textos y datos a los proveedores de GPAI?</h3>
+            <p>El Art. 53 obliga a implementar <strong>mecanismos técnicos para respetar la reserva de derechos (opt-out)</strong> que los titulares de obras pueden ejercer para excluir sus contenidos del entrenamiento de IA.</p>
+            
+            <h3>10. ¿Quién supervisa el cumplimiento del AI Act en España?</h3>
+            <p>La <strong>AESIA</strong> (Agencia Española de Supervisión de la Inteligencia Artificial), que será la autoridad nacional designada.</p>
+            
+            <h3>11. ¿Qué sistemas de IA en el ámbito laboral son de alto riesgo?</h3>
+            <p>Aquellos destinados a la <strong>selección de personal, evaluación de rendimiento, decisión de promoción o rescisión de contratos</strong> (Anexo III, punto 2).</p>
+            
+            <h3>12. ¿Puede un sistema de riesgo mínimo pasar a ser de alto riesgo?</h3>
+            <p>Sí. Si mediante una <strong>actualización</strong> o cambio en su <strong>finalidad prevista</strong> se modifica para operar en una de las áreas críticas del Anexo III, automáticamente se convierte en un sistema de alto riesgo.</p>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="checklist">
+            <h2>15. Checklist de Implementación para el Cumplimiento del AI Act</h2>
+            <p>Utilice esta lista de verificación priorizada según los hitos temporales.</p>
+            
+            <div class="checklist">
+                <h3>Checklist Genérico (Para Toda Empresa) - INMEDIATO</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1"><strong>Auditoría de inventario:</strong> Identificar todos los sistemas de software/IA utilizados, en desarrollo o previstos.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2"><strong>Clasificación de riesgos:</strong> Determinar para cada sistema si es: a) Prohibido (Art. 5), b) Alto Riesgo (Anexos II/III), c) GPAI, d) Otro.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3"><strong>Asignación de responsables:</strong> Designar un responsable interno (ej: DPO, Compliance Officer) para la gobernanza del AI Act.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4"><strong>Plan de acción para prohibiciones:</strong> Para sistemas que puedan caer bajo el Art. 5, planificar su retirada o modificación <strong>antes del 2/02/2025</strong>.</label>
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h3>Checklist para Proveedores de Sistemas de IA de Alto Riesgo</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5"><strong>Sistema de Gestión de Riesgos:</strong> Establecer un proceso continuo y documentado (Art. 9).</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6"><strong>Gobernanza y Calidad de Datos:</strong> Documentar y evaluar los conjuntos de datos de entrenamiento para detectar y corregir sesgos (Art. 10).</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7"><strong>Documentación Técnica:</strong> Elaborar la documentación completa exigida en el Anexo IV.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8"><strong>Registros (Logs):</strong> Asegurar que el sistema genera registros automáticos para la trazabilidad (Art. 12).</label>
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h3>Checklist para Deployers (Usuarios Profesionales) de Sistemas de Alto Riesgo</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9"><strong>Verificación del Proveedor:</strong> Comprobar que el proveedor ha realizado la evaluación de conformidad y le proporciona la documentación técnica.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10"><strong>Designación de Supervisores:</strong> Nombrar y formar a personal para la supervisión humana del sistema.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check11">
+                    <label for="check11"><strong>Procedimiento de Información:</strong> Establecer mecanismos para informar a trabajadores y personas afectadas (Art. 52).</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check12">
+                    <label for="check12"><strong>Realización de FRIAS (si aplica):</strong> Si es organismo público o presta servicios de interés público, realizar y documentar la FRIAS.</label>
+                </div>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="glosario">
+            <h2>16. Glosario de Términos Técnicos del AI Act</h2>
+            
+            <p><strong>AI Act:</strong> Reglamento (UE) 2024/1689 del Parlamento Europeo y del Consejo, por el que se establecen normas armonizadas en materia de inteligencia artificial.</p>
+            
+            <p><strong>Alto Riesgo (High-Risk AI System):</strong> Sistema de IA que, por su finalidad prevista, puede generar riesgos elevados para la salud, seguridad o derechos fundamentales, según se define en los Anexos II y III del AI Act.</p>
+            
+            <p><strong>Deployer (Responsable del Despliegue):</strong> Persona física o jurídica, autoridad pública, agencia u otro organismo que utiliza un sistema de IA bajo su autoridad, excepto para uso personal no profesional.</p>
+            
+            <p><strong>FRIAS (Fundamental Rights Impact Assessment):</strong> Evaluación de Impacto relativa a los Derechos Fundamentales. Obligación ex-ante para ciertos deployers de sistemas de alto riesgo para evaluar y mitigar riesgos sobre derechos fundamentales.</p>
+            
+            <p><strong>GPAI (General-Purpose AI Model):</strong> Modelo de IA de uso general. Modelo de IA que muestra una capacidad significativa de generalización y puede realizar una amplia gama de tareas distintas.</p>
+            
+            <p><strong>Proveedor (Provider):</strong> Persona física o jurídica, autoridad pública, agencia u otro organismo que desarrolla un sistema de IA o lo hace desarrollar, con vistas a su comercialización o puesta en servicio bajo su nombre o marca.</p>
+            
+            <p><strong>Representante Autorizado:</strong> Persona física o jurídica establecida en la Unión que ha recibido un mandato escrito de un proveedor o deployer no establecido en la UE para actuar en su nombre en relación con las obligaciones del AI Act.</p>
+            
+            <p><strong>Riesgo Sistémico (GPAI):</strong> Riesgo de impacto negativo a gran escala en la salud, seguridad, seguridad pública, derechos fundamentales o sociedad en su conjunto, que pueda derivarse del desarrollo, las capacidades o el uso de modelos de GPAI de gran impacto.</p>
+            
+            <p><strong>Scoring Social (Social Scoring):</strong> Práctica prohibida por el AI Act (Art. 5) por la cual las autoridades públicas evalúan la solvencia moral o social de personas físicas, conduciendo a un trato desfavorable injustificado.</p>
+            
+            <p><strong>Sistema de IA (AI System):</strong> Sistema basado en máquinas diseñado para operar con distintos niveles de autonomía y que puede, para un conjunto determinado de objetivos definidos por el ser humano, generar resultados tales como predicciones, recomendaciones o decisiones que influyan en entornos reales o virtuales.</p>
+            
+            <p><strong>Supervisión Humana (Human Oversight):</strong> Medida concebida para que el sistema de IA sea supervisado de forma eficaz por personas físicas durante el periodo de uso, incluyendo la capacidad de intervenir o desactivarlo.</p>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+
+        <section id="recursos">
+            <h2>17. Recursos Adicionales y Bibliografía</h2>
+            
+            <h3>Documentos Oficiales de la UE:</h3>
+            <ul>
+                <li>Texto Consolidado del <strong>Reglamento (UE) 2024/1689 (AI Act)</strong>.</li>
+                <li><strong>Directiva (UE) 2019/790</strong> sobre los derechos de autor y los derechos afines en el mercado único digital.</li>
+                <li><strong>Reglamento (UE) 2016/679 (RGPD)</strong>.</li>
+                <li><strong>Reglamento (UE) 2022/2065 (Ley de Servicios Digitales - DSA)</strong>.</li>
+                <li><strong>Reglamento (UE) 2022/1925 (Ley de Mercados Digitales - DMA)</strong>.</li>
+            </ul>
+            
+            <h3>Guías y Herramientas Prácticas:</h3>
+            <ol>
+                <li><strong>Protocolo de Auditoría Técnica de Sesgos Algorítmicos:</strong> Metodología para evaluar conjuntos de datos y modelos en busca de sesgos discriminatorios.</li>
+                <li><strong>Contrato Tipo para la Gestión de Responsabilidades en la Cadena de Valor de la IA:</strong> Cláusulas modelo para regular relaciones proveedor-deployer-usuario final.</li>
+                <li><strong>Guía Metodológica de la FRIAS para el Sector Público Español:</strong> Adaptación práctica de los pasos de la evaluación de impacto, con ejemplos sectoriales.</li>
+                <li><strong>Página web de la futura Agencia Española de Supervisión de la IA (AESIA).</strong></li>
+                <li><strong>Portal de la Oficina de IA Europea (AI Office).</strong></li>
+            </ol>
+            
+            <h3>Jurisprudencia Relevante:</h3>
+            <ul>
+                <li>TJUE, Caso <strong>SCHUFA (C-634/21)</strong>, sobre decisiones automatizadas y scoring crediticio.</li>
+                <li>Tribunal Regional de Hannover (Alemania), Caso <strong>Kneschke vs. Laion e.V.</strong>, sobre copyright y entrenamiento de IA.</li>
+                <li>Tribunal de Distrito de La Haya (Países Bajos), Caso <strong>SyRI</strong>, sobre sistemas de detección de fraude social y discriminación.</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p>El <strong>AI Act</strong> representa una oportunidad histórica para el liderazgo ético de las empresas españolas en el mercado global. La confianza se convierte en el nuevo activo intangible de las corporaciones. Cumplir con esta norma no es solo una obligación legal, sino una ventaja competitiva que garantiza la sostenibilidad de la innovación en un marco de respeto por los derechos humanos.</p>
+            </div>
+            
+            <a href="#toc" class="back-to-top">↑ Volver al índice</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Guía Maestra del AI Act - Documento para fines informativos y de cumplimiento regulatorio.</p>
+        <p>Actualizado conforme al Reglamento (UE) 2024/1689 y normativa aplicable.</p>
+        <p><em>Para uso profesional de DPOs, compliance officers, abogados especializados y responsables de implementación de IA.</em></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add current year to footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentYear = new Date().getFullYear();
+            const yearElement = document.querySelector('footer p:first-child');
+            if(yearElement) {
+                yearElement.innerHTML = yearElement.innerHTML.replace('2024', `2024-${currentYear}`);
+            }
+        });
+    </script>
+</body>
+</html>
