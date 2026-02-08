@@ -15,6 +15,14 @@ const nextConfig = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/Recursos/Analisis/:path*',
+        destination: '/Recursos/Analisis/:path*',
+      },
+    ]
+  },
 };
 
 export default nextConfig;
