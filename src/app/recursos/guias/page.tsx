@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Badges } from "@/lib/badges";
 import libraryDocs from "../../../data/library-docs.json";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import { ContentPreviewGrid, type PreviewItem } from "@/components/ContentPreviewCard";
 
 export const metadata: Metadata = {
   title: "Guías y Protocolos | Biblioteca AESIA y Comisión Europea",
@@ -28,6 +29,22 @@ type DocCard = {
   language?: string;
   tags?: string[];
 };
+
+function docToPreviewItem(doc: DocCard, badge: string): PreviewItem {
+  const parts: string[] = [];
+  if (doc.year) parts.push(doc.year);
+  if (doc.tags && doc.tags.length > 0) parts.push(doc.tags.join(" · "));
+  
+  return {
+    id: doc.id,
+    href: doc.url,
+    title: doc.title,
+    description: doc.description,
+    badge,
+    meta: parts.join(" · "),
+    dateMs: doc.year ? new Date(doc.year).getTime() : Date.now(),
+  };
+}
 
 const softLawDocs = [
   {
@@ -77,6 +94,13 @@ export default function GuidesPage() {
   const commissionDocs: DocCard[] = [...ecDocs, ...softLawEcDocs];
   const mainAesiaDoc = aesiaDocs[0];
 
+  // Convertir a PreviewItems
+  const mainAesiaPreview = mainAesiaDoc ? docToPreviewItem(mainAesiaDoc, "Destacada") : null;
+  const aesiaPreviews = aesiaDocs.map((doc) => docToPreviewItem(doc, "Guía"));
+  const cepejPreviews = cepejDocs.map((doc) => docToPreviewItem(doc, "Protocolo"));
+  const commissionPreviews = [...ecDocs, ...softLawEcDocs].map((doc) => docToPreviewItem(doc, "Documento"));
+  const otherPreviews = otherDocs.map((doc) => docToPreviewItem(doc, "Recurso"));
+
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       {
@@ -106,88 +130,26 @@ export default function GuidesPage() {
             </p>
           </header>
 
-          {mainAesiaDoc && (
+          {mainAesiaPreview && (
             <>
               <section className="mb-12">
-                <Link
-                  href={mainAesiaDoc.url}
-                  className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Destacada</p>
-                  <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">{mainAesiaDoc.title}</h2>
-                  <p className="text-sm text-body mb-4">{mainAesiaDoc.description}</p>
-                  <div className="mt-4 text-xs text-caption">
-                    {mainAesiaDoc.year && <span>{mainAesiaDoc.year}</span>}
-                    {mainAesiaDoc.tags && (
-                      <span className="ml-2">{mainAesiaDoc.tags.join(" · ")}</span>
-                    )}
-                  </div>
-                </Link>
+                <ContentPreviewGrid items={[mainAesiaPreview]} columns={1} size="large" />
               </section>
 
-              <section className="grid grid-cols-3 gap-6 mb-12">
-                {aesiaDocs.map((doc) => (
-                  <Link
-                    key={doc.id}
-                    href={doc.url}
-                    className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-                  >
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guía</p>
-                    <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">{doc.title}</h2>
-                    <p className="text-sm text-body mb-4">{doc.description}</p>
-                    <div className="mt-4 text-xs text-caption">
-                      {doc.year && <span>{doc.year}</span>}
-                      {doc.tags && (
-                        <span className="ml-2">{doc.tags.join(" · ")}</span>
-                      )}
-                    </div>
-                  </Link>
-                ))}
+              <section className="mb-12">
+                <ContentPreviewGrid items={aesiaPreviews} columns={3} size="large" />
               </section>
 
-              <section className="grid gap-6 md:grid-cols-2 mb-12">
-                {cepejDocs.map((doc) => (
-                  <Link
-                    key={doc.id}
-                    href={doc.url}
-                    className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-                  >
-                    <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Protocolo</p>
-                    <h2 className="font-serif text-2xl text-foreground mb-4">{doc.title}</h2>
-                    <p className="text-body mb-6">{doc.description}</p>
-                    <div className="text-sm text-caption">{doc.year}</div>
-                  </Link>
-                ))}
+              <section className="mb-12">
+                <ContentPreviewGrid items={cepejPreviews} columns={2} size="medium" />
               </section>
 
-              <section className="grid gap-6 md:grid-cols-2 mb-12">
-                {commissionDocs.map((doc) => (
-                  <Link
-                    key={doc.id}
-                    href={doc.url}
-                    className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-                  >
-                    <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Documento</p>
-                    <h2 className="font-serif text-2xl text-foreground mb-4">{doc.title}</h2>
-                    <p className="text-body mb-6">{doc.description}</p>
-                    <div className="text-sm text-caption">{doc.year}</div>
-                  </Link>
-                ))}
+              <section className="mb-12">
+                <ContentPreviewGrid items={commissionPreviews} columns={2} size="medium" />
               </section>
 
-              <section className="grid gap-6 md:grid-cols-2 mb-12">
-                {otherDocs.map((doc) => (
-                  <Link
-                    key={doc.id}
-                    href={doc.url}
-                    className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-                  >
-                    <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Recurso</p>
-                    <h2 className="font-serif text-2xl text-foreground mb-4">{doc.title}</h2>
-                    <p className="text-body mb-6">{doc.description}</p>
-                    <div className="text-sm text-caption">{doc.year}</div>
-                  </Link>
-                ))}
+              <section className="mb-12">
+                <ContentPreviewGrid items={otherPreviews} columns={2} size="medium" />
               </section>
 
               <section className="mt-12 rounded-lg border border-divider bg-surface p-8">

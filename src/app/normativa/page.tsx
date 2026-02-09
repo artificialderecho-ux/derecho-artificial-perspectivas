@@ -5,6 +5,7 @@ import { getContentEntry, listContentSlugs } from "@/lib/content";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import { ContentPreviewGrid } from "@/components/ContentPreviewCard";
 
 export const metadata: Metadata = {
   title: "Normativa",
@@ -41,16 +42,7 @@ export const metadata: Metadata = {
   },
 };
 
-type PreviewItem = {
-  id: string;
-  href: string;
-  title: string;
-  description: string;
-  badge: string;
-  meta: string;
-  dateMs: number;
-  displayDateMs?: number;
-};
+import type { PreviewItem } from "@/components/ContentPreviewCard";
 
 export default async function NormativaPage() {
   const slugs = await listContentSlugs("normativa");
@@ -164,35 +156,13 @@ export default async function NormativaPage() {
           </header>
 
           {/* Grid Principal - Previews Destacados */}
-          <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
-            {items.slice(0, 3).map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
-                <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">{item.title}</h2>
-                <p className="text-sm text-body mb-4">{item.description}</p>
-                <div className="mt-4 text-xs text-caption">{item.meta}</div>
-              </Link>
-            ))}
+          <section className="mb-12">
+            <ContentPreviewGrid items={items.slice(0, 3)} columns={3} size="large" />
           </section>
 
           {/* Grid Secundario - Previews Adicionales */}
-          <section className="grid gap-6 md:grid-cols-2 mb-12">
-            {items.slice(3).map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-              >
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
-                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                <p className="text-body mb-6">{item.description}</p>
-                <div className="text-sm text-caption">{item.meta}</div>
-              </Link>
-            ))}
+          <section className="mb-12">
+            <ContentPreviewGrid items={items.slice(3)} columns={2} size="medium" />
           </section>
 
           {/* Marco Regulatorio */}
