@@ -199,8 +199,7 @@ export default async function NormativaPage() {
                 escalonada. Las prohibiciones de riesgo inaceptable aplican a los 6 meses, y la mayoría
                 de las normas a los 24 meses (2026).
               </p>
-            </details>
-          </div>
+          </details>
         </div>
 
         {resolvedEntries.length > 0 && (
