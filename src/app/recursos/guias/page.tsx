@@ -199,7 +199,6 @@ export default function GuidesPage() {
               trazabilidad y utilidad para profesionales del derecho.
             </p>
           </section>
-          )}
         </div>
       </main>
     </>
