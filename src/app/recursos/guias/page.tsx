@@ -125,171 +125,86 @@ export default function GuidesPage() {
               </Link>
             </section>
 
-          <div className="space-y-20">
-            <section id="aesia">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="w-12 h-[1px] bg-primary"></span>
-                <h2 className="text-2xl font-serif text-foreground">
-                  Agencia Española de Supervisión de la IA (AESIA)
-                </h2>
-              </div>
-              {mainAesiaDoc && (
-                <div className="mb-10 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
-                  <h3 className="font-serif text-2xl text-slate-900 mb-4">
-                    Summary: Guías Prácticas de la AESIA
-                  </h3>
-                  <p className="text-slate-700 mb-6 leading-relaxed text-justify hyphens-auto">
-                    La Agencia Española de Supervisión de la IA publica guías y
-                    protocolos para ayudar a organizaciones públicas y privadas a
-                    gestionar riesgos, documentar sistemas de IA y cumplir con las
-                    obligaciones del Reglamento Europeo de IA. Este repositorio
-                    reúne los documentos clave, con foco en notificación de
-                    incidentes, gobernanza y buenas prácticas de transparencia.
-                  </p>
-                  <a
-                    href={mainAesiaDoc.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-sm hover:bg-primary/90 transition-all duration-300 shadow-sm hover:shadow-md"
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                      <polyline points="7 10 12 15 17 10" />
-                      <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    DESCARGAR DOCUMENTO ORIGINAL
-                  </a>
+          {/* Grid Principal - Documentos AESIA */}
+          <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
+            {aesiaDocs.map((doc) => (
+              <Link
+                key={doc.id}
+                href={doc.url}
+                className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+              >
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guía</p>
+                <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">{doc.title}</h2>
+                <p className="text-sm text-body mb-4">{doc.description}</p>
+                <div className="mt-4 text-xs text-caption">
+                  {doc.year && <span>{doc.year}</span>}
+                  {doc.tags && (
+                    <span className="ml-2">{doc.tags.join(" · ")}</span>
+                  )}
                 </div>
-              )}
+              </Link>
+            ))}
+          </section>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {aesiaDocs.length > 0 ? (
-                  aesiaDocs.map((doc) => (
-                    <DocCardItem key={doc.id} doc={doc} color="bg-blue-600" />
-                  ))
-                ) : (
-                  <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
-                    No hay documentos disponibles por el momento.
-                  </div>
-                )}
-              </div>
-            </section>
+          {/* Grid Secundario - Documentos CEPEJ */}
+          <section className="grid gap-6 md:grid-cols-2 mb-12">
+            {cepejDocs.map((doc) => (
+              <Link
+                key={doc.id}
+                href={doc.url}
+                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Protocolo</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{doc.title}</h2>
+                <p className="text-body mb-6">{doc.description}</p>
+                <div className="text-sm text-caption">{doc.year}</div>
+              </Link>
+            ))}
+          </section>
 
-            <section id="cepej">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="w-12 h-[1px] bg-primary"></span>
-                <h2 className="text-2xl font-serif text-foreground">
-                  CEPEJ (Consejo de Europa)
-                </h2>
-              </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cepejDocs.length > 0 ? (
-                  cepejDocs.map((doc) => (
-                    <DocCardItem key={doc.id} doc={doc} color="bg-slate-500" />
-                  ))
-                ) : (
-                  <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
-                    No hay documentos disponibles por el momento.
-                  </div>
-                )}
-              </div>
-            </section>
+          {/* Grid Tercero - Documentos Comisión Europea */}
+          <section className="grid gap-6 md:grid-cols-2 mb-12">
+            {commissionDocs.map((doc) => (
+              <Link
+                key={doc.id}
+                href={doc.url}
+                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Documento</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{doc.title}</h2>
+                <p className="text-body mb-6">{doc.description}</p>
+                <div className="text-sm text-caption">{doc.year}</div>
+              </Link>
+            ))}
+          </section>
 
-            <section id="comision-europea">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="w-12 h-[1px] bg-primary"></span>
-                <h2 className="text-2xl font-serif text-foreground">
-                  Comisión Europea
-                </h2>
-              </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {commissionDocs.length > 0 ? (
-                  commissionDocs.map((doc) => (
-                    <DocCardItem key={doc.id} doc={doc} color="bg-[#003399]" />
-                  ))
-                ) : (
-                  <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
-                    No hay documentos disponibles por el momento.
-                  </div>
-                )}
-              </div>
-            </section>
+          {/* Grid Cuarto - Otros Documentos */}
+          <section className="grid gap-6 md:grid-cols-2 mb-12">
+            {otherDocs.map((doc) => (
+              <Link
+                key={doc.id}
+                href={doc.url}
+                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Recurso</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{doc.title}</h2>
+                <p className="text-body mb-6">{doc.description}</p>
+                <div className="text-sm text-caption">{doc.year}</div>
+              </Link>
+            ))}
+          </section>
 
-            <section id="otros-organismos">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="w-12 h-[1px] bg-primary"></span>
-                <h2 className="text-2xl font-serif text-foreground">
-                  Otros organismos
-                </h2>
-              </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {otherDocs.length > 0 ? (
-                  otherDocs.map((doc) => (
-                    <DocCardItem key={doc.id} doc={doc} color="bg-slate-500" />
-                  ))
-                ) : (
-                  <div className="col-span-full p-6 border border-dashed border-border rounded-lg text-center text-muted-foreground">
-                    No hay documentos disponibles por el momento.
-                  </div>
-                )}
-              </div>
-            </section>
-          </div>
+          {/* Metodología Editorial */}
+          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Metodología editorial</p>
+            <p className="text-body max-w-3xl">
+              Cada documento es seleccionado por su relevancia técnica, actualidad regulatoria y aplicabilidad práctica. 
+              Priorizamos fuentes oficiales y directrices de organismos reconocidos para garantizar la máxima 
+              trazabilidad y utilidad para profesionales del derecho.
+            </p>
+          </section>
         </div>
       </main>
     </>
-  );
-}
-
-function DocCardItem({ doc, color }: { doc: DocCard; color: string }) {
-  const isAesia = doc.source === "AESIA";
-  const toMs = (value?: string) => {
-    if (!value) return 0;
-    const d = new Date(value);
-    const ms = d.getTime();
-    return Number.isNaN(ms) ? 0 : ms;
-  };
-  const dateMs = toMs(doc.date);
-
-  return (
-    <a
-      href={doc.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex flex-col h-full bg-card p-6 border border-border rounded-lg hover:border-primary transition-all duration-300 hover:shadow-md"
-    >
-      <div className="flex justify-between items-start mb-4">
-        <span
-          className={`px-2 py-1 text-[10px] uppercase tracking-wider text-white font-medium rounded-sm ${color}`}
-        >
-          {doc.source}
-        </span>
-        <div className="text-xs text-muted-foreground font-mono inline-flex items-center gap-2">
-          <span>{doc.year || doc.date?.split("-")[0]}</span>
-          <Badges ms={dateMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" />
-        </div>
-      </div>
-      <h3 className="font-serif text-lg text-foreground mb-3 group-hover:text-primary transition-colors">
-        {doc.title}
-      </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-grow">
-        {doc.description}
-      </p>
-      <div className="flex items-center text-xs font-medium text-primary uppercase tracking-wider mt-auto">
-        {isAesia ? "Descargar documento original" : "Acceder al documento"}{" "}
-        <span className="ml-2 group-hover:translate-x-1 transition-transform">
-          →
-        </span>
-      </div>
-    </a>
   );
 }
