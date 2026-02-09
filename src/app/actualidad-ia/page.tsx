@@ -42,24 +42,15 @@ export const metadata: Metadata = {
   },
 };
 
-type NovedadItem = {
+type PreviewItem = {
   id: string;
   href: string;
   title: string;
   description: string;
+  badge: string;
   meta: string;
   dateMs: number;
   displayDateMs?: number;
-};
-
-type NewsItem = {
-  id: string;
-  title: string;
-  source: string;
-  date: string;
-  url: string;
-  summary: string;
-  tags: string[];
 };
 
 export default async function ActualidadIAPage() {
@@ -86,7 +77,7 @@ export default async function ActualidadIAPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
-  const contentItems: NovedadItem[] = sortedEntries.map((entry) => {
+  const contentItems: PreviewItem[] = sortedEntries.map((entry) => {
     const time = typeof entry.dateMs === "number" && !Number.isNaN(entry.dateMs) ? entry.dateMs : 0;
     const displayMs = (() => {
       const d = new Date(entry.datePublished).getTime();
@@ -102,13 +93,14 @@ export default async function ActualidadIAPage() {
       href: entry.urlPath,
       title: entry.title,
       description: entry.description,
+      badge: "Análisis",
       meta: parts.join(" · "),
       dateMs: time,
       displayDateMs: displayMs,
     };
   });
 
-  const resourceItems: NovedadItem[] = resolvedResourceEntries.map((entry) => {
+  const resourceItems: PreviewItem[] = resolvedResourceEntries.map((entry) => {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
     const date =
@@ -135,15 +127,16 @@ export default async function ActualidadIAPage() {
       href: `/actualidad-ia/${entry.slug}`,
       title: entry.title,
       description: plainSummary,
+      badge: "Recurso",
       meta: parts.join(" · "),
-      dateMs: entry.displayDateMs ?? safeTime,
+      dateMs: safeTime,
       displayDateMs: entry.displayDateMs ?? undefined,
     };
   });
 
-  const items: NovedadItem[] = [...contentItems, ...resourceItems].sort(
-  (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
-);
+  const items: PreviewItem[] = [...contentItems, ...resourceItems].sort(
+    (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
+  );
 
   const apiNews: NewsItem[] = latestNews as NewsItem[];
 
@@ -212,46 +205,42 @@ export default async function ActualidadIAPage() {
             </p>
           </header>
 
-          <section className="grid gap-6 md:grid-cols-2">
-            {items.length ? (
-              items.map((item) => (
-                <Link
-                  key={item.id}
-                  href={item.href}
-                  className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-                >
-                  <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Novedad</p>
-                  <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                  {item.description && <p className="text-body mb-6">{item.description}</p>}
-                  {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
-                </Link>
-              ))
-            ) : (
-              <div className="card-elevated p-6 md:col-span-2">
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Repositorio</p>
-                <h2 className="font-serif text-2xl text-foreground">Contenido en preparación</h2>
-                <p className="text-body mt-4 max-w-2xl">
-                  Estamos organizando nuevos briefings sobre la agenda regulatoria de IA, criterios de cumplimiento
-                  y referencias institucionales. Próximas publicaciones durante el primer trimestre de 2026.
-                </p>
-              </div>
-            )}
+          {/* Grid Principal - Previews Destacados */}
+          <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
+            {items.slice(0, 3).map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+              >
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
+                <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">{item.title}</h2>
+                <p className="text-sm text-body mb-4">{item.description}</p>
+                <div className="mt-4 text-xs text-caption">{item.meta}</div>
+              </Link>
+            ))}
           </section>
 
-          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
-            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Metodología editorial</p>
-            <p className="text-body max-w-3xl">
-              Cada briefing sintetiza documentos oficiales, posicionamientos regulatorios y criterios jurisprudenciales
-              relevantes para equipos jurídicos y responsables de cumplimiento. La prioridad es la trazabilidad de
-              fuentes y la aplicación práctica en entornos profesionales.
-            </p>
+          {/* Grid Secundario - Resto de Items */}
+          <section className="grid gap-6 md:grid-cols-2 mb-12">
+            {items.slice(3).map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                <p className="text-body mb-6">{item.description}</p>
+                <div className="text-sm text-caption">{item.meta}</div>
+              </Link>
+            ))}
           </section>
 
+          {/* Sección de Fuentes Oficiales */}
           {sources.length > 0 && (
             <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
-              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
-                Actualizaciones oficiales
-              </p>
+              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Actualizaciones oficiales</p>
               <div className="space-y-10">
                 {sources.map((source) => (
                   <div key={source} className="space-y-4">
@@ -292,6 +281,16 @@ export default async function ActualidadIAPage() {
               </div>
             </section>
           )}
+
+          {/* Metodología Editorial */}
+          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Metodología editorial</p>
+            <p className="text-body max-w-3xl">
+              Cada briefing sintetiza documentos oficiales, posicionamientos regulatorios y criterios jurisprudenciales
+              relevantes para equipos jurídicos y responsables de cumplimiento. La prioridad es la trazabilidad de
+              fuentes y la aplicación práctica en entornos profesionales.
+            </p>
+          </section>
         </div>
       </main>
     </>

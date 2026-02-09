@@ -1,19 +1,5 @@
 [
   {
-    "id": "ai-act-guide-2026-featured",
-    "title": "Guía práctica Reglamento Europeo de IA 2026",
-    "description": "Guía completa sobre el Reglamento Europeo de IA con análisis y recomendaciones para cumplimiento normativo.",
-    "date": "2026-01-15",
-    "url": "/Recursos/Analisis/Guias-y-Protocolos/guia-ai-act-destacada.html",
-    "source": "Derecho Artificial",
-    "language": "ES",
-    "tags": [
-      "#Reglamento IA",
-      "#Guía práctica",
-      "#2026"
-    ]
-  },
-  {
     "id": "aesia-1",
     "title": "Guía Nacional de Notificación de Incidentes de IA",
     "description": "Protocolo oficial para la comunicación de brechas de seguridad y fallos en sistemas de IA de alto riesgo.",

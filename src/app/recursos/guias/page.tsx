@@ -94,46 +94,33 @@ export default function GuidesPage() {
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <main className="section-spacing">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <header className="mb-16 text-center max-w-3xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
-              Biblioteca Digital
-            </p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight">
+        <div className="container-editorial">
+          <header className="mb-12">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Sección</p>
+            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
               Guías y Protocolos
             </h1>
-            <p className="lead text-muted-foreground">
-              Repositorio centralizado de documentación técnica y ética de la AESIA, la Comisión Europea y organismos internacionales.
+            <p className="lead mt-6 text-justify max-w-3xl">
+              Repositorio centralizado de documentación técnica y ética de la AESIA, la Comisión Europea 
+              y organismos internacionales. Recursos curados para profesionales del derecho.
             </p>
           </header>
 
-          <section className="grid gap-6 md:grid-cols-3 not-prose mb-16 bento-surface">
-            <a
-              href="#aesia"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AESIA</p>
-              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Documentos</h3>
-              <p className="text-sm text-body">Publicaciones clave de la AESIA.</p>
-              <div className="mt-4 text-xs text-caption">Total: {aesiaDocs.length}</div>
-            </a>
-            <a
-              href="#comision-europea"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Comisión Europea</p>
-              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Documentos</h3>
-              <p className="text-sm text-body">Guías y materiales oficiales.</p>
-              <div className="mt-4 text-xs text-caption">Total: {commissionDocs.length}</div>
-            </a>
-            <a
-              href="#otros-organismos"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Otros</p>
-              <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Soft law</h3>
-              <p className="text-sm text-body">CEPEJ, UNESCO y organismos afines.</p>
-              <div className="mt-4 text-xs text-caption">Total: {otherDocs.length + cepejDocs.length}</div>
+          {/* Guía Destacada */}
+          {mainAesiaDoc && (
+            <section className="mb-12">
+              <Link
+                href={mainAesiaDoc.url}
+                className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+              >
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Destacada</p>
+                <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">{mainAesiaDoc.title}</h2>
+                <p className="text-sm text-body mb-4">{mainAesiaDoc.description}</p>
+                <div className="mt-4 text-xs text-caption">
+                  {mainAesiaDoc.year && <span>{mainAesiaDoc.year}</span>}
+                  {mainAesiaDoc.tags && (
+                    <span className="ml-2">{mainAesiaDoc.tags.join(" · ")}</span>
+                  )}
             </a>
           </section>
 
