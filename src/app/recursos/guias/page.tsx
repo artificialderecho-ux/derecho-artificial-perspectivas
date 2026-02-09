@@ -145,7 +145,6 @@ export default function GuidesPage() {
             ))}
           </section>
 
-          {/* Grid Secundario - Documentos CEPEJ */}
           <section className="grid gap-6 md:grid-cols-2 mb-12">
             {cepejDocs.map((doc) => (
               <Link
@@ -161,7 +160,6 @@ export default function GuidesPage() {
             ))}
           </section>
 
-          {/* Grid Tercero - Documentos Comisión Europea */}
           <section className="grid gap-6 md:grid-cols-2 mb-12">
             {commissionDocs.map((doc) => (
               <Link
@@ -177,7 +175,6 @@ export default function GuidesPage() {
             ))}
           </section>
 
-          {/* Grid Cuarto - Otros Documentos */}
           <section className="grid gap-6 md:grid-cols-2 mb-12">
             {otherDocs.map((doc) => (
               <Link
