@@ -177,7 +177,30 @@ export default async function NormativaPage() {
                 <div className="mt-4 text-xs text-caption">{item.meta}</div>
               </Link>
             ))}
-                <span>¿Cuándo entra en vigor plenamente?</span>
+          </section>
+
+          {/* Grid Secundario - Previews Adicionales */}
+          <section className="grid gap-6 md:grid-cols-2 mb-12">
+            {items.slice(3).map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                <p className="text-body mb-6">{item.description}</p>
+                <div className="text-sm text-caption">{item.meta}</div>
+              </Link>
+            ))}
+          </section>
+
+          {/* Marco Regulatorio */}
+          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Marco regulatorio</p>
+            <details className="group">
+              <summary className="flex items-center justify-between cursor-pointer">
+                <span className="text-foreground font-medium">¿Cuándo entra en vigor plenamente?</span>
                 <span className="transition group-open:rotate-180">
                   <svg
                     fill="none"
@@ -199,7 +222,8 @@ export default async function NormativaPage() {
                 escalonada. Las prohibiciones de riesgo inaceptable aplican a los 6 meses, y la mayoría
                 de las normas a los 24 meses (2026).
               </p>
-          </details>
+            </details>
+          </section>
         </div>
 
         {resolvedEntries.length > 0 && (
@@ -214,10 +238,9 @@ export default async function NormativaPage() {
                 >
                   <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
                   <h3 className="font-serif text-2xl text-foreground mb-4">{entry.title}</h3>
-                  <Badges ms={entry.dateMs} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                  {entry.summaryHtml && (
+                  {entry.description && (
                     <p className="text-body">
-                      {entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
+                      {entry.description.replace(/<[^>]+>/g, "").slice(0, 200)}
                     </p>
                   )}
                 </Link>
@@ -225,7 +248,7 @@ export default async function NormativaPage() {
             </div>
           </section>
         )}
-      </LegalLayout>
+      </main>
     </>
   );
 }

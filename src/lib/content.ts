@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-export type ContentSection = "actualidad-ia" | "firma-scarpa";
+export type ContentSection = "actualidad-ia" | "firma-scarpa" | "normativa";
 
 export type ContentEntry = {
   slug: string;

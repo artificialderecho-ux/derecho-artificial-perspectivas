@@ -121,8 +121,9 @@ export default function GuidesPage() {
                   {mainAesiaDoc.tags && (
                     <span className="ml-2">{mainAesiaDoc.tags.join(" · ")}</span>
                   )}
-            </a>
-          </section>
+                </div>
+              </Link>
+            </section>
 
           <div className="space-y-20">
             <section id="aesia">
