@@ -125,7 +125,7 @@ export default function GuidesPage() {
               </Link>
             </section>
 
-          <section className="grid gap-6 md:grid-cols-3 mb-12">
+          <section className="grid grid-cols-3 gap-6 mb-12">
             {aesiaDocs.map((doc) => (
               <Link
                 key={doc.id}
