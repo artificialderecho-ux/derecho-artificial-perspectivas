@@ -53,7 +53,7 @@ const softLawDocs = [
     description: "Guía completa sobre el Reglamento Europeo de IA con análisis y recomendaciones para cumplimiento normativo.",
     source: "Derecho Artificial",
     year: "2026",
-    url: "/Recursos/Analisis/Guias-y-Protocolos/guia-ai-act.html",
+    url: "/normativa/ai-act-guia-completa",
     tags: ["Reglamento IA", "Guía práctica", "2026"]
   },
   {
