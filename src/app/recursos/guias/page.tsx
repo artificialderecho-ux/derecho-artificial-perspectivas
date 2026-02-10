@@ -89,13 +89,16 @@ export default function GuidesPage() {
   const cepejDocs = softLawDocs.filter((d) => d.source.startsWith("CEPEJ"));
   const softLawEcDocs = softLawDocs.filter((d) => d.source === "Comisión Europea");
   const otherDocs = softLawDocs.filter(
-    (d) => d.source !== "Comisión Europea" && !d.source.startsWith("CEPEJ"),
+    (d) => d.source !== "Comisión Europea" && !d.source.startsWith("CEPEJ") && d.id !== "ai-act-guide-2026",
   );
   const commissionDocs: DocCard[] = [...ecDocs, ...softLawEcDocs];
   const mainAesiaDoc = aesiaDocs[0];
 
   // Convertir a PreviewItems
-  const mainAesiaPreview = mainAesiaDoc ? docToPreviewItem(mainAesiaDoc, "Destacada") : null;
+  const aiActGuide = softLawDocs.find((d) => d.id === "ai-act-guide-2026");
+  const aiActPreview = aiActGuide ? docToPreviewItem(aiActGuide, "Destacada") : null;
+  
+  const mainAesiaPreview = mainAesiaDoc ? docToPreviewItem(mainAesiaDoc, "Guía") : null;
   const aesiaPreviews = aesiaDocs.map((doc) => docToPreviewItem(doc, "Guía"));
   const cepejPreviews = cepejDocs.map((doc) => docToPreviewItem(doc, "Protocolo"));
   const commissionPreviews = [...ecDocs, ...softLawEcDocs].map((doc) => docToPreviewItem(doc, "Documento"));
@@ -129,6 +132,12 @@ export default function GuidesPage() {
               y organismos internacionales. Recursos curados para profesionales del derecho.
             </p>
           </header>
+
+          {aiActPreview && (
+            <section className="mb-12">
+              <ContentPreviewGrid items={[aiActPreview]} columns={1} size="large" />
+            </section>
+          )}
 
           {mainAesiaPreview && (
             <>

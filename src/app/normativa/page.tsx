@@ -126,6 +126,16 @@ export default async function NormativaPage() {
     (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
   );
 
+  // Feature specific item: AI Act Guide
+  const featuredSlug = "ai-act-guia-completa";
+  const featuredIndex = items.findIndex((item) => item.href.endsWith(`/${featuredSlug}`));
+
+  if (featuredIndex > -1) {
+    const [featuredItem] = items.splice(featuredIndex, 1);
+    featuredItem.badge = "Destacado";
+    items.unshift(featuredItem);
+  }
+
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       {
