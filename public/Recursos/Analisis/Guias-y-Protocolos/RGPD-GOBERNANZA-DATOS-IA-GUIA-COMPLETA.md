@@ -129,7 +129,7 @@ Para la alta dirección de las empresas españolas, el cumplimiento normativo ha
 ### Tabla Comparativa: Enfoque en Derechos vs. Enfoque en Riesgo
 
 | Característica | Enfoque en Derechos (RGPD) | Enfoque en Producto/Riesgo (AI Act) |
-|----------------|----------------------------|-------------------------------------|
+|--------------|----------------------------|-------------------------------------|
 | **Objeto Principal** | Protección de la persona física y su dignidad | Seguridad, fiabilidad y robustez del sistema |
 | **Base de Control** | Autodeterminación informativa | Mitigación de riesgos sistémicos y conformidad |
 | **Mecanismo Clave** | Evaluación de Impacto (EIPD - Art. 35 RGPD) | Evaluación de conformidad y gestión de riesgos de IA (Arts. 9, 43 AI Act) |
@@ -171,6 +171,7 @@ El TJUE en *Wirtschaftsakademie* (C-210/16) estableció que quien determina **co
 |-----------|----------------|-------------------|
 | Empresa usa ChatGPT API para análisis clientes | **Empresa:** Responsable único (determina finalidad análisis)<br>**OpenAI:** Encargado (procesa por cuenta empresa) | Art. 28 RGPD - Contrato encargo |
 | Dos empresas co-desarrollan modelo IA con datos compartidos | **Ambas:** Corresponsables (determinan conjuntamente) | Art. 26 RGPD - Acuerdo corresponsabilidad |
+| Una empresa española utiliza un modelo de lenguaje desarrollado por un tercero en EE.UU. pero lo personaliza con datos propios de clientes | **Empresa española:** Responsable único (determina finalidad personalización)<br>**Tercero en EE.UU.:** Encargado (procesa por cuenta empresa española) | Art. 28 RGPD - Contrato encargo |
 | Hospital usa IA diagnóstica de proveedor externo que entrena con datos pacientes | **Hospital:** Responsable datos pacientes<br>**Proveedor:** Responsable entrenamiento modelo (finalidad propia) | Independientes - Evaluaciones separadas |
 
 **Implicación práctica:**  
@@ -207,7 +208,7 @@ Sanción 8,15M EUR por permitir a un encargado (proveedor telemarketing) determi
 2. **Requisito de ingeniería:** Desde el primer bloque de código
 3. **Ciclo de vida completo:** Entrenamiento, validación, despliegue, mantenimiento
 
-**Técnicas implementación Privacy by Design en IA:**
+### Técnicas implementación Privacy by Design en IA:
 
 | Técnica | Descripción | Ejemplo IA |
 |---------|-------------|------------|
@@ -278,12 +279,13 @@ Cualquier sistema de IA que procese datos personales en España debe cumplir **s
 
 España se enfrenta a un **reto administrativo singular**: la convivencia de la **AEPD** con la nueva **Agencia Española de Supervisión de Inteligencia Artificial (AESIA)** (creación prevista Real Decreto pendiente, feb 2026).
 
-**Reparto competencial proyectado:**
+### Reparto competencial proyectado:
 
 | Aspecto | Autoridad Competente | Base Legal |
 |---------|---------------------|------------|
 | **Derechos fundamentales** (dignidad, privacidad, no discriminación) | **AEPD** (exclusiva) | Arts. 51-59 RGPD |
 | **Seguridad técnica del producto IA** | **AESIA** | Arts. 70-75 AI Act |
+| **Evaluación de impacto en la privacidad** | **AEPD** | Arts. 35-36 RGPD |
 | **Conformidad técnica algoritmo** (precisión, robustez) | **AESIA** | Arts. 9, 15 AI Act |
 | **Tratamiento datos personales** (bases legales, principios) | **AEPD** (exclusiva) | Arts. 5-6 RGPD |
 | **Evaluación impacto** (EIPD datos + FRIAS derechos fundamentales) | **Ambas** (coordinación) | Art. 35 RGPD + Art. 27 AI Act |
@@ -344,18 +346,14 @@ Art. 9 LOPDGDD establece que el **consentimiento solo NO basta** para tratar dat
 | Normativa | Obligación Específica |
 |-----------|----------------------|
 | **RGPD** | • Base legal Art. 6.1.b) (ejecución contrato) o 6.1.f) (interés legítimo ponderado)<br>• Principio minimización (solo datos relevantes puesto)<br>• EIPD obligatoria (Art. 35.3.a - evaluación automática gran escala)<br>• Derechos acceso, rectificación, oposición, explicación (Arts. 15, 16, 21, 22.3) |
-| **AI Act** | • Clasificación: Alto riesgo (Anexo III.4 - empleo)<br>• Obligaciones proveedores: Gestión riesgos, calidad datos sin sesgos, documentación técnica, supervisión humana (Arts. 9-15)<br>• Evaluación conformidad + Marcado CE<br>• FRIAS obligatoria si desplegador >250 empleados (Art. 27) |
-| **LOPDGDD** | • Art. 88 Estatuto Trabajadores: Prohibición tratamiento datos personales trabajadores sin información previa y consulta representantes<br>• Art. 22 LOPDGDD: Derecho desconexión digital |
-
-**Cumplimiento acumulativo:** El sistema debe satisfacer **todas** las obligaciones de **todas** las normativas simultáneamente.
-
-**Caso 2: Chatbot atención cliente**
 
 | Normativa | Clasificación | Obligaciones |
 |-----------|---------------|--------------|
 | **RGPD** | Tratamiento datos personales (conversaciones clientes) | Base legal Art. 6.1.b) o f), información clara Art. 13, seguridad Art. 32 |
 | **AI Act** | Riesgo limitado (transparencia) | Art. 50: Informar usuario que interactúa con IA (salvo obvio por contexto) |
 | **LOPDGDD** | Servicios sociedad información | Ley 34/2002 LSSI: Información precontractual, cookies |
+| **Ley 41/2002** | Protección de datos en sanidad | Información al paciente sobre tratamiento de datos de salud |
+| **Ley 34/2002** | Servicios de la sociedad de la información | Información precontractual y cookies |
 
 ### "So What?": Estrategia de Mitigación de Fricción
 
@@ -407,6 +405,10 @@ El entrenamiento de modelos de IA de gran escala (LLMs - *Large Language Models*
 | **Granularidad imposible** | IA usa datos para múltiples finalidades difíciles de segregar | Modelo lenguaje entrenado con millones de textos web → Imposible consentimiento específico de cada autor |
 | **Información incomprensible** | Lógica algorítmica demasiado compleja para explicar | Red neuronal 175 billones parámetros → ¿Cómo informar "comprensiblemente"? |
 | **Revocación impracticable** | Machine unlearning técnicamente muy difícil | Usuario revoca consentimiento → ¿Cómo "desaprender" dato de modelo ya entrenado? |
+| **Asimetría de poder** | Usuario en posición subordinada o dependiente | Trabajador "consiente" monitorización IA por empleador → Consentimiento NO libre (Considerando 43 RGPD) |
+| **Granularidad imposible** | IA usa datos para múltiples finalidades difíciles de segregar | Modelo lenguaje entrenado con millones de textos web → Imposible consentimiento específico de cada autor |
+| **Información incomprensible** | Lógica algorítmica demasiado compleja para explicar | Red neuronal 175 billones parámetros → ¿Cómo informar "comprensiblemente"? |
+| **Revocación impracticable** | Machine unlearning técnicamente muy difícil | Usuario revoca consentimiento → ¿Cómo "desaprender" dato de modelo ya entrenado? |
 
 **Conclusión doctrina AEPD:**  
 El consentimiento es **inadecuado como base legal principal** para sistemas IA que impliquen:
@@ -453,6 +455,10 @@ El consentimiento es **inadecuado como base legal principal** para sistemas IA q
 
 | Factor | Peso Empresa | Peso Cliente | Resultado |
 |--------|--------------|--------------|-----------|
+| Tipo dato | Transacciones financieras (sensible pero esperado) | +2 | +3 | ⚖️ Equilibrado |
+| Expectativa razonable | Cliente espera protección fraude | +3 | +1 | ✅ Empresa |
+| Necesidad proporcional | IA es único método efectivo | +4 | +2 | ✅ Empresa |
+| Alternativas | Sin alternativas viables | +3 | +1 | ✅ Empresa |
 | Tipo dato | Transacciones financieras (sensible pero esperado) | +2 | +3 | ⚖️ Equilibrado |
 | Expectativa razonable | Cliente espera protección fraude | +3 | +1 | ✅ Empresa |
 | Impacto individuo | Bloqueo temporal si falso positivo | +1 | +2 | ⚖️ Equilibrado |
