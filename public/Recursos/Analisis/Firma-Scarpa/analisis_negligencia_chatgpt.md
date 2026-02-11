@@ -1,4 +1,5 @@
 title: "Análisis de la negligencia profesional por uso de IA: El incidente del Código Penal colombiano en el TSJ de Navarra"
+description: "Responsabilidad IA: guía completa civil (contractual, extracontractual, productos defectuosos), penal (Art. 31 bis CP), administrativa (AI Act). Seguros RC, compliance, 15 FAQ. 20,000 palabras por Ricardp Scarpa."
 jurisdiction: "España · Navarra"
 court: "Tribunal Superior de Justicia de Navarra (Sala de lo Civil y Penal)"
 date: 2024-09-04

@@ -75,6 +75,7 @@ export type ResourceEntry = {
   displayDateMs: number | null;
   jurisdiction?: string | null;
   courtName?: string | null;
+  description?: string | null;
 };
 
 function slugifyBaseName(baseName: string) {
@@ -422,9 +423,10 @@ type RawAnalysis = {
   sourceFileName: string | null;
   dateMs: number | null;
   jurisdiction: string | null;
-  courtName: string | null;
-  filePath: string;
-};
+    courtName: string | null;
+    description: string | null;
+    filePath: string;
+  };
 
 async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | null> {
   const files = await listAnalysisFiles();
@@ -442,6 +444,7 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
       frontmatterTitle || inferTitleFromMarkdown(markdown) || inferTitleFromFileName(baseName);
     const jurisdiction = extractFrontmatterField(markdown, "jurisdiction");
     const courtName = extractFrontmatterField(markdown, "court");
+    const description = extractFrontmatterField(markdown, "description");
     const sourceFileName = await findMatchingSourceFileName(baseName, entry.relativeDir || null);
     const dateMs = await getFileDateMs(filePath);
     return {
@@ -452,6 +455,7 @@ async function resolveRawAnalysisBySlug(slug: string): Promise<RawAnalysis | nul
       dateMs: Number.isNaN(dateMs) ? null : dateMs,
       jurisdiction: jurisdiction || null,
       courtName: courtName || null,
+      description: description || null,
       filePath,
     };
   }
@@ -541,6 +545,7 @@ export async function getResourceEntry(slug: string): Promise<ResourceEntry | nu
     displayDateMs: displayDateMs ?? null,
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,
+    description: raw.description,
   };
 }
 
@@ -551,9 +556,10 @@ type RawSectionAnalysis = {
   sourceFileName: string | null;
   dateMs: number | null;
   jurisdiction: string | null;
-  courtName: string | null;
-  filePath: string;
-};
+    courtName: string | null;
+    description: string | null;
+    filePath: string;
+  };
 
 async function resolveSectionRawAnalysis(section: ResourceSection, slug: string): Promise<RawSectionAnalysis | null> {
   const config = getSectionConfig(section);
@@ -583,6 +589,7 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
         inferTitleFromFileName(baseName);
       const jurisdiction = extractFrontmatterField(markdown, "jurisdiction");
       const courtName = extractFrontmatterField(markdown, "court");
+      const description = extractFrontmatterField(markdown, "description");
       const sourceFileName = await findMatchingSourceFileName(baseName, config.fuentesSubdir);
       const dateMs = await getFileDateMs(filePath);
       return {
@@ -593,6 +600,7 @@ async function resolveSectionRawAnalysis(section: ResourceSection, slug: string)
         dateMs: Number.isNaN(dateMs) ? null : dateMs,
         jurisdiction: jurisdiction || null,
         courtName: courtName || null,
+        description: description || null,
         filePath,
       };
     }
@@ -652,6 +660,7 @@ export async function getSectionResourceEntry(
     displayDateMs: displayDateMs ?? null,
     jurisdiction: raw.jurisdiction,
     courtName: raw.courtName,
+    description: raw.description,
   };
 }
 

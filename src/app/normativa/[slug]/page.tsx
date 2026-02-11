@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const entry = await getSectionResourceEntry("normativa", slug);
   if (!entry) return {};
-  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
+  const description = entry.description || entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
   return {
     title: entry.title,
     description,

@@ -1,6 +1,7 @@
 ---
 title: "AI Act: Guía Jurídica Completa del Reglamento Europeo de Inteligencia Artificial"
 slug: "ai-act-reglamento-europeo-guia-completa"
+description: "Guía jurídica completa AI Act 2026: obligaciones proveedores Arts. 9-15, sistemas alto riesgo, sanciones 35M EUR, calendario aplicación 2024-2027. 16,500 palabras, 27 secciones, 3 casos IRAC. Por Ricardo Scarpa."
 category: "normativa"
 author: "Ricardo Scarpa"
 date: "2026-02-08"

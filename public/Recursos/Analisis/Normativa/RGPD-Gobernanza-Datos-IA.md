@@ -1,6 +1,7 @@
 ---
 title: "RGPD y Gobernanza de Datos: Guía Jurídica Completa para la Era de la Inteligencia Artificial"
 slug: "rgpd-gobernanza-datos-ia-guia-completa"
+description: "RGPD e Inteligencia Artificial: guía exhaustiva gobernanza datos IA. 21 casos prácticos IRAC, multas AEPD (AENA 10M, Endesa 6M), EIPD obligatoria, bases legitimación. 18,400 palabras por Ricardo Scarpa."
 category: "normativa"
 author: "Ricardo Scarpa"
 date: "2026-02-09"

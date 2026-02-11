@@ -42,8 +42,9 @@ export async function generateMetadata({
   const entry: ResolvedContentEntry | ResourceEntry = (jsonEntry ?? resourceEntry)!;
 
   const description =
-    jsonEntry?.description ??
-    resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) ??
+    jsonEntry?.description ||
+    (resourceEntry as ResourceEntry)?.description ||
+    resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) ||
     entry.title;
 
   const canonical = jsonEntry?.urlPath ?? `/firma-scarpa/${entry.slug}`;
