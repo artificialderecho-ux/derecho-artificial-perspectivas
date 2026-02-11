@@ -280,11 +280,6 @@ export default async function HomePage() {
   const actualidadWeeklyCount = unifiedActualidad.filter((e) => isNew(e.date)).length;
   const firmaWeeklyCount = unifiedFirma.filter((e) => isNew(e.date)).length;
 
-  const [normativaEntriesAll, jurisprudenciaEntriesAll, guiasEntriesAll] = await Promise.all([
-    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
-    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
-    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
-  ]);
   const normativaWeeklyCount = normativaEntriesAll
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
     .filter((e) => isNew(e.displayDateMs ?? 0)).length;
