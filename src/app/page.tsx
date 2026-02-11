@@ -191,6 +191,14 @@ export default async function HomePage() {
       urlPath: `/jurisprudencia/${e.slug}`,
       author: "Derecho Artificial",
       type: 'Jurisprudencia' as const
+    })),
+    ...guiasEntriesAll.filter((e): e is NonNullable<typeof e> => Boolean(e)).map(e => ({
+      title: e.title,
+      description: e.description || e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+      date: e.displayDateMs ?? e.dateMs ?? 0,
+      urlPath: `/recursos/guias/${e.slug}`,
+      author: "Derecho Artificial",
+      type: 'Guías y Protocolos' as const
     }))
   ].sort((a, b) => b.date - a.date);
 

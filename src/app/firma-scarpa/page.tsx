@@ -108,9 +108,9 @@ export default async function FirmaScarpaPage() {
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
         : null;
-    const plainSummary = entry.summaryHtml
+    const plainSummary = entry.description || (entry.summaryHtml
       ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
-      : "";
+      : "");
     const parts: string[] = [];
     if (dateLabel) {
       parts.push(dateLabel);
@@ -123,7 +123,7 @@ export default async function FirmaScarpaPage() {
       href: `/firma-scarpa/${entry.slug}`,
       title: entry.title,
       description: plainSummary,
-      badge: "Análisis",
+      badge: entry.slug === "caso-eeoc-v-itutorgroup" ? "Destacado" : "Análisis",
       meta: parts.join(" · "),
       dateMs: safeTime,
       displayDateMs: entry.displayDateMs ?? undefined,
@@ -133,6 +133,17 @@ export default async function FirmaScarpaPage() {
   const allItems: UnifiedItem[] = [...contentItems, ...resourceItems].sort(
   (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
 );
+
+  const featuredSlugs = ["caso-eeoc-v-itutorgroup"];
+  const featuredItems: UnifiedItem[] = [];
+  
+  featuredSlugs.forEach(slug => {
+    const index = allItems.findIndex((item) => item.href.endsWith(`/${slug}`));
+    if (index > -1) {
+      const [item] = allItems.splice(index, 1);
+      featuredItems.push(item);
+    }
+  });
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -163,6 +174,40 @@ export default async function FirmaScarpaPage() {
               hasta las implicaciones prácticas del Reglamento de IA en el sector legal.
             </p>
           </header>
+
+          {/* Artículos Destacados - Una por fila */}
+          {featuredItems.map((item) => (
+            <section key={item.id} className="mb-12">
+              <Link
+                href={item.href}
+                className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+              >
+                <div className="flex flex-col gap-4">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+                    {item.badge}
+                  </p>
+                  <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight">
+                    {item.title}
+                  </h2>
+                  {item.description && (
+                    <p className="text-lg text-body leading-relaxed max-w-4xl">
+                      {item.description}
+                    </p>
+                  )}
+                  {item.meta && (
+                    <div className="text-sm text-caption mt-2">
+                      {item.meta}
+                    </div>
+                  )}
+                  <div className="mt-4">
+                    <span className="text-primary font-medium inline-flex items-center gap-2">
+                      Leer análisis completo <span className="text-xl">→</span>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </section>
+          ))}
 
           <section className="grid gap-6 md:grid-cols-2">
             {allItems.map((item) => (
