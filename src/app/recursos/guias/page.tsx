@@ -48,6 +48,15 @@ function docToPreviewItem(doc: DocCard, badge: string): PreviewItem {
 
 const softLawDocs = [
   {
+    id: "rgpd-ia-guia-completa-2026",
+    title: "RGPD y Gobernanza de Datos: Guía Jurídica Completa para la Era de la IA",
+    description: "Análisis exhaustivo del RGPD aplicado a sistemas de IA: bases de legitimación, responsabilidad proactiva, biometría y régimen sancionador.",
+    source: "Derecho Artificial",
+    year: "2026",
+    url: "/normativa/rgpd-gobernanza-datos-ia-guia-completa",
+    tags: ["RGPD", "Gobernanza de Datos", "IA", "2026"]
+  },
+  {
     id: "ai-act-guide-2026",
     title: "Guía práctica Reglamento Europeo de IA 2026",
     description: "Guía completa sobre el Reglamento Europeo de IA con análisis y recomendaciones para cumplimiento normativo.",
@@ -89,12 +98,19 @@ export default function GuidesPage() {
   const cepejDocs = softLawDocs.filter((d) => d.source.startsWith("CEPEJ"));
   const softLawEcDocs = softLawDocs.filter((d) => d.source === "Comisión Europea");
   const otherDocs = softLawDocs.filter(
-    (d) => d.source !== "Comisión Europea" && !d.source.startsWith("CEPEJ") && d.id !== "ai-act-guide-2026",
+    (d) =>
+      d.source !== "Comisión Europea" &&
+      !d.source.startsWith("CEPEJ") &&
+      d.id !== "ai-act-guide-2026" &&
+      d.id !== "rgpd-ia-guia-completa-2026",
   );
   const commissionDocs: DocCard[] = [...ecDocs, ...softLawEcDocs];
   const mainAesiaDoc = aesiaDocs[0];
 
   // Convertir a PreviewItems
+  const rgpdGuide = softLawDocs.find((d) => d.id === "rgpd-ia-guia-completa-2026");
+  const rgpdPreview = rgpdGuide ? docToPreviewItem(rgpdGuide, "Destacada") : null;
+
   const aiActGuide = softLawDocs.find((d) => d.id === "ai-act-guide-2026");
   const aiActPreview = aiActGuide ? docToPreviewItem(aiActGuide, "Destacada") : null;
   
@@ -132,6 +148,12 @@ export default function GuidesPage() {
               y organismos internacionales. Recursos curados para profesionales del derecho.
             </p>
           </header>
+
+          {rgpdPreview && (
+            <section className="mb-12">
+              <ContentPreviewGrid items={[rgpdPreview]} columns={1} size="large" />
+            </section>
+          )}
 
           {aiActPreview && (
             <section className="mb-12">
