@@ -100,9 +100,9 @@ export default async function NormativaPage() {
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
         : null;
-    const plainSummary = entry.summaryHtml
+    const plainSummary = entry.description || (entry.summaryHtml
       ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
-      : "";
+      : "");
     const parts: string[] = [];
     if (dateLabel) {
       parts.push(dateLabel);
