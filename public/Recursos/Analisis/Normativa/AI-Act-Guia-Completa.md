@@ -2535,9 +2535,9 @@ IA diagnóstico cáncer mamografía:
 
 ---
 
-## 16. AI Act y Propiedad Intelectual
+---
 
-**Considerando 105 AI Act:**  
+## 16. AI Act y Propiedad Intelectual
 > "El presente Reglamento **no afecta** a la aplicación del Derecho de autor y derechos conexos"
 
 **Cuestión clave:** ¿Puede IA entrenarse con contenido protegido por copyright?
@@ -2731,10 +2731,13 @@ Reconocimiento facial laboral es sistema alto riesgo por combinar biometría + R
 
 ---
 
-[Casos 4-6 seguirían formato similar IRAC desarrollando: LLM propósito general, scoring crediticio, diagnóstico médico]
+## Normativa Relacionada
 
+*   [**Cumplimiento RGPD para sistemas IA**](file:///c:/Proyectos/derechoartificial/public/Recursos/Analisis/Normativa/RGPD-Gobernanza-Datos-IA.md): Análisis exhaustivo de cómo el Reglamento de IA se superpone con las obligaciones de protección de datos.
+*   [**Responsabilidad civil si incumples AI Act**](file:///c:/Proyectos/derechoartificial/public/Recursos/Analisis/Firma-Scarpa/analisis_negligencia_chatgpt.md): Guía sobre las consecuencias indemnizatorias y procesales derivadas del uso inadecuado o ilícito de sistemas de IA.
+*   [**Casos prácticos alto riesgo**](/blog): Exploración de escenarios reales y sectores críticos bajo la nueva regulación europea.
 
-## 23. Recursos y Herramientas de Compliance
+---
 
 ### Recursos Oficiales
 

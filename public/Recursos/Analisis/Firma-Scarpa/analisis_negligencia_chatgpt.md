@@ -121,3 +121,11 @@ Lecciones Fundamentales
 Análisis de Impacto ("So What?") El letrado permanece como el garante final de la exactitud de sus argumentos. La innovación tecnológica es una aliada del Derecho, siempre que se ejerza bajo una vigilancia inquebrantable que garantice que la norma invocada sea, efectivamente, la norma vigente en el foro.
 
 La excelencia profesional en el siglo XXI reside en el equilibrio exacto entre la eficiencia del algoritmo y la prudencia indelegable del jurista.
+
+---
+
+## Normativa Relacionada
+
+*   [**Incumplir AI Act facilita probar negligencia**](file:///c:/Proyectos/derechoartificial/public/Recursos/Analisis/Normativa/AI-Act-Guia-Completa.md): Relación entre el incumplimiento de los estándares técnicos del Reglamento de IA y la responsabilidad civil profesional.
+*   [**RGPD como base responsabilidad datos**](file:///c:/Proyectos/derechoartificial/public/Recursos/Analisis/Normativa/RGPD-Gobernanza-Datos-IA.md): Cómo las brechas de seguridad y el tratamiento ilícito fundamentan reclamaciones indemnizatorias.
+*   [**Seguros RC obligatorios para...**](#responsabilidad-profesional-indelegable): Análisis de la evolución de las pólizas de responsabilidad civil ante el riesgo algorítmico.

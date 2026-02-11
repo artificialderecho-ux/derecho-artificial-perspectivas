@@ -2996,7 +2996,16 @@ Para optimizar el SEO interno del sitio, se recomienda enlazar esta página pila
 13. [Datos Biométricos: Protección Reforzada RGPD](/normativa/datos-biometricos-rgpd)
 14. [Neurodatos y Privacidad Mental](/futuros/neurodatos-privacidad-mental)
 15. [FRIAS: Evaluación Impacto Derechos Fundamentales](/guias/frias-ai-act)
-16. [Casos Prácticos RGPD: Jurisprudencia Comentada](/casos/rgpd-jurisprudencia)
+16. [Casos Prácticos RGPD: Jurisprudencia Comentada](/casos/rgpd-jurisprudencia)---
+
+## Normativa Relacionada
+
+*   [**Obligaciones AI Act sistemas alto riesgo**](file:///c:/Proyectos/derechoartificial/public/Recursos/Analisis/Normativa/AI-Act-Guia-Completa.md): Requisitos técnicos y de gobernanza para sistemas de IA que procesan datos personales.
+*   [**Responsabilidad AEPD multas**](file:///c:/Proyectos/derechoartificial/public/Recursos/Analisis/Firma-Scarpa/analisis_negligencia_chatgpt.md): Análisis de los criterios sancionadores de la Agencia Española de Protección de Datos en incidentes de IA.
+*   [**Casos AENA, Endesa, Enérgya-VM**](#casos-jurisprudencia-ia): Análisis de la jurisprudencia y sanciones recientes en el mercado español.
+
+---
+
 17. [Sanciones RGPD España: Base de Datos Actualizada](/recursos/base-datos-sanciones)
 18. [Formación DPO: Certificaciones y Recursos](/formacion/dpo-certificaciones)
 19. [Consultoría RGPD e IA: Servicios Profesionales](/servicios/consultoria-rgpd-ia)
