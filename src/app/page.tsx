@@ -130,6 +130,13 @@ export default async function HomePage() {
   const latestActualidad = unifiedActualidad[0] ?? null;
   const latestFirma = unifiedFirma[0] ?? null;
 
+  // Encontrar las tres guías específicas para destacar en la Home
+  const homeFeaturedSlugs = [
+    "ai-act-reglamento-europeo-guia-completa",
+    "rgpd-gobernanza-datos-ia-guia-completa",
+    "analisis-de-la-negligencia-profesional-por-uso-de-ia-el-incidente-del-codigo-penal-colombiano-en-el-tsj-de-navarra"
+  ];
+
   const [latestNormativa, latestJurisprudencia, latestGuias] = await Promise.all([
     Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))).then((arr) => {
       const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
@@ -483,7 +490,84 @@ export default async function HomePage() {
             }}
           />
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {/* Guía AI Act */}
+            {(() => {
+              const guide = normativaEntriesAll.find(e => e?.slug === "ai-act-reglamento-europeo-guia-completa");
+              if (!guide) return null;
+              return (
+                <Link
+                  href={`/normativa/${guide.slug}`}
+                  className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
+                    Guía Destacada · Normativa
+                  </p>
+                  <h3 className="font-serif text-lg text-foreground mb-2">
+                    {guide.title}
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                  </h3>
+                  <Badges ms={(guide.displayDateMs ?? guide.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
+                  <p className="text-sm text-body mb-4 line-clamp-3">
+                    {guide.description || guide.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
+                  </p>
+                  <p className="mt-auto text-xs text-caption">{formatDateFromMs(guide.displayDateMs ?? guide.dateMs ?? 0, "es-ES")}</p>
+                </Link>
+              );
+            })()}
+
+            {/* Guía RGPD */}
+            {(() => {
+              const guide = normativaEntriesAll.find(e => e?.slug === "rgpd-gobernanza-datos-ia-guia-completa");
+              if (!guide) return null;
+              return (
+                <Link
+                  href={`/normativa/${guide.slug}`}
+                  className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
+                    Guía Destacada · Normativa
+                  </p>
+                  <h3 className="font-serif text-lg text-foreground mb-2">
+                    {guide.title}
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                  </h3>
+                  <Badges ms={(guide.displayDateMs ?? guide.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
+                  <p className="text-sm text-body mb-4 line-clamp-3">
+                    {guide.description || guide.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
+                  </p>
+                  <p className="mt-auto text-xs text-caption">{formatDateFromMs(guide.displayDateMs ?? guide.dateMs ?? 0, "es-ES")}</p>
+                </Link>
+              );
+            })()}
+
+            {/* Guía Responsabilidad */}
+            {(() => {
+              const guide = resolvedFirmaResources.find(e => e?.slug === "analisis-de-la-negligencia-profesional-por-uso-de-ia-el-incidente-del-codigo-penal-colombiano-en-el-tsj-de-navarra");
+              if (!guide) return null;
+              return (
+                <Link
+                  href={`/firma-scarpa/${guide.slug}`}
+                  className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                >
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
+                    Guía Destacada · Firma Scarpa
+                  </p>
+                  <h3 className="font-serif text-lg text-foreground mb-2">
+                    {guide.title}
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                  </h3>
+                  <Badges ms={(guide.displayDateMs ?? guide.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
+                  <p className="text-sm text-body mb-4 line-clamp-3">
+                    {guide.description || guide.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
+                  </p>
+                  <p className="mt-auto text-xs text-caption">{formatDateFromMs(guide.displayDateMs ?? guide.dateMs ?? 0, "es-ES")}</p>
+                </Link>
+              );
+            })()}
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-12">
             {latestActualidad && (
               <Link
                 href={latestActualidad.urlPath}

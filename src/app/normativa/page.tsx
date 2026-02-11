@@ -126,10 +126,11 @@ export default async function NormativaPage() {
     (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
   );
 
-  // Feature specific items: AI Act and RGPD Guides
+  // Feature specific items: AI Act, RGPD and most recent guides
   const featuredSlugs = [
     "ai-act-reglamento-europeo-guia-completa",
     "rgpd-gobernanza-datos-ia-guia-completa",
+    "instruccion-cgpj-uso-ia-jueces",
   ];
 
   const featuredItems: PreviewItem[] = [];
