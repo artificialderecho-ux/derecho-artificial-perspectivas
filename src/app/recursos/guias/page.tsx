@@ -48,15 +48,6 @@ function docToPreviewItem(doc: DocCard, badge: string): PreviewItem {
 
 const softLawDocs = [
   {
-    id: "rgpd-ia-guia-completa-2026",
-    title: "RGPD y Gobernanza de Datos: Guía Jurídica Completa para la Era de la IA",
-    description: "Análisis exhaustivo del RGPD aplicado a sistemas de IA: bases de legitimación, responsabilidad proactiva, biometría y régimen sancionador.",
-    source: "Derecho Artificial",
-    year: "2026",
-    url: "/normativa/rgpd-gobernanza-datos-ia-guia-completa",
-    tags: ["RGPD", "Gobernanza de Datos", "IA", "2026"]
-  },
-  {
     id: "ai-act-guide-2026",
     title: "Guía práctica Reglamento Europeo de IA 2026",
     description: "Guía completa sobre el Reglamento Europeo de IA con análisis y recomendaciones para cumplimiento normativo.",
@@ -148,12 +139,6 @@ export default function GuidesPage() {
               y organismos internacionales. Recursos curados para profesionales del derecho.
             </p>
           </header>
-
-          {rgpdPreview && (
-            <section className="mb-12">
-              <ContentPreviewGrid items={[rgpdPreview]} columns={1} size="large" />
-            </section>
-          )}
 
           {aiActPreview && (
             <section className="mb-12">
