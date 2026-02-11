@@ -126,15 +126,22 @@ export default async function NormativaPage() {
     (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
   );
 
-  // Feature specific item: AI Act Guide
-  const featuredSlug = "ai-act-guia-completa";
-  const featuredIndex = items.findIndex((item) => item.href.endsWith(`/${featuredSlug}`));
+  // Feature specific items: AI Act and RGPD Guides
+  const featuredSlugs = [
+    "ai-act-reglamento-europeo-guia-completa",
+    "rgpd-gobernanza-datos-ia-guia-completa",
+  ];
 
-  if (featuredIndex > -1) {
-    const [featuredItem] = items.splice(featuredIndex, 1);
-    featuredItem.badge = "Destacado";
-    items.unshift(featuredItem);
-  }
+  const featuredItems: PreviewItem[] = [];
+  
+  featuredSlugs.forEach(slug => {
+    const index = items.findIndex((item) => item.href.endsWith(`/${slug}`));
+    if (index > -1) {
+      const [item] = items.splice(index, 1);
+      item.badge = "Destacado";
+      featuredItems.push(item);
+    }
+  });
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -165,7 +172,14 @@ export default async function NormativaPage() {
             </p>
           </header>
 
-          {/* Grid Principal - Previews Destacados */}
+          {/* Guías Destacadas - Una por fila */}
+          {featuredItems.map((item) => (
+            <section key={item.id} className="mb-12">
+              <ContentPreviewGrid items={[item]} columns={1} size="large" />
+            </section>
+          ))}
+
+          {/* Grid Principal - Previews Restantes */}
           <section className="mb-12">
             <ContentPreviewGrid items={items.slice(0, 3)} columns={3} size="large" />
           </section>
