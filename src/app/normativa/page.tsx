@@ -128,8 +128,8 @@ export default async function NormativaPage() {
 
   // Feature specific items: AI Act, RGPD and most recent guides
   const featuredSlugs = [
-    "ai-act-reglamento-europeo-guia-completa",
-    "rgpd-gobernanza-datos-ia-guia-completa",
+    "ai-act-guia-completa",
+    "rgpd-gobernanza-datos-ia",
     "instruccion-cgpj-uso-ia-jueces",
   ];
 

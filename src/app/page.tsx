@@ -132,9 +132,9 @@ export default async function HomePage() {
 
   // Encontrar las tres guías específicas para destacar en la Home
   const homeFeaturedSlugs = [
-    "ai-act-reglamento-europeo-guia-completa",
-    "rgpd-gobernanza-datos-ia-guia-completa",
-    "analisis-de-la-negligencia-profesional-por-uso-de-ia-el-incidente-del-codigo-penal-colombiano-en-el-tsj-de-navarra"
+    "ai-act-guia-completa",
+    "rgpd-gobernanza-datos-ia",
+    "analisis-negligencia-chatgpt"
   ];
 
   const [latestNormativa, latestJurisprudencia, latestGuias] = await Promise.all([
@@ -493,7 +493,7 @@ export default async function HomePage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {/* Guía AI Act */}
             {(() => {
-              const guide = normativaEntriesAll.find(e => e?.slug === "ai-act-reglamento-europeo-guia-completa");
+              const guide = normativaEntriesAll.find(e => e?.slug === "ai-act-guia-completa");
               if (!guide) return null;
               return (
                 <Link
@@ -518,7 +518,7 @@ export default async function HomePage() {
 
             {/* Guía RGPD */}
             {(() => {
-              const guide = normativaEntriesAll.find(e => e?.slug === "rgpd-gobernanza-datos-ia-guia-completa");
+              const guide = normativaEntriesAll.find(e => e?.slug === "rgpd-gobernanza-datos-ia");
               if (!guide) return null;
               return (
                 <Link
@@ -543,7 +543,7 @@ export default async function HomePage() {
 
             {/* Guía Responsabilidad */}
             {(() => {
-              const guide = resolvedFirmaResources.find(e => e?.slug === "analisis-de-la-negligencia-profesional-por-uso-de-ia-el-incidente-del-codigo-penal-colombiano-en-el-tsj-de-navarra");
+              const guide = resolvedFirmaResources.find(e => e?.slug === "analisis-negligencia-chatgpt");
               if (!guide) return null;
               return (
                 <Link
