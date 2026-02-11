@@ -1,14 +1,8 @@
-﻿---
-title: "La Frontera de la Discriminación Algorítmica: Análisis Exhaustivo del Caso iTutorGroup y el Futuro de la Responsabilidad Civil en la IA"
-description: "Análisis del hito fundacional de la responsabilidad algorítmica: el caso EEOC v. iTutorGroup. Un examen sobre discriminación por IA, impacto dispar y propuestas de reforma legislativa para blindar la equidad laboral."
-date: "2026-02-11"
----
-
 # La Frontera de la Discriminación Algorítmica: Análisis Exhaustivo del Caso iTutorGroup y el Futuro de la Responsabilidad Civil en la IA
 
 ## 1. Introducción: El Cambio de Paradigma en el Reclutamiento Automatizado
 
-Desde la perspectiva analítica que define la "Firma Scarpa" en derechoartificial.com, hemos insistido en que la Inteligencia Artificial (IA) no es una herramienta aséptica, sino una *machina económica* que actúa como un prisma de las estructuras sociales preexistentes.
+desde la perspectiva analítica de derechoartificial.com, hemos insistido en que la Inteligencia Artificial (IA) no es una herramienta aséptica, sino una *machina económica* que actúa como un prisma de las estructuras sociales preexistentes.
 
 El caso **EEOC v. iTutorGroup** no debe ser leído como un incidente aislado, sino como el **hito fundacional de la frontera de la responsabilidad algorítmica**. Nos encontramos ante el nacimiento de una nueva era de litigiosidad laboral donde la opacidad técnica ya no sirve de refugio contra el escrutinio de los derechos civiles.
 
@@ -26,7 +20,7 @@ Este litigio constituye un **punto de inflexión estratégico** al representar e
 
 - **La mecánica del sesgo deliberado**: A diferencia de otros sistemas donde el sesgo es una consecuencia imprevista, iTutorGroup programó explícitamente su software de reclutamiento para ejecutar un rechazo automático basado en criterios de edad. Se excluyó sistemáticamente a mujeres mayores de 55 años y a hombres mayores de 60 años, afectando a más de 200 profesionales cualificados.
 
-- **Alcance Multinacional y Jurisdicción**: El caso involucró a entidades radicadas en el extranjero —Shanghai Ping'An Intelligent Education Technology Co. Ltd. y Tutor Group Limited (Hong Kong)— que contrataban tutores remotos basados en EE. UU. La lección estratégica es clara: las fronteras internacionales no operan como un escudo frente a la ADEA o el Título VII cuando la prestación del servicio ocurre en suelo estadounidense.
+- **Alcance Multinacional y Jurisdicción**: El caso involucró a entidades radicadas en el extranjero —Shanghai Ping'An Intelligent Education Technology Co. Ltd. y Tutor Group Limited (Hong Kong)— que contrataban tutores remotos basados en EE. UU. La lección estratégica es clara: las fronteras internacionales no operan como an escudo frente a la ADEA o el Título VII cuando la prestación del servicio ocurre en suelo estadounidense.
 
 - **El método de detección (Experimento de Doble Solicitud)**: La discriminación fue expuesta mediante una técnica de *testing* jurídico: una aspirante (Wendy Pincus) fue rechazada tras ingresar su fecha de nacimiento real; no obstante, al presentar una solicitud idéntica al día siguiente con una fecha más reciente, el sistema le ofreció una entrevista de inmediato.
 
@@ -104,8 +98,3 @@ El futuro de la gobernanza algorítmica debe integrar las lecciones de la NYC Lo
 7. **Privilegio Abogado-Cliente**: Realizar las auditorías internas bajo supervisión legal para proteger los hallazgos sensibles de futuras acciones de descubrimiento.
 
 8. **Eliminación de Proxies Endógenos**: Auditoría constante de variables neutrales que actúan como sustitutos de categorías protegidas.
-
----
-
-*Ricardo Scarpa*  
-*Director de derechoartificial.com*
