@@ -130,7 +130,6 @@ export default async function HomePage() {
   const latestActualidad = unifiedActualidad[0] ?? null;
   const latestFirma = unifiedFirma[0] ?? null;
 
-  // Encontrar las tres guías específicas para destacar en la Home
   const homeFeaturedSlugs = [
     "ai-act-guia-completa",
     "rgpd-gobernanza-datos-ia",
@@ -166,6 +165,34 @@ export default async function HomePage() {
       return items[0] ?? null;
     }),
   ]);
+
+  const [normativaEntriesAll, jurisprudenciaEntriesAll, guiasEntriesAll] = await Promise.all([
+    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
+    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
+    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
+  ]);
+
+  // Crear una lista unificada de todas las entradas recientes para la sección "Actualidad y Análisis"
+  const allRecentEntries = [
+    ...unifiedActualidad.map(e => ({ ...e, type: 'Actualidad IA' as const })),
+    ...unifiedFirma.map(e => ({ ...e, type: 'Firma Scarpa' as const })),
+    ...normativaEntriesAll.filter((e): e is NonNullable<typeof e> => Boolean(e)).map(e => ({
+      title: e.title,
+      description: e.description || e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+      date: e.displayDateMs ?? e.dateMs ?? 0,
+      urlPath: `/normativa/${e.slug}`,
+      author: "Derecho Artificial",
+      type: 'Normativa' as const
+    })),
+    ...jurisprudenciaEntriesAll.filter((e): e is NonNullable<typeof e> => Boolean(e)).map(e => ({
+      title: e.title,
+      description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+      date: e.displayDateMs ?? e.dateMs ?? 0,
+      urlPath: `/jurisprudencia/${e.slug}`,
+      author: "Derecho Artificial",
+      type: 'Jurisprudencia' as const
+    }))
+  ].sort((a, b) => b.date - a.date);
 
   const formatDate = (value: string | number) => {
     const date = new Date(value);
@@ -490,175 +517,27 @@ export default async function HomePage() {
             }}
           />
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {/* Guía AI Act */}
-            {(() => {
-              const guide = normativaEntriesAll.find(e => e?.slug === "ai-act-guia-completa");
-              if (!guide) return null;
-              return (
-                <Link
-                  href={`/normativa/${guide.slug}`}
-                  className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                    Guía Destacada · Normativa
-                  </p>
-                  <h3 className="font-serif text-lg text-foreground mb-2">
-                    {guide.title}
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                  </h3>
-                  <Badges ms={(guide.displayDateMs ?? guide.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                  <p className="text-sm text-body mb-4 line-clamp-3">
-                    {guide.description || guide.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
-                  </p>
-                  <p className="mt-auto text-xs text-caption">{formatDateFromMs(guide.displayDateMs ?? guide.dateMs ?? 0, "es-ES")}</p>
-                </Link>
-              );
-            })()}
-
-            {/* Guía RGPD */}
-            {(() => {
-              const guide = normativaEntriesAll.find(e => e?.slug === "rgpd-gobernanza-datos-ia");
-              if (!guide) return null;
-              return (
-                <Link
-                  href={`/normativa/${guide.slug}`}
-                  className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                    Guía Destacada · Normativa
-                  </p>
-                  <h3 className="font-serif text-lg text-foreground mb-2">
-                    {guide.title}
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                  </h3>
-                  <Badges ms={(guide.displayDateMs ?? guide.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                  <p className="text-sm text-body mb-4 line-clamp-3">
-                    {guide.description || guide.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
-                  </p>
-                  <p className="mt-auto text-xs text-caption">{formatDateFromMs(guide.displayDateMs ?? guide.dateMs ?? 0, "es-ES")}</p>
-                </Link>
-              );
-            })()}
-
-            {/* Guía Responsabilidad */}
-            {(() => {
-              const guide = resolvedFirmaResources.find(e => e?.slug === "analisis-negligencia-chatgpt");
-              if (!guide) return null;
-              return (
-                <Link
-                  href={`/firma-scarpa/${guide.slug}`}
-                  className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                    Guía Destacada · Firma Scarpa
-                  </p>
-                  <h3 className="font-serif text-lg text-foreground mb-2">
-                    {guide.title}
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                  </h3>
-                  <Badges ms={(guide.displayDateMs ?? guide.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                  <p className="text-sm text-body mb-4 line-clamp-3">
-                    {guide.description || guide.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
-                  </p>
-                  <p className="mt-auto text-xs text-caption">{formatDateFromMs(guide.displayDateMs ?? guide.dateMs ?? 0, "es-ES")}</p>
-                </Link>
-              );
-            })()}
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-12">
-            {latestActualidad && (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {allRecentEntries.slice(0, 8).map((entry, idx) => (
               <Link
-                href={latestActualidad.urlPath}
+                key={`${entry.urlPath}-${idx}`}
+                href={entry.urlPath}
                 className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  Actualidad IA
+                  {entry.type}
                 </p>
                 <h3 className="font-serif text-lg text-foreground mb-2">
-                  {latestActualidad.title}
+                  {entry.title}
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                 </h3>
-                <Badges ms={latestActualidad.date} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
+                <Badges ms={entry.date} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
                 <p className="text-sm text-body mb-4 line-clamp-3">
-                  {latestActualidad.description}
+                  {entry.description}
                 </p>
-                <p className="mt-auto text-xs text-caption">{formatDate(latestActualidad.date)}</p>
+                <p className="mt-auto text-xs text-caption">{formatDate(entry.date)}</p>
               </Link>
-            )}
-
-            {latestFirma && (
-              <Link
-                href={latestFirma.urlPath}
-                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  Firma Scarpa
-                </p>
-                <h3 className="font-serif text-lg text-foreground mb-2">
-                  {latestFirma.title}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                </h3>
-                <Badges ms={latestFirma.date} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                <p className="text-sm text-body mb-4 line-clamp-3">
-                  {latestFirma.description}
-                </p>
-                <p className="mt-auto text-xs text-caption">{formatDate(latestFirma.date)}</p>
-              </Link>
-            )}
-
-            {latestNormativa && (
-              <Link
-                href={`/normativa/${latestNormativa.slug}`}
-                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  Normativa
-                </p>
-                <h3 className="font-serif text-lg text-foreground mb-2">
-                  {latestNormativa.title}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                </h3>
-                <Badges ms={(latestNormativa.displayDateMs ?? latestNormativa.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                {latestNormativa.summaryHtml && (
-                  <p className="text-sm text-body mb-4 line-clamp-3">
-                    {latestNormativa.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
-                  </p>
-                )}
-                <p className="mt-auto text-xs text-caption">
-                  {(latestNormativa.displayDateMs ?? latestNormativa.dateMs)
-                    ? formatDateFromMs(latestNormativa.displayDateMs ?? latestNormativa.dateMs ?? 0, "es-ES")
-                    : ""}
-                </p>
-              </Link>
-            )}
-
-            {latestJurisprudencia && (
-              <Link
-                href={`/jurisprudencia/${latestJurisprudencia.slug}`}
-                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  Jurisprudencia
-                </p>
-                <h3 className="font-serif text-lg text-foreground mb-2">
-                  {latestJurisprudencia.title}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                </h3>
-                <Badges ms={(latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs ?? 0)} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                {latestJurisprudencia.summaryHtml && (
-                  <p className="text-sm text-body mb-4 line-clamp-3">
-                    {latestJurisprudencia.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
-                  </p>
-                )}
-                <p className="mt-auto text-xs text-caption">
-                  {(latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs)
-                    ? formatDateFromMs(latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs ?? 0, "es-ES")
-                    : ""}
-                </p>
-              </Link>
-            )}
+            ))}
           </div>
         </div>
       </section>
