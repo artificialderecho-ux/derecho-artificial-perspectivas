@@ -32,7 +32,7 @@ export default async function RelatedArticles({ currentSlug }: RelatedArticlesPr
           >
             <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
               <img
-                src={article.image || "/logo-principal.png"}
+                src={"/logo-principal.png"}
                 alt={article.title}
                 className="w-full h-48 object-cover"
               />
