@@ -257,7 +257,7 @@ export default async function FirmaScarpaSlugPage({
           )}
 
           {/* Artículos relacionados */}
-          <RelatedArticles currentSlug={params.slug} />
+          <RelatedArticles currentSlug={slug} />
         </LegalLayout>
       </>
     );
@@ -415,7 +415,7 @@ export default async function FirmaScarpaSlugPage({
         )}
 
         {/* Artículos relacionados */}
-        <RelatedArticles currentSlug={params.slug} />
+        <RelatedArticles currentSlug={slug} />
       </LegalLayout>
     </>
   );
