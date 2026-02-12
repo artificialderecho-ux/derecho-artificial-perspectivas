@@ -85,12 +85,14 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
   if (!jsonEntry && !resourceEntry) notFound();
 
   if (jsonEntry) {
+    const authorName = jsonEntry.author === "Derecho Artificial" ? "Ricardo Scarpa" : jsonEntry.author;
+
     const jsonLd = createNewsArticleJsonLd({
       url: jsonEntry.url,
       headline: jsonEntry.title,
       description: jsonEntry.description,
       datePublished: jsonEntry.datePublished,
-      authorName: jsonEntry.author,
+      authorName: authorName,
     });
 
     const genericJsonLd = createGenericArticleJsonLd({
@@ -98,7 +100,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
       headline: jsonEntry.title,
       description: jsonEntry.description,
       datePublished: jsonEntry.datePublished,
-      authorName: jsonEntry.author,
+      authorName: authorName,
     });
 
     const articleSchema = {
@@ -112,7 +114,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
       description: jsonEntry.description,
       author: { 
         "@type": "Person", 
-        name: jsonEntry.author,
+        name: authorName,
         url: "https://www.derechoartificial.com/quienes-somos"
       },
       publisher: { 
@@ -138,7 +140,10 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
           title={jsonEntry.title}
           category="Actualidad IA"
           date={jsonEntry.datePublished}
-          author={{ name: jsonEntry.author }}
+          author={{ 
+            name: authorName,
+            href: "/quienes-somos"
+          }}
         >
           <Breadcrumbs items={[
             { label: 'Inicio', href: '/' },
@@ -170,7 +175,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     headline: entry.title,
     description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
     datePublished: date,
-    authorName: "Derecho Artificial",
+    authorName: "Ricardo Scarpa",
   });
 
   const genericJsonLd = createGenericArticleJsonLd({
@@ -178,7 +183,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     headline: entry.title,
     description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
     datePublished: date,
-    authorName: "Derecho Artificial",
+    authorName: "Ricardo Scarpa",
   });
 
   const articleSchema = {
