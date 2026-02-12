@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
-import { createNewsArticleJsonLd } from "@/components/seo/StructuredData";
+import { createNewsArticleJsonLd, createGenericArticleJsonLd, StructuredData } from "@/components/seo/StructuredData";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { Button } from "@/components/ui/button";
 import type { ResourceEntry } from "@/lib/resources";
@@ -74,11 +74,20 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
       authorName: jsonEntry.author,
     });
 
+    const genericJsonLd = createGenericArticleJsonLd({
+      url: jsonEntry.url,
+      headline: jsonEntry.title,
+      description: jsonEntry.description,
+      datePublished: jsonEntry.datePublished,
+      authorName: jsonEntry.author,
+    });
+
     return (
       <>
         <Script id={`ld-article-actualidad-ia-${slug}`} type="application/ld+json" strategy="beforeInteractive">
           {JSON.stringify(jsonLd)}
         </Script>
+        <StructuredData data={genericJsonLd} />
         <LegalLayout
           title={jsonEntry.title}
           category="Actualidad IA"
@@ -112,11 +121,20 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     authorName: "Derecho Artificial",
   });
 
+  const genericJsonLd = createGenericArticleJsonLd({
+    url: `https://derechoartificial.com/actualidad-ia/${entry.slug}`,
+    headline: entry.title,
+    description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+    datePublished: date,
+    authorName: "Derecho Artificial",
+  });
+
   return (
     <>
       <Script id={`ld-article-actualidad-ia-${slug}`} type="application/ld+json" strategy="beforeInteractive">
         {JSON.stringify(jsonLd)}
       </Script>
+      <StructuredData data={genericJsonLd} />
       <LegalLayout
         title={entry.title}
         category="Actualidad IA"

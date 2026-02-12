@@ -4,6 +4,7 @@ import { LegalLayout } from "@/components/layout/LegalLayout";
 import {
   StructuredData,
   createArticleJsonLd,
+  createGenericArticleJsonLd,
   createBreadcrumbJsonLd,
 } from "@/components/seo/StructuredData";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
@@ -57,6 +58,13 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
     datePublished,
   });
 
+  const genericJsonLd = createGenericArticleJsonLd({
+    url,
+    headline: entry.title,
+    description,
+    datePublished,
+  });
+
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       {
@@ -76,7 +84,7 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
 
   return (
     <>
-      <StructuredData data={[jsonLd, breadcrumbJsonLd]} />
+      <StructuredData data={[jsonLd, genericJsonLd, breadcrumbJsonLd]} />
       <LegalLayout title={entry.title} category="Guías y Protocolos">
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
           {entry.summaryHtml ? (

@@ -100,6 +100,39 @@ export function createArticleJsonLd(params: {
   };
 }
 
+export function createGenericArticleJsonLd(params: {
+  url: string;
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName?: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": params.headline,
+    "description": params.description,
+    "author": {
+      "@type": "Person",
+      "name": params.authorName ?? "Ricardo Scarpa",
+      "url": "https://www.derechoartificial.com/quienes-somos"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Derecho Artificial",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.derechoartificial.com/logo-principal.png"
+      }
+    },
+    "datePublished": params.datePublished,
+    "dateModified": params.dateModified ?? params.datePublished,
+    "image": params.image ?? "/logo-principal.png"
+  };
+}
+
 export function createNewsArticleJsonLd(params: {
   url: string;
   headline: string;

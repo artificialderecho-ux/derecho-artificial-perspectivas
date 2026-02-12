@@ -5,7 +5,11 @@ import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { LegalLayout } from "@/components/layout/LegalLayout";
-import { StructuredData, createArticleJsonLd } from "@/components/seo/StructuredData";
+import {
+  StructuredData,
+  createArticleJsonLd,
+  createGenericArticleJsonLd,
+} from "@/components/seo/StructuredData";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -117,6 +121,14 @@ export default async function FirmaScarpaSlugPage({
       authorName: jsonEntry.author,
     });
 
+    const genericJsonLd = createGenericArticleJsonLd({
+      url: jsonEntry.url,
+      headline: jsonEntry.title,
+      description: jsonEntry.description,
+      datePublished: jsonEntry.datePublished,
+      authorName: jsonEntry.author,
+    });
+
     const faqJsonLd = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -187,6 +199,7 @@ export default async function FirmaScarpaSlugPage({
     return (
       <>
         <StructuredData data={jsonLd} />
+        <StructuredData data={genericJsonLd} />
         <StructuredData data={faqJsonLd} />
         <StructuredData data={authorJsonLd} />
         <LegalLayout
@@ -277,6 +290,14 @@ export default async function FirmaScarpaSlugPage({
     authorName: "Ricardo Scarpa",
   });
 
+  const genericJsonLd = createGenericArticleJsonLd({
+    url,
+    headline: entry.title,
+    description,
+    datePublished: new Date().toISOString().slice(0, 10),
+    authorName: "Ricardo Scarpa",
+  });
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -347,6 +368,7 @@ export default async function FirmaScarpaSlugPage({
   return (
     <>
       <StructuredData data={jsonLd} />
+      <StructuredData data={genericJsonLd} />
       <StructuredData data={faqJsonLd} />
       <StructuredData data={authorJsonLd} />
       <LegalLayout
