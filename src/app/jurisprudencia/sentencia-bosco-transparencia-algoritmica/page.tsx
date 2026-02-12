@@ -4,6 +4,7 @@ import {
   StructuredData,
   createLegalDecisionJsonLd,
 } from "@/components/seo/StructuredData";
+import { RelatedArticles } from "@/components/RelatedArticles";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
@@ -312,6 +313,7 @@ export default function BoscoSentenciaPage() {
               También le puede interesar: <Link href="/quienes-somos" className="text-slate-700 hover:text-slate-900 font-medium underline">Biografía de Ricardo Scarpa</Link>
             </p>
           </section>
+          <RelatedArticles currentSlug="sentencia-bosco-transparencia-algoritmica" />
         </div>
       </LegalLayout>
     </>
