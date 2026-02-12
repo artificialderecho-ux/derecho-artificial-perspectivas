@@ -103,7 +103,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Cuándo es obligatorio cumplir el AI Act?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "La aplicación es escalonada: las prohibiciones de sistemas de riesgo inaceptable entraron en vigor el 2 de febrero de 2025. Las normas para modelos de IA de propósito general se aplican desde agosto de 2025, y la mayoría de las obligaciones para sistemas de alto riesgo serán exigibles a partir de agosto de 2026."
+          "text": "La aplicación es escalonada: las prohibiciones de sistemas de riesgo inaceptable (como social scoring o manipulación subliminal) entraron en vigor el 2 de febrero de 2025. Las normas para modelos de IA de propósito general (GPAI) se aplican desde el 2 de agosto de 2025. La mayoría de las obligaciones para sistemas de alto riesgo serán exigibles el 2 de agosto de 2026, y la adaptación completa de sistemas existentes finalizará el 2 de agosto de 2027."
         }
       },
       {
@@ -111,15 +111,15 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Qué sistemas de IA están prohibidos?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Están prohibidos los sistemas que suponen un riesgo inaceptable, como la puntuación social (social scoring) por parte de gobiernos, la manipulación subliminal que cause daños, la explotación de vulnerabilidades de grupos específicos y el uso de sistemas de identificación biométrica remota en tiempo real en espacios públicos para fines policiales (salvo excepciones muy tasadas)."
+          "text": "Según el Artículo 5 del AI Act, están prohibidos los sistemas de riesgo inaceptable: puntuación social (social scoring) gubernamental, manipulación subliminal con daño potencial, explotación de vulnerabilidades (edad, discapacidad), predicción delictiva basada en perfilado, bases de datos de reconocimiento facial mediante raspado (scraping) indiscriminado e identificación biométrica remota 'en tiempo real' en espacios públicos para fines policiales (salvo excepciones críticas)."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Cuáles son las multas por incumplimiento?",
+        "name": "¿Cuáles son las multas por incumplimiento del AI Act?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El Reglamento establece sanciones severas: hasta 35 millones de euros o el 7% de la facturación global anual por prácticas prohibidas; hasta 15 millones o el 3% por incumplimiento de obligaciones generales; y hasta 7,5 millones o el 1,5% por proporcionar información inexacta a las autoridades."
+          "text": "El régimen sancionador establece multas administrativas proporcionales: hasta 35 millones de euros o el 7% de la facturación global anual por prácticas prohibidas (Art. 5); hasta 15 millones o el 3% por incumplimiento de obligaciones de sistemas de alto riesgo; y hasta 7,5 millones o el 1,5% por proporcionar información incorrecta a las autoridades. Para las PYMEs, las multas se limitan al porcentaje menor indicado."
         }
       }
     ]
