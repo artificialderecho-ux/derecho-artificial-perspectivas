@@ -35,15 +35,18 @@ export async function generateMetadata({
 
   const entry: ResolvedContentEntry | ResourceEntry = (jsonEntry ?? resourceEntry)!;
 
+  const title = `${entry.title} | Derecho Artificial`;
   const description =
     jsonEntry?.description ??
-    resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) ??
-    entry.title;
+    resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) ??
+    entry.title.slice(0, 158);
 
-  const canonical = jsonEntry?.urlPath ?? `/actualidad-ia/${entry.slug}`;
+  const canonical = jsonEntry?.urlPath ? `https://www.derechoartificial.com${jsonEntry.urlPath}` : `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`;
+
+  const ogImage = "/logo-principal.png";
 
   return {
-    title: entry.title,
+    title,
     description,
     alternates: {
       canonical,
@@ -53,7 +56,20 @@ export async function generateMetadata({
       title: entry.title,
       description,
       url: canonical,
+      siteName: "Derecho Artificial",
       locale: "es_ES",
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: entry.title
+      }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+      images: [ogImage],
     },
   };
 }

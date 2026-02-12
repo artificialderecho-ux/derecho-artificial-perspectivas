@@ -22,18 +22,37 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const entry = await getSectionResourceEntry("guias", slug);
   if (!entry) return {};
-  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
+  
+  const title = `${entry.title} | Derecho Artificial`;
+  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || entry.title.slice(0, 158);
+  const canonical = `https://www.derechoartificial.com/recursos/guias/${entry.slug}`;
+  const ogImage = "/logo-principal.png";
+
   return {
-    title: entry.title,
+    title,
     description,
     alternates: {
-      canonical: `/recursos/guias/${entry.slug}`,
+      canonical,
     },
     openGraph: {
       type: "article",
       title: entry.title,
       description,
-      url: `/recursos/guias/${entry.slug}`,
+      url: canonical,
+      siteName: "Derecho Artificial",
+      locale: "es_ES",
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: entry.title
+      }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+      images: [ogImage],
     },
   };
 }

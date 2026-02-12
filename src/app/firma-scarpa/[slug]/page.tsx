@@ -47,25 +47,28 @@ export async function generateMetadata({
 
   const entry: ResolvedContentEntry | ResourceEntry = (jsonEntry ?? resourceEntry)!;
 
+  const title = `${entry.title} | Derecho Artificial`;
   const description =
     jsonEntry?.description ||
     (resourceEntry as ResourceEntry)?.description ||
-    resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) ||
-    entry.title;
+    resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) ||
+    entry.title.slice(0, 158);
 
   const canonical = jsonEntry?.urlPath ?? `https://www.derechoartificial.com/firma-scarpa/${entry.slug}`;
   
   // Get published time for OpenGraph
   const publishedTime = jsonEntry?.datePublished || (resourceEntry as any)?.datePublished;
   
-  // Get tags/keywords - using generic keywords since 'tags' property doesn't exist
+  // Get tags/keywords
   const keywords = "derecho artificial, inteligencia artificial, AI Act, RGPD, discriminación algorítmica, compliance IA, Ricardo Scarpa";
   
   // Get author information
   const authors = jsonEntry?.author ? [jsonEntry.author] : ["Ricardo Scarpa"];
 
+  const ogImage = "/logo-principal.png"; // Use default if no specific image
+
   return {
-    title: `${entry.title} | Derecho Artificial`,
+    title,
     description,
     keywords,
     alternates: {
@@ -76,11 +79,13 @@ export async function generateMetadata({
       title: entry.title,
       description,
       url: canonical,
+      siteName: "Derecho Artificial",
       locale: "es_ES",
       images: [{
-        url: "/logo-principal.png", 
+        url: ogImage, 
         width: 1200, 
-        height: 630 
+        height: 630,
+        alt: entry.title
       }],
       publishedTime,
       authors,
@@ -89,7 +94,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: entry.title,
       description,
-      images: ["/logo-principal.png"],
+      images: [ogImage],
     },
   };
 }
