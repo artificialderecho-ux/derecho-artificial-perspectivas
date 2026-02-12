@@ -12,7 +12,7 @@ export async function GET() {
 
   // Unir y ordenar por fecha descendente
   const allItems = [...contentItems]
-    .sort((a, b) => new Date(b.datePublished || b.date).getTime() - new Date(a.datePublished || a.date).getTime())
+    .sort((a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime())
 
   // Generar XML RSS
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -30,7 +30,7 @@ export async function GET() {
       <title>${escapeXml(item.title)}</title>
       <link>${baseUrl}/firma-scarpa/${item.slug}</link>
       <guid>${baseUrl}/firma-scarpa/${item.slug}</guid>
-      <pubDate>${new Date(item.datePublished || item.date).toUTCString()}</pubDate>
+      <pubDate>${new Date(item.datePublished).toUTCString()}</pubDate>
       <description>${escapeXml(item.description || item.excerpt || '')}</description>
     </item>`).join('')}
   </channel>
