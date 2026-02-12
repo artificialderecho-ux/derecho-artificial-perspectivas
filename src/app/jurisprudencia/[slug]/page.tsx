@@ -146,7 +146,11 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
           ) : null}
         </div>
         {entry.bodyHtml ? <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} /> : null}
-        <RelatedArticles currentSlug={`/jurisprudencia/${entry.slug}`} />
+        <RelatedArticles 
+          currentSlug={entry.slug} 
+          currentCategory="jurisprudencia"
+          currentTags={["#Jurisprudencia", "#IA"]}
+        />
       </LegalLayout>
     </>
   );

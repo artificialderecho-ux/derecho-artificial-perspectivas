@@ -241,7 +241,11 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
           <div className="lead text-muted-foreground mb-8" dangerouslySetInnerHTML={{ __html: entry.summaryHtml }} />
         )}
         <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} />
-        <RelatedArticles currentSlug={slug} />
+        <RelatedArticles 
+          currentSlug={slug} 
+          currentCategory="actualidad-ia"
+          currentTags={(resourceEntry as any)?.tags || []}
+        />
       </LegalLayout>
     </>
   );

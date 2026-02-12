@@ -207,7 +207,11 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
           ) : null}
         </div>
         {entry.bodyHtml ? <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} /> : null}
-        <RelatedArticles currentSlug={`/normativa/${entry.slug}`} />
+        <RelatedArticles 
+          currentSlug={entry.slug} 
+          currentCategory="normativa" 
+          currentTags={entry.slug === "ai-act-guia-completa" ? ["#AIAct", "#Regulación", "#UE"] : entry.slug === "rgpd-gobernanza-datos-ia" ? ["#RGPD", "#Privacidad", "#IA"] : []}
+        />
       </LegalLayout>
     </>
   );

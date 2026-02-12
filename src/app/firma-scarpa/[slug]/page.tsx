@@ -502,7 +502,11 @@ export default async function FirmaScarpaSlugPage({
         )}
 
         {/* Artículos relacionados */}
-        <RelatedArticles currentSlug={slug} />
+        <RelatedArticles 
+          currentSlug={slug} 
+          currentCategory="firma-scarpa"
+          currentTags={slug === "caso-itutorgroup" ? ["#Discriminación", "#Algoritmos", "#FirmaScarpa"] : slug === "tsj-canarias-ia" ? ["#Jurisprudencia", "#Abogacía", "#IA"] : []}
+        />
       </LegalLayout>
     </>
   );
