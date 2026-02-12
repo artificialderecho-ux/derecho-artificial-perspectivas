@@ -234,42 +234,50 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Cómo se complementan el RGPD y el AI Act?",
+        "name": "¿Es obligatorio el DPO en empresas de IA?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ambas normativas son de aplicación acumulativa. Mientras el RGPD protege la privacidad y autodeterminación informativa del individuo (enfoque en derechos), el AI Act introduce una capa de seguridad de producto y gestión de riesgos sistémicos (enfoque en producto). El cumplimiento de uno no exime del otro."
+          "text": "SÍ, si el tratamiento se realiza por autoridad pública, requiere observación habitual y sistemática de interesados a gran escala, o implica tratamiento a gran escala de categorías especiales de datos (salud, biometría, etc.)."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Cuáles son las multas por incumplimiento del RGPD en sistemas de IA?",
+        "name": "¿Cómo afecta el AI Act a algoritmos ya existentes antes de 2024?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El régimen sancionador establece dos niveles: hasta 20M EUR o 4% de la facturación global anual para infracciones graves (Art. 83.5), y hasta 10M EUR o 2% para infracciones administrativas (Art. 83.4). En España, la AEPD ha impuesto sanciones récord concentrándose en fallos de gobernanza algorítmica."
+          "text": "Sistemas alto riesgo existentes tienen hasta el 2 de agosto de 2027 para adaptarse a los requisitos de los Arts. 9-15 (gestión riesgos, calidad datos, supervisión humana) y obtener marcado CE."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Qué es el 'Accountability' o responsabilidad proactiva en IA?",
+        "name": "¿Es el consentimiento la mejor base legal para entrenar modelos IA?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Es la obligación del responsable (Art. 5.2 RGPD) de ser capaz de demostrar el cumplimiento de todos los principios de protección de datos en todo momento. En IA implica documentar la lógica del algoritmo, datasets, medidas de seguridad y realizar auditorías periódicas."
+          "text": "NO, suele ser preferible el interés legítimo (Art. 6.1.f) con test de ponderación o la ejecución de un contrato. El consentimiento plantea problemas de granularidad y revocabilidad (machine unlearning)."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Cuándo es obligatoria una EIPD para un sistema de IA?",
+        "name": "¿Qué pasa si mi proveedor de IA está fuera de la UE?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Es obligatoria (Art. 35 RGPD) antes del despliegue si el tratamiento entraña un alto riesgo para los derechos de las personas. En IA, esto ocurre casi siempre que hay decisiones automatizadas, perfiles a gran escala o uso de categorías especiales de datos."
+          "text": "Es transferencia internacional ilegal si no hay decisión de adecuación o Cláusulas Contractuales Tipo (CCT 2021) con medidas técnicas complementarias como cifrado E2E o seudonimización robusta."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Puedo usar datos públicos de redes sociales para entrenar mi IA?",
+        "name": "¿Cómo demuestro Responsabilidad Proactiva (accountability)?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No automáticamente. 'Público' no significa libre de uso. Se requiere una base legal (Art. 6) válida, y el interés legítimo suele ser difícil de sostener para scraping masivo sin consentimiento explícito del usuario para esa finalidad específica."
+          "text": "Mediante documentación exhaustiva: Registro de Actividades (RAT), EIPDs antes del despliegue, políticas de privacidad claras, contratos conformes Art. 28.3 y auditorías técnicas periódicas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo usar datos públicos de Instagram/TikTok para entrenar mi IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "NO automáticamente. 'Público' no significa libre de uso. El scraping masivo sin base legal válida infringe el RGPD y los términos de servicio de las plataformas."
         }
       },
       {
@@ -277,7 +285,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Es legal el reconocimiento facial en el entorno laboral?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Casi nunca es proporcionado según la AEPD. Existe una asimetría de poder que invalida el consentimiento. Solo se permite en supuestos de muy alta seguridad (infraestructuras críticas) y tras una EIPD robusta que demuestre que no hay alternativas menos invasivas."
+          "text": "Casi nunca es proporcionado según AEPD. La asimetría de poder invalida el consentimiento. Solo se permite en supuestos de muy alta seguridad (infraestructuras críticas) con EIPD robusta."
         }
       },
       {
@@ -285,31 +293,31 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Qué son los neurodatos y cómo se protegen?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Son datos obtenidos de la actividad cerebral. Se consideran categorías especiales de datos (salud) bajo el Art. 9 del RGPD y requieren protección reforzada, consentimiento explícito informado y medidas de seguridad máximas."
+          "text": "Información de actividad cerebral. Se consideran datos de salud (categoría especial Art. 9 RGPD). Requieren protección reforzada, consentimiento informado médico-legal y EIPD obligatoria."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Qué diferencia hay entre seudonimización y anonimización?",
+        "name": "¿Qué es la seudonimización y cuándo es obligatoria?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "La seudonimización (Art. 4.5) es reversible con información adicional guardada aparte; los datos siguen siendo personales. La anonimización es irreversible; los datos dejan de estar sujetos al RGPD. Para entrenamiento de IA se recomienda la seudonimización como medida de seguridad."
+          "text": "Sustituir identificadores por códigos reversibles con información adicional separada. Es obligatoria para investigación científica (Art. 89) y muy recomendada para datasets de entrenamiento IA."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Es válido el consentimiento dado bajo presión o asimetría?",
+        "name": "¿Es nulo el consentimiento dado bajo presión?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No, es nulo de pleno derecho. El consentimiento debe ser libre (Art. 4.11). Si existe un desequilibrio claro (como empleador-empleado o autoridad-ciudadano), difícilmente se considera prestado libremente si no hay una opción real de rechazo sin perjuicio."
+          "text": "SÍ, absolutamente. El consentimiento debe ser libre. Si hay desequilibrio claro (empleador, autoridad) y no hay opción real de rechazo sin perjuicio, el consentimiento es nulo de pleno derecho."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Qué sanción conlleva no notificar una brecha de seguridad?",
+        "name": "¿Qué sanción conlleva NO notificar una brecha de seguridad?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Conlleva una doble sanción: por la brecha en sí (hasta 10M EUR o 2% facturación) y un agravante por no notificar a la autoridad en 72h o a los afectados. La ocultación deliberada puede elevar la sanción al máximo permitido."
+          "text": "Doble sanción: por la brecha (hasta 10M EUR) y por no notificar (agravante). La ocultación deliberada puede elevar la sanción al máximo del 4% de la facturación global."
         }
       },
       {
@@ -317,15 +325,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Quién tiene la última palabra sobre IA: AESIA o AEPD?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Depende del aspecto. La AEPD tiene exclusividad en derechos fundamentales y protección de datos. La AESIA supervisa la seguridad técnica del producto IA. En caso de conflicto sobre derechos de las personas, prevalece el criterio de la AEPD."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué es la transparencia algorítmica?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Es el derecho del interesado a recibir información significativa sobre la lógica aplicada en decisiones automatizadas (Art. 13-14 RGPD). La organización debe ser capaz de explicar cómo y por qué el algoritmo llegó a un resultado específico."
+          "text": "Depende: AEPD exclusiva en derechos fundamentales y datos personales; AESIA en seguridad técnica del producto IA. En caso de impacto en privacidad, prevalece la AEPD."
         }
       }
     ]
