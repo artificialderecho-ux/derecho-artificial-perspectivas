@@ -31,7 +31,7 @@ export async function GET() {
       <link>${baseUrl}/firma-scarpa/${item.slug}</link>
       <guid>${baseUrl}/firma-scarpa/${item.slug}</guid>
       <pubDate>${new Date(item.datePublished).toUTCString()}</pubDate>
-      <description>${escapeXml(item.description || item.excerpt || '')}</description>
+      <description>${escapeXml(item.description || '')}</description>
     </item>`).join('')}
   </channel>
 </rss>`
