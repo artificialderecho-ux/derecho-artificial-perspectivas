@@ -320,6 +320,13 @@ export default async function FirmaScarpaSlugPage({
   const description =
     entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) || entry.title;
 
+  const datePublished =
+    entry.dateMs != null && !Number.isNaN(entry.dateMs)
+      ? new Date(entry.dateMs).toISOString().slice(0, 10)
+      : new Date().toISOString().slice(0, 10);
+
+  const postDate = (entry as any).date || (entry as any).publishedAt || (entry as any).updatedAt || datePublished;
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -338,8 +345,8 @@ export default async function FirmaScarpaSlugPage({
         "url": "https://www.derechoartificial.com/logo-principal.png"
       }
     },
-    "datePublished": new Date().toISOString().slice(0, 10),
-    "dateModified": new Date().toISOString().slice(0, 10),
+    "datePublished": postDate,
+    "dateModified": (entry as any).updatedAt || postDate,
     "image": {
       "@type": "ImageObject",
       "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",

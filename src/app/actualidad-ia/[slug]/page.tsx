@@ -173,16 +173,17 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
 
   // It's a resource entry
   const entry = resourceEntry!;
-  const date =
-    entry.dateMs != null && !Number.isNaN(entry.dateMs)
-      ? new Date(entry.dateMs).toISOString()
-      : new Date().toISOString();
+  const datePublished = (entry as any).dateMs != null && !Number.isNaN((entry as any).dateMs)
+    ? new Date((entry as any).dateMs).toISOString().slice(0, 10)
+    : new Date().toISOString().slice(0, 10);
+
+  const postDate = (entry as any).date || (entry as any).publishedAt || (entry as any).updatedAt || datePublished;
 
   const jsonLd = createNewsArticleJsonLd({
     url: `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`,
     headline: entry.title,
     description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-    datePublished: date,
+    datePublished: postDate,
     authorName: "Ricardo Scarpa",
   });
 
@@ -190,7 +191,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     url: `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`,
     headline: entry.title,
     description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-    datePublished: date,
+    datePublished: postDate,
     authorName: "Ricardo Scarpa",
   });
 
@@ -212,8 +213,8 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         "url": "https://www.derechoartificial.com/logo-principal.png"
       }
     },
-    "datePublished": date,
-    "dateModified": date,
+    "datePublished": postDate,
+    "dateModified": (entry as any).updatedAt || postDate,
     "image": {
       "@type": "ImageObject",
       "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
@@ -236,7 +237,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
       <LegalLayout
         title={entry.title}
         category="Actualidad IA"
-        date={date}
+        date={postDate}
         author={{ name: "Ricardo Scarpa" }}
       >
         <Breadcrumbs items={[

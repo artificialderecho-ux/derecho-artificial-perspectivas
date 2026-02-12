@@ -71,6 +71,8 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
       ? new Date(entry.dateMs).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10);
 
+  const postDate = (entry as any).date || (entry as any).publishedAt || (entry as any).updatedAt || datePublished;
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -89,8 +91,8 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
         "url": "https://www.derechoartificial.com/logo-principal.png"
       }
     },
-    "datePublished": datePublished,
-    "dateModified": datePublished,
+    "datePublished": postDate,
+    "dateModified": (entry as any).updatedAt || postDate,
     "image": {
       "@type": "ImageObject",
       "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
