@@ -34,8 +34,8 @@ export default function LegalAIGlossaryPage() {
     <>
       <Breadcrumbs 
         items={[
-          { name: "Home", href: "/en" },
-          { name: "Legal AI Glossary", href: "/en/legal-ai-glossary" }
+          { label: "Home", href: "/en" },
+          { label: "Legal AI Glossary", href: "/en/legal-ai-glossary" }
         ]}
       />
       <main className="min-h-screen pb-20 bg-slate-50">

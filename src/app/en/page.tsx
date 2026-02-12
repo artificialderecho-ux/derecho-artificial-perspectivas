@@ -316,7 +316,7 @@ export default async function EnglishHomePage() {
     <>
       <Breadcrumbs 
         items={[
-          { name: "Home", href: "/en" }
+          { label: "Home", href: "/en" }
         ]}
       />
       <main>

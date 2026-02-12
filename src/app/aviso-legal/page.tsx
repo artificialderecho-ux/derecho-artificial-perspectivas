@@ -14,8 +14,8 @@ export default function AvisoLegalPage() {
     <>
       <Breadcrumbs 
         items={[
-          { name: "Inicio", href: "/" },
-          { name: "Aviso Legal", href: "/aviso-legal" }
+          { label: "Inicio", href: "/" },
+          { label: "Aviso Legal", href: "/aviso-legal" }
         ]}
       />
       <main>

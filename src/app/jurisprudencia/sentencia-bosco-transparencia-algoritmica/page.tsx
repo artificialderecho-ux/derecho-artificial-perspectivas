@@ -28,9 +28,9 @@ export default function BoscoSentenciaPage() {
     <>
       <Breadcrumbs 
         items={[
-          { name: "Inicio", href: "/" },
-          { name: "Jurisprudencia", href: "/jurisprudencia" },
-          { name: "Sentencia BOSCO", href: "/jurisprudencia/sentencia-bosco-transparencia-algoritmica" }
+          { label: "Inicio", href: "/" },
+          { label: "Jurisprudencia", href: "/jurisprudencia" },
+          { label: "Sentencia BOSCO", href: "/jurisprudencia/sentencia-bosco-transparencia-algoritmica" }
         ]}
       />
       <StructuredData data={jsonLd} />

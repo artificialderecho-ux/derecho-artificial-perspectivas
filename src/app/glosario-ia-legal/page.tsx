@@ -32,8 +32,8 @@ export default function GlossaryPage() {
     <>
       <Breadcrumbs 
         items={[
-          { name: "Inicio", href: "/" },
-          { name: "Glosario IA Legal", href: "/glosario-ia-legal" }
+          { label: "Inicio", href: "/" },
+          { label: "Glosario IA Legal", href: "/glosario-ia-legal" }
         ]}
       />
       <main className="min-h-screen pb-20 bg-slate-50">
