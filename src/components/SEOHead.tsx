@@ -49,6 +49,7 @@ export function SEOHead({
       title,
       description,
       images: [finalImage],
+      creator: "@RicardoScarpa",
     },
   };
 }

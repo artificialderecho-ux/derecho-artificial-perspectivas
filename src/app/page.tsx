@@ -32,13 +32,25 @@ export const metadata: Metadata = {
     title: "Derecho, ética y regulación de la IA",
     description:
       "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
-    url: "/",
+    url: "https://www.derechoartificial.com",
+    siteName: "Derecho Artificial",
     locale: "es_ES",
     images: [
       {
         url: "/logo-principal.png",
+        width: 1200,
+        height: 630,
+        alt: "Derecho Artificial - Perspectivas Legales sobre IA",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Derecho, ética y regulación de la IA",
+    description:
+      "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
+    images: ["/logo-principal.png"],
+    creator: "@RicardoScarpa", // Assuming this from previous context
   },
 };
 

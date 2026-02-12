@@ -95,6 +95,7 @@ export async function generateMetadata({
       title: entry.title,
       description,
       images: [ogImage],
+      creator: "@RicardoScarpa",
     },
   };
 }

@@ -15,6 +15,27 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.derechoartificial.com/jurisprudencia/sentencia-bosco-transparencia-algoritmica",
   },
+  openGraph: {
+    type: "article",
+    title: "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",
+    description: "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO.",
+    url: "https://www.derechoartificial.com/jurisprudencia/sentencia-bosco-transparencia-algoritmica",
+    siteName: "Derecho Artificial",
+    locale: "es_ES",
+    images: [{
+      url: "/logo-principal.png",
+      width: 1200,
+      height: 630,
+      alt: "Sentencia BOSCO: Transparencia Algorítmica",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sentencia BOSCO: Transparencia Algorítmica",
+    description: "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO.",
+    images: ["/logo-principal.png"],
+    creator: "@RicardoScarpa",
+  },
 };
 
 export default function BoscoSentenciaPage() {

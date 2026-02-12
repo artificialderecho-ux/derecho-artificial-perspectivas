@@ -24,16 +24,27 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Quiénes somos",
+    title: "Quiénes somos | Derecho Artificial",
     description:
       "Conoce el proyecto editorial Derecho Artificial, la trayectoria del responsable editorial y el Manifiesto Editorial.",
-    url: "/quienes-somos",
+    url: "https://www.derechoartificial.com/quienes-somos",
+    siteName: "Derecho Artificial",
     locale: "es_ES",
     images: [
       {
         url: "/logo-principal.png",
+        width: 1200,
+        height: 630,
+        alt: "Sobre Derecho Artificial",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Quiénes somos",
+    description: "Conoce el proyecto editorial Derecho Artificial y su misión.",
+    images: ["/logo-principal.png"],
+    creator: "@RicardoScarpa",
   },
 };
 

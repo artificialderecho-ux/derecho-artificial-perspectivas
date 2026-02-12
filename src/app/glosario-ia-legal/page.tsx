@@ -13,6 +13,27 @@ export const metadata: Metadata = {
       en: "https://derechoartificial.com/en/legal-ai-glossary",
     },
   },
+  openGraph: {
+    type: "website",
+    title: "Glosario de IA Legal y Regulación Europea",
+    description: "Diccionario especializado en términos de Inteligencia Artificial, EU AI Act, Legaltech y ética digital.",
+    url: "https://derechoartificial.com/glosario-ia-legal",
+    siteName: "Derecho Artificial",
+    locale: "es_ES",
+    images: [{
+      url: "/logo-principal.png",
+      width: 1200,
+      height: 630,
+      alt: "Glosario de IA Legal",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Glosario de IA Legal",
+    description: "Diccionario especializado en términos de Inteligencia Artificial y Regulación Europea.",
+    images: ["/logo-principal.png"],
+    creator: "@RicardoScarpa",
+  },
 };
 
 export default function GlossaryPage() {

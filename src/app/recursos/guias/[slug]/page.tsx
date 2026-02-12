@@ -55,6 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       title: entry.title,
       description,
       images: [ogImage],
+      creator: "@RicardoScarpa",
     },
   };
 }

@@ -21,18 +21,36 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const entry = await getSectionResourceEntry("normativa", slug);
   if (!entry) return {};
-  const description = entry.description || entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
+  const description = entry.description || entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158);
+  const canonical = `https://www.derechoartificial.com/normativa/${entry.slug}`;
+  const ogImage = "/logo-principal.png";
+
   return {
-    title: entry.title,
+    title: `${entry.title} | Derecho Artificial`,
     description,
     alternates: {
-      canonical: `/normativa/${entry.slug}`,
+      canonical,
     },
     openGraph: {
       type: "article",
       title: entry.title,
       description,
-      url: `/normativa/${entry.slug}`,
+      url: canonical,
+      siteName: "Derecho Artificial",
+      locale: "es_ES",
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: entry.title
+      }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+      images: [ogImage],
+      creator: "@RicardoScarpa",
     },
   };
 }
