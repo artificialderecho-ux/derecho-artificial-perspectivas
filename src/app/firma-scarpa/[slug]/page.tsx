@@ -201,8 +201,20 @@ export default async function FirmaScarpaSlugPage({
       "description": "Abogado y académico especializado en la regulación de la inteligencia artificial, protección de datos y ética tecnológica. Profesor en UEM, UNED e IE Business School."
     };
 
+    const articleSchema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: jsonEntry.title,
+      description: jsonEntry.description,
+      author: { "@type": "Person", name: "Ricardo Scarpa" },
+      publisher: { "@type": "Organization", name: "Derecho Artificial" },
+      datePublished: jsonEntry.datePublished,
+      image: "/logo-principal.png"
+    };
+
     return (
       <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
         <StructuredData data={jsonLd} />
         <StructuredData data={genericJsonLd} />
         <StructuredData data={faqJsonLd} />
@@ -286,6 +298,17 @@ export default async function FirmaScarpaSlugPage({
   const url = `https://derechoartificial.com/firma-scarpa/${entry.slug}`;
   const description =
     entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) || entry.title;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: entry.title,
+    description: description,
+    author: { "@type": "Person", name: "Ricardo Scarpa" },
+    publisher: { "@type": "Organization", name: "Derecho Artificial" },
+    datePublished: new Date().toISOString().slice(0, 10),
+    image: "/logo-principal.png"
+  };
 
   const jsonLd = createArticleJsonLd({
     url,
@@ -372,6 +395,7 @@ export default async function FirmaScarpaSlugPage({
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <StructuredData data={jsonLd} />
       <StructuredData data={genericJsonLd} />
       <StructuredData data={faqJsonLd} />

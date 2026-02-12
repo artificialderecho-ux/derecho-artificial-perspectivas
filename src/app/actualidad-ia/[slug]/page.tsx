@@ -100,8 +100,20 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
       authorName: jsonEntry.author,
     });
 
+    const articleSchema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: jsonEntry.title,
+      description: jsonEntry.description,
+      author: { "@type": "Person", name: jsonEntry.author },
+      publisher: { "@type": "Organization", name: "Derecho Artificial" },
+      datePublished: jsonEntry.datePublished,
+      image: "/logo-principal.png"
+    };
+
     return (
       <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
         <Script id={`ld-article-actualidad-ia-${slug}`} type="application/ld+json" strategy="beforeInteractive">
           {JSON.stringify(jsonLd)}
         </Script>
@@ -153,8 +165,20 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     authorName: "Derecho Artificial",
   });
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: entry.title,
+    description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+    author: { "@type": "Person", name: "Derecho Artificial" },
+    publisher: { "@type": "Organization", name: "Derecho Artificial" },
+    datePublished: date,
+    image: "/logo-principal.png"
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <Script id={`ld-article-actualidad-ia-${slug}`} type="application/ld+json" strategy="beforeInteractive">
         {JSON.stringify(jsonLd)}
       </Script>

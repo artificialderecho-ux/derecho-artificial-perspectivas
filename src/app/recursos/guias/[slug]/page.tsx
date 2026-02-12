@@ -103,8 +103,20 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
     ],
   });
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: entry.title,
+    description: description,
+    author: { "@type": "Person", name: "Ricardo Scarpa" },
+    publisher: { "@type": "Organization", name: "Derecho Artificial" },
+    datePublished: datePublished,
+    image: "/logo-principal.png"
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <StructuredData data={[jsonLd, genericJsonLd, breadcrumbJsonLd]} />
       <LegalLayout title={entry.title} category="Guías y Protocolos">
         <Breadcrumbs items={[

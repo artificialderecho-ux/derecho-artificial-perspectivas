@@ -12,9 +12,23 @@ export const metadata: Metadata = {
     "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente | DerechoArtificial",
   description:
     "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO. Un hito en transparencia administrativa comentado por Ricardo Scarpa.",
+  alternates: {
+    canonical: "https://www.derechoartificial.com/jurisprudencia/sentencia-bosco-transparencia-algoritmica",
+  },
 };
 
 export default function BoscoSentenciaPage() {
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",
+    description: "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO. Un hito en transparencia administrativa comentado por Ricardo Scarpa.",
+    author: { "@type": "Person", name: "Ricardo Scarpa" },
+    publisher: { "@type": "Organization", name: "Derecho Artificial" },
+    datePublished: "2026-01-30",
+    image: "/logo-principal.png"
+  };
+
   const jsonLd = createLegalDecisionJsonLd({
     url: "https://derechoartificial.com/jurisprudencia/sentencia-bosco-transparencia-algoritmica",
     name: "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",
@@ -26,6 +40,7 @@ export default function BoscoSentenciaPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <Breadcrumbs 
         items={[
           { label: "Inicio", href: "/" },
