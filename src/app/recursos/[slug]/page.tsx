@@ -71,7 +71,16 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
       }
     },
     datePublished: datePublished,
-    image: "https://www.derechoartificial.com/og-default-1200x630.jpg"
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "width": 1200,
+      "height": 630
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    }
   };
 
   const jsonLd =
