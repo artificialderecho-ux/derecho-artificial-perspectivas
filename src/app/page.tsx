@@ -10,7 +10,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 export const metadata: Metadata = {
   title: "Derecho, ética y regulación de la IA",
   description:
-    "Análisis jurídico y editorial independiente sobre inteligencia artificial: normativa, jurisprudencia, cumplimiento y práctica jurídica.",
+    "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
   keywords: [
     "derecho artificial",
     "inteligencia artificial",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Derecho, ética y regulación de la IA",
     description:
-      "Análisis jurídico y editorial independiente sobre inteligencia artificial: normativa, jurisprudencia, cumplimiento y práctica jurídica.",
+      "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
     url: "/",
     locale: "es_ES",
     images: [
@@ -422,11 +422,11 @@ export default async function HomePage() {
             Derecho, ética y regulación de la IA
           </p>
           <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
-            Derecho Artificial, Ética y Regulación de la IA
+            Análisis Jurídico Experto del Reglamento IA
           </h1>
-          <h2 className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
-            Más allá de las noticias: análisis jurídico independiente y criterio experto sobre el Reglamento de IA y su impacto legal. La referencia práctica para abogados y profesionales del compliance.
-          </h2>
+          <p className="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
+            Guías prácticas y criterio independiente para abogados y compliance
+          </p>
         </div>
       </section>
       <section className="section-spacing bento-surface">
