@@ -45,7 +45,7 @@ export async function generateMetadata({
 
   const canonical = jsonEntry?.urlPath ? `https://www.derechoartificial.com${jsonEntry.urlPath}` : `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`;
 
-  const ogImage = "/logo-principal.png";
+  const ogImage = "https://www.derechoartificial.com/default-og-1200x630.jpg";
 
   return {
     title,
@@ -66,6 +66,8 @@ export async function generateMetadata({
         height: 630,
         alt: entry.title
       }],
+      publishedTime: jsonEntry?.datePublished || (resourceEntry as any)?.dateMs ? new Date(jsonEntry?.datePublished || (resourceEntry as any)?.dateMs).toISOString() : undefined,
+      authors: ['Ricardo Scarpa']
     },
     twitter: {
       card: "summary_large_image",

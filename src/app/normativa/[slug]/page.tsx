@@ -6,6 +6,7 @@ import {
   createBreadcrumbJsonLd,
   createLegislationJsonLd,
 } from "@/components/seo/StructuredData";
+import { RelatedArticles } from "@/components/RelatedArticles";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
 type Params = {
@@ -21,9 +22,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const entry = await getSectionResourceEntry("normativa", slug);
   if (!entry) return {};
-  const description = entry.description || entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158);
+  const description = entry.description || entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
   const canonical = `https://www.derechoartificial.com/normativa/${entry.slug}`;
-  const ogImage = "/logo-principal.png";
+  const ogImage = "https://www.derechoartificial.com/default-og-1200x630.jpg";
 
   return {
     title: `${entry.title} | Derecho Artificial`,
@@ -44,6 +45,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         height: 630,
         alt: entry.title
       }],
+      publishedTime: entry.dateMs != null ? new Date(entry.dateMs).toISOString() : undefined,
+      authors: ['Ricardo Scarpa']
     },
     twitter: {
       card: "summary_large_image",
@@ -204,6 +207,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
           ) : null}
         </div>
         {entry.bodyHtml ? <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} /> : null}
+        <RelatedArticles currentSlug={`/normativa/${entry.slug}`} />
       </LegalLayout>
     </>
   );

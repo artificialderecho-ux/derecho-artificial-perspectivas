@@ -7,6 +7,7 @@ import {
   createLegalDecisionJsonLd,
 } from "@/components/seo/StructuredData";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { RelatedArticles } from "@/components/RelatedArticles";
 
 type Params = {
   slug: string;
@@ -21,18 +22,38 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const entry = await getSectionResourceEntry("jurisprudencia", slug);
   if (!entry) return {};
-  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
+  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
+  const canonical = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
+  const ogImage = "https://www.derechoartificial.com/default-og-1200x630.jpg";
+
   return {
-    title: entry.title,
+    title: `${entry.title} | Derecho Artificial`,
     description,
     alternates: {
-      canonical: `/jurisprudencia/${entry.slug}`,
+      canonical,
     },
     openGraph: {
       type: "article",
       title: entry.title,
       description,
-      url: `/jurisprudencia/${entry.slug}`,
+      url: canonical,
+      siteName: "Derecho Artificial",
+      locale: "es_ES",
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: entry.title
+      }],
+      publishedTime: entry.dateMs != null ? new Date(entry.dateMs).toISOString() : undefined,
+      authors: ['Ricardo Scarpa']
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+      images: [ogImage],
+      creator: "@RicardoScarpa",
     },
   };
 }
@@ -125,6 +146,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
           ) : null}
         </div>
         {entry.bodyHtml ? <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} /> : null}
+        <RelatedArticles currentSlug={`/jurisprudencia/${entry.slug}`} />
       </LegalLayout>
     </>
   );

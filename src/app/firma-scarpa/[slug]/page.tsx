@@ -65,7 +65,7 @@ export async function generateMetadata({
   // Get author information
   const authors = jsonEntry?.author ? [jsonEntry.author] : ["Ricardo Scarpa"];
 
-  const ogImage = "/logo-principal.png"; // Use default if no specific image
+  const ogImage = "https://www.derechoartificial.com/default-og-1200x630.jpg";
 
   return {
     title,
@@ -87,7 +87,7 @@ export async function generateMetadata({
         height: 630,
         alt: entry.title
       }],
-      publishedTime,
+      publishedTime: publishedTime ? new Date(publishedTime).toISOString() : undefined,
       authors,
     },
     twitter: {

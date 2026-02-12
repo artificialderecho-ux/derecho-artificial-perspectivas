@@ -11,13 +11,13 @@ import {
 } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://derechoartificial.com"),
+  metadataBase: new URL("https://www.derechoartificial.com"),
   title: {
-    default: "Derecho Artificial",
+    default: "Derecho, ética y regulación de la IA | Derecho Artificial",
     template: "%s | Derecho Artificial",
   },
   description:
-    "Análisis jurídico, ético y regulatorio de la inteligencia artificial. Enfoque editorial independiente centrado en normativa, jurisprudencia y práctica jurídica.",
+    "Análisis jurídico independiente sobre inteligencia artificial, Reglamento IA, ética y compliance para abogados y profesionales.",
   keywords: [
     "derecho artificial",
     "inteligencia artificial",
@@ -39,23 +39,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Derecho Artificial",
-    url: "https://derechoartificial.com",
-    title: "Derecho Artificial",
+    url: "https://www.derechoartificial.com",
+    title: "Derecho Artificial | Análisis Jurídico de IA, Ética y Regulación",
     description:
-      "Análisis jurídico, ético y regulatorio de la inteligencia artificial. Enfoque editorial independiente centrado en normativa, jurisprudencia y práctica jurídica.",
+      "Guías prácticas y criterio experto sobre el impacto legal de la IA. Referencia para abogados y compliance.",
     locale: "es_ES",
     images: [
       {
-        url: "/logo-principal.png",
+        url: "https://www.derechoartificial.com/og-home-1200x630.jpg",
+        width: 1200,
+        height: 630,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Derecho Artificial",
+    title: "Derecho Artificial | IA, Ética y Regulación",
     description:
-      "Análisis jurídico, ético y regulatorio de la inteligencia artificial. Enfoque editorial independiente centrado en normativa, jurisprudencia y práctica jurídica.",
-    images: ["/logo-principal.png"],
+      "Análisis jurídico independiente sobre inteligencia artificial, Reglamento IA, ética y compliance.",
+    images: ["https://www.derechoartificial.com/og-home-1200x630.jpg"],
   },
 };
 
@@ -69,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             createWebSiteJsonLd(),
             createPersonJsonLd({
               name: "Ricardo Scarpa",
-              url: "https://derechoartificial.com/quienes-somos",
+              url: "https://www.derechoartificial.com/quienes-somos",
               description:
                 "Responsable editorial de Derecho Artificial. Licenciado en Derecho por la Universidad Europea de Madrid. Máster en Informática Jurídica por la UNED. Máster en Dirección de Empresas Audiovisuales por el Instituto de Empresa (IE) de Madrid.",
             }),
