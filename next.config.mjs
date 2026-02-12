@@ -13,7 +13,6 @@ const nextConfig = {
 
   // Compresión y minificación
   compress: true,
-  swcMinify: true,
 
   // Headers de seguridad (RGPD y buenas prácticas)
   async headers() {

@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { listContentSlugs, getContentEntry, listSectionResourceSlugs, getSectionResourceEntry } from '@/lib/content'
+import { listContentSlugs, getContentEntry } from '@/lib/content'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.derechoartificial.com'
@@ -29,18 +29,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  // Recursos (PDFs, guías, etc.) de Firma Scarpa
-  const resourceSlugs = await listSectionResourceSlugs('firma-scarpa')
-  const resourceEntries = await Promise.all(
-    resourceSlugs.map(slug => getSectionResourceEntry('firma-scarpa', slug))
-  )
-
-  const resourcePages = resourceEntries.map(entry => ({
-    url: `${baseUrl}/firma-scarpa/${entry.slug}`,
-    lastModified: new Date(entry.datePublished || entry.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
-
-  return [...staticPages, ...articlePages, ...resourcePages]
+  return [...staticPages, ...articlePages]
 }

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { listContentSlugs, getContentEntry, listSectionResourceSlugs, getSectionResourceEntry } from '@/lib/content'
+import { listContentSlugs, getContentEntry } from '@/lib/content'
 
 interface RelatedArticlesProps {
   currentSlug: string
@@ -12,14 +12,8 @@ export default async function RelatedArticles({ currentSlug }: RelatedArticlesPr
     contentSlugs.map(slug => getContentEntry('firma-scarpa', slug))
   )
 
-  // Cargar recursos (PDFs, etc.)
-  const resourceSlugs = await listSectionResourceSlugs('firma-scarpa')
-  const resourceItems = await Promise.all(
-    resourceSlugs.map(slug => getSectionResourceEntry('firma-scarpa', slug))
-  )
-
   // Unir todo y filtrar el actual
-  const allArticles = [...contentItems, ...resourceItems]
+  const allArticles = [...contentItems]
     .filter(item => item.slug !== currentSlug)
     .sort((a, b) => new Date(b.datePublished || b.date).getTime() - new Date(a.datePublished || a.date).getTime())
     .slice(0, 3) // solo 3

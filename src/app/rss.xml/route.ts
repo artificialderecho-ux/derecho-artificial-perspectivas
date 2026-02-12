@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { listContentSlugs, getContentEntry, listSectionResourceSlugs, getSectionResourceEntry } from '@/lib/content'
+import { listContentSlugs, getContentEntry } from '@/lib/content'
 
 export async function GET() {
   const baseUrl = 'https://www.derechoartificial.com'
@@ -10,14 +10,8 @@ export async function GET() {
     contentSlugs.map(slug => getContentEntry('firma-scarpa', slug))
   )
 
-  // Cargar recursos
-  const resourceSlugs = await listSectionResourceSlugs('firma-scarpa')
-  const resourceItems = await Promise.all(
-    resourceSlugs.map(slug => getSectionResourceEntry('firma-scarpa', slug))
-  )
-
   // Unir y ordenar por fecha descendente
-  const allItems = [...contentItems, ...resourceItems]
+  const allItems = [...contentItems]
     .sort((a, b) => new Date(b.datePublished || b.date).getTime() - new Date(a.datePublished || a.date).getTime())
 
   // Generar XML RSS
