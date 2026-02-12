@@ -107,23 +107,28 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: entry.title,
-    description: description,
-    author: { 
+    "headline": entry.title,
+    "description": description,
+    "author": { 
       "@type": "Person", 
-      name: "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+      "name": "Ricardo Scarpa",
+      "url": "https://www.derechoartificial.com/quienes-somos"
     },
-    publisher: { 
+    "publisher": { 
       "@type": "Organization", 
-      name: "Derecho Artificial",
-      logo: {
+      "name": "Derecho Artificial",
+      "logo": {
         "@type": "ImageObject",
-        url: "https://www.derechoartificial.com/logo-principal.png"
+        "url": "https://www.derechoartificial.com/logo-principal.png"
       }
     },
-    datePublished: datePublished,
-    image: "https://www.derechoartificial.com/default-og.jpg"
+    "datePublished": datePublished,
+    "dateModified": datePublished,
+    "image": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    }
   };
 
   return (

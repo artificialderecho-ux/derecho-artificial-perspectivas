@@ -74,27 +74,28 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "headline": entry.title,
+    "description": description,
+    "author": { 
+      "@type": "Person", 
+      "name": "Ricardo Scarpa",
+      "url": "https://www.derechoartificial.com/quienes-somos"
+    },
+    "publisher": { 
+      "@type": "Organization", 
+      "name": "Derecho Artificial",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.derechoartificial.com/logo-principal.png"
+      }
+    },
+    "datePublished": datePublished,
+    "dateModified": entry.date || datePublished,
+    "image": "https://www.derechoartificial.com/og-default-1200x630.jpg",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": url
-    },
-    headline: entry.title,
-    description: description,
-    author: { 
-      "@type": "Person", 
-      name: "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos"
-    },
-    publisher: { 
-      "@type": "Organization", 
-      name: "Derecho Artificial",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.derechoartificial.com/logo-principal.png"
-      }
-    },
-    datePublished: datePublished,
-    image: "https://www.derechoartificial.com/default-og.jpg"
+    }
   };
 
   const faqJsonLd = entry.slug === "ai-act-guia-completa" ? {

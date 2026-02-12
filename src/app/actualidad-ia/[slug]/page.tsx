@@ -191,27 +191,28 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "headline": entry.title,
+    "description": entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+    "author": { 
+      "@type": "Person", 
+      "name": "Ricardo Scarpa",
+      "url": "https://www.derechoartificial.com/quienes-somos"
+    },
+    "publisher": { 
+      "@type": "Organization", 
+      "name": "Derecho Artificial",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.derechoartificial.com/logo-principal.png"
+      }
+    },
+    "datePublished": date,
+    "dateModified": date,
+    "image": "https://www.derechoartificial.com/og-default-1200x630.jpg",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`
-    },
-    headline: entry.title,
-    description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-    author: { 
-      "@type": "Person", 
-      name: "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos"
-    },
-    publisher: { 
-      "@type": "Organization", 
-      name: "Derecho Artificial",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.derechoartificial.com/logo-principal.png"
-      }
-    },
-    datePublished: date,
-    image: "https://www.derechoartificial.com/default-og.jpg"
+    }
   };
 
   return (
