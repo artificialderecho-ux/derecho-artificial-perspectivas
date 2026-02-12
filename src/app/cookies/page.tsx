@@ -14,8 +14,8 @@ export default function CookiesPage() {
     <>
       <Breadcrumbs 
         items={[
-          { label: "Inicio", href: "/" },
-          { label: "Cookies", href: "/cookies" }
+          { name: "Inicio", href: "/" },
+          { name: "Cookies", href: "/cookies" }
         ]}
       />
       <main>

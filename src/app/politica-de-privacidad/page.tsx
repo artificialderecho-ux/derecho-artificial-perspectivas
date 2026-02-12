@@ -14,8 +14,8 @@ export default function PoliticaPrivacidadPage() {
     <>
       <Breadcrumbs 
         items={[
-          { label: "Inicio", href: "/" },
-          { label: "Política de Privacidad", href: "/politica-de-privacidad" }
+          { name: "Inicio", href: "/" },
+          { name: "Política de Privacidad", href: "/politica-de-privacidad" }
         ]}
       />
       <main>

@@ -42,8 +42,8 @@ export default function QuienesSomosPage() {
     <>
       <Breadcrumbs 
         items={[
-          { label: "Inicio", href: "/" },
-          { label: "Quiénes Somos", href: "/quienes-somos" }
+          { name: "Inicio", href: "/" },
+          { name: "Quiénes Somos", href: "/quienes-somos" }
         ]}
       />
       <StructuredData

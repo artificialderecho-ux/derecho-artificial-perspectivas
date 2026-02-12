@@ -404,7 +404,7 @@ export default async function HomePage() {
     <>
       <Breadcrumbs 
         items={[
-          { label: "Inicio", href: "/" }
+          { name: "Inicio", href: "/" }
         ]}
       />
       <main>

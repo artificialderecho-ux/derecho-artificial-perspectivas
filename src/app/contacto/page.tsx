@@ -17,8 +17,8 @@ export default function ContactoPage() {
     <>
       <Breadcrumbs 
         items={[
-          { label: "Inicio", href: "/" },
-          { label: "Contacto", href: "/contacto" }
+          { name: "Inicio", href: "/" },
+          { name: "Contacto", href: "/contacto" }
         ]}
       />
       <StructuredData
