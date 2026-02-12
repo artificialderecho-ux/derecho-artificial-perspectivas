@@ -218,9 +218,9 @@ export default async function FirmaScarpaSlugPage({
         >
           {/* Breadcrumbs para navegación y SEO */}
           <Breadcrumbs items={[
-            { name: 'Inicio', href: '/' },
-            { name: 'Firma Scarpa', href: '/firma-scarpa' },
-            { name: jsonEntry.title, href: `/firma-scarpa/${jsonEntry.slug}` }
+            { label: 'Inicio', href: '/' },
+            { label: 'Firma Scarpa', href: '/firma-scarpa' },
+            { label: jsonEntry.title, href: `/firma-scarpa/${jsonEntry.slug}` }
           ]} />
           
           <div className="mb-10 flex items-center justify-between">
@@ -384,6 +384,13 @@ export default async function FirmaScarpaSlugPage({
           href: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
         }}
       >
+        {/* Breadcrumbs para navegación y SEO */}
+        <Breadcrumbs items={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Firma Scarpa', href: '/firma-scarpa' },
+          { label: entry.title, href: `/firma-scarpa/${entry.slug}` }
+        ]} />
+
         <div className="mb-10 flex items-center justify-between">
           <Button asChild variant="outline" size="sm">
             <Link href="/firma-scarpa">Volver a Firma Scarpa</Link>

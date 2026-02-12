@@ -5,6 +5,7 @@ import Script from "next/script";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
 import { createNewsArticleJsonLd, createGenericArticleJsonLd, StructuredData } from "@/components/seo/StructuredData";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { Button } from "@/components/ui/button";
 import type { ResourceEntry } from "@/lib/resources";
@@ -110,6 +111,11 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
           date={jsonEntry.datePublished}
           author={{ name: jsonEntry.author }}
         >
+          <Breadcrumbs items={[
+            { label: 'Inicio', href: '/' },
+            { label: 'Actualidad IA', href: '/actualidad-ia' },
+            { label: jsonEntry.title, href: `/actualidad-ia/${jsonEntry.slug}` }
+          ]} />
           <div className="mb-10">
             <Button asChild variant="outline" size="sm">
               <Link href="/actualidad-ia">Volver a Actualidad IA</Link>
@@ -157,6 +163,11 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         date={date}
         author={{ name: "Derecho Artificial" }}
       >
+        <Breadcrumbs items={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Actualidad IA', href: '/actualidad-ia' },
+          { label: entry.title, href: `/actualidad-ia/${entry.slug}` }
+        ]} />
         <div className="mb-10">
           <Button asChild variant="outline" size="sm">
             <Link href="/actualidad-ia">Volver a Actualidad IA</Link>

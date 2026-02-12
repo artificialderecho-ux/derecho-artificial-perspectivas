@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import {
   StructuredData,
   createArticleJsonLd,
@@ -105,6 +106,11 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
     <>
       <StructuredData data={[jsonLd, genericJsonLd, breadcrumbJsonLd]} />
       <LegalLayout title={entry.title} category="Guías y Protocolos">
+        <Breadcrumbs items={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Guías y Protocolos', href: '/recursos/guias' },
+          { label: entry.title, href: `/recursos/guias/${entry.slug}` }
+        ]} />
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
           {entry.summaryHtml ? (
             <div
