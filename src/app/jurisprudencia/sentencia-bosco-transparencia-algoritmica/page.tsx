@@ -43,23 +43,33 @@ export default function BoscoSentenciaPage() {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",
-    description: "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO. Un hito en transparencia administrativa comentado por Ricardo Scarpa.",
-    author: { 
+    "headline": "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",
+    "description": "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO. Un hito en transparencia administrativa comentado por Ricardo Scarpa.",
+    "author": { 
       "@type": "Person", 
-      name: "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+      "name": "Ricardo Scarpa",
+      "url": "https://www.derechoartificial.com/quienes-somos"
     },
-    publisher: { 
+    "publisher": { 
       "@type": "Organization", 
-      name: "Derecho Artificial",
-      logo: {
+      "name": "Derecho Artificial",
+      "logo": {
         "@type": "ImageObject",
-        url: "https://www.derechoartificial.com/logo-principal.png"
+        "url": "https://www.derechoartificial.com/logo-principal.png"
       }
     },
-    datePublished: "2026-01-30",
-    image: "https://www.derechoartificial.com/default-og.jpg"
+    "datePublished": "2026-01-30",
+    "dateModified": "2026-01-30",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "width": 1200,
+      "height": 630
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.derechoartificial.com/jurisprudencia/sentencia-bosco-transparencia-algoritmica"
+    }
   };
 
   const jsonLd = createLegalDecisionJsonLd({

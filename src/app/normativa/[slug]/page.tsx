@@ -91,7 +91,12 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
     },
     "datePublished": datePublished,
     "dateModified": entry.date || datePublished,
-    "image": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "width": 1200,
+      "height": 630
+    },
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": url
@@ -104,26 +109,122 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Cuándo es obligatorio cumplir el AI Act?",
+        "name": "¿Todos los sistemas de IA están regulados por el AI Act?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "La aplicación es escalonada: las prohibiciones de sistemas de riesgo inaceptable (como social scoring o manipulación subliminal) entraron en vigor el 2 de febrero de 2025. Las normas para modelos de IA de propósito general (GPAI) se aplican desde el 2 de agosto de 2025. La mayoría de las obligaciones para sistemas de alto riesgo serán exigibles el 2 de agosto de 2026, y la adaptación completa de sistemas existentes finalizará el 2 de agosto de 2027."
+          "text": "SÍ, todos los sistemas IA están cubiertos por AI Act, pero con intensidad regulatoria diferente: Prohibidos (Art. 5) con prohibición absoluta; Alto riesgo (Anexo III) con obligaciones estrictas Arts. 9-15; Transparencia (Art. 52) con el deber de informar al usuario que es IA; y Mínimo riesgo con códigos de conducta voluntarios."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Qué sistemas de IA están prohibidos?",
+        "name": "¿Qué es un sistema de 'alto riesgo'?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Según el Artículo 5 del AI Act, están prohibidos los sistemas de riesgo inaceptable: puntuación social (social scoring) gubernamental, manipulación subliminal con daño potencial, explotación de vulnerabilidades (edad, discapacidad), predicción delictiva basada en perfilado, bases de datos de reconocimiento facial mediante raspado (scraping) indiscriminado e identificación biométrica remota 'en tiempo real' en espacios públicos para fines policiales (salvo excepciones críticas)."
+          "text": "Sistemas IA listados Anexo III que impactan significativamente derechos fundamentales o seguridad. Ejemplos: RRHH, educación, aplicación ley, scoring crediticio, biometría, infraestructuras críticas."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Cuáles son las multas por incumplimiento del AI Act?",
+        "name": "¿Cómo sé si mi sistema es alto riesgo?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "El régimen sancionador establece multas administrativas proporcionales: hasta 35 millones de euros o el 7% de la facturación global anual por prácticas prohibidas (Art. 5); hasta 15 millones o el 3% por incumplimiento de obligaciones de sistemas de alto riesgo; y hasta 7,5 millones o el 1,5% por proporcionar información incorrecta a las autoridades. Para las PYMEs, las multas se limitan al porcentaje menor indicado."
+          "text": "Consultar Anexo III AI Act. Si sistema encaja en alguna categoría → Alto riesgo. Casos frontera → Consultar autoridad nacional (AESIA) o asesor jurídico especializado."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo usar IA para selección de personal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SÍ, pero es sistema alto riesgo (Anexo III.4.a) → Obligaciones estrictas: Gestión riesgos Art. 9, Datasets sin sesgo Art. 10, FRIAS, Supervisión humana Art. 14 y Marcado CE."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Mi chatbot necesita cumplir el AI Act?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende: Mínimo riesgo requiere informar al usuario que es IA (Art. 52.1). Si es alto riesgo (ej: chatbot bancario toma decisiones crediticias) → Obligaciones completas Arts. 9-15."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuándo entra en vigor el AI Act?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ya está en vigor (1 agosto 2024), pero aplicación escalonada: 2 feb 2025 (prohibiciones Art. 5), 2 ago 2026 (sistemas alto riesgo nuevos), 2 ago 2027 (sistemas alto riesgo existentes - deadline adaptación)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué es el marcado CE y cómo lo obtengo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Certificación que sistema cumple AI Act → Permite comercializar UE. Cómo obtener: Anexo VI (Autoevaluación interna para mayoría sistemas), Anexo VII (Evaluación organismo notificado para biometría), registrar en base datos UE y aplicar logo CE."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Necesito hacer una EIPD y una FRIAS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Si sistema IA trata datos personales Y es alto riesgo: EIPD (RGPD Art. 35) obligatoria si alto riesgo datos; FRIAS (AI Act Art. 27) obligatoria si impacto DDHH. Ambas pueden integrarse en documento único."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Las multas del AI Act se suman a las del RGPD?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SÍ. Si sistema IA + datos personales → Posible sanción acumulativa: AEPD hasta 20M EUR (RGPD) y AESIA hasta 35M EUR (AI Act)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo usar ChatGPT/Claude en mi empresa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SÍ, pero: Verificar que proveedor cumple AI Act; Si usas API para decisiones alto riesgo (ej: RRHH) → TÚ eres desplegador (Obligaciones Art. 26); Si solo uso genérico (redacción emails) → Bajo riesgo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Sistemas de IA actuales deben adaptarse?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SÍ. Sistemas alto riesgo ya en mercado tienen hasta 2 agosto 2027 para cumplir Arts. 9-15. Si no pueden adaptarse → Retirada mercado."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué pasa si mi sistema IA causa un daño?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Responsabilidad múltiple: Administrativa (sanción AI Act si incumplió obligaciones), Civil (indemnización víctimas por productos defectuosos o negligencia) y Penal (si delito)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Necesito un DPO para cumplir el AI Act?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI Act NO requiere DPO expresamente. Pero si sistema trata datos personales → RGPD puede requerir DPO (Art. 37). Recomendable: Designar Oficial IA (Chief AI Officer) responsable compliance AI Act."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo comprar sistema IA a proveedor fuera de la UE?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SÍ, pero proveedor debe cumplir AI Act (efecto extraterritorial Art. 2.1). Tú como importador (Art. 24) tienes obligaciones: Verificar conformidad, conservar documentación, marcado CE y nombre tuyo en sistema como importador."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Dónde puedo consultar dudas sobre el AI Act?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AESIA (cuando esté operativa - previsto 2026), Comisión Europea (Portal AI Act + AI Pact), Asociaciones empresariales (Guías específicas sectores) o Asesor jurídico especializado en tech/IA."
         }
       }
     ]
@@ -133,26 +234,98 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Cuáles son las multas por incumplimiento del RGPD en IA?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "El régimen sancionador del RGPD establece dos niveles: multas de hasta 20 millones de euros o el 4% de la facturación global anual para infracciones graves (Art. 83.5), y hasta 10 millones o el 2% para infracciones administrativas (Art. 83.4). En España, la AEPD ha impuesto sanciones récord recientemente, destacando fallos en gobernanza algorítmica y falta de Evaluaciones de Impacto (EIPD)."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué obligaciones críticas establece el RGPD para sistemas de IA?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Las organizaciones deben cumplir con la responsabilidad proactiva (Art. 5.2), realizar una EIPD preventiva (Art. 35) antes del despliegue si hay alto riesgo para los derechos, garantizar una base legal sólida (Art. 6) más allá del consentimiento, y asegurar la transparencia algorítmica y notificación de brechas en un plazo de 72 horas."
-        }
-      },
-      {
-        "@type": "Question",
         "name": "¿Cómo se complementan el RGPD y el AI Act?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ambas normativas son de aplicación acumulativa. Mientras el RGPD protege la privacidad y autodeterminación informativa del individuo, el AI Act introduce una capa de seguridad de producto y gestión de riesgos sistémicos. El cumplimiento del AI Act no exime de las obligaciones de protección de datos del RGPD."
+          "text": "Ambas normativas son de aplicación acumulativa. Mientras el RGPD protege la privacidad y autodeterminación informativa del individuo (enfoque en derechos), el AI Act introduce una capa de seguridad de producto y gestión de riesgos sistémicos (enfoque en producto). El cumplimiento de uno no exime del otro."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuáles son las multas por incumplimiento del RGPD en sistemas de IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El régimen sancionador establece dos niveles: hasta 20M EUR o 4% de la facturación global anual para infracciones graves (Art. 83.5), y hasta 10M EUR o 2% para infracciones administrativas (Art. 83.4). En España, la AEPD ha impuesto sanciones récord concentrándose en fallos de gobernanza algorítmica."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué es el 'Accountability' o responsabilidad proactiva en IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Es la obligación del responsable (Art. 5.2 RGPD) de ser capaz de demostrar el cumplimiento de todos los principios de protección de datos en todo momento. En IA implica documentar la lógica del algoritmo, datasets, medidas de seguridad y realizar auditorías periódicas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuándo es obligatoria una EIPD para un sistema de IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Es obligatoria (Art. 35 RGPD) antes del despliegue si el tratamiento entraña un alto riesgo para los derechos de las personas. En IA, esto ocurre casi siempre que hay decisiones automatizadas, perfiles a gran escala o uso de categorías especiales de datos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo usar datos públicos de redes sociales para entrenar mi IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No automáticamente. 'Público' no significa libre de uso. Se requiere una base legal (Art. 6) válida, y el interés legítimo suele ser difícil de sostener para scraping masivo sin consentimiento explícito del usuario para esa finalidad específica."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Es legal el reconocimiento facial en el entorno laboral?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Casi nunca es proporcionado según la AEPD. Existe una asimetría de poder que invalida el consentimiento. Solo se permite en supuestos de muy alta seguridad (infraestructuras críticas) y tras una EIPD robusta que demuestre que no hay alternativas menos invasivas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué son los neurodatos y cómo se protegen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Son datos obtenidos de la actividad cerebral. Se consideran categorías especiales de datos (salud) bajo el Art. 9 del RGPD y requieren protección reforzada, consentimiento explícito informado y medidas de seguridad máximas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué diferencia hay entre seudonimización y anonimización?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La seudonimización (Art. 4.5) es reversible con información adicional guardada aparte; los datos siguen siendo personales. La anonimización es irreversible; los datos dejan de estar sujetos al RGPD. Para entrenamiento de IA se recomienda la seudonimización como medida de seguridad."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Es válido el consentimiento dado bajo presión o asimetría?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, es nulo de pleno derecho. El consentimiento debe ser libre (Art. 4.11). Si existe un desequilibrio claro (como empleador-empleado o autoridad-ciudadano), difícilmente se considera prestado libremente si no hay una opción real de rechazo sin perjuicio."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué sanción conlleva no notificar una brecha de seguridad?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Conlleva una doble sanción: por la brecha en sí (hasta 10M EUR o 2% facturación) y un agravante por no notificar a la autoridad en 72h o a los afectados. La ocultación deliberada puede elevar la sanción al máximo permitido."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Quién tiene la última palabra sobre IA: AESIA o AEPD?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende del aspecto. La AEPD tiene exclusividad en derechos fundamentales y protección de datos. La AESIA supervisa la seguridad técnica del producto IA. En caso de conflicto sobre derechos de las personas, prevalece el criterio de la AEPD."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué es la transparencia algorítmica?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Es el derecho del interesado a recibir información significativa sobre la lógica aplicada en decisiones automatizadas (Art. 13-14 RGPD). La organización debe ser capaz de explicar cómo y por qué el algoritmo llegó a un resultado específico."
         }
       }
     ]

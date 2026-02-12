@@ -91,7 +91,12 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
     },
     "datePublished": datePublished,
     "dateModified": datePublished,
-    "image": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "width": 1200,
+      "height": 630
+    },
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": url

@@ -60,7 +60,7 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
     author: { 
       "@type": "Person", 
       name: "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+      url: "https://www.derechoartificial.com/quienes-somos"
     },
     publisher: { 
       "@type": "Organization", 
@@ -71,7 +71,7 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
       }
     },
     datePublished: datePublished,
-    image: "https://www.derechoartificial.com/default-og.jpg"
+    image: "https://www.derechoartificial.com/og-default-1200x630.jpg"
   };
 
   const jsonLd =

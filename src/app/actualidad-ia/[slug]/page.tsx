@@ -108,27 +108,33 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     const articleSchema = {
       "@context": "https://schema.org",
       "@type": "Article",
+      "headline": jsonEntry.title,
+      "description": jsonEntry.description,
+      "author": { 
+        "@type": "Person", 
+        "name": authorName,
+        "url": "https://www.derechoartificial.com/quienes-somos"
+      },
+      "publisher": { 
+        "@type": "Organization", 
+        "name": "Derecho Artificial",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.derechoartificial.com/logo-principal.png"
+        }
+      },
+      "datePublished": jsonEntry.datePublished,
+      "dateModified": jsonEntry.datePublished,
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+        "width": 1200,
+        "height": 630
+      },
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": jsonEntry.url
-      },
-      headline: jsonEntry.title,
-      description: jsonEntry.description,
-      author: { 
-        "@type": "Person", 
-        name: authorName,
-        url: "https://www.derechoartificial.com/quienes-somos"
-      },
-      publisher: { 
-        "@type": "Organization", 
-        name: "Derecho Artificial",
-        logo: {
-          "@type": "ImageObject",
-          url: "https://www.derechoartificial.com/logo-principal.png"
-        }
-      },
-      datePublished: jsonEntry.datePublished,
-      image: "https://www.derechoartificial.com/default-og.jpg"
+      }
     };
 
     return (
@@ -208,7 +214,12 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     },
     "datePublished": date,
     "dateModified": date,
-    "image": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "width": 1200,
+      "height": 630
+    },
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`

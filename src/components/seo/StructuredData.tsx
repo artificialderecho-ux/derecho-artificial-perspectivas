@@ -88,7 +88,7 @@ export function createArticleJsonLd(params: {
     },
     headline: params.headline,
     description: params.description,
-    image: params.image ? [params.image] : [`${siteUrl}/default-og.jpg`],
+    image: params.image ? [params.image] : [`${siteUrl}/og-default-1200x630.jpg`],
     datePublished: params.datePublished,
     dateModified: params.dateModified ?? params.datePublished,
     license: `${siteUrl}/aviso-legal`,
