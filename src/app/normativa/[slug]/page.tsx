@@ -170,7 +170,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Necesito hacer una EIPD y una FRIAS?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Si sistema IA trata datos personales Y es alto riesgo: EIPD (RGPD Art. 35) obligatoria si alto riesgo datos; FRIAS (AI Act Art. 27) obligatoria si impacto DDHH. Ambas pueden integrarse en documento único."
+          "text": "Si el sistema de IA trata datos personales y es de alto riesgo, ambas son obligatorias: EIPD (RGPD Art. 35) por el tratamiento de datos y FRIAS (AI Act Art. 27) por el impacto en derechos fundamentales. Pueden integrarse en un documento único."
         }
       },
       {
@@ -178,23 +178,23 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Las multas del AI Act se suman a las del RGPD?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SÍ. Si sistema IA + datos personales → Posible sanción acumulativa: AEPD hasta 20M EUR (RGPD) y AESIA hasta 35M EUR (AI Act)."
+          "text": "SÍ. Si un sistema de IA incumple ambas normativas, las sanciones pueden ser acumulativas: hasta 20M€ por RGPD (AEPD) y hasta 35M€ por AI Act (AESIA), pudiendo superar los 50M€ en casos extremos."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Puedo usar ChatGPT/Claude en mi empresa?",
+        "name": "¿Puedo usar ChatGPT o Claude en mi empresa?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SÍ, pero: Verificar que proveedor cumple AI Act; Si usas API para decisiones alto riesgo (ej: RRHH) → TÚ eres desplegador (Obligaciones Art. 26); Si solo uso genérico (redacción emails) → Bajo riesgo."
+          "text": "SÍ, pero con cautelas: verificar que el proveedor cumple el AI Act y, si usas su API para decisiones de alto riesgo (como RRHH), tú asumes las obligaciones de 'desplegador' según el Art. 26. El uso genérico suele ser de bajo riesgo."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Sistemas de IA actuales deben adaptarse?",
+        "name": "¿Los sistemas de IA actuales deben adaptarse?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SÍ. Sistemas alto riesgo ya en mercado tienen hasta 2 agosto 2027 para cumplir Arts. 9-15. Si no pueden adaptarse → Retirada mercado."
+          "text": "SÍ. Los sistemas de alto riesgo ya en el mercado tienen hasta el 2 de agosto de 2027 para cumplir con los requisitos de los Arts. 9-15. Si no pueden adaptarse, deberán ser retirados del mercado."
         }
       },
       {
@@ -202,7 +202,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Qué pasa si mi sistema IA causa un daño?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Responsabilidad múltiple: Administrativa (sanción AI Act si incumplió obligaciones), Civil (indemnización víctimas por productos defectuosos o negligencia) y Penal (si delito)."
+          "text": "La responsabilidad es múltiple: administrativa (sanciones AI Act), civil (indemnizaciones por productos defectuosos o negligencia) y potencialmente penal si el daño constituye delito por imprudencia grave."
         }
       },
       {
@@ -210,15 +210,15 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Necesito un DPO para cumplir el AI Act?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "AI Act NO requiere DPO expresamente. Pero si sistema trata datos personales → RGPD puede requerir DPO (Art. 37). Recomendable: Designar Oficial IA (Chief AI Officer) responsable compliance AI Act."
+          "text": "El AI Act no lo exige expresamente, pero si el sistema trata datos personales, el RGPD (Art. 37) puede obligar a designar uno. Es muy recomendable contar con un Oficial de IA (Chief AI Officer) para el cumplimiento normativo."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Puedo comprar sistema IA a proveedor fuera de la UE?",
+        "name": "¿Puedo comprar un sistema IA a un proveedor fuera de la UE?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SÍ, pero proveedor debe cumplir AI Act (efecto extraterritorial Art. 2.1). Tú como importador (Art. 24) tienes obligaciones: Verificar conformidad, conservar documentación, marcado CE y nombre tuyo en sistema como importador."
+          "text": "SÍ, pero el proveedor debe cumplir el AI Act por su efecto extraterritorial. Tú, como importador (Art. 24), debes verificar la conformidad, conservar la documentación y asegurar que el sistema lleva el marcado CE y tu nombre."
         }
       },
       {
@@ -226,7 +226,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Dónde puedo consultar dudas sobre el AI Act?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "AESIA (cuando esté operativa - previsto 2026), Comisión Europea (Portal AI Act + AI Pact), Asociaciones empresariales (Guías específicas sectores) o Asesor jurídico especializado en tech/IA."
+          "text": "Puedes acudir a la AESIA (cuando esté operativa), al portal de la Comisión Europea (AI Act + AI Pact), a asociaciones empresariales (ADigital, DigitalES) o a un asesor jurídico especializado en tecnología e IA."
         }
       }
     ]
@@ -236,10 +236,10 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Es obligatorio el DPO en empresas de IA?",
+        "name": "¿Es obligatorio un DPO para una startup de IA?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SÍ, si el tratamiento se realiza por autoridad pública, requiere observación habitual y sistemática de interesados a gran escala, o implica tratamiento a gran escala de categorías especiales de datos (salud, biometría, etc.)."
+          "text": "Casi siempre SÍ si trata datos a gran escala, realiza supervisión sistemática de conductas o trata categorías especiales (salud, biometría) como actividad principal. No designarlo puede acarrear multas de hasta 10M€ o 2% de facturación."
         }
       },
       {
@@ -247,7 +247,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Cómo afecta el AI Act a algoritmos ya existentes antes de 2024?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sistemas alto riesgo existentes tienen hasta el 2 de agosto de 2027 para adaptarse a los requisitos de los Arts. 9-15 (gestión riesgos, calidad datos, supervisión humana) y obtener marcado CE."
+          "text": "Tienen un periodo transitorio hasta el 2 de agosto de 2027 para adaptarse a los requisitos de los Arts. 9-15, obtener el marcado CE y registrarse. No obstante, el RGPD les aplica plenamente desde 2018 sin periodos de gracia."
         }
       },
       {
@@ -255,39 +255,23 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Es el consentimiento la mejor base legal para entrenar modelos IA?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "NO, suele ser preferible el interés legítimo (Art. 6.1.f) con test de ponderación o la ejecución de un contrato. El consentimiento plantea problemas de granularidad y revocabilidad (machine unlearning)."
+          "text": "Generalmente NO. Es preferible usar la ejecución de contrato (Art. 6.1.b), el interés legítimo (Art. 6.1.f) con test de ponderación, o el interés público para investigación (Art. 89), debido a la dificultad de gestionar revocaciones y granularidad."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Qué pasa si mi proveedor de IA está fuera de la UE?",
+        "name": "¿Qué pasa si mi proveedor de IA está en un 'paraíso de datos'?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Es transferencia internacional ilegal si no hay decisión de adecuación o Cláusulas Contractuales Tipo (CCT 2021) con medidas técnicas complementarias como cifrado E2E o seudonimización robusta."
+          "text": "Se considera transferencia internacional ilegal si no hay decisión de adecuación, CCT 2021 firmadas, un TIA favorable y medidas complementarias (cifrado E2E, seudonimización). Si el riesgo es alto y no hay garantías, no se debe transferir."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Cómo demuestro Responsabilidad Proactiva (accountability)?",
+        "name": "¿Es legal el reconocimiento facial para fichar en el trabajo?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Mediante documentación exhaustiva: Registro de Actividades (RAT), EIPDs antes del despliegue, políticas de privacidad claras, contratos conformes Art. 28.3 y auditorías técnicas periódicas."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Puedo usar datos públicos de Instagram/TikTok para entrenar mi IA?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "NO automáticamente. 'Público' no significa libre de uso. El scraping masivo sin base legal válida infringe el RGPD y los términos de servicio de las plataformas."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Es legal el reconocimiento facial en el entorno laboral?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Casi nunca es proporcionado según AEPD. La asimetría de poder invalida el consentimiento. Solo se permite en supuestos de muy alta seguridad (infraestructuras críticas) con EIPD robusta."
+          "text": "Casi nunca. La AEPD lo considera desproporcionado si existen alternativas menos invasivas (tarjeta, PIN). Solo se admite en infraestructuras críticas o alta seguridad con una EIPD robusta y consulta previa."
         }
       },
       {
@@ -295,7 +279,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Qué son los neurodatos y cómo se protegen?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Información de actividad cerebral. Se consideran datos de salud (categoría especial Art. 9 RGPD). Requieren protección reforzada, consentimiento informado médico-legal y EIPD obligatoria."
+          "text": "Son datos obtenidos de la actividad cerebral. Se consideran categorías especiales (salud) bajo el RGPD y requieren protección máxima: consentimiento reforzado, EIPD obligatoria, minimización estricta y cifrado de alto nivel."
         }
       },
       {
@@ -303,7 +287,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Qué es la seudonimización y cuándo es obligatoria?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sustituir identificadores por códigos reversibles con información adicional separada. Es obligatoria para investigación científica (Art. 89) y muy recomendada para datasets de entrenamiento IA."
+          "text": "Es sustituir identificadores por códigos reversibles solo con información adicional separada. Es obligatoria en investigación científica (Art. 89) y muy recomendada como medida de seguridad (Art. 32) y privacidad desde el diseño (Art. 25)."
         }
       },
       {
@@ -311,7 +295,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Es nulo el consentimiento dado bajo presión?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SÍ, absolutamente. El consentimiento debe ser libre. Si hay desequilibrio claro (empleador, autoridad) y no hay opción real de rechazo sin perjuicio, el consentimiento es nulo de pleno derecho."
+          "text": "SÍ, absolutamente. El consentimiento debe ser libre. Si hay asimetría de poder (empleador-empleado) o el servicio se condiciona a datos no necesarios, el consentimiento es nulo y el tratamiento ilícito, con sanciones de hasta 20M€."
         }
       },
       {
@@ -319,7 +303,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Qué sanción conlleva NO notificar una brecha de seguridad?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Doble sanción: por la brecha (hasta 10M EUR) y por no notificar (agravante). La ocultación deliberada puede elevar la sanción al máximo del 4% de la facturación global."
+          "text": "Conlleva una doble sanción: por la brecha en sí (hasta 10M€) y por la falta de notificación o retraso (hasta 10M€ adicionales), con el agravante de intencionalidad o negligencia si se intentó ocultar."
         }
       },
       {
@@ -327,7 +311,23 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "name": "¿Quién tiene la última palabra sobre IA: AESIA o AEPD?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Depende: AEPD exclusiva en derechos fundamentales y datos personales; AESIA en seguridad técnica del producto IA. En caso de impacto en privacidad, prevalece la AEPD."
+          "text": "Depende: la AESIA supervisa la seguridad técnica y conformidad del producto IA, mientras que la AEPD tiene la competencia exclusiva sobre derechos fundamentales y protección de datos. En caso de conflicto sobre privacidad, prevalece la AEPD."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué es el 'machine unlearning' y qué dice el RGPD?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Es la capacidad de eliminar la huella de datos personales de un modelo entrenado. El RGPD exige cumplir el derecho de supresión (Art. 17). La dificultad técnica o el coste no eximen de la obligación de borrar los datos si son exactos e identificables."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Es legal usar IA para predecir el abandono de clientes con datos de salud?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "NO, si no se tiene un consentimiento específico para esa finalidad comercial. El uso de datos de salud para marketing predictivo se considera incompatible con la finalidad original de bienestar y viola el principio de limitación de la finalidad."
         }
       }
     ]

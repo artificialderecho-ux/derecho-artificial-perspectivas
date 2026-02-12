@@ -162,6 +162,30 @@ export default async function FirmaScarpaSlugPage({
             "@type": "Answer",
             "text": "Las sanciones pueden ser masivas, alcanzando hasta 35 millones de euros o el 7% de la facturación global anual de la empresa por el uso de prácticas prohibidas, y hasta 15 millones de euros o el 3% por el incumplimiento de las obligaciones generales establecidas en el Reglamento."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo afecta el RGPD a la inteligencia artificial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El RGPD exige que cualquier tratamiento de datos personales mediante IA cumpla con principios fundamentales como la transparencia, la licitud, la limitación de la finalidad y la minimización de datos. Además, garantiza derechos como la oposición a decisiones automatizadas y el derecho a obtener una explicación humana."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es obligatorio realizar una EIPD en proyectos de IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SÍ, es obligatoria siempre que el tratamiento de datos mediante IA entrañe un alto riesgo para los derechos y libertades de las personas, lo cual es común en sistemas de perfilado, decisiones automatizadas o tratamiento masivo de categorías especiales de datos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es la responsabilidad proactiva en el contexto de la IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La responsabilidad proactiva o 'accountability' implica que el responsable del tratamiento no solo debe cumplir con la normativa (RGPD/AI Act), sino que debe ser capaz de demostrar dicho cumplimiento mediante documentación, auditorías, evaluaciones de impacto y medidas técnicas desde el diseño."
+          }
         }
       ]
     };
