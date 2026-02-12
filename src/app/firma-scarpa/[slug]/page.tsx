@@ -205,12 +205,16 @@ export default async function FirmaScarpaSlugPage({
     const articleSchema = {
       "@context": "https://schema.org",
       "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": jsonEntry.url
+      },
       headline: jsonEntry.title,
       description: jsonEntry.description,
       author: { 
         "@type": "Person", 
         name: "Ricardo Scarpa",
-        url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+        url: "https://www.derechoartificial.com/quienes-somos"
       },
       publisher: { 
         "@type": "Organization", 
@@ -237,7 +241,7 @@ export default async function FirmaScarpaSlugPage({
           date={jsonEntry.datePublished}
           author={{
             name: jsonEntry.author,
-            href: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+            href: "/quienes-somos",
           }}
         >
           {/* Breadcrumbs para navegación y SEO */}
@@ -314,12 +318,16 @@ export default async function FirmaScarpaSlugPage({
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    },
     headline: entry.title,
     description: description,
     author: { 
       "@type": "Person", 
       name: "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+      url: "https://www.derechoartificial.com/quienes-somos"
     },
     publisher: { 
       "@type": "Organization", 
@@ -428,7 +436,7 @@ export default async function FirmaScarpaSlugPage({
         category="Firma Scarpa"
         author={{
           name: "Ricardo Scarpa",
-          href: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+          href: "/quienes-somos",
         }}
       >
         {/* Breadcrumbs para navegación y SEO */}

@@ -95,8 +95,8 @@ export function createArticleJsonLd(params: {
     author: {
       "@type": "Person",
       name: params.authorName ?? "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa",
-      "@id": "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+      url: "https://www.derechoartificial.com/quienes-somos",
+      "@id": "https://www.derechoartificial.com/quienes-somos"
     },
     publisher: {
       "@type": "Organization",
@@ -122,6 +122,10 @@ export function createGenericArticleJsonLd(params: {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": params.url
+    },
     "headline": params.headline,
     "description": params.description,
     "author": {
@@ -168,8 +172,8 @@ export function createNewsArticleJsonLd(params: {
     author: {
       "@type": "Person",
       name: params.authorName ?? "Ricardo Scarpa",
-      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
-      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa",
+      url: "https://www.derechoartificial.com/quienes-somos",
+      "@id": "https://www.derechoartificial.com/quienes-somos",
     },
     publisher: {
       "@id": `${siteUrl}/#organization`,
@@ -199,8 +203,8 @@ export function createLegalDecisionJsonLd(params: {
     author: {
       "@type": "Person",
       name: "Ricardo Scarpa",
-      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
-      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa"
+      url: "https://www.derechoartificial.com/quienes-somos",
+      "@id": "https://www.derechoartificial.com/quienes-somos"
     },
     publisher: {
       "@id": `${siteUrl}/#organization`
@@ -231,8 +235,8 @@ export function createLegislationJsonLd(params: {
     author: {
       "@type": "Person",
       name: "Ricardo Scarpa",
-      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
-      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa"
+      url: "https://www.derechoartificial.com/quienes-somos",
+      "@id": "https://www.derechoartificial.com/quienes-somos"
     },
     publisher: {
       "@id": `${siteUrl}/#organization`
@@ -272,7 +276,10 @@ export function createLegalArticleJsonLd(params: {
   return {
     "@context": "https://schema.org",
     "@type": "LegalArticle",
-    mainEntityOfPage: params.url,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": params.url
+    },
     headline: params.headline,
     description: params.description,
     datePublished: params.datePublished,
@@ -280,8 +287,8 @@ export function createLegalArticleJsonLd(params: {
     author: {
       "@type": "Person",
       name: params.authorName ?? "Ricardo Scarpa",
-      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
-      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa"
+      url: "https://www.derechoartificial.com/quienes-somos",
+      "@id": "https://www.derechoartificial.com/quienes-somos"
     },
     publisher: {
       "@type": "Organization",

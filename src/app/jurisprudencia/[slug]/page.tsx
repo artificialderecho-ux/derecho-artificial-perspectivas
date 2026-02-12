@@ -53,12 +53,16 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    },
     headline: entry.title,
     description: description,
     author: { 
       "@type": "Person", 
       name: "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+      url: "https://www.derechoartificial.com/quienes-somos"
     },
     publisher: { 
       "@type": "Organization", 

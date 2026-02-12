@@ -104,12 +104,16 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     const articleSchema = {
       "@context": "https://schema.org",
       "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": jsonEntry.url
+      },
       headline: jsonEntry.title,
       description: jsonEntry.description,
       author: { 
         "@type": "Person", 
         name: jsonEntry.author,
-        url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+        url: "https://www.derechoartificial.com/quienes-somos"
       },
       publisher: { 
         "@type": "Organization", 
@@ -180,12 +184,16 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`
+    },
     headline: entry.title,
     description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
     author: { 
       "@type": "Person", 
-      name: "Derecho Artificial",
-      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+      name: "Ricardo Scarpa",
+      url: "https://www.derechoartificial.com/quienes-somos"
     },
     publisher: { 
       "@type": "Organization", 
@@ -210,7 +218,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         title={entry.title}
         category="Actualidad IA"
         date={date}
-        author={{ name: "Derecho Artificial" }}
+        author={{ name: "Ricardo Scarpa" }}
       >
         <Breadcrumbs items={[
           { label: 'Inicio', href: '/' },
