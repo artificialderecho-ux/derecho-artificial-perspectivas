@@ -1,55 +1,46 @@
-import type { MetadataRoute } from "next";
-import { listContentSlugs } from "@/lib/content";
-
-const siteUrl = "https://derechoartificial.com";
+import { MetadataRoute } from 'next'
+import { listContentSlugs, getContentEntry, listSectionResourceSlugs, getSectionResourceEntry } from '@/lib/content'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const lastModified = new Date();
+  const baseUrl = 'https://www.derechoartificial.com'
 
-  // Rutas estáticas
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${siteUrl}/`, lastModified, changeFrequency: "weekly", priority: 1 },
-    { url: `${siteUrl}/firma-scarpa`, lastModified, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/jurisprudencia`, lastModified, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${siteUrl}/actualidad-ia`, lastModified, changeFrequency: "daily", priority: 0.9 },
-    { url: `${siteUrl}/legislacion`, lastModified, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/normativa`, lastModified, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${siteUrl}/recursos/guias`, lastModified, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/quienes-somos`, lastModified, changeFrequency: "yearly", priority: 0.6 },
-    { url: `${siteUrl}/contacto`, lastModified, changeFrequency: "yearly", priority: 0.6 },
-    { url: `${siteUrl}/aviso-legal`, lastModified, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${siteUrl}/politica-de-privacidad`, lastModified, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${siteUrl}/cookies`, lastModified, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${siteUrl}/glosario-ia-legal`, lastModified, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${siteUrl}/en`, lastModified, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${siteUrl}/en/scarpa-firm`, lastModified, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${siteUrl}/en/jurisprudence`, lastModified, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${siteUrl}/en/ai-news`, lastModified, changeFrequency: "daily", priority: 0.8 },
-    { url: `${siteUrl}/en/legislation`, lastModified, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${siteUrl}/en/guides-protocols`, lastModified, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${siteUrl}/en/about-us`, lastModified, changeFrequency: "yearly", priority: 0.5 },
-    { url: `${siteUrl}/en/contact`, lastModified, changeFrequency: "yearly", priority: 0.5 },
-    { url: `${siteUrl}/en/legal-ai-glossary`, lastModified, changeFrequency: "monthly", priority: 0.7 },
-  ];
+  // Páginas estáticas principales
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
+    { url: `${baseUrl}/firma-scarpa`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/jurisprudencia`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/normativa`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${baseUrl}/actualidad-ia`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.8 },
+    { url: `${baseUrl}/recursos/guias`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/quienes-somos`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/contacto`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+  ]
 
-  // Rutas dinámicas de Firma Scarpa
-  const firmaScarpaSlugs = await listContentSlugs("firma-scarpa");
-  const firmaScarpaRoutes: MetadataRoute.Sitemap = firmaScarpaSlugs.map((slug) => ({
-    url: `${siteUrl}/firma-scarpa/${slug}`,
-    lastModified,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+  // Artículos normales de Firma Scarpa
+  const contentSlugs = await listContentSlugs('firma-scarpa')
+  const contentEntries = await Promise.all(
+    contentSlugs.map(slug => getContentEntry('firma-scarpa', slug))
+  )
 
-  // Ruta específica de Sentencia BOSCO
-  const boscoRoute: MetadataRoute.Sitemap = [
-    {
-      url: `${siteUrl}/jurisprudencia/sentencia-bosco-transparencia-algoritmica`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-  ];
+  const articlePages = contentEntries.map(entry => ({
+    url: `${baseUrl}/firma-scarpa/${entry.slug}`,
+    lastModified: new Date(entry.datePublished || entry.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
 
-  return [...staticRoutes, ...firmaScarpaRoutes, ...boscoRoute];
+  // Recursos (PDFs, guías, etc.) de Firma Scarpa
+  const resourceSlugs = await listSectionResourceSlugs('firma-scarpa')
+  const resourceEntries = await Promise.all(
+    resourceSlugs.map(slug => getSectionResourceEntry('firma-scarpa', slug))
+  )
+
+  const resourcePages = resourceEntries.map(entry => ({
+    url: `${baseUrl}/firma-scarpa/${entry.slug}`,
+    lastModified: new Date(entry.datePublished || entry.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [...staticPages, ...articlePages, ...resourcePages]
 }

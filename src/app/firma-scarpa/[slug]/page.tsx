@@ -8,6 +8,8 @@ import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createArticleJsonLd } from "@/components/seo/StructuredData";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import RelatedArticles from "@/components/RelatedArticles";
 
 // Map slugs to PDF files
 const PDF_MAPPING: Record<string, string> = {
@@ -47,11 +49,21 @@ export async function generateMetadata({
     resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) ||
     entry.title;
 
-  const canonical = jsonEntry?.urlPath ?? `/firma-scarpa/${entry.slug}`;
+  const canonical = jsonEntry?.urlPath ?? `https://www.derechoartificial.com/firma-scarpa/${entry.slug}`;
+  
+  // Get published time for OpenGraph
+  const publishedTime = jsonEntry?.datePublished || (resourceEntry as any)?.datePublished;
+  
+  // Get tags/keywords
+  const keywords = jsonEntry?.tags?.join(", ") || (resourceEntry as any)?.tags?.join(", ");
+  
+  // Get author information
+  const authors = jsonEntry?.author ? [jsonEntry.author] : ["Ricardo Scarpa"];
 
   return {
-    title: entry.title,
+    title: `${entry.title} | Derecho Artificial`,
     description,
+    keywords,
     alternates: {
       canonical,
     },
@@ -61,6 +73,19 @@ export async function generateMetadata({
       description,
       url: canonical,
       locale: "es_ES",
+      images: [{
+        url: jsonEntry?.ogImage || "/logo-principal.png", 
+        width: 1200, 
+        height: 630 
+      }],
+      publishedTime,
+      authors,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+      images: [jsonEntry?.ogImage || "/logo-principal.png"],
     },
   };
 }
@@ -92,9 +117,78 @@ export default async function FirmaScarpaSlugPage({
       authorName: jsonEntry.author,
     });
 
+    const faqJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la discriminación algorítmica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La discriminación algorítmica ocurre cuando un sistema de IA toma decisiones que generan trato desigual basado en características protegidas (edad, género, raza, etc.)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué obligaciones tiene el AI Act respecto al sesgo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El AI Act exige evaluaciones de impacto, datasets representativos, pruebas de sesgo y supervisión humana en sistemas de alto riesgo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué multas puede haber por incumplir el AI Act?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hasta 35 millones de euros o el 7% de la facturación global para infracciones graves."
+          }
+        }
+      ]
+    };
+
+    const authorJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ricardo Scarpa",
+      "jobTitle": "Abogado experto en Derecho Digital e Inteligencia Artificial",
+      "url": "https://www.derechoartificial.com/quienes-somos",
+      "sameAs": [
+        "https://www.linkedin.com/in/ricardoscarpa",
+        // Añade aquí tu ORCID o Twitter si lo tienes
+      ],
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Universidad Europea de Madrid"
+        },
+        {
+          "@type": "Organization",
+          "name": "UNED"
+        },
+        {
+          "@type": "Organization",
+          "name": "IE Business School"
+        }
+      ],
+      "knowsAbout": [
+        "Derecho Digital",
+        "Inteligencia Artificial",
+        "AI Act",
+        "RGPD",
+        "Discriminación algorítmica",
+        "Compliance tecnológico",
+        "Responsabilidad civil en IA"
+      ],
+      "description": "Abogado y académico especializado en la regulación de la inteligencia artificial, protección de datos y ética tecnológica. Profesor en UEM, UNED e IE Business School."
+    };
+
     return (
       <>
         <StructuredData data={jsonLd} />
+        <StructuredData data={faqJsonLd} />
+        <StructuredData data={authorJsonLd} />
         <LegalLayout
           title={jsonEntry.title}
           category="Firma Scarpa"
@@ -104,6 +198,13 @@ export default async function FirmaScarpaSlugPage({
             href: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
           }}
         >
+          {/* Breadcrumbs para navegación y SEO */}
+          <Breadcrumbs items={[
+            { name: 'Inicio', href: '/' },
+            { name: 'Firma Scarpa', href: '/firma-scarpa' },
+            { name: jsonEntry.title, href: `/firma-scarpa/${jsonEntry.slug}` }
+          ]} />
+          
           <div className="mb-10 flex items-center justify-between">
             <Button asChild variant="outline" size="sm">
               <Link href="/firma-scarpa">Volver a Firma Scarpa</Link>
@@ -154,6 +255,9 @@ export default async function FirmaScarpaSlugPage({
             </a>
             </div>
           )}
+
+          {/* Artículos relacionados */}
+          <RelatedArticles currentSlug={params.slug} />
         </LegalLayout>
       </>
     );
@@ -173,9 +277,78 @@ export default async function FirmaScarpaSlugPage({
     authorName: "Ricardo Scarpa",
   });
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué es la discriminación algorítmica?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La discriminación algorítmica ocurre cuando un sistema de IA toma decisiones que generan trato desigual basado en características protegidas (edad, género, raza, etc.)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué obligaciones tiene el AI Act respecto al sesgo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El AI Act exige evaluaciones de impacto, datasets representativos, pruebas de sesgo y supervisión humana en sistemas de alto riesgo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué multas puede haber por incumplir el AI Act?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hasta 35 millones de euros o el 7% de la facturación global para infracciones graves."
+        }
+      }
+    ]
+  };
+
+  const authorJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ricardo Scarpa",
+    "jobTitle": "Abogado experto en Derecho Digital e Inteligencia Artificial",
+    "url": "https://www.derechoartificial.com/quienes-somos",
+    "sameAs": [
+      "https://www.linkedin.com/in/ricardoscarpa",
+      // Añade aquí tu ORCID o Twitter si lo tienes
+    ],
+    "affiliation": [
+      {
+        "@type": "Organization",
+        "name": "Universidad Europea de Madrid"
+      },
+      {
+        "@type": "Organization",
+        "name": "UNED"
+      },
+      {
+        "@type": "Organization",
+        "name": "IE Business School"
+      }
+    ],
+    "knowsAbout": [
+      "Derecho Digital",
+      "Inteligencia Artificial",
+      "AI Act",
+      "RGPD",
+      "Discriminación algorítmica",
+      "Compliance tecnológico",
+      "Responsabilidad civil en IA"
+    ],
+    "description": "Abogado y académico especializado en la regulación de la inteligencia artificial, protección de datos y ética tecnológica. Profesor en UEM, UNED e IE Business School."
+  };
+
   return (
     <>
       <StructuredData data={jsonLd} />
+      <StructuredData data={faqJsonLd} />
+      <StructuredData data={authorJsonLd} />
       <LegalLayout
         title={entry.title}
         category="Firma Scarpa"
@@ -240,6 +413,9 @@ export default async function FirmaScarpaSlugPage({
             </a>
           </div>
         )}
+
+        {/* Artículos relacionados */}
+        <RelatedArticles currentSlug={params.slug} />
       </LegalLayout>
     </>
   );

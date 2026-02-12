@@ -1,0 +1,39 @@
+# Derecho Artificial - Análisis Jurídico de IA
+
+> Análisis crítico e independiente sobre la intersección del Derecho, la Ética y la Inteligencia Artificial para el mundo hispanohablante.
+
+## Secciones principales
+
+### Firma Scarpa
+Opinión experta y análisis crítico del Derecho Digital
+`https://www.derechoartificial.com/firma-scarpa` 
+
+### Jurisprudencia IA
+Observatorio de jurisprudencia sobre Inteligencia Artificial
+`https://www.derechoartificial.com/jurisprudencia` 
+
+### Normativa
+Marco regulatorio: AI Act, RGPD, LOPDGDD
+`https://www.derechoartificial.com/normativa` 
+
+### Guías Prácticas
+Protocolos de actuación profesional
+`https://www.derechoartificial.com/recursos/guias` 
+
+## Contenido destacado
+
+- AI Act: Guía Jurídica Completa del Reglamento Europeo de IA
+  `https://www.derechoartificial.com/normativa/ai-act-guia-completa` 
+  
+- RGPD y Gobernanza de Datos en la Era de la IA
+  `https://www.derechoartificial.com/normativa/rgpd-gobernanza-datos-ia` 
+  
+- Caso iTutorGroup: Discriminación Algorítmica
+  `https://www.derechoartificial.com/firma-scarpa/caso-eeoc-v-itutorgroup` 
+
+## Autor
+Ricardo Scarpa - Experto en Derecho Digital e IA
+UEM · UNED · IE Business School
+
+## Contacto
+`https://www.derechoartificial.com/contacto`

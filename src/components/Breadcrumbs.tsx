@@ -1,74 +1,40 @@
-import React from "react";
-import Link from "next/link";
-import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import Link from 'next/link'
 
 interface BreadcrumbItem {
-  label: string;
-  href: string;
+  name: string
+  href: string
 }
 
-interface BreadcrumbsProps {
-  items: BreadcrumbItem[];
-  className?: string;
-}
-
-export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
-  if (!items || items.length === 0) {
-    return null;
+export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": `https://www.derechoartificial.com${item.href}`
+    }))
   }
-
-  // Generate schema.org BreadcrumbList
-  const breadcrumbSchema = createBreadcrumbJsonLd({
-    items: items.map(item => ({
-      name: item.label,
-      url: item.href.startsWith('http') ? item.href : `https://derechoartificial.com${item.href}`,
-    })),
-  });
 
   return (
     <>
-      <StructuredData data={breadcrumbSchema} />
-      <nav 
-        aria-label="Breadcrumb" 
-        className={`mb-6 ${className}`}
-      >
-        <ol className="flex items-center gap-1.5 text-sm text-muted-foreground flex-wrap">
-          {items.map((item, index) => {
-            const isLast = index === items.length - 1;
-            
-            return (
-              <React.Fragment key={index}>
-                <li className="inline-flex items-center">
-                  {isLast ? (
-                    <span 
-                      className="font-normal text-foreground"
-                      aria-current="page"
-                    >
-                      {item.label}
-                    </span>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className="transition-colors hover:text-foreground hover:underline"
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
-                {!isLast && (
-                  <li 
-                    role="presentation" 
-                    aria-hidden="true"
-                    className="text-muted-foreground/60"
-                  >
-                    /
-                  </li>
-                )}
-              </React.Fragment>
-            );
-          })}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <nav aria-label="Breadcrumb" className="py-4 text-sm text-gray-500">
+        <ol className="flex space-x-2">
+          {items.map((item, index) => (
+            <li key={item.href} className="flex items-center">
+              <Link href={item.href} className="hover:text-blue-600">
+                {item.name}
+              </Link>
+              {index < items.length - 1 && <span className="mx-2">›</span>}
+            </li>
+          ))}
         </ol>
       </nav>
     </>
-  );
+  )
 }
