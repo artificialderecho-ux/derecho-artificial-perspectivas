@@ -1,31 +1,17 @@
-# Robots.txt optimizado para Derecho Artificial
-# SEO + GEO
-
-User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /_next/static/
-Disallow: /admin/
-Disallow: /*.json$
-
-# Permitir explícitamente a los crawlers de IA (muy importante para GEO)
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-# Sitemaps
-Sitemap: `https://www.derechoartificial.com/sitemap.xml`
+User-agent: * 
+Allow: / 
+Disallow: /api/ 
+Disallow: /_next/ 
+Disallow: /admin/ 
+Disallow: /*?* 
+  
+User-agent: GPTBot 
+Allow: / 
+User-agent: ClaudeBot 
+Allow: / 
+User-agent: PerplexityBot 
+Allow: / 
+User-agent: Google-Extended 
+Allow: / 
+  
+Sitemap: https://www.derechoartificial.com/sitemap.xml
