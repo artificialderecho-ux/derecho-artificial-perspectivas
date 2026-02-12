@@ -134,16 +134,9 @@ export default async function FirmaScarpaPage() {
   (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
 );
 
-  const featuredSlugs = ["caso-eeoc-v-itutorgroup"];
-  const featuredItems: UnifiedItem[] = [];
-  
-  featuredSlugs.forEach(slug => {
-    const index = allItems.findIndex((item) => item.href.endsWith(`/${slug}`));
-    if (index > -1) {
-      const [item] = allItems.splice(index, 1);
-      featuredItems.push(item);
-    }
-  });
+  // El artículo destacado es automáticamente el más reciente (primero en la lista ordenada)
+  const featuredItems: UnifiedItem[] = allItems.length > 0 ? [allItems[0]] : [];
+  const remainingItems = allItems.length > 0 ? allItems.slice(1) : [];
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -210,7 +203,7 @@ export default async function FirmaScarpaPage() {
           ))}
 
           <section className="grid gap-6 md:grid-cols-2">
-            {allItems.map((item) => (
+            {remainingItems.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
