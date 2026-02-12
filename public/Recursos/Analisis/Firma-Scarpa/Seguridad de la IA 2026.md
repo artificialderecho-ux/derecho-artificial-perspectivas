@@ -6,7 +6,7 @@
 
 ## **1\. Arquitectura técnica y “cadena de valor” regulatoria**
 
-El informe describe la IA de propósito general como sistemas de deep learning basados en redes neuronales tipo *transformer*[, entrenados sobre datos masivos y heterogéneos, que luego se afinan mediante técnicas de post-entrenamiento (fine-tuning supervisado, RLHF, RLVR) para comportarse de forma “útil y segura” en múltiples tareas. Esta arquitectura conlleva:](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/163017302/c7d166ec-f5d8-43c0-bbfa-116b0b964d61/international-ai-safety-report-2026.pdf)
+El informe describe la IA de propósito general como sistemas de deep learning basados en redes neuronales tipo *transformer*, entrenados sobre datos masivos y heterogéneos, que luego se afinan mediante técnicas de post-entrenamiento (fine-tuning supervisado, RLHF, RLVR) para comportarse de forma "útil y segura" en múltiples tareas. Esta arquitectura conlleva:
 
 * Una enorme dependencia de **datos** [(incluyendo potencialmente datos personales, contenidos protegidos por derechos de autor y conocimientos peligrosos).](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/163017302/c7d166ec-f5d8-43c0-bbfa-116b0b964d61/international-ai-safety-report-2026.pdf)
 
