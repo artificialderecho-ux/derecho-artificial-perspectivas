@@ -41,7 +41,7 @@ export default async function RelatedArticles({ currentSlug }: RelatedArticlesPr
                   {article.title}
                 </h3>
                 <p className="text-sm text-gray-500 mt-3 line-clamp-2">
-                  {article.description || article.excerpt}
+                  {article.description}
                 </p>
               </div>
             </div>
