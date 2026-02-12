@@ -45,7 +45,7 @@ export async function generateMetadata({
 
   const canonical = jsonEntry?.urlPath ? `https://www.derechoartificial.com${jsonEntry.urlPath}` : `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`;
 
-  const ogImage = "https://www.derechoartificial.com/default-og-1200x630.jpg";
+  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
 
   return {
     title,

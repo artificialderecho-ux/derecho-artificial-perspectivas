@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!entry) return {};
   const description = entry.description || entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
   const canonical = `https://www.derechoartificial.com/normativa/${entry.slug}`;
-  const ogImage = "https://www.derechoartificial.com/default-og-1200x630.jpg";
+  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
 
   return {
     title: `${entry.title} | Derecho Artificial`,

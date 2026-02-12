@@ -13,11 +13,11 @@ import {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.derechoartificial.com"),
   title: {
-    default: "Derecho, ética y regulación de la IA | Derecho Artificial",
+    default: "Derecho, ética y regulación de la IA",
     template: "%s | Derecho Artificial",
   },
   description:
-    "Análisis jurídico independiente sobre inteligencia artificial, Reglamento IA, ética y compliance para abogados y profesionales.",
+    "Análisis jurídico independiente sobre IA, Reglamento IA, ética y compliance.",
   keywords: [
     "derecho artificial",
     "inteligencia artificial",
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Derecho Artificial",
-    url: "https://www.derechoartificial.com",
-    title: "Derecho Artificial | Análisis Jurídico de IA, Ética y Regulación",
+    url: "/",
+    title: "Derecho Artificial | IA, Ética y Regulación Jurídica",
     description:
-      "Guías prácticas y criterio experto sobre el impacto legal de la IA. Referencia para abogados y compliance.",
+      "Guías prácticas y análisis experto para abogados y compliance.",
     locale: "es_ES",
     images: [
       {
-        url: "https://www.derechoartificial.com/og-home-1200x630.jpg",
+        url: "/og-home-1200x630.jpg",
         width: 1200,
         height: 630,
       },
@@ -54,10 +54,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Derecho Artificial | IA, Ética y Regulación",
+    title: "Derecho Artificial | IA Jurídica y Ética",
     description:
-      "Análisis jurídico independiente sobre inteligencia artificial, Reglamento IA, ética y compliance.",
-    images: ["https://www.derechoartificial.com/og-home-1200x630.jpg"],
+      "Análisis jurídico independiente sobre IA, Reglamento IA, ética y compliance.",
+    images: ["/og-home-1200x630.jpg"],
   },
 };
 

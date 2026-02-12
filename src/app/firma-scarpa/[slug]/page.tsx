@@ -65,7 +65,7 @@ export async function generateMetadata({
   // Get author information
   const authors = jsonEntry?.author ? [jsonEntry.author] : ["Ricardo Scarpa"];
 
-  const ogImage = "https://www.derechoartificial.com/default-og-1200x630.jpg";
+  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
 
   return {
     title,
