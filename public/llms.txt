@@ -10,72 +10,44 @@
 - Análisis jurídico-informático de vanguardia
 - Estudios de casos prácticos y jurisprudencia
 - Perspectiva técnica-jurídica integrada
-- **URL**: `https://www.derechoartificial.com/firma-scarpa`
+**URL**: `https://www.derechoartificial.com/firma-scarpa`
 
-### 🔹 Jurisprudencia IA  
+### 🔹 Jurisprudencia IA
 **Observatorio de jurisprudencia sobre Inteligencia Artificial**
 - Análisis de sentencias relevantes
 - Estudio de precedentes judiciales
 - Interpretación aplicada al contexto tecnológico
-- **URL**: `https://www.derechoartificial.com/jurisprudencia`
+**URL**: `https://www.derechoartificial.com/jurisprudencia`
 
 ### 🔹 Normativa
 **Marco regulatorio: AI Act, RGPD, LOPDGDD y legislación aplicable**
 - Guías de implementación del Reglamento Europeo de IA
 - Análisis de cumplimiento normativo
 - Protocolos de adaptación regulatoria
-- **URL**: `https://www.derechoartificial.com/normativa`
+**URL**: `https://www.derechoartificial.com/normativa`
 
 ### 🔹 Guías Prácticas
 **Protocolos de actuación profesional y recursos técnico-jurídicos**
 - Manuales de implementación
 - Checklist de cumplimiento
 - Herramientas para profesionales del derecho
-- **URL**: `https://www.derechoartificial.com/recursos/guias`
+**URL**: `https://www.derechoartificial.com/recursos/guias`
 
 ## 🎯 Contenido Destacado
-
-### 📖 Análisis Recientes
-- **Guía Internacional de Seguridad de la IA 2026** - Análisis jurídico-informático exhaustivo
-- **Caso iTutorGroup** - Discriminación algorítmica y responsabilidad civil
-- **AI Act** - Guía jurídica completa del Reglamento Europeo de IA
-- **RGPD y Gobernanza de Datos** - Implementación en sistemas de IA
-
-### 🔍 Especialidades Temáticas
-- Propiedad intelectual en la era de la IA generativa
-- Responsabilidad civil por sistemas algorítmicos
-- Protección de datos y privacidad en IA
-- Ética y compliance en inteligencia artificial
-- Jurisprudencia aplicada al contexto tecnológico
+- Guía Internacional de Seguridad de la IA 2026
+- Caso iTutorGroup - Discriminación algorítmica
+- AI Act - Guía jurídica completa
+- RGPD y Gobernanza de Datos en IA
 
 ## 👤 Director Editorial
-
 **Ricardo Scarpa**
-- Experto en Derecho Digital e Inteligencia Artificial
-- Formación: UEM · UNED · IE Business School
-- Especializado en la intersección derecho-tecnología
-- Enfoque práctico y aplicado al ejercicio profesional
+Experto en Derecho Digital e Inteligencia Artificial
+UEM · UNED · IE Business School
 
-## 🌐 Estructura del Sitio
-
-### 📊 Recursos Disponibles
-- **Artículos de análisis** (>50 documentos)
-- **Guías prácticas** (>15 protocolos)  
-- **Jurisprudencia comentada** (>20 sentencias)
-- **Recursos descargables** (PDF, checklists, templates)
-
-### 🎨 Diseño Editorial
-- Estética profesional de firma legal
-- Enfoque editorial serio y riguroso
-- Contenido técnico-jurídico especializado
-- Arquitectura de información clara y accesible
-
-## 📞 Contacto y Colaboración
-
-**URL oficial**: `https://www.derechoartificial.com`
-**Contacto**: `https://www.derechoartificial.com/contacto`
-**GitHub**: `https://github.com/artificialderecho-ux/derecho-artificial-perspectivas`
+## 📞 Contacto
+`https://www.derechoartificial.com/contacto`
+GitHub: `https://github.com/artificialderecho-ux/derecho-artificial-perspectivas`
 
 ---
-*Última actualización: Febrero 2026*  
-*Este resumen está optimizado para sistemas LLM y motores de búsqueda*
+*Última actualización: Febrero 2026*
+*Optimizado para LLMs y motores de búsqueda*
