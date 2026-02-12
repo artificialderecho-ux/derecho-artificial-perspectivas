@@ -203,6 +203,14 @@ export default async function HomePage() {
   ].sort((a, b) => b.date - a.date);
 
   const formatDate = (value: string | number) => {
+    // Si es un timestamp numérico (milisegundos desde 1970)
+    if (typeof value === 'number') {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "";
+      return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+    }
+    
+    // Si es una string de fecha (como "2026-02-10")
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return "";
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
