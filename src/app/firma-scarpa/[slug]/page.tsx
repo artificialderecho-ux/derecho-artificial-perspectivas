@@ -54,8 +54,8 @@ export async function generateMetadata({
   // Get published time for OpenGraph
   const publishedTime = jsonEntry?.datePublished || (resourceEntry as any)?.datePublished;
   
-  // Get tags/keywords
-  const keywords = jsonEntry?.tags?.join(", ") || (resourceEntry as any)?.tags?.join(", ");
+  // Get tags/keywords - using generic keywords since 'tags' property doesn't exist
+  const keywords = "derecho artificial, inteligencia artificial, AI Act, RGPD, discriminación algorítmica, compliance IA, Ricardo Scarpa";
   
   // Get author information
   const authors = jsonEntry?.author ? [jsonEntry.author] : ["Ricardo Scarpa"];
