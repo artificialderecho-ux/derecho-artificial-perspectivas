@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedArticles } from "@/components/RelatedArticles";
 import {
   StructuredData,
   createArticleJsonLd,
@@ -132,6 +133,7 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
         {entry.bodyHtml ? (
           <div className="prose prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} />
         ) : null}
+        <RelatedArticles currentSlug={slug} />
       </LegalLayout>
     </>
   );

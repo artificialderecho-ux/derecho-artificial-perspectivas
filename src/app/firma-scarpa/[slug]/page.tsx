@@ -13,7 +13,7 @@ import {
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import RelatedArticles from "@/components/RelatedArticles";
+import { RelatedArticles } from "@/components/RelatedArticles";
 
 // Map slugs to PDF files
 const PDF_MAPPING: Record<string, string> = {

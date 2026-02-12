@@ -1,53 +1,23 @@
-import Link from 'next/link'
-import { listContentSlugs, getContentEntry } from '@/lib/content'
 
-interface RelatedArticlesProps {
-  currentSlug: string
-}
-
-export default async function RelatedArticles({ currentSlug }: RelatedArticlesProps) {
-  // Cargar todos los artículos normales
-  const contentSlugs = await listContentSlugs('firma-scarpa')
-  const contentItems = await Promise.all(
-    contentSlugs.map(slug => getContentEntry('firma-scarpa', slug))
-  )
-
-  // Unir todo y filtrar el actual
-  const allArticles = [...contentItems]
-    .filter(item => item.slug !== currentSlug)
-    .sort((a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime())
-    .slice(0, 3) // solo 3
-
-  if (allArticles.length === 0) return null
-
-  return (
-    <section className="mt-16 border-t border-gray-200 pt-12">
-      <h2 className="text-2xl font-bold mb-8 text-gray-900">Artículos relacionados</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {allArticles.map((article) => (
-          <Link
-            key={article.slug}
-            href={`/firma-scarpa/${article.slug}`}
-            className="group block"
-          >
-            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-              <img
-                src={"/logo-principal.png"}
-                alt={article.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="font-semibold text-lg leading-tight group-hover:text-blue-600 transition-colors">
-                  {article.title}
-                </h3>
-                <p className="text-sm text-gray-500 mt-3 line-clamp-2">
-                  {article.description}
-                </p>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </section>
-  )
-}
+ export function RelatedArticles({ currentSlug }: { currentSlug: string }) { 
+   // Por ahora 3 ejemplos hardcoded – después filtra por tags o categoría 
+   const related = [ 
+     { title: "Guía completa del AI Act", url: "/normativa/ai-act-guia-completa", date: "2025-12-10" }, 
+     { title: "RGPD en la era de la IA", url: "/normativa/rgpd-gobernanza-datos-ia", date: "2026-01-05" }, 
+     { title: "Caso TSJ Canarias: citas falsas por IA", url: "/firma-scarpa/analisis-sentencia-tsj-canarias", date: "2025-11-20" }, 
+   ].filter(item => item.url !== `/firma-scarpa/${currentSlug}`); 
+ 
+   return ( 
+     <section className="mt-16 border-t pt-10"> 
+       <h2 className="text-2xl font-bold mb-6">Artículos relacionados</h2> 
+       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"> 
+         {related.map((item) => ( 
+           <a key={item.url} href={item.url} className="block border rounded-lg p-5 hover:shadow-md transition"> 
+             <h3 className="font-semibold text-lg mb-2">{item.title}</h3> 
+             <time className="text-sm text-gray-500">{item.date}</time> 
+           </a> 
+         ))} 
+       </div> 
+     </section> 
+   ); 
+ } 
