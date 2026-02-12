@@ -17,7 +17,10 @@ export function createOrganizationJsonLd() {
     "@id": `${siteUrl}/#organization`,
     name: "Derecho Artificial",
     url: siteUrl,
-    logo: `${siteUrl}/logo-principal.png`,
+    logo: {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/logo-principal.png`
+    },
   };
 }
 
@@ -75,6 +78,7 @@ export function createArticleJsonLd(params: {
   authorName?: string;
   image?: string;
 }) {
+  const siteUrl = "https://www.derechoartificial.com";
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -84,18 +88,24 @@ export function createArticleJsonLd(params: {
     },
     headline: params.headline,
     description: params.description,
-    image: params.image ? [params.image] : [`${siteUrl}/logo-principal.png`],
+    image: params.image ? [params.image] : [`${siteUrl}/default-og.jpg`],
     datePublished: params.datePublished,
     dateModified: params.dateModified ?? params.datePublished,
     license: `${siteUrl}/aviso-legal`,
     author: {
       "@type": "Person",
       name: params.authorName ?? "Ricardo Scarpa",
-      url: "https://derechoartificial.com/quienes-somos#ricardoscarpa",
-      "@id": "https://derechoartificial.com/quienes-somos#ricardoscarpa"
+      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa",
+      "@id": "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
     },
     publisher: {
-      "@id": `${siteUrl}/#organization`
+      "@type": "Organization",
+      "name": "Derecho Artificial",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/logo-principal.png`
+      },
+      "@id": "https://derechoartificial.com/#organization"
     },
   };
 }

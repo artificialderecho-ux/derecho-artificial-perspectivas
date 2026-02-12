@@ -50,6 +50,28 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
       ? new Date(entry.dateMs).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: entry.title,
+    description: description,
+    author: { 
+      "@type": "Person", 
+      name: "Ricardo Scarpa",
+      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+    },
+    publisher: { 
+      "@type": "Organization", 
+      name: "Derecho Artificial",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.derechoartificial.com/logo-principal.png"
+      }
+    },
+    datePublished: datePublished,
+    image: "https://www.derechoartificial.com/default-og.jpg"
+  };
+
   const jsonLd = createLegalDecisionJsonLd({
     url,
     name: entry.title,
@@ -77,6 +99,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <StructuredData data={[jsonLd, breadcrumbJsonLd]} />
       <LegalLayout title={entry.title} category="Jurisprudencia">
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">

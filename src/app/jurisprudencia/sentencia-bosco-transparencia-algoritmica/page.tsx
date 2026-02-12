@@ -45,10 +45,21 @@ export default function BoscoSentenciaPage() {
     "@type": "Article",
     headline: "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",
     description: "Análisis jurídico de la STS 1119/2025 sobre el acceso al código fuente del programa BOSCO. Un hito en transparencia administrativa comentado por Ricardo Scarpa.",
-    author: { "@type": "Person", name: "Ricardo Scarpa" },
-    publisher: { "@type": "Organization", name: "Derecho Artificial" },
+    author: { 
+      "@type": "Person", 
+      name: "Ricardo Scarpa",
+      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+    },
+    publisher: { 
+      "@type": "Organization", 
+      name: "Derecho Artificial",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.derechoartificial.com/logo-principal.png"
+      }
+    },
     datePublished: "2026-01-30",
-    image: "/logo-principal.png"
+    image: "https://www.derechoartificial.com/default-og.jpg"
   };
 
   const jsonLd = createLegalDecisionJsonLd({

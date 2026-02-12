@@ -207,10 +207,21 @@ export default async function FirmaScarpaSlugPage({
       "@type": "Article",
       headline: jsonEntry.title,
       description: jsonEntry.description,
-      author: { "@type": "Person", name: "Ricardo Scarpa" },
-      publisher: { "@type": "Organization", name: "Derecho Artificial" },
+      author: { 
+        "@type": "Person", 
+        name: "Ricardo Scarpa",
+        url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+      },
+      publisher: { 
+        "@type": "Organization", 
+        name: "Derecho Artificial",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://www.derechoartificial.com/logo-principal.png"
+        }
+      },
       datePublished: jsonEntry.datePublished,
-      image: "/logo-principal.png"
+      image: "https://www.derechoartificial.com/default-og.jpg"
     };
 
     return (
@@ -305,10 +316,21 @@ export default async function FirmaScarpaSlugPage({
     "@type": "Article",
     headline: entry.title,
     description: description,
-    author: { "@type": "Person", name: "Ricardo Scarpa" },
-    publisher: { "@type": "Organization", name: "Derecho Artificial" },
+    author: { 
+      "@type": "Person", 
+      name: "Ricardo Scarpa",
+      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+    },
+    publisher: { 
+      "@type": "Organization", 
+      name: "Derecho Artificial",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.derechoartificial.com/logo-principal.png"
+      }
+    },
     datePublished: new Date().toISOString().slice(0, 10),
-    image: "/logo-principal.png"
+    image: "https://www.derechoartificial.com/default-og.jpg"
   };
 
   const jsonLd = createArticleJsonLd({

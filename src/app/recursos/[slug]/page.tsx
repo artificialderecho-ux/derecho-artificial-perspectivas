@@ -52,6 +52,28 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
       ? new Date(entry.dateMs).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: entry.title,
+    description: description,
+    author: { 
+      "@type": "Person", 
+      name: "Ricardo Scarpa",
+      url: "https://www.derechoartificial.com/quienes-somos#ricardoscarpa"
+    },
+    publisher: { 
+      "@type": "Organization", 
+      name: "Derecho Artificial",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.derechoartificial.com/logo-principal.png"
+      }
+    },
+    datePublished: datePublished,
+    image: "https://www.derechoartificial.com/default-og.jpg"
+  };
+
   const jsonLd =
     entry.kind === "Legislation"
       ? createLegislationJsonLd({
@@ -85,6 +107,7 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <StructuredData data={jsonLd} />
       <LegalLayout title={entry.title} category="Recursos">
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
