@@ -144,7 +144,7 @@ export default async function FirmaScarpaSlugPage({
           "name": "¿Qué es la discriminación algorítmica?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "La discriminación algorítmica ocurre cuando un sistema de IA toma decisiones que generan trato desigual basado en características protegidas (edad, género, raza, etc.)."
+            "text": "La discriminación algorítmica ocurre cuando un sistema de inteligencia artificial toma decisiones automatizadas que generan un trato desigual o injusto basado en características protegidas como el género, la raza, la edad o la discapacidad, a menudo debido a sesgos en los datos de entrenamiento o en el diseño del modelo."
           }
         },
         {
@@ -152,7 +152,7 @@ export default async function FirmaScarpaSlugPage({
           "name": "¿Qué obligaciones tiene el AI Act respecto al sesgo?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "El AI Act exige evaluaciones de impacto, datasets representativos, pruebas de sesgo y supervisión humana en sistemas de alto riesgo."
+            "text": "El Reglamento de IA (AI Act) impone obligaciones estrictas para los sistemas de alto riesgo, incluyendo la implementación de sistemas de gestión de riesgos, la gobernanza de datos para minimizar sesgos, documentación técnica detallada, transparencia para los usuarios y una supervisión humana efectiva para corregir posibles desviaciones algorítmicas."
           }
         },
         {
@@ -160,7 +160,7 @@ export default async function FirmaScarpaSlugPage({
           "name": "¿Qué multas puede haber por incumplir el AI Act?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Hasta 35 millones de euros o el 7% de la facturación global para infracciones graves."
+            "text": "Las sanciones pueden ser masivas, alcanzando hasta 35 millones de euros o el 7% de la facturación global anual de la empresa por el uso de prácticas prohibidas, y hasta 15 millones de euros o el 3% por el incumplimiento de las obligaciones generales establecidas en el Reglamento."
           }
         }
       ]
@@ -349,36 +349,36 @@ export default async function FirmaScarpaSlugPage({
     authorName: "Ricardo Scarpa",
   });
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Qué es la discriminación algorítmica?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "La discriminación algorítmica ocurre cuando un sistema de IA toma decisiones que generan trato desigual basado en características protegidas (edad, género, raza, etc.)."
+    const faqJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la discriminación algorítmica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La discriminación algorítmica ocurre cuando un sistema de inteligencia artificial toma decisiones automatizadas que generan un trato desigual o injusto basado en características protegidas como el género, la raza, la edad o la discapacidad, a menudo debido a sesgos en los datos de entrenamiento o en el diseño del modelo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué obligaciones tiene el AI Act respecto al sesgo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El Reglamento de IA (AI Act) impone obligaciones estrictas para los sistemas de alto riesgo, incluyendo la implementación de sistemas de gestión de riesgos, la gobernanza de datos para minimizar sesgos, documentación técnica detallada, transparencia para los usuarios y una supervisión humana efectiva para corregir posibles desviaciones algorítmicas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué multas puede haber por incumplir el AI Act?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las sanciones pueden ser masivas, alcanzando hasta 35 millones de euros o el 7% de la facturación global anual de la empresa por el uso de prácticas prohibidas, y hasta 15 millones de euros o el 3% por el incumplimiento de las obligaciones generales establecidas en el Reglamento."
+          }
         }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué obligaciones tiene el AI Act respecto al sesgo?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "El AI Act exige evaluaciones de impacto, datasets representativos, pruebas de sesgo y supervisión humana en sistemas de alto riesgo."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué multas puede haber por incumplir el AI Act?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Hasta 35 millones de euros o el 7% de la facturación global para infracciones graves."
-        }
-      }
-    ]
-  };
+      ]
+    };
 
   const authorJsonLd = {
     "@context": "https://schema.org",

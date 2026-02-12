@@ -90,6 +90,37 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
     image: "https://www.derechoartificial.com/default-og.jpg"
   };
 
+  const faqJsonLd = entry.slug === "ai-act-guia-completa" ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cuándo es obligatorio cumplir el AI Act?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La aplicación es escalonada: las prohibiciones de sistemas de riesgo inaceptable entraron en vigor el 2 de febrero de 2025. Las normas para modelos de IA de propósito general se aplican desde agosto de 2025, y la mayoría de las obligaciones para sistemas de alto riesgo serán exigibles a partir de agosto de 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué sistemas de IA están prohibidos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Están prohibidos los sistemas que suponen un riesgo inaceptable, como la puntuación social (social scoring) por parte de gobiernos, la manipulación subliminal que cause daños, la explotación de vulnerabilidades de grupos específicos y el uso de sistemas de identificación biométrica remota en tiempo real en espacios públicos para fines policiales (salvo excepciones muy tasadas)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuáles son las multas por incumplimiento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El Reglamento establece sanciones severas: hasta 35 millones de euros o el 7% de la facturación global anual por prácticas prohibidas; hasta 15 millones o el 3% por incumplimiento de obligaciones generales; y hasta 7,5 millones o el 1,5% por proporcionar información inexacta a las autoridades."
+        }
+      }
+    ]
+  } : null;
+
   const jsonLd = createLegislationJsonLd({
     url,
     name: entry.title,
@@ -118,6 +149,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
       <StructuredData data={[jsonLd, breadcrumbJsonLd]} />
       <LegalLayout title={entry.title} category="Normativa">
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
