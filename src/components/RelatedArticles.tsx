@@ -31,13 +31,11 @@ export default async function RelatedArticles({ currentSlug }: RelatedArticlesPr
             className="group block"
           >
             <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-              {article.image && (
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-48 object-cover"
-                />
-              )}
+              <img
+                src={article.image || "/logo-principal.png"}
+                alt={article.title}
+                className="w-full h-48 object-cover"
+              />
               <div className="p-6">
                 <h3 className="font-semibold text-lg leading-tight group-hover:text-blue-600 transition-colors">
                   {article.title}
