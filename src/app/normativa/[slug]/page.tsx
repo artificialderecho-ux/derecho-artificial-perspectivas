@@ -60,7 +60,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
   const entry = await getSectionResourceEntry("normativa", slug);
   if (!entry) notFound();
 
-  const url = `https://derechoartificial.com/normativa/${entry.slug}`;
+  const url = `https://www.derechoartificial.com/normativa/${entry.slug}`;
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
 
   const datePublished =
@@ -120,6 +120,35 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "El régimen sancionador establece multas administrativas proporcionales: hasta 35 millones de euros o el 7% de la facturación global anual por prácticas prohibidas (Art. 5); hasta 15 millones o el 3% por incumplimiento de obligaciones de sistemas de alto riesgo; y hasta 7,5 millones o el 1,5% por proporcionar información incorrecta a las autoridades. Para las PYMEs, las multas se limitan al porcentaje menor indicado."
+        }
+      }
+    ]
+  } : entry.slug === "rgpd-gobernanza-datos-ia" ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cuáles son las multas por incumplimiento del RGPD en IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El régimen sancionador del RGPD establece dos niveles: multas de hasta 20 millones de euros o el 4% de la facturación global anual para infracciones graves (Art. 83.5), y hasta 10 millones o el 2% para infracciones administrativas (Art. 83.4). En España, la AEPD ha impuesto sanciones récord recientemente, destacando fallos en gobernanza algorítmica y falta de Evaluaciones de Impacto (EIPD)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué obligaciones críticas establece el RGPD para sistemas de IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Las organizaciones deben cumplir con la responsabilidad proactiva (Art. 5.2), realizar una EIPD preventiva (Art. 35) antes del despliegue si hay alto riesgo para los derechos, garantizar una base legal sólida (Art. 6) más allá del consentimiento, y asegurar la transparencia algorítmica y notificación de brechas en un plazo de 72 horas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo se complementan el RGPD y el AI Act?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ambas normativas son de aplicación acumulativa. Mientras el RGPD protege la privacidad y autodeterminación informativa del individuo, el AI Act introduce una capa de seguridad de producto y gestión de riesgos sistémicos. El cumplimiento del AI Act no exime de las obligaciones de protección de datos del RGPD."
         }
       }
     ]

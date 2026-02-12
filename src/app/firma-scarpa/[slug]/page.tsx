@@ -124,7 +124,7 @@ export default async function FirmaScarpaSlugPage({
       headline: jsonEntry.title,
       description: jsonEntry.description,
       datePublished: jsonEntry.datePublished,
-      authorName: jsonEntry.author,
+      authorName: "Ricardo Scarpa",
     });
 
     const genericJsonLd = createGenericArticleJsonLd({
@@ -132,7 +132,7 @@ export default async function FirmaScarpaSlugPage({
       headline: jsonEntry.title,
       description: jsonEntry.description,
       datePublished: jsonEntry.datePublished,
-      authorName: jsonEntry.author,
+      authorName: "Ricardo Scarpa",
     });
 
     const faqJsonLd = {
@@ -174,7 +174,6 @@ export default async function FirmaScarpaSlugPage({
       "url": "https://www.derechoartificial.com/quienes-somos",
       "sameAs": [
         "https://www.linkedin.com/in/ricardoscarpa",
-        // Añade aquí tu ORCID o Twitter si lo tienes
       ],
       "affiliation": [
         {
@@ -240,7 +239,7 @@ export default async function FirmaScarpaSlugPage({
           category="Firma Scarpa"
           date={jsonEntry.datePublished}
           author={{
-            name: jsonEntry.author,
+            name: "Ricardo Scarpa",
             href: "/quienes-somos",
           }}
         >
@@ -311,7 +310,7 @@ export default async function FirmaScarpaSlugPage({
 
   const entry = resourceEntry as ResourceEntry;
 
-  const url = `https://derechoartificial.com/firma-scarpa/${entry.slug}`;
+  const url = `https://www.derechoartificial.com/firma-scarpa/${entry.slug}`;
   const description =
     entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) || entry.title;
 
@@ -395,9 +394,8 @@ export default async function FirmaScarpaSlugPage({
     "jobTitle": "Abogado experto en Derecho Digital e Inteligencia Artificial",
     "url": "https://www.derechoartificial.com/quienes-somos",
     "sameAs": [
-      "https://www.linkedin.com/in/ricardoscarpa",
-      // Añade aquí tu ORCID o Twitter si lo tienes
-    ],
+        "https://www.linkedin.com/in/ricardoscarpa",
+      ],
     "affiliation": [
       {
         "@type": "Organization",

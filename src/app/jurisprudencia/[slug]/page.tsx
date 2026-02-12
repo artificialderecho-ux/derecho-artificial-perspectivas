@@ -42,7 +42,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
   const entry = await getSectionResourceEntry("jurisprudencia", slug);
   if (!entry) notFound();
 
-  const url = `https://derechoartificial.com/jurisprudencia/${entry.slug}`;
+  const url = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
 
   const datePublished =

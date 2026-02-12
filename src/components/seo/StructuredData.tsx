@@ -8,7 +8,7 @@ export function StructuredData({ data }: { data: JsonLdValue }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(data) }} />;
 }
 
-const siteUrl = "https://derechoartificial.com";
+const siteUrl = "https://www.derechoartificial.com";
 
 export function createOrganizationJsonLd() {
   return {
@@ -105,7 +105,7 @@ export function createArticleJsonLd(params: {
         "@type": "ImageObject",
         "url": `${siteUrl}/logo-principal.png`
       },
-      "@id": "https://derechoartificial.com/#organization"
+      "@id": `${siteUrl}/#organization`
     },
   };
 }

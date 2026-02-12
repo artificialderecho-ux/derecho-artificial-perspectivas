@@ -171,7 +171,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
       : new Date().toISOString();
 
   const jsonLd = createNewsArticleJsonLd({
-    url: `https://derechoartificial.com/actualidad-ia/${entry.slug}`,
+    url: `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`,
     headline: entry.title,
     description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
     datePublished: date,
@@ -179,7 +179,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
   });
 
   const genericJsonLd = createGenericArticleJsonLd({
-    url: `https://derechoartificial.com/actualidad-ia/${entry.slug}`,
+    url: `https://www.derechoartificial.com/actualidad-ia/${entry.slug}`,
     headline: entry.title,
     description: entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
     datePublished: date,
