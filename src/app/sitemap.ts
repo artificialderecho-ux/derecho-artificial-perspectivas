@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const articlePages = contentEntries.map(entry => ({
     url: `${baseUrl}/firma-scarpa/${entry.slug}`,
-    lastModified: new Date(entry.datePublished || entry.date),
+    lastModified: new Date(entry.datePublished),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))
