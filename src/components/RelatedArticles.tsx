@@ -15,7 +15,7 @@ export default async function RelatedArticles({ currentSlug }: RelatedArticlesPr
   // Unir todo y filtrar el actual
   const allArticles = [...contentItems]
     .filter(item => item.slug !== currentSlug)
-    .sort((a, b) => new Date(b.datePublished || b.date).getTime() - new Date(a.datePublished || a.date).getTime())
+    .sort((a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime())
     .slice(0, 3) // solo 3
 
   if (allArticles.length === 0) return null
