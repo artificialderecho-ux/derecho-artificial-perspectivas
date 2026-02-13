@@ -115,7 +115,11 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         </div>
         
         <div className="mt-12 pt-8 border-t border-border">
-          <RelatedArticles currentSlug={slug} section="normativa" />
+          <RelatedArticles 
+            currentSlug={slug} 
+            currentCategory="normativa" 
+            currentTags={mdxPost.frontmatter.tags}
+          />
         </div>
       </LegalLayout>
     );
