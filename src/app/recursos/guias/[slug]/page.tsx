@@ -129,9 +129,22 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
         <StructuredData data={breadcrumbJsonLd} />
         <LegalLayout
           title={mdxPost.frontmatter.title}
-          meta={`${formatDate(mdxPost.frontmatter.date)} · ${mdxPost.frontmatter.author || "Ricardo Scarpa"}`}
-          pdfUrl={mdxPost.frontmatter.pdf}
+          category="Guías y Protocolos"
+          date={mdxPost.frontmatter.date}
+          author={mdxPost.frontmatter.author ? { name: mdxPost.frontmatter.author } : undefined}
         >
+          {mdxPost.frontmatter.pdf && (
+            <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+              <a
+                href={mdxPost.frontmatter.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
+              >
+                Descargar documento original
+              </a>
+            </div>
+          )}
           <div className="prose prose-slate max-w-none prose-headings:font-serif prose-a:text-primary">
             <MDXRemote source={mdxPost.content} />
           </div>
