@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import { getAllPosts } from "@/lib/mdx-utils";
 
 export const metadata: Metadata = {
   title: "Jurisprudencia",
@@ -56,6 +57,20 @@ export default async function JurisprudenciaPage() {
     (entry): entry is NonNullable<typeof entry> => Boolean(entry),
   );
 
+  const mdxPosts = getAllPosts().filter(post => post.frontmatter.category === 'jurisprudencia');
+
+  const mdxItems: SentenciaItem[] = mdxPosts.map(post => {
+    const dateMs = new Date(post.frontmatter.date).getTime();
+    return {
+      id: `mdx-${post.slug}`,
+      href: post.url,
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.author || "Ricardo Scarpa"}`,
+      dateMs: dateMs,
+    };
+  });
+
   
 
   const boscoDateString = "2026-01-30";
@@ -102,7 +117,7 @@ export default async function JurisprudenciaPage() {
     };
   });
 
-  const items: SentenciaItem[] = [boscoItem, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+  const items: SentenciaItem[] = [...mdxItems, boscoItem, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [

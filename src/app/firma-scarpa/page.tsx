@@ -5,6 +5,7 @@ import { getContentEntry, listContentSlugs } from "@/lib/content";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import { getAllPosts } from "@/lib/mdx-utils";
 
 export const metadata: Metadata = {
   title: "Firma Scarpa",
@@ -64,6 +65,22 @@ export default async function FirmaScarpaPage() {
   const resolvedResourceEntries = resourceEntries.filter(
     (entry): entry is ResourceEntry => Boolean(entry),
   );
+
+  const mdxPosts = getAllPosts().filter(post => post.frontmatter.category === 'firma-scarpa');
+
+  const mdxItems: UnifiedItem[] = mdxPosts.map(post => {
+    const dateMs = new Date(post.frontmatter.date).getTime();
+    return {
+      id: `mdx-${post.slug}`,
+      href: post.url,
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      badge: "Análisis",
+      meta: `${formatDate(post.frontmatter.date)} · ${post.frontmatter.author || "Ricardo Scarpa"}`,
+      dateMs: dateMs,
+      displayDateMs: dateMs,
+    };
+  });
 
   type UnifiedItem = {
     id: string;
@@ -130,9 +147,9 @@ export default async function FirmaScarpaPage() {
     };
   });
 
-  const allItems: UnifiedItem[] = [...contentItems, ...resourceItems].sort(
-  (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
-);
+  const items: UnifiedItem[] = [...mdxItems, ...contentItems, ...resourceItems].sort(
+    (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
+  );
 
   // El artículo destacado es automáticamente el más reciente (primero en la lista ordenada)
   const featuredItems: UnifiedItem[] = allItems.length > 0 ? [allItems[0]] : [];

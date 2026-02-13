@@ -6,6 +6,7 @@ import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { ContentPreviewGrid } from "@/components/ContentPreviewCard";
+import { getAllPosts } from "@/lib/mdx-utils";
 
 export const metadata: Metadata = {
   title: "Normativa",
@@ -68,6 +69,22 @@ export default async function NormativaPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
+  const mdxPosts = getAllPosts().filter(post => post.frontmatter.category === 'normativa');
+
+  const mdxItems: PreviewItem[] = mdxPosts.map(post => {
+    const dateMs = new Date(post.frontmatter.date).getTime();
+    return {
+      id: `mdx-${post.slug}`,
+      href: post.url,
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      badge: "Análisis",
+      meta: `${formatDate(post.frontmatter.date)} · ${post.frontmatter.author || "Ricardo Scarpa"}`,
+      dateMs: dateMs,
+      displayDateMs: dateMs,
+    };
+  });
+
   const contentItems: PreviewItem[] = sortedEntries.map((entry) => {
     const time = typeof entry.dateMs === "number" && !Number.isNaN(entry.dateMs) ? entry.dateMs : 0;
     const displayMs = (() => {
@@ -122,7 +139,7 @@ export default async function NormativaPage() {
     };
   });
 
-  const items: PreviewItem[] = [...contentItems, ...resourceItems].sort(
+  const items: PreviewItem[] = [...mdxItems, ...contentItems, ...resourceItems].sort(
     (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
   );
 

@@ -20,6 +20,7 @@ export interface PostData {
   frontmatter: PostFrontmatter;
   content: string;
   url: string;
+  excerpt: string;
 }
 
 export function getAllPosts(): PostData[] {
@@ -35,11 +36,19 @@ export function getAllPosts(): PostData[] {
     const { data, content } = matter(fileContents);
     const slug = file.replace(/\.mdx?$/, '');
     
+    // Generar excerpt: descripción o los primeros 160 caracteres del contenido
+    const excerpt = data.description || 
+                   content.replace(/[#*`]/g, '') // Quitar markdown básico
+                          .replace(/\n/g, ' ')
+                          .trim()
+                          .slice(0, 160) + '...';
+    
     return {
       slug,
       frontmatter: data as PostFrontmatter,
       content,
-      url: `/${data.category || 'blog'}/${slug}`
+      url: `/${data.category || 'blog'}/${slug}`,
+      excerpt
     };
   });
 

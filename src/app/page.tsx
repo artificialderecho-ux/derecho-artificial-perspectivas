@@ -6,6 +6,7 @@ import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/
 import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { getAllPosts } from "@/lib/mdx-utils";
 
 export const metadata: Metadata = {
   title: "Derecho, ética y regulación de la IA",
@@ -185,7 +186,17 @@ export default async function HomePage() {
   ]);
 
   // Crear una lista unificada de todas las entradas recientes para la sección "Actualidad y Análisis"
+  const mdxPosts = getAllPosts();
+  
   const allRecentEntries = [
+    ...mdxPosts.map(post => ({
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      date: new Date(post.frontmatter.date).getTime(),
+      urlPath: post.url,
+      author: post.frontmatter.author || "Ricardo Scarpa",
+      type: (post.frontmatter.category.charAt(0).toUpperCase() + post.frontmatter.category.slice(1)) as any
+    })),
     ...unifiedActualidad.map(e => ({ ...e, type: 'Actualidad IA' as const })),
     ...unifiedFirma.map(e => ({ ...e, type: 'Firma Scarpa' as const })),
     ...normativaEntriesAll.filter((e): e is NonNullable<typeof e> => Boolean(e)).map(e => ({
