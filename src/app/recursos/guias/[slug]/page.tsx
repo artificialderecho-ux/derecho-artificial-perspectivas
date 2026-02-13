@@ -10,18 +10,57 @@ import {
   createBreadcrumbJsonLd,
 } from "@/components/seo/StructuredData";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { formatDate } from "@/lib/utils";
 
 type Params = {
   slug: string;
 };
 
 export async function generateStaticParams() {
-  const slugs = await listSectionResourceSlugs("guias");
-  return slugs.map((slug) => ({ slug }));
+  const resourceSlugs = await listSectionResourceSlugs("guias");
+  const mdxSlugs = getAllPosts()
+    .filter(p => p.frontmatter.category === 'recursos' && p.frontmatter.subcategory === 'guias')
+    .map(p => p.slug);
+  
+  const allSlugs = Array.from(new Set([...resourceSlugs, ...mdxSlugs]));
+  return allSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
+  const mdxPost = getPostBySlug(slug);
+  
+  if (mdxPost) {
+    const title = `${mdxPost.frontmatter.title} | Derecho Artificial`;
+    const description = mdxPost.frontmatter.description || mdxPost.excerpt;
+    const canonical = `https://www.derechoartificial.com/recursos/guias/${slug}`;
+    const ogImage = "/logo-principal.png";
+
+    return {
+      title,
+      description,
+      alternates: { canonical },
+      openGraph: {
+        type: "article",
+        title: mdxPost.frontmatter.title,
+        description,
+        url: canonical,
+        siteName: "Derecho Artificial",
+        locale: "es_ES",
+        images: [{ url: ogImage, width: 1200, height: 630, alt: mdxPost.frontmatter.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: mdxPost.frontmatter.title,
+        description,
+        images: [ogImage],
+        creator: "@RicardoScarpa",
+      },
+    };
+  }
+
   const entry = await getSectionResourceEntry("guias", slug);
   if (!entry) return {};
   
@@ -62,6 +101,49 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function GuiasSlugPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
+  const mdxPost = getPostBySlug(slug);
+
+  if (mdxPost) {
+    const url = `https://derechoartificial.com/recursos/guias/${slug}`;
+    const description = mdxPost.frontmatter.description || mdxPost.excerpt;
+    const datePublished = new Date(mdxPost.frontmatter.date).toISOString().slice(0, 10);
+
+    const jsonLd = createArticleJsonLd({
+      url,
+      headline: mdxPost.frontmatter.title,
+      description,
+      datePublished,
+    });
+
+    const breadcrumbJsonLd = createBreadcrumbJsonLd({
+      items: [
+        { name: "Derecho Artificial", url: "https://derechoartificial.com" },
+        { name: "Guías y Protocolos", url: "https://derechoartificial.com/recursos/guias" },
+        { name: mdxPost.frontmatter.title, url },
+      ],
+    });
+
+    return (
+      <>
+        <StructuredData data={jsonLd} />
+        <StructuredData data={breadcrumbJsonLd} />
+        <LegalLayout
+          title={mdxPost.frontmatter.title}
+          meta={`${formatDate(mdxPost.frontmatter.date)} · ${mdxPost.frontmatter.author || "Ricardo Scarpa"}`}
+          pdfUrl={mdxPost.frontmatter.pdf}
+        >
+          <div className="prose prose-slate max-w-none prose-headings:font-serif prose-a:text-primary">
+            <MDXRemote source={mdxPost.content} />
+          </div>
+          
+          <div className="mt-12 pt-8 border-t border-slate-200">
+            <RelatedArticles currentSlug={slug} category="recursos" />
+          </div>
+        </LegalLayout>
+      </>
+    );
+  }
+
   const entry = await getSectionResourceEntry("guias", slug);
   if (!entry) notFound();
 
