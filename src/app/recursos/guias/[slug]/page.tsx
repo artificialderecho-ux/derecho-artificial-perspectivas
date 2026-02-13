@@ -12,7 +12,7 @@ import {
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { formatDate } from "@/lib/utils";
+import { formatDate } from "@/../date-utils";
 
 type Params = {
   slug: string;
