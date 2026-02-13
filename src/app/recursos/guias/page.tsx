@@ -81,12 +81,12 @@ const softLawDocs = [
     url: "https://www.unesco.org/es/artificial-intelligence/recommendation-ethics",
   },
   {
-    id: "ccbe-cloud-computing-2025",
-    title: "Directrices CCBE sobre el uso de Cloud Computing por abogados",
-    description: "Análisis exhaustivo de las recomendaciones de 2025 del Consejo de la Abogacía Europea sobre confidencialidad, seguridad y cumplimiento en la nube.",
+    id: "ccbe-cloud-computing-2026",
+    title: "Directrices CCBE sobre el uso de cloud computing por abogados",
+    description: "Análisis exhaustivo de las recomendaciones de 2026 del Consejo de la Abogacía Europea sobre confidencialidad, seguridad y cumplimiento en la nube.",
     source: "CCBE",
-    year: "2025",
-    url: "/recursos/en-itl-20250227-ccbe-guidelines-on-the-use-of-cloud-computing-by-lawyers",
+    year: "2026",
+    url: "/recursos/guias/en-itl-20250227-ccbe-guidelines-on-the-use-of-cloud-computing-by-lawyers",
     tags: ["Abogacía", "Cloud Computing", "Confidencialidad"]
   }
 ];

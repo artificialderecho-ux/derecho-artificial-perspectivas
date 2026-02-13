@@ -228,7 +228,7 @@ async function getDisplayDateMs(filePath: string) {
   m = t.match(/(\d{1,2})\s+([a-záéíóú.]+)\s+(\d{4})/i);
   if (m) {
     const d = parseInt(m[1], 10);
-    let monKey = (m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+    let monKey = (m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     monKey = monKey.endsWith(".") ? monKey.slice(0, -1) : monKey;
     const mon = monthsEs[monKey];
     const y = parseInt(m[3], 10);
