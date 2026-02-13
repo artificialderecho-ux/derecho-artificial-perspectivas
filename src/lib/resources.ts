@@ -219,7 +219,7 @@ async function getDisplayDateMs(filePath: string) {
   let m = t.match(/(\d{1,2})\s+de\s+([a-záéíóú.]+)\s+de\s+(\d{4})/i);
   if (m) {
     const d = parseInt(m[1], 10);
-    let monKey = (m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+    let monKey = (m[2] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     monKey = monKey.endsWith(".") ? monKey.slice(0, -1) : monKey;
     const mon = monthsEs[monKey];
     const y = parseInt(m[3], 10);
@@ -236,7 +236,7 @@ async function getDisplayDateMs(filePath: string) {
   }
   m = t.match(/([a-z.]+)\s+(\d{1,2}),\s*(\d{4})/i);
   if (m) {
-    const raw = (m[1] || "");
+    const raw = (m[1] || "").toLowerCase();
     const mon = monthsEn[raw.endsWith(".") ? raw.slice(0, -1) : raw];
     const d = parseInt(m[2], 10);
     const y = parseInt(m[3], 10);
@@ -245,7 +245,7 @@ async function getDisplayDateMs(filePath: string) {
   m = t.match(/(\d{1,2})\s+([a-z.]+)\s+(\d{4})/i);
   if (m) {
     const d = parseInt(m[1], 10);
-    const raw = (m[2] || "");
+    const raw = (m[2] || "").toLowerCase();
     const mon = monthsEn[raw.endsWith(".") ? raw.slice(0, -1) : raw];
     const y = parseInt(m[3], 10);
     if (mon) return toMs(y, mon, d);
@@ -260,7 +260,7 @@ async function getDisplayDateMs(filePath: string) {
   }
   m = t.match(/([a-záéíóú.]+)\s+(\d{4})/i);
   if (m) {
-    let monKey = (m[1] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+    let monKey = (m[1] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     monKey = monKey.endsWith(".") ? monKey.slice(0, -1) : monKey;
     const mon = monthsEs[monKey] || monthsEn[monKey];
     const y = parseInt(m[2], 10);
