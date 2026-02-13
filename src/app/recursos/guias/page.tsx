@@ -79,6 +79,15 @@ const softLawDocs = [
     source: "UNESCO",
     year: "2021",
     url: "https://www.unesco.org/es/artificial-intelligence/recommendation-ethics",
+  },
+  {
+    id: "ccbe-cloud-computing-2025",
+    title: "Directrices CCBE sobre el uso de Cloud Computing por abogados",
+    description: "Análisis exhaustivo de las recomendaciones de 2025 del Consejo de la Abogacía Europea sobre confidencialidad, seguridad y cumplimiento en la nube.",
+    source: "CCBE",
+    year: "2025",
+    url: "/recursos/en-itl-20250227-ccbe-guidelines-on-the-use-of-cloud-computing-by-lawyers",
+    tags: ["Abogacía", "Cloud Computing", "Confidencialidad"]
   }
 ];
 
@@ -93,12 +102,16 @@ export default function GuidesPage() {
       d.source !== "Comisión Europea" &&
       !d.source.startsWith("CEPEJ") &&
       d.id !== "ai-act-guide-2026" &&
-      d.id !== "rgpd-ia-guia-completa-2026",
+      d.id !== "rgpd-ia-guia-completa-2026" &&
+      d.id !== "ccbe-cloud-computing-2025",
   );
   const commissionDocs: DocCard[] = [...ecDocs, ...softLawEcDocs];
   const mainAesiaDoc = aesiaDocs[0];
 
   // Convertir a PreviewItems
+  const ccbeGuide = softLawDocs.find((d) => d.id === "ccbe-cloud-computing-2025");
+  const ccbePreview = ccbeGuide ? docToPreviewItem(ccbeGuide, "Nuevo Análisis") : null;
+
   const rgpdGuide = softLawDocs.find((d) => d.id === "rgpd-ia-guia-completa-2026");
   const rgpdPreview = rgpdGuide ? docToPreviewItem(rgpdGuide, "Destacada") : null;
 
@@ -143,6 +156,12 @@ export default function GuidesPage() {
           {aiActPreview && (
             <section className="mb-12">
               <ContentPreviewGrid items={[aiActPreview]} columns={1} size="large" />
+            </section>
+          )}
+
+          {ccbePreview && (
+            <section className="mb-12">
+              <ContentPreviewGrid items={[ccbePreview]} columns={1} size="large" />
             </section>
           )}
 
