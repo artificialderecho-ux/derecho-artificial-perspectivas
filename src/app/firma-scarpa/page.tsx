@@ -152,8 +152,8 @@ export default async function FirmaScarpaPage() {
   );
 
   // El artículo destacado es automáticamente el más reciente (primero en la lista ordenada)
-  const featuredItems: UnifiedItem[] = allItems.length > 0 ? [allItems[0]] : [];
-  const remainingItems = allItems.length > 0 ? allItems.slice(1) : [];
+  const featuredItems: UnifiedItem[] = items.length > 0 ? [items[0]] : [];
+  const remainingItems = items.length > 0 ? items.slice(1) : [];
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
