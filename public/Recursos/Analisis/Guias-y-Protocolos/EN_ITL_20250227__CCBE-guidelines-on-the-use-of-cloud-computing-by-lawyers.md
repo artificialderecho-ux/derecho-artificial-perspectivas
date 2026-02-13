@@ -1,3 +1,11 @@
+---
+title: "Directrices CCBE sobre el uso de cloud computing por abogados"
+date: 2026-02-13
+author: "Ricardo Scarpa"
+document: "Directrices CCBE sobre el uso de cloud computing por abogados"
+standards: "Metodología IRAC - Harvard Law School"
+---
+
 # Directrices CCBE sobre el uso de cloud computing por abogados
 
 **Autor:** Ricardo Scarpa  
