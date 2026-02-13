@@ -1,6 +1,7 @@
 **Guía Internacional de Seguridad de la IA 2026: Análisis jurídico-informático exhaustivo**
 
-**Ricardo Scarpa**
+**Autor:** Ricardo Scarpa  
+**Fecha:** 10 Febrero 2026  
 
 ## **I. Evolución técnica de la IA de propósito general y su relevancia para la informática jurídica**
 

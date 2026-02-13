@@ -1,5 +1,8 @@
 # La Frontera de la Discriminación Algorítmica: Análisis Exhaustivo del Caso iTutorGroup y el Futuro de la Responsabilidad Civil en la IA
 
+**Autor:** Ricardo Scarpa  
+**Fecha:** 11 Febrero 2026  
+
 ## 1. Introducción: El Cambio de Paradigma en el Reclutamiento Automatizado
 
 desde la perspectiva analítica de derechoartificial.com, hemos insistido en que la Inteligencia Artificial (IA) no es una herramienta aséptica, sino una *machina económica* que actúa como un prisma de las estructuras sociales preexistentes.
