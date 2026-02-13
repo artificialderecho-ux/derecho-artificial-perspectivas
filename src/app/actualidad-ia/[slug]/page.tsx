@@ -132,8 +132,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         <div className="mt-16 pt-8 border-t border-slate-200">
           <RelatedArticles
             currentSlug={slug}
-            category="actualidad-ia"
-            title="Más Actualidad IA"
+            currentCategory="actualidad-ia"
           />
         </div>
       </LegalLayout>

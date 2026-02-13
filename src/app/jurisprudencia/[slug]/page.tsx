@@ -112,8 +112,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
         <div className="mt-16 pt-8 border-t border-slate-200">
           <RelatedArticles
             currentSlug={slug}
-            category="jurisprudencia"
-            title="Más Jurisprudencia"
+            currentCategory="jurisprudencia"
           />
         </div>
       </LegalLayout>

@@ -157,8 +157,7 @@ export default async function FirmaScarpaSlugPage({
         <div className="mt-16 pt-8 border-t border-slate-200">
           <RelatedArticles
             currentSlug={slug}
-            category="firma-scarpa"
-            title="Más de Firma Scarpa"
+            currentCategory="firma-scarpa"
           />
         </div>
       </LegalLayout>
