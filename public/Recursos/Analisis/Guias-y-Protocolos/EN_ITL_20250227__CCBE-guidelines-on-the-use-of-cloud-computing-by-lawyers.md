@@ -1,7 +1,7 @@
 # ANÁLISIS JURÍDICO EXHAUSTIVO: DIRECTRICES CCBE SOBRE CLOUD COMPUTING PARA ABOGADOS
 
 **Autor:** Análisis Jurídico Profesional  
-**Fecha:** Febrero 2025  
+**Fecha:** 27 de febrero de 2025  
 **Documento:** Directrices CCBE sobre el uso de cloud computing por barras y abogados (27/02/2025)  
 **Estándares:** Metodología IRAC - Harvard Law School
 

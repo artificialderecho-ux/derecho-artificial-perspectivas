@@ -208,7 +208,9 @@ export default async function HomePage() {
       title: e.title,
       description: e.description || e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
       date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: `/recursos/guias/${e.slug}`,
+      urlPath: e.slug === "ai-act-guia-completa" || e.slug === "rgpd-gobernanza-datos-ia" 
+        ? `/normativa/${e.slug}` 
+        : `/recursos/guias/${e.slug}`,
       author: "Derecho Artificial",
       type: 'Guías y Protocolos' as const
     }))
