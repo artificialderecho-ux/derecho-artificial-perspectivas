@@ -89,13 +89,13 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
   const mdxPost = getPostBySlug(slug);
   
   if (mdxPost) {
-    const { title, date, pdf } = mdxPost.frontmatter;
+    const { title, date, pdf, category } = mdxPost.frontmatter;
     return (
       <LegalLayout
         title={title}
-        author="Ricardo Scarpa"
+        category={category || "Normativa"}
+        author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
-        pdfUrl={pdf}
       >
         <div className="prose prose-blue max-w-none dark:prose-invert">
           <MDXRemote source={mdxPost.content} />
