@@ -8,18 +8,49 @@ import {
 } from "@/components/seo/StructuredData";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { RelatedArticles } from "@/components/RelatedArticles";
+import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
 type Params = {
   slug: string;
 };
 
 export async function generateStaticParams() {
-  const slugs = await listSectionResourceSlugs("jurisprudencia");
-  return slugs.map((slug) => ({ slug }));
+  const resourceSlugs = await listSectionResourceSlugs("jurisprudencia");
+  
+  // Incluir slugs de posts MDX que tengan categoría jurisprudencia
+  const mdxPosts = getAllPosts().filter(p => p.frontmatter.category === "jurisprudencia");
+  const mdxSlugs = mdxPosts.map(p => p.slug);
+
+  const allSlugs = new Set<string>([...resourceSlugs, ...mdxSlugs]);
+  return Array.from(allSlugs).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
+
+  // Priorizar MDX nativo
+  const mdxPost = getPostBySlug(slug);
+  if (mdxPost && mdxPost.frontmatter.category === "jurisprudencia") {
+    const { title, description, category, date } = mdxPost.frontmatter;
+    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+    return {
+      title: `${title} | Derecho Artificial`,
+      description: description || "Análisis jurídico experto sobre IA por Ricardo Scarpa",
+      alternates: { canonical },
+      openGraph: {
+        type: "article",
+        title,
+        description,
+        url: canonical,
+        siteName: "Derecho Artificial",
+        locale: "es_ES",
+        publishedTime: date ? new Date(date).toISOString() : undefined,
+        authors: ['Ricardo Scarpa']
+      }
+    };
+  }
+
   const entry = await getSectionResourceEntry("jurisprudencia", slug);
   if (!entry) return {};
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
@@ -60,6 +91,35 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function JurisprudenciaSlugPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
+
+  // Intentar cargar desde MDX nativo primero
+  const mdxPost = getPostBySlug(slug);
+  if (mdxPost && mdxPost.frontmatter.category === "jurisprudencia") {
+    const { title, date, category } = mdxPost.frontmatter;
+    return (
+      <LegalLayout
+        title={title}
+        category={category === "jurisprudencia" ? "Jurisprudencia" : (category || "Jurisprudencia")}
+        author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
+        date={date}
+      >
+        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+          <div className="prose prose-slate max-w-none">
+            <MDXRemote source={mdxPost.content} />
+          </div>
+        </div>
+
+        <div className="mt-16 pt-8 border-t border-slate-200">
+          <RelatedArticles
+            currentSlug={slug}
+            category="jurisprudencia"
+            title="Más Jurisprudencia"
+          />
+        </div>
+      </LegalLayout>
+    );
+  }
+
   const entry = await getSectionResourceEntry("jurisprudencia", slug);
   if (!entry) notFound();
 

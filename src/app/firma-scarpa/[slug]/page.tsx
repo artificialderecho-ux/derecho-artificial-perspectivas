@@ -14,6 +14,8 @@ import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedArticles } from "@/components/RelatedArticles";
+import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
 // Map slugs to PDF files
 const PDF_MAPPING: Record<string, string> = {
@@ -27,7 +29,12 @@ export async function generateStaticParams() {
     listContentSlugs("firma-scarpa"),
     listSectionResourceSlugs("firma-scarpa"),
   ]);
-  const allSlugs = new Set<string>([...jsonSlugs, ...resourceSlugs]);
+  
+  // Incluir slugs de posts MDX que tengan categoría firma-scarpa
+  const mdxPosts = getAllPosts().filter(p => p.frontmatter.category === "firma-scarpa");
+  const mdxSlugs = mdxPosts.map(p => p.slug);
+
+  const allSlugs = new Set<string>([...jsonSlugs, ...resourceSlugs, ...mdxSlugs]);
   const seed = allSlugs.size ? Array.from(allSlugs) : ["nota-editorial-inaugural"];
   return seed.map((slug) => ({ slug }));
 }
@@ -38,6 +45,29 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+
+  // Priorizar MDX nativo
+  const mdxPost = getPostBySlug(slug);
+  if (mdxPost && mdxPost.frontmatter.category === "firma-scarpa") {
+    const { title, description, category, date } = mdxPost.frontmatter;
+    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+    return {
+      title: `${title} | Derecho Artificial`,
+      description: description || "Análisis jurídico experto sobre IA por Ricardo Scarpa",
+      alternates: { canonical },
+      openGraph: {
+        type: "article",
+        title,
+        description,
+        url: canonical,
+        siteName: "Derecho Artificial",
+        locale: "es_ES",
+        publishedTime: date ? new Date(date).toISOString() : undefined,
+        authors: ['Ricardo Scarpa']
+      }
+    };
+  }
+
   const [jsonEntry, resourceEntry] = await Promise.all([
     getContentEntry("firma-scarpa", slug),
     getSectionResourceEntry("firma-scarpa", slug),
@@ -106,6 +136,35 @@ export default async function FirmaScarpaSlugPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  // Intentar cargar desde MDX nativo primero
+  const mdxPost = getPostBySlug(slug);
+  if (mdxPost && mdxPost.frontmatter.category === "firma-scarpa") {
+    const { title, date, category } = mdxPost.frontmatter;
+    return (
+      <LegalLayout
+        title={title}
+        category={category === "firma-scarpa" ? "Firma Scarpa" : (category || "Firma Scarpa")}
+        author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
+        date={date}
+      >
+        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+          <div className="prose prose-slate max-w-none">
+            <MDXRemote source={mdxPost.content} />
+          </div>
+        </div>
+
+        <div className="mt-16 pt-8 border-t border-slate-200">
+          <RelatedArticles
+            currentSlug={slug}
+            category="firma-scarpa"
+            title="Más de Firma Scarpa"
+          />
+        </div>
+      </LegalLayout>
+    );
+  }
+
   const jsonEntry = await getContentEntry("firma-scarpa", slug);
   const resourceEntry = jsonEntry ? null : await getSectionResourceEntry("firma-scarpa", slug);
 

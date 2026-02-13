@@ -11,13 +11,20 @@ import { LegalLayout } from "@/components/layout/LegalLayout";
 import { Button } from "@/components/ui/button";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 export async function generateStaticParams() {
   const [jsonSlugs, resourceSlugs] = await Promise.all([
     listContentSlugs("actualidad-ia"),
     listSectionResourceSlugs("actualidad-ia"),
   ]);
-  const allSlugs = new Set<string>([...jsonSlugs, ...resourceSlugs]);
+
+  // Incluir slugs de posts MDX que tengan categoría actualidad-ia
+  const mdxPosts = getAllPosts().filter(p => p.frontmatter.category === "actualidad-ia");
+  const mdxSlugs = mdxPosts.map(p => p.slug);
+
+  const allSlugs = new Set<string>([...jsonSlugs, ...resourceSlugs, ...mdxSlugs]);
   const seed = allSlugs.size ? Array.from(allSlugs) : [""];
   return seed.map((slug) => ({ slug }));
 }
@@ -28,6 +35,29 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+
+  // Priorizar MDX nativo
+  const mdxPost = getPostBySlug(slug);
+  if (mdxPost && mdxPost.frontmatter.category === "actualidad-ia") {
+    const { title, description, category, date } = mdxPost.frontmatter;
+    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+    return {
+      title: `${title} | Derecho Artificial`,
+      description: description || "Análisis jurídico experto sobre IA por Ricardo Scarpa",
+      alternates: { canonical },
+      openGraph: {
+        type: "article",
+        title,
+        description,
+        url: canonical,
+        siteName: "Derecho Artificial",
+        locale: "es_ES",
+        publishedTime: date ? new Date(date).toISOString() : undefined,
+        authors: ['Ricardo Scarpa']
+      }
+    };
+  }
+
   const [jsonEntry, resourceEntry] = await Promise.all([
     getContentEntry("actualidad-ia", slug),
     getSectionResourceEntry("actualidad-ia", slug),
@@ -81,6 +111,35 @@ export async function generateMetadata({
 
 export default async function ActualidadIASlugPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  // Intentar cargar desde MDX nativo primero
+  const mdxPost = getPostBySlug(slug);
+  if (mdxPost && mdxPost.frontmatter.category === "actualidad-ia") {
+    const { title, date, category } = mdxPost.frontmatter;
+    return (
+      <LegalLayout
+        title={title}
+        category={category === "actualidad-ia" ? "Actualidad IA" : (category || "Actualidad IA")}
+        author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
+        date={date}
+      >
+        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+          <div className="prose prose-slate max-w-none">
+            <MDXRemote source={mdxPost.content} />
+          </div>
+        </div>
+
+        <div className="mt-16 pt-8 border-t border-slate-200">
+          <RelatedArticles
+            currentSlug={slug}
+            category="actualidad-ia"
+            title="Más Actualidad IA"
+          />
+        </div>
+      </LegalLayout>
+    );
+  }
+
   const jsonEntry = await getContentEntry("actualidad-ia", slug);
   const resourceEntry = jsonEntry ? null : await getSectionResourceEntry("actualidad-ia", slug);
 
