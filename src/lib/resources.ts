@@ -258,6 +258,14 @@ async function getDisplayDateMs(filePath: string) {
     const ms = toMs(y, mon, d);
     if (ms != null) return ms;
   }
+  m = t.match(/([a-záéíóú.]+)\s+(\d{4})/i);
+  if (m) {
+    let monKey = (m[1] || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+    monKey = monKey.endsWith(".") ? monKey.slice(0, -1) : monKey;
+    const mon = monthsEs[monKey] || monthsEn[monKey];
+    const y = parseInt(m[2], 10);
+    if (mon) return toMs(y, mon, 1);
+  }
   return null;
 }
 function extractFrontmatterField(markdown: string, field: string) {
