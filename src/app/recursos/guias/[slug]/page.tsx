@@ -150,7 +150,7 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
           </div>
           
           <div className="mt-12 pt-8 border-t border-slate-200">
-            <RelatedArticles currentSlug={slug} category="recursos" />
+            <RelatedArticles currentSlug={slug} currentCategory="recursos" currentTags={mdxPost.frontmatter.tags} />
           </div>
         </LegalLayout>
       </>
