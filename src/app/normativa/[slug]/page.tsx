@@ -97,6 +97,19 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >
+        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+          {pdf ? (
+            <a
+              href={pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
+            >
+              Descargar documento original
+            </a>
+          ) : null}
+        </div>
+
         <div className="prose prose-blue max-w-none dark:prose-invert">
           <MDXRemote source={mdxPost.content} />
         </div>
