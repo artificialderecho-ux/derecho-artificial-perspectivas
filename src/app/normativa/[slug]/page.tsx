@@ -9,7 +9,9 @@ import {
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { getPostBySlug } from "@/lib/mdx-utils";
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 type Params = {
   slug: string;
@@ -110,8 +112,10 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
           ) : null}
         </div>
 
-        <div className="prose prose-blue max-w-none dark:prose-invert">
-          <MDXRemote source={mdxPost.content} />
+        <div className="mx-auto">
+          <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+            {mdxPost.content}
+          </ReactMarkdown>
         </div>
         
         <div className="mt-12 pt-8 border-t border-border">

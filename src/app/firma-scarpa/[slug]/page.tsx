@@ -15,7 +15,9 @@ import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resourc
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 // Map slugs to PDF files
 const PDF_MAPPING: Record<string, string> = {
@@ -148,10 +150,10 @@ export default async function FirmaScarpaSlugPage({
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >
-        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
-          <div className="prose prose-slate max-w-none">
-            <MDXRemote source={mdxPost.content} />
-          </div>
+        <div className="mx-auto">
+          <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+            {mdxPost.content}
+          </ReactMarkdown>
         </div>
 
         <div className="mt-16 pt-8 border-t border-slate-200">

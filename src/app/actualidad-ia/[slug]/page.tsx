@@ -12,7 +12,9 @@ import { Button } from "@/components/ui/button";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 export async function generateStaticParams() {
   const [jsonSlugs, resourceSlugs] = await Promise.all([
@@ -123,10 +125,10 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >
-        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
-          <div className="prose prose-slate max-w-none">
-            <MDXRemote source={mdxPost.content} />
-          </div>
+        <div className="mx-auto">
+          <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+            {mdxPost.content}
+          </ReactMarkdown>
         </div>
 
         <div className="mt-16 pt-8 border-t border-slate-200">
