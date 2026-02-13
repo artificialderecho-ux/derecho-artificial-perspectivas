@@ -8,6 +8,8 @@ import {
 } from "@/components/seo/StructuredData";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { getPostBySlug } from "@/lib/mdx-utils";
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
 type Params = {
   slug: string;
@@ -20,6 +22,28 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
+  
+  // Priorizar MDX nativo
+  const mdxPost = getPostBySlug(slug);
+  if (mdxPost) {
+    const { title, description, category } = mdxPost.frontmatter;
+    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+    return {
+      title: `${title} | Derecho Artificial`,
+      description: description || "Análisis jurídico experto sobre IA por Ricardo Scarpa",
+      alternates: { canonical },
+      openGraph: {
+        type: "article",
+        title,
+        description,
+        url: canonical,
+        siteName: "Derecho Artificial",
+        locale: "es_ES",
+        authors: ['Ricardo Scarpa']
+      }
+    };
+  }
+
   const entry = await getSectionResourceEntry("normativa", slug);
   if (!entry) return {};
   const description = entry.description || entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
@@ -60,6 +84,30 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export default async function NormativaSlugPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
+
+  // Intentar cargar desde MDX nativo primero
+  const mdxPost = getPostBySlug(slug);
+  
+  if (mdxPost) {
+    const { title, date, pdf } = mdxPost.frontmatter;
+    return (
+      <LegalLayout
+        title={title}
+        author="Ricardo Scarpa"
+        date={date}
+        pdfUrl={pdf}
+      >
+        <div className="prose prose-blue max-w-none dark:prose-invert">
+          <MDXRemote source={mdxPost.content} />
+        </div>
+        
+        <div className="mt-12 pt-8 border-t border-border">
+          <RelatedArticles currentSlug={slug} section="normativa" />
+        </div>
+      </LegalLayout>
+    );
+  }
+
   const entry = await getSectionResourceEntry("normativa", slug);
   if (!entry) notFound();
 

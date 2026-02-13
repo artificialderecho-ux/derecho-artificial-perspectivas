@@ -1,0 +1,99 @@
+---
+title: "AI Act: Guía Jurídica Completa del Reglamento Europeo de Inteligencia Artificial"
+date: "2026-02-11"
+category: "normativa"
+tags: ["ai-act", "reglamento-ia", "cumplimiento", "alto-riesgo"]
+pdf: "/Fuentes/Normativa/AI-Act-Guia-Completa.pdf"
+author: "Ricardo Scarpa"
+description: "Guía jurídica completa AI Act 2026: obligaciones proveedores Arts. 9-15, sistemas alto riesgo, sanciones 35M EUR, calendario aplicación 2024-2027."
+---
+
+# AI Act: Guía Jurídica Completa del Reglamento Europeo de Inteligencia Artificial
+
+*Por Ricardo Scarpa | Actualizado: 11 de febrero de 2026 | Lectura: 50 minutos*
+
+---
+
+## Resumen Ejecutivo
+
+El **AI Act** (Reglamento UE 2024/1689) representa el primer marco legal integral del mundo para regular la inteligencia artificial, estableciendo el estándar global de gobernanza de sistemas de IA con efecto extraterritorial. Publicado el 12 de julio de 2024 y en vigor desde el 1 de agosto de 2024, su aplicación es **escalonada hasta 2027** mediante un enfoque basado en riesgos que diferencia cuatro niveles de sistemas: prohibidos, alto riesgo, transparencia y mínimo riesgo.
+
+**Fechas críticas de cumplimiento obligatorio:**
+- **2 febrero 2025:** Prohibición efectiva de prácticas de riesgo inaceptable (Art. 5) – Sin prórroga posible
+- **2 agosto 2025:** Obligaciones para modelos de IA de propósito general (GPAI) y autoridades de supervisión
+- **2 agosto 2026:** Cumplimiento completo para sistemas de alto riesgo nuevos comercializados después de esta fecha
+- **2 agosto 2027:** Adaptación obligatoria de sistemas de alto riesgo ya existentes en el mercado
+
+**Clasificación de sistemas según nivel de riesgo:**
+
+| Nivel | Criterio | Ejemplos | Régimen |
+|-------|----------|----------|---------|
+| **Prohibido** | Riesgo inaceptable para valores UE | Social scoring gubernamental, manipulación subliminal, predicción delictiva por perfilado | Prohibición absoluta, cese inmediato |
+| **Alto riesgo** | Impacto significativo en derechos fundamentales (Anexo III) | RRHH, educación, scoring crediticio, justicia, identificación biométrica | Obligaciones Arts. 9-15, evaluación conformidad, marcado CE |
+| **Transparencia** | Interacción humano-máquina | Chatbots, deepfakes, sistemas reconocimiento emociones | Deber de informar al usuario |
+| **Mínimo** | Sin impacto significativo | Filtros spam, videojuegos, IA industrial simple | Códigos conducta voluntarios |
+
+**Obligaciones para proveedores de sistemas alto riesgo:** Sistema de gestión de riesgos continuo (Art. 9), gobernanza y calidad de datos de entrenamiento libres de sesgos (Art. 10), documentación técnica exhaustiva con conservación 10 años (Art. 11), capacidades de logging automático para trazabilidad (Art. 12), transparencia e instrucciones de uso claras (Art. 13), diseño que permita supervisión humana efectiva con capacidad de intervención (Art. 14), precisión, robustez y ciberseguridad adecuadas (Art. 15), evaluación de conformidad interna (Anexo VI) o externa por organismo notificado (Anexo VII), marcado CE, y registro en base de datos UE antes de comercialización.
+
+**Régimen sancionador proporcional:** Multas administrativas hasta **35 millones EUR o 7% de la facturación global anual** (lo mayor) por prácticas prohibidas Art. 5; **15 millones EUR o 3%** por incumplimiento de obligaciones de sistemas alto riesgo; **7,5 millones EUR o 1,5%** por información incorrecta a autoridades. Las sanciones son proporcionadas para PYMEs (límite 3% facturación) pero no existe minimis.
+
+**Interacción con RGPD:** Ambos reglamentos son **complementarios y acumulativos**, no sustitutivos. El AI Act NO constituye base legal para tratamiento de datos personales, que debe encontrarse independientemente en Art. 6 RGPD. Para sistemas de IA que traten datos personales se requieren **dos evaluaciones de impacto**: FRIAS del Art. 27 AI Act (derechos fundamentales) + EIPD del Art. 35 RGPD (protección datos).
+
+**Modelos GPAI con riesgo sistémico:** Umbral crítico de capacidad de cómputo **>10²⁵ FLOPs** en entrenamiento. Obligaciones reforzadas: evaluaciones adversariales (red teaming), seguimiento y reporte de incidentes graves a Oficina de IA, ciberseguridad estado del arte, política de respeto a copyright con opt-out técnico para minería de textos y datos.
+
+Esta guía analiza exhaustivamente todos los aspectos normativos, técnicos y operativos del AI Act, proporcionando metodología IRAC en casos prácticos, tablas comparativas, análisis jurisprudencial, checklist de implementación por tipo de actor, y recursos para compliance efectivo en organizaciones españolas y europeas.
+
+---
+
+## Tabla de Contenidos
+
+**PARTE I: FUNDAMENTOS Y CONTEXTO**
+1. [¿Qué es el AI Act? Introducción al Reglamento Europeo](#que-es-ai-act)
+2. [Calendario de Aplicación 2024-2027: Fechas Críticas](#calendario-aplicacion)
+3. [Ámbito de Aplicación: Definición de Sistema de IA](#ambito-aplicacion)
+
+**PARTE II: CLASIFICACIÓN DE SISTEMAS**
+4. [Prácticas Prohibidas: Riesgo Inaceptable (Art. 5)](#practicas-prohibidas)
+5. [Sistemas de Alto Riesgo: Anexo III Detallado](#sistemas-alto-riesgo)
+6. [Identificación Biométrica: Régimen de Excepciones](#identificacion-biometrica)
+7. [Modelos GPAI y Riesgo Sistémico](#modelos-gpai)
+
+**PARTE III: OBLIGACIONES OPERATIVAS**
+8. [Obligaciones de Proveedores (Arts. 9-15)](#obligaciones-proveedores)
+9. [Obligaciones de Usuarios y Desplegadores (Art. 26)](#obligaciones-usuarios)
+10. [Evaluación de Conformidad y Marcado CE](#evaluacion-conformidad)
+
+**PARTE IV: SUPERVISIÓN Y SANCIONES**
+11. [Régimen Sancionador del AI Act](#regimen-sancionador)
+12. [Autoridades Competentes en España](#autoridades-espana)
+13. [Evaluación Impacto Derechos Fundamentales (FRIAS)](#frias)
+
+**PARTE V: INTERACCIÓN NORMATIVA**
+14. [AI Act y RGPD: Aplicación Conjunta](#ai-act-rgpd)
+15. [Normativa Sectorial Específica](#normativa-sectorial)
+16. [AI Act y Propiedad Intelectual](#ai-act-propiedad-intelectual)
+
+**PARTE VI: CASOS PRÁCTICOS**
+17. [Caso 1: Sistema IA Selección Personal (RRHH)](#caso-rrhh)
+18. [Caso 2: Chatbot Atención Cliente](#caso-chatbot)
+19. [Caso 3: Reconocimiento Facial Acceso](#caso-reconocimiento-facial)
+20. [Caso 4: Modelo Lenguaje Propósito General](#caso-llm)
+21. [Caso 5: Scoring Crediticio](#caso-scoring)
+22. [Caso 6: Sistema Diagnóstico Médico](#caso-medicina)
+
+**PARTE VII: IMPLEMENTACIÓN PRÁCTICA**
+23. [Jurisprudencia Relevante: Caso SCHUFA](#jurisprudencia)
+24. [Recursos y Herramientas de Compliance](#recursos)
+25. [Checklist de Implementación por Actor](#checklist)
+26. [Glosario de Términos Técnico-Jurídicos](#glosario)
+27. [FAQ: 15 Preguntas Frecuentes](#faq)
+28. [Conclusiones y Próximos Pasos](#conclusiones)
+
+**Tiempo de lectura:** 50 minutos | **Palabras:** 12,500+ | **Última actualización:** Febrero 2026
+
+---
+
+<a name="que-es-ai-act"></a>
+## 1. ¿Qué es el AI Act? Introducción al Reglamento Europeo de Inteligencia Artificial
+
+El **AI Act** —oficialmente denominado **Reglamento (UE) 2024/1689 del Parlamento Europeo y del Consejo, de 13 de junio de 2024, por el que se establecen normas armonizadas en materia de inteligencia artificial**— constituye la primera regulación integral a nivel mundial de sistemas de inteligencia artificial. Su publicación en el Diario Oficial de la Unión Europea el 12 de julio de 2024 (DO L, 12.7.2024) y entrada en vigor el 1 de agosto de 2024 marcan un hito histórico en la gobernanza tecnológica global.
