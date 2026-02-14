@@ -76,6 +76,7 @@ export type ResourceEntry = {
   jurisdiction?: string | null;
   courtName?: string | null;
   description?: string | null;
+  date?: string;
 };
 
 function slugifyBaseName(baseName: string) {

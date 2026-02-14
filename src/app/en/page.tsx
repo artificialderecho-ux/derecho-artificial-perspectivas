@@ -6,6 +6,7 @@ import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/
 import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { getAllPosts } from "@/lib/mdx-utils";
 
 export const metadata: Metadata = {
   title: "Law, ethics and AI regulation",
@@ -515,6 +516,7 @@ export default async function EnglishHomePage() {
                   href: post.url,
                   description: post.excerpt,
                   dateMs: new Date(post.frontmatter.date).getTime(),
+                  meta: undefined,
                 }));
             const propiedadItems = filterByCategory("propiedad-intelectual-ia");
             const eticaItems = filterByCategory("etica-ia");

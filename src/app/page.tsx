@@ -616,6 +616,7 @@ export default async function HomePage() {
                   href: post.url,
                   description: post.excerpt,
                   dateMs: new Date(post.frontmatter.date).getTime(),
+                  meta: undefined,
                 }));
             const propiedadItems = filterByCategory("propiedad-intelectual-ia");
             const eticaItems = filterByCategory("etica-ia");

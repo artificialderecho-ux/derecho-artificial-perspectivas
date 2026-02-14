@@ -38,6 +38,7 @@ const esEnRouteMap: Record<string, string> = {
   "/ia-global": "/en",
   "/recursos": "/recursos",
 
+};
 
 // Map English routes to Spanish equivalents  
 const enEsRouteMap: Record<string, string> = {
@@ -83,7 +84,7 @@ export function Header() {
     if (pathname.startsWith("/normativa")) return "/en/legislation";
     if (pathname.startsWith("/jurisprudencia")) return "/en/jurisprudence";
     if (pathname.startsWith("/recursos")) return "/recursos";
-    if (pathname.startsWith("/actualidad-ia")) return "/en/ai-news";
+    if (pathname.startsWith("/actualidad-ia")) return "/recursos/noticias";
     // For sections without EN routes, send to EN home
     if (pathname.startsWith("/propiedad-intelectual-ia")) return "/en";
     if (pathname.startsWith("/etica-ia")) return "/en";

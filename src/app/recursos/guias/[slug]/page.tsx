@@ -242,7 +242,6 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
           { label: 'Guías y Protocolos', href: '/recursos/guias' },
           { label: mdxPost.frontmatter.title, href: `/recursos/guias/${slug}` }
         ]} />
-        ]} />
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
           {entry.summaryHtml ? (
             <div
