@@ -225,7 +225,7 @@ export default async function EnglishHomePage() {
     {
       key: "scarpa-firm",
       label: "Scarpa Firm",
-      href: "/en/scarpa-firm",
+      href: "/firma-scarpa",
       items: uniqueByHref(
         [unifiedFirma[0], unifiedFirma[1]]
           .filter((e): e is NonNullable<typeof e> => Boolean(e))
@@ -241,13 +241,13 @@ export default async function EnglishHomePage() {
     {
       key: "jurisprudence",
       label: "Jurisprudence",
-      href: "/en/jurisprudence",
+      href: "/jurisprudencia",
       items: uniqueByHref(jurisprudenciaItems).slice(0, 2),
     },
     {
-      key: "ai-news",
-      label: "AI News",
-      href: "/en/ai-news",
+      key: "ai-resources",
+      label: "AI Resources",
+      href: "/recursos",
       items: uniqueByHref(
         [unifiedActualidad[0], unifiedActualidad[1]]
           .filter((e): e is NonNullable<typeof e> => Boolean(e))
@@ -263,29 +263,29 @@ export default async function EnglishHomePage() {
     {
       key: "legislation",
       label: "Legislation",
-      href: "/en/legislation",
+      href: "/normativa",
       items: uniqueByHref(normativaItems).slice(0, 2),
     },
     {
       key: "guides",
       label: "Guides & Protocols",
-      href: "/en/guides-protocols",
+      href: "/recursos/guias",
       items: uniqueByHref(guiasItems).slice(0, 2),
     },
     {
       key: "legal-ai-glossary",
       label: "Legal AI Glossary",
-      href: "/en/legal-ai-glossary",
+      href: "/glosario-ia-legal",
     },
     {
       key: "about-us",
       label: "About Us",
-      href: "/en/about-us",
+      href: "/quienes-somos",
     },
     {
       key: "contact",
       label: "Contact",
-      href: "/en/contact",
+      href: "/contacto",
     },
   ];
 
@@ -326,11 +326,19 @@ export default async function EnglishHomePage() {
             Law, ethics and AI regulation
           </p>
           <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
-            Law, Ethics and AI Regulation
+            Law, ethics and AI regulation
           </h1>
           <h2 className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
             Beyond the news: independent legal analysis and expert judgment on the AI Act and its legal impact. The practical reference for lawyers and compliance professionals.
           </h2>
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <Link href="/recursos/noticias" className="px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors">
+              View AI news
+            </Link>
+            <Link href="/en#sections" className="px-4 py-2 border border-divider rounded-sm text-foreground hover:bg-surface transition-colors">
+              Explore sections
+            </Link>
+          </div>
         </div>
       </section>
       <section className="section-spacing bento-surface">
@@ -383,7 +391,7 @@ export default async function EnglishHomePage() {
               </p>
               <div className="mt-3">
                 <Link
-                  href="/en/ai-news"
+                  href="/recursos/noticias"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
                   View all news
@@ -432,150 +440,209 @@ export default async function EnglishHomePage() {
             }}
           />
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {latestActualidad && (
-              <Link
-                href={latestActualidad.urlPath}
-                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  AI News
-                </p>
-                <h3 className="font-serif text-lg text-foreground mb-2">
-                  {latestActualidad.title}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                </h3>
-                <Badges ms={latestActualidad.date} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                <p className="text-sm text-body mb-4 line-clamp-3">
-                  {latestActualidad.description}
-                </p>
-                <p className="mt-auto text-xs text-caption">{formatDate(latestActualidad.date)}</p>
-              </Link>
-            )}
-
-            {latestFirma && (
-              <Link
-                href={latestFirma.urlPath}
-                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  Scarpa Firm
-                </p>
-                <h3 className="font-serif text-lg text-foreground mb-2">
-                  {latestFirma.title}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                </h3>
-                <Badges ms={latestFirma.date} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                <p className="text-sm text-body mb-4 line-clamp-3">
-                  {latestFirma.description}
-                </p>
-                <p className="mt-auto text-xs text-caption">{formatDate(latestFirma.date)}</p>
-              </Link>
-            )}
-
-            {latestNormativa && (
-              <Link
-                href={`/normativa/${latestNormativa.slug}`}
-                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  Legislation
-                </p>
-                <h3 className="font-serif text-lg text-foreground mb-2">
-                  {latestNormativa.title}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                </h3>
-                <Badges ms={latestNormativa.dateMs ?? 0} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                {latestNormativa.summaryHtml && (
-                  <p className="text-sm text-body mb-4 line-clamp-3">
-                    {latestNormativa.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
-                  </p>
-                )}
-                <p className="mt-auto text-xs text-caption">
-                  {latestNormativa.dateMs ? formatDateFromMs(latestNormativa.dateMs, "en-US") : ""}
-                </p>
-              </Link>
-            )}
-
-            {latestJurisprudencia && (
-              <Link
-                href={`/jurisprudencia/${latestJurisprudencia.slug}`}
-                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  Jurisprudence
-                </p>
-                <h3 className="font-serif text-lg text-foreground mb-2">
-                  {latestJurisprudencia.title}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                </h3>
-                <Badges ms={latestJurisprudencia.dateMs ?? 0} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                {latestJurisprudencia.summaryHtml && (
-                  <p className="text-sm text-body mb-4 line-clamp-3">
-                    {latestJurisprudencia.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)}
-                  </p>
-                )}
-                <p className="mt-auto text-xs text-caption">
-                  {latestJurisprudencia.dateMs
-                    ? formatDateFromMs(latestJurisprudencia.dateMs, "en-US")
-                    : ""}
-                </p>
-              </Link>
-            )}
-          </div>
+          {
+            // Build news entries from MDX or fallback to resources
+          }
+          {(() => {
+            const mdxPosts = getAllPosts();
+            const newsMdx = mdxPosts
+              .filter((post) => {
+                const cat = (post.frontmatter.category || "").toLowerCase();
+                const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+                return cat === "noticia" || cat === "actualidad-ia" || tags.includes("noticia") || tags.includes("actualidad-ia") || tags.includes("news");
+              })
+              .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+              .slice(0, 6);
+            const newsEntries =
+              newsMdx.length > 0
+                ? newsMdx.map((post) => ({
+                    title: post.frontmatter.title,
+                    description: post.excerpt,
+                    date: new Date(post.frontmatter.date).getTime(),
+                    urlPath: post.url,
+                  }))
+                : unifiedActualidad.slice(0, 6).map((e) => ({
+                    title: e.title,
+                    description: e.description,
+                    date: e.date,
+                    urlPath: e.urlPath,
+                  }));
+            return (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {newsEntries.map((entry, idx) => (
+                  <Link
+                    key={`${entry.urlPath}-${idx}`}
+                    href={entry.urlPath}
+                    className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  >
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
+                      AI News
+                    </p>
+                    <h3 className="font-serif text-lg text-foreground mb-2">
+                      {entry.title}
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                    </h3>
+                    <Badges ms={entry.date} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
+                    <p className="text-sm text-body mb-4 line-clamp-3">
+                      {entry.description}
+                    </p>
+                    <p className="mt-auto text-xs text-caption">{formatDate(entry.date)}</p>
+                  </Link>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
-      <section className="section-spacing">
+      <section id="sections" className="section-spacing">
         <div className="container-wide">
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
             Sections
           </h2>
-          <div className="space-y-6">
-            {sectionCards.map((section) => (
-              <div
-                key={section.key}
-                className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    {section.items && section.items.length > 0 && (
-                      <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">
-                        Section
-                      </p>
-                    )}
-                    <h3 className="font-serif text-xl md:text-2xl text-foreground">{section.label}</h3>
-                  </div>
-                  <Link
-                    href={section.href}
-                    className="text-sm font-medium text-primary inline-flex items-center gap-1"
+          {(() => {
+            const filterByCategory = (cat: string) =>
+              getAllPosts()
+                .filter((post) => {
+                  const c = (post.frontmatter.category || "").toLowerCase();
+                  const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+                  return c === cat || tags.includes(cat);
+                })
+                .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+                .slice(0, 2)
+                .map((post) => ({
+                  title: post.frontmatter.title,
+                  href: post.url,
+                  description: post.excerpt,
+                  dateMs: new Date(post.frontmatter.date).getTime(),
+                }));
+            const propiedadItems = filterByCategory("propiedad-intelectual-ia");
+            const eticaItems = filterByCategory("etica-ia");
+            const globalItems = filterByCategory("ia-global");
+            const recursosItems = uniqueByHref([
+              ...guiasItems.slice(0, 1),
+              ...[unifiedActualidad[0]]
+                .filter((e): e is NonNullable<typeof e> => Boolean(e))
+                .map((e) => ({
+                  title: e.title,
+                  href: e.urlPath,
+                  description: e.description ?? "",
+                  meta: `${formatDate(e.date)} · ${e.author}`,
+                  dateMs: e.date,
+                })),
+            ]);
+            const cards = [
+              {
+                key: "scarpa-firm",
+                label: "Scarpa Firm",
+                href: "/firma-scarpa",
+                description: "Expert opinion and critical analysis of Digital Law",
+                items: uniqueByHref(
+                  [unifiedFirma[0], unifiedFirma[1]]
+                    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+                    .map((e) => ({
+                      title: e.title,
+                      href: e.urlPath,
+                      description: e.description ?? "",
+                      meta: `${formatDate(e.date)} · ${e.author}`,
+                      dateMs: e.date,
+                    })),
+                ),
+              },
+              {
+                key: "legislation",
+                label: "AI Regulation",
+                href: "/normativa",
+                description: "Laws, regulations and AI compliance",
+                items: uniqueByHref(normativaItems).slice(0, 2),
+              },
+              {
+                key: "jurisprudence",
+                label: "AI Jurisprudence",
+                href: "/jurisprudencia",
+                description: "Key decisions on algorithms and rights",
+                items: uniqueByHref(jurisprudenciaItems).slice(0, 2),
+              },
+              {
+                key: "resources",
+                label: "AI Resources",
+                href: "/recursos",
+                description: "Guides, protocols and curated news",
+                items: recursosItems,
+              },
+              {
+                key: "ip-ai",
+                label: "AI Intellectual Property",
+                href: "/propiedad-intelectual-ia",
+                description: "Section in development, content coming soon",
+                items: propiedadItems,
+              },
+              {
+                key: "ethics-ai",
+                label: "AI Ethics",
+                href: "/etica-ia",
+                description: "Section in development, content coming soon",
+                items: eticaItems,
+              },
+              {
+                key: "global-ai",
+                label: "Global AI",
+                href: "/ia-global",
+                description: "Section in development, content coming soon",
+                items: globalItems,
+              },
+            ];
+            return (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {cards.map((section) => (
+                  <div
+                    key={section.key}
+                    className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4"
                   >
-                    {getCtaLabel(section.key)} <span>→</span>
-                  </Link>
-                </div>
-                {section.items && section.items.length > 0 && (
-                  <div className="mt-2 flex flex-col gap-3">
-                    {section.items.slice(0, 2).map((item) => (
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        {(section.items && section.items.length > 0) && (
+                          <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">
+                            Section
+                          </p>
+                        )}
+                        <h3 className="font-serif text-xl md:text-2xl text-foreground">{section.label}</h3>
+                        {(!section.items || section.items.length === 0) && (
+                          <p className="text-sm text-body mt-2">{section.description}</p>
+                        )}
+                      </div>
                       <Link
-                        key={item.href}
-                        href={item.href}
-                        className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                        href={section.href}
+                        className="text-sm font-medium text-primary inline-flex items-center gap-1 flex-shrink-0"
                       >
-                        <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
-                        <Badges ms={getItemDateMs(item)} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-2 inline-flex items-center gap-2 text-xs text-caption" />
-                        {item.description &&
-                          item.title &&
-                          item.description.trim().toLowerCase() !== item.title.trim().toLowerCase() && (
-                            <p className="text-sm text-body line-clamp-2">{item.description}</p>
-                          )}
-                        {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                        {getCtaLabel(section.key)} <span>→</span>
                       </Link>
-                    ))}
+                    </div>
+                    {section.items && section.items.length > 0 && (
+                      <div className="mt-2 flex flex-col gap-3">
+                        {section.items.slice(0, 2).map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                          >
+                            <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                            <Badges ms={getItemDateMs(item)} locale="en-US" newLabel="New" updatedLabel="Updated" className="mb-2 inline-flex items-center gap-2 text-xs text-caption" />
+                            {item.description &&
+                              item.title &&
+                              item.description.trim().toLowerCase() !== item.title.trim().toLowerCase() && (
+                                <p className="text-sm text-body line-clamp-2">{item.description}</p>
+                              )}
+                            {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
+                ))}
               </div>
-            ))}
-          </div>
+            );
+          })()}
         </div>
       </section>
     </main>

@@ -187,45 +187,40 @@ export default async function HomePage() {
 
   // Crear una lista unificada de todas las entradas recientes para la sección "Actualidad y Análisis"
   const mdxPosts = getAllPosts();
-  
-  const allRecentEntries = [
-    ...mdxPosts.map(post => ({
-      title: post.frontmatter.title,
-      description: post.excerpt,
-      date: new Date(post.frontmatter.date).getTime(),
-      urlPath: post.url,
-      author: post.frontmatter.author || "Ricardo Scarpa",
-      type: (post.frontmatter.category.charAt(0).toUpperCase() + post.frontmatter.category.slice(1)) as any
-    })),
-    ...unifiedActualidad.map(e => ({ ...e, type: 'Actualidad IA' as const })),
-    ...unifiedFirma.map(e => ({ ...e, type: 'Firma Scarpa' as const })),
-    ...normativaEntriesAll.filter((e): e is NonNullable<typeof e> => Boolean(e)).map(e => ({
-      title: e.title,
-      description: e.description || e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-      date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: `/normativa/${e.slug}`,
-      author: "Derecho Artificial",
-      type: 'Normativa' as const
-    })),
-    ...jurisprudenciaEntriesAll.filter((e): e is NonNullable<typeof e> => Boolean(e)).map(e => ({
-      title: e.title,
-      description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-      date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: `/jurisprudencia/${e.slug}`,
-      author: "Derecho Artificial",
-      type: 'Jurisprudencia' as const
-    })),
-    ...guiasEntriesAll.filter((e): e is NonNullable<typeof e> => Boolean(e)).map(e => ({
-      title: e.title,
-      description: e.description || e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-      date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: e.slug === "ai-act-guia-completa" || e.slug === "rgpd-gobernanza-datos-ia" 
-        ? `/normativa/${e.slug}` 
-        : `/recursos/guias/${e.slug}`,
-      author: "Derecho Artificial",
-      type: 'Guías y Protocolos' as const
-    }))
-  ].sort((a, b) => b.date - a.date);
+  const newsMdxCandidates = mdxPosts
+    .filter((post) => {
+      const cat = (post.frontmatter.category || "").toLowerCase();
+      const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+      return (
+        cat === "noticia" ||
+        cat === "actualidad-ia" ||
+        tags.includes("noticia") ||
+        tags.includes("actualidad-ia") ||
+        tags.includes("news")
+      );
+    })
+    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+    .slice(0, 6);
+  const newsEntries =
+    newsMdxCandidates.length > 0
+      ? newsMdxCandidates.map((post) => ({
+          title: post.frontmatter.title,
+          description: post.excerpt,
+          date: new Date(post.frontmatter.date).getTime(),
+          urlPath: post.url,
+          author: post.frontmatter.author || "Derecho Artificial",
+          type: "Noticias IA" as const,
+        }))
+      : unifiedActualidad.slice(0, 6).map((e) => ({
+          title: e.title,
+          description: e.description,
+          date: e.date,
+          urlPath: e.urlPath,
+          author: e.author,
+          type: "Noticias IA" as const,
+        }));
+
+  const allRecentEntries: any[] = [];
 
   const formatDate = (value: string | number) => {
     // Si es un timestamp numérico (milisegundos desde 1970)
@@ -443,15 +438,20 @@ export default async function HomePage() {
       <main>
       <section className="py-20 md:py-28 bg-surface border-b border-divider">
         <div className="container-narrow text-center">
-          <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">
-            Derecho, ética y regulación de la IA
-          </p>
           <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
-            Análisis Jurídico Experto del Reglamento IA
+            Derecho, ética y regulación de la IA
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            Guías prácticas y criterio independiente para abogados y compliance
+          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
+            Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.
           </p>
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <Link href="/recursos/noticias" className="px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors">
+              Ver noticias IA
+            </Link>
+            <Link href="/#secciones" className="px-4 py-2 border border-divider rounded-sm text-foreground hover:bg-surface transition-colors">
+              Explorar secciones
+            </Link>
+          </div>
         </div>
       </section>
       <section className="section-spacing bento-surface">
@@ -492,22 +492,22 @@ export default async function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div>
               <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
-                Actualidad
+                Noticias IA
               </p>
               <h2 className="font-serif text-2xl md:text-3xl text-foreground">
-                Actualidad y Análisis: El pulso legal de la IA
+                El pulso legal de la IA
               </h2>
             </div>
             <div className="max-w-xl">
               <p className="text-sm text-caption">
-                Explora nuestros últimos briefings, ensayos y documentos críticos. Una selección editorial diseñada para dotar de criterio técnico y jurídico a los profesionales que lideran la transformación digital.
+                Explora nuestros últimos briefings, ensayos y actualizaciones. Selección editorial para aportar criterio técnico y jurídico.
               </p>
               <div className="mt-3">
                 <Link
-                  href="/actualidad-ia"
+                  href="/recursos/noticias"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
-                  Ver toda la actualidad
+                  Ver todas las noticias
                 </Link>
               </div>
             </div>
@@ -553,15 +553,15 @@ export default async function HomePage() {
             }}
           />
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {allRecentEntries.slice(0, 8).map((entry, idx) => (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {newsEntries.map((entry, idx) => (
               <Link
                 key={`${entry.urlPath}-${idx}`}
                 href={entry.urlPath}
                 className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  {entry.type}
+                  Noticias IA
                 </p>
                 <h3 className="font-serif text-lg text-foreground mb-2">
                   {entry.title}
@@ -578,62 +578,166 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-spacing bento-surface">
+      <section id="secciones" className="section-spacing bento-surface">
         <div className="container-wide">
           <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-8">
             Secciones
           </h2>
-          <div className="space-y-6">
-            {sectionCards.map((section) => (
-              <div
-                key={section.key}
-                className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    {section.items && section.items.length > 0 && (
-                      <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">
-                        Sección
-                      </p>
-                    )}
-                    <h3 className="font-serif text-xl md:text-2xl text-foreground">{section.label}</h3>
-                  </div>
-                  <Link
-                    href={section.href}
-                    className="text-sm font-medium text-primary inline-flex items-center gap-1"
+          {
+            // Build section cards aligned to 7-menu order with placeholders for new sections
+          }
+          {(() => {
+            const recursosItems = uniqueByHref([
+              ...guiasItems.slice(0, 1),
+              ...[unifiedActualidad[0]]
+                .filter((e): e is NonNullable<typeof e> => Boolean(e))
+                .map((e) => ({
+                  title: e.title,
+                  href: e.urlPath,
+                  description: e.description ?? "",
+                  meta: `${formatDate(e.date)} · ${e.author}`,
+                  dateMs: e.date,
+                })),
+            ]);
+            const filterByCategory = (cat: string) =>
+              mdxPosts
+                .filter((post) => {
+                  const c = (post.frontmatter.category || "").toLowerCase();
+                  const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+                  return c === cat || tags.includes(cat);
+                })
+                .sort(
+                  (a, b) =>
+                    new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime(),
+                )
+                .slice(0, 2)
+                .map((post) => ({
+                  title: post.frontmatter.title,
+                  href: post.url,
+                  description: post.excerpt,
+                  dateMs: new Date(post.frontmatter.date).getTime(),
+                }));
+            const propiedadItems = filterByCategory("propiedad-intelectual-ia");
+            const eticaItems = filterByCategory("etica-ia");
+            const globalItems = filterByCategory("ia-global");
+            const cards = [
+              {
+                key: "firma-scarpa",
+                label: "Firma Scarpa",
+                href: "/firma-scarpa",
+                description: "Opinión experta y análisis crítico del Derecho Digital",
+                items: uniqueByHref(
+                  [unifiedFirma[0], unifiedFirma[1]]
+                    .filter((e): e is NonNullable<typeof e> => Boolean(e))
+                    .map((e) => ({
+                      title: e.title,
+                      href: e.urlPath,
+                      description: e.description ?? "",
+                      meta: `${formatDate(e.date)} · ${e.author}`,
+                      dateMs: e.date,
+                    })),
+                ),
+              },
+              {
+                key: "normativa",
+                label: "Normativa IA",
+                href: "/normativa",
+                description: "Leyes, reglamentos y cumplimiento de IA",
+                items: uniqueByHref(normativaItems).slice(0, 2),
+              },
+              {
+                key: "jurisprudencia",
+                label: "Jurisprudencia IA",
+                href: "/jurisprudencia",
+                description: "Sentencias clave sobre algoritmos y derechos",
+                items: uniqueByHref(jurisprudenciaItems).slice(0, 2),
+              },
+              {
+                key: "recursos",
+                label: "Recursos IA",
+                href: "/recursos",
+                description: "Guías, protocolos y noticias especializadas",
+                items: recursosItems,
+              },
+              {
+                key: "propiedad-intelectual-ia",
+                label: "Propiedad Intelectual IA",
+                href: "/propiedad-intelectual-ia",
+                description: "Sección en desarrollo, pronto contenido",
+                items: propiedadItems,
+              },
+              {
+                key: "etica-ia",
+                label: "Ética IA",
+                href: "/etica-ia",
+                description: "Sección en desarrollo, pronto contenido",
+                items: eticaItems,
+              },
+              {
+                key: "ia-global",
+                label: "IA Global",
+                href: "/ia-global",
+                description: "Sección en desarrollo, pronto contenido",
+                items: globalItems,
+              },
+            ];
+            return (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {cards.map((section) => (
+                  <div
+                    key={section.key}
+                    className="card-elevated p-6 md:p-8 hover:border-primary/20 transition-all duration-300 flex flex-col gap-4"
                   >
-                    {getCtaLabel(section.key)} <span>→</span>
-                  </Link>
-                </div>
-                {section.items && section.items.length > 0 && (
-                  <div className="mt-2 flex flex-col gap-3">
-                    {section.items.slice(0, 2).map((item) => (
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        {(section.items && section.items.length > 0) && (
+                          <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-2">
+                            Sección
+                          </p>
+                        )}
+                        <h3 className="font-serif text-xl md:text-2xl text-foreground">{section.label}</h3>
+                        {(!section.items || section.items.length === 0) && (
+                          <p className="text-sm text-body mt-2">{section.description}</p>
+                        )}
+                      </div>
                       <Link
-                        key={item.href}
-                        href={item.href}
-                        className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                        href={section.href}
+                        className="text-sm font-medium text-primary inline-flex items-center gap-1 flex-shrink-0"
                       >
-                        <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
-                        <Badges
-                          ms={getItemDateMs(item)}
-                          locale="es-ES"
-                          newLabel="Nuevo"
-                          updatedLabel="Actualizado"
-                          className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
-                        />
-                        {item.description &&
-                          item.title &&
-                          item.description.trim().toLowerCase() !== item.title.trim().toLowerCase() && (
-                            <p className="text-sm text-body line-clamp-2">{item.description}</p>
-                          )}
-                        {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                        {getCtaLabel(section.key)} <span>→</span>
                       </Link>
-                    ))}
+                    </div>
+                    {section.items && section.items.length > 0 && (
+                      <div className="mt-2 flex flex-col gap-3">
+                        {section.items.slice(0, 2).map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className="border border-dashed border-divider rounded-sm p-4 hover:border-primary/40 transition-colors"
+                          >
+                            <p className="font-medium text-sm text-foreground mb-1">{item.title}</p>
+                            <Badges
+                              ms={getItemDateMs(item)}
+                              locale="es-ES"
+                              newLabel="Nuevo"
+                              updatedLabel="Actualizado"
+                              className="mb-2 inline-flex items-center gap-2 text-xs text-caption"
+                            />
+                            {item.description &&
+                              item.title &&
+                              item.description.trim().toLowerCase() !== item.title.trim().toLowerCase() && (
+                                <p className="text-sm text-body line-clamp-2">{item.description}</p>
+                              )}
+                            {item.meta && <p className="mt-2 text-xs text-caption">{item.meta}</p>}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
+                ))}
               </div>
-            ))}
-          </div>
+            );
+          })()}
         </div>
       </section>
     </main>

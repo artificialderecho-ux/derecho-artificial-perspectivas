@@ -34,8 +34,8 @@ const esEnRouteMap: Record<string, string> = {
   "/actualidad-ia": "/recursos/noticias",
   "/normativa": "/en/legislation",
   "/propiedad-intelectual-ia": "/en",
+  "/etica-ia": "/en",
   "/ia-global": "/en",
-  "/recursos": "/en",
   "/recursos": "/recursos",
 
 
@@ -44,7 +44,7 @@ const enEsRouteMap: Record<string, string> = {
   "/en": "/",
   "/en/scarpa-firm": "/firma-scarpa",
   "/en/jurisprudence": "/jurisprudencia",
-  "/en/ai-news": "/actualidad-ia",
+  "/en/ai-news": "/recursos/noticias",
   "/en/legislation": "/normativa",
   "/en/guides-protocols": "/recursos",
 };
@@ -113,13 +113,13 @@ export function Header() {
             />
           </Link>
 
-          <div className="hidden xl:flex items-center gap-10">
-            <nav className="flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6 flex-shrink-0">
+            <nav className="flex flex-nowrap items-center space-x-3 overflow-x-auto whitespace-nowrap text-sm">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`text-sm tracking-wide transition-all duration-300 relative ${
+                  className={`tracking-wide transition-all duration-300 relative ${
                     pathname === item.href
                       ? "text-primary font-medium"
                       : "text-caption hover:text-foreground"
@@ -133,7 +133,7 @@ export function Header() {
               ))}
             </nav>
             
-            <div className="flex items-center gap-3 pl-6 border-l border-divider">
+            <div className="flex items-center gap-3 pl-6 border-l border-divider flex-shrink-0">
               <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
               <Link
                 href={isEnglish ? getAlternateRoute() : pathname}
@@ -157,7 +157,7 @@ export function Header() {
 
           <button
             type="button"
-            className="xl:hidden p-2 -mr-2 text-foreground hover:text-primary transition-colors"
+            className="lg:hidden p-2 -mr-2 text-foreground hover:text-primary transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={isEnglish ? "Open menu" : "Abrir menú"}
           >
@@ -170,7 +170,7 @@ export function Header() {
         </div>
 
         {mobileMenuOpen && (
-          <nav className="xl:hidden border-t border-divider py-8 animate-fade-in">
+          <nav className="lg:hidden border-t border-divider py-8 animate-fade-in">
             <div className="flex flex-col gap-6">
               {navigation.map((item) => (
                 <Link
