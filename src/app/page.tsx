@@ -495,7 +495,7 @@ export default async function HomePage() {
                 Noticias IA
               </p>
               <h2 className="font-serif text-2xl md:text-3xl text-foreground">
-                El pulso legal de la IA
+                Últimas novedades por sección
               </h2>
             </div>
             <div className="max-w-xl">
@@ -512,69 +512,62 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-          <StructuredData
-            data={{
-              "@context": "https://schema.org",
-              "@type": "ItemList",
-              itemListElement: [
-                latestActualidad && {
-                  "@type": "ListItem",
-                  position: 1,
-                  url: latestActualidad.urlPath,
-                  name: latestActualidad.title,
-                  datePublished: new Date(latestActualidad.date).toISOString(),
-                },
-                latestFirma && {
-                  "@type": "ListItem",
-                  position: 2,
-                  url: latestFirma.urlPath,
-                  name: latestFirma.title,
-                  datePublished: new Date(latestFirma.date).toISOString(),
-                },
-                latestNormativa && {
-                  "@type": "ListItem",
-                  position: 3,
-                  url: `/normativa/${latestNormativa.slug}`,
-                  name: latestNormativa.title,
-                  datePublished: (latestNormativa.displayDateMs ?? latestNormativa.dateMs)
-                    ? new Date(latestNormativa.displayDateMs ?? latestNormativa.dateMs).toISOString()
-                    : undefined,
-                },
-                latestJurisprudencia && {
-                  "@type": "ListItem",
-                  position: 4,
-                  url: `/jurisprudencia/${latestJurisprudencia.slug}`,
-                  name: latestJurisprudencia.title,
-                  datePublished: (latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs)
-                    ? new Date(latestJurisprudencia.displayDateMs ?? latestJurisprudencia.dateMs).toISOString()
-                    : undefined,
-                },
-              ].filter(Boolean),
-            }}
-          />
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {newsEntries.map((entry, idx) => (
-              <Link
-                key={`${entry.urlPath}-${idx}`}
-                href={entry.urlPath}
-                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                  Noticias IA
-                </p>
-                <h3 className="font-serif text-lg text-foreground mb-2">
-                  {entry.title}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                </h3>
-                <Badges ms={entry.date} locale="es-ES" newLabel="Nuevo" updatedLabel="Actualizado" className="mb-3 inline-flex items-center gap-2 text-xs text-caption" />
-                <p className="text-sm text-body mb-4 line-clamp-3">
-                  {entry.description}
-                </p>
-                <p className="mt-auto text-xs text-caption">{formatDate(entry.date)}</p>
-              </Link>
-            ))}
-          </div>
+          {(() => {
+            const sections = [
+              { key: "firma-scarpa", label: "Firma Scarpa", category: "firma-scarpa" },
+              { key: "normativa", label: "Normativa IA", category: "normativa" },
+              { key: "jurisprudencia", label: "Jurisprudencia IA", category: "jurisprudencia" },
+              { key: "recursos", label: "Recursos IA", category: "recursos" },
+              { key: "propiedad-intelectual-ia", label: "Propiedad Intelectual IA", category: "propiedad-intelectual-ia" },
+              { key: "etica-ia", label: "Ética IA", category: "etica-ia" },
+              { key: "ia-global", label: "IA Global", category: "ia-global" },
+            ];
+            const getLatestByCategory = (cat: string) =>
+              mdxPosts
+                .filter((post) => (post.frontmatter.category || "").toLowerCase() === cat)
+                .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+                .slice(0, 2);
+            return (
+              <div className="space-y-8">
+                {sections.map((sec) => {
+                  const items = getLatestByCategory(sec.category);
+                  return (
+                    <div key={sec.key}>
+                      <h3 className="font-serif text-xl md:text-2xl text-foreground mb-3">{sec.label}</h3>
+                      <div className="grid gap-6 md:grid-cols-2">
+                        {items.length > 0 ? (
+                          items.map((post) => (
+                            <Link
+                              key={post.slug}
+                              href={post.url}
+                              className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                            >
+                              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
+                                {sec.label}
+                              </p>
+                              <h4 className="font-serif text-lg text-foreground mb-2">
+                                {post.frontmatter.title}
+                                <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                              </h4>
+                              <p className="text-xs text-caption mb-2">{formatDate(post.frontmatter.date)}</p>
+                              <p className="text-sm text-body line-clamp-3">{post.excerpt}</p>
+                            </Link>
+                          ))
+                        ) : (
+                          <>
+                            <div className="border border-dashed border-divider rounded-sm p-5">
+                              <p className="text-sm text-body">Próximamente contenido</p>
+                            </div>
+                            <div className="hidden md:block border border-transparent rounded-sm p-5" />
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
