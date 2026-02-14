@@ -49,11 +49,8 @@ export function Footer() {
                   <Link href="/jurisprudencia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     AI Jurisprudence
                   </Link>
-                  <Link href="/recursos/guias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    AI Guides
-                  </Link>
-                  <Link href="/actualidad-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    AI News
+                  <Link href="/recursos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    AI Resources
                   </Link>
                   <Link href="/propiedad-intelectual-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     AI Intellectual Property
@@ -89,16 +86,10 @@ export function Footer() {
                     Jurisprudencia IA
                   </Link>
                   <Link
-                    href="/recursos/guias"
+                    href="/recursos"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
-                    Guías IA
-                  </Link>
-                  <Link
-                    href="/actualidad-ia"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Noticias IA
+                    Recursos IA
                   </Link>
                   <Link
                     href="/propiedad-intelectual-ia"
