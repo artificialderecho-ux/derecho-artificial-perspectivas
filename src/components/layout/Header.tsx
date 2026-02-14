@@ -72,9 +72,25 @@ export function Header() {
   // Get the equivalent route in the other language
   const getAlternateRoute = () => {
     if (isEnglish) {
-      return enEsRouteMap[pathname] || "/";
+      if (enEsRouteMap[pathname]) return enEsRouteMap[pathname];
+      if (pathname.startsWith("/en/scarpa-firm")) return "/firma-scarpa";
+      if (pathname.startsWith("/en/legislation")) return "/normativa";
+      if (pathname.startsWith("/en/jurisprudence")) return "/jurisprudencia";
+      if (pathname.startsWith("/en/guides-protocols")) return "/recursos/guias";
+      if (pathname.startsWith("/en/ai-news")) return "/actualidad-ia";
+      return "/";
     }
-    return esEnRouteMap[pathname] || "/en";
+    if (esEnRouteMap[pathname]) return esEnRouteMap[pathname];
+    if (pathname.startsWith("/firma-scarpa")) return "/en/scarpa-firm";
+    if (pathname.startsWith("/normativa")) return "/en/legislation";
+    if (pathname.startsWith("/jurisprudencia")) return "/en/jurisprudence";
+    if (pathname.startsWith("/recursos/guias")) return "/en/guides-protocols";
+    if (pathname.startsWith("/actualidad-ia")) return "/en/ai-news";
+    // For sections without EN routes, send to EN home
+    if (pathname.startsWith("/propiedad-intelectual-ia")) return "/en";
+    if (pathname.startsWith("/etica-ia")) return "/en";
+    if (pathname.startsWith("/ia-global")) return "/en";
+    return "/en";
   };
 
   return (
