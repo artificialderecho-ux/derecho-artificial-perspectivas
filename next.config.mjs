@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   async redirects() {
     return [
       // Consolidate news under /recursos/noticias
@@ -9,8 +10,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/actualidad-ia/:slug",
-        destination: "/recursos/noticias/:slug",
+        source: "/actualidad-ia/:slug*",
+        destination: "/recursos/noticias/:slug*",
         permanent: true,
       },
       // English redirects to consolidated resources

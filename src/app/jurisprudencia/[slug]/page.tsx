@@ -105,7 +105,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >
-        <div className="mx-auto">
+        <div className="prose prose-lg max-w-none">
           <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
             {mdxPost.content}
           </ReactMarkdown>
