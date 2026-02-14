@@ -40,40 +40,31 @@ export function Footer() {
             <nav className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
               {isEnglish ? (
                 <>
-                  <Link
-                    href="/en/scarpa-firm"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
+                  <Link href="/firma-scarpa" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Scarpa Firm
                   </Link>
-                  <Link
-                    href="/en/legislation"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Legislation
+                  <Link href="/normativa" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    AI Regulation
                   </Link>
-                  <Link
-                    href="/en/jurisprudence"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Jurisprudence
+                  <Link href="/jurisprudencia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    AI Jurisprudence
                   </Link>
-                  <Link
-                    href="/en/guides-protocols"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Guides
+                  <Link href="/recursos/guias" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    AI Guides
                   </Link>
-                  <Link
-                    href="/en/ai-news"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
+                  <Link href="/actualidad-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     AI News
                   </Link>
-                  <Link
-                    href="/en/legal-ai-glossary"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
+                  <Link href="/propiedad-intelectual-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    AI Intellectual Property
+                  </Link>
+                  <Link href="/etica-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    AI Ethics
+                  </Link>
+                  <Link href="/ia-global" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Global AI
+                  </Link>
+                  <Link href="/en/legal-ai-glossary" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Legal AI Glossary
                   </Link>
                 </>

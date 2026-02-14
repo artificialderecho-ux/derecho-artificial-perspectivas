@@ -18,14 +18,14 @@ const navigationES = [
 ];
 
 const navigationEN = [
-  { name: "Scarpa Firm", href: "/en/scarpa-firm" },
-  { name: "Legislation", href: "/en/legislation" },
-  { name: "Jurisprudence", href: "/en/jurisprudence" },
-  { name: "Guides", href: "/en/guides-protocols" },
-  { name: "AI News", href: "/en/ai-news" },
-  { name: "AI Intellectual Property", href: "/en" },
-  { name: "AI Ethics", href: "/en" },
-  { name: "Global AI", href: "/en" },
+  { name: "Scarpa Firm", href: "/firma-scarpa" },
+  { name: "AI Regulation", href: "/normativa" },
+  { name: "AI Jurisprudence", href: "/jurisprudencia" },
+  { name: "AI Guides", href: "/recursos/guias" },
+  { name: "AI News", href: "/actualidad-ia" },
+  { name: "AI Intellectual Property", href: "/propiedad-intelectual-ia" },
+  { name: "AI Ethics", href: "/etica-ia" },
+  { name: "Global AI", href: "/ia-global" },
 ];
 
 // Map Spanish routes to English equivalents
