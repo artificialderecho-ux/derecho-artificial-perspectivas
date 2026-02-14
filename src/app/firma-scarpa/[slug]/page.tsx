@@ -150,6 +150,18 @@ export default async function FirmaScarpaSlugPage({
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >
+        {mdxPost.frontmatter.pdf && (
+          <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+            <a
+              href={mdxPost.frontmatter.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
+            >
+              Descargar documento original
+            </a>
+          </div>
+        )}
         <div className="mx-auto">
           <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
             {mdxPost.content}
