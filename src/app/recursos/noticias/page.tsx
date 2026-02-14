@@ -7,34 +7,34 @@ import { getAllPosts } from "@/lib/mdx-utils";
 import { ContentPreviewGrid, type PreviewItem } from "@/components/ContentPreviewCard";
 
 export const metadata: Metadata = {
-  title: "Guías y Protocolos",
-  description: "Selección de guías y protocolos de referencia sobre IA.",
-  alternates: { canonical: "/recursos/guias" },
+  title: "Noticias IA",
+  description: "Selección y monitor de noticias reguladoras e institucionales sobre IA.",
+  alternates: { canonical: "/recursos/noticias" },
   openGraph: {
     type: "website",
-    title: "Guías y Protocolos",
-    description: "Selección de guías y protocolos de referencia sobre IA.",
-    url: "/recursos/guias",
+    title: "Noticias IA",
+    description: "Selección y monitor de noticias reguladoras e institucionales sobre IA.",
+    url: "/recursos/noticias",
     locale: "es_ES",
     images: [{ url: "/logo-principal.png" }],
   },
 };
 
-export default async function GuiasIndexPage() {
+export default async function NoticiasIndexPage() {
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       { name: "Derecho Artificial", url: "https://derechoartificial.com" },
       { name: "Recursos IA", url: "https://derechoartificial.com/recursos" },
-      { name: "Guías y Protocolos", url: "https://derechoartificial.com/recursos/guias" },
+      { name: "Noticias IA", url: "https://derechoartificial.com/recursos/noticias" },
     ],
   });
 
-  const slugs = await listSectionResourceSlugs("guias");
-  const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("guias", slug)));
+  const slugs = await listSectionResourceSlugs("actualidad-ia");
+  const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug)));
   const resolved = entries.filter((e): e is NonNullable<typeof e> => Boolean(e));
 
   const posts = getAllPosts().filter(
-    (p) => p.frontmatter.category === "recursos" && (p.frontmatter.subcategory === "guias" || p.frontmatter.tags?.includes("guias")),
+    (p) => p.frontmatter.category === "actualidad-ia" || p.frontmatter.tags?.includes("noticia"),
   );
 
   const formatDateEs = (ms?: number | null) => {
@@ -45,20 +45,20 @@ export default async function GuiasIndexPage() {
   };
 
   const items: PreviewItem[] = [
-    ...resolved.map((g) => {
-      const dateLabel = formatDateEs(g.displayDateMs ?? g.dateMs);
+    ...resolved.map((n) => {
+      const dateLabel = formatDateEs(n.displayDateMs ?? n.dateMs);
       const parts: string[] = [];
       if (dateLabel) parts.push(dateLabel);
-      if (g.sourceUrl) parts.push("Incluye descarga del documento");
+      if (n.sourceUrl) parts.push("Incluye documento original");
       return {
-        id: `guide-${g.slug}`,
-        href: `/recursos/guias/${g.slug}`,
-        title: g.title,
-        description: g.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 180),
-        badge: "Guías y Protocolos",
+        id: `news-${n.slug}`,
+        href: `/actualidad-ia/${n.slug}`,
+        title: n.title,
+        description: n.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 180),
+        badge: "Noticias IA",
         meta: parts.join(" · "),
-        dateMs: g.dateMs ?? 0,
-        displayDateMs: g.displayDateMs ?? undefined,
+        dateMs: n.dateMs ?? 0,
+        displayDateMs: n.displayDateMs ?? undefined,
       };
     }),
     ...posts.map((p) => {
@@ -69,10 +69,10 @@ export default async function GuiasIndexPage() {
       if (p.frontmatter.author) parts.push(p.frontmatter.author);
       return {
         id: `mdx-${p.slug}`,
-        href: `/recursos/guias/${p.slug}`,
+        href: p.url,
         title: p.frontmatter.title,
         description: p.excerpt,
-        badge: "Guías y Protocolos",
+        badge: "Noticias IA",
         meta: parts.join(" · "),
         dateMs: d || 0,
         displayDateMs: d || 0,
@@ -87,10 +87,10 @@ export default async function GuiasIndexPage() {
         items={[
           { label: "Inicio", href: "/" },
           { label: "Recursos IA", href: "/recursos" },
-          { label: "Guías y Protocolos", href: "/recursos/guias" },
+          { label: "Noticias IA", href: "/recursos/noticias" },
         ]}
       />
-      <LegalLayout title="Guías y Protocolos" category="Recursos IA" date={new Date().toISOString().slice(0, 10)}>
+      <LegalLayout title="Noticias IA" category="Recursos IA" date={new Date().toISOString().slice(0, 10)}>
         <ContentPreviewGrid items={items} columns={2} size="medium" />
       </LegalLayout>
     </>

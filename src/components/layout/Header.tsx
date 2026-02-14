@@ -34,10 +34,10 @@ const esEnRouteMap: Record<string, string> = {
   "/actualidad-ia": "/en/ai-news",
   "/normativa": "/en/legislation",
   "/propiedad-intelectual-ia": "/en",
-  "/etica-ia": "/en",
   "/ia-global": "/en",
   "/recursos": "/en",
-};
+  "/recursos": "/recursos",
+
 
 // Map English routes to Spanish equivalents  
 const enEsRouteMap: Record<string, string> = {
@@ -82,7 +82,7 @@ export function Header() {
     if (pathname.startsWith("/firma-scarpa")) return "/en/scarpa-firm";
     if (pathname.startsWith("/normativa")) return "/en/legislation";
     if (pathname.startsWith("/jurisprudencia")) return "/en/jurisprudence";
-    if (pathname.startsWith("/recursos")) return "/en/guides-protocols";
+    if (pathname.startsWith("/recursos")) return "/recursos";
     if (pathname.startsWith("/actualidad-ia")) return "/en/ai-news";
     // For sections without EN routes, send to EN home
     if (pathname.startsWith("/propiedad-intelectual-ia")) return "/en";
