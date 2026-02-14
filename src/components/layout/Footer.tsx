@@ -47,10 +47,22 @@ export function Footer() {
                     Scarpa Firm
                   </Link>
                   <Link
+                    href="/en/legislation"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Legislation
+                  </Link>
+                  <Link
                     href="/en/jurisprudence"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
                     Jurisprudence
+                  </Link>
+                  <Link
+                    href="/en/guides-protocols"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Guides
                   </Link>
                   <Link
                     href="/en/ai-news"
@@ -59,34 +71,10 @@ export function Footer() {
                     AI News
                   </Link>
                   <Link
-                    href="/en/legislation"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Legislation
-                  </Link>
-                  <Link
-                    href="/en/guides-protocols"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Guides & Protocols
-                  </Link>
-                  <Link
                     href="/en/legal-ai-glossary"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
                     Legal AI Glossary
-                  </Link>
-                  <Link
-                    href="/en/about-us"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    About Us
-                  </Link>
-                  <Link
-                    href="/en/contact"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Contact
                   </Link>
                 </>
               ) : (
@@ -98,28 +86,46 @@ export function Footer() {
                     Firma Scarpa
                   </Link>
                   <Link
-                    href="/jurisprudencia"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Jurisprudencia
-                  </Link>
-                  <Link
-                    href="/actualidad-ia"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Actualidad IA
-                  </Link>
-                  <Link
                     href="/normativa"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
-                    Normativa
+                    Normativa IA
+                  </Link>
+                  <Link
+                    href="/jurisprudencia"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Jurisprudencia IA
                   </Link>
                   <Link
                     href="/recursos/guias"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
-                    Guías y Protocolos
+                    Guías IA
+                  </Link>
+                  <Link
+                    href="/actualidad-ia"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Noticias IA
+                  </Link>
+                  <Link
+                    href="/propiedad-intelectual-ia"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Propiedad Intelectual IA
+                  </Link>
+                  <Link
+                    href="/etica-ia"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    Ética IA
+                  </Link>
+                  <Link
+                    href="/ia-global"
+                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
+                  >
+                    IA Global
                   </Link>
                   <Link
                     href="/glosario-ia-legal"
@@ -127,21 +133,33 @@ export function Footer() {
                   >
                     Glosario IA legal
                   </Link>
-                  <Link
-                    href="/quienes-somos"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Quiénes somos
-                  </Link>
-                  <Link
-                    href="/contacto"
-                    className="text-sm text-body hover:text-foreground transition-colors duration-300"
-                  >
-                    Contacto
-                  </Link>
                 </>
               )}
             </nav>
+            {!isEnglish && (
+              <div className="mt-6">
+                <nav className="flex flex-wrap gap-x-6 gap-y-2">
+                  <Link href="/quienes-somos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Quiénes somos
+                  </Link>
+                  <Link href="/contacto" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Contacto
+                  </Link>
+                </nav>
+              </div>
+            )}
+            {isEnglish && (
+              <div className="mt-6">
+                <nav className="flex flex-wrap gap-x-6 gap-y-2">
+                  <Link href="/en/about-us" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    About Us
+                  </Link>
+                  <Link href="/en/contact" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    Contact
+                  </Link>
+                </nav>
+              </div>
+            )}
           </div>
         </div>
 

@@ -8,22 +8,24 @@ import { Menu, X, Globe } from "lucide-react";
 
 const navigationES = [
   { name: "Firma Scarpa", href: "/firma-scarpa" },
-  { name: "Jurisprudencia", href: "/jurisprudencia" },
-  { name: "Actualidad IA", href: "/actualidad-ia" },
-  { name: "Normativa", href: "/normativa" },
-  { name: "Guías y Protocolos", href: "/recursos/guias" },
-  { name: "Quiénes somos", href: "/quienes-somos" },
-  { name: "Contacto", href: "/contacto" },
+  { name: "Normativa IA", href: "/normativa" },
+  { name: "Jurisprudencia IA", href: "/jurisprudencia" },
+  { name: "Guías IA", href: "/recursos/guias" },
+  { name: "Noticias IA", href: "/actualidad-ia" },
+  { name: "Propiedad Intelectual IA", href: "/propiedad-intelectual-ia" },
+  { name: "Ética IA", href: "/etica-ia" },
+  { name: "IA Global", href: "/ia-global" },
 ];
 
 const navigationEN = [
   { name: "Scarpa Firm", href: "/en/scarpa-firm" },
-  { name: "Jurisprudence", href: "/en/jurisprudence" },
-  { name: "AI News", href: "/en/ai-news" },
   { name: "Legislation", href: "/en/legislation" },
-  { name: "Guides & Protocols", href: "/en/guides-protocols" },
-  { name: "About Us", href: "/en/about-us" },
-  { name: "Contact", href: "/en/contact" },
+  { name: "Jurisprudence", href: "/en/jurisprudence" },
+  { name: "Guides", href: "/en/guides-protocols" },
+  { name: "AI News", href: "/en/ai-news" },
+  { name: "AI Intellectual Property", href: "/en" },
+  { name: "AI Ethics", href: "/en" },
+  { name: "Global AI", href: "/en" },
 ];
 
 // Map Spanish routes to English equivalents
@@ -34,8 +36,9 @@ const esEnRouteMap: Record<string, string> = {
   "/actualidad-ia": "/en/ai-news",
   "/normativa": "/en/legislation",
   "/recursos/guias": "/en/guides-protocols",
-  "/quienes-somos": "/en/about-us",
-  "/contacto": "/en/contact",
+  "/propiedad-intelectual-ia": "/en",
+  "/etica-ia": "/en",
+  "/ia-global": "/en",
 };
 
 // Map English routes to Spanish equivalents  
@@ -46,8 +49,6 @@ const enEsRouteMap: Record<string, string> = {
   "/en/ai-news": "/actualidad-ia",
   "/en/legislation": "/normativa",
   "/en/guides-protocols": "/recursos/guias",
-  "/en/about-us": "/quienes-somos",
-  "/en/contact": "/contacto",
 };
 
 export function Header() {
