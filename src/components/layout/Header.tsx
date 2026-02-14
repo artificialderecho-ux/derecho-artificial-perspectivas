@@ -31,7 +31,7 @@ const esEnRouteMap: Record<string, string> = {
   "/": "/en",
   "/firma-scarpa": "/en/scarpa-firm",
   "/jurisprudencia": "/en/jurisprudence",
-  "/actualidad-ia": "/en/ai-news",
+  "/actualidad-ia": "/recursos/noticias",
   "/normativa": "/en/legislation",
   "/propiedad-intelectual-ia": "/en",
   "/ia-global": "/en",
