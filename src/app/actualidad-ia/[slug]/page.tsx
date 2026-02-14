@@ -15,6 +15,34 @@ import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
+import { defaultSchema } from 'hast-util-sanitize';
+
+const sanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [
+    ...(defaultSchema as any).tagNames,
+    'table',
+    'thead',
+    'tbody',
+    'tr',
+    'th',
+    'td',
+    'caption'
+  ],
+  attributes: {
+    ...(defaultSchema as any).attributes,
+    table: ['className'],
+    thead: [],
+    tbody: [],
+    tr: [],
+    th: ['align', 'colspan', 'rowspan'],
+    td: ['align', 'colspan', 'rowspan'],
+    a: ['href', 'name', 'target', 'rel'],
+    img: ['src', 'alt', 'title', 'width', 'height'],
+    code: ['className']
+  }
+};
 
 export async function generateStaticParams() {
   const [jsonSlugs, resourceSlugs] = await Promise.all([
@@ -126,7 +154,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         date={date}
       >
         <div className="prose prose-lg max-w-none">
-          <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}>
             {mdxPost.content}
           </ReactMarkdown>
         </div>
