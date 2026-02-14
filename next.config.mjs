@@ -13,6 +13,17 @@ const nextConfig = {
         destination: "/recursos/noticias/:slug",
         permanent: true,
       },
+      // English redirects to consolidated resources
+      {
+        source: "/en/ai-news",
+        destination: "/recursos/noticias",
+        permanent: true,
+      },
+      {
+        source: "/en/ai-news/:slug*",
+        destination: "/recursos/noticias/:slug*",
+        permanent: true,
+      },
     ];
   },
 };
