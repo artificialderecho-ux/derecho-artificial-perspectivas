@@ -112,7 +112,7 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
           ) : null}
         </div>
 
-        <div className="mx-auto">
+        <div className="prose prose-lg max-w-prose mx-auto">
           <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
             {mdxPost.content}
           </ReactMarkdown>
