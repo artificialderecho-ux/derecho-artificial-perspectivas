@@ -9,43 +9,36 @@ author: "Ricardo Scarpa"
 
 # La IA ante el Derecho de Autor: Análisis Multidisciplinar de la Sentencia 10 C 13/2023 del Tribunal Municipal de Praga
 
-**Ricardo Scarpa (derechoartificial.com)**
+Ricardo Scarpa (derechoartificial.com)
 
-# ÍNDICE
+## Índice
+
+- Capítulo 1: Introducción y Contexto del Litigio
+  - 1.1. Antecedentes de hecho: Descripción del conflicto entre el demandante (S. Š.) y el bufete de abogados Taubel Legal por el uso no autorizado de una imagen generada por IA.
+  - 1.2. El objeto de la controversia: La ilustración de "dos personas firmando un contrato" creada mediante la herramienta DALL-E de OpenAI.
+  - 1.3. Pretensiones de las partes: Reclamación de autoría y medidas cautelares frente a la excepción de falta de protección legal alegada por la defensa.
+- Capítulo 2: Fundamentos Técnicos y Operativos de la IA Generativa
+  - 2.1. Funcionamiento del modelo DALL-E: Análisis del procesamiento de instrucciones de texto (prompts) para la síntesis de contenido visual.
+  - 2.2. La naturaleza del prompting: Diferencia técnica entre la creación intelectual humana y la ejecución probabilística de algoritmos de difusión.
+  - 2.3. Transición técnica-legal: Cómo la opacidad algorítmica y la falta de control creativo total del usuario impactan en la calificación jurídica de la obra.
+- Capítulo 3: El Marco Normativo del Derecho de Autor (Lex Specialis)
+  - 3.1. La Ley de Propiedad Intelectual Checa: Análisis de las secciones 2 (definición de obra) y 5 (condición de autor como persona natural).
+  - 3.2. Estándares de la Unión Europea: El requisito de la "creación intelectual propia del autor" según la jurisprudencia del TJUE (casos Infopaq y Painer).
+  - 3.3. El concepto de "chispa creativa": El umbral de originalidad frente a los procesos mecánicos o automáticos de las máquinas.
+- Capítulo 4: Análisis Crítico de la Sentencia (Asunto 10 C 13/2023)
+  - 4.1. El fallo del Tribunal: Desestimación de la demanda por falta de legitimación activa y ausencia de evidencia sobre el proceso de creación.
+  - 4.2. El prompt como idea, no como expresión: Razonamiento judicial que clasifica las instrucciones del usuario como simples "temas" o "sugerencias" no protegibles.
+  - 4.3. La exclusión del sujeto no humano: Confirmación de que la IA carece de personalidad jurídica para ser titular de derechos de autor.
+- Capítulo 5: Perspectiva Multidisciplinar y Regulatoria
+  - 5.1. Impacto del Reglamento de IA (AI Act): Obligaciones de transparencia y publicación de resúmenes de datos de entrenamiento.
+  - 5.2. Minería de Textos y Datos (TDM): La excepción de los artículos 3 y 4 de la Directiva CDSM y su relación con el entrenamiento de modelos generativos.
+  - 5.3. Comparativa Internacional: El modelo antropocéntrico de la UE frente a la doctrina de obras generadas por computadora en el Reino Unido.
+- Capítulo 6: Conclusiones y Propuestas de Política Jurídica
+  - 6.1. El dominio público por defecto: Consecuencias económicas y legales de que los resultados de la IA carezcan de protección propietaria.
+  - 6.2. Hacia una seguridad jurídica: Necesidad de criterios claros para distinguir entre IA-asistida e IA-generada.
+  - 6.3. Recomendaciones finales: Implementación de protocolos de etiquetado y estándares de metadatos (como C2PA) para la trazabilidad de obras.
 
 ## Capítulo 1: Introducción y Contexto del Litigio
-
-### • 1.1. Antecedentes de hecho: Descripción del conflicto entre el demandante (S. Š.) y el bufete de abogados Taubel Legal por el uso no autorizado de una imagen generada por IA.• 1.2. El objeto de la controversia: La ilustración de "dos personas firmando un contrato" creada mediante la herramienta DALL-E de OpenAI.• 1.3. Pretensiones de las partes: Reclamación de autoría y medidas cautelares frente a la excepción de falta de protección legal alegada por la defensa.
-
-## Capítulo 2: Fundamentos Técnicos y Operativos de la IA Generativa
-
-### • 2.1. Funcionamiento del modelo DALL-E: Análisis del procesamiento de instrucciones de texto (prompts) para la síntesis de contenido visual.• 2.2. La naturaleza del prompting: Diferencia técnica entre la creación intelectual humana y la ejecución probabilística de algoritmos de difusión.• 2.3. Transición técnica-legal: Cómo la opacidad algorítmica y la falta de control creativo total del usuario impactan en la calificación jurídica de la obra.
-
-## Capítulo 3: El Marco Normativo del Derecho de Autor (Lex Specialis)
-
-### • 3.1. La Ley de Propiedad Intelectual Checa: Análisis de las secciones 2 (definición de obra) y 5 (condición de autor como persona natural).• 3.2. Estándares de la Unión Europea: El requisito de la "creación intelectual propia del autor" según la jurisprudencia del TJUE (casos _Infopaq_ y _Painer_).• 3.3. El concepto de "chispa creativa": El umbral de originalidad frente a los procesos mecánicos o automáticos de las máquinas.
-
-## Capítulo 4: Análisis Crítico de la Sentencia (Asunto 10 C 13/2023)
-
-### • 4.1. El fallo del Tribunal: Desestimación de la demanda por falta de legitimación activa y ausencia de evidencia sobre el proceso de creación.• 4.2. El prompt como idea, no como expresión: Razonamiento judicial que clasifica las instrucciones del usuario como simples "temas" o "sugerencias" no protegibles.• 4.3. La exclusión del sujeto no humano: Confirmación de que la IA carece de personalidad jurídica para ser titular de derechos de autor.
-
-Capítulo 5: Perspectiva Multidisciplinar y Regulatoria
-
-• 5.1. Impacto del Reglamento de IA (AI Act): Obligaciones de transparencia y publicación de resúmenes de datos de entrenamiento.
-
-• 5.2. Minería de Textos y Datos (TDM): La excepción de los artículos 3 y 4 de la Directiva CDSM y su relación con el entrenamiento de modelos generativos.
-
-• 5.3. Comparativa Internacional: El modelo antropocéntrico de la UE frente a la doctrina de obras generadas por computadora en el Reino Unido.
-
-Capítulo 6: Conclusiones y Propuestas de Política Jurídica
-
-• 6.1. El dominio público por defecto: Consecuencias económicas y legales de que los resultados de la IA carezcan de protección propietaria.
-
-• 6.2. Hacia una seguridad jurídica: Necesidad de criterios claros para distinguir entre IA-asistida e IA-generada.
-
-• 6.3. Recomendaciones finales: Implementación de protocolos de etiquetado y estándares de metadatos (como C2PA) para la trazabilidad de obras.
-
-## CAPÍTULO 1: INTRODUCCIÓN Y CONTEXTO DEL LITIGIO
 
 ### 1.1. Antecedentes de hecho
 
@@ -69,9 +62,9 @@ El actor formuló una demanda de tutela declarativa y condena, articulada en las
 
 3\. Medidas cautelares: La prohibición de cualquier uso futuro o distribución no autorizada de la obra basada en el artículo 40(1) de la Ley de Propiedad Intelectual Checa.
 
-## Por su parte, la defensa de Taubel Legal fundamentó su oposición en la falta de objeto protegido. Argumentó que, bajo el marco normativo de la Ley No. 121/2000 Coll. (Copyright Act), una imagen generada por IA no cumple con las características conceptuales de una "obra de autoría" (_autorské dílo_) al no ser el resultado de la actividad creativa de una persona natural. Esta postura sitúa la controversia en la esfera de los derechos fundamentales de propiedad frente al dominio público, cuestionando si el _prompting_ posee la "chispa creativa" necesaria para la protección legal o si se limita a ser una simple idea no protegible.
+Por su parte, la defensa de Taubel Legal fundamentó su oposición en la falta de objeto protegido. Argumentó que, bajo el marco normativo de la Ley No. 121/2000 Coll. (Copyright Act), una imagen generada por IA no cumple con las características conceptuales de una "obra de autoría" (_autorské dílo_) al no ser el resultado de la actividad creativa de una persona natural. Esta postura sitúa la controversia en la esfera de los derechos fundamentales de propiedad frente al dominio público, cuestionando si el _prompting_ posee la "chispa creativa" necesaria para la protección legal o si se limita a ser una simple idea no protegible.
 
-## CAPÍTULO 2: FUNDAMENTOS TÉCNICOS Y OPERATIVOS DE LA IA GENERATIVA
+## Capítulo 2: Fundamentos Técnicos y Operativos de la IA Generativa
 
 ### 2.1. Funcionamiento del modelo DALL-E: De la arquitectura de difusión a la síntesis de contenido
 
@@ -97,7 +90,7 @@ La arquitectura de estos sistemas plantea el desafío de los algoritmos opacos, 
 
 Desde una perspectiva de derechos fundamentales, esta falta de trazabilidad colisiona con el principio de transparencia. El nivel de riesgo jurídico es elevado, puesto que, al carecer la máquina de conciencia o "chispa creativa", el resultado es producto de una ejecución mecánica automatizada que no satisface el estándar de "creación intelectual propia del autor" exigido por la jurisprudencia del TJUE. En consecuencia, la autonomía técnica del modelo desplaza la agencia humana, situando el resultado en un limbo legal donde la técnica de síntesis probabilística sustituye al control directivo del creador.
 
-## CAPÍTULO 3: EL MARCO NORMATIVO DEL DERECHO DE AUTOR (LEX SPECIALIS)
+## Capítulo 3: El Marco Normativo del Derecho de Autor (Lex Specialis)
 
 ### 3.1. La Ley de Propiedad Intelectual Checa: Requisitos de la obra y subjetividad del autor
 
@@ -127,7 +120,7 @@ La frontera entre la herramienta y el autor reside en la existencia de una "chis
 
 El nivel de riesgo jurídico en la GenAI es que el sistema opera mediante un procesamiento probabilístico que "actúa sin comprensión humana" (_agere sine intelligere_) Mientras que un autor humano selecciona elementos expresivos con intención, la IA recombina patrones estadísticos de su base de datos de entrenamiento. Por tanto, el _prompting_ por sí solo no equivale a la ejecución de una obra; para que exista protección, el usuario debe retener un "control creativo" sustancial sobre la forma expresiva final (composición, color, sombreado), y no limitarse a aceptar el primer resultado emitido por la máquina. En ausencia de esta intervención humana cualificada, las obras generadas íntegramente por IA caen, por defecto, en el dominio público.
 
-## CAPÍTULO 4: ANÁLISIS CRÍTICO DE LA SENTENCIA (ASUNTO 10 C 13/2023)
+## Capítulo 4: Análisis Crítico de la Sentencia (Asunto 10 C 13/2023)
 
 ### 4.1. El fallo del Tribunal: Desestimación por insuficiencia probatoria y falta de legitimación
 
@@ -159,7 +152,7 @@ Este razonamiento conduce a consecuencias jurídicas de alto impacto para el mer
 
 En conclusión, el fallo del Tribunal de Praga consolida la doctrina de que el uso de niveles de riesgo altos en la automatización creativa, donde el humano se limita a ser un "asistente de cocina" que aporta ingredientes (ideas) pero no ejecuta el plato (expresión), desplaza el resultado fuera del ámbito de los derechos fundamentales de propiedad intelectual.
 
-## CAPÍTULO 5: PERSPECTIVA MULTIDISCIPLINAR Y REGULATORIA
+## Capítulo 5: Perspectiva Multidisciplinar y Regulatoria
 
 ### 5.1. Impacto del Reglamento de IA (AI Act): Obligaciones de transparencia y gobernanza
 
@@ -179,7 +172,7 @@ La sentencia de Praga reafirma el compromiso de la UE con un modelo de propiedad
 
 A pesar de su aparente progresismo técnico, el modelo del Reino Unido ha sido criticado por su falta de claridad ante la autonomía de los modelos modernos de difusión, ya que fue diseñado para un contexto tecnológico de outputs deterministas y no para sistemas probabilísticos complejos. Mientras que en la UE el output de una IA sin intervención humana cualificada cae directamente en el dominio público, el enfoque anglosajón busca capturar el valor económico de estas producciones otorgando derechos de propiedad a los inversores o desarrolladores. No obstante, las tendencias regulatorias más recientes sugieren que incluso jurisdicciones como el Reino Unido están evaluando adoptar mecanismos de _opt-out_ similares al modelo europeo para equilibrar los incentivos a la innovación con la protección de los creadores humanos.
 
-## CAPÍTULO 6: CONCLUSIONES Y PROPUESTAS DE POLÍTICA JURÍDICA
+## Capítulo 6: Conclusiones y Propuestas de Política Jurídica
 
 ### 6.1. El dominio público por defecto: Consecuencias de la falta de subjetividad jurídica
 
