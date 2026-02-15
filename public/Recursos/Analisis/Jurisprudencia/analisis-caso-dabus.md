@@ -1,5 +1,5 @@
 title: "La Exclusividad del Inventor Humano frente a la Inteligencia Artificial (Análisis de la Sentencia [2023] UKSC 49)"
-date: 2026-02-07
+date: 2026-02-14
 
 # La Exclusividad del Inventor Humano frente a la Inteligencia Artificial (Análisis de la Sentencia [2023] UKSC 49)
 

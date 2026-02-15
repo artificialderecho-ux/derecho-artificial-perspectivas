@@ -485,6 +485,7 @@ export default async function HomePage() {
           {(() => {
             const sections = [
               { key: "firma-scarpa", label: "Firma Scarpa", category: "firma-scarpa" },
+              { key: "actualidad-ia", label: "Actualidad IA", category: "actualidad-ia" },
               { key: "normativa", label: "Normativa IA", category: "normativa" },
               { key: "jurisprudencia", label: "Jurisprudencia IA", category: "jurisprudencia" },
               { key: "recursos", label: "Recursos IA", category: "recursos" },
@@ -494,9 +495,31 @@ export default async function HomePage() {
             ];
             const getLatestByCategory = (cat: string) =>
               mdxPosts
-                .filter((post) => (post.frontmatter.category || "").toLowerCase() === cat)
+                .filter((post) => {
+                  const c = (post.frontmatter.category || "").toLowerCase();
+                  if (c !== cat) return false;
+                  if (c === "recursos") {
+                    const subcat = (post.frontmatter.subcategory || "").toLowerCase();
+                    const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+                    return subcat === "guias" || tags.includes("guias");
+                  }
+                  return true;
+                })
                 .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
                 .slice(0, 2);
+
+            const buildHref = (post: any) => {
+              const c = (post.frontmatter.category || "").toLowerCase();
+              const subcat = (post.frontmatter.subcategory || "").toLowerCase();
+              const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+
+              if (c === "recursos" && (subcat === "guias" || tags.includes("guias"))) {
+                return `/recursos/guias/${post.slug}`;
+              }
+
+              return post.url;
+            };
+
             return (
               <div className="space-y-8">
                 {sections.map((sec) => {
@@ -510,7 +533,7 @@ export default async function HomePage() {
                           post ? (
                             <Link
                               key={`${post.slug}-${idx}`}
-                              href={post.url}
+                              href={buildHref(post)}
                               className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                             >
                               <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
