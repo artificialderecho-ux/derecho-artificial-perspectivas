@@ -1,11 +1,11 @@
-\---  
-title: "IA y Propiedad Intelectual: El Ciclo de Vida del Dato y la Minería de Textos y Datos bajo el Prisma del Caso Kneschke vs. LAION"  
-date: "2026-02-15"  
-category: "propiedad-intelectual-ia"  
-tags: \["ia-generativa", "propiedad-intelectual", "mineria-datos", "caso-kneschke-laion", "opt-out"\]  
-pdf: ""  
-author: "Ricardo Scarpa"  
-\---
+---
+title: "IA y Propiedad Intelectual: El Ciclo de Vida del Dato y la Minería de Textos y Datos bajo el Prisma del Caso Kneschke vs. LAION"
+date: "2026-02-15"
+category: "propiedad-intelectual-ia"
+tags: ["ia-generativa", "propiedad-intelectual", "mineria-datos", "caso-kneschke-laion", "opt-out"]
+pdf: ""
+author: "Ricardo Scarpa"
+---
 
 \# IA y Propiedad Intelectual: El Ciclo de Vida del Dato y la Minería de Textos y Datos bajo el Prisma del Caso Kneschke vs. LAION   
 Ricardo Scarpa
