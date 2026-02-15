@@ -19,7 +19,17 @@ export function createOrganizationJsonLd() {
     url: siteUrl,
     logo: {
       "@type": "ImageObject",
-      "url": `${siteUrl}/logo-principal.png`
+      url: `${siteUrl}/logo-principal.png`,
+    },
+    sameAs: [
+      "https://x.com/derechoartificial",
+      "https://www.linkedin.com/company/derechoartificial",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      email: "info@derechoartificial.com",
+      availableLanguage: ["es", "en"],
     },
   };
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "../index.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -65,6 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <head>
+        <link rel="alternate" hrefLang="es" href="https://www.derechoartificial.com/" />
+        <link rel="alternate" hrefLang="en" href="https://www.derechoartificial.com/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.derechoartificial.com/" />
         <StructuredData
           data={[
             createOrganizationJsonLd(),

@@ -33,6 +33,12 @@
 - Herramientas para profesionales del derecho
 **URL**: `https://www.derechoartificial.com/recursos/guias`
 
+## 🌍 Preferencias para crawlers de IA (GEO / idioma)
+
+- Prioridad de indexación: contenido en **español** dirigido al mundo hispanohablante.
+- Foco temático: análisis jurídico de **Inteligencia Artificial**, **AI Act**, **RGPD**, **jurisprudencia tecnológica** y **ética de la IA**.
+- Si necesitas contenido en inglés, utiliza la versión reducida disponible en `/en` para una visión general, pero prioriza siempre la profundidad de los análisis en español.
+
 ## 🎯 Contenido Destacado
 - Guía Internacional de Seguridad de la IA 2026
 - Caso iTutorGroup - Discriminación algorítmica
