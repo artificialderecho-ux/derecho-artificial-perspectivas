@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   
   if (mdxPost) {
     const title = `${mdxPost.frontmatter.title} | Derecho Artificial`;
-    const description = mdxPost.frontmatter.description || mdxPost.excerpt;
+    const description = mdxPost.excerpt || mdxPost.frontmatter.description || "Análisis jurídico experto sobre recursos y guías en IA.";
     const canonical = `https://www.derechoartificial.com/recursos/guias/${slug}`;
     const ogImage = "/logo-principal.png";
 
@@ -42,6 +42,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       title,
       description,
       alternates: { canonical },
+      robots: {
+        index: true,
+        follow: true,
+      },
       openGraph: {
         type: "article",
         title: mdxPost.frontmatter.title,
@@ -72,8 +76,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title,
     description,
-    alternates: {
-      canonical,
+    alternates: { canonical },
+    robots: {
+      index: true,
+      follow: true,
     },
     openGraph: {
       type: "article",

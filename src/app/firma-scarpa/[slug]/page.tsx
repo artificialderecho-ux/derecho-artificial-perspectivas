@@ -52,15 +52,21 @@ export async function generateMetadata({
   const mdxPost = getPostBySlug(slug);
   if (mdxPost && mdxPost.frontmatter.category === "firma-scarpa") {
     const { title, description, category, date } = mdxPost.frontmatter;
+    const metaDescription =
+      mdxPost.excerpt || description || "Análisis jurídico experto sobre IA por Ricardo Scarpa.";
     const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
     return {
       title: `${title} | Derecho Artificial`,
-      description: description || "Análisis jurídico experto sobre IA por Ricardo Scarpa",
+      description: metaDescription,
       alternates: { canonical },
+      robots: {
+        index: true,
+        follow: true,
+      },
       openGraph: {
         type: "article",
         title,
-        description,
+        description: metaDescription,
         url: canonical,
         siteName: "Derecho Artificial",
         locale: "es_ES",
@@ -105,6 +111,10 @@ export async function generateMetadata({
     keywords,
     alternates: {
       canonical,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
     openGraph: {
       type: "article",
@@ -163,7 +173,12 @@ export default async function FirmaScarpaSlugPage({
           </div>
         )}
         <div className="mx-auto">
-          <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+          <ReactMarkdown
+            rehypePlugins={[rehypeRaw, rehypeSanitize]}
+            components={{
+              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
+            }}
+          >
             {mdxPost.content}
           </ReactMarkdown>
         </div>

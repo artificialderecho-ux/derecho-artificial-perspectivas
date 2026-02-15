@@ -43,11 +43,12 @@ export function NewsCard({ title, date, source, url, summary, tags, image }: New
     <article className="border border-divider mb-10 last:mb-0 bg-card shadow-sm rounded-lg overflow-hidden">
       {image && (
         <div className="aspect-video w-full overflow-hidden border-b border-divider relative">
-          <Image 
-            src={image} 
-            alt="" 
-            fill 
-            className="object-cover" 
+          <Image
+            src={image}
+            alt=""
+            fill
+            loading="lazy"
+            className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>

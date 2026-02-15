@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.derechoartificial.com/jurisprudencia/sentencia-bosco-transparencia-algoritmica",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     type: "article",
     title: "Sentencia BOSCO: Transparencia Algorítmica y Código Fuente",

@@ -57,15 +57,21 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const mdxPost = getPostBySlug(slug);
   if (mdxPost) {
     const { title, description, category } = mdxPost.frontmatter;
+    const metaDescription =
+      mdxPost.excerpt || description || "Análisis jurídico experto sobre normativa en IA.";
     const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
     return {
       title: `${title} | Derecho Artificial`,
-      description: description || "Análisis jurídico experto sobre IA por Ricardo Scarpa",
+      description: metaDescription,
       alternates: { canonical },
+      robots: {
+        index: true,
+        follow: true,
+      },
       openGraph: {
         type: "article",
         title,
-        description,
+        description: metaDescription,
         url: canonical,
         siteName: "Derecho Artificial",
         locale: "es_ES",
@@ -85,6 +91,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     description,
     alternates: {
       canonical,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
     openGraph: {
       type: "article",
@@ -141,7 +151,13 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         </div>
 
         <div className="prose prose-lg max-w-prose mx-auto">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}
+            components={{
+              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
+            }}
+          >
             {mdxPost.content}
           </ReactMarkdown>
         </div>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
+import { SearchBar } from "@/components/SearchBar";
 
 const navigationES = [
   { name: "Firma Scarpa", href: "/firma-scarpa" },
@@ -102,19 +103,24 @@ export function Header() {
     >
       <div className="container-wide">
         <div className="flex items-center justify-between py-3 md:py-4 min-h-[120px]">
-          <Link href={isEnglish ? "/en" : "/"} className="flex items-center group">
-            <Image
-              src="/logo-principal.png"
-              alt="Derecho Artificial"
-              width={300}
-              height={100}
-              className="h-[100px] w-auto object-contain"
-              style={{ mixBlendMode: "multiply" }}
-              priority
-            />
-          </Link>
+          <div className="flex flex-1 items-center justify-between gap-6">
+            <Link href={isEnglish ? "/en" : "/"} className="flex items-center group flex-shrink-0">
+              <Image
+                src="/logo-principal.png"
+                alt="Derecho Artificial"
+                width={300}
+                height={100}
+                className="h-[100px] w-auto object-contain"
+                style={{ mixBlendMode: "multiply" }}
+                priority
+              />
+            </Link>
 
-          <div className="hidden lg:flex items-center gap-6 flex-shrink-0">
+            <div className="hidden flex-1 items-center justify-end gap-6 lg:flex">
+              <div className="w-full max-w-xs">
+                <SearchBar />
+              </div>
+
             <nav className="flex flex-nowrap items-center space-x-3 overflow-x-auto whitespace-nowrap text-sm">
               {navigation.map((item) => (
                 <Link
@@ -153,6 +159,7 @@ export function Header() {
               >
                 EN
               </Link>
+            </div>
             </div>
           </div>
 

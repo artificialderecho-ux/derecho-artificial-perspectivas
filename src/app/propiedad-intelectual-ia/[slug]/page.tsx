@@ -38,17 +38,23 @@ export async function generateMetadata({
 
   const { title, description, category, date } = mdxPost.frontmatter;
   const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+  const metaDescription =
+    mdxPost.excerpt ||
+    description ||
+    "Análisis jurídico sobre propiedad intelectual y responsabilidad en sistemas de inteligencia artificial.";
 
   return {
     title: `${title} | Derecho Artificial`,
-    description:
-      description ||
-      "Análisis jurídico sobre propiedad intelectual y responsabilidad en sistemas de inteligencia artificial.",
+    description: metaDescription,
     alternates: { canonical },
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       type: "article",
       title,
-      description,
+      description: metaDescription,
       url: canonical,
       siteName: "Derecho Artificial",
       locale: "es_ES",

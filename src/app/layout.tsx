@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Derecho Artificial",
   },
   description:
-    "Análisis jurídico independiente sobre IA, Reglamento IA, ética y compliance.",
+    "Análisis jurídico experto del Reglamento IA. Guías prácticas y criterio independiente para abogados y compliance.",
   keywords: [
     "derecho artificial",
     "inteligencia artificial",
@@ -37,13 +37,17 @@ export const metadata: Metadata = {
       "en-US": "/en",
     },
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     type: "website",
     siteName: "Derecho Artificial",
     url: "/",
-    title: "Derecho Artificial | IA, Ética y Regulación Jurídica",
+    title: "Derecho Artificial",
     description:
-      "Guías prácticas y análisis experto para abogados y compliance.",
+      "Análisis jurídico experto del Reglamento IA. Guías prácticas y criterio independiente para abogados y compliance.",
     locale: "es_ES",
     images: [
       {
@@ -55,9 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Derecho Artificial | IA Jurídica y Ética",
+    title: "Derecho Artificial",
     description:
-      "Análisis jurídico independiente sobre IA, Reglamento IA, ética y compliance.",
+      "Análisis jurídico experto del Reglamento IA. Guías prácticas y criterio independiente para abogados y compliance.",
     images: ["/og-home-1200x630.jpg"],
   },
 };

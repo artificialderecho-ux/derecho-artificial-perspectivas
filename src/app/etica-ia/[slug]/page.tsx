@@ -38,17 +38,23 @@ export async function generateMetadata({
 
   const { title, description, category, date } = mdxPost.frontmatter;
   const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+  const metaDescription =
+    mdxPost.excerpt ||
+    description ||
+    "Análisis sobre ética de la inteligencia artificial, seguridad de modelos y responsabilidad profesional.";
 
   return {
     title: `${title} | Derecho Artificial`,
-    description:
-      description ||
-      "Análisis sobre ética de la inteligencia artificial, seguridad de modelos y responsabilidad profesional.",
+    description: metaDescription,
     alternates: { canonical },
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       type: "article",
       title,
-      description,
+      description: metaDescription,
       url: canonical,
       siteName: "Derecho Artificial",
       locale: "es_ES",
@@ -118,7 +124,12 @@ export default async function EticaIASlugPage({
           </div>
         )}
         <div className="mx-auto">
-          <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+          <ReactMarkdown
+            rehypePlugins={[rehypeRaw, rehypeSanitize]}
+            components={{
+              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
+            }}
+          >
             {mdxPost.content}
           </ReactMarkdown>
         </div>
