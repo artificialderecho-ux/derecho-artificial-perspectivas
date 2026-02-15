@@ -1,4 +1,13 @@
-# \---title: "La IA ante el Derecho de Autor: Análisis Multidisciplinar de la Sentencia 10 C 13/2023 del Tribunal Municipal de Praga"date: "2026-02-16"category: "jurisprudencia"tags: \["derecho-autor", "ia-generativa", "sentencia-praga", "originalidad", "autor-humano", "europa", "dall-e", "prompt"\]pdf: ""author: "Ricardo Scarpa"---La IA ante el Derecho de Autor: Análisis Multidisciplinar de la Sentencia 10 C 13/2023 del Tribunal Municipal de Praga
+---
+title: "La IA ante el Derecho de Autor: Análisis Multidisciplinar de la Sentencia 10 C 13/2023 del Tribunal Municipal de Praga"
+date: "2026-02-16"
+category: "propiedad-intelectual-ia"
+tags: ["derecho-autor", "ia-generativa", "sentencia-praga", "originalidad", "autor-humano", "europa", "dall-e", "prompt"]
+pdf: ""
+author: "Ricardo Scarpa"
+---
+
+# La IA ante el Derecho de Autor: Análisis Multidisciplinar de la Sentencia 10 C 13/2023 del Tribunal Municipal de Praga
 
 **Ricardo Scarpa (derechoartificial.com)**
 
