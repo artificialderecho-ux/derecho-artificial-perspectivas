@@ -501,14 +501,15 @@ export default async function HomePage() {
               <div className="space-y-8">
                 {sections.map((sec) => {
                   const items = getLatestByCategory(sec.category);
+                  const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
                   return (
                     <div key={sec.key}>
                       <h3 className="font-serif text-xl md:text-2xl text-foreground mb-3">{sec.label}</h3>
                       <div className="grid gap-6 md:grid-cols-2">
-                        {items.length > 0 ? (
-                          items.map((post) => (
+                        {slots.map((post, idx) =>
+                          post ? (
                             <Link
-                              key={post.slug}
+                              key={`${post.slug}-${idx}`}
                               href={post.url}
                               className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                             >
@@ -522,14 +523,11 @@ export default async function HomePage() {
                               <p className="text-xs text-caption mb-2">{formatDate(post.frontmatter.date)}</p>
                               <p className="text-sm text-body line-clamp-3">{post.excerpt}</p>
                             </Link>
-                          ))
-                        ) : (
-                          <>
-                            <div className="border border-dashed border-divider rounded-sm p-5">
+                          ) : (
+                            <div key={`placeholder-${sec.key}-${idx}`} className="border border-dashed border-divider rounded-sm p-5">
                               <p className="text-sm text-body">Próximamente contenido</p>
                             </div>
-                            <div className="hidden md:block border border-transparent rounded-sm p-5" />
-                          </>
+                          ),
                         )}
                       </div>
                     </div>
