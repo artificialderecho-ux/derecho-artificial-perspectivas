@@ -117,11 +117,11 @@ export function Header() {
             </Link>
 
             <div className="flex flex-1 items-center justify-end gap-3 sm:gap-4 md:gap-5">
-              <div className="w-24 sm:w-32 md:w-40 lg:w-44 xl:w-48">
+              <div className="w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32">
                 <SearchBar />
               </div>
 
-              <nav className="hidden md:flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+              <nav className="hidden md:flex flex-nowrap items-center gap-x-3 text-sm whitespace-nowrap">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
