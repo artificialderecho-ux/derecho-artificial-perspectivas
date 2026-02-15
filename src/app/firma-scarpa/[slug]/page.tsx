@@ -171,7 +171,8 @@ export default async function FirmaScarpaSlugPage({
         <div className="mt-16 pt-8 border-t border-slate-200">
           <RelatedArticles
             currentSlug={slug}
-            currentCategory="firma-scarpa"
+            currentTags={mdxPost.frontmatter.tags || []}
+            currentCategory={mdxPost.frontmatter.category || "firma-scarpa"}
           />
         </div>
       </LegalLayout>

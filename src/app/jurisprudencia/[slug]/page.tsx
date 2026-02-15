@@ -142,7 +142,8 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
         <div className="mt-16 pt-8 border-t border-slate-200">
           <RelatedArticles
             currentSlug={slug}
-            currentCategory="jurisprudencia"
+            currentTags={mdxPost.frontmatter.tags || []}
+            currentCategory={mdxPost.frontmatter.category || "jurisprudencia"}
           />
         </div>
       </LegalLayout>

@@ -162,7 +162,8 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         <div className="mt-16 pt-8 border-t border-slate-200">
           <RelatedArticles
             currentSlug={slug}
-            currentCategory="actualidad-ia"
+            currentTags={mdxPost.frontmatter.tags || []}
+            currentCategory={mdxPost.frontmatter.category || "actualidad-ia"}
           />
         </div>
       </LegalLayout>
@@ -344,8 +345,8 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} />
         <RelatedArticles 
           currentSlug={slug} 
-          currentCategory="actualidad-ia"
           currentTags={(resourceEntry as any)?.tags || []}
+          currentCategory="actualidad-ia"
         />
       </LegalLayout>
     </>

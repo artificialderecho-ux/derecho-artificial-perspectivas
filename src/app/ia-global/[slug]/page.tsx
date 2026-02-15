@@ -123,10 +123,13 @@ export default async function IAGlobalSlugPage({
           </ReactMarkdown>
         </div>
         <div className="mt-16 pt-8 border-t border-slate-200">
-          <RelatedArticles currentSlug={slug} currentCategory="ia-global" />
+          <RelatedArticles
+            currentSlug={slug}
+            currentTags={mdxPost.frontmatter.tags || []}
+            currentCategory={mdxPost.frontmatter.category || "ia-global"}
+          />
         </div>
       </LegalLayout>
     </>
   );
 }
-

@@ -123,10 +123,13 @@ export default async function PropiedadIntelectualIASlugPage({
           </ReactMarkdown>
         </div>
         <div className="mt-16 pt-8 border-t border-slate-200">
-          <RelatedArticles currentSlug={slug} currentCategory="propiedad-intelectual-ia" />
+          <RelatedArticles
+            currentSlug={slug}
+            currentTags={mdxPost.frontmatter.tags || []}
+            currentCategory={mdxPost.frontmatter.category || "propiedad-intelectual-ia"}
+          />
         </div>
       </LegalLayout>
     </>
   );
 }
-

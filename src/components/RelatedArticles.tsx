@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/lib/getAllPosts";
+import { getAllPosts } from "@/lib/mdx-utils";
 
 interface RelatedArticlesProps {
   currentTags?: string[];
@@ -11,41 +11,36 @@ export async function RelatedArticles({
   currentSlug,
   currentCategory,
 }: RelatedArticlesProps) {
-  const allPosts = await getAllPosts();
+  const allPosts = getAllPosts();
 
-  // Filtrar artículos relacionados
+  const normalizedCurrentTags = currentTags.map((t) => t.toLowerCase().replace("#", ""));
+
   const related = allPosts
     .filter((post) => {
-      // No mostrar el artículo actual
       if (post.slug === currentSlug) return false;
 
-      // Coincidencia por tags (ignorando mayúsculas y el símbolo #)
-      const normalizedCurrentTags = currentTags.map((t) =>
-        t.toLowerCase().replace("#", "")
+      const postTags = (post.frontmatter.tags || []).map((t: string) =>
+        t.toLowerCase().replace("#", ""),
       );
       const sharedTags =
         normalizedCurrentTags.length > 0 &&
-        post.tags?.some((tag) =>
-          normalizedCurrentTags.includes(tag.toLowerCase().replace("#", ""))
-        );
+        postTags.some((tag) => normalizedCurrentTags.includes(tag));
 
-      // Coincidencia por categoría
-      const sameCategory = currentCategory && post.category === currentCategory;
+      const sameCategory =
+        currentCategory && (post.frontmatter.category || "").toLowerCase() === currentCategory;
 
       return sharedTags || sameCategory;
     })
-    .slice(0, 3); // Máximo 3 artículos
+    .slice(0, 4);
 
   if (related.length === 0) {
-    // Si no hay relacionados por tags/categoría, mostrar los más recientes (excluyendo el actual)
-    const latest = allPosts
-      .filter((p) => p.slug !== currentSlug)
-      .slice(0, 3);
-    
-    if (latest.length === 0) return null;
-    
     return (
-      <RelatedArticlesList articles={latest} title="Últimos artículos" />
+      <section className="mt-16 border-t border-slate-200 pt-10">
+        <h2 className="font-serif text-2xl font-bold mb-6 text-foreground">
+          Artículos relacionados
+        </h2>
+        <p className="text-sm text-slate-500">Próximamente más análisis relacionados.</p>
+      </section>
     );
   }
 
@@ -54,7 +49,7 @@ export async function RelatedArticles({
   );
 }
 
-function RelatedArticlesList({ articles, title }: { articles: any[], title: string }) {
+function RelatedArticlesList({ articles, title }: { articles: any[]; title: string }) {
   return (
     <section className="mt-16 border-t border-slate-200 pt-10">
       <h2 className="font-serif text-2xl font-bold mb-6 text-foreground">{title}</h2>
@@ -66,13 +61,13 @@ function RelatedArticlesList({ articles, title }: { articles: any[], title: stri
             className="group block border border-slate-200 rounded-lg p-5 hover:shadow-md hover:border-slate-400 transition"
           >
             <h3 className="font-serif font-semibold text-lg mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-              {item.title}
+              {item.frontmatter.title}
             </h3>
             <div className="flex items-center justify-between mt-4">
-              <time className="text-sm text-slate-500">{item.date}</time>
-              {item.category && (
+              <time className="text-sm text-slate-500">{item.frontmatter.date}</time>
+              {item.frontmatter.category && (
                 <span className="text-xs font-medium px-2 py-1 bg-slate-100 text-slate-600 rounded-full capitalize">
-                  {item.category.replace("-", " ")}
+                  {item.frontmatter.category.replace("-", " ")}
                 </span>
               )}
             </div>
