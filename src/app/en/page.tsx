@@ -353,7 +353,7 @@ export default async function EnglishHomePage() {
               <h3 className="font-serif text-xl text-foreground">Jurisprudence</h3>
               <h2 className="text-sm md:text-base text-body">Jurisprudence Observatory: Case law and rulings on Artificial Intelligence</h2>
             </Link>
-            <Link href="/en/ai-news" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/recursos/noticias" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">AI News</h3>
               <h2 className="text-sm md:text-base text-body">Legal Tech Updates: News and legal impact of technology</h2>
             </Link>

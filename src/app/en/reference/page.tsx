@@ -252,7 +252,7 @@ export default async function ReferencePage() {
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(160px,_auto)]">
               <Link
-                href="/en/ai-news"
+                href="/recursos/noticias"
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">AI News</p>

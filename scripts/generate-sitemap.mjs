@@ -45,7 +45,6 @@ async function generateSitemap() {
     { url: `${siteUrl}/en`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/en/scarpa-firm`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/en/jurisprudence`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${siteUrl}/en/ai-news`, changeFrequency: "daily", priority: 0.8 },
     { url: `${siteUrl}/en/legislation`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/en/guides-protocols`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/en/about-us`, changeFrequency: "yearly", priority: 0.5 },
