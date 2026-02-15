@@ -361,22 +361,6 @@ export default async function HomePage() {
       items: uniqueByHref(jurisprudenciaItems).slice(0, 2),
     },
     {
-      key: "actualidad-ia",
-      label: "Actualidad IA",
-      href: "/actualidad-ia",
-      items: uniqueByHref(
-        [unifiedActualidad[0], unifiedActualidad[1]]
-          .filter((e): e is NonNullable<typeof e> => Boolean(e))
-          .map((e) => ({
-            title: e.title,
-            href: e.urlPath,
-            description: e.description ?? "",
-            meta: `${formatDate(e.date)} · ${e.author}`,
-            dateMs: e.date,
-          })),
-      ),
-    },
-    {
       key: "normativa",
       label: "Normativa",
       href: "/normativa",
@@ -413,8 +397,6 @@ export default async function HomePage() {
         return "Ver jurisprudencia";
       case "guias":
         return "Navegar guías";
-      case "actualidad-ia":
-        return "Leer actualidad";
       case "firma-scarpa":
         return "Conocer la firma";
       case "glosario":
@@ -485,7 +467,6 @@ export default async function HomePage() {
           {(() => {
             const sections = [
               { key: "firma-scarpa", label: "Firma Scarpa", category: "firma-scarpa" },
-              { key: "actualidad-ia", label: "Actualidad IA", category: "actualidad-ia" },
               { key: "normativa", label: "Normativa IA", category: "normativa" },
               { key: "jurisprudencia", label: "Jurisprudencia IA", category: "jurisprudencia" },
               { key: "recursos", label: "Recursos IA", category: "recursos" },
