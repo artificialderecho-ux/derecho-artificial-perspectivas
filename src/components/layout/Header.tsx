@@ -103,7 +103,7 @@ export function Header() {
     >
       <div className="container-wide">
         <div className="flex items-center justify-between py-3 md:py-4 min-h-[120px]">
-          <div className="flex flex-1 items-center justify-between gap-6">
+          <div className="flex flex-1 items-center justify-between gap-4 md:gap-6">
             <Link href={isEnglish ? "/en" : "/"} className="flex items-center group flex-shrink-0">
               <Image
                 src="/logo-principal.png"
@@ -116,50 +116,50 @@ export function Header() {
               />
             </Link>
 
-            <div className="hidden flex-1 items-center justify-end gap-6 lg:flex">
-              <div className="w-full max-w-xs">
+            <div className="flex flex-1 items-center justify-end gap-3 sm:gap-4 md:gap-6">
+              <div className="w-32 xs:w-40 sm:w-52 md:w-full md:max-w-xs">
                 <SearchBar />
               </div>
 
-            <nav className="flex flex-nowrap items-center space-x-3 overflow-x-auto whitespace-nowrap text-sm">
-              {navigation.map((item) => (
+              <nav className="hidden md:flex flex-nowrap items-center space-x-3 overflow-x-auto whitespace-nowrap text-sm">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`tracking-wide transition-all duration-300 relative ${
+                      pathname === item.href
+                        ? "text-primary font-medium"
+                        : "text-caption hover:text-foreground"
+                    }`}
+                  >
+                    {item.name}
+                    {pathname === item.href && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />
+                    )}
+                  </Link>
+                ))}
+              </nav>
+              
+              <div className="hidden md:flex items-center gap-3 pl-4 md:pl-6 border-l border-divider flex-shrink-0">
+                <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
                 <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`tracking-wide transition-all duration-300 relative ${
-                    pathname === item.href
-                      ? "text-primary font-medium"
-                      : "text-caption hover:text-foreground"
+                  href={isEnglish ? getAlternateRoute() : pathname}
+                  className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
+                    !isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                   }`}
                 >
-                  {item.name}
-                  {pathname === item.href && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />
-                  )}
+                  ES
                 </Link>
-              ))}
-            </nav>
-            
-            <div className="flex items-center gap-3 pl-6 border-l border-divider flex-shrink-0">
-              <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
-              <Link
-                href={isEnglish ? getAlternateRoute() : pathname}
-                className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
-                  !isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
-                }`}
-              >
-                ES
-              </Link>
-              <span className="text-caption">|</span>
-              <Link
-                href={isEnglish ? pathname : getAlternateRoute()}
-                className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
-                  isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
-                }`}
-              >
-                EN
-              </Link>
-            </div>
+                <span className="text-caption">|</span>
+                <Link
+                  href={isEnglish ? pathname : getAlternateRoute()}
+                  className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
+                    isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
+                  }`}
+                >
+                  EN
+                </Link>
+              </div>
             </div>
           </div>
 
