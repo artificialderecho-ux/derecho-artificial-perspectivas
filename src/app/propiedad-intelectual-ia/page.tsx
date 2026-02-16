@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { LegalLayout } from "@/components/layout/LegalLayout";
@@ -64,12 +65,31 @@ export default async function PropiedadIntelectualIAPage() {
         title="Propiedad Intelectual IA"
         category="Secciones"
         date={new Date().toISOString().slice(0, 10)}
+        hero={
+          <div className="relative w-full h-64 md:h-96">
+            <Image
+              src="/images/sections/propiedad-intelectual.jpg"
+              alt="Propiedad Intelectual IA"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
+            <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+              <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
+                Propiedad Intelectual IA
+              </h1>
+            </div>
+          </div>
+        }
       >
         <div className="space-y-8">
-          <p className="text-body">
-            Selección de análisis y recursos sobre el conflicto entre IA generativa y derechos de
-            autor, licencias de uso, text and data mining y blindaje de catálogos creativos.
-          </p>
+          <div className="container mx-auto px-4 py-8">
+            <p className="text-body">
+              Selección de análisis y recursos sobre el conflicto entre IA generativa y derechos de
+              autor, licencias de uso, text and data mining y blindaje de catálogos creativos.
+            </p>
+          </div>
           {items.length === 0 ? (
             <p className="text-body">Próximamente contenido.</p>
           ) : (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
@@ -136,19 +137,29 @@ export default async function JurisprudenciaPage() {
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <main className="section-spacing">
-        <div className="container-editorial">
-          <header className="mb-12">
-            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Sección</p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+        <div className="relative w-full h-64 md:h-96">
+          <Image
+            src="/images/sections/jurisprudencia.jpg"
+            alt="Jurisprudencia"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
+          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
               Jurisprudencia
             </h1>
-            <p className="lead mt-6 text-justify max-w-3xl">
-              Repositorio crítico de resoluciones judiciales y administrativas que definen el Derecho de la IA. 
-              Analizamos sentencias que sientan precedente sobre transparencia algorítmica, responsabilidad civil 
-              y protección de derechos fundamentales en la era digital.
-            </p>
-          </header>
-          
+          </div>
+        </div>
+        <div className="container mx-auto px-4 py-8">
+          <p className="lead text-justify max-w-3xl">
+            Repositorio crítico de resoluciones judiciales y administrativas que definen el Derecho de la IA. 
+            Analizamos sentencias que sientan precedente sobre transparencia algorítmica, responsabilidad civil 
+            y protección de derechos fundamentales en la era digital.
+          </p>
+        </div>
+        <div className="container-editorial">
           <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
             <Link
               href={boscoItem.href}

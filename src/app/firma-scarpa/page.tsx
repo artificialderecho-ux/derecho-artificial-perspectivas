@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
@@ -172,19 +173,30 @@ export default async function FirmaScarpaPage() {
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <main className="section-spacing">
-        <div className="container-editorial">
-          <header className="mb-12">
-            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Sección</p>
-            <h1 className="font-serif text-4xl md:text-5xl text-foreground leading-tight">
+        <div className="relative w-full h-64 md:h-96">
+          <Image
+            src="/images/sections/firma-scarpa.jpg"
+            alt="Firma Scarpa"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority={false}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
+          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
               Firma Scarpa
             </h1>
-            <p className="lead mt-6 text-justify max-w-3xl">
-              Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión 
-              profunda sobre la intersección entre tecnología y ley, abordando desde la ética del algoritmo 
-              hasta las implicaciones prácticas del Reglamento de IA en el sector legal.
-            </p>
-          </header>
-
+          </div>
+        </div>
+        <div className="container mx-auto px-4 py-8">
+          <p className="lead text-justify max-w-3xl">
+            Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión 
+            profunda sobre la intersección entre tecnología y ley, abordando desde la ética del algoritmo 
+            hasta las implicaciones prácticas del Reglamento de IA en el sector legal.
+          </p>
+        </div>
+        <div className="container-editorial">
           {/* Artículos Destacados - Una por fila */}
           {featuredItems.map((item) => (
             <section key={item.id} className="mb-12">

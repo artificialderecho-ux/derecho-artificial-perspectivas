@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
@@ -125,7 +126,33 @@ export default async function RecursosPage() {
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <Breadcrumbs items={[{ label: "Inicio", href: "/" }, { label: "Recursos IA", href: "/recursos" }]} />
-      <LegalLayout title="Recursos IA" category="Secciones" date={new Date().toISOString().slice(0, 10)}>
+      <LegalLayout
+        title="Recursos IA"
+        category="Secciones"
+        date={new Date().toISOString().slice(0, 10)}
+        hero={
+          <div className="relative w-full h-64 md:h-96">
+            <Image
+              src="/images/sections/recursos.jpg"
+              alt="Recursos IA"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
+            <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+              <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
+                Recursos IA
+              </h1>
+            </div>
+          </div>
+        }
+      >
+        <div className="container mx-auto px-4 py-8">
+          <p className="text-body">
+            Sección Recursos IA en desarrollo: incluye guías y noticias.
+          </p>
+        </div>
         <section className="mb-12">
           <p className="text-xs uppercase tracking-[0.25em] text-caption mb-4">Subsección</p>
           <h2 className="font-serif text-3xl text-foreground mb-6">Guías y Protocolos</h2>
