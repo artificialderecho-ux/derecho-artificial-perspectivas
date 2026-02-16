@@ -466,13 +466,41 @@ export default async function HomePage() {
           </div>
           {(() => {
             const sections = [
-              { key: "firma-scarpa", label: "Firma Scarpa", category: "firma-scarpa" },
-              { key: "normativa", label: "Normativa IA", category: "normativa" },
-              { key: "jurisprudencia", label: "Jurisprudencia IA", category: "jurisprudencia" },
-              { key: "recursos", label: "Recursos IA", category: "recursos" },
-              { key: "propiedad-intelectual-ia", label: "Propiedad Intelectual IA", category: "propiedad-intelectual-ia" },
-              { key: "etica-ia", label: "Ética IA", category: "etica-ia" },
-              { key: "ia-global", label: "IA Global", category: "ia-global" },
+              {
+                title: "Firma Scarpa",
+                category: "firma-scarpa",
+                image: "/images/sections/firma-scarpa.jpg",
+              },
+              {
+                title: "Normativa IA",
+                category: "normativa",
+                image: "/images/sections/normativa.jpg",
+              },
+              {
+                title: "Jurisprudencia IA",
+                category: "jurisprudencia",
+                image: "/images/sections/jurisprudencia.jpg",
+              },
+              {
+                title: "Recursos IA",
+                category: "recursos",
+                image: "/images/sections/recursos.jpg",
+              },
+              {
+                title: "Propiedad Intelectual IA",
+                category: "propiedad-intelectual-ia",
+                image: "/images/sections/propiedad-intelectual.jpg",
+              },
+              {
+                title: "Ética IA",
+                category: "etica-ia",
+                image: "/images/sections/etica.jpg",
+              },
+              {
+                title: "IA Global",
+                category: "ia-global",
+                image: "/images/sections/ia-global.jpg",
+              },
             ];
             const getLatestByCategory = (cat: string) =>
               mdxPosts
@@ -507,32 +535,46 @@ export default async function HomePage() {
                   const items = getLatestByCategory(sec.category);
                   const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
                   return (
-                    <div key={sec.key}>
-                      <h3 className="font-serif text-xl md:text-2xl text-foreground mb-3">{sec.label}</h3>
-                      <div className="grid gap-6 md:grid-cols-2">
-                        {slots.map((post, idx) =>
-                          post ? (
-                            <Link
-                              key={`${post.slug}-${idx}`}
-                              href={buildHref(post)}
-                              className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                            >
-                              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                                {sec.label}
-                              </p>
-                              <h4 className="font-serif text-lg text-foreground mb-2">
-                                {post.frontmatter.title}
-                                <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                              </h4>
-                              <p className="text-xs text-caption mb-2">{formatDate(post.frontmatter.date)}</p>
-                              <p className="text-sm text-body line-clamp-3">{post.excerpt}</p>
-                            </Link>
-                          ) : (
-                            <div key={`placeholder-${sec.key}-${idx}`} className="border border-dashed border-divider rounded-sm p-5">
-                              <p className="text-sm text-body">Próximamente contenido</p>
-                            </div>
-                          ),
-                        )}
+                    <div key={sec.category} className="relative overflow-hidden rounded-lg border border-divider">
+                      <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${sec.image})` }}
+                      />
+                      <div className="absolute inset-0 bg-black/50" />
+                      <div className="relative z-10 p-6 md:p-8">
+                        <div className="flex items-center justify-center text-center py-6 md:py-8">
+                          <h3 className="text-2xl md:text-3xl font-bold text-white text-shadow-lg">
+                            {sec.title}
+                          </h3>
+                        </div>
+                        <div className="grid gap-6 md:grid-cols-2">
+                          {slots.map((post, idx) =>
+                            post ? (
+                              <Link
+                                key={`${post.slug}-${idx}`}
+                                href={buildHref(post)}
+                                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                              >
+                                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
+                                  {sec.title}
+                                </p>
+                                <h4 className="font-serif text-lg text-foreground mb-2">
+                                  {post.frontmatter.title}
+                                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                                </h4>
+                                <p className="text-xs text-caption mb-2">{formatDate(post.frontmatter.date)}</p>
+                                <p className="text-sm text-body line-clamp-3">{post.excerpt}</p>
+                              </Link>
+                            ) : (
+                              <div
+                                key={`placeholder-${sec.category}-${idx}`}
+                                className="border border-dashed border-divider rounded-sm p-5 bg-white/90"
+                              >
+                                <p className="text-sm text-body">Próximamente contenido</p>
+                              </div>
+                            ),
+                          )}
+                        </div>
                       </div>
                     </div>
                   );
