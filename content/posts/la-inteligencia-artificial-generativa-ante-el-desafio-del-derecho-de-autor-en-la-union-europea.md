@@ -3,14 +3,14 @@ title: "La Inteligencia Artificial Generativa ante el Desafío del Derecho de Au
 author: "Ricardo Scarpa"
 date: "2026-02-16"
 category: "propiedad-intelectual-ia"
-pdf: "/fuentes/La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea.pdf"
+pdf: "/fuentes/La%20Inteligencia%20Artificial%20Generativa%20ante%20el%20Desaf%C3%ADo%20del%20Derecho%20de%20Autor%20en%20la%20Uni%C3%B3n%20Europea.pdf"
 tags: ["ia-generativa", "copyright", "mineria-textos-datos", "directiva-cdsm", "ley-ia", "autoria-humana", "remuneracion-equitativa", "datos-entrenamiento", "originalidad", "opt-out"]
 description: "Revisión bibliográfica."
 ---
 
 # Revisión Bibliográfica: La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea
 
-[Descargar informe completo (PDF)](/fuentes/La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea.pdf)
+[Descargar informe completo (PDF)](/fuentes/La%20Inteligencia%20Artificial%20Generativa%20ante%20el%20Desaf%C3%ADo%20del%20Derecho%20de%20Autor%20en%20la%20Uni%C3%B3n%20Europea.pdf)
 
 ### **1\. Introducción: El Cambio de Paradigma en la Creación Digital**
 
@@ -22,12 +22,37 @@ La fase de entrenamiento de los modelos de IAGen se ha intentado amparar, de man
 
 La siguiente tabla contrasta las divergencias críticas entre ambos procesos según la evidencia técnica y jurídica:
 
-| Dimensión Técnica | TDM Tradicional | Entrenamiento de IAGen |
-| :---- | :---- | :---- |
-| **Naturaleza del Proceso** | Descubrimiento y aprendizaje de patrones analíticos. | Internalización y codificación de estructuras expresivas. |
-| **Propósito Legal** | Extracción de conocimientos y tendencias. | Síntesis de contenidos competitivos. |
-| **Impacto en el Titular** | Uso no consuntivo; valor extractivo. | Competencia directa; valor sustitutivo. |
-| **Almacenamiento** | Copias temporales para análisis. | Codificación permanente en pesos del modelo (*weights*). |
+<table>
+  <thead>
+    <tr>
+      <th>Dimensión Técnica</th>
+      <th>TDM Tradicional</th>
+      <th>Entrenamiento de IAGen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Naturaleza del Proceso</strong></td>
+      <td>Descubrimiento y aprendizaje de patrones analíticos.</td>
+      <td>Internalización y codificación de estructuras expresivas.</td>
+    </tr>
+    <tr>
+      <td><strong>Propósito Legal</strong></td>
+      <td>Extracción de conocimientos y tendencias.</td>
+      <td>Síntesis de contenidos competitivos.</td>
+    </tr>
+    <tr>
+      <td><strong>Impacto en el Titular</strong></td>
+      <td>Uso no consuntivo; valor extractivo.</td>
+      <td>Competencia directa; valor sustitutivo.</td>
+    </tr>
+    <tr>
+      <td><strong>Almacenamiento</strong></td>
+      <td>Copias temporales para análisis.</td>
+      <td>Codificación permanente en pesos del modelo (<em>weights</em>).</td>
+    </tr>
+  </tbody>
+</table>
 
 A nivel normativo, el mecanismo de "opt-out" del Artículo 4.3 enfrenta una inefectividad crítica debido a la falta de **estándares técnicos armonizados** y legibles por máquina. Los protocolos actuales, como el *robots.txt* o los metadatos, resultan "frágiles y ampliamente inejecutables", lo que genera una asimetría que favorece la **expropiación técnica** del contenido por parte de los desarrolladores frente a la incapacidad de los autores para escalar su reserva de derechos (Lucchi, 2025). Esta falta de seguridad jurídica en la ingesta masiva cuestiona si la simple accesibilidad justifica la protección del producto final resultante.
 
