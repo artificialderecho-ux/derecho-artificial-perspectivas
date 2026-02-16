@@ -1,0 +1,97 @@
+# \### \\\--  \### title: \"Convenio Marco del Consejo de Europa sobre Inteligencia Artificial, Derechos Humanos, Democracia y el Estado de Derecho (CETS No. 225)\"  \### author: \"Ricardo Scarpa (derechoartificial.com)\"  \### date: \"2026-02-16\"  \### category: \"Ética IA\"  \### pdf: \"/main/public/fuentes/convenio_europea_ia_democracia.pdf\"  \### Tags: \"Artificial Intelligence\" \"Judicial Systems\" \"Fundamental Rights\" \"Non-discrimination\" \"Quality and Security\" \"Transparency\" \"User Control\" \"Predictive Justice\" \"Machine Learning\" \"Data Protection " {#title-convenio-marco-del-consejo-de-europa-sobre-inteligencia-artificial-derechos-humanos-democracia-y-el-estado-de-derecho-cets-no.-225-author-ricardo-scarpa-derechoartificial.com-date-2026-02-16-category-ética-ia-pdf-mainpublicfuentesconvenio_europea_ia_democracia.pdf-tags-artificial-intelligence-judicial-systems-fundamental-rights-non-discrimination-quality-and-security-transparency-user-control-predictive-justice-machine-learning-data-protection}
+
+# \### description: \"Revisión Bibliográfica\"  \### \\\-- {#description-revisión-bibliográfica----}
+
+# 
+
+# Revisión Bibliográfica: El Convenio Marco del Consejo de Europa sobre Inteligencia Artificial, Derechos Humanos, Democracia y el Estado de Derecho (CETS No. 225) {#revisión-bibliográfica-el-convenio-marco-del-consejo-de-europa-sobre-inteligencia-artificial-derechos-humanos-democracia-y-el-estado-de-derecho-cets-no.-225}
+
+## 1. Introducción y Contexto Estratégico del Convenio {#introducción-y-contexto-estratégico-del-convenio}
+
+El Convenio Marco del Consejo de Europa sobre Inteligencia Artificial, Derechos Humanos, Democracia y el Estado de Derecho (CETS No. 225) se erige como el primer instrumento jurídico vinculante de carácter transversal a nivel global. Su adopción representa un hito en la arquitectura del derecho internacional, diseñado específicamente para armonizar la gobernanza de la inteligencia artificial (IA) con los valores fundacionales de la organización. A diferencia de instrumentos sectoriales o meramente éticos, el CETS No. 225 establece un estándar obligatorio que trasciende las fronteras europeas, consolidando un marco de seguridad jurídica frente a la naturaleza disruptiva de las tecnologías algorítmicas (Consejo de Europa, 2024).
+
+La evolución institucional y el proceso de gestación del texto subrayan su relevancia estratégica:
+
+1.  **Génesis Institucional (2021-2022):** El proceso se inició con el Comité Ad Hoc sobre Inteligencia Artificial (CAHAI), cuyo informe sobre los elementos de un marco jurídico (diciembre de 2021) proporcionó la base para que el Comité de Ministros instruyera al Comité sobre Inteligencia Artificial (CAI) la redacción del Convenio.
+
+2.  **Apertura Global y Observadores:** El proceso no fue exclusivo de los Estados miembros; contó con la participación activa de Estados observadores con valores compartidos, tales como Argentina, EE. UU., Japón, Australia, Canadá, Israel, México, Perú, Uruguay, Costa Rica y la Santa Sede (Consejo de Europa, 2024, párr. 3).
+
+3.  **Gobernanza Multisectorial:** En las negociaciones participaron 68 representantes de la sociedad civil y la industria, además de organismos internacionales como la OCDE, UNESCO y la OSCE, asegurando una visión técnica y pluralista.
+
+4.  **Adopción Formal:** El texto definitivo fue adoptado el 17 de mayo de 2024 en la 133ª Sesión del Comité de Ministros en Estrasburgo, entrando en vigor bajo una premisa de universalidad regulatoria.
+
+Esta sólida base institucional precede a la necesidad de definir con precisión el objeto técnico y el ámbito jurisdiccional en el que operará el Convenio.
+
+## 2. Definición Operativa y Alcance de Aplicación: Un Análisis Crítico {#definición-operativa-y-alcance-de-aplicación-un-análisis-crítico}
+
+La arquitectura jurídica del Convenio descansa sobre la decisión estratégica de adoptar la definición de sistema de IA de la OCDE. Esta alineación no es meramente técnica, sino que responde a la necesidad de \"facilitar los esfuerzos encaminados a armonizar la gobernanza de la IA a nivel mundial\" (Consejo de Europa, 2024, párr. 23). Al priorizar la interoperabilidad normativa sobre la originalidad léxica, el Convenio garantiza una seguridad jurídica esencial para los actores transnacionales, evitando la fragmentación regulatoria que suele asfixiar la innovación segura.
+
+El alcance del Convenio se articula mediante una distinción crítica entre las obligaciones de los sectores público y privado, como se detalla a continuación:
+
+|                      |                   |                                                                                                                                                                                                                                                                                  |
+|----------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ámbito de Aplicación | Disposición Legal | Evaluación del Impacto y Naturaleza de la Obligación                                                                                                                                                                                                                             |
+| **Sector Público**   | Artículo 3.1.a    | **Vinculación Directa:** Las Partes deben garantizar que las autoridades públicas y los actores privados que actúan en su nombre cumplan plenamente con el Convenio.                                                                                                             |
+| **Sector Privado**   | Artículo 3.1.b    | **Flexibilidad Estratégica:** Las Partes deben \"abordar los riesgos\" mediante declaraciones. Aunque otorga discrecionalidad, los redactores esperan que este enfoque evolucione de \"soft law\" a obligaciones más robustas con el tiempo (Consejo de Europa, 2024, párr. 30). |
+
+Resulta imperativo analizar las exclusiones del alcance. Si bien el Artículo 3.2 excluye las actividades relacionadas con la seguridad nacional, se colige de la arquitectura del tratado que esta excepción no es absoluta. La exclusión no aplica a sistemas de \"doble uso\" cuando se emplean para fines ajenos a la seguridad nacional, ni exime automáticamente a las actividades ordinarias de aplicación de la ley o control migratorio, a menos que los intereses soberanos esenciales estén específicamente en juego (Consejo de Europa, 2024, párr. 32). Esta delimitación técnica impide que la \"seguridad nacional\" se convierta en una zona de impunidad jurídica, obligando a que cualquier interferencia con los derechos humanos sea necesaria y proporcionada.
+
+Esta delimitación del alcance obliga, por consiguiente, a la implementación de principios rectores que deben permear todo el ciclo de vida de los sistemas de IA.
+
+## 3. Principios Fundamentales en el Ciclo de Vida de la IA {#principios-fundamentales-en-el-ciclo-de-vida-de-la-ia}
+
+El Capítulo III del Convenio constituye su núcleo axiológico, presentando un enfoque \"humanocéntrico\" que guía la gobernanza tecnológica (Consejo de Europa, 2024, párr. 53). Estos principios están diseñados para ser \"orientados a fines\", lo que les otorga una flexibilidad vital para mantenerse vigentes ante el ritmo imprevisible de la innovación algorítmica.
+
+- **Dignidad Humana y Autonomía Individual:** Este principio actúa como un baluarte contra la deshumanización. Prohíbe la reducción de los individuos a meros puntos de datos y previene la manipulación o el uso de sistemas que socaven la agencia humana mediante el engaño o la antropomorfización indebida de la máquina.
+
+- **Transparencia y Supervisión:** El Convenio diferencia entre la \"explicabilidad\" (capacidad de dar razones comprensibles sobre un resultado) y la \"interpretabilidad\" (acceso al funcionamiento interno). Es crítico destacar que el texto reconoce las \"limitaciones tecnológicas\" actuales, admitiendo que, a menudo, el camino hacia un resultado no es plenamente accesible ni siquiera para los diseñadores (Consejo de Europa, 2024, párr. 61).
+
+- **Responsabilidad y Rendición de Cuentas:** Se establece la obligación de que las acciones de la IA sean atribuibles a entidades físicas o jurídicas identificables. Esta trazabilidad es la condición *sine qua non* para la reparación de daños y el control democrático de la tecnología.
+
+- **Igualdad y No Discriminación:** El análisis del Reporte Explicativo es riguroso al distinguir entre el sesgo social (reflejo de desigualdades históricas) y el **sesgo técnico**, este último originado por errores en los parámetros de aprendizaje y funcionamiento del algoritmo (Consejo de Europa, 2024, párr. 75).
+
+La transición de la teoría axiológica a la práctica jurídica exige que estos principios se respalden con mecanismos de remedio tangibles cuando se producen fallos sistémicos.
+
+## 4. Mecanismos de Remedio, Salvaguardias y Gestión de Riesgos {#mecanismos-de-remedio-salvaguardias-y-gestión-de-riesgos}
+
+La efectividad del Convenio se mide por su capacidad para corregir la asimetría de información entre el desarrollador y el ciudadano. Los Artículos 14 y 15 no son meras recomendaciones, sino la \"garantía de efectividad\" del marco jurídico. No obstante, es vital precisar que estas obligaciones de remedio se activan únicamente cuando un sistema de IA posee un **\"efecto significativo\"** o un **\"impacto significativo\"** sobre el disfrute de los derechos humanos (Consejo de Europa, 2024, párr. 101-102). Este umbral impide la saturación del sistema legal con reclamaciones sobre usos triviales de la tecnología.
+
+Para los sistemas que superan dicho umbral, el Artículo 16 impone una metodología de gestión de riesgos basada en los siguientes criterios de evaluación:
+
+- **Severidad:** Magnitud del daño potencial sobre el derecho afectado.
+
+- **Probabilidad:** Frecuencia estimada de la ocurrencia del riesgo.
+
+- **Duración:** Persistencia temporal de los efectos adversos.
+
+- **Reversibilidad:** Posibilidad técnica y jurídica de restaurar la situación anterior al daño (Consejo de Europa, 2024, párr. 108).
+
+Un pilar de control soberano es el Artículo 16.4, que faculta a las Partes para imponer **moratorias o prohibiciones** sobre usos de IA considerados \"incompatibles\" con los valores del Convenio. Esta incompatibilidad se manifiesta cuando un sistema presenta riesgos inaceptables que no pueden ser mitigados mediante salvaguardias técnicas o procesales, protegiendo así la integridad del Estado de Derecho frente a aplicaciones tecnológicas represivas.
+
+## 5. Implementación, Seguimiento y Cooperación Internacional {#implementación-seguimiento-y-cooperación-internacional}
+
+La Conferencia de las Partes (COP) se constituye como el órgano de supervisión dinámica del tratado. Su función trasciende lo administrativo, actuando como un foro consultivo para la interpretación del Convenio y el intercambio de mejores prácticas. Un detalle fundamental para la gobernanza internacional es que las reglas de procedimiento de la COP deben adoptarse por **consenso**, asegurando que ninguna decisión sobre la implementación del tratado carezca del respaldo colectivo de las Partes (Consejo de Europa, 2024, párr. 133).
+
+El sistema de seguimiento se apoya en dos requisitos de integridad:
+
+1.  **Obligaciones de Reporte (Artículo 24):** Las Partes deben informar periódicamente sobre las medidas adoptadas, especialmente respecto a la flexibilidad otorgada en el sector privado.
+
+2.  **Independencia de la Supervisión (Artículo 26):** El Convenio exige la creación de mecanismos nacionales que operen bajo una estricta \"independencia funcional\".
+
+\"Dichos organismos deben ejercer sus funciones con independencia funcional respecto al poder ejecutivo y legislativo, contando con los poderes, la experiencia y los recursos necesarios para cumplir sus tareas de manera efectiva e imparcial\" (Consejo de Europa, 2024, párr. 142).
+
+Esta estructura asegura que el cumplimiento no dependa del arbitrio político del gobierno de turno, estableciendo una base para que el seguimiento no sea una mera formalidad, sino un proceso de evaluación continua.
+
+## 6. Conclusiones, Lagunas en la Investigación y Direcciones Futuras {#conclusiones-lagunas-en-la-investigación-y-direcciones-futuras}
+
+El CETS No. 225 logra un equilibrio sofisticado entre la protección de derechos y el fomento de una \"innovación segura\". Al centrar su regulación en los efectos sobre los derechos humanos en lugar de prescribir especificaciones técnicas estáticas, el Convenio demuestra una arquitectura \"futuro-compatible\" (future-proof). Sin embargo, la revisión crítica identifica áreas de tensión normativa que requieren atención inmediata.
+
+**Lagunas Identificadas:**
+
+1.  **Fragmentación en el Sector Privado:** La flexibilidad del Artículo 3.1.b, si bien facilitó el consenso diplomático, crea un riesgo de \"arbitraje regulatorio\", donde el nivel de protección de los ciudadanos dependa de las declaraciones específicas de cada Estado, debilitando la uniformidad frente a actores tecnológicos globales.
+
+2.  **Opacidad en la Exclusión de Seguridad Nacional:** A pesar de las aclaraciones del Reporte Explicativo, la exclusión general del Artículo 3.2 deja un margen de discrecionalidad preocupante sobre cómo supervisar de forma independiente los sistemas de IA en contextos de inteligencia, donde el \"interés nacional\" suele ser invocado de forma expansiva.
+
+3.  **Estandarización de Indicadores de Riesgo:** El Convenio delega en las Partes la definición de criterios como \"severidad\" y \"reversibilidad\" (párr. 108). Existe una necesidad crítica de investigación académica y normativa para estandarizar estos indicadores, evitando que la evaluación de riesgos sea subjetiva o dispar entre jurisdicciones.
+
+En última instancia, el Convenio Marco CETS No. 225 reafirma un principio fundamental del derecho internacional contemporáneo: el progreso tecnológico es un medio, no un fin, y su legitimidad reside exclusivamente en su capacidad para operar bajo la primacía de la dignidad humana y el fortalecimiento de la democracia.
