@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { listContentSlugs, getContentEntry } from "@/lib/content";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
@@ -530,51 +531,57 @@ export default async function HomePage() {
             };
 
             return (
-              <div className="space-y-8">
+              <div className="space-y-10">
                 {sections.map((sec) => {
                   const items = getLatestByCategory(sec.category);
                   const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
                   return (
-                    <div key={sec.category} className="relative overflow-hidden rounded-lg border border-divider">
-                      <div
-                        className="absolute inset-0 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${sec.image})` }}
-                      />
-                      <div className="absolute inset-0 bg-black/50" />
-                      <div className="relative z-10 p-6 md:p-8">
-                        <div className="flex items-center justify-center text-center py-6 md:py-8">
-                          <h3 className="text-2xl md:text-3xl font-bold text-white text-shadow-lg">
+                    <div key={sec.category} className="space-y-5">
+                      <div className="group relative overflow-hidden rounded-lg border border-divider aspect-[16/9] md:aspect-video">
+                        <div className="absolute inset-0">
+                          <Image
+                            src={sec.image}
+                            alt={sec.title}
+                            fill
+                            sizes="(min-width: 768px) 1000px, 100vw"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
+                            priority={false}
+                          />
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
+                        <div className="absolute inset-0 flex items-center justify-center text-center px-6">
+                          <h3 className="text-2xl md:text-4xl font-bold text-white drop-shadow-2xl">
                             {sec.title}
                           </h3>
                         </div>
-                        <div className="grid gap-6 md:grid-cols-2">
-                          {slots.map((post, idx) =>
-                            post ? (
-                              <Link
-                                key={`${post.slug}-${idx}`}
-                                href={buildHref(post)}
-                                className="group bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                              >
-                                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                                  {sec.title}
-                                </p>
-                                <h4 className="font-serif text-lg text-foreground mb-2">
-                                  {post.frontmatter.title}
-                                  <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                                </h4>
-                                <p className="text-xs text-caption mb-2">{formatDate(post.frontmatter.date)}</p>
-                                <p className="text-sm text-body line-clamp-3">{post.excerpt}</p>
-                              </Link>
-                            ) : (
-                              <div
-                                key={`placeholder-${sec.category}-${idx}`}
-                                className="border border-dashed border-divider rounded-sm p-5 bg-white/90"
-                              >
-                                <p className="text-sm text-body">Próximamente contenido</p>
-                              </div>
-                            ),
-                          )}
-                        </div>
+                      </div>
+                      <div className="grid gap-6 md:grid-cols-2">
+                        {slots.map((post, idx) =>
+                          post ? (
+                            <Link
+                              key={`${post.slug}-${idx}`}
+                              href={buildHref(post)}
+                              className="group bg-white border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                            >
+                              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
+                                {sec.title}
+                              </p>
+                              <h4 className="font-serif text-lg text-foreground mb-2">
+                                {post.frontmatter.title}
+                                <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                              </h4>
+                              <p className="text-xs text-caption mb-2">{formatDate(post.frontmatter.date)}</p>
+                              <p className="text-sm text-body line-clamp-3">{post.excerpt}</p>
+                            </Link>
+                          ) : (
+                            <div
+                              key={`placeholder-${sec.category}-${idx}`}
+                              className="border border-dashed border-divider rounded-sm p-5 bg-white"
+                            >
+                              <p className="text-sm text-body">Próximamente contenido</p>
+                            </div>
+                          ),
+                        )}
                       </div>
                     </div>
                   );
