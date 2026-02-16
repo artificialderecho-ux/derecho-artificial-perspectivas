@@ -419,19 +419,32 @@ export default async function HomePage() {
         ]}
       />
       <main>
-      <section className="py-20 md:py-28 bg-surface border-b border-divider">
-        <div className="container-narrow text-center">
-          <h1 className="font-sans text-4xl md:text-6xl text-foreground mb-6 leading-[1.05]">
+      <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
+        <Image
+          src="/images/hero-home.jpg"
+          alt="Derecho e IA"
+          fill
+          className="object-cover bg-center"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white px-6">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
             Derecho, ética y regulación de la IA
           </h1>
-          <p className="text-xl md:text-2xl text-body leading-relaxed max-w-3xl mx-auto">
+          <p className="text-base md:text-xl lg:text-2xl mt-4 max-w-3xl drop-shadow-lg">
             Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.
           </p>
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <Link href="/recursos/noticias" className="px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors">
+          <div className="mt-8 flex flex-col md:flex-row gap-4">
+            <Link
+              href="/recursos/noticias"
+              className="bg-primary text-white px-8 py-4 rounded-lg font-bold hover:bg-primary/90 transition-colors"
+            >
               Ver noticias IA
             </Link>
-            <Link href="/#secciones" className="px-4 py-2 border border-divider rounded-sm text-foreground hover:bg-surface transition-colors">
+            <Link
+              href="/#secciones"
+              className="bg-white text-primary px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+            >
               Explorar secciones
             </Link>
           </div>
