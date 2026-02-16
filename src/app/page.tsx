@@ -471,36 +471,43 @@ export default async function HomePage() {
                 title: "Firma Scarpa",
                 category: "firma-scarpa",
                 image: "/images/sections/firma-scarpa.jpg",
+                href: "/firma-scarpa",
               },
               {
                 title: "Normativa IA",
                 category: "normativa",
                 image: "/images/sections/normativa.jpg",
+                href: "/normativa",
               },
               {
                 title: "Jurisprudencia IA",
                 category: "jurisprudencia",
                 image: "/images/sections/jurisprudencia.jpg",
+                href: "/jurisprudencia",
               },
               {
                 title: "Recursos IA",
                 category: "recursos",
                 image: "/images/sections/recursos.jpg",
+                href: "/recursos",
               },
               {
                 title: "Propiedad Intelectual IA",
                 category: "propiedad-intelectual-ia",
                 image: "/images/sections/propiedad-intelectual.jpg",
+                href: "/propiedad-intelectual-ia",
               },
               {
                 title: "Ética IA",
                 category: "etica-ia",
                 image: "/images/sections/etica.jpg",
+                href: "/etica-ia",
               },
               {
                 title: "IA Global",
                 category: "ia-global",
                 image: "/images/sections/ia-global.jpg",
+                href: "/ia-global",
               },
             ];
             const getLatestByCategory = (cat: string) =>
@@ -536,26 +543,30 @@ export default async function HomePage() {
                   const items = getLatestByCategory(sec.category);
                   const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
                   return (
-                    <div key={sec.category} className="space-y-5">
-                      <div className="group relative overflow-hidden rounded-lg border border-divider aspect-[16/9] md:aspect-video">
-                        <div className="absolute inset-0">
-                          <Image
-                            src={sec.image}
-                            alt={sec.title}
-                            fill
-                            sizes="(min-width: 768px) 1000px, 100vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
-                            priority={false}
-                          />
-                        </div>
+                    <div
+                      key={sec.category}
+                      className="group flex flex-col md:flex-col lg:flex-row rounded-lg overflow-hidden border border-divider shadow-md hover:shadow-lg transition"
+                    >
+                      <Link
+                        href={sec.href}
+                        className="relative w-full lg:w-5/12 aspect-[4/3] md:aspect-video lg:aspect-[4/3] overflow-hidden"
+                      >
+                        <Image
+                          src={sec.image}
+                          alt={sec.title}
+                          fill
+                          sizes="(min-width: 1024px) 40vw, 100vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
+                          priority={false}
+                        />
                         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
                         <div className="absolute inset-0 flex items-center justify-center text-center px-6">
-                          <h3 className="text-2xl md:text-4xl font-bold text-white drop-shadow-2xl">
+                          <h3 className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">
                             {sec.title}
                           </h3>
                         </div>
-                      </div>
-                      <div className="grid gap-6 md:grid-cols-2">
+                      </Link>
+                      <div className="w-full lg:w-7/12 p-6 flex flex-col gap-6 bg-white">
                         {slots.map((post, idx) =>
                           post ? (
                             <Link
