@@ -1,22 +1,16 @@
-### \---
+---
+title: "La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea"
+author: "Ricardo Scarpa"
+date: "2026-02-16"
+category: "propiedad-intelectual-ia"
+pdf: "/fuentes/La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea.pdf"
+tags: ["ia-generativa", "copyright", "mineria-textos-datos", "directiva-cdsm", "ley-ia", "autoria-humana", "remuneracion-equitativa", "datos-entrenamiento", "originalidad", "opt-out"]
+description: "Revisión bibliográfica."
+---
 
-### title: "La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea"
+# Revisión Bibliográfica: La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea
 
-### author: "Ricardo Scarpa (derechoartificial.com)"
-
-### date: "2026-02-16"
-
-### category: "Propiedad Intelectual IA"
-
-### pdf: "/main/public/fuentes/La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea.pdf"
-
-### Tags: "IA generativa", "Copyright", "Minería de textos y datos (TDM)", "Directiva CDSM", "Ley de IA", "Autoría humana", "Remuneración equitativa", "Datos de entrenamiento", "Originalidad", "Mecanismos de opt-out"
-
-### description: "Revisión Bibliográfica"
-
-### \---
-
-# **Revisión Bibliográfica: La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea**
+[Descargar informe completo (PDF)](/fuentes/La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea.pdf)
 
 ### **1\. Introducción: El Cambio de Paradigma en la Creación Digital**
 
