@@ -23,6 +23,24 @@ export interface PostData {
   excerpt: string;
 }
 
+function decodeSlug(value: string) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function normalizeSlugForMatch(value: string) {
+  return decodeSlug(value)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/[_\s]+/g, "-")
+    .replace(/-+/g, "-");
+}
+
 export function getAllPosts(): PostData[] {
   if (!fs.existsSync(postsDir)) {
     return [];
@@ -47,7 +65,7 @@ export function getAllPosts(): PostData[] {
       slug,
       frontmatter: data as PostFrontmatter,
       content,
-      url: `/${data.category || 'blog'}/${slug}`,
+      url: `/${data.category || 'blog'}/${encodeURIComponent(slug)}`,
       excerpt
     };
   });
@@ -61,5 +79,13 @@ export function getAllPosts(): PostData[] {
 
 export function getPostBySlug(slug: string): PostData | undefined {
   const posts = getAllPosts();
-  return posts.find(p => p.slug === slug);
+  const directMatch = posts.find(p => p.slug === slug);
+  if (directMatch) return directMatch;
+
+  const decodedSlug = decodeSlug(slug);
+  const decodedMatch = posts.find(p => p.slug === decodedSlug);
+  if (decodedMatch) return decodedMatch;
+
+  const normalizedSlug = normalizeSlugForMatch(slug);
+  return posts.find(p => normalizeSlugForMatch(p.slug) === normalizedSlug);
 }
