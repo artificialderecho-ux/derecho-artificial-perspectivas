@@ -42,12 +42,17 @@ export function ContentPreviewCard({ item, size = "medium" }: ContentPreviewCard
     medium: "text-sm text-caption",
     large: "text-xs text-caption",
   };
+  const isExternalImage = item.imageUrl?.startsWith("http");
 
   return (
     <Link href={item.href} className={cardClasses[size]}>
       {item.imageUrl && (
         <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden rounded-sm bg-slate-100">
-          <Image src={item.imageUrl} alt={item.title} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+          {isExternalImage ? (
+            <img src={item.imageUrl} alt={item.title} loading="lazy" className="h-full w-full object-cover" />
+          ) : (
+            <Image src={item.imageUrl} alt={item.title} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+          )}
         </div>
       )}
       <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
