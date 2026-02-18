@@ -562,7 +562,7 @@ export default async function HomePage() {
                     >
                       <Link
                         href={sec.href}
-                        className="relative w-full lg:w-5/12 aspect-[4/3] md:aspect-video lg:aspect-[4/3] overflow-hidden"
+                        className="relative block w-full lg:w-5/12 aspect-[4/3] md:aspect-video lg:aspect-[4/3] overflow-hidden"
                       >
                         <Image
                           src={sec.image}
