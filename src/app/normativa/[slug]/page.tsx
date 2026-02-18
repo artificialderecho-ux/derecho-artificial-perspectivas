@@ -130,6 +130,12 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
   
   if (mdxPost) {
     const { title, date, pdf, category } = mdxPost.frontmatter;
+    const pdfUrl =
+      pdf && (pdf.startsWith("/") || pdf.startsWith("http"))
+        ? pdf
+        : pdf
+        ? `/fuentes/${pdf}.pdf`
+        : "";
     return (
       <LegalLayout
         title={title}
@@ -138,9 +144,9 @@ export default async function NormativaSlugPage({ params }: { params: Promise<Pa
         date={date}
       >
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
-          {pdf ? (
+          {pdfUrl ? (
             <a
-              href={pdf}
+              href={pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
