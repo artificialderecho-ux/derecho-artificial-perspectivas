@@ -49,7 +49,12 @@ export function ContentPreviewCard({ item, size = "medium" }: ContentPreviewCard
       {item.imageUrl && (
         <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden rounded-sm bg-slate-100">
           {isExternalImage ? (
-            <img src={item.imageUrl} alt={item.title} loading="lazy" className="block h-full w-full object-cover object-center" />
+            <img
+              src={item.imageUrl}
+              alt={item.title}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
           ) : (
             <Image src={item.imageUrl} alt={item.title} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover object-center" />
           )}
