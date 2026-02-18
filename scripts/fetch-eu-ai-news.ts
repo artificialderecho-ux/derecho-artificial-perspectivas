@@ -4,6 +4,26 @@ import path from "path";
 import Parser from "rss-parser";
 import { load } from "cheerio";
 
+const fetchWithTimeout = async (url: string, init: RequestInit = {}, timeoutMs = 12000): Promise<Response> => {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
+        "Accept-Language": "es-ES,es;q=0.9",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        ...(init.headers || {}),
+      },
+    });
+  } finally {
+    clearTimeout(id);
+  }
+};
+
 type FeedSource = {
   name: string;
   url: string;
@@ -189,7 +209,7 @@ const readFeed = async (source: FeedSource): Promise<RawItem[]> => {
 
 const readAesiaNews = async (): Promise<RawItem[]> => {
   try {
-    const response = await fetch("https://aesia.digital.gob.es/es/actualidad");
+    const response = await fetchWithTimeout("https://aesia.digital.gob.es/es/actualidad");
     const html = await response.text();
     const $ = load(html);
     const items: RawItem[] = [];
@@ -223,7 +243,7 @@ const readAesiaNews = async (): Promise<RawItem[]> => {
 
 const readEuDigitalNews = async (): Promise<RawItem[]> => {
   try {
-    const response = await fetch("https://digital-strategy.ec.europa.eu/es/news");
+    const response = await fetchWithTimeout("https://digital-strategy.ec.europa.eu/es/news");
     const html = await response.text();
     const $ = load(html);
     const items: RawItem[] = [];
@@ -264,7 +284,7 @@ const readEuDigitalNews = async (): Promise<RawItem[]> => {
 
 const readEuipoNews = async (): Promise<RawItem[]> => {
   try {
-    const response = await fetch("https://www.euipo.europa.eu/es/news-and-events/news");
+    const response = await fetchWithTimeout("https://www.euipo.europa.eu/es/news-and-events/news");
     const html = await response.text();
     const $ = load(html);
     const items: RawItem[] = [];

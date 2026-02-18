@@ -188,6 +188,32 @@ export default async function HomePage() {
 
   // Crear una lista unificada de todas las entradas recientes para la sección "Actualidad y Análisis"
   const mdxPosts = getAllPosts();
+  const normalizeLangText = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+  const detectLanguage = (title: string, description: string): "es" | "other" => {
+    const text = normalizeLangText(`${title} ${description}`.toLowerCase());
+    const countMatches = (words: string[]) =>
+      words.reduce((acc, word) => acc + (text.match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 0), 0);
+    const esScore = countMatches([
+      "el",
+      "la",
+      "los",
+      "las",
+      "de",
+      "del",
+      "y",
+      "para",
+      "datos",
+      "proteccion",
+      "privacidad",
+      "agencia",
+      "inteligencia",
+    ]);
+    const frScore = countMatches(["le", "les", "des", "dans", "droits", "effacement"]);
+    if (esScore === 0) return "other";
+    if (esScore > frScore) return "es";
+    return "other";
+  };
+  const isAllowedLanguage = (title: string, description: string) => detectLanguage(title, description) === "es";
   const newsMdxCandidates = mdxPosts
     .filter((post) => {
       const cat = (post.frontmatter.category || "").toLowerCase();
@@ -201,6 +227,7 @@ export default async function HomePage() {
         tags.includes("news")
       );
     })
+    .filter((post) => isAllowedLanguage(post.frontmatter.title, post.excerpt))
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
     .slice(0, 6);
   const newsEntries =
