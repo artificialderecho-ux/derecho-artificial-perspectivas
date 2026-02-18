@@ -501,7 +501,7 @@ export default async function HomePage() {
               {
                 title: "Actualidad IA",
                 category: "actualidad-ia",
-                image: "/images/sections/recursos.jpg",
+                image: "/images/sections/Actualidad IA 2.jpg",
                 href: "/actualidad-ia",
               },
               {
