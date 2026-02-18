@@ -53,19 +53,28 @@ export function getAllPosts(): PostData[] {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
     const slug = file.replace(/\.mdx?$/, '');
-    
-    // Generar excerpt: descripción o los primeros 160 caracteres del contenido
-    const excerpt = data.description || 
-                   content.replace(/[#*`]/g, '') // Quitar markdown básico
-                          .replace(/\n/g, ' ')
-                          .trim()
-                          .slice(0, 160) + '...';
-    
+
+    const excerpt =
+      data.description ||
+      content
+        .replace(/[#*`]/g, '')
+        .replace(/\n/g, ' ')
+        .trim()
+        .slice(0, 160) +
+        '...';
+
+    const category = (data.category || 'blog') as string;
+    const frontmatterUrl = (data as any).url as string | undefined;
+    const url =
+      category.toLowerCase() === 'noticia' && frontmatterUrl
+        ? frontmatterUrl
+        : `/${category}/${encodeURIComponent(slug)}`;
+
     return {
       slug,
       frontmatter: data as PostFrontmatter,
       content,
-      url: `/${data.category || 'blog'}/${encodeURIComponent(slug)}`,
+      url,
       excerpt
     };
   });
