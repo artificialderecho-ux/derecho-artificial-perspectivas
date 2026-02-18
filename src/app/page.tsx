@@ -566,6 +566,8 @@ export default async function HomePage() {
                 .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
                 .slice(0, 2);
 
+        const getLatestActualidadPosts = () => newsMdxCandidates.slice(0, 2);
+
             const buildHref = (post: any) => {
               const c = (post.frontmatter.category || "").toLowerCase();
               const subcat = (post.frontmatter.subcategory || "").toLowerCase();
@@ -581,7 +583,10 @@ export default async function HomePage() {
             return (
               <div className="space-y-10">
                 {sections.map((sec) => {
-                  const items = getLatestByCategory(sec.category);
+              const items =
+                sec.category === "actualidad-ia"
+                  ? getLatestActualidadPosts()
+                  : getLatestByCategory(sec.category);
                   const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
                   return (
                     <div
