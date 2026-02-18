@@ -12,7 +12,8 @@
     "prebuild": "node scripts/convert-sfpro.mjs",
     "generate-md": "node scripts/generate-md-from-html.mjs",
     "deploy-content": "node scripts/deploy-content.mjs",
-    "deploy-content:dry": "node scripts/deploy-content.mjs --dry"
+    "deploy-content:dry": "node scripts/deploy-content.mjs --dry",
+    "fetch-eu-ai-news": "tsx scripts/fetch-eu-ai-news.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -73,6 +74,7 @@
     "rehype-raw": "^7.0.0",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
+    "rss-parser": "^3.13.0",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
@@ -100,6 +102,7 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "ttf2woff2": "^8.0.0",
+    "tsx": "^4.20.5",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
     "vercel": "^50.9.6"

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export type PreviewItem = {
@@ -9,6 +10,7 @@ export type PreviewItem = {
   meta: string;
   dateMs: number;
   displayDateMs?: number;
+  imageUrl?: string;
 };
 
 interface ContentPreviewCardProps {
@@ -43,6 +45,11 @@ export function ContentPreviewCard({ item, size = "medium" }: ContentPreviewCard
 
   return (
     <Link href={item.href} className={cardClasses[size]}>
+      {item.imageUrl && (
+        <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden rounded-sm bg-slate-100">
+          <Image src={item.imageUrl} alt={item.title} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+        </div>
+      )}
       <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
       <h2 className={titleClasses[size]}>{item.title}</h2>
       {item.description && <p className={descriptionClasses[size]}>{item.description}</p>}

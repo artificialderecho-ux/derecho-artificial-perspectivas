@@ -36,7 +36,7 @@ const tabs = [
   { key: "guias", label: "Guías y Protocolos" },
 ];
 
-const formatGuideTitle = (title: string) => {
+const formatGuideTitle = (title: string, source?: string) => {
   const normalized = title.trim().toLowerCase();
   if (
     normalized.startsWith("guía") ||
@@ -44,6 +44,14 @@ const formatGuideTitle = (title: string) => {
     normalized.startsWith("protocolo")
   ) {
     return title;
+  }
+  const sourceLabel = source?.trim();
+  if (sourceLabel) {
+    const normalizedSource = sourceLabel.toLowerCase();
+    if (normalized.startsWith(normalizedSource)) {
+      return title;
+    }
+    return `${sourceLabel} publica guía sobre ${title}`;
   }
   return `Guía publicada: ${title}`;
 };
@@ -72,14 +80,17 @@ export default async function ActualidadIAPage({
   const resolvedNews = newsEntries.filter((entry): entry is ResourceEntry => Boolean(entry));
 
   const mdxPosts = getAllPosts();
-  const mdxGuides = mdxPosts.filter(
-    (p) =>
-      p.frontmatter.category === "recursos" &&
-      (p.frontmatter.subcategory === "guias" || p.frontmatter.tags?.includes("guias")),
-  );
-  const mdxNews = mdxPosts.filter(
-    (p) => p.frontmatter.category === "actualidad-ia" || p.frontmatter.tags?.includes("noticia"),
-  );
+  const normalizeTags = (tags?: string[]) => (tags ?? []).map((tag) => tag.toLowerCase());
+  const mdxGuides = mdxPosts.filter((p) => {
+    const category = p.frontmatter.category?.toLowerCase();
+    const tags = normalizeTags(p.frontmatter.tags);
+    return category === "guia" || category === "guías" || tags.includes("guia") || tags.includes("guias");
+  });
+  const mdxNews = mdxPosts.filter((p) => {
+    const category = p.frontmatter.category?.toLowerCase();
+    const tags = normalizeTags(p.frontmatter.tags);
+    return category === "noticia" || tags.includes("actualidad") || tags.includes("noticia");
+  });
 
   const formatDateEs = (ms?: number | null) => {
     if (!ms || Number.isNaN(ms)) return null;
@@ -87,39 +98,61 @@ export default async function ActualidadIAPage({
     if (Number.isNaN(d.getTime())) return null;
     return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
+  const fallbackImage = "/images/sections/recursos.jpg";
+  const extractImage = (post: ReturnType<typeof getAllPosts>[number]) =>
+    post.frontmatter.image || post.frontmatter.ogImage || post.frontmatter.cover || fallbackImage;
+  const getSourceFromUrl = (url?: string | null) => {
+    if (!url) return null;
+    try {
+      const { hostname } = new URL(url);
+      const host = hostname.replace(/^www\./, "");
+      if (host.includes("euipo")) return "EUIPO";
+      if (host.includes("eur-lex")) return "EUR-Lex";
+      if (host.includes("cnil")) return "CNIL";
+      if (host.includes("ico.org.uk")) return "ICO";
+      if (host.includes("aesia")) return "AESIA";
+      return host.split(".")[0]?.toUpperCase() ?? host;
+    } catch {
+      return null;
+    }
+  };
+  const buildMeta = (dateLabel: string | null, sourceLabel?: string | null) => {
+    const parts: string[] = [];
+    if (dateLabel) parts.push(dateLabel);
+    if (sourceLabel) parts.push(`Fuente: ${sourceLabel}`);
+    return parts.join(" · ");
+  };
 
   const guideItems: PreviewItem[] = [
     ...resolvedGuides.map((g) => {
       const dateLabel = formatDateEs(g.displayDateMs ?? g.dateMs);
-      const parts: string[] = [];
-      if (dateLabel) parts.push(dateLabel);
-      if (g.sourceUrl) parts.push("Incluye descarga del documento");
+      const sourceLabel = getSourceFromUrl(g.sourceUrl);
       return {
         id: `guide-${g.slug}`,
         href: `/recursos/guias/${g.slug}`,
-        title: formatGuideTitle(g.title),
+        title: formatGuideTitle(g.title, sourceLabel ?? undefined),
         description: g.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 180),
         badge: "Guías y Protocolos",
-        meta: parts.join(" · "),
+        meta: buildMeta(dateLabel, sourceLabel),
         dateMs: g.dateMs ?? 0,
         displayDateMs: g.displayDateMs ?? undefined,
+        imageUrl: fallbackImage,
       };
     }),
     ...mdxGuides.map((p) => {
       const d = new Date(p.frontmatter.date).getTime();
       const dateLabel = formatDateEs(d);
-      const parts: string[] = [];
-      if (dateLabel) parts.push(dateLabel);
-      if (p.frontmatter.author) parts.push(p.frontmatter.author);
+      const sourceLabel = p.frontmatter.source || getSourceFromUrl(p.frontmatter.url);
       return {
         id: `mdx-guide-${p.slug}`,
-        href: p.frontmatter.pdf || `/recursos/guias/${p.slug}`,
-        title: formatGuideTitle(p.frontmatter.title),
+        href: p.frontmatter.pdf || p.frontmatter.url || `/recursos/guias/${p.slug}`,
+        title: formatGuideTitle(p.frontmatter.title, sourceLabel ?? undefined),
         description: p.excerpt,
         badge: "Guías y Protocolos",
-        meta: parts.join(" · "),
+        meta: buildMeta(dateLabel, sourceLabel),
         dateMs: d || 0,
         displayDateMs: d || 0,
+        imageUrl: extractImage(p),
       };
     }),
   ].sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
@@ -127,35 +160,33 @@ export default async function ActualidadIAPage({
   const newsItems: PreviewItem[] = [
     ...resolvedNews.map((n) => {
       const dateLabel = formatDateEs(n.displayDateMs ?? n.dateMs);
-      const parts: string[] = [];
-      if (dateLabel) parts.push(dateLabel);
-      if (n.sourceUrl) parts.push("Incluye documento original");
+      const sourceLabel = getSourceFromUrl(n.sourceUrl);
       return {
         id: `news-${n.slug}`,
         href: `/actualidad-ia/${n.slug}`,
         title: n.title,
         description: n.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 180),
         badge: "Noticias IA",
-        meta: parts.join(" · "),
+        meta: buildMeta(dateLabel, sourceLabel),
         dateMs: n.dateMs ?? 0,
         displayDateMs: n.displayDateMs ?? undefined,
+        imageUrl: fallbackImage,
       };
     }),
     ...mdxNews.map((p) => {
       const d = new Date(p.frontmatter.date).getTime();
       const dateLabel = formatDateEs(d);
-      const parts: string[] = [];
-      if (dateLabel) parts.push(dateLabel);
-      if (p.frontmatter.author) parts.push(p.frontmatter.author);
+      const sourceLabel = p.frontmatter.source || getSourceFromUrl(p.frontmatter.url);
       return {
         id: `mdx-news-${p.slug}`,
-        href: p.url,
+        href: p.frontmatter.url || p.url,
         title: p.frontmatter.title,
         description: p.excerpt,
         badge: "Noticias IA",
-        meta: parts.join(" · "),
+        meta: buildMeta(dateLabel, sourceLabel),
         dateMs: d || 0,
         displayDateMs: d || 0,
+        imageUrl: extractImage(p),
       };
     }),
   ].sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
