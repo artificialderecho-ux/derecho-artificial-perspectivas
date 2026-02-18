@@ -571,6 +571,9 @@ export default async function HomePage() {
               const subcat = (post.frontmatter.subcategory || "").toLowerCase();
               const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
 
+              if (c === "noticia" && post.frontmatter.url) {
+                return post.frontmatter.url;
+              }
               if (c === "recursos" && (subcat === "guias" || tags.includes("guias"))) {
                 return `/recursos/guias/${post.slug}`;
               }
