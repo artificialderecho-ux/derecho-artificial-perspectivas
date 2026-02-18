@@ -48,6 +48,50 @@ const keywordPool = [
   "eur-lex",
 ];
 
+const detectLanguage = (title: string, description: string): "es" | "en" | "other" => {
+  const text = normalizeText(`${title} ${description}`.toLowerCase());
+  const countMatches = (words: string[]) =>
+    words.reduce((acc, word) => acc + (text.match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 0), 0);
+
+  const esScore = countMatches([
+    "el",
+    "la",
+    "los",
+    "las",
+    "de",
+    "del",
+    "y",
+    "para",
+    "datos",
+    "proteccion",
+    "privacidad",
+    "agencia",
+    "inteligencia",
+  ]);
+
+  const enScore = countMatches([
+    "the",
+    "and",
+    "for",
+    "data",
+    "privacy",
+    "agency",
+    "artificial",
+    "intelligence",
+    "regulation",
+    "law",
+  ]);
+
+  if (esScore === 0 && enScore === 0) return "other";
+  if (esScore >= enScore) return "es";
+  return "en";
+};
+
+const isAllowedLanguage = (title: string, description: string) => {
+  const lang = detectLanguage(title, description);
+  return lang === "es" || lang === "en";
+};
+
 const feeds: FeedSource[] = [
   {
     name: "EU Digital Strategy",
@@ -208,6 +252,7 @@ const readFeed = async (source: FeedSource): Promise<RawItem[]> => {
         };
       })
       .filter((item) => item.title && item.link)
+      .filter((item) => isAllowedLanguage(item.title, item.description))
       .filter((item) => isRelevant(item.title, item.description) || source.keywords.some((k) => item.title.toLowerCase().includes(k)));
   } catch {
     return [];
@@ -240,7 +285,9 @@ const readAesiaNews = async (): Promise<RawItem[]> => {
         image,
       });
     });
-    return items.filter((item) => isRelevant(item.title, item.description));
+    return items
+      .filter((item) => isAllowedLanguage(item.title, item.description))
+      .filter((item) => isRelevant(item.title, item.description));
   } catch {
     return [];
   }
@@ -253,7 +300,7 @@ const readUnAiNews = async (): Promise<RawItem[]> => {
     const $ = load(html);
     const title = cleanText($("h1").first().text() || $("title").text());
     const description = cleanText($("main p").first().text() || $("article p").first().text());
-    if (!title) return [];
+    if (!title || !isAllowedLanguage(title, description)) return [];
     return [
       {
         title,
