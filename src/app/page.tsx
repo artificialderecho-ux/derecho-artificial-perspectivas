@@ -436,7 +436,7 @@ export default async function HomePage() {
           </p>
           <div className="mt-8 flex flex-col md:flex-row gap-4">
             <Link
-              href="/recursos/noticias"
+              href="/actualidad-ia"
               className="bg-primary text-white px-8 py-4 rounded-lg font-bold hover:bg-primary/90 transition-colors"
             >
               Ver noticias IA
@@ -470,7 +470,7 @@ export default async function HomePage() {
               </p>
               <div className="mt-3">
                 <Link
-                  href="/recursos/noticias"
+                  href="/actualidad-ia"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
                   Ver todas las noticias
@@ -499,10 +499,10 @@ export default async function HomePage() {
                 href: "/jurisprudencia",
               },
               {
-                title: "Recursos IA",
-                category: "recursos",
+                title: "Actualidad IA",
+                category: "actualidad-ia",
                 image: "/images/sections/recursos.jpg",
-                href: "/recursos",
+                href: "/actualidad-ia",
               },
               {
                 title: "Propiedad Intelectual IA",

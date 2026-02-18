@@ -24,7 +24,7 @@ export default async function GuiasIndexPage() {
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       { name: "Derecho Artificial", url: "https://derechoartificial.com" },
-      { name: "Recursos IA", url: "https://derechoartificial.com/recursos" },
+      { name: "Actualidad IA", url: "https://derechoartificial.com/actualidad-ia" },
       { name: "Guías y Protocolos", url: "https://derechoartificial.com/recursos/guias" },
     ],
   });
@@ -86,11 +86,11 @@ export default async function GuiasIndexPage() {
       <Breadcrumbs
         items={[
           { label: "Inicio", href: "/" },
-          { label: "Recursos IA", href: "/recursos" },
+          { label: "Actualidad IA", href: "/actualidad-ia" },
           { label: "Guías y Protocolos", href: "/recursos/guias" },
         ]}
       />
-      <LegalLayout title="Guías y Protocolos" category="Recursos IA" date={new Date().toISOString().slice(0, 10)}>
+      <LegalLayout title="Guías y Protocolos" category="Actualidad IA" date={new Date().toISOString().slice(0, 10)}>
         <ContentPreviewGrid items={items} columns={2} size="medium" />
       </LegalLayout>
     </>

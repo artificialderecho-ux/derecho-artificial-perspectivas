@@ -11,7 +11,7 @@ const navigationES = [
   { name: "Firma Scarpa", href: "/firma-scarpa" },
   { name: "Normativa IA", href: "/normativa" },
   { name: "Jurisprudencia IA", href: "/jurisprudencia" },
-  { name: "Recursos IA", href: "/recursos" },
+  { name: "Actualidad IA", href: "/actualidad-ia" },
   { name: "Propiedad Intelectual IA", href: "/propiedad-intelectual-ia" },
   { name: "Ética IA", href: "/etica-ia" },
   { name: "IA Global", href: "/ia-global" },
@@ -21,7 +21,7 @@ const navigationEN = [
   { name: "Scarpa Firm", href: "/firma-scarpa" },
   { name: "AI Regulation", href: "/normativa" },
   { name: "AI Jurisprudence", href: "/jurisprudencia" },
-  { name: "AI Resources", href: "/recursos" },
+  { name: "AI News", href: "/en/ai-news" },
   { name: "AI Intellectual Property", href: "/propiedad-intelectual-ia" },
   { name: "AI Ethics", href: "/etica-ia" },
   { name: "Global AI", href: "/ia-global" },
@@ -32,13 +32,12 @@ const esEnRouteMap: Record<string, string> = {
   "/": "/en",
   "/firma-scarpa": "/en/scarpa-firm",
   "/jurisprudencia": "/en/jurisprudence",
-  "/actualidad-ia": "/recursos/noticias",
+  "/actualidad-ia": "/en/ai-news",
   "/normativa": "/en/legislation",
   "/propiedad-intelectual-ia": "/en",
   "/etica-ia": "/en",
   "/ia-global": "/en",
-  "/recursos": "/recursos",
-
+  "/recursos": "/en/ai-news",
 };
 
 // Map English routes to Spanish equivalents  
@@ -46,9 +45,9 @@ const enEsRouteMap: Record<string, string> = {
   "/en": "/",
   "/en/scarpa-firm": "/firma-scarpa",
   "/en/jurisprudence": "/jurisprudencia",
-  "/en/ai-news": "/recursos/noticias",
+  "/en/ai-news": "/actualidad-ia",
   "/en/legislation": "/normativa",
-  "/en/guides-protocols": "/recursos",
+  "/en/guides-protocols": "/recursos/guias",
 };
 
 export function Header() {
@@ -84,8 +83,9 @@ export function Header() {
     if (pathname.startsWith("/firma-scarpa")) return "/en/scarpa-firm";
     if (pathname.startsWith("/normativa")) return "/en/legislation";
     if (pathname.startsWith("/jurisprudencia")) return "/en/jurisprudence";
-    if (pathname.startsWith("/recursos")) return "/recursos";
-    if (pathname.startsWith("/actualidad-ia")) return "/recursos/noticias";
+    if (pathname.startsWith("/recursos/guias")) return "/en/guides-protocols";
+    if (pathname.startsWith("/recursos")) return "/en/ai-news";
+    if (pathname.startsWith("/actualidad-ia")) return "/en/ai-news";
     // For sections without EN routes, send to EN home
     if (pathname.startsWith("/propiedad-intelectual-ia")) return "/en";
     if (pathname.startsWith("/etica-ia")) return "/en";

@@ -124,7 +124,7 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
     const breadcrumbJsonLd = createBreadcrumbJsonLd({
       items: [
         { name: "Derecho Artificial", url: "https://derechoartificial.com" },
-        { name: "Recursos IA", url: "https://derechoartificial.com/recursos" },
+        { name: "Actualidad IA", url: "https://derechoartificial.com/actualidad-ia" },
         { name: "Guías y Protocolos", url: "https://derechoartificial.com/recursos/guias" },
         { name: mdxPost.frontmatter.title, url },
       ],
@@ -200,8 +200,8 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
         url: "https://derechoartificial.com",
       },
       {
-        name: "Recursos IA",
-        url: "https://derechoartificial.com/recursos",
+        name: "Actualidad IA",
+        url: "https://derechoartificial.com/actualidad-ia",
       },
       {
         name: "Guías y Protocolos",
@@ -248,7 +248,7 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
       <LegalLayout title={entry.title} category="Guías y Protocolos">
         <Breadcrumbs items={[
           { label: 'Inicio', href: '/' },
-          { label: 'Recursos IA', href: '/recursos' },
+          { label: 'Actualidad IA', href: '/actualidad-ia' },
           { label: 'Guías y Protocolos', href: '/recursos/guias' },
           { label: mdxPost.frontmatter.title, href: `/recursos/guias/${slug}` }
         ]} />

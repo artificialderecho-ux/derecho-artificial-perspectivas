@@ -49,8 +49,8 @@ export function Footer() {
                   <Link href="/jurisprudencia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     AI Jurisprudence
                   </Link>
-                  <Link href="/recursos" className="text-sm text-body hover:text-foreground transition-colors duration-300">
-                    AI Resources
+                  <Link href="/en/ai-news" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                    AI News
                   </Link>
                   <Link href="/propiedad-intelectual-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     AI Intellectual Property
@@ -86,10 +86,10 @@ export function Footer() {
                     Jurisprudencia IA
                   </Link>
                   <Link
-                    href="/recursos"
+                    href="/actualidad-ia"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
-                    Recursos IA
+                    Actualidad IA
                   </Link>
                   <Link
                     href="/propiedad-intelectual-ia"

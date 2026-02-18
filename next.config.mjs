@@ -3,26 +3,24 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   async redirects() {
     return [
-      // Consolidate news under /recursos/noticias
       {
-        source: "/actualidad-ia",
-        destination: "/recursos/noticias",
+        source: "/recursos",
+        destination: "/actualidad-ia",
         permanent: true,
       },
       {
-        source: "/actualidad-ia/:slug*",
-        destination: "/recursos/noticias/:slug*",
+        source: "/recursos/noticias",
+        destination: "/actualidad-ia",
         permanent: true,
       },
-      // English redirects to consolidated resources
       {
         source: "/en/ai-news",
-        destination: "/recursos/noticias",
+        destination: "/actualidad-ia",
         permanent: true,
       },
       {
         source: "/en/ai-news/:slug*",
-        destination: "/recursos/noticias/:slug*",
+        destination: "/actualidad-ia",
         permanent: true,
       },
       {

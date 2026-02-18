@@ -248,7 +248,7 @@ export default async function EnglishHomePage() {
     {
       key: "ai-resources",
       label: "AI Resources",
-      href: "/recursos",
+      href: "/actualidad-ia",
       items: uniqueByHref(
         [unifiedActualidad[0], unifiedActualidad[1]]
           .filter((e): e is NonNullable<typeof e> => Boolean(e))
@@ -333,7 +333,7 @@ export default async function EnglishHomePage() {
             Beyond the news: independent legal analysis and expert judgment on the AI Act and its legal impact. The practical reference for lawyers and compliance professionals.
           </h2>
           <div className="mt-6 flex items-center justify-center gap-3">
-            <Link href="/recursos/noticias" className="px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors">
+            <Link href="/actualidad-ia" className="px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors">
               View AI news
             </Link>
             <Link href="/en#sections" className="px-4 py-2 border border-divider rounded-sm text-foreground hover:bg-surface transition-colors">
@@ -353,7 +353,7 @@ export default async function EnglishHomePage() {
               <h3 className="font-serif text-xl text-foreground">Jurisprudence</h3>
               <h2 className="text-sm md:text-base text-body">Jurisprudence Observatory: Case law and rulings on Artificial Intelligence</h2>
             </Link>
-            <Link href="/recursos/noticias" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/actualidad-ia" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">AI News</h3>
               <h2 className="text-sm md:text-base text-body">Legal Tech Updates: News and legal impact of technology</h2>
             </Link>
@@ -392,7 +392,7 @@ export default async function EnglishHomePage() {
               </p>
               <div className="mt-3">
                 <Link
-                  href="/recursos/noticias"
+                  href="/actualidad-ia"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
                   View all news
@@ -568,7 +568,7 @@ export default async function EnglishHomePage() {
               {
                 key: "resources",
                 label: "AI Resources",
-                href: "/recursos",
+                href: "/actualidad-ia",
                 description: "Guides, protocols and curated news",
                 items: recursosItems,
               },
