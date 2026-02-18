@@ -68,10 +68,8 @@ const detectLanguage = (title: string, description: string): "es" | "en" | "othe
 
   const esScore = countMatches([
     "el",
-    "la",
     "los",
     "las",
-    "de",
     "del",
     "y",
     "para",
@@ -82,8 +80,18 @@ const detectLanguage = (title: string, description: string): "es" | "en" | "othe
     "inteligencia",
   ]);
 
-  const frScore = countMatches(["le", "les", "des", "dans", "droits", "effacement"]);
+  const frScore = countMatches([
+    "le",
+    "les",
+    "des",
+    "dans",
+    "droits",
+    "effacement",
+    "numerique",
+    "omnibus",
+  ]);
 
+  if (esScore === 0 && frScore > 0) return "other";
   if (esScore === 0) return "other";
   if (esScore > frScore) return "es";
   return "other";

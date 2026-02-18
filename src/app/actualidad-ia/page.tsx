@@ -80,6 +80,31 @@ export default async function ActualidadIAPage({
   const resolvedNews = newsEntries.filter((entry): entry is ResourceEntry => Boolean(entry));
 
   const mdxPosts = getAllPosts();
+  const normalizeLangText = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+  const detectLanguage = (title: string, description: string): "es" | "other" => {
+    const text = normalizeLangText(`${title} ${description}`.toLowerCase());
+    const countMatches = (words: string[]) =>
+      words.reduce((acc, word) => acc + (text.match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 0), 0);
+    const esScore = countMatches([
+      "el",
+      "los",
+      "las",
+      "del",
+      "y",
+      "para",
+      "datos",
+      "proteccion",
+      "privacidad",
+      "agencia",
+      "inteligencia",
+    ]);
+    const frScore = countMatches(["le", "les", "des", "dans", "droits", "effacement", "numerique", "omnibus"]);
+    if (esScore === 0 && frScore > 0) return "other";
+    if (esScore === 0) return "other";
+    if (esScore > frScore) return "es";
+    return "other";
+  };
+  const isAllowedLanguage = (title: string, description: string) => detectLanguage(title, description) === "es";
   const normalizeTags = (tags?: string[]) => (tags ?? []).map((tag) => tag.toLowerCase());
   const mdxGuides = mdxPosts.filter((p) => {
     const category = p.frontmatter.category?.toLowerCase();
@@ -102,41 +127,6 @@ export default async function ActualidadIAPage({
       tags.includes("noticia")
     );
   });
-
-  const normalizeLangText = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
-
-  const detectLanguage = (title: string, description: string): "es" | "en" | "other" => {
-    const text = normalizeLangText(`${title} ${description}`.toLowerCase());
-    const countMatches = (words: string[]) =>
-      words.reduce((acc, word) => acc + (text.match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 0), 0);
-
-    const esScore = countMatches([
-      "el",
-      "la",
-      "los",
-      "las",
-      "de",
-      "del",
-      "y",
-      "para",
-      "datos",
-      "proteccion",
-      "privacidad",
-      "agencia",
-      "inteligencia",
-    ]);
-
-    const frScore = countMatches(["le", "les", "des", "dans", "droits", "effacement"]);
-
-    if (esScore === 0) return "other";
-    if (esScore > frScore) return "es";
-    return "other";
-  };
-
-  const isAllowedLanguage = (title: string, description: string) => {
-    const lang = detectLanguage(title, description);
-    return lang === "es";
-  };
 
   const formatDateEs = (ms?: number | null) => {
     if (!ms || Number.isNaN(ms)) return null;

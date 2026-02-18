@@ -195,10 +195,8 @@ export default async function HomePage() {
       words.reduce((acc, word) => acc + (text.match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 0), 0);
     const esScore = countMatches([
       "el",
-      "la",
       "los",
       "las",
-      "de",
       "del",
       "y",
       "para",
