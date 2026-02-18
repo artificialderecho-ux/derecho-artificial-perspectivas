@@ -84,13 +84,59 @@ export default async function ActualidadIAPage({
   const mdxGuides = mdxPosts.filter((p) => {
     const category = p.frontmatter.category?.toLowerCase();
     const tags = normalizeTags(p.frontmatter.tags);
-    return category === "guia" || category === "guías" || tags.includes("guia") || tags.includes("guias");
+    return (
+      category === "guia" ||
+      category === "guías" ||
+      tags.includes("guia") ||
+      tags.includes("guias")
+    );
   });
   const mdxNews = mdxPosts.filter((p) => {
     const category = p.frontmatter.category?.toLowerCase();
     const tags = normalizeTags(p.frontmatter.tags);
-    return category === "noticia" || tags.includes("actualidad") || tags.includes("noticia");
+    return (
+      category === "noticia" ||
+      category === "actualidad-ia" ||
+      tags.includes("actualidad") ||
+      tags.includes("actualidad-ia") ||
+      tags.includes("noticia")
+    );
   });
+
+  const normalizeLangText = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+
+  const detectLanguage = (title: string, description: string): "es" | "en" | "other" => {
+    const text = normalizeLangText(`${title} ${description}`.toLowerCase());
+    const countMatches = (words: string[]) =>
+      words.reduce((acc, word) => acc + (text.match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 0), 0);
+
+    const esScore = countMatches([
+      "el",
+      "la",
+      "los",
+      "las",
+      "de",
+      "del",
+      "y",
+      "para",
+      "datos",
+      "proteccion",
+      "privacidad",
+      "agencia",
+      "inteligencia",
+    ]);
+
+    const frScore = countMatches(["le", "les", "des", "dans", "droits", "effacement"]);
+
+    if (esScore === 0) return "other";
+    if (esScore > frScore) return "es";
+    return "other";
+  };
+
+  const isAllowedLanguage = (title: string, description: string) => {
+    const lang = detectLanguage(title, description);
+    return lang === "es";
+  };
 
   const formatDateEs = (ms?: number | null) => {
     if (!ms || Number.isNaN(ms)) return null;
@@ -157,7 +203,7 @@ export default async function ActualidadIAPage({
     }),
   ].sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
 
-  const newsItems: PreviewItem[] = [
+  const rawNewsItems: PreviewItem[] = [
     ...resolvedNews.map((n) => {
       const dateLabel = formatDateEs(n.displayDateMs ?? n.dateMs);
       const sourceLabel = getSourceFromUrl(n.sourceUrl);
@@ -190,6 +236,8 @@ export default async function ActualidadIAPage({
       };
     }),
   ].sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
+
+  const newsItems: PreviewItem[] = rawNewsItems.filter((item) => isAllowedLanguage(item.title, item.description));
 
   const allItems: PreviewItem[] = [...newsItems, ...guideItems].sort(
     (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),

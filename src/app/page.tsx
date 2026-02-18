@@ -197,6 +197,7 @@ export default async function HomePage() {
         cat === "actualidad-ia" ||
         tags.includes("noticia") ||
         tags.includes("actualidad-ia") ||
+        tags.includes("actualidad") ||
         tags.includes("news")
       );
     })

@@ -27,25 +27,18 @@ const parser = new Parser();
 
 const keywordPool = [
   "ai act",
-  "artificial intelligence",
   "inteligencia artificial",
   "reglamento ia",
   "regulation (eu) 2024/1689",
   "guía",
   "guia",
   "guideline",
-  "jurisprudencia",
-  "jurisprudence",
   "aepd",
   "aesia",
-  "europarl",
-  "edps",
-  "parlamento europeo",
-  "proteccion de datos",
   "euipo",
-  "cnil",
-  "ico",
-  "eur-lex",
+  "aesía",
+  "supervision de la inteligencia artificial",
+  "reglamento de ia",
 ];
 
 const detectLanguage = (title: string, description: string): "es" | "en" | "other" => {
@@ -69,89 +62,24 @@ const detectLanguage = (title: string, description: string): "es" | "en" | "othe
     "inteligencia",
   ]);
 
-  const enScore = countMatches([
-    "the",
-    "and",
-    "for",
-    "data",
-    "privacy",
-    "agency",
-    "artificial",
-    "intelligence",
-    "regulation",
-    "law",
-  ]);
+  const frScore = countMatches(["le", "les", "des", "dans", "droits", "effacement"]);
 
-  if (esScore === 0 && enScore === 0) return "other";
-  if (esScore >= enScore) return "es";
-  return "en";
+  if (esScore === 0) return "other";
+  if (esScore > frScore) return "es";
+  return "other";
 };
 
 const isAllowedLanguage = (title: string, description: string) => {
   const lang = detectLanguage(title, description);
-  return lang === "es" || lang === "en";
+  return lang === "es";
 };
 
 const feeds: FeedSource[] = [
-  {
-    name: "EU Digital Strategy",
-    url: "https://digital-strategy.ec.europa.eu/en/rss-feeds",
-    keywords: ["artificial intelligence", "ai act", "ai office"],
-    tags: ["ue"],
-  },
-  {
-    name: "EU Digital Strategy (RSS XML)",
-    url: "https://digital-strategy.ec.europa.eu/en/rss.xml",
-    keywords: ["artificial intelligence", "ai act", "ai office"],
-    tags: ["ue"],
-  },
-  {
-    name: "EUIPO",
-    url: "https://euipo.europa.eu/ohimportal/en/rss-feeds",
-    keywords: ["ai", "artificial intelligence"],
-    tags: ["ue", "euipo"],
-  },
-  {
-    name: "EUR-Lex",
-    url: "https://eur-lex.europa.eu/rss",
-    keywords: ["artificial intelligence", "regulation (eu) 2024/1689", "ai act"],
-    tags: ["ue", "eur-lex", "ai-act"],
-  },
-  {
-    name: "CNIL",
-    url: "https://www.cnil.fr/fr/rss.xml",
-    keywords: ["intelligence artificielle", "ia", "ai act"],
-    tags: ["ue", "cnil"],
-  },
-  {
-    name: "ICO",
-    url: "https://ico.org.uk/about-the-ico/news-and-events/rss/",
-    keywords: ["artificial intelligence", "ai act", "ai"],
-    tags: ["ico"],
-  },
   {
     name: "AEPD",
     url: "https://www.aepd.es/noticias/feed.xml",
     keywords: ["inteligencia artificial", "deepfake", "rgpd", "sancion", "proteccion de datos"],
     tags: ["aepd", "es"],
-  },
-  {
-    name: "Europarl AI",
-    url: "https://www.europarl.europa.eu/rss/topic/Artificial-Intelligence",
-    keywords: ["artificial intelligence", "ai", "inteligencia artificial"],
-    tags: ["ue", "europarl"],
-  },
-  {
-    name: "EDPS",
-    url: "https://www.edps.europa.eu/rss.xml",
-    keywords: ["artificial intelligence", "ai", "data protection", "privacy"],
-    tags: ["ue", "edps"],
-  },
-  {
-    name: "Gobierno Digital",
-    url: "https://digital.gob.es/noticias/rss",
-    keywords: ["inteligencia artificial", "ia", "datos", "digital"],
-    tags: ["es", "gobierno"],
   },
 ];
 
@@ -261,7 +189,7 @@ const readFeed = async (source: FeedSource): Promise<RawItem[]> => {
 
 const readAesiaNews = async (): Promise<RawItem[]> => {
   try {
-    const response = await fetch("https://www.aesia.gob.es/actualidad");
+    const response = await fetch("https://aesia.digital.gob.es/es/actualidad");
     const html = await response.text();
     const $ = load(html);
     const items: RawItem[] = [];
@@ -293,26 +221,82 @@ const readAesiaNews = async (): Promise<RawItem[]> => {
   }
 };
 
-const readUnAiNews = async (): Promise<RawItem[]> => {
+const readEuDigitalNews = async (): Promise<RawItem[]> => {
   try {
-    const response = await fetch("https://www.un.org/en/global-issues/artificial-intelligence");
+    const response = await fetch("https://digital-strategy.ec.europa.eu/es/news");
     const html = await response.text();
     const $ = load(html);
-    const title = cleanText($("h1").first().text() || $("title").text());
-    const description = cleanText($("main p").first().text() || $("article p").first().text());
-    if (!title || !isAllowedLanguage(title, description)) return [];
-    return [
-      {
+    const items: RawItem[] = [];
+
+    $("article, .ecl-list-item, .listing__item").each((_, el) => {
+      const title = cleanText(
+        $(el).find("h2, h3, .ecl-link, .listing__title").first().text(),
+      );
+      const linkRaw = $(el).find("a").first().attr("href") || "";
+      const link = linkRaw.startsWith("http")
+        ? linkRaw
+        : `https://digital-strategy.ec.europa.eu${linkRaw}`;
+      const dateText = cleanText($(el).find("time, .ecl-meta__item, .date").first().text());
+      const date = formatDate(dateText);
+      const description = cleanText(
+        $(el).find("p, .listing__summary, .ecl-link__description").first().text(),
+      );
+      if (!title || !link) return;
+      items.push({
         title,
         description,
-        link: "https://www.un.org/en/global-issues/artificial-intelligence",
-        date: formatDate(undefined),
-        source: "United Nations",
-        tags: enrichTags(["un", "ai"], title, description),
-        pdf: "",
+        link,
+        date,
+        source: "EU Digital Strategy (ES)",
+        tags: enrichTags(["ue", "digital-strategy"], title, description),
+        pdf: detectPdf(description, link),
         image: detectImage(html),
-      },
-    ];
+      });
+    });
+
+    return items
+      .filter((item) => isAllowedLanguage(item.title, item.description))
+      .filter((item) => isRelevant(item.title, item.description));
+  } catch {
+    return [];
+  }
+};
+
+const readEuipoNews = async (): Promise<RawItem[]> => {
+  try {
+    const response = await fetch("https://www.euipo.europa.eu/es/news-and-events/news");
+    const html = await response.text();
+    const $ = load(html);
+    const items: RawItem[] = [];
+
+    $("article, .card, .news, .o-layout__item").each((_, el) => {
+      const title = cleanText(
+        $(el).find("h2, h3, .title, .card-title").first().text(),
+      );
+      const linkRaw = $(el).find("a").first().attr("href") || "";
+      const link = linkRaw.startsWith("http")
+        ? linkRaw
+        : `https://www.euipo.europa.eu${linkRaw}`;
+      const dateText = cleanText($(el).find("time, .date").first().text());
+      const date = formatDate(dateText);
+      const description = cleanText($(el).find("p, .card-text").first().text());
+      if (!title || !link) return;
+      const image = $(el).find("img").first().attr("src") || detectImage(html);
+      items.push({
+        title,
+        description,
+        link,
+        date,
+        source: "EUIPO",
+        tags: enrichTags(["ue", "euipo"], title, description),
+        pdf: detectPdf(description, link),
+        image,
+      });
+    });
+
+    return items
+      .filter((item) => isAllowedLanguage(item.title, item.description))
+      .filter((item) => isRelevant(item.title, item.description));
   } catch {
     return [];
   }
@@ -321,8 +305,11 @@ const readUnAiNews = async (): Promise<RawItem[]> => {
 const run = async () => {
   const feedItems = (await Promise.all(feeds.map(readFeed))).flat();
   const aesiaItems = await readAesiaNews();
-  const unItems = await readUnAiNews();
-  const allItems = [...feedItems, ...aesiaItems, ...unItems];
+  const [euDigitalItems, euipoItems] = await Promise.all([
+    readEuDigitalNews(),
+    readEuipoNews(),
+  ]);
+  const allItems = [...feedItems, ...aesiaItems, ...euDigitalItems, ...euipoItems];
   for (const item of allItems) {
     await writeMdx(item);
   }
