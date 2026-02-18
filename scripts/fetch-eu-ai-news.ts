@@ -36,7 +36,12 @@ const keywordPool = [
   "guideline",
   "jurisprudencia",
   "jurisprudence",
+  "aepd",
   "aesia",
+  "europarl",
+  "edps",
+  "parlamento europeo",
+  "proteccion de datos",
   "euipo",
   "cnil",
   "ico",
@@ -47,6 +52,12 @@ const feeds: FeedSource[] = [
   {
     name: "EU Digital Strategy",
     url: "https://digital-strategy.ec.europa.eu/en/rss-feeds",
+    keywords: ["artificial intelligence", "ai act", "ai office"],
+    tags: ["ue"],
+  },
+  {
+    name: "EU Digital Strategy (RSS XML)",
+    url: "https://digital-strategy.ec.europa.eu/en/rss.xml",
     keywords: ["artificial intelligence", "ai act", "ai office"],
     tags: ["ue"],
   },
@@ -73,6 +84,30 @@ const feeds: FeedSource[] = [
     url: "https://ico.org.uk/about-the-ico/news-and-events/rss/",
     keywords: ["artificial intelligence", "ai act", "ai"],
     tags: ["ico"],
+  },
+  {
+    name: "AEPD",
+    url: "https://www.aepd.es/noticias/feed.xml",
+    keywords: ["inteligencia artificial", "deepfake", "rgpd", "sancion", "proteccion de datos"],
+    tags: ["aepd", "es"],
+  },
+  {
+    name: "Europarl AI",
+    url: "https://www.europarl.europa.eu/rss/topic/Artificial-Intelligence",
+    keywords: ["artificial intelligence", "ai", "inteligencia artificial"],
+    tags: ["ue", "europarl"],
+  },
+  {
+    name: "EDPS",
+    url: "https://www.edps.europa.eu/rss.xml",
+    keywords: ["artificial intelligence", "ai", "data protection", "privacy"],
+    tags: ["ue", "edps"],
+  },
+  {
+    name: "Gobierno Digital",
+    url: "https://digital.gob.es/noticias/rss",
+    keywords: ["inteligencia artificial", "ia", "datos", "digital"],
+    tags: ["es", "gobierno"],
   },
 ];
 
@@ -211,10 +246,36 @@ const readAesiaNews = async (): Promise<RawItem[]> => {
   }
 };
 
+const readUnAiNews = async (): Promise<RawItem[]> => {
+  try {
+    const response = await fetch("https://www.un.org/en/global-issues/artificial-intelligence");
+    const html = await response.text();
+    const $ = load(html);
+    const title = cleanText($("h1").first().text() || $("title").text());
+    const description = cleanText($("main p").first().text() || $("article p").first().text());
+    if (!title) return [];
+    return [
+      {
+        title,
+        description,
+        link: "https://www.un.org/en/global-issues/artificial-intelligence",
+        date: formatDate(undefined),
+        source: "United Nations",
+        tags: enrichTags(["un", "ai"], title, description),
+        pdf: "",
+        image: detectImage(html),
+      },
+    ];
+  } catch {
+    return [];
+  }
+};
+
 const run = async () => {
   const feedItems = (await Promise.all(feeds.map(readFeed))).flat();
   const aesiaItems = await readAesiaNews();
-  const allItems = [...feedItems, ...aesiaItems];
+  const unItems = await readUnAiNews();
+  const allItems = [...feedItems, ...aesiaItems, ...unItems];
   for (const item of allItems) {
     await writeMdx(item);
   }
