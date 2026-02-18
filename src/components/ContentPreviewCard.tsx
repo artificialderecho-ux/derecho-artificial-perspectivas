@@ -53,17 +53,23 @@ export function ContentPreviewCard({ item, size = "medium" }: ContentPreviewCard
     <Link href={item.href} className={cardClasses[size]}>
       {item.imageUrl && (
         <div
-          className={`relative aspect-[16/9] w-full overflow-hidden bg-slate-100 ${imageWrapperClasses[size]}`}
+          className={`relative aspect-[16/9] w-full overflow-hidden ${imageWrapperClasses[size]}`}
         >
           {isExternalImage ? (
             <img
               src={item.imageUrl}
               alt={item.title}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              className="absolute inset-0 h-full w-full object-cover object-[50%_65%] scale-[1.08]"
             />
           ) : (
-            <Image src={item.imageUrl} alt={item.title} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover object-center" />
+            <Image
+              src={item.imageUrl}
+              alt={item.title}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover object-[50%_65%] scale-[1.08]"
+            />
           )}
         </div>
       )}
