@@ -42,12 +42,19 @@ export function ContentPreviewCard({ item, size = "medium" }: ContentPreviewCard
     medium: "text-sm text-caption",
     large: "text-xs text-caption",
   };
+  const imageWrapperClasses = {
+    small: "-mx-4 -mt-4 mb-4 rounded-t-sm",
+    medium: "-mx-6 -mt-6 mb-4 rounded-t-sm",
+    large: "-mx-6 -mt-6 mb-4 rounded-t-sm",
+  };
   const isExternalImage = item.imageUrl?.startsWith("http");
 
   return (
     <Link href={item.href} className={cardClasses[size]}>
       {item.imageUrl && (
-        <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden rounded-sm bg-slate-100">
+        <div
+          className={`relative aspect-[16/9] w-full overflow-hidden bg-slate-100 ${imageWrapperClasses[size]}`}
+        >
           {isExternalImage ? (
             <img
               src={item.imageUrl}
