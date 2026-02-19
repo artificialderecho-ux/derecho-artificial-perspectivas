@@ -135,7 +135,13 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
   // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
   if (mdxPost && mdxPost.frontmatter.category === "jurisprudencia") {
-    const { title, date, category } = mdxPost.frontmatter;
+    const { title, date, category, pdf } = mdxPost.frontmatter;
+    const pdfUrl =
+      pdf && (pdf.startsWith("/") || pdf.startsWith("http"))
+        ? pdf
+        : pdf
+        ? `/fuentes/${pdf}.pdf`
+        : "";
     return (
       <LegalLayout
         title={title}
@@ -143,6 +149,18 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >
+        {pdfUrl ? (
+          <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
+            >
+              Descargar documento original
+            </a>
+          </div>
+        ) : null}
         <div className="prose prose-lg max-w-none">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
