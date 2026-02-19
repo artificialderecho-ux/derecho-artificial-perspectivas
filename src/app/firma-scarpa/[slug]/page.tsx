@@ -16,6 +16,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 
@@ -174,6 +175,7 @@ export default async function FirmaScarpaSlugPage({
         )}
         <div className="mx-auto">
           <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeSanitize]}
             components={{
               img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
