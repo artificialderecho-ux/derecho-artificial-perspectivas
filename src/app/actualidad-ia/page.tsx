@@ -107,14 +107,8 @@ export default async function ActualidadIAPage({
   const isAllowedLanguage = (title: string, description: string) => detectLanguage(title, description) === "es";
   const normalizeTags = (tags?: string[]) => (tags ?? []).map((tag) => tag.toLowerCase());
   const mdxGuides = mdxPosts.filter((p) => {
-    const category = p.frontmatter.category?.toLowerCase();
     const tags = normalizeTags(p.frontmatter.tags);
-    return (
-      category === "guia" ||
-      category === "guías" ||
-      tags.includes("guia") ||
-      tags.includes("guias")
-    );
+    return tags.includes("guia") || tags.includes("protocolo");
   });
   const mdxNews = mdxPosts.filter((p) => {
     const category = p.frontmatter.category?.toLowerCase();
@@ -159,29 +153,14 @@ export default async function ActualidadIAPage({
     return parts.join(" · ");
   };
 
-  const guideItems: PreviewItem[] = [
-    ...resolvedGuides.map((g) => {
-      const dateLabel = formatDateEs(g.displayDateMs ?? g.dateMs);
-      const sourceLabel = getSourceFromUrl(g.sourceUrl);
-      return {
-        id: `guide-${g.slug}`,
-        href: `/recursos/guias/${g.slug}`,
-        title: formatGuideTitle(g.title, sourceLabel ?? undefined),
-        description: g.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 180),
-        badge: "Guías y Protocolos",
-        meta: buildMeta(dateLabel, sourceLabel),
-        dateMs: g.dateMs ?? 0,
-        displayDateMs: g.displayDateMs ?? undefined,
-        imageUrl: fallbackImage,
-      };
-    }),
-    ...mdxGuides.map((p) => {
+  const guideItems: PreviewItem[] = mdxGuides
+    .map((p) => {
       const d = new Date(p.frontmatter.date).getTime();
       const dateLabel = formatDateEs(d);
       const sourceLabel = p.frontmatter.source || getSourceFromUrl(p.frontmatter.url);
       return {
         id: `mdx-guide-${p.slug}`,
-        href: p.frontmatter.pdf || p.frontmatter.url || `/recursos/guias/${p.slug}`,
+        href: p.frontmatter.url || p.url,
         title: formatGuideTitle(p.frontmatter.title, sourceLabel ?? undefined),
         description: p.excerpt,
         badge: "Guías y Protocolos",
@@ -190,8 +169,8 @@ export default async function ActualidadIAPage({
         displayDateMs: d || 0,
         imageUrl: extractImage(p),
       };
-    }),
-  ].sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
+    })
+    .sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
 
   const rawNewsItems: PreviewItem[] = [
     ...resolvedNews.map((n) => {

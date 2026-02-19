@@ -151,7 +151,16 @@ const detectImage = (text: string) => {
 
 const detectCategory = (title: string, description: string) => {
   const t = `${title} ${description}`.toLowerCase();
-  if (t.includes("guía") || t.includes("guia") || t.includes("guideline") || t.includes("guide")) {
+  if (
+    t.includes("guía") ||
+    t.includes("guia") ||
+    t.includes("guideline") ||
+    t.includes("guidelines") ||
+    t.includes("guide") ||
+    t.includes("framework") ||
+    t.includes("protocolo") ||
+    t.includes("protocol")
+  ) {
     return "guia";
   }
   return "noticia";
@@ -164,7 +173,16 @@ const enrichTags = (baseTags: string[], title: string, description: string) => {
     tags.add("ai-act");
   }
   if (t.includes("jurisprudencia")) tags.add("jurisprudencia");
-  if (t.includes("guía") || t.includes("guia") || t.includes("guideline") || t.includes("guide")) {
+  if (
+    t.includes("guía") ||
+    t.includes("guia") ||
+    t.includes("guideline") ||
+    t.includes("guidelines") ||
+    t.includes("guide") ||
+    t.includes("framework") ||
+    t.includes("protocolo") ||
+    t.includes("protocol")
+  ) {
     tags.add("guia");
   }
   return Array.from(tags);
