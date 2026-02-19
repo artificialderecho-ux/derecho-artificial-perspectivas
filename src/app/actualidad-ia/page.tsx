@@ -271,7 +271,9 @@ export default async function ActualidadIAPage({
             <ContentPreviewGrid items={items} columns={2} size="medium" />
           ) : (
             <div className="rounded-lg border border-divider bg-surface p-8 text-sm text-body">
-              No hay entradas disponibles en esta pestaña.
+              {currentTab === "guias"
+                ? "Próximamente más guías y protocolos relacionados con IA"
+                : "No hay entradas disponibles en esta pestaña."}
             </div>
           )}
         </div>
