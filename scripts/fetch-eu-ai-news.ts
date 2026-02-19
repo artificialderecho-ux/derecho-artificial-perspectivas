@@ -149,22 +149,7 @@ const detectImage = (text: string) => {
   return "";
 };
 
-const detectCategory = (title: string, description: string) => {
-  const t = `${title} ${description}`.toLowerCase();
-  if (
-    t.includes("guía") ||
-    t.includes("guia") ||
-    t.includes("guideline") ||
-    t.includes("guidelines") ||
-    t.includes("guide") ||
-    t.includes("framework") ||
-    t.includes("protocolo") ||
-    t.includes("protocol")
-  ) {
-    return "guia";
-  }
-  return "noticia";
-};
+const detectCategory = () => "noticia";
 
 const enrichTags = (baseTags: string[], title: string, description: string) => {
   const tags = new Set(baseTags.map((t) => t.toLowerCase()));

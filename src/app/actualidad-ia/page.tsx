@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { ContentPreviewGrid, type PreviewItem } from "@/components/ContentPreviewCard";
+import type { PreviewItem } from "@/components/ContentPreviewCard";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
+import { ActualidadTabsClient } from "./ActualidadTabsClient";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -32,12 +32,6 @@ export const metadata: Metadata = {
     images: [{ url: "/logo-principal.png" }],
   },
 };
-
-const tabs = [
-  { key: "todas", label: "Todas" },
-  { key: "noticias", label: "Noticias" },
-  { key: "guias", label: "Guías y Protocolos" },
-];
 
 const formatGuideTitle = (title: string, source?: string) => {
   const normalized = title.trim().toLowerCase();
@@ -217,9 +211,6 @@ export default async function ActualidadIAPage({
     (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
   );
 
-  const items = currentTab === "guias" ? guideItems : currentTab === "noticias" ? newsItems : allItems;
-  const currentLabel = tabs.find((t) => t.key === currentTab)?.label || "Todas";
-
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
@@ -252,36 +243,12 @@ export default async function ActualidadIAPage({
           </div>
         }
       >
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-wrap gap-2 mb-8">
-            {tabs.map((tabItem) => {
-              const active = currentTab === tabItem.key;
-              return (
-                <Link
-                  key={tabItem.key}
-                  href={tabItem.key === "todas" ? "/actualidad-ia" : `/actualidad-ia?tab=${tabItem.key}`}
-                  className={
-                    active
-                      ? "inline-flex items-center rounded-full bg-slate-900 text-white px-4 py-2 text-sm font-medium"
-                      : "inline-flex items-center rounded-full bg-slate-100 text-slate-700 px-4 py-2 text-sm font-medium hover:bg-slate-200"
-                  }
-                >
-                  {tabItem.label}
-                </Link>
-              );
-            })}
-          </div>
-          <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">{currentLabel}</h2>
-          {items.length > 0 ? (
-            <ContentPreviewGrid items={items} columns={2} size="medium" />
-          ) : (
-            <div className="rounded-lg border border-divider bg-surface p-8 text-sm text-body">
-              {currentTab === "guias"
-                ? "Próximamente más guías y protocolos relacionados con IA"
-                : "No hay entradas disponibles en esta pestaña."}
-            </div>
-          )}
-        </div>
+        <ActualidadTabsClient
+          initialTab={currentTab === "noticias" || currentTab === "guias" ? currentTab : "todas"}
+          allItems={allItems}
+          noticiasItems={newsItems}
+          guiasItems={guideItems}
+        />
       </LegalLayout>
     </>
   );
