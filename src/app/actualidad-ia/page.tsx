@@ -113,12 +113,14 @@ export default async function ActualidadIAPage({
   const mdxNews = mdxPosts.filter((p) => {
     const category = p.frontmatter.category?.toLowerCase();
     const tags = normalizeTags(p.frontmatter.tags);
+    const isGuide = tags.includes("guia") || tags.includes("protocolo");
     return (
-      category === "noticia" ||
-      category === "actualidad-ia" ||
-      tags.includes("actualidad") ||
-      tags.includes("actualidad-ia") ||
-      tags.includes("noticia")
+      !isGuide &&
+      (category === "noticia" ||
+        category === "actualidad-ia" ||
+        tags.includes("actualidad") ||
+        tags.includes("actualidad-ia") ||
+        tags.includes("noticia"))
     );
   });
 
