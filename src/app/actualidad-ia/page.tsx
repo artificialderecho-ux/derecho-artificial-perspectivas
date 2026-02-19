@@ -9,6 +9,8 @@ import { getAllPosts } from "@/lib/mdx-utils";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Actualidad IA",
   description: "Novedades diarias en regulación, jurisprudencia y guías prácticas sobre IA.",
