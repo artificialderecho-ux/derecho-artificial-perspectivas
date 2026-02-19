@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 const postsDir = path.join(process.cwd(), 'content/posts');
+const rootContentDir = path.join(process.cwd(), 'content');
 
 export interface PostFrontmatter {
   title: string;
@@ -42,17 +43,27 @@ function normalizeSlugForMatch(value: string) {
 }
 
 export function getAllPosts(): PostData[] {
-  if (!fs.existsSync(postsDir)) {
+  if (!fs.existsSync(postsDir) && !fs.existsSync(rootContentDir)) {
     return [];
   }
 
-  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.mdx') || f.endsWith('.md'));
-  
-  const posts = files.map(file => {
-    const fullPath = path.join(postsDir, file);
+  const directories = [postsDir, rootContentDir];
+  const fileMap = new Map<string, string>();
+
+  for (const dir of directories) {
+    if (!fs.existsSync(dir)) continue;
+    const dirFiles = fs.readdirSync(dir).filter(f => f.endsWith('.mdx') || f.endsWith('.md'));
+    for (const file of dirFiles) {
+      const slug = file.replace(/\.mdx?$/, '');
+      if (!fileMap.has(slug)) {
+        fileMap.set(slug, path.join(dir, file));
+      }
+    }
+  }
+
+  const posts = Array.from(fileMap.entries()).map(([slug, fullPath]) => {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
-    const slug = file.replace(/\.mdx?$/, '');
 
     const excerpt =
       data.description ||
