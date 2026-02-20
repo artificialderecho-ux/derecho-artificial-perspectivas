@@ -21,7 +21,7 @@ featured: true
 image: "/images/ai-act-guia-completa.jpg"
 seo:
   title: "AI Act: Guía Jurídica Completa del Reglamento Europeo de IA 2026"
-  description: "Análisis jurídico exhaustivo del AI Act: clasificación sistemas IA, obligaciones proveedores Arts. 9-15, sanciones hasta 35M EUR, calendario 2024-2027, casos prácticos IRAC y checklist implementación."
+  description: "Guía completa del AI Act (Reglamento IA UE 2024/1689): obligaciones, riesgos y plazos de cumplimiento para empresas y abogados, con análisis práctico 2026."
   keywords: "AI Act, Reglamento UE 2024/1689, sistemas alto riesgo, obligaciones proveedores, sanciones, evaluación conformidad, RGPD IA, GPAI, compliance"
 ---
 
