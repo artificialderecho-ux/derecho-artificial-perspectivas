@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import ArticleContent from "@/content/posts/articulo_ia_agentica.mdx";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getPostBySlug } from "@/lib/mdx-utils";
 import NormativaIA from "@/components/normativa_ia_agentica";
 import FlujosIA from "@/components/flujos_ia_agentica";
 import { LegalLayout } from "@/components/layout/LegalLayout";
@@ -63,7 +64,9 @@ const articleJsonLd = createLegalArticleJsonLd({
   authorName: "Ricardo Scarpa",
 });
 
-export default function IAAgenticaPage() {
+export default async function IAAgenticaPage() {
+  const mdxPost = getPostBySlug("ia-agentica-rgpd");
+
   return (
     <>
       <StructuredData data={articleJsonLd} />
@@ -73,11 +76,10 @@ export default function IAAgenticaPage() {
         date={datePublished}
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
       >
-        <ArticleContent />
+        {mdxPost && <MDXRemote source={mdxPost.content} />}
       </LegalLayout>
       <NormativaIA />
       <FlujosIA />
     </>
   );
 }
-
