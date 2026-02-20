@@ -1,0 +1,64 @@
+---
+title: "Thomson Reuters v. Ross Intelligence: Copyright de Headnotes, IA y el Ocaso del Fair Use en el Entrenamiento de Modelos Jurídicos"
+date: "2026-02-20"
+category: "propiedad-intelectual-ia"
+tags: "Thomson Reuters" "Ross Intelligence" "headnotes" "copyright IA" "fair use" "entrenamiento IA" "Westlaw" "LegalEase" "copia intermedia" "propiedad intelectual"
+pdf: "20-613_5"
+author: "Ricardo Scarpa"
+description: "El Tribunal de Delaware establece que el uso de headnotes de Westlaw para entrenar una IA jurídica competidora no constituye fair use, con implicaciones definitorias para el legaltech global."
+image: "propiedad-intelectual-ia"
+---
+
+## Introducción
+
+La sentencia dictada el 11 de febrero de 2025 por el juez Stephanos Bibas en el caso *Thomson Reuters Enterprise Centre GmbH et al. v. Ross Intelligence Inc.* (No. 1:20-cv-613-SB, D. Del.) es, sin exageración, una de las resoluciones más relevantes en materia de copyright aplicado a la inteligencia artificial que ha producido la jurisdicción norteamericana en los últimos años. Y lo es, en parte, precisamente porque su autor lo reconoce así: este es un juez que en 2023 se equivocó, lo admite públicamente y revisa su propio criterio antes del juicio. Esa honestidad intelectual —tan infrecuente en la praxis judicial— convierte la opinión revisada no solo en derecho positivo, sino en un ejercicio de metodología jurídica que merece atención doctrinal.
+
+El caso enfrenta a Thomson Reuters, propietaria de Westlaw, con Ross Intelligence, una startup que desarrolló un motor de búsqueda jurídico basado en inteligencia artificial. Ross necesitaba datos de entrenamiento; Thomson Reuters se los negó; Ross los obtuvo indirectamente a través de un tercero. El resultado: 2.243 headnotes infringidos, la defensa de fair use rechazada y un precedente que interpela directamente a toda la industria del legaltech.
+
+## La Cuestión Jurídica Central: ¿Son los Headnotes Obras Originales Protegibles?
+
+El primer frente del litigio es la validez del copyright sobre los headnotes de Westlaw. Un headnote es una síntesis editorial del punto jurídico central de una resolución judicial. El texto de las resoluciones judiciales no es protegible por copyright en EE.UU. —son obras del gobierno—, pero la edición que sobre ellas realiza un jurista privado sí puede serlo. ¿En qué medida?
+
+La regla aplicable es la de *Feist Publications, Inc. v. Rural Tel. Serv. Co.* (499 U.S. 340, 1991): el umbral de originalidad para el copyright es "extremadamente bajo", exigiendo solo "algún grado mínimo de creatividad". En 2023, el propio juez Bibas había considerado que la originalidad de los headnotes dependía del grado de solapamiento con el texto no protegible de la opinión subyacente. En 2025 revoca esa lectura.
+
+La corrección doctrinal se articula a través de una analogía especialmente feliz: la del escultor. Un bloque de mármol —como una opinión judicial— no es protegible por copyright. Pero el escultor que decide qué cortar y qué conservar crea una obra protegible. Del mismo modo, el jurista-editor que identifica qué palabras de una opinión de cientos de páginas constituyen el punto jurídico relevante, y las "cincela" en un headnote, ejerce una creatividad editorial suficiente. El hecho de que el headnote tome verbatim el texto de la opinión no destruye esa originalidad: la elección de qué fragmento reproducir ya es una expresión creativa.
+
+Esta corrección tiene consecuencias sistémicas: consolida la protegibilidad de los materiales editoriales jurídicos secundarios frente a quienes pretendan usarlos libremente como materia prima para sistemas de IA.
+
+## El Marco Normativo del Fair Use ante la Copia para Entrenamiento de IA
+
+La parte más influyente de la opinión es el análisis del fair use (17 U.S.C. §107). Ross argumentó que su copia fue "intermedia" —los headnotes no aparecen en el producto final que el usuario ve—, y que casos como *Sony Computer Entertainment v. Connectix Corp.* (9th Cir. 2000), *Sega Enterprises v. Accolade* (9th Cir. 1992) y *Google LLC v. Oracle America* (593 U.S. 1, 2021) amparan ese tipo de copia.
+
+El juez Bibas desmonta el argumento con precisión quirúrgica. Los precedentes de copia intermedia tolerada tienen dos condiciones que no concurren aquí: (1) versan sobre código informático, cuya naturaleza funcional justifica un tratamiento diferente, y (2) la copia era necesaria para acceder a los elementos no protegibles del programa. Los headnotes son texto escrito, no código; y nada impedía a Ross crear sus propios materiales de entrenamiento sin copiar los de Thomson Reuters.
+
+El análisis de los cuatro factores arroja el siguiente resultado:
+
+**Factor 1 (propósito y carácter del uso):** Desfavorable a Ross. El uso es comercial y no transformativo. Aplicando el test de *Warhol Foundation v. Goldsmith* (598 U.S. 508, 2023), cuando el original y el uso secundario comparten el mismo propósito sustancial —facilitar la investigación jurídica— y el uso es comercial, la ausencia de transformación es determinante. El hecho de que los headnotes no aparezcan en el output final no convierte el uso en transformativo.
+
+**Factor 2 (naturaleza del original):** Favorable a Ross. Los headnotes tienen originalidad suficiente para el copyright pero son menos creativos que una novela o una obra artística. Este factor, sin embargo, raramente resulta decisivo.
+
+**Factor 3 (cantidad usada):** Favorable a Ross. Lo relevante no es cuánto se copió internamente, sino qué se hace accesible al público. Ross no expone los headnotes al usuario final.
+
+**Factor 4 (efecto sobre el mercado):** Desfavorable a Ross, y decisivo. El juez identifica dos mercados afectados: el de las plataformas de investigación jurídica (donde Ross es sustituto competitivo de Westlaw) y el mercado potencial de datos para entrenar IA jurídica. Este segundo mercado es el que hace pivotear todo el análisis: aunque Thomson Reuters no haya licenciado aún sus datos para entrenar IA, ese mercado existe o puede existir, y Ross lo ha erosionado al extraerlos sin licencia.
+
+## Análisis Aplicado: La Arquitectura de la Infracción
+
+Los hechos de la copia son de especial riqueza analítica. Ross no copió directamente: contrató a LegalEase, que a su vez instruyó a abogados para crear preguntas jurídicas usando los headnotes de Westlaw como guía —sin copiar y pegar literalmente—. El juez analiza uno por uno los 3.384 headnotes del batch principal, comparando la pregunta del Bulk Memo, el headnote y la opinión judicial. Su conclusión: en 2.243 casos, la pregunta se parece más al headnote que a la opinión subyacente, lo que constituye prueba circunstancial irrefutable de copia efectiva.
+
+Esta metodología de comparación tripartita —pregunta vs. headnote vs. opinión— es en sí misma una contribución procesal relevante: establece un procedimiento reproducible para detectar la copia de materiales editoriales en contextos de entrenamiento de IA, susceptible de ser adoptado en futuros litigios.
+
+## Implicaciones Doctrinales
+
+La sentencia tiene proyección más allá de EE.UU. y más allá del legaltech. Sus consecuencias doctrinales pueden sintetizarse en cuatro planos:
+
+Primero, **la copia para entrenamiento de IA no es neutral**. El argumento de que la IA "transforma" cualquier dato que ingiere —que el output no reproduce el input— no es suficiente para justificar el fair use cuando el propósito competitivo es idéntico al del original.
+
+Segundo, **el mercado de datos de entrenamiento es jurídicamente relevante**. Los titulares de copyright tienen un interés legítimo en los mercados potenciales de licenciamiento de sus obras para entrenamiento de modelos, aunque esos mercados estén aún en formación.
+
+Tercero, **la creatividad editorial secundaria merece protección robusta**. La analogía del escultor refuerza la protegibilidad de todo tipo de materiales de compilación, selección y síntesis, con implicaciones para bases de datos, taxonomías y sistemas de clasificación propietarios.
+
+Cuarto, **la distinción código/texto es jurídicamente operativa en IA**. El juez Bibas traza explícitamente una línea entre la jurisprudencia de copia de código fuente y la copia de texto escrito, con implicaciones para los litigios sobre LLMs entrenados con corpus textuales.
+
+## Conclusión
+
+*Thomson Reuters v. Ross Intelligence* no es solo un caso sobre headnotes. Es el primer pronunciamiento robusto de un tribunal federal sobre el perímetro del fair use en el entrenamiento de IA con contenidos jurídicos protegidos, y anticipa el terreno donde se librarán los grandes litigios de copyright de la próxima década. El juez Bibas tiene el mérito adicional de haber corregido su propio error con honestidad intelectual ejemplar. Para los operadores jurídicos europeos, la sentencia es también un recordatorio: cuando el AI Act y la Directiva DSM enfrenten casos análogos, la doctrina angloamericana estará ya consolidada, y el diálogo transatlántico será inevitable.
