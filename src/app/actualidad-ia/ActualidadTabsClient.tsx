@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ContentPreviewGrid, type PreviewItem } from "@/components/ContentPreviewCard";
 
@@ -32,10 +33,27 @@ export function ActualidadTabsClient({
   guiasItems,
 }: Props) {
   const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     setActiveTab(initialTab);
   }, [initialTab]);
+
+  const onChangeTab = (value: string) => {
+    const next = (value || "todas") as TabKey;
+    setActiveTab(next);
+    const params = new URLSearchParams(searchParams?.toString() || "");
+    if (next === "todas") {
+      params.delete("tab");
+    } else {
+      params.set("tab", next);
+    }
+    const qs = params.toString();
+    const url = qs ? `${pathname}?${qs}` : pathname;
+    router.replace(url, { scroll: false });
+  };
 
   const items =
     activeTab === "noticias" ? noticiasItems : activeTab === "guias" ? guiasItems : allItems;
@@ -43,7 +61,7 @@ export function ActualidadTabsClient({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabKey)}>
+      <Tabs value={activeTab} onValueChange={onChangeTab}>
         <TabsList className="mb-6">
           <TabsTrigger value="todas">Todas</TabsTrigger>
           <TabsTrigger value="noticias">Noticias</TabsTrigger>
@@ -63,4 +81,3 @@ export function ActualidadTabsClient({
     </div>
   );
 }
-
