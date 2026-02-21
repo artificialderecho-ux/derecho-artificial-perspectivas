@@ -139,7 +139,7 @@ export default async function JurisprudenciaPage() {
       <main className="section-spacing">
         <div className="relative w-full h-64 md:h-96">
           <Image
-            src="/images/sections/jurisprudencia.jpg"
+            src="/images/jurisprudencia.jpg"
             alt="Jurisprudencia"
             fill
             sizes="100vw"

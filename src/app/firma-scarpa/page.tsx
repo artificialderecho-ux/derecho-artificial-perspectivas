@@ -175,7 +175,7 @@ export default async function FirmaScarpaPage() {
       <main className="section-spacing">
         <div className="relative w-full h-64 md:h-96">
           <Image
-            src="/images/sections/firma-scarpa.jpg"
+            src="/images/firma-scarpa.jpg"
             alt="Firma Scarpa"
             fill
             sizes="100vw"

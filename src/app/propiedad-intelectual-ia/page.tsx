@@ -68,7 +68,7 @@ export default async function PropiedadIntelectualIAPage() {
         hero={
           <div className="relative w-full h-64 md:h-96">
             <Image
-              src="/images/sections/propiedad-intelectual.jpg"
+              src="/images/propiedad-intelectual.jpg"
               alt="Propiedad Intelectual IA"
               fill
               sizes="100vw"

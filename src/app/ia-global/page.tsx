@@ -68,7 +68,7 @@ export default async function IAGlobalPage() {
         hero={
           <div className="relative w-full h-64 md:h-96">
             <Image
-              src="/images/sections/ia-global.jpg"
+              src="/images/ia-global.jpg"
               alt="IA Global"
               fill
               sizes="100vw"

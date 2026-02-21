@@ -127,7 +127,7 @@ export default async function ActualidadIAPage({
     if (Number.isNaN(d.getTime())) return null;
     return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
-  const fallbackImage = "/images/sections/Actualidad IA 2.jpg";
+  const fallbackImage = "/images/Actualidad IA 2.jpg";
   const extractImage = (post: ReturnType<typeof getAllPosts>[number]) =>
     post.frontmatter.image || post.frontmatter.ogImage || post.frontmatter.cover || fallbackImage;
   const getSourceFromUrl = (url?: string | null) => {
@@ -223,7 +223,7 @@ export default async function ActualidadIAPage({
         hero={
           <div className="relative w-full h-64 md:h-96">
             <Image
-              src="/images/sections/Actualidad IA 2.jpg"
+              src="/images/Actualidad IA 2.jpg"
               alt="Actualidad IA"
               fill
               sizes="100vw"

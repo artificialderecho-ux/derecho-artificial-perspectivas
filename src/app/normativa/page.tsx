@@ -181,7 +181,7 @@ export default async function NormativaPage() {
       <main className="section-spacing">
         <div className="relative w-full h-64 md:h-96">
           <Image
-            src="/images/sections/normativa.jpg"
+            src="/images/normativa.jpg"
             alt="Normativa"
             fill
             sizes="100vw"

@@ -10,7 +10,7 @@ const title = "IA Agéntica y RGPD: Guía Completa sobre Protección de Datos Pe
 const description =
   "Guía práctica del impacto de la IA agéntica en el RGPD: vulnerabilidades, EIPD, prompt injection, shadow-leak y gobernanza arquitectónica. Obligaciones y recomendaciones 2026.";
 const url = "https://www.derechoartificial.com/normativa/ia-agentica";
-const image = "/images/sections/normativa.jpg";
+const image = "/images/normativa.jpg";
 const datePublished = "2026-02-18";
 
 export const metadata: Metadata = {

@@ -68,7 +68,7 @@ export default async function EticaIAPage() {
         hero={
           <div className="relative w-full h-64 md:h-96">
             <Image
-              src="/images/sections/etica.jpg"
+              src="/images/etica.jpg"
               alt="Ética IA"
               fill
               sizes="100vw"
