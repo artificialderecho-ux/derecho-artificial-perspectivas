@@ -157,9 +157,10 @@ export default async function ActualidadIAPage({
       const d = new Date(p.frontmatter.date).getTime();
       const dateLabel = formatDateEs(d);
       const sourceLabel = p.frontmatter.source || getSourceFromUrl(p.frontmatter.url);
+      const href = p.frontmatter.url || `/recursos/guias/${p.slug}`;
       return {
         id: `mdx-guide-${p.slug}`,
-        href: p.frontmatter.url || p.url,
+        href,
         title: formatGuideTitle(p.frontmatter.title, sourceLabel ?? undefined),
         description: p.excerpt,
         badge: "Guías y Protocolos",
