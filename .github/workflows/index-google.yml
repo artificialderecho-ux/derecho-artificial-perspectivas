@@ -1,0 +1,30 @@
+name: Index new posts in Google
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  index-posts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project and generate sitemap
+        run: npm run build
+
+      - name: Notify new posts to Google
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+        run: node scripts/notify-new-posts.js
