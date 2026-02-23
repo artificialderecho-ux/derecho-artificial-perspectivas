@@ -1,17 +1,9 @@
-User-agent: * 
-Allow: / 
-Disallow: /api/ 
-Disallow: /_next/ 
-Disallow: /admin/ 
-Disallow: /*?* 
-  
-User-agent: GPTBot 
-Allow: / 
-User-agent: ClaudeBot 
-Allow: / 
-User-agent: PerplexityBot 
-Allow: / 
-User-agent: Google-Extended 
-Allow: / 
-  
-Sitemap: https://www.derechoartificial.com/sitemap.xml
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://derechoartificial.com
+
+# Sitemaps
+Sitemap: https://derechoartificial.com/sitemap.xml

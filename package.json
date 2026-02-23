@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next-sitemap",
+    "build": "next build && next-sitemap --config next-sitemap.config.cjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -13,7 +13,8 @@
     "generate-md": "node scripts/generate-md-from-html.mjs",
     "deploy-content": "node scripts/deploy-content.mjs",
     "deploy-content:dry": "node scripts/deploy-content.mjs --dry",
-    "fetch-eu-ai-news": "tsx scripts/fetch-eu-ai-news.ts"
+    "fetch-eu-ai-news": "tsx scripts/fetch-eu-ai-news.ts",
+    "index-all": "node scripts/index-all-posts.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
