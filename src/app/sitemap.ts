@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
+import { getAllPosts } from '@/lib/mdx-utils';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.derechoartificial.com';
@@ -17,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // 2. Artículos dinámicos de todas las secciones de contenido
-  const contentSections: ContentSection[] = ['firma-scarpa', 'actualidad-ia', 'normativa', 'posts'];
+  const contentSections: ContentSection[] = ['firma-scarpa', 'actualidad-ia', 'normativa'];
   let allArticlePages: MetadataRoute.Sitemap = [];
 
   for (const section of contentSections) {
@@ -42,6 +43,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  return [...staticPages, ...allArticlePages];
+  // 3. Posts MDX (Jurisprudencia, Noticias, etc.)
+  const mdxPosts = getAllPosts();
+  const mdxPages: MetadataRoute.Sitemap = mdxPosts
+    .filter(post => !post.url.startsWith('http')) // Excluir enlaces externos si los hay
+    .map(post => ({
+      url: `${baseUrl}${post.url}`,
+      lastModified: new Date(post.frontmatter.date),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+
+  return [...staticPages, ...allArticlePages, ...mdxPages];
 }
 
