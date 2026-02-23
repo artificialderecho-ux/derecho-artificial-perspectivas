@@ -16,12 +16,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/contacto`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
   ]
 
-  // Artículos normales de Firma Scarpa
+  // Artículos de Firma Scarpa
   const contentSlugs = await listContentSlugs('firma-scarpa')
   const contentEntries = await Promise.all(
     contentSlugs.map(slug => getContentEntry('firma-scarpa', slug))
   )
-
   const articlePages = contentEntries.map(entry => ({
     url: `${baseUrl}/firma-scarpa/${entry.slug}`,
     lastModified: new Date(entry.datePublished),
@@ -29,5 +28,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  return [...staticPages, ...articlePages]
+  // ✅ NUEVO: Artículos de /posts/
+  let postsPages: MetadataRoute.Sitemap = []
+  try {
+    const postsSlugs = await listContentSlugs('posts')
+    const postsEntries = await Promise.all(
+      postsSlugs.map(slug => getContentEntry('posts', slug))
+    )
+    postsPages = postsEntries.map(entry => ({
+      url: `${baseUrl}/posts/${entry.slug}`,
+      lastModified: new Date(entry.datePublished || new Date()),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }))
+  } catch (error) {
+    console.warn('No se encontraron artículos en /posts/', error)
+  }
+
+  return [...staticPages, ...articlePages, ...postsPages]
 }
