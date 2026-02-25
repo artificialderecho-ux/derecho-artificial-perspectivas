@@ -157,7 +157,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
             >
-              Descargar documento original
+              Sentencia
             </a>
           </div>
         ) : null}
