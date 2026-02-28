@@ -13,6 +13,7 @@ import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resourc
 import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { formatDate } from "@/../date-utils";
+import remarkGfm from "remark-gfm";
 
 type Params = {
   slug: string;
@@ -153,7 +154,14 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
             </div>
           )}
           <div className="prose prose-slate max-w-none prose-headings:font-serif prose-a:text-primary">
-            <MDXRemote source={mdxPost.content} />
+            <MDXRemote 
+              source={mdxPost.content} 
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                },
+              }}
+            />
           </div>
           
           <div className="mt-12 pt-8 border-t border-slate-200">
