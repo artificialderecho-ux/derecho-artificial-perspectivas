@@ -12,6 +12,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
 
 type Params = {
   slug: string;
@@ -125,6 +126,7 @@ export default async function EticaIASlugPage({
         )}
         <div className="mx-auto">
           <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeSanitize]}
             components={{
               img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
