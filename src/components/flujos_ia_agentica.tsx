@@ -72,14 +72,9 @@ function Diagram1() {
                 <p className="text-xs sm:text-sm text-body/90 leading-relaxed">{n.text}</p>
               </div>
               {index < linear.length - 1 && (
-                <button
-                  type="button"
-                  className="text-center text-amber-600 text-lg opacity-60 mb-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  onClick={() => setActiveTab(index + 1)}
-                  aria-label="Siguiente paso"
-                >
+                <div className="text-center text-amber-600 text-lg opacity-60 mb-2 w-full">
                   ↓
-                </button>
+                </div>
               )}
             </div>
           ))}
@@ -371,14 +366,9 @@ function Diagram4() {
           </div>
         </div>
 
-        <button
-          type="button"
-          className="text-center text-amber-600 text-lg opacity-60 mb-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          onClick={() => setActiveTab(1)}
-          aria-label="Siguiente paso"
-        >
+        <div className="text-center text-amber-600 text-lg opacity-60 mb-2 w-full">
           ↓
-        </button>
+        </div>
 
         <div className="flex items-center gap-3">
           <div
@@ -419,14 +409,9 @@ function Diagram4() {
                 El agente propone o inicia una operación.
               </p>
             </div>
-            <button
-              type="button"
-              className="text-center text-green-600 text-base w-full"
-              onClick={() => setActiveTab(3)}
-              aria-label="Siguiente paso"
-            >
+            <div className="text-center text-green-600 text-base w-full">
               ↓
-            </button>
+            </div>
             <div
               className="rounded-sm border px-3 py-3 text-xs leading-relaxed"
               style={{
@@ -464,14 +449,9 @@ function Diagram4() {
                 El humano debe comprender la lógica del proceso.
               </p>
             </div>
-            <button
-              type="button"
-              className="text-center text-red-600 text-base w-full"
-              onClick={() => setActiveTab(2)}
-              aria-label="Siguiente paso"
-            >
+            <div className="text-center text-red-600 text-base w-full">
               ↓
-            </button>
+            </div>
             <div
               className="rounded-sm border px-3 py-3 text-xs leading-relaxed"
               style={{
