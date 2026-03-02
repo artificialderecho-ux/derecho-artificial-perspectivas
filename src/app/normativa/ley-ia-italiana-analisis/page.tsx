@@ -3,7 +3,39 @@ import Link from "next/link";
 import Image from "next/image";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
-import { MDXContent } from "@/components/MDXContent";
+import { LegalLayout } from "@/components/layout/LegalLayout";
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
+import { defaultSchema } from 'hast-util-sanitize';
+import { RelatedArticles } from "@/components/RelatedArticles";
+
+const sanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [
+    ...(defaultSchema as any).tagNames,
+    'table',
+    'thead',
+    'tbody',
+    'tr',
+    'th',
+    'td',
+    'caption'
+  ],
+  attributes: {
+    ...(defaultSchema as any).attributes,
+    table: ['className'],
+    thead: [],
+    tbody: [],
+    tr: [],
+    th: ['align', 'colspan', 'rowspan'],
+    td: ['align', 'colspan', 'rowspan'],
+    a: ['href', 'name', 'target', 'rel'],
+    img: ['src', 'alt', 'title', 'width', 'height'],
+    code: ['className']
+  }
+};
 
 export const metadata: Metadata = {
   title: "Análisis Jurídico de la Ley Italiana 132/2025 sobre Inteligencia Artificial",
@@ -63,134 +95,108 @@ export default async function LeyIAItalianaPage() {
     ],
   });
 
+  const pdfUrl = "/fuentes/ley-ia-italiana-analisis.pdf";
+
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
-      <main className="section-spacing">
-        <div className="relative w-full h-64 md:h-96">
-          <Image
-            src="/images/normativa.jpg"
-            alt="Normativa de Inteligencia Artificial Italiana"
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-            <div>
-              <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl mb-4">
-                Ley Italiana 132/2025
-              </h1>
-              <p className="text-lg md:text-xl text-white/90 max-w-3xl">
-                Análisis Jurídico de la Regulación de Inteligencia Artificial en Italia
+      <LegalLayout
+        title={post.frontmatter.title}
+        category="Normativa"
+        author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
+        date={post.frontmatter.date}
+      >
+        {/* Recuadro de descarga del PDF */}
+        <div className="mb-12 p-8 bg-amber-50 border border-amber-200 rounded-sm not-prose">
+          <div className="flex items-center gap-4">
+            <div className="flex-shrink-0">
+              <svg
+                className="h-8 w-8 text-amber-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-amber-900 mb-1">Documento Original</h3>
+              <p className="text-sm text-amber-700 mb-3">
+                Accede al análisis completo en formato PDF con todas las referencias bibliográficas y notas jurídicas.
               </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-4 py-8">
-          <div className="max-w-4xl mx-auto">
-            {/* Recuadro de descarga del PDF */}
-            <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50/70 p-6">
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-8 w-8 text-amber-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-amber-900 mb-1">Documento Original</h3>
-                  <p className="text-sm text-amber-700 mb-3">
-                    Accede al análisis completo en formato PDF con todas las referencias bibliográficas y notas jurídicas.
-                  </p>
-                  <Link
-                    href="/fuentes/ley-ia-italiana-analisis.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-md bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors"
-                  >
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                    LEY
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Metadatos del artículo */}
-            <div className="mb-8 flex flex-wrap gap-4 text-sm text-muted-foreground">
-              <span>📅 {new Date(post.frontmatter.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-              <span>📝 {post.frontmatter.author || 'Ricardo Scarpa'}</span>
-              <span>🏷️ {post.frontmatter.category}</span>
-            </div>
-
-            {/* Palabras clave */}
-            <div className="mb-8">
-              <div className="flex flex-wrap gap-2">
-                {post.frontmatter.keywords?.map((keyword: string) => (
-                  <span
-                    key={keyword}
-                    className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800"
-                  >
-                    {keyword}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Contenido del artículo */}
-            <article className="prose prose-lg max-w-none">
-              <MDXContent source={post.content} />
-            </article>
-
-            {/* Navegación */}
-            <div className="mt-12 pt-8 border-t border-border">
-              <div className="flex justify-between">
-                <Link
-                  href="/normativa"
-                  className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              <Link
+                href={pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors"
+              >
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                  Volver a Normativa
-                </Link>
-              </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                LEY
+              </Link>
             </div>
           </div>
         </div>
-      </main>
+
+        {/* Metadatos del artículo */}
+        <div className="mb-8 flex flex-wrap gap-4 text-sm text-muted-foreground">
+          <span>📅 {new Date(post.frontmatter.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span>📝 {post.frontmatter.author || 'Ricardo Scarpa'}</span>
+          <span>🏷️ {post.frontmatter.category}</span>
+        </div>
+
+        {/* Palabras clave */}
+        <div className="mb-8">
+          <div className="flex flex-wrap gap-2">
+            {post.frontmatter.keywords?.map((keyword: string) => (
+              <span
+                key={keyword}
+                className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800"
+              >
+                {keyword}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Contenido del artículo */}
+        <div className="prose prose-lg max-w-none">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}
+            components={{
+              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
+            }}
+          >
+            {post.content}
+          </ReactMarkdown>
+        </div>
+
+        {/* Related Articles */}
+        <div className="mt-16 pt-8 border-t border-slate-200">
+          <RelatedArticles
+            currentSlug={post.slug}
+            currentTags={post.frontmatter.keywords || []}
+            currentCategory={post.frontmatter.category || "normativa"}
+          />
+        </div>
+      </LegalLayout>
     </>
   );
 }
