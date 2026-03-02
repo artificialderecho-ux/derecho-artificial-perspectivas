@@ -39,7 +39,7 @@ export async function RelatedArticles({
         <h2 className="font-serif text-2xl font-bold mb-6 text-foreground">
           Artículos relacionados
         </h2>
-        <p className="text-sm text-slate-500">Próximamente más análisis relacionados.</p>
+        <p className="text-sm text-slate-600">Próximamente más análisis relacionados.</p>
       </section>
     );
   }
@@ -58,21 +58,21 @@ function RelatedArticlesList({ articles, title }: { articles: any[]; title: stri
           <a
             key={item.url}
             href={item.url}
-            className="group block border border-slate-200 rounded-lg p-5 hover:shadow-md hover:border-slate-400 transition"
+            className="group block border border-slate-200 rounded-lg p-5 hover:shadow-md hover:border-slate-400 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             <h3 className="font-serif font-semibold text-lg mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
               {item.frontmatter.title}
             </h3>
             <div className="flex items-center justify-between mt-4">
-              <time className="text-sm text-slate-500">{item.frontmatter.date}</time>
+              <time className="text-sm text-slate-600">{item.frontmatter.date}</time>
               {item.frontmatter.category && (
-                <span className="text-xs font-medium px-2 py-1 bg-slate-100 text-slate-600 rounded-full capitalize">
+                <span className="text-xs font-medium px-2 py-1 bg-slate-100 text-slate-700 rounded-full capitalize">
                   {item.frontmatter.category.replace("-", " ")}
                 </span>
               )}
             </div>
             {item.excerpt && (
-              <p className="text-sm text-slate-600 mt-3 line-clamp-2 italic">
+              <p className="text-sm text-slate-700 mt-3 line-clamp-2 italic">
                 {item.excerpt}
               </p>
             )}

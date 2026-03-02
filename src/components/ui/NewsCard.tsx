@@ -15,17 +15,17 @@ export function NewsCard({ title, date, source, url, summary, tags, image }: New
   const isInternal = url.startsWith("/");
 
   const TitleLink = isInternal ? (
-    <Link href={url} className="hover:text-primary transition-colors">
+    <Link href={url} className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
       {title}
     </Link>
   ) : (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+    <a href={url} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
       {title}
     </a>
   );
 
   const SourceLink = isInternal ? (
-    <Link href={url} className="text-body hover:text-foreground transition-colors underline underline-offset-4">
+    <Link href={url} className="text-body hover:text-foreground transition-colors underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
       {source} →
     </Link>
   ) : (
@@ -33,7 +33,7 @@ export function NewsCard({ title, date, source, url, summary, tags, image }: New
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-body hover:text-foreground transition-colors underline underline-offset-4"
+      className="text-body hover:text-foreground transition-colors underline underline-offset-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
     >
       {source} →
     </a>

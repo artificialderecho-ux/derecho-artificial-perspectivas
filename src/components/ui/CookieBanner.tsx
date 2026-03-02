@@ -81,13 +81,13 @@ export function CookieBanner() {
       <div className="bg-[#0F172A] text-white p-6 rounded-lg shadow-2xl border border-slate-700 backdrop-blur-sm bg-opacity-95">
         <h3 className="font-serif text-lg mb-3 font-medium">Privacidad y Transparencia</h3>
 
-        <p className="text-slate-300 text-sm leading-relaxed mb-4">
+        <p className="text-slate-400 text-sm leading-relaxed mb-4">
           En Derecho Artificial utilizamos cookies propias y de terceros para analizar nuestros servicios y mostrarle
           publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación.
           <br />
           <Link
             href="/cookies"
-            className="text-white underline underline-offset-2 hover:text-blue-200 transition-colors mt-1 inline-block"
+            className="text-white underline underline-offset-2 hover:text-blue-400 transition-colors mt-1 inline-block"
           >
             Leer Política de Cookies
           </Link>
@@ -104,14 +104,14 @@ export function CookieBanner() {
             <Button
               onClick={() => saveConsent("essential")}
               variant="outline"
-              className="flex-1 border-slate-600 text-slate-200 hover:bg-slate-800 hover:text-white"
+              className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white"
             >
               Rechazar opcionales
             </Button>
           </div>
 
           <div className="text-center">
-            <Link href="/cookies" className="text-xs text-slate-400 hover:text-white transition-colors">
+            <Link href="/cookies" className="text-xs text-slate-500 hover:text-white transition-colors">
               Configurar
             </Link>
           </div>

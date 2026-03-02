@@ -128,7 +128,7 @@ export function SearchBar({ className }: SearchBarProps) {
 
   return (
     <div ref={containerRef} className={cn("relative w-full max-w-xs", className)}>
-      <div className="flex items-center gap-2 rounded-md border border-input bg-background px-2 py-1 text-sm focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background">
+      <div className="flex items-center gap-2 rounded-md border border-input bg-background px-2 py-1 text-sm focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 focus-within:ring-offset-background">
         <Search className="h-4 w-4 text-muted-foreground" />
         <input
           type="search"
@@ -164,7 +164,8 @@ export function SearchBar({ className }: SearchBarProps) {
                   key={`${result.category}-${result.slug}`}
                   type="button"
                   onClick={() => handleNavigate(result)}
-                  className="flex w-full flex-col items-start gap-1 px-4 py-3 text-left text-sm hover:bg-accent"
+                  className="flex w-full flex-col items-start gap-1 px-4 py-3 text-left text-sm hover:bg-accent focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  aria-label={`Ver ${result.title} - ${result.category}`}
                 >
                   <span className="font-medium text-foreground">{result.title}</span>
                   <span className="text-[11px] uppercase tracking-wide text-caption">

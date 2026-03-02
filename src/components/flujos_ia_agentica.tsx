@@ -39,9 +39,9 @@ function Diagram1() {
   return (
     <div className="space-y-4">
       <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-caption">Flujo 01</p>
-      <h3 className="font-serif text-xl md:text-2xl text-foreground">
+      <h2 className="font-serif text-xl md:text-2xl text-foreground">
         Mutación estructural del tratamiento de datos
-      </h3>
+      </h2>
       <p className="text-sm md:text-[0.95rem] text-body/90 italic">
         Del modelo lineal-reactivo al ecosistema agéntico distribuido.
       </p>
@@ -72,7 +72,14 @@ function Diagram1() {
                 <p className="text-xs sm:text-sm text-body/90 leading-relaxed">{n.text}</p>
               </div>
               {index < linear.length - 1 && (
-                <div className="text-center text-amber-500 text-lg opacity-60 mb-2">↓</div>
+                <button
+                  type="button"
+                  className="text-center text-amber-600 text-lg opacity-60 mb-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  onClick={() => setActiveTab(index + 1)}
+                  aria-label="Siguiente paso"
+                >
+                  ↓
+                </button>
               )}
             </div>
           ))}
@@ -118,7 +125,7 @@ function Diagram1() {
                 <p className="text-xs sm:text-sm text-body/90 leading-relaxed">{n.text}</p>
               </div>
               {index < agentic.length - 1 && (
-                <div className="text-center text-amber-500 text-lg opacity-60 mb-2">↓</div>
+                <div className="text-center text-amber-600 text-lg opacity-60 mb-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">↓</div>
               )}
             </div>
           ))}
@@ -188,9 +195,9 @@ function Diagram2() {
   return (
     <div className="space-y-4">
       <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-caption">Flujo 02</p>
-      <h3 className="font-serif text-xl md:text-2xl text-foreground">
+      <h2 className="font-serif text-xl md:text-2xl text-foreground">
         Marco operativo de gobernanza dinámica
-      </h3>
+      </h2>
       <p className="text-sm md:text-[0.95rem] text-body/90 italic">
         Ciclo iterativo de cuatro fases para sistemas agénticos, alineado con el art. 25 RGPD.
       </p>
@@ -282,9 +289,9 @@ function Diagram3() {
   return (
     <div className="space-y-4">
       <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-caption">Flujo 03</p>
-      <h3 className="font-serif text-xl md:text-2xl text-foreground">
+      <h2 className="font-serif text-xl md:text-2xl text-foreground">
         Los cuatro riesgos estructurales de la IA agéntica
-      </h3>
+      </h2>
       <p className="text-sm md:text-[0.95rem] text-body/90 italic">
         Categorías de riesgo inherentes a la arquitectura, no dependientes del contenido concreto de los datos.
       </p>
@@ -364,7 +371,14 @@ function Diagram4() {
           </div>
         </div>
 
-        <div className="text-center text-amber-500 text-lg opacity-60">↓</div>
+        <button
+          type="button"
+          className="text-center text-amber-600 text-lg opacity-60 mb-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          onClick={() => setActiveTab(1)}
+          aria-label="Siguiente paso"
+        >
+          ↓
+        </button>
 
         <div className="flex items-center gap-3">
           <div
@@ -401,17 +415,23 @@ function Diagram4() {
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] mb-1" style={{ color: GREEN }}>
                 Parámetros dentro de rango
               </p>
-              <p style={{ color: WHITE }}>El agente ejecuta la acción autónomamente.</p>
-              <p className="mt-1 text-[11px] italic" style={{ color: SILVER }}>
-                Registro automático obligatorio de la operación.
+              <p className="text-[13px]" style={{ color: WHITE }}>
+                El agente propone o inicia una operación.
               </p>
             </div>
-            <div className="text-center text-emerald-600 text-base">↓</div>
+            <button
+              type="button"
+              className="text-center text-green-600 text-base w-full"
+              onClick={() => setActiveTab(3)}
+              aria-label="Siguiente paso"
+            >
+              ↓
+            </button>
             <div
               className="rounded-sm border px-3 py-3 text-xs leading-relaxed"
               style={{
-                borderColor: "rgba(26,107,60,0.5)",
-                backgroundColor: "rgba(26,107,60,0.08)",
+                borderColor: "rgba(26,107,60,0.4)",
+                backgroundColor: "rgba(26,107,60,0.06)",
               }}
             >
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] mb-1" style={{ color: GREEN }}>
@@ -444,7 +464,14 @@ function Diagram4() {
                 El humano debe comprender la lógica del proceso.
               </p>
             </div>
-            <div className="text-center text-red-500 text-base">↓</div>
+            <button
+              type="button"
+              className="text-center text-red-600 text-base w-full"
+              onClick={() => setActiveTab(2)}
+              aria-label="Siguiente paso"
+            >
+              ↓
+            </button>
             <div
               className="rounded-sm border px-3 py-3 text-xs leading-relaxed"
               style={{
@@ -562,9 +589,9 @@ function Diagram5() {
   return (
     <div className="space-y-4">
       <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-caption">Flujo 05</p>
-      <h3 className="font-serif text-xl md:text-2xl text-foreground">
+      <h2 className="font-serif text-xl md:text-2xl text-foreground">
         Los cinco pilares de la gobernanza arquitectónica
-      </h3>
+      </h2>
       <p className="text-sm md:text-[0.95rem] text-body/90 italic">
         Modelo de cumplimiento integrado desde el diseño: compliance by architecture.
       </p>
@@ -590,7 +617,8 @@ function Diagram5() {
                 key={p.num}
                 type="button"
                 onClick={() => setActive(isActive ? null : index)}
-                className="flex flex-col items-center transition-transform hover:-translate-y-1"
+                className="flex flex-col items-center transition-transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label={`Pilar ${p.num}: ${p.title}`}
               >
                 <div
                   className="w-full rounded-t-sm"

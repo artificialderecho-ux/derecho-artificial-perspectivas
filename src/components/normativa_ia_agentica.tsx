@@ -378,7 +378,8 @@ function SecInstrumentos() {
               <button
                 type="button"
                 onClick={() => setOpen(isOpen ? null : inst.id)}
-                className="flex w-full items-start gap-3 px-4 py-3 text-left"
+                className="flex w-full items-start gap-3 px-4 py-3 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label={`${inst.nombre} - ${isOpen ? 'Contraer' : 'Expandir'} detalles`}
               >
                 <div
                   className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full"
@@ -511,7 +512,8 @@ function SecCalendario() {
                 key={item.fecha}
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="group relative w-full text-left"
+                className="group relative w-full text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label={`${item.fecha} - ${isOpen ? 'Contraer' : 'Expandir'} detalles`}
               >
                 <div
                   className="absolute left-0 top-2 h-3 w-3 -translate-x-1 rounded-full border-2 bg-background transition-all group-hover:scale-110"

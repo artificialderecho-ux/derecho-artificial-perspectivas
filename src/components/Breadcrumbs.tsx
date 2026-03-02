@@ -22,7 +22,7 @@ export function Breadcrumbs({ items }: { items: { label: string; href: string }[
                {index === items.length - 1 ? ( 
                  <span>{item.label}</span> 
                ) : ( 
-                 <a href={item.href} className="hover:underline text-blue-600">{item.label}</a> 
+                 <a href={item.href} className="hover:underline text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">{item.label}</a> 
                )} 
              </li> 
            ))} 

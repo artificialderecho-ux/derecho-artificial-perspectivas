@@ -95,8 +95,8 @@ export function Header() {
 
   return (
     <header 
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled 
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        pathname === "/" || pathname === "/en"
           ? 'bg-card/95 backdrop-blur-md shadow-nav border-b border-border' 
           : 'bg-transparent border-b border-divider'
       }`}
@@ -121,12 +121,12 @@ export function Header() {
                 <SearchBar />
               </div>
 
-              <nav className="hidden md:flex flex-nowrap items-center gap-x-3 text-sm whitespace-nowrap">
+              <nav className="hidden md:flex flex-nowrap items-center gap-x-3 text-sm whitespace-nowrap" role="navigation" aria-label="Navegación principal">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`tracking-wide transition-all duration-300 relative ${
+                    className={`tracking-wide transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded ${
                       pathname === item.href
                         ? "text-primary font-medium"
                         : "text-caption hover:text-foreground"
@@ -144,7 +144,7 @@ export function Header() {
                 <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
                 <Link
                   href={isEnglish ? getAlternateRoute() : pathname}
-                  className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
+                  className={`text-xs uppercase tracking-wider transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded ${
                     !isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                   }`}
                 >
@@ -153,7 +153,7 @@ export function Header() {
                 <span className="text-caption">|</span>
                 <Link
                   href={isEnglish ? pathname : getAlternateRoute()}
-                  className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
+                  className={`text-xs uppercase tracking-wider transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded ${
                     isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                   }`}
                 >
@@ -165,7 +165,7 @@ export function Header() {
 
           <button
             type="button"
-            className="lg:hidden p-2 -mr-2 text-foreground hover:text-primary transition-colors"
+            className="lg:hidden p-2 -mr-2 text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={isEnglish ? "Open menu" : "Abrir menú"}
           >
@@ -178,14 +178,14 @@ export function Header() {
         </div>
 
         {mobileMenuOpen && (
-          <nav className="lg:hidden border-t border-divider py-8 animate-fade-in">
+          <nav className="lg:hidden border-t border-divider py-8 animate-fade-in" role="navigation" aria-label="Navegación móvil">
             <div className="flex flex-col gap-6">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-base transition-colors duration-300 ${
+                  className={`text-base transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded ${
                     pathname === item.href
                       ? "text-primary font-medium"
                       : "text-caption hover:text-foreground"
@@ -201,7 +201,7 @@ export function Header() {
                   <Link
                     href={getAlternateRoute()}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm text-primary hover:text-primary/80 transition-colors duration-300"
+                    className="text-sm text-primary hover:text-primary/80 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                   >
                     {isEnglish ? "Versión en español" : "English version"}
                   </Link>

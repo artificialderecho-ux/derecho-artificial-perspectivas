@@ -8,6 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+
+# Reportes de accesibilidad
+/a11y-reports/
 .next/
 out/
 build/
