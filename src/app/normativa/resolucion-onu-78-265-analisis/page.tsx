@@ -96,7 +96,7 @@ export default async function ResolucionONUPage() {
     ],
   });
 
-  const pdfUrl = "/fuentes/resolucion_onu_78_265_analisis.pdf";
+  const pdfUrl = "/fuentes/3050901.pdf";
 
   return (
     <>
