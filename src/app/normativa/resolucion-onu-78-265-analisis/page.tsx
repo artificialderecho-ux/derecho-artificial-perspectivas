@@ -103,7 +103,7 @@ export default async function ResolucionONUPage() {
       <StructuredData data={breadcrumbJsonLd} />
       <LegalLayout
         title={post.frontmatter.title}
-        category="Normativa Internacional"
+        category="Normativa IA"
         author={{ name: "Análisis Jurídico", href: "/quienes-somos" }}
         date={post.frontmatter.date}
       >
