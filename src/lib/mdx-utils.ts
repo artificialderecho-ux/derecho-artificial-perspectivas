@@ -88,7 +88,7 @@ export function getAllPosts(): PostData[] {
       category.toLowerCase() === 'noticia' && frontmatterUrl
         ? frontmatterUrl
         : isLegislationCategory
-        ? `/normativa/${encodeURIComponent(slug)}`
+        ? `/normativa/${slug}`
         : `/${category}/${encodeURIComponent(slug)}`;
 
     return {
