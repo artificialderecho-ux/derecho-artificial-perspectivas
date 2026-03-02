@@ -76,9 +76,19 @@ export function getAllPosts(): PostData[] {
 
     const category = (data.category || 'blog') as string;
     const frontmatterUrl = (data as any).url as string | undefined;
+    
+    // Para posts de legislación, usar siempre la ruta /normativa/
+    const isLegislationCategory = 
+      category.toLowerCase() === 'legislación digital' ||
+      category.toLowerCase() === 'legislación internacional' ||
+      category.toLowerCase() === 'legislación' ||
+      category.toLowerCase() === 'normativa';
+    
     const url =
       category.toLowerCase() === 'noticia' && frontmatterUrl
         ? frontmatterUrl
+        : isLegislationCategory
+        ? `/normativa/${encodeURIComponent(slug)}`
         : `/${category}/${encodeURIComponent(slug)}`;
 
     return {
