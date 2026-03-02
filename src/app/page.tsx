@@ -553,6 +553,15 @@ export default async function HomePage() {
               mdxPosts
                 .filter((post) => {
                   const c = (post.frontmatter.category || "").toLowerCase();
+                  
+                  // Para normativa, incluir categorías relacionadas
+                  if (cat === "normativa") {
+                    return c === "normativa" || 
+                           c === "legislación digital" || 
+                           c === "legislación internacional" ||
+                           c === "legislación";
+                  }
+                  
                   if (c !== cat) return false;
                   if (c === "recursos") {
                     const subcat = (post.frontmatter.subcategory || "").toLowerCase();

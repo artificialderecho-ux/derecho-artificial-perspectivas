@@ -70,7 +70,12 @@ export default async function NormativaPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post => post.frontmatter.category === 'normativa');
+  const mdxPosts = getAllPosts().filter(post => 
+    post.frontmatter.category === 'normativa' || 
+    post.frontmatter.category === 'Legislación Digital' || 
+    post.frontmatter.category === 'Legislación Internacional' ||
+    post.frontmatter.category === 'Legislación'
+  );
 
   const mdxItems: PreviewItem[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
