@@ -74,7 +74,8 @@ export default async function NormativaPage() {
     post.frontmatter.category === 'normativa' || 
     post.frontmatter.category === 'Legislación Digital' || 
     post.frontmatter.category === 'Legislación Internacional' ||
-    post.frontmatter.category === 'Legislación'
+    post.frontmatter.category === 'Legislación' ||
+    post.frontmatter.category === 'Legislación IA'
   );
 
   const mdxItems: PreviewItem[] = mdxPosts.map(post => {

@@ -559,7 +559,8 @@ export default async function HomePage() {
                     return c === "normativa" || 
                            c === "legislación digital" || 
                            c === "legislación internacional" ||
-                           c === "legislación";
+                           c === "legislación" ||
+                           c === "legislación ia";
                   }
                   
                   if (c !== cat) return false;

@@ -82,6 +82,7 @@ export function getAllPosts(): PostData[] {
       category.toLowerCase() === 'legislación digital' ||
       category.toLowerCase() === 'legislación internacional' ||
       category.toLowerCase() === 'legislación' ||
+      category.toLowerCase() === 'legislación ia' ||
       category.toLowerCase() === 'normativa';
     
     const url =
