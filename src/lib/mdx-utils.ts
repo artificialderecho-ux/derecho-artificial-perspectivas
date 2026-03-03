@@ -94,6 +94,11 @@ export function getAllPosts(): PostData[] {
       category.toLowerCase() === 'jurisprudencia' ||
       category.toLowerCase() === 'jurisprudencia ia';
     
+    // Para posts de IA Global, usar siempre la ruta /global-ia/
+    const isGlobalIACategory = 
+      category.toLowerCase() === 'ia-global' ||
+      category.toLowerCase() === 'global ia';
+    
     const url =
       category.toLowerCase() === 'noticia' && frontmatterUrl
         ? frontmatterUrl
@@ -101,6 +106,8 @@ export function getAllPosts(): PostData[] {
         ? `/normativa/${finalSlug}`
         : isJurisprudenceCategory
         ? `/jurisprudencia/${finalSlug}`
+        : isGlobalIACategory
+        ? `/global-ia/${finalSlug}`
         : `/${category}/${encodeURIComponent(finalSlug)}`;
 
     return {

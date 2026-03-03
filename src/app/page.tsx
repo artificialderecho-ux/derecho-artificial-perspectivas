@@ -570,6 +570,12 @@ export default async function HomePage() {
                            c === "jurisprudencia ia";
                   }
                   
+                  // Para IA Global, incluir categorías relacionadas
+                  if (cat === "ia-global") {
+                    return c === "ia-global" || 
+                           c === "global ia";
+                  }
+                  
                   if (c !== cat) return false;
                   if (c === "recursos") {
                     const subcat = (post.frontmatter.subcategory || "").toLowerCase();
