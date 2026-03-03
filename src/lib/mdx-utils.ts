@@ -83,6 +83,7 @@ export function getAllPosts(): PostData[] {
       category.toLowerCase() === 'legislación internacional' ||
       category.toLowerCase() === 'legislación' ||
       category.toLowerCase() === 'legislación ia' ||
+      category.toLowerCase() === 'regulación ue' ||
       category.toLowerCase() === 'normativa';
     
     const url =

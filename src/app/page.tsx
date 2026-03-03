@@ -560,7 +560,8 @@ export default async function HomePage() {
                            c === "legislación digital" || 
                            c === "legislación internacional" ||
                            c === "legislación" ||
-                           c === "legislación ia";
+                           c === "legislación ia" ||
+                           c === "regulación ue";
                   }
                   
                   if (c !== cat) return false;
