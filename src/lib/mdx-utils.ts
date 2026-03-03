@@ -86,11 +86,18 @@ export function getAllPosts(): PostData[] {
       category.toLowerCase() === 'regulación ue' ||
       category.toLowerCase() === 'normativa';
     
+    // Para posts de jurisprudencia, usar siempre la ruta /jurisprudencia/
+    const isJurisprudenceCategory = 
+      category.toLowerCase() === 'jurisprudencia' ||
+      category.toLowerCase() === 'jurisprudencia ia';
+    
     const url =
       category.toLowerCase() === 'noticia' && frontmatterUrl
         ? frontmatterUrl
         : isLegislationCategory
         ? `/normativa/${slug}`
+        : isJurisprudenceCategory
+        ? `/jurisprudencia/${slug}`
         : `/${category}/${encodeURIComponent(slug)}`;
 
     return {

@@ -564,6 +564,12 @@ export default async function HomePage() {
                            c === "regulación ue";
                   }
                   
+                  // Para jurisprudencia, incluir categorías relacionadas
+                  if (cat === "jurisprudencia") {
+                    return c === "jurisprudencia" || 
+                           c === "jurisprudencia ia";
+                  }
+                  
                   if (c !== cat) return false;
                   if (c === "recursos") {
                     const subcat = (post.frontmatter.subcategory || "").toLowerCase();
