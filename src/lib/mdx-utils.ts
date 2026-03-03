@@ -65,6 +65,9 @@ export function getAllPosts(): PostData[] {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
+    // Usar slug del frontmatter si está disponible, si no usar el nombre del archivo
+    const finalSlug = (data as any).slug || slug;
+
     const excerpt =
       data.description ||
       content
@@ -95,13 +98,13 @@ export function getAllPosts(): PostData[] {
       category.toLowerCase() === 'noticia' && frontmatterUrl
         ? frontmatterUrl
         : isLegislationCategory
-        ? `/normativa/${slug}`
+        ? `/normativa/${finalSlug}`
         : isJurisprudenceCategory
-        ? `/jurisprudencia/${slug}`
-        : `/${category}/${encodeURIComponent(slug)}`;
+        ? `/jurisprudencia/${finalSlug}`
+        : `/${category}/${encodeURIComponent(finalSlug)}`;
 
     return {
-      slug,
+      slug: finalSlug,
       frontmatter: data as PostFrontmatter,
       content,
       url,
