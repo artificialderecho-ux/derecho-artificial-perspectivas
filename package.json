@@ -15,7 +15,9 @@
     "deploy-content:dry": "node scripts/deploy-content.mjs --dry",
     "fetch-eu-ai-news": "tsx scripts/fetch-eu-ai-news.ts",
     "test": "jest --coverage --testMatch=\"**/__tests__/**/*.test.tsx\"",
-    "audit:a11y": "npx axe https://derechoartificial.com --output json --output-file a11y-reports/report.json"
+    "audit:a11y": "npx axe https://derechoartificial.com --output json --output-file a11y-reports/report.json",
+    "verify-posts": "node scripts/verify-posts.mjs",
+    "publish-post": "node scripts/publish-post.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
