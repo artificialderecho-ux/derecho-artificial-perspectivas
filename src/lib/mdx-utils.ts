@@ -84,6 +84,10 @@ export function getAllPosts(): PostData[] {
 
     const category = (data.category || 'blog') as string;
     const frontmatterUrl = (data as any).url as string | undefined;
+    const frontmatterSlug = (data as any).slug as string | undefined;
+    
+    // Usar slug del frontmatter si existe, sino usar el nombre del archivo
+    const finalSlug = frontmatterSlug || slug;
     
     // Para posts de legislación, usar siempre la ruta /normativa/
     const isLegislationCategory = 
@@ -108,12 +112,12 @@ export function getAllPosts(): PostData[] {
       category.toLowerCase() === 'noticia' && frontmatterUrl
         ? frontmatterUrl // Para noticias con URL externa, usar la URL externa directamente
         : isLegislationCategory
-        ? `/normativa/${slug}`
+        ? `/normativa/${finalSlug}`
         : isJurisprudenceCategory
-        ? `/jurisprudencia/${slug}`
+        ? `/jurisprudencia/${finalSlug}`
         : isGlobalIACategory
-        ? `/global-ia/${slug}`
-        : `/${category}/${encodeURIComponent(slug)}`;
+        ? `/global-ia/${finalSlug}`
+        : `/${category}/${encodeURIComponent(finalSlug)}`;
 
     // Si es una noticia con URL externa, no incluirla en la lista de posts internos
     if (category.toLowerCase() === 'noticia' && frontmatterUrl) {
@@ -121,7 +125,7 @@ export function getAllPosts(): PostData[] {
     }
 
     return {
-      slug,
+      slug: finalSlug,
       frontmatter: data as PostFrontmatter,
       content,
       url,
