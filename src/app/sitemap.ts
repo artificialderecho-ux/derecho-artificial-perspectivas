@@ -47,12 +47,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const mdxPosts = getAllPosts();
   const mdxPages: MetadataRoute.Sitemap = mdxPosts
     .filter(post => !post.url.startsWith('http')) // Excluir enlaces externos si los hay
-    .map(post => ({
-      url: `${baseUrl}${post.url}`,
-      lastModified: post.frontmatter.lastModified ? new Date(post.frontmatter.lastModified) : new Date(post.frontmatter.date),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    }));
+    .map(post => {
+      // Función para validar y crear fecha segura
+      const createSafeDate = (dateString: string | undefined): Date => {
+        if (!dateString) return new Date();
+        
+        try {
+          const date = new Date(dateString);
+          // Verificar si la fecha es válida
+          if (isNaN(date.getTime())) {
+            console.warn(`Invalid date detected: ${dateString}, using current date`);
+            return new Date();
+          }
+          return date;
+        } catch (error) {
+          console.warn(`Error parsing date: ${dateString}, using current date`, error);
+          return new Date();
+        }
+      };
+
+      return {
+        url: `${baseUrl}${post.url}`,
+        lastModified: post.frontmatter.lastModified 
+          ? createSafeDate(post.frontmatter.lastModified)
+          : createSafeDate(post.frontmatter.date),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      };
+    });
 
   return [...staticPages, ...allArticlePages, ...mdxPages];
 }
