@@ -84,7 +84,7 @@ export default async function PostPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-blue-900">SENTENCIA</h3>
+                <h3 className="text-lg font-semibold text-blue-900">INFORME COMPLETO</h3>
                 <p className="text-sm text-blue-700">Documento de análisis jurídico</p>
               </div>
             </div>
