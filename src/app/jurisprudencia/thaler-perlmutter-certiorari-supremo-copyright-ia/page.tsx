@@ -163,7 +163,7 @@ export default async function ThalerPerlmutterPage() {
               ))}
             </div>
           </div>
-        }
+        )}
 
         {/* Contenido del artículo */}
         <div className="prose prose-lg max-w-none">
