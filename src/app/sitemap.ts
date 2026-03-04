@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter(post => !post.url.startsWith('http')) // Excluir enlaces externos si los hay
     .map(post => ({
       url: `${baseUrl}${post.url}`,
-      lastModified: new Date(post.frontmatter.date),
+      lastModified: post.frontmatter.lastModified ? new Date(post.frontmatter.lastModified) : new Date(post.frontmatter.date),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     }));
