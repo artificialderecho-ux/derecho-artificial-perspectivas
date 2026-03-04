@@ -108,6 +108,11 @@ export function getAllPosts(): PostData[] {
       category.toLowerCase() === 'ia-global' ||
       category.toLowerCase() === 'global ia';
     
+    // Para posts de Firma Scarpa, usar siempre la ruta /firma-scarpa/
+    const isFirmaScarpaCategory = 
+      category.toLowerCase() === 'firma scarpa' ||
+      category.toLowerCase() === 'firma-scarpa';
+    
     const url =
       category.toLowerCase() === 'noticia' && frontmatterUrl
         ? frontmatterUrl // Para noticias con URL externa, usar la URL externa directamente
@@ -117,6 +122,8 @@ export function getAllPosts(): PostData[] {
         ? `/jurisprudencia/${finalSlug}`
         : isGlobalIACategory
         ? `/global-ia/${finalSlug}`
+        : isFirmaScarpaCategory
+        ? `/firma-scarpa/${finalSlug}`
         : `/${category}/${encodeURIComponent(finalSlug)}`;
 
     // Si es una noticia con URL externa, no incluirla en la lista de posts internos
