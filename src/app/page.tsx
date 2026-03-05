@@ -152,6 +152,12 @@ export default async function HomePage() {
   unifiedActualidad.sort((a, b) => b.date - a.date);
   unifiedFirma.sort((a, b) => b.date - a.date);
 
+  // DEBUG: Mostrar posts de Firma Scarpa para depuración
+  console.log('🔍 DEBUG - Posts de Firma Scarpa (unifiedFirma):');
+  unifiedFirma.forEach((post, index) => {
+    console.log(`${index + 1}. ${post.title} - ${new Date(post.date).toLocaleDateString()} - ${post.urlPath}`);
+  });
+
   const latestActualidad = unifiedActualidad[0] ?? null;
   const latestFirma = unifiedFirma[0] ?? null;
 
