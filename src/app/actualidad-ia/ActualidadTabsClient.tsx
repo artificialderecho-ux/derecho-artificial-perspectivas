@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ContentPreviewGrid, type PreviewItem } from "@/components/ContentPreviewCard";
@@ -26,6 +26,14 @@ const getPlaceholder = (tab: TabKey) => {
   return "No hay contenidos disponibles por ahora.";
 };
 
+function SearchParamsWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={null}>
+      {children}
+    </Suspense>
+  );
+}
+
 export function ActualidadTabsClient({
   initialTab,
   allItems,
@@ -35,49 +43,63 @@ export function ActualidadTabsClient({
   const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    setActiveTab(initialTab);
-  }, [initialTab]);
-
-  const onChangeTab = (value: string) => {
-    const next = (value || "todas") as TabKey;
-    setActiveTab(next);
-    const params = new URLSearchParams(searchParams?.toString() || "");
-    if (next === "todas") {
-      params.delete("tab");
-    } else {
-      params.set("tab", next);
-    }
-    const qs = params.toString();
-    const url = qs ? `${pathname}?${qs}` : pathname;
-    router.replace(url, { scroll: false });
-  };
-
-  const items =
-    activeTab === "noticias" ? noticiasItems : activeTab === "guias" ? guiasItems : allItems;
-  const currentLabel = tabLabels[activeTab];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Tabs value={activeTab} onValueChange={onChangeTab}>
-        <TabsList className="mb-6">
-          <TabsTrigger value="todas">Todas</TabsTrigger>
-          <TabsTrigger value="noticias">Noticias</TabsTrigger>
-          <TabsTrigger value="guias">Guías y Protocolos</TabsTrigger>
-        </TabsList>
-      </Tabs>
+    <SearchParamsWrapper>
+      {() => {
+        const searchParams = useSearchParams();
 
-      <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">{currentLabel}</h2>
+        useEffect(() => {
+          setActiveTab(initialTab);
+        }, [initialTab]);
 
-      {items.length > 0 ? (
-        <ContentPreviewGrid items={items} columns={2} size="medium" />
-      ) : (
-        <div className="rounded-lg border border-divider bg-surface p-8 text-sm text-body">
-          {getPlaceholder(activeTab)}
-        </div>
-      )}
-    </div>
+        const onChangeTab = (value: string) => {
+          const next = (value || "todas") as TabKey;
+          setActiveTab(next);
+          const params = new URLSearchParams(searchParams?.toString() || "");
+          if (next === "todas") {
+            params.delete("tab");
+          } else {
+            params.set("tab", next);
+          }
+          const newUrl = `${pathname}${params.toString() ? `?${params.toString()}` : ""}`;
+          router.push(newUrl);
+        };
+
+        const getItems = () => {
+          switch (activeTab) {
+            case "noticias":
+              return noticiasItems;
+            case "guias":
+              return guiasItems;
+            default:
+              return allItems;
+          }
+        };
+
+        const items = getItems();
+        const hasItems = items.length > 0;
+
+        return (
+          <div className="container mx-auto px-4 py-8">
+            <Tabs value={activeTab} onValueChange={onChangeTab}>
+              <TabsList className="mb-6">
+                <TabsTrigger value="todas">Todas</TabsTrigger>
+                <TabsTrigger value="noticias">Noticias</TabsTrigger>
+                <TabsTrigger value="guias">Guías y Protocolos</TabsTrigger>
+              </TabsList>
+              <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">{tabLabels[activeTab]}</h2>
+              {hasItems ? (
+                <ContentPreviewGrid items={items} columns={2} size="medium" />
+              ) : (
+                <div className="rounded-lg border border-divider bg-surface p-8 text-sm text-body">
+                  {getPlaceholder(activeTab)}
+                </div>
+              )}
+            </Tabs>
+          </div>
+        );
+      }}
+    </SearchParamsWrapper>
   );
 }
