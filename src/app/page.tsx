@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
+import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
 import { getAllPosts } from '@/lib/mdx-utils';
 import { cache } from 'react';
 
