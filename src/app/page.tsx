@@ -155,7 +155,13 @@ export default async function HomePage() {
   // DEBUG: Mostrar posts de Firma Scarpa para depuración
   console.log('🔍 DEBUG - Posts de Firma Scarpa (unifiedFirma):');
   unifiedFirma.forEach((post, index) => {
-    console.log(`${index + 1}. ${post.title} - ${new Date(post.date).toLocaleDateString()} - ${post.urlPath}`);
+    const dateObj = new Date(post.date);
+    const timestamp = dateObj.getTime();
+    console.log(`${index + 1}. ${post.title}`);
+    console.log(`   Fecha: ${dateObj.toLocaleDateString()} (${timestamp})`);
+    console.log(`   URL: ${post.urlPath}`);
+    console.log(`   Author: ${post.author}`);
+    console.log('---');
   });
 
   const latestActualidad = unifiedActualidad[0] ?? null;
