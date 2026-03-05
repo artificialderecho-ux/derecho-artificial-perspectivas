@@ -3,7 +3,7 @@ import Image from "next/image";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
 import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
 import { getAllPosts } from '@/lib/mdx-utils';
-import { formatDateFromMs } from '@/lib/badges';
+import { formatDateFromMs, isNew } from '@/lib/badges';
 import { cache } from 'react';
 
 // Revalidación automática cada hora
