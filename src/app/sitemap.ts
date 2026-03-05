@@ -18,7 +18,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // 2. Artículos dinámicos de todas las secciones de contenido
-  const contentSections: ContentSection[] = ['firma-scarpa', 'actualidad-ia', 'normativa'];
+  const contentSections: ContentSection[] = [
+    'firma-scarpa',
+    'actualidad-ia',
+    'normativa',
+    'guia',
+    'jurisprudencia',
+    'propiedad-intelectual-ia',
+    'etica-ia',
+    'recursos'
+  ];
   let allArticlePages: MetadataRoute.Sitemap = [];
 
   for (const section of contentSections) {
