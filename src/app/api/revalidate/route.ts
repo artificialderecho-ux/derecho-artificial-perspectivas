@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
     // Revalidar rutas
     pathsToRevalidate.forEach(path => {
       try {
-        revalidatePath(path);
+        revalidatePath(path, 'revalidate-api');
         console.log(`✅ Path revalidado: ${path}`);
       } catch (error) {
         console.error(`❌ Error revalidando path ${path}:`, error);
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
     // Revalidar tags
     tagsToRevalidate.forEach(tag => {
       try {
-        revalidateTag(tag);
+        revalidateTag(tag, 'revalidate-api');
         console.log(`✅ Tag revalidado: ${tag}`);
       } catch (error) {
         console.error(`❌ Error revalidando tag ${tag}:`, error);
