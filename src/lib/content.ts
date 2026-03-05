@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import { marked } from "marked";
 
-export type ContentSection = "actualidad-ia" | "firma-scarpa" | "normativa";
+export type ContentSection = "actualidad-ia" | "firma-scarpa" | "normativa" | "guia" | "jurisprudencia" | "propiedad-intelectual-ia" | "etica-ia" | "recursos";
 
 export type ContentEntry = {
   slug: string;
