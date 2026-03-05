@@ -139,7 +139,9 @@ export default async function HomePage() {
     ...getAllPosts().filter(post => 
       post.frontmatter.category && 
       (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
-       post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa')
+       post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
+       post.frontmatter.category.toLowerCase() === 'firma scarpa' ||
+       post.frontmatter.category.toLowerCase() === 'firma-scarpa')
     ).map(post => {
       // DEBUG: Mostrar posts MDX de Firma Scarpa antes de conversión
       console.log('🔍 DEBUG - Post MDX encontrado:', post.frontmatter.title, 'Categoría:', post.frontmatter.category, 'Fecha:', post.frontmatter.date);
