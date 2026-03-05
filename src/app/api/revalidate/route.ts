@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
     // Revalidar tags
     tagsToRevalidate.forEach(tag => {
       try {
-        revalidateTag(tag);
+        revalidateTag(tag, '');
         console.log(`✅ Tag revalidado: ${tag}`);
       } catch (error) {
         console.error(`❌ Error revalidando tag ${tag}:`, error);
