@@ -8,6 +8,9 @@ import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resourc
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
 
+// Revalidación automática cada hora
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Firma Scarpa",
   description:

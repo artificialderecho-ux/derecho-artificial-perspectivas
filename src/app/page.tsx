@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { listContentSlugs, getContentEntry } from "@/lib/content";
-import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
-import { Badges, isNew, isRecent, formatDateFromMs, getItemDateMs } from "@/lib/badges";
-import { IndicatorsLegend } from "@/components/ui/IndicatorsLegend";
-import { StructuredData } from "@/components/seo/StructuredData";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { getAllPosts } from "@/lib/mdx-utils";
+import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
+import { getAllPosts } from '@/lib/mdx-utils';
+import { cache } from 'react';
+
+// Revalidación automática cada hora
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Derecho, ética y regulación de la IA",
@@ -142,33 +140,17 @@ export default async function HomePage() {
        post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
        post.frontmatter.category.toLowerCase() === 'firma scarpa' ||
        post.frontmatter.category.toLowerCase() === 'firma-scarpa')
-    ).map(post => {
-      // DEBUG: Mostrar posts MDX de Firma Scarpa antes de conversión
-      console.log('🔍 DEBUG - Post MDX encontrado:', post.frontmatter.title, 'Categoría:', post.frontmatter.category, 'Fecha:', post.frontmatter.date);
-      return {
-        title: post.frontmatter.title,
-        description: post.excerpt,
-        date: new Date(post.frontmatter.date).getTime(),
-        urlPath: post.url,
-        author: post.frontmatter.author || "Ricardo Scarpa",
-      };
-    }),
+    ).map(post => ({
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      date: new Date(post.frontmatter.date).getTime(),
+      urlPath: post.url,
+      author: post.frontmatter.author || "Ricardo Scarpa",
+    })),
   ];
 
   unifiedActualidad.sort((a, b) => b.date - a.date);
   unifiedFirma.sort((a, b) => b.date - a.date);
-
-  // DEBUG: Mostrar posts de Firma Scarpa para depuración
-  console.log('🔍 DEBUG - Posts de Firma Scarpa (unifiedFirma):');
-  unifiedFirma.forEach((post, index) => {
-    const dateObj = new Date(post.date);
-    const timestamp = post.date; // ya es timestamp
-    console.log(`${index + 1}. ${post.title}`);
-    console.log(`   Fecha: ${dateObj.toLocaleDateString()} (${timestamp})`);
-    console.log(`   URL: ${post.urlPath}`);
-    console.log(`   Author: ${post.author}`);
-    console.log('---');
-  });
 
   const latestActualidad = unifiedActualidad[0] ?? null;
   const latestFirma = unifiedFirma[0] ?? null;

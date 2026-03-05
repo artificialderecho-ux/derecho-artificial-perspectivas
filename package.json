@@ -17,7 +17,10 @@
     "test": "jest --coverage --testMatch=\"**/__tests__/**/*.test.tsx\"",
     "audit:a11y": "npx axe https://derechoartificial.com --output json --output-file a11y-reports/report.json",
     "verify-posts": "node scripts/verify-posts.mjs",
-    "publish-post": "node scripts/publish-post.mjs"
+    "publish-post": "node scripts/publish-post.mjs",
+    "revalidate": "node scripts/revalidate-api.mjs",
+    "revalidate:home": "scripts/revalidate-home.bat",
+    "revalidate:home:unix": "bash scripts/revalidate-home.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -9,8 +9,8 @@ import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { ActualidadTabsClient } from "./ActualidadTabsClient";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+// Revalidación automática cada hora
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Actualidad IA",
