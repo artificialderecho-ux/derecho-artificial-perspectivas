@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   title: "Análisis Jurídico - Derecho Artificial",
   description: "Análisis exhaustivo de jurisprudencia y normativa en inteligencia artificial",
   alternates: {
-    canonical: "/articulo-doctrinal/e-negotiation-singapur-transformacion-digital-justicia-odr",
+    canonical: "/firma-scarpa/e-negotiation-singapur-transformacion-digital-justicia-odr",
   },
 };
 
@@ -55,7 +55,7 @@ export default async function PostPage() {
     <>
       <LegalLayout
         title={post.frontmatter.title}
-        category="articulo-doctrinal"
+        category="Firma Scarpa"
         author={{ name: "Derecho Artificial", href: "/quienes-somos" }}
         date={post.frontmatter.date}
       >
@@ -136,7 +136,7 @@ export default async function PostPage() {
           <RelatedArticles
             currentSlug={post.slug}
             currentTags={post.frontmatter.tags || []}
-            currentCategory={post.frontmatter.category || "articulo-doctrinal"}
+            currentCategory={post.frontmatter.category || "Firma Scarpa"}
           />
         </div>
       </LegalLayout>
