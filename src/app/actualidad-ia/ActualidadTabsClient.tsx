@@ -26,15 +26,7 @@ const getPlaceholder = (tab: TabKey) => {
   return "No hay contenidos disponibles por ahora.";
 };
 
-function SearchParamsWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <Suspense fallback={null}>
-      {children}
-    </Suspense>
-  );
-}
-
-export function ActualidadTabsClient({
+function ActualidadTabsContent({
   initialTab,
   allItems,
   noticiasItems,
@@ -43,63 +35,64 @@ export function ActualidadTabsClient({
   const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    setActiveTab(initialTab);
+  }, [initialTab]);
+
+  const onChangeTab = (value: string) => {
+    const next = (value || "todas") as TabKey;
+    setActiveTab(next);
+    const params = new URLSearchParams(searchParams?.toString() || "");
+    if (next === "todas") {
+      params.delete("tab");
+    } else {
+      params.set("tab", next);
+    }
+    const newUrl = `${pathname}${params.toString() ? `?${params.toString()}` : ""}`;
+    router.push(newUrl);
+  };
+
+  const getItems = () => {
+    switch (activeTab) {
+      case "noticias":
+        return noticiasItems;
+      case "guias":
+        return guiasItems;
+      default:
+        return allItems;
+    }
+  };
+
+  const items = getItems();
+  const hasItems = items.length > 0;
 
   return (
-    <SearchParamsWrapper>
-      {() => {
-        const searchParams = useSearchParams();
-
-        useEffect(() => {
-          setActiveTab(initialTab);
-        }, [initialTab]);
-
-        const onChangeTab = (value: string) => {
-          const next = (value || "todas") as TabKey;
-          setActiveTab(next);
-          const params = new URLSearchParams(searchParams?.toString() || "");
-          if (next === "todas") {
-            params.delete("tab");
-          } else {
-            params.set("tab", next);
-          }
-          const newUrl = `${pathname}${params.toString() ? `?${params.toString()}` : ""}`;
-          router.push(newUrl);
-        };
-
-        const getItems = () => {
-          switch (activeTab) {
-            case "noticias":
-              return noticiasItems;
-            case "guias":
-              return guiasItems;
-            default:
-              return allItems;
-          }
-        };
-
-        const items = getItems();
-        const hasItems = items.length > 0;
-
-        return (
-          <div className="container mx-auto px-4 py-8">
-            <Tabs value={activeTab} onValueChange={onChangeTab}>
-              <TabsList className="mb-6">
-                <TabsTrigger value="todas">Todas</TabsTrigger>
-                <TabsTrigger value="noticias">Noticias</TabsTrigger>
-                <TabsTrigger value="guias">Guías y Protocolos</TabsTrigger>
-              </TabsList>
-              <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">{tabLabels[activeTab]}</h2>
-              {hasItems ? (
-                <ContentPreviewGrid items={items} columns={2} size="medium" />
-              ) : (
-                <div className="rounded-lg border border-divider bg-surface p-8 text-sm text-body">
-                  {getPlaceholder(activeTab)}
-                </div>
-              )}
-            </Tabs>
+    <div className="container mx-auto px-4 py-8">
+      <Tabs value={activeTab} onValueChange={onChangeTab}>
+        <TabsList className="mb-6">
+          <TabsTrigger value="todas">Todas</TabsTrigger>
+          <TabsTrigger value="noticias">Noticias</TabsTrigger>
+          <TabsTrigger value="guias">Guías y Protocolos</TabsTrigger>
+        </TabsList>
+        <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6">{tabLabels[activeTab]}</h2>
+        {hasItems ? (
+          <ContentPreviewGrid items={items} columns={2} size="medium" />
+        ) : (
+          <div className="rounded-lg border border-divider bg-surface p-8 text-sm text-body">
+            {getPlaceholder(activeTab)}
           </div>
-        );
-      }}
-    </SearchParamsWrapper>
+        )}
+      </Tabs>
+    </div>
+  );
+}
+
+export function ActualidadTabsClient(props: Props) {
+  return (
+    <Suspense fallback={<div className="container mx-auto px-4 py-8">Cargando...</div>}>
+      <ActualidadTabsContent {...props} />
+    </Suspense>
   );
 }
