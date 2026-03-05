@@ -136,6 +136,17 @@ export default async function HomePage() {
       urlPath: `/firma-scarpa/${e.slug}`,
       author: "Derecho Artificial",
     })),
+    ...getAllPosts().filter(post => 
+      post.frontmatter.category && 
+      (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
+       post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa')
+    ).map(post => ({
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      date: new Date(post.frontmatter.date).getTime(),
+      urlPath: post.url,
+      author: post.frontmatter.author || "Ricardo Scarpa",
+    })),
   ];
 
   unifiedActualidad.sort((a, b) => b.date - a.date);
