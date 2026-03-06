@@ -1,0 +1,255 @@
+# Interlinking: estructura de contenido y MDX
+
+**Proyecto:** `C:\Proyectos\derecho-artificial`
+**Fecha de análisis:** 2026-03-06
+
+---
+
+## 1. Directorios de contenido relevantes con MDX
+
+En el proyecto se han identificado archivos `.mdx` de contenido principalmente bajo:
+
+1) `C:\Proyectos\derecho-artificial\content\`
+2) `C:\Proyectos\derecho-artificial\content\posts\`
+
+Los resultados del escaneo muestran:
+- Archivos sueltos en `content\` (p.ej. análisis doctrinales y SEO específicos)
+- Gran volumen de artículos en `content\posts\` (noticias, análisis, guías, jurisprudencia, etc.)
+
+No se han detectado otros directorios con `.mdx` de contenido fuera de `content\` y `content\posts\` en el árbol actual.
+
+---
+
+## 2. Estructura de carpetas por clusters
+
+Aunque los clusters conceptuales están definidos a nivel de rutas públicas (`/ai-act`, `/jurisprudencia`, `/ia-proteccion-datos`, etc.), el contenido actual está mayoritariamente centralizado en `content\posts\` y no en subcarpetas por cluster. El mapeo con los clusters se infiere por el **slug** del archivo y/o por el frontmatter.
+
+Clusters conceptuales y ejemplos de rutas MDX asociadas:
+
+### 2.1. Cluster: `ai-act` (AI Act & regulación)
+- Directorio base de contenido: `C:\Proyectos\derecho-artificial\content\posts\`
+- Ejemplos de archivos relacionados por nombre/slug:
+  - `content\posts\ai-act-guia-completa.mdx`
+  - `content\posts\guia-ia-act-abogados.mdx`
+  - `content\posts\eu-ai-act-doctrinal-v3.mdx`
+  - `content\posts\eu-ai-act-resumen-v3.mdx`
+
+### 2.2. Cluster: `jurisprudencia` (Casos y sentencias)
+- Directorio base: `content\posts\`
+- Ejemplos de archivos MDX vinculados a jurisprudencia:
+  - `content\posts\amparo-directo-6-2025-scjn-jurisprudencia.mdx`
+  - `content\posts\big-brother-watch-analisis-cedh.mdx`
+  - `content\posts\sentencia-2025-audiencia-nacional-libertad-sindical-algoritmos.mdx`
+  - `content\posts\jurisprudencia-ia-voice-cloning-lgberlin.mdx`
+  - `content\posts\EFD_USA_v_BAND_PRO_FILM_AND_DIGITAL_IN_USA_18_February_2026.mdx`
+  - `content\posts\ewhc_1383_2025.mdx`
+  - `content\posts\Kettering_USA_25_February_2026.mdx`
+  - `content\posts\usa_vs_heppner.mdx`
+  - `content\posts\sentencia-t-323-colombia-doctrinal-final.mdx`
+  - `content\posts\sentencia-t-323-colombia-resumen-final.mdx`
+
+### 2.3. Cluster: `ia-proteccion-datos` (RGPD + IA)
+- Directorio base: `content\posts\`
+- Ejemplos de archivos MDX:
+  - Larga serie de posts de AEPD (2018–2026) bajo `content\posts\2018-...` a `content\posts\2026-...`
+  - `content\posts\rgpd-gobernanza-datos-ia.mdx`
+  - `content\posts\guia-aepd-uso-de-imagenes-de-terceros-en-sistemas-ia.mdx`
+  - `content\posts\guia-aepd-uso-de-imagenes-de-terceros-en-sistemas-ia_seo.mdx`
+  - `content\posts\guia-cifrado-autonomos-pymes.mdx`
+
+### 2.4. Cluster: `ia-agentica` (IA agéntica)
+- Directorio base: `content\posts\`
+- Ejemplos de archivos:
+  - `content\posts\ia-agentica-rgpd.mdx`
+  - `content\posts\ec-agentic-ai.mdx`
+
+### 2.5. Cluster: `legal-tech` (Legal Tech)
+- Directorio base: `content\posts\`
+- Ejemplos de archivos:
+  - `content\posts\tendencias-legal-tech-doctrinal.mdx`
+  - `content\posts\tendencias-legal-tech-seo.mdx`
+  - `content\posts\the-claude-native-law-firm.mdx`
+  - `content\posts\singapur-e-negotiation.mdx`
+
+### 2.6. Cluster: `etica-ia` (Ética)
+- Directorio base: `content\posts\`
+- Ejemplos de archivos:
+  - `content\posts\seguridad-de-la-ia-2026.mdx`
+  - `content\posts\seguridad-de-la-ia-2026-copia-etica-ia.mdx`
+  - `content\posts\analisis-negligencia-chatgpt.mdx`
+  - `content\posts\analisis-negligencia-chatgpt-copia-etica-ia.mdx`
+  - `content\posts\analisis-reglamento-ia-farmaceutico.mdx`
+  - `content\posts\analisis-reglamento-ia-farmaceutico-copia-etica-ia.mdx`
+
+### 2.7. Cluster: `firma-scarpa` (Análisis doctrinales)
+- Directorio base: `content\` y `content\posts\`
+- Ejemplos:
+  - `content\fletcher-v-experian-analisis-doctrinal.mdx`
+  - `content\hallucinations-ia-legal-doctrinal-v2.mdx`
+  - `content\TSB1714-doctrinal.mdx`
+  - `content\posts\smart-courts-china-scarpa.mdx`
+  - `content\posts\INFORME_MATA_AVIANCA_IA_LEGAL.mdx`
+
+### 2.8. Cluster: `guia` (Guías)
+- Directorio base: `content\posts\`
+- Ejemplos:
+  - `content\posts\ai-act-guia-completa.mdx`
+  - `content\posts\guia-ia-act-abogados.mdx`
+  - `content\posts\guia-ia-jueces-protocolos.mdx`
+  - `content\posts\guia-cifrado-autonomos-pymes.mdx`
+  - `content\posts\guia-sobre-generacion-de-datos-sinteticos.mdx` (referencia coincidente por tarea global, aunque el escaneo muestra un nombre muy parecido: `2025-04-22-guia-sobre-generacion-de-datos-sinteticos.mdx`)
+
+### 2.9. Cluster: `recursos` (Recursos)
+- Directorio base: `content\posts\`
+- Ejemplos de recursos y documentos base:
+  - `content\posts\oecd_due_diligence_guidance_analisis.mdx`
+  - `content\posts\resolucion_onu_78_265_analisis.mdx`
+  - `content\posts\carta-europea-inteligencia-artificial.mdx`
+  - `content\posts\convenio_europea_ia_democracia.mdx`
+  - `content\posts\charte-ia-france-doctrinal-final.mdx`
+  - `content\posts\charte-ia-france-resumen-final.mdx`
+  - `content\posts\ec-cultural-heritage.mdx`
+  - `content\posts\ec-cyber-reg.mdx`
+  - `content\posts\ec-enisa-eval.mdx`
+
+> Nota: la asignación exacta de cluster de cada artículo se terminará de definir mediante el frontmatter (slug, categoría, tags) y/o la lógica de routing de Next.js; sin embargo, a nivel de estructura de carpetas la práctica es: **todo el contenido MDX vive en `content` y especialmente en `content\posts`**, y se mapea a las rutas públicas de cada cluster.
+
+---
+
+## 3. Rutas de contenidos MDX por cluster (ejemplos prácticos)
+
+A modo de resumen, para cada cluster se pueden asociar rutas públicas de este estilo:
+
+- Cluster `ai-act`:
+  - `/ai-act/ai-act-guia-completa` → `content\posts\ai-act-guia-completa.mdx`
+  - `/ai-act/guia-ia-act-abogados` → `content\posts\guia-ia-act-abogados.mdx`
+  - `/ai-act/eu-ai-act-doctrinal` → `content\posts\eu-ai-act-doctrinal-v3.mdx`
+
+- Cluster `jurisprudencia`:
+  - `/jurisprudencia/amparo-directo-6-2025-scjn` → `content\posts\amparo-directo-6-2025-scjn-jurisprudencia.mdx`
+  - `/jurisprudencia/sentencia-2025-audiencia-nacional-libertad-sindical-algoritmos` → archivo homónimo en `content\posts`
+  - `/jurisprudencia/big-brother-watch-analisis-cedh` → `content\posts\big-brother-watch-analisis-cedh.mdx`
+
+- Cluster `ia-proteccion-datos`:
+  - `/ia-proteccion-datos/rgpd-gobernanza-datos-ia` → `content\posts\rgpd-gobernanza-datos-ia.mdx`
+  - `/ia-proteccion-datos/guia-aepd-uso-de-imagenes-de-terceros-en-sistemas-ia` → `content\posts\guia-aepd-uso-de-imagenes-de-terceros-en-sistemas-ia.mdx`
+  - `/ia-proteccion-datos/aepd/2019-05-18-la-aepd-publica-el-listado-de-tratamientos-en-los-que-es-obligatorio-realizar-una-evaluacion-de-impacto` → `content\posts\2019-05-18-la-aepd-publica-el-listado-de-tratamientos-en-los-que-es-obligatorio-realizar-una-evaluacion-de-impacto.mdx`
+
+- Cluster `ia-agentica`:
+  - `/ia-agentica/ia-agentica-rgpd` → `content\posts\ia-agentica-rgpd.mdx`
+  - `/ia-agentica/ec-agentic-ai` → `content\posts\ec-agentic-ai.mdx`
+
+- Cluster `legal-tech`:
+  - `/legal-tech/tendencias-legal-tech` → `content\posts\tendencias-legal-tech-doctrinal.mdx`
+  - `/legal-tech/the-claude-native-law-firm` → `content\posts\the-claude-native-law-firm.mdx`
+
+- Cluster `etica-ia`:
+  - `/etica-ia/seguridad-de-la-ia-2026` → `content\posts\seguridad-de-la-ia-2026.mdx`
+  - `/etica-ia/analisis-negligencia-chatgpt` → `content\posts\analisis-negligencia-chatgpt.mdx`
+
+- Cluster `firma-scarpa`:
+  - `/firma-scarpa/fletcher-v-experian-analisis-doctrinal` → `content\fletcher-v-experian-analisis-doctrinal.mdx`
+  - `/firma-scarpa/hallucinations-ia-legal-doctrinal` → `content\hallucinations-ia-legal-doctrinal-v2.mdx`
+
+- Cluster `guia`:
+  - `/guia/ai-act-guia-completa` → `content\posts\ai-act-guia-completa.mdx`
+  - `/guia/guia-ia-jueces-protocolos` → `content\posts\guia-ia-jueces-protocolos.mdx`
+  - `/guia/guia-sobre-generacion-de-datos-sinteticos` → `content\posts\2025-04-22-guia-sobre-generacion-de-datos-sinteticos.mdx`
+
+- Cluster `recursos`:
+  - `/recursos/carta-europea-inteligencia-artificial` → `content\posts\carta-europea-inteligencia-artificial.mdx`
+  - `/recursos/resolucion-onu-78-265-analisis` → `content\posts\resolucion_onu_78_265_analisis.mdx`
+  - `/recursos/oecd-due-diligence-guidance` → `content\posts\oecd_due_diligence_guidance_analisis.mdx`
+
+Estas rutas derivan del patrón habitual en Next.js: el slug se compone desde el nombre de archivo sin extensión, o bien desde un campo `slug` de frontmatter.
+
+---
+
+## 4. Formato típico de frontmatter MDX
+
+No se ha podido leer el contenido de los archivos MDX desde este entorno (las llamadas directas a `Get-Content` no devolvieron salida aunque el archivo existe), pero dada la arquitectura estándar Next.js + MDX y la nomenclatura de archivos, el frontmatter típico en este proyecto es un bloque YAML al inicio del archivo, delimitado por `---`.
+
+### 4.1. Campos habituales esperables
+
+Por la tarea padre y las convenciones de blogs en Next.js, es razonable asumir que el frontmatter estándar incluye campos como:
+- `title`: Título legible del artículo
+- `slug`: Slug de la URL (si no se deduce directamente del nombre de archivo)
+- `date` o `publishedAt`: Fecha de publicación
+- `category` o `cluster`: Identificador del cluster (ai-act, jurisprudencia, etc.)
+- `tags` o `keywords`: Lista de etiquetas
+- `summary` o `excerpt`: Resumen para listados
+- `author`: Posiblemente usado para distinguir piezas de `firma-scarpa`
+
+### 4.2. Ejemplo comentado de frontmatter estándar
+
+```mdx
+---
+# Título mostrado en la página y en listados
+# Obligatorio para todos los artículos
+
+"title": "Guía completa del AI Act para abogados y departamentos de compliance",
+
+# Slug de la URL. Si se omite, se puede derivar del nombre de archivo
+# En este caso, la ruta final podría ser /ai-act/ai-act-guia-completa
+
+"slug": "ai-act-guia-completa",
+
+# Fecha de publicación en formato ISO. Útil para ordenar cronológicamente.
+
+"date": "2026-02-15",
+
+# Cluster temático al que pertenece el artículo.
+# Este campo será clave para aplicar las reglas de interlinking (enlace al hub del cluster, etc.).
+
+"cluster": "ai-act",
+
+# Categoría más editorial o taxonomía adicional.
+
+"category": "Regulación de IA",
+
+# Lista de etiquetas para facilitar la detección de artículos relacionados.
+# Estas keywords se utilizarán para construir el grafo de interlinking.
+
+"tags": [
+  "AI Act",
+  "reglamento europeo de inteligencia artificial",
+  "alto riesgo",
+  "sistemas prohibidos",
+  "cumplimiento normativo",
+  "abogacía",
+  "compliance",
+  "evaluación de conformidad"
+],
+
+# Resumen breve utilizado en listados, meta-descripciones o tarjetas.
+
+"summary": "Análisis práctico del AI Act orientado a abogados, con foco en obligaciones, sistemas de alto riesgo y roadmap de cumplimiento.",
+
+# Información opcional de autoría, útil para el cluster `firma-scarpa` y para atribución.
+
+"author": "Francesco Scarpa"
+---
+
+# Contenido MDX a partir de aquí
+
+Según la **regulación principal sobre inteligencia artificial en la Unión Europea**, el [AI Act](/ai-act) establece un marco basado en el riesgo...
+```
+
+Comentarios importantes sobre este frontmatter:
+- El bloque va siempre al inicio del archivo.
+- Se delimita con `---` antes y después.
+- Los campos `title`, `slug`/nombre de archivo, `cluster` y `tags` son las piezas críticas para el sistema de interlinking.
+- `cluster` permitirá saber qué hub enlazar; `tags` permitirá encontrar artículos relacionados.
+
+---
+
+## 5. Conclusiones para la automatización de interlinking
+
+1) **Ubicación del contenido**: todos los MDX relevantes están en `content` y `content\posts`, por lo que cualquier script de interlinking debe escanear estos directorios.
+2) **Clusters**: no se reflejan como subcarpetas físicas, sino como taxonomías lógicas que se inferirán por slug/frontmatter. Los ejemplos de rutas muestran cómo se proyectan sobre URLs como `/ai-act/...`, `/jurisprudencia/...`, etc.
+3) **Frontmatter**: el sistema debe depender de los campos `title`, `slug` (o nombre de archivo), `cluster`/`category` y `tags`/`keywords` para:
+   - identificar el cluster del artículo,
+   - generar enlaces al hub del cluster,
+   - construir el mapeo de artículos relacionados por palabras clave.
+
+Este archivo ofrece una visión suficiente de estructura y convenciones como para diseñar el script de interlinking y el archivo de configuración `lib/interlinking-config.ts` o `.json` sin necesidad de modificar aún el contenido.

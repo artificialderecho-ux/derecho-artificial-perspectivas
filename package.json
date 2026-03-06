@@ -20,7 +20,10 @@
     "publish-post": "node scripts/publish-post.mjs",
     "revalidate": "node scripts/revalidate-api.mjs",
     "revalidate:home": "scripts/revalidate-home.bat",
-    "revalidate:home:unix": "bash scripts/revalidate-home.sh"
+    "revalidate:home:unix": "bash scripts/revalidate-home.sh",
+    "interlinking": "node scripts/interlinking-complete-fixed.mjs",
+    "interlinking:dry": "node scripts/interlinking-complete-fixed.mjs",
+    "interlinking:apply": "node -e \"import('./scripts/interlinking-complete-fixed.mjs').then(m => { m.processFiles(); })\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
