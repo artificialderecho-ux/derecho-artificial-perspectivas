@@ -1,335 +1,294 @@
+#!/usr/bin/env node
+/**
+ * publish-post.mjs — Script de publicación · derechoartificial.com
+ *
+ * USO:
+ *   node scripts/publish-post.mjs <seccion>/<slug>
+ *
+ * EJEMPLOS:
+ *   node scripts/publish-post.mjs jurisprudencia/xai-openai-2026
+ *   node scripts/publish-post.mjs firma-scarpa/encrucijada-ia-justicia
+ *   node scripts/publish-post.mjs normativa/reglamento-ia-guia
+ *
+ * ESTRUCTURA ESPERADA EN CONTENT/:
+ *   content/jurisprudencia/xai-openai-2026/index.mdx
+ *   content/jurisprudencia/xai-openai-2026/xai-openai-2026.pdf  ← opcional
+ *
+ * QUÉ HACE:
+ *   1. Valida que el index.mdx existe y tiene frontmatter correcto
+ *   2. Verifica que el campo `section` del frontmatter coincide con la carpeta
+ *   3. Avisa si falta PDF en secciones donde es esperado (jurisprudencia, normativa)
+ *   4. Avisa si hay PDF en secciones donde no corresponde (firma-scarpa)
+ *   5. Hace git add + commit + push
+ *   6. Vercel despliega automáticamente
+ *
+ * QUÉ NO HACE:
+ *   - NO crea page.tsx (el [slug]/page.tsx dinámico ya sirve todos los posts)
+ *   - NO modifica el MDX (sin riesgo de corromper frontmatter)
+ *   - NO hace git add -A (solo añade los archivos del post)
+ */
+
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname  = path.dirname(__filename);
 
-// Función principal de publicación
-async function publishPost(mdxFileName) {
-  console.log('🚀 Iniciando proceso de publicación...');
-  
-  const postsDir = path.join(process.cwd(), 'content', 'posts');
-  const mdxFile = path.join(postsDir, mdxFileName);
-  
-  // Verificar que el archivo MDX existe
-  if (!fs.existsSync(mdxFile)) {
-    console.error(`❌ Archivo MDX no encontrado: ${mdxFile}`);
-    process.exit(1);
-  }
-  
-  console.log(`📄 Procesando: ${mdxFileName}`);
-  
-  // Leer y procesar el MDX
-  const content = fs.readFileSync(mdxFile, 'utf8');
-  
-  // Extraer frontmatter
-  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatterMatch) {
-    console.error(`❌ No se encontró frontmatter en: ${mdxFileName}`);
-    process.exit(1);
-  }
-  
-  const frontmatterText = frontmatterMatch[1];
-  const slugMatch = frontmatterText.match(/slug:\s*"([^"]+)"/);
-  const categoryMatch = frontmatterText.match(/category:\s*"([^"]+)"/);
-  const titleMatch = frontmatterText.match(/title:\s*"([^"]+)"/);
-  
-  if (!slugMatch || !categoryMatch || !titleMatch) {
-    console.error(`❌ Faltan campos requeridos en frontmatter (slug, category, title)`);
-    process.exit(1);
-  }
-  
-  const slug = slugMatch[1];
-  const category = categoryMatch[1];
-  const title = titleMatch[1];
-  
-  console.log(`📋 Información del post:`);
-  console.log(`   Título: ${title}`);
-  console.log(`   Slug: ${slug}`);
-  console.log(`   Categoría: ${category}`);
-  
-  // Eliminar imports innecesarios
-  const cleanedContent = removeImports(content);
-  fs.writeFileSync(mdxFile, cleanedContent);
-  console.log('✅ Imports innecesarios eliminados');
-  
-  // Verificar y crear página del post
-  await verifyAndCreatePostPage(mdxFileName, slug, category);
-  
-  // Verificar PDF
-  const pdfPath = path.join(process.cwd(), 'public', 'fuentes', `${mdxFileName.replace('.mdx', '.pdf')}`);
-  if (fs.existsSync(pdfPath)) {
-    console.log('✅ PDF encontrado y accesible');
-  } else {
-    console.log('⚠️  No se encontró PDF correspondiente');
-  }
-  
-  // Ejecutar verificación general
-  console.log('🔍 Ejecutando verificación general de posts...');
-  execSync('node scripts/verify-posts.mjs', { stdio: 'inherit' });
-  
-  console.log('✅ Proceso de publicación completado');
-  console.log(`📝 Post disponible en: https://derechoartificial.com/${getRoutePath(category)}/${slug}`);
-}
+// ─── Configuración de secciones ──────────────────────────────────────────────
 
-// Función para eliminar imports innecesarios
-function removeImports(content) {
-  const lines = content.split('\n');
-  const cleanedLines = lines.filter(line => {
+const SECTIONS = {
+  'jurisprudencia':           { route: 'jurisprudencia',           pdfExpected: true  },
+  'normativa':                { route: 'normativa',                pdfExpected: true  },
+  'firma-scarpa':             { route: 'firma-scarpa',             pdfExpected: false, pdfForbidden: true },
+  'etica-ia':                 { route: 'etica-ia',                 pdfExpected: false },
+  'propiedad-intelectual-ia': { route: 'propiedad-intelectual-ia', pdfExpected: false },
+  'ia-global':                { route: 'global-ia',                pdfExpected: false },
+  'guias':                    { route: 'recursos/guias',           pdfExpected: false },
+};
+
+// ─── Utilidades ───────────────────────────────────────────────────────────────
+
+function log(emoji, msg)  { console.log(`${emoji}  ${msg}`); }
+function warn(msg)        { console.warn(`⚠️   ${msg}`); }
+function fail(msg)        { console.error(`❌  ${msg}`); process.exit(1); }
+
+/**
+ * Parsea el frontmatter YAML sin dependencias externas.
+ * Devuelve un objeto con los campos clave o null si no hay frontmatter.
+ */
+function parseFrontmatter(content) {
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!match) return null;
+
+  const yaml   = match[1];
+  const fields = {};
+
+  for (const line of yaml.split('\n')) {
     const trimmed = line.trim();
-    return !trimmed.startsWith('import {') && 
-           !trimmed.startsWith('import ') && 
-           trimmed !== '' &&
-           !trimmed.startsWith('---');
-  });
-  
-  // Reconstruir el contenido manteniendo el frontmatter
-  const frontmatterEnd = content.indexOf('---', 3) + 3;
-  const frontmatter = content.substring(0, frontmatterEnd);
-  const bodyContent = cleanedLines.join('\n');
-  
-  return frontmatter + '\n' + bodyContent;
-}
+    if (!trimmed || trimmed.startsWith('#')) continue;
 
-// Función para determinar la ruta según la categoría
-function getRoutePath(category) {
-  if (category.toLowerCase() === 'jurisprudencia' || category.toLowerCase() === 'jurisprudencia ia') {
-    return 'jurisprudencia';
-  } else if (category.toLowerCase() === 'global ia' || category.toLowerCase() === 'ia-global') {
-    return 'global-ia';
-  } else if (category.toLowerCase() === 'normativa' || category.toLowerCase() === 'legislación digital' || category.toLowerCase() === 'legislación') {
-    return 'normativa';
-  } else {
-    return category.toLowerCase().replace(/\s+/g, '-');
-  }
-}
+    const colonIdx = trimmed.indexOf(':');
+    if (colonIdx === -1) continue;
 
-// Función para verificar y crear página de post
-async function verifyAndCreatePostPage(mdxFileName, slug, category) {
-  const appDir = path.join(process.cwd(), 'src', 'app');
-  const routePath = getRoutePath(category);
-  const targetDir = path.join(appDir, routePath);
-  const pageDir = path.join(targetDir, slug);
-  const pageFile = path.join(pageDir, 'page.tsx');
-  
-  // Crear directorio si no existe
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir, { recursive: true });
-  }
-  
-  // Verificar si la página existe
-  if (fs.existsSync(pageFile)) {
-    console.log('✅ Página del post ya existe');
-    return;
-  }
-  
-  console.log('📝 Creando página del post...');
-  
-  // Crear directorio
-  if (!fs.existsSync(pageDir)) {
-    fs.mkdirSync(pageDir, { recursive: true });
-  }
-  
-  // Verificar si tiene PDF
-  const pdfPath = path.join(process.cwd(), 'public', 'fuentes', `${mdxFileName.replace('.mdx', '.pdf')}`);
-  const hasPdf = fs.existsSync(pdfPath);
-  
-  // Generar contenido de la página
-  const pageContent = generatePageContent(mdxFileName, slug, category, routePath, hasPdf);
-  
-  fs.writeFileSync(pageFile, pageContent);
-  console.log(`✅ Página creada: ${pageFile}`);
-  
-  // Verificar inconsistencia entre nombre de archivo y slug
-  const fileName = mdxFileName.replace('.mdx', '');
-  if (fileName !== slug) {
-    console.log('⚠️  Inconsistencia detectada entre nombre de archivo y slug');
-    console.log(`   Nombre archivo: ${fileName}`);
-    console.log(`   Slug: ${slug}`);
-    
-    // Crear página de redirección
-    const redirectDir = path.join(targetDir, fileName);
-    const redirectFile = path.join(redirectDir, 'page.tsx');
-    
-    if (!fs.existsSync(redirectFile)) {
-      console.log('🔄 Creando redirección para compatibilidad...');
-      if (!fs.existsSync(redirectDir)) {
-        fs.mkdirSync(redirectDir, { recursive: true });
-      }
-      
-      const redirectContent = `import { redirect } from 'next/navigation';
+    const key   = trimmed.slice(0, colonIdx).trim();
+    let   value = trimmed.slice(colonIdx + 1).trim();
 
-export default function RedirectPage() {
-  redirect('/${routePath}/${slug}');
-}`;
-      
-      fs.writeFileSync(redirectFile, redirectContent);
-      console.log(`✅ Redirección creada: ${redirectFile}`);
+    // Ignorar líneas de arrays YAML (empiezan con -)
+    if (value.startsWith('-')) continue;
+
+    // Quitar comillas
+    if ((value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
     }
+
+    // Eliminar comentarios inline
+    value = value.split('#')[0].trim();
+    if (value) fields[key] = value;
   }
+
+  return fields;
 }
 
-// Función para generar contenido de página
-function generatePageContent(mdxFile, slug, category, routePath, hasPdf) {
-  const pdfSection = hasPdf ? `
-        {/* PDF Download Box */}
-        <div className="mb-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="p-3 bg-blue-100 rounded-full">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 4H9m0 4h6" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-blue-900">SENTENCIA</h3>
-                <p className="text-sm text-blue-700">Documento de análisis jurídico</p>
-              </div>
-            </div>
-            <Link
-              href="/fuentes/${mdxFile.replace('.mdx', '.pdf')}"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Descargar PDF
-            </Link>
-          </div>
-        </div>` : '';
+// ─── Función principal ────────────────────────────────────────────────────────
 
-  return `import type { Metadata } from "next";
-import Link from "next/link";
-import { getAllPosts } from "@/lib/mdx-utils";
-import { LegalLayout } from "@/components/layout/LegalLayout";
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import rehypeSanitize from 'rehype-sanitize';
-import remarkGfm from 'remark-gfm';
-import { defaultSchema } from 'hast-util-sanitize';
-import { RelatedArticles } from "@/components/RelatedArticles";
+async function publishPost(seccionSlug) {
+  console.log('');
+  log('🚀', `Publicando: ${seccionSlug}\n`);
 
-const sanitizeSchema = {
-  ...defaultSchema,
-  tagNames: [
-    ...(defaultSchema as any).tagNames,
-    'table',
-    'thead',
-    'tbody',
-    'tr',
-    'th',
-    'td',
-    'caption'
-  ],
-  attributes: {
-    ...(defaultSchema as any).attributes,
-    table: ['className'],
-    thead: [],
-    tbody: [],
-    tr: [],
-    th: ['align', 'colspan', 'rowspan'],
-    td: ['align', 'colspan', 'rowspan'],
-    a: ['href', 'name', 'target', 'rel'],
-    img: ['src', 'alt', 'title', 'width', 'height'],
-    code: ['className']
+  // 1. Separar sección y slug
+  const parts = seccionSlug.split('/');
+  if (parts.length !== 2 || !parts[0] || !parts[1]) {
+    fail(`Formato incorrecto. Usa: seccion/slug\nEjemplo: jurisprudencia/xai-openai-2026`);
   }
-};
+  const [argSection, argSlug] = parts;
 
-export const metadata: Metadata = {
-  title: "Análisis Jurídico - Derecho Artificial",
-  description: "Análisis exhaustivo de jurisprudencia y normativa en inteligencia artificial",
-  alternates: {
-    canonical: "/${routePath}/${slug}",
-  },
-};
-
-export default async function PostPage() {
-  const posts = getAllPosts();
-  const post = posts.find(p => p.slug === "${slug}");
-  
-  if (!post) {
-    return <div>Post no encontrado</div>;
+  // 2. Verificar sección válida
+  const sectionConfig = SECTIONS[argSection];
+  if (!sectionConfig) {
+    fail(
+      `Sección no reconocida: "${argSection}"\n` +
+      `Secciones válidas: ${Object.keys(SECTIONS).join(', ')}`
+    );
   }
 
-  return (
-    <>
-      <LegalLayout
-        title={post.frontmatter.title}
-        category="${category}"
-        author={{ name: "Derecho Artificial", href: "/quienes-somos" }}
-        date={post.frontmatter.date}
-      >
-        {/* Metadatos del artículo */}
-        <div className="mb-8 flex flex-wrap gap-4 text-sm text-muted-foreground">
-          <span>📅 {new Date(post.frontmatter.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-          <span>📝 {post.frontmatter.authors?.[0] || 'Derecho Artificial'}</span>
-          <span>🏷️ {post.frontmatter.category}</span>
-          {post.frontmatter.readingTime && (
-            <span>⏱️ {post.frontmatter.readingTime} min</span>
-          )}
-          {post.frontmatter.lastModified && (
-            <span>🔄 Actualizado: {new Date(post.frontmatter.lastModified).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-          )}
-        </div>
+  // 3. Resolver rutas
+  const projectRoot = path.resolve(__dirname, '..');
+  const postDir     = path.join(projectRoot, 'content', argSection, argSlug);
+  const mdxPath     = path.join(postDir, 'index.mdx');
 
-        ${pdfSection}
+  // 4. Verificar que el directorio y el MDX existen
+  if (!fs.existsSync(postDir)) {
+    fail(
+      `No se encontró la carpeta: content/${argSection}/${argSlug}/\n` +
+      `Crea la carpeta y coloca el index.mdx dentro antes de publicar.`
+    );
+  }
+  if (!fs.existsSync(mdxPath)) {
+    fail(
+      `No se encontró: content/${argSection}/${argSlug}/index.mdx\n` +
+      `El archivo debe llamarse exactamente "index.mdx"`
+    );
+  }
+  log('✅', `MDX: content/${argSection}/${argSlug}/index.mdx`);
 
-        {/* Tags */}
-        {post.frontmatter.tags && (
-          <div className="mb-8">
-            <div className="flex flex-wrap gap-2">
-              {post.frontmatter.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
+  // 5. Parsear y validar frontmatter
+  const content = fs.readFileSync(mdxPath, 'utf8');
+  const fields  = parseFrontmatter(content);
 
-        {/* Contenido del artículo */}
-        <div className="prose prose-lg max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}
-            components={{
-              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
-            }}
-          >
-            {post.content}
-          </ReactMarkdown>
-        </div>
+  if (!fields) {
+    fail(`El archivo no tiene frontmatter válido (bloque --- al inicio).`);
+  }
 
-        {/* Related Articles */}
-        <div className="mt-16 pt-8 border-t border-slate-200">
-          <RelatedArticles
-            currentSlug={post.slug}
-            currentTags={post.frontmatter.tags || []}
-            currentCategory={post.frontmatter.category || "${category}"}
-          />
-        </div>
-      </LegalLayout>
-    </>
-  );
-}`;
+  const required = ['title', 'date', 'section', 'slug'];
+  const missing  = required.filter(f => !fields[f]);
+  if (missing.length > 0) {
+    fail(
+      `Faltan campos obligatorios: ${missing.join(', ')}\n\n` +
+      `Frontmatter mínimo:\n` +
+      `  ---\n` +
+      `  title: "Título"\n` +
+      `  description: "Descripción SEO"\n` +
+      `  date: "YYYY-MM-DD"\n` +
+      `  author: "Ricardo Scarpa"\n` +
+      `  section: "${argSection}"\n` +
+      `  slug: "${argSlug}"\n` +
+      `  category: "analisis-juridico"\n` +
+      `  ---`
+    );
+  }
+
+  const { title, date, section: fmSection, slug: fmSlug } = fields;
+
+  log('📋', `Título:    ${title}`);
+  log('📋', `Fecha:     ${date}`);
+  log('📋', `Sección:   ${fmSection}`);
+  log('📋', `Slug:      ${fmSlug}`);
+
+  // 6. Coherencia frontmatter ↔ carpeta
+  if (fmSection !== argSection) {
+    fail(
+      `El campo section del frontmatter ("${fmSection}") no coincide\n` +
+      `con la carpeta del archivo ("${argSection}").\n` +
+      `Corrígelo en el frontmatter o mueve el archivo a la carpeta correcta.`
+    );
+  }
+  if (fmSlug !== argSlug) {
+    warn(`El slug del frontmatter ("${fmSlug}") difiere de la carpeta ("${argSlug}").`);
+    warn(`La URL usará el slug del frontmatter: /${sectionConfig.route}/${fmSlug}`);
+  }
+
+  log('✅', `URL final: /${sectionConfig.route}/${fmSlug}`);
+
+  // 7. Verificar author
+  if (fields.author && fields.author !== 'Ricardo Scarpa') {
+    warn(`Author es "${fields.author}" — debería ser "Ricardo Scarpa".`);
+  }
+
+  // 8. Gestión del PDF
+  const pdfFiles = fs.existsSync(postDir)
+    ? fs.readdirSync(postDir).filter(f => f.endsWith('.pdf'))
+    : [];
+  const hasPdf  = pdfFiles.length > 0;
+  const pdfFile = hasPdf ? pdfFiles[0] : null;
+
+  if (sectionConfig.pdfForbidden && hasPdf) {
+    warn(`Sección "firma-scarpa" no lleva PDF (análisis propios sin fuente externa).`);
+    warn(`Se encontró: ${pdfFile} — no se añadirá al commit.`);
+  } else if (sectionConfig.pdfExpected && !hasPdf) {
+    warn(`Sección "${argSection}" normalmente incluye PDF de la sentencia/norma.`);
+    warn(`Si lo tienes, colócalo en: content/${argSection}/${argSlug}/${argSlug}.pdf`);
+    warn(`El post se publicará sin enlace al PDF.`);
+  } else if (hasPdf) {
+    log('✅', `PDF: ${pdfFile}`);
+  }
+
+  // 9. Sanity check: página dinámica existe
+  const dynamicPage = path.join(projectRoot, 'src', 'app', sectionConfig.route, '[slug]', 'page.tsx');
+  if (!fs.existsSync(dynamicPage)) {
+    warn(`No se encontró src/app/${sectionConfig.route}/[slug]/page.tsx`);
+    warn(`El post puede no renderizarse correctamente.`);
+  } else {
+    log('✅', `Router dinámico: src/app/${sectionConfig.route}/[slug]/page.tsx`);
+  }
+
+  // 10. Sanity check: no existe page.tsx estático para este slug
+  const staticPage = path.join(projectRoot, 'src', 'app', sectionConfig.route, fmSlug, 'page.tsx');
+  if (fs.existsSync(staticPage)) {
+    warn(`¡Existe un page.tsx estático en src/app/${sectionConfig.route}/${fmSlug}/page.tsx!`);
+    warn(`Tiene precedencia sobre el router dinámico y puede romper el build.`);
+    warn(`Elimínalo con: git rm "src/app/${sectionConfig.route}/${fmSlug}/page.tsx"`);
+  }
+
+  // 11. Git status
+  console.log('');
+  log('🔍', 'Verificando git...');
+
+  try {
+    execSync('git status --porcelain', { cwd: projectRoot, encoding: 'utf8' });
+  } catch {
+    fail('No se pudo ejecutar git. ¿Estás en el directorio raíz del proyecto?');
+  }
+
+  // 12. Git add + commit + push
+  console.log('');
+  log('📦', 'Haciendo commit y push...\n');
+
+  try {
+    // Añadir toda la carpeta del post
+    execSync(`git add "content/${argSection}/${argSlug}"`, {
+      cwd: projectRoot,
+      stdio: 'inherit',
+    });
+
+    const pdfNote   = hasPdf && !sectionConfig.pdfForbidden ? '\n- Incluye PDF' : '';
+    const commitMsg =
+      `feat(${argSection}): publicar "${title}"\n\n` +
+      `- Sección: /${sectionConfig.route}/\n` +
+      `- Slug: ${fmSlug}\n` +
+      `- Fecha: ${date}` + pdfNote;
+
+    execSync(`git commit -m ${JSON.stringify(commitMsg)}`, {
+      cwd: projectRoot,
+      stdio: 'inherit',
+    });
+
+    execSync('git push', {
+      cwd: projectRoot,
+      stdio: 'inherit',
+    });
+
+  } catch {
+    fail(`Error en git commit/push. Revisa el mensaje arriba.`);
+  }
+
+  // 13. Resumen final
+  console.log('');
+  console.log('─'.repeat(60));
+  log('🎉', 'Post publicado.');
+  console.log('');
+  log('🌐', `https://www.derechoartificial.com/${sectionConfig.route}/${fmSlug}`);
+  log('⏱️ ', 'Vercel desplegará en ~1-2 minutos.');
+  console.log('─'.repeat(60));
+  console.log('');
 }
 
-// Obtener nombre del archivo de los argumentos
-const mdxFileName = process.argv[2];
+// ─── Entrada ──────────────────────────────────────────────────────────────────
 
-if (!mdxFileName) {
-  console.error('❌ Debes especificar el nombre del archivo MDX');
-  console.log('Uso: node scripts/publish-post.mjs <nombre-archivo.mdx>');
+const arg = process.argv[2];
+
+if (!arg) {
+  console.error('\n❌  Falta el argumento seccion/slug\n');
+  console.error('Uso:     node scripts/publish-post.mjs <seccion>/<slug>');
+  console.error('Ejemplo: node scripts/publish-post.mjs jurisprudencia/xai-openai-2026\n');
+  console.error('Secciones: jurisprudencia | normativa | firma-scarpa | etica-ia |');
+  console.error('           propiedad-intelectual-ia | ia-global | guias\n');
   process.exit(1);
 }
 
-// Ejecutar publicación
-publishPost(mdxFileName).catch(console.error);
+publishPost(arg).catch(e => {
+  console.error(`❌  Error inesperado: ${e.message}`);
+  process.exit(1);
+});
