@@ -19,7 +19,7 @@ type Params = {
 
 export async function generateStaticParams() {
   const mdxPosts = getAllPosts().filter(
-    (p) => (p.frontmatter.category || "").toLowerCase() === "propiedad-intelectual-ia",
+    (p) => (p.frontmatter.category || "").toLowerCase() === "propiedad-intelectual-ia" || (p.frontmatter.section || "").toLowerCase() === "propiedad-intelectual-ia",
   );
   return mdxPosts.map((post) => ({ slug: post.slug }));
 }
@@ -32,7 +32,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "propiedad-intelectual-ia") {
+  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "propiedad-intelectual-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "propiedad-intelectual-ia") {
     return {};
   }
 
@@ -72,7 +72,7 @@ export default async function PropiedadIntelectualIASlugPage({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "propiedad-intelectual-ia") {
+  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "propiedad-intelectual-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "propiedad-intelectual-ia") {
     notFound();
   }
 

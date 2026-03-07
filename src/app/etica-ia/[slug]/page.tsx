@@ -20,7 +20,7 @@ type Params = {
 
 export async function generateStaticParams() {
   const mdxPosts = getAllPosts().filter(
-    (p) => (p.frontmatter.category || "").toLowerCase() === "etica-ia",
+    (p) => (p.frontmatter.category || "").toLowerCase() === "etica-ia" || (p.frontmatter.section || "").toLowerCase() === "etica-ia",
   );
   return mdxPosts.map((post) => ({ slug: post.slug }));
 }
@@ -33,7 +33,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "etica-ia") {
+  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "etica-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "etica-ia") {
     return {};
   }
 
@@ -73,7 +73,7 @@ export default async function EticaIASlugPage({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "etica-ia") {
+  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "etica-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "etica-ia") {
     notFound();
   }
 
