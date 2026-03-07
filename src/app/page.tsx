@@ -582,7 +582,8 @@ export default async function HomePage() {
                   // Para jurisprudencia, incluir categorías relacionadas
                   if (cat === "jurisprudencia") {
                     return c === "jurisprudencia" || 
-                           c === "jurisprudencia ia";
+                           c === "jurisprudencia ia" ||
+                           (post.frontmatter.section || "").toLowerCase() === "jurisprudencia";
                   }
                   
                   // Para IA Global, incluir categorías relacionadas
