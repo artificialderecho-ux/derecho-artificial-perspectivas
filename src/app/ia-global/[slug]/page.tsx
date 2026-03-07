@@ -19,7 +19,7 @@ type Params = {
 
 export async function generateStaticParams() {
   const mdxPosts = getAllPosts().filter(
-    (p) => (p.frontmatter.category || "").toLowerCase() === "ia-global",
+    (p) => (p.frontmatter.category || "").toLowerCase() === "ia-global" || (p.frontmatter.section || "").toLowerCase() === "ia-global",
   );
   return mdxPosts.map((post) => ({ slug: post.slug }));
 }
@@ -32,7 +32,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "ia-global") {
+  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "ia-global" && (mdxPost.frontmatter.section || "").toLowerCase() !== "ia-global") {
     return {};
   }
 
