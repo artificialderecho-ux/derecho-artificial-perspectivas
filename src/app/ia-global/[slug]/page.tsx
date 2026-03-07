@@ -72,14 +72,16 @@ export default async function IAGlobalSlugPage({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "ia-global") {
+  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "ia-global" && (mdxPost.frontmatter.section || "").toLowerCase() !== "ia-global")) {
     notFound();
   }
 
-  const { title, date, category, pdf, author } = mdxPost.frontmatter;
+  const { title, date, category, pdf, author, section } = mdxPost.frontmatter;
+  const categoryForUrl = section || category || "ia-global";
+  const canonical = `https://www.derechoartificial.com/ia-global/${slug}`;
 
   const jsonLd = createArticleJsonLd({
-    url: `https://www.derechoartificial.com/${category}/${slug}`,
+    url: canonical,
     headline: title,
     description: mdxPost.excerpt,
     datePublished: date,
@@ -87,7 +89,7 @@ export default async function IAGlobalSlugPage({
   });
 
   const genericJsonLd = createGenericArticleJsonLd({
-    url: `https://www.derechoartificial.com/${category}/${slug}`,
+    url: canonical,
     headline: title,
     description: mdxPost.excerpt,
     datePublished: date,
@@ -102,7 +104,7 @@ export default async function IAGlobalSlugPage({
         items={[
           { label: "Inicio", href: "/" },
           { label: "IA Global", href: "/ia-global" },
-          { label: title, href: `/${category}/${slug}` },
+          { label: title, href: `/ia-global/${slug}` },
         ]}
       />
       <LegalLayout
@@ -137,7 +139,7 @@ export default async function IAGlobalSlugPage({
           <RelatedArticles
             currentSlug={slug}
             currentTags={mdxPost.frontmatter.tags || []}
-            currentCategory={mdxPost.frontmatter.category || "ia-global"}
+            currentCategory="ia-global"
           />
         </div>
       </LegalLayout>

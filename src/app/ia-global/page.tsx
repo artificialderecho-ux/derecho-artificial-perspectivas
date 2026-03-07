@@ -31,7 +31,10 @@ export default async function IAGlobalPage() {
   });
 
   const mdxPosts = getAllPosts().filter(
-    (post) => (post.frontmatter.category || "").toLowerCase() === "ia-global",
+    (post) => 
+      (post.frontmatter.section || "").toLowerCase() === "ia-global" ||
+      (post.frontmatter.category || "").toLowerCase() === "ia-global" ||
+      (post.frontmatter.category || "").toLowerCase() === "global ia",
   );
 
   const items = mdxPosts
