@@ -51,8 +51,8 @@ export async function generateMetadata({
 
   // Priorizar MDX nativo
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && mdxPost.frontmatter.category === "firma-scarpa") {
-    const { title, description, category, date } = mdxPost.frontmatter;
+  if (mdxPost && (mdxPost.frontmatter.category === "firma-scarpa" || (mdxPost.frontmatter.section || "").toLowerCase() === "firma-scarpa")) {
+    const { title, description, category, date, section } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre IA por Ricardo Scarpa.";
     const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
@@ -152,7 +152,7 @@ export default async function FirmaScarpaSlugPage({
 
   // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && mdxPost.frontmatter.category === "firma-scarpa") {
+  if (mdxPost && (mdxPost.frontmatter.category === "firma-scarpa" || (mdxPost.frontmatter.section || "").toLowerCase() === "firma-scarpa")) {
     const { title, date, category } = mdxPost.frontmatter;
     return (
       <LegalLayout
