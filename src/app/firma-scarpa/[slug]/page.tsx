@@ -34,7 +34,7 @@ export async function generateStaticParams() {
   ]);
   
   // Incluir slugs de posts MDX que tengan categoría firma-scarpa
-  const mdxPosts = getAllPosts().filter(p => p.frontmatter.category === "firma-scarpa");
+  const mdxPosts = getAllPosts().filter(p => p.frontmatter.category === "firma-scarpa" || (p.frontmatter.section || "").toLowerCase() === "firma-scarpa");
   const mdxSlugs = mdxPosts.map(p => p.slug);
 
   const allSlugs = new Set<string>([...jsonSlugs, ...resourceSlugs, ...mdxSlugs]);
