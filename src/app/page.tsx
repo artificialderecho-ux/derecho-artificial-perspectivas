@@ -589,7 +589,8 @@ export default async function HomePage() {
                   // Para IA Global, incluir categorías relacionadas
                   if (cat === "ia-global") {
                     return c === "ia-global" || 
-                           c === "global ia";
+                           c === "global ia" ||
+                           (post.frontmatter.section || "").toLowerCase() === "ia-global";
                   }
                   
                   if (c !== cat) return false;
