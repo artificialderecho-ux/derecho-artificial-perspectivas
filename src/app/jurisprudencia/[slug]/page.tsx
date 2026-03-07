@@ -49,7 +49,7 @@ export async function generateStaticParams() {
   const resourceSlugs = await listSectionResourceSlugs("jurisprudencia");
   
   // Incluir slugs de posts MDX que tengan categoría jurisprudencia
-  const mdxPosts = getAllPosts().filter(p => p.frontmatter.category === "jurisprudencia");
+  const mdxPosts = getAllPosts().filter(p => p.frontmatter.section === "jurisprudencia" || p.frontmatter.category === "jurisprudencia" || p.frontmatter.category?.toLowerCase() === "jurisprudencia ia");
   const mdxSlugs = mdxPosts.map(p => p.slug);
 
   const allSlugs = new Set<string>([...resourceSlugs, ...mdxSlugs]);
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   // Priorizar MDX nativo
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && mdxPost.frontmatter.category === "jurisprudencia") {
+  if (mdxPost && (mdxPost.frontmatter.section === "jurisprudencia" || mdxPost.frontmatter.category === "jurisprudencia" || mdxPost.frontmatter.category?.toLowerCase() === "jurisprudencia ia")) {
     const { title, description, category, date } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre jurisprudencia en IA.";
@@ -134,7 +134,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
 
   // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && mdxPost.frontmatter.category === "jurisprudencia") {
+  if (mdxPost && (mdxPost.frontmatter.section === "jurisprudencia" || mdxPost.frontmatter.category === "jurisprudencia" || mdxPost.frontmatter.category?.toLowerCase() === "jurisprudencia ia")) {
     const { title, date, category, pdf } = mdxPost.frontmatter;
     const pdfUrl =
       pdf && (pdf.startsWith("/") || pdf.startsWith("http"))
