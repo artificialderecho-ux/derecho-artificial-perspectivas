@@ -143,7 +143,8 @@ export default async function HomePage() {
       (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
        post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
        post.frontmatter.category.toLowerCase() === 'firma scarpa' ||
-       post.frontmatter.category.toLowerCase() === 'firma-scarpa')
+       post.frontmatter.category.toLowerCase() === 'firma-scarpa' ||
+       (post.frontmatter.section || "").toLowerCase() === 'firma-scarpa')
     ).map(post => ({
       title: post.frontmatter.title,
       description: post.excerpt,

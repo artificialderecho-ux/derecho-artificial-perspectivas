@@ -73,7 +73,8 @@ export default async function FirmaScarpaPage() {
   const mdxPosts = getAllPosts().filter(post => 
     post.frontmatter.category && 
     (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
-     post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa')
+     post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
+     (post.frontmatter.section || "").toLowerCase() === 'firma-scarpa')
   );
 
   const mdxItems: UnifiedItem[] = mdxPosts.map(post => {
