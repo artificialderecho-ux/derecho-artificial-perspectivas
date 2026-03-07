@@ -81,20 +81,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 ### 2.1 Análisis de Conformidad Normativa
 
-<Tabs className="my-6">
-  <TabsList>
-    <TabsTrigger value="rgpd">RGPD</TabsTrigger>
-    <TabsTrigger value="regia">Reg. IA</TabsTrigger>
-    <TabsTrigger value="lopdgdd">LOPDGDD</TabsTrigger>
-  </TabsList>
+
   
-  <TabsContent value="rgpd">
-    <Card>
-      <CardHeader>
-        <CardTitle>Conformidad RGPD</CardTitle>
-        <CardDescription>Requisitos de protección de datos en sistemas IA judiciales</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    RGPD</TabsTrigger>
+    Reg. IA</TabsTrigger>
+    LOPDGDD</TabsTrigger>
+  
+  
+  
+    
+      
+        #### Conformidad RGPD
+        Requisitos de protección de datos en sistemas IA judiciales</CardDescription>
+      
+      
         <div>
           <h4 className="font-semibold mb-2">Art. 5 RGPD - Principios fundacionales</h4>
           <ul className="list-disc pl-6 space-y-1 text-sm">
@@ -115,17 +115,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
           <h4 className="font-semibold mb-2">Art. 35 RGPD - Evaluación de Impacto (EIPD)</h4>
           <p className="text-sm"><strong>Obligatoria cuando:</strong> Sistema IA procesa datos de litigantes, magistrados u otra información sensible; perfiló automático; vigilancia masiva.</p>
         </div>
-      </CardContent>
-    </Card>
-  </TabsContent>
+      
+    ---
+  
 
-  <TabsContent value="regia">
-    <Card>
-      <CardHeader>
-        <CardTitle>Reglamento IA de la UE</CardTitle>
-        <CardDescription>Regulación específica de sistemas IA de alto riesgo en justicia</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
+  
+    
+      
+        #### Reglamento IA de la UE
+        Regulación específica de sistemas IA de alto riesgo en justicia</CardDescription>
+      
+      
         <div>
           <h4 className="font-semibold mb-2">Art. 5 - Sistemas prohibidos</h4>
           <ul className="list-disc pl-6 space-y-1 text-sm">
@@ -152,17 +152,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
           <h4 className="font-semibold mb-2">Art. 14 - Supervisión humana</h4>
           <p className="text-sm">Requisito: Capacidad significativa de un humano para monitorear, comprender y actuar respecto a decisiones IA.</p>
         </div>
-      </CardContent>
-    </Card>
-  </TabsContent>
+      
+    ---
+  
 
-  <TabsContent value="lopdgdd">
-    <Card>
-      <CardHeader>
-        <CardTitle>LOPDGDD (Ley Orgánica 3/2018)</CardTitle>
-        <CardDescription>Especificidades españolas en protección de datos y IA judicial</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
+  
+    
+      
+        #### LOPDGDD (Ley Orgánica 3/2018)
+        Especificidades españolas en protección de datos y IA judicial</CardDescription>
+      
+      
         <div>
           <h4 className="font-semibold mb-2">Art. 22 LOPDGDD - Decisiones automatizadas individuales</h4>
           <p className="text-sm mb-2">Prohibición reforzada en contexto judicial: derecho a obtención de decisión de persona física cuando el interesado sea parte de procedimiento.</p>
@@ -177,10 +177,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
           <h4 className="font-semibold mb-2">Art. 8 LOPDGDD - Seguridad reforzada</h4>
           <p className="text-sm">Medidas técnicas y organizativas proporcionales a naturaleza sensible de datos judiciales: auditoría, encriptación, control de acceso diferenciado.</p>
         </div>
-      </CardContent>
-    </Card>
-  </TabsContent>
-</Tabs>
+      
+    ---
+  
+
 
 ---
 
@@ -190,8 +190,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 **ANTES de utilizar cualquier sistema IA, el juez debe verificar:**
 
-<Card className="my-6">
-  <CardContent className="pt-6">
+
+  
     <div className="space-y-3">
       <div className="flex gap-3">
         <input type="checkbox" disabled className="mt-1" />
@@ -257,8 +257,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
         </div>
       </div>
     </div>
-  </CardContent>
-</Card>
+  
+---
 
 ### 3.2 Evaluación de Impacto en Derechos Fundamentales (EDFH)
 
@@ -442,11 +442,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 **Contenidos mínimos:**
 
-<Card>
-  <CardHeader>
-    <CardTitle>Módulos de Formación Obligatoria</CardTitle>
-  </CardHeader>
-  <CardContent className="space-y-4">
+
+  
+    #### Módulos de Formación Obligatoria
+  
+  
     <div>
       <h4 className="font-semibold">Módulo 1: Conceptos fundamentales (4 horas)</h4>
       <p className="text-sm text-gray-700">Qué es IA, machine learning, algoritmos; diferencia con automatización tradicional; limitaciones inherentes</p>
@@ -467,8 +467,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
       <h4 className="font-semibold">Módulo 5: Ética judicial (3 horas)</h4>
       <p className="text-sm text-gray-700">Imparcialidad; independencia; confianza pública; integridad; reconciliación con tecnología</p>
     </div>
-  </CardContent>
-</Card>
+  
+---
 
 ### 8.2 Actualización Periódica
 
