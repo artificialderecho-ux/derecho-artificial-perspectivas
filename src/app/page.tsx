@@ -609,7 +609,7 @@ export default async function HomePage() {
 
         const getLatestFirmaPosts = () => {
               return unifiedFirma.slice(0, 2).map((entry, idx) => ({
-                slug: irma-home-,
+                slug: irma-home-,
                 frontmatter: {
                   title: entry.title,
                   date: new Date(entry.date).toISOString(),
