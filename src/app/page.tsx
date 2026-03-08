@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
@@ -643,7 +643,9 @@ export default async function HomePage() {
               const items =
                 sec.category === "actualidad-ia"
                   ? getLatestActualidadPosts()
-                  : getLatestByCategory(sec.category);
+                  : sec.category === "firma-scarpa"
+                    ? getLatestFirmaPosts()
+                    : getLatestByCategory(sec.category);
                   const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
                   return (
                     <div
