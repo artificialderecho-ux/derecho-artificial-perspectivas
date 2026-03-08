@@ -607,6 +607,19 @@ export default async function HomePage() {
                 .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
                 .slice(0, 2);
 
+        const getLatestFirmaPosts = () => {
+              return unifiedFirma.slice(0, 2).map((entry, idx) => ({
+                slug: irma-home-,
+                frontmatter: {
+                  title: entry.title,
+                  date: new Date(entry.date).toISOString(),
+                  category: "firma-scarpa",
+                },
+                excerpt: entry.description || "",
+                url: entry.urlPath,
+              }));
+            };
+
         const getLatestActualidadPosts = () => newsMdxCandidates.slice(0, 2);
 
             const buildHref = (post: any) => {
@@ -698,3 +711,4 @@ export default async function HomePage() {
     </>
   );
 }
+
