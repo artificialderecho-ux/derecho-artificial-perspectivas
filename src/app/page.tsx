@@ -119,25 +119,7 @@ export default async function HomePage() {
   ];
 
   const unifiedFirma = [
-    ...resolvedFirmaJson.map((e) => ({
-      title: e.title,
-      description: e.description,
-      date: (() => {
-        const publishedMs =
-          typeof e.datePublished === "string" ? new Date(e.datePublished).getTime() : NaN;
-        const fallback = typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0;
-        return Number.isNaN(publishedMs) ? fallback : publishedMs;
-      })(),
-      urlPath: e.urlPath,
-      author: e.author,
-    })),
-    ...resolvedFirmaResources.map((e) => ({
-      title: e.title,
-      description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-      date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: `/firma-scarpa/${e.slug}`,
-      author: "Derecho Artificial",
-    })),
+    // Priorizar posts MDX de Firma Scarpa
     ...getAllPosts().filter(post => 
       post.frontmatter.category && 
       (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
@@ -152,10 +134,30 @@ export default async function HomePage() {
       urlPath: post.url,
       author: post.frontmatter.author || "Ricardo Scarpa",
     })),
-  ];
+    // Luego añadir recursos JSON legacy
+    ...resolvedFirmaJson.map((e) => ({
+      title: e.title,
+      description: e.description,
+      date: (() => {
+        const publishedMs =
+          typeof e.datePublished === "string" ? new Date(e.datePublished).getTime() : NaN;
+        const fallback = typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0;
+        return Number.isNaN(publishedMs) ? fallback : publishedMs;
+      })(),
+      urlPath: e.urlPath,
+      author: e.author,
+    })),
+    // Finalmente añadir recursos PDF
+    ...resolvedFirmaResources.map((e) => ({
+      title: e.title,
+      description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
+      date: e.displayDateMs ?? e.dateMs ?? 0,
+      urlPath: `/firma-scarpa/${e.slug}`,
+      author: "Derecho Artificial",
+    })),
+  ].sort((a, b) => b.date - a.date);
 
   unifiedActualidad.sort((a, b) => b.date - a.date);
-  unifiedFirma.sort((a, b) => b.date - a.date);
 
   const latestActualidad = unifiedActualidad[0] ?? null;
   const latestFirma = unifiedFirma[0] ?? null;
