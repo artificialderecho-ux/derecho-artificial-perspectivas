@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
@@ -9,7 +9,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { cache } from 'react';
 
 // Revalidación automática cada hora
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Derecho, ética y regulación de la IA",
