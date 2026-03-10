@@ -224,7 +224,7 @@ export default async function JurisprudenciaSlugPage({
         </article>
         <RelatedArticles 
           currentSlug={slug} 
-          category="jurisprudencia"
+          currentCategory="jurisprudencia"
         />
         <StructuredData 
           jsonLd={createArticleJsonLd({
