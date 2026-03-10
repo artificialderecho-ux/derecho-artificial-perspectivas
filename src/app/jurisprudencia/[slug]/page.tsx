@@ -1,289 +1,362 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { LegalLayout } from "@/components/layout/LegalLayout";
-import {
-  StructuredData,
-  createBreadcrumbJsonLd,
-  createLegalDecisionJsonLd,
-} from "@/components/seo/StructuredData";
-import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
-import { RelatedArticles } from "@/components/RelatedArticles";
-import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import rehypeSanitize from 'rehype-sanitize';
-import remarkGfm from 'remark-gfm';
-import { defaultSchema } from 'hast-util-sanitize';
+import Link from "next/link"
 
-const sanitizeSchema = {
-  ...defaultSchema,
-  tagNames: [
-    ...(defaultSchema as any).tagNames,
-    'table',
-    'thead',
-    'tbody',
-    'tr',
-    'th',
-    'td',
-    'caption'
-  ],
-  attributes: {
-    ...(defaultSchema as any).attributes,
-    table: ['className'],
-    thead: [],
-    tbody: [],
-    tr: [],
-    th: ['align', 'colspan', 'rowspan'],
-    td: ['align', 'colspan', 'rowspan'],
-    a: ['href', 'name', 'target', 'rel'],
-    img: ['src', 'alt', 'title', 'width', 'height'],
-    code: ['className']
-  }
-};
+// Mock data - later will come from MDX/CMS
+const FEATURED_ARTICLES = [
+  {
+    slug: "california-sb-1047-ai-liability-lawyers",
+    title: "California's SB-1047 and What It Means for Law Firm Liability",
+    description: "The landmark AI safety bill creates new exposure for firms deploying AI in client-facing workflows. Here's what you need to know.",
+    category: "Legislation",
+    state: "California",
+    date: "Mar 1, 2025",
+    readingTime: 8,
+  },
+  {
+    slug: "harvey-ai-review-2025",
+    title: "Harvey AI Review 2025: Is It Worth the Enterprise Price?",
+    description: "We put Harvey through its paces across research, drafting, and deposition prep. The results are nuanced.",
+    category: "Tool Review",
+    date: "Feb 28, 2025",
+    readingTime: 12,
+  },
+  {
+    slug: "aba-formal-opinion-512-ai",
+    title: "ABA Formal Opinion 512: Competence in the Age of AI",
+    description: "The ABA has spoken. Every attorney using AI tools must now meet a new standard of technological competence.",
+    category: "ABA Ethics",
+    date: "Feb 25, 2025",
+    readingTime: 6,
+  },
+]
 
-type Params = {
-  slug: string;
-};
+const TRACKER_HIGHLIGHTS = [
+  { state: "California", status: "enacted", slug: "california" },
+  { state: "New York", status: "enacted", slug: "new-york" },
+  { state: "Texas", status: "active-legislation", slug: "texas" },
+  { state: "Florida", status: "active-legislation", slug: "florida" },
+  { state: "Colorado", status: "enacted", slug: "colorado" },
+  { state: "Illinois", status: "active-legislation", slug: "illinois" },
+]
 
-export async function generateStaticParams() {
-  const resourceSlugs = await listSectionResourceSlugs("jurisprudencia");
-  
-  // Incluir slugs de posts MDX que tengan categoría jurisprudencia
-  const mdxPosts = getAllPosts().filter(p => p.frontmatter.section === "jurisprudencia" || p.frontmatter.category === "jurisprudencia" || p.frontmatter.category?.toLowerCase() === "jurisprudencia ia");
-  const mdxSlugs = mdxPosts.map(p => p.slug);
-
-  const allSlugs = new Set<string>([...resourceSlugs, ...mdxSlugs]);
-  return Array.from(allSlugs).map((slug) => ({ slug }));
+const STATUS_COLORS: Record<string, { bg: string; text: string; label: string }> = {
+  enacted: { bg: "rgba(34,197,94,0.1)", text: "#4ADE80", label: "Enacted" },
+  "active-legislation": { bg: "rgba(212,175,55,0.1)", text: "#D4AF37", label: "Active Legislation" },
+  monitoring: { bg: "rgba(100,100,100,0.1)", text: "#888", label: "Monitoring" },
+  "no-activity": { bg: "rgba(60,60,60,0.1)", text: "#555", label: "No Activity" },
 }
 
-export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const { slug } = await params;
-
-  // Priorizar MDX nativo
-  const mdxPost = getPostBySlug(slug);
-  if (mdxPost && (mdxPost.frontmatter.section === "jurisprudencia" || mdxPost.frontmatter.category === "jurisprudencia" || mdxPost.frontmatter.category?.toLowerCase() === "jurisprudencia ia")) {
-    const { title, description, category, date } = mdxPost.frontmatter;
-    const metaDescription =
-      mdxPost.excerpt || description || "Análisis jurídico experto sobre jurisprudencia en IA.";
-    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
-    return {
-      title: `${title} | Derecho Artificial`,
-      description: metaDescription,
-      alternates: { canonical },
-      robots: {
-        index: true,
-        follow: true,
-      },
-      openGraph: {
-        type: "article",
-        title,
-        description: metaDescription,
-        url: canonical,
-        siteName: "Derecho Artificial",
-        locale: "es_ES",
-        publishedTime: date ? new Date(date).toISOString() : undefined,
-        authors: ['Ricardo Scarpa']
-      }
-    };
-  }
-
-  const entry = await getSectionResourceEntry("jurisprudencia", slug);
-  if (!entry) return {};
-  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
-  const canonical = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
-  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
-
-  return {
-    title: `${entry.title} | Derecho Artificial`,
-    description,
-    alternates: {
-      canonical,
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-    openGraph: {
-      type: "article",
-      title: entry.title,
-      description,
-      url: canonical,
-      siteName: "Derecho Artificial",
-      locale: "es_ES",
-      images: [{
-        url: ogImage,
-        width: 1200,
-        height: 630,
-        alt: entry.title
-      }],
-      publishedTime: entry.dateMs != null ? new Date(entry.dateMs).toISOString() : undefined,
-      authors: ['Ricardo Scarpa']
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: entry.title,
-      description,
-      images: [ogImage],
-      creator: "@RicardoScarpa",
-    },
-  };
-}
-
-export default async function JurisprudenciaSlugPage({ params }: { params: Promise<Params> }) {
-  const { slug } = await params;
-
-  // Intentar cargar desde MDX nativo primero
-  const mdxPost = getPostBySlug(slug);
-  if (mdxPost && (mdxPost.frontmatter.section === "jurisprudencia" || mdxPost.frontmatter.category === "jurisprudencia" || mdxPost.frontmatter.category?.toLowerCase() === "jurisprudencia ia")) {
-    const { title, date, category, pdf } = mdxPost.frontmatter;
-    const pdfUrl =
-      pdf && (pdf.startsWith("/") || pdf.startsWith("http"))
-        ? pdf
-        : pdf
-        ? `/fuentes/${pdf}.pdf`
-        : "";
-    return (
-      <LegalLayout
-        title={title}
-        category={category === "jurisprudencia" ? "Jurisprudencia" : (category || "Jurisprudencia")}
-        author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
-        date={date}
-      >
-        {pdfUrl ? (
-          <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
-            <a
-              href={pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
-            >
-              Sentencia
-            </a>
-          </div>
-        ) : null}
-        <div className="prose prose-lg max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}
-            components={{
-              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
-            }}
-          >
-            {mdxPost.content}
-          </ReactMarkdown>
-        </div>
-
-        <div className="mt-16 pt-8 border-t border-slate-200">
-          <RelatedArticles
-            currentSlug={slug}
-            currentTags={mdxPost.frontmatter.tags || []}
-            currentCategory={mdxPost.frontmatter.category || "jurisprudencia"}
-          />
-        </div>
-      </LegalLayout>
-    );
-  }
-
-  const entry = await getSectionResourceEntry("jurisprudencia", slug);
-  if (!entry) notFound();
-
-  const url = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
-  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
-
-  const datePublished =
-    entry.dateMs != null && !Number.isNaN(entry.dateMs)
-      ? new Date(entry.dateMs).toISOString().slice(0, 10)
-      : new Date().toISOString().slice(0, 10);
-
-  const postDate = (entry as any).date || (entry as any).publishedAt || (entry as any).updatedAt || datePublished;
-
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": entry.title,
-    "description": description,
-    "author": { 
-      "@type": "Person", 
-      "name": "Ricardo Scarpa",
-      "url": "https://www.derechoartificial.com/quienes-somos"
-    },
-    "publisher": { 
-      "@type": "Organization", 
-      "name": "Derecho Artificial",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.derechoartificial.com/logo-principal.png"
-      }
-    },
-    "datePublished": postDate,
-    "dateModified": (entry as any).updatedAt || postDate,
-    "image": {
-      "@type": "ImageObject",
-      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
-      "width": 1200,
-      "height": 630
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": url
-    }
-  };
-
-  const jsonLd = createLegalDecisionJsonLd({
-    url,
-    name: entry.title,
-    description,
-    datePublished,
-    courtName: entry.courtName ?? undefined,
-  });
-
-  const breadcrumbJsonLd = createBreadcrumbJsonLd({
-    items: [
-      {
-        name: "Derecho Artificial",
-        url: "https://derechoartificial.com",
-      },
-      {
-        name: "Jurisprudencia",
-        url: "https://derechoartificial.com/jurisprudencia",
-      },
-      {
-        name: entry.title,
-        url,
-      },
-    ],
-  });
-
+export default function HomePage() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <StructuredData data={[jsonLd, breadcrumbJsonLd]} />
-      <LegalLayout title={entry.title} category="Jurisprudencia">
-        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
-          {entry.summaryHtml ? (
-            <div
-              className="prose prose-slate max-w-none mb-6"
-              dangerouslySetInnerHTML={{ __html: entry.summaryHtml }}
-            />
-          ) : null}
-          {entry.sourceUrl ? (
-            <a
-              href={entry.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
-            >
-              Descargar documento original
-            </a>
-          ) : null}
+    <main style={{ backgroundColor: "#0A0A0A", minHeight: "100vh", color: "#F5F0E8" }}>
+
+      {/* ── HERO ─────────────────────────────────────────────────────── */}
+      <section style={{
+        position: "relative",
+        minHeight: "85vh",
+        display: "flex",
+        alignItems: "center",
+        overflow: "hidden",
+        paddingTop: "120px",
+      }}>
+        {/* Background texture */}
+        <div style={{
+          position: "absolute", inset: 0,
+          backgroundImage: `
+            radial-gradient(ellipse 80% 60% at 50% -10%, rgba(212,175,55,0.07) 0%, transparent 60%),
+            repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(212,175,55,0.02) 80px, rgba(212,175,55,0.02) 81px),
+            repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(212,175,55,0.02) 80px, rgba(212,175,55,0.02) 81px)
+          `,
+        }} />
+
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 32px", position: "relative", width: "100%" }}>
+          <div style={{ maxWidth: "760px" }}>
+            {/* Eyebrow */}
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: "10px",
+              marginBottom: "32px",
+              padding: "6px 16px",
+              border: "1px solid rgba(212,175,55,0.3)",
+              backgroundColor: "rgba(212,175,55,0.05)",
+            }}>
+              <div style={{ width: "6px", height: "6px", backgroundColor: "#D4AF37", borderRadius: "50%", animation: "pulse 2s infinite" }} />
+              <span style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#D4AF37" }}>
+                AI & Law — Latest Intelligence
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 style={{
+              fontFamily: "'Georgia', serif",
+              fontSize: "clamp(42px, 6vw, 72px)",
+              fontWeight: "700",
+              lineHeight: "1.08",
+              letterSpacing: "-0.02em",
+              color: "#F5F0E8",
+              marginBottom: "28px",
+            }}>
+              Where Law Meets<br />
+              <span style={{
+                background: "linear-gradient(135deg, #D4AF37 0%, #F5E27A 50%, #D4AF37 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
+                Artificial Intelligence
+              </span>
+            </h1>
+
+            <p style={{
+              fontSize: "18px",
+              lineHeight: "1.7",
+              color: "#8A8070",
+              marginBottom: "48px",
+              maxWidth: "580px",
+              fontFamily: "Georgia, serif",
+              fontStyle: "italic",
+            }}>
+              Legislation tracking, tool reviews, and case law analysis for US legal professionals navigating the AI transformation.
+            </p>
+
+            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+              <Link href="/tracker" style={{
+                padding: "14px 32px",
+                backgroundColor: "#D4AF37",
+                color: "#0A0A0A",
+                textDecoration: "none",
+                fontSize: "13px",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                fontWeight: "700",
+                transition: "all 0.2s",
+              }}>
+                View 50-State Tracker →
+              </Link>
+              <Link href="/newsletter" style={{
+                padding: "14px 32px",
+                backgroundColor: "transparent",
+                border: "1px solid rgba(212,175,55,0.3)",
+                color: "#C8C0B0",
+                textDecoration: "none",
+                fontSize: "13px",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                transition: "all 0.2s",
+              }}>
+                Get the Newsletter
+              </Link>
+            </div>
+          </div>
         </div>
-        {entry.bodyHtml ? <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} /> : null}
-        <RelatedArticles 
-          currentSlug={entry.slug} 
-          currentCategory="jurisprudencia"
-          currentTags={["#Jurisprudencia", "#IA"]}
-        />
-      </LegalLayout>
-    </>
-  );
+
+        {/* Vertical rule decoration */}
+        <div style={{
+          position: "absolute", right: "80px", top: "20%", bottom: "20%",
+          width: "1px", backgroundColor: "rgba(212,175,55,0.1)",
+          display: "none",
+        }} />
+      </section>
+
+      {/* ── TICKER / STATS BAR ───────────────────────────────────────── */}
+      <div style={{
+        borderTop: "1px solid rgba(212,175,55,0.15)",
+        borderBottom: "1px solid rgba(212,175,55,0.15)",
+        backgroundColor: "rgba(212,175,55,0.03)",
+        padding: "20px 32px",
+        display: "flex",
+        justifyContent: "center",
+        gap: "64px",
+        flexWrap: "wrap",
+      }}>
+        {[
+          { num: "50", label: "States Tracked" },
+          { num: "12", label: "Enacted AI Laws" },
+          { num: "23", label: "Bills in Progress" },
+          { num: "47", label: "Tools Reviewed" },
+        ].map(({ num, label }) => (
+          <div key={label} style={{ textAlign: "center" }}>
+            <div style={{ fontSize: "28px", fontFamily: "Georgia, serif", fontWeight: "700", color: "#D4AF37" }}>{num}</div>
+            <div style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#555", marginTop: "2px" }}>{label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── FEATURED ARTICLES ────────────────────────────────────────── */}
+      <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "80px 32px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "40px" }}>
+          <div>
+            <div style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#D4AF37", marginBottom: "8px" }}>
+              Latest
+            </div>
+            <h2 style={{ fontFamily: "Georgia, serif", fontSize: "32px", fontWeight: "700", color: "#F5F0E8", margin: 0 }}>
+              Recent Coverage
+            </h2>
+          </div>
+          <Link href="/news" style={{ color: "#D4AF37", textDecoration: "none", fontSize: "13px", letterSpacing: "0.08em" }}>
+            All News →
+          </Link>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "2px", backgroundColor: "rgba(212,175,55,0.08)" }}>
+          {/* Hero article */}
+          <div style={{ backgroundColor: "#0A0A0A", padding: "40px", borderRight: "1px solid rgba(212,175,55,0.08)" }}>
+            <ArticleCard article={FEATURED_ARTICLES[0]} large />
+          </div>
+          {/* Secondary articles */}
+          <div style={{ backgroundColor: "#0A0A0A", display: "flex", flexDirection: "column" }}>
+            {FEATURED_ARTICLES.slice(1).map((article, i) => (
+              <div key={article.slug} style={{
+                padding: "32px",
+                borderBottom: i === 0 ? "1px solid rgba(212,175,55,0.08)" : "none",
+                flex: 1,
+              }}>
+                <ArticleCard article={article} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TRACKER PREVIEW ──────────────────────────────────────────── */}
+      <section style={{
+        backgroundColor: "#080808",
+        borderTop: "1px solid rgba(212,175,55,0.1)",
+        borderBottom: "1px solid rgba(212,175,55,0.1)",
+        padding: "80px 32px",
+      }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "40px" }}>
+            <div>
+              <div style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#D4AF37", marginBottom: "8px" }}>
+                Live
+              </div>
+              <h2 style={{ fontFamily: "Georgia, serif", fontSize: "32px", fontWeight: "700", color: "#F5F0E8", margin: 0 }}>
+                AI Regulation Tracker
+              </h2>
+              <p style={{ color: "#555", fontSize: "14px", marginTop: "8px", fontStyle: "italic" }}>
+                Real-time status across all 50 US states
+              </p>
+            </div>
+            <Link href="/tracker/state" style={{ color: "#D4AF37", textDecoration: "none", fontSize: "13px", letterSpacing: "0.08em" }}>
+              Full 50-State Index →
+            </Link>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", backgroundColor: "rgba(212,175,55,0.08)" }}>
+            {TRACKER_HIGHLIGHTS.map((item) => {
+              const s = STATUS_COLORS[item.status]
+              return (
+                <Link
+                  key={item.slug}
+                  href={`/tracker/state/${item.slug}`}
+                  style={{
+                    display: "block",
+                    backgroundColor: "#0A0A0A",
+                    padding: "24px 28px",
+                    textDecoration: "none",
+                    transition: "background 0.2s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#0F0F0F")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#0A0A0A")}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontFamily: "Georgia, serif", fontSize: "16px", color: "#C8C0B0" }}>{item.state}</span>
+                    <span style={{
+                      fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase",
+                      padding: "3px 10px", backgroundColor: s.bg, color: s.text,
+                    }}>
+                      {s.label}
+                    </span>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER CTA ───────────────────────────────────────────── */}
+      <section style={{
+        maxWidth: "1200px", margin: "0 auto", padding: "100px 32px",
+        display: "flex", justifyContent: "center",
+      }}>
+        <div style={{
+          maxWidth: "600px", textAlign: "center",
+          padding: "60px",
+          border: "1px solid rgba(212,175,55,0.15)",
+          position: "relative",
+        }}>
+          <div style={{
+            position: "absolute", top: "-1px", left: "50%", transform: "translateX(-50%)",
+            width: "60px", height: "2px", backgroundColor: "#D4AF37",
+          }} />
+          <div style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#D4AF37", marginBottom: "20px" }}>
+            Newsletter
+          </div>
+          <h2 style={{ fontFamily: "Georgia, serif", fontSize: "30px", color: "#F5F0E8", marginBottom: "16px", lineHeight: "1.3" }}>
+            Stay Ahead of AI Law
+          </h2>
+          <p style={{ color: "#666", fontSize: "15px", lineHeight: "1.7", marginBottom: "32px", fontStyle: "italic" }}>
+            Weekly briefings on legislation, case law, and tool reviews — written for legal professionals, not technologists.
+          </p>
+          <Link href="/newsletter" style={{
+            display: "inline-block",
+            padding: "14px 40px",
+            backgroundColor: "#D4AF37",
+            color: "#0A0A0A",
+            textDecoration: "none",
+            fontSize: "13px",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            fontWeight: "700",
+          }}>
+            Subscribe Free →
+          </Link>
+          <p style={{ marginTop: "16px", fontSize: "11px", color: "#444" }}>No spam. Unsubscribe anytime.</p>
+        </div>
+      </section>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
+        }
+      `}</style>
+    </main>
+  )
+}
+
+function ArticleCard({ article, large = false }: { article: typeof FEATURED_ARTICLES[0]; large?: boolean }) {
+  return (
+    <Link href={`/news/${article.slug}`} style={{ textDecoration: "none", display: "block" }}>
+      <div style={{
+        fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase",
+        color: "#D4AF37", marginBottom: "12px",
+      }}>
+        {article.category}{article.state ? ` — ${article.state}` : ""}
+      </div>
+      <h3 style={{
+        fontFamily: "Georgia, serif",
+        fontSize: large ? "24px" : "17px",
+        fontWeight: "700",
+        color: "#F5F0E8",
+        lineHeight: "1.3",
+        marginBottom: "12px",
+        transition: "color 0.2s",
+      }}>
+        {article.title}
+      </h3>
+      <p style={{
+        color: "#6A6560",
+        fontSize: large ? "15px" : "13px",
+        lineHeight: "1.6",
+        marginBottom: "16px",
+        fontStyle: "italic",
+      }}>
+        {article.description}
+      </p>
+      <div style={{ fontSize: "11px", color: "#444", letterSpacing: "0.06em" }}>
+        {article.date} · {article.readingTime} min read
+      </div>
+    </Link>
+  )
 }
