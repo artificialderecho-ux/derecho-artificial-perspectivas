@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import {
@@ -135,7 +135,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
   // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
   if (mdxPost && (mdxPost.frontmatter.section === "jurisprudencia" || mdxPost.frontmatter.category === "jurisprudencia" || mdxPost.frontmatter.category?.toLowerCase() === "jurisprudencia ia")) {
-    const { title, date, category, pdf } = mdxPost.frontmatter;
+    const { title, date, category, pdf, pdfLabel } = mdxPost.frontmatter;
     const pdfUrl =
       pdf && (pdf.startsWith("/") || pdf.startsWith("http"))
         ? pdf
