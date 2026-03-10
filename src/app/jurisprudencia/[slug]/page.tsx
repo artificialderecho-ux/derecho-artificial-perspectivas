@@ -1,82 +1,71 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { ResolvedContentEntry } from "@/lib/content";
-import { getContentEntry, listContentSlugs } from "@/lib/content";
-import { Button } from "@/components/ui/button";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import {
   StructuredData,
-  createArticleJsonLd,
-  createGenericArticleJsonLd,
+  createBreadcrumbJsonLd,
+  createLegalDecisionJsonLd,
 } from "@/components/seo/StructuredData";
-import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
+import { defaultSchema } from 'hast-util-sanitize';
 
-// PDFs que tienen recuadro especial
-const PDF_BOXES: Record<string, string> = {
-  "3050901.pdf": "SENTENCIA",
-  "ABC_SentenciaIA_T323De2024.pdf": "SENTENCIA", 
-  "Fletcher_v_Experian_Analisis_Juridico.pdf": "SENTENCIA",
-  "NYT_Complaint_Dec2023.pdf": "DEMANDA",
-  "Nippon_Life_v_OpenAI_20260304.pdf": "DEMANDA",
-  "USCOURTS-cand-3_23-cv-00770-1.pdf": "SENTENCIA",
-  "EFD_USA_v_BAND_PRO_FILM_AND_DIGITAL_IN_USA_18_February_2026.pdf": "SENTENCIA",
-  "Kettering_USA_25_February_2026.pdf": "SENTENCIA",
-  "Medal_v._Amazon_USA_27_February_2026.pdf": "SENTENCIA",
-  "BeijingInternetCourtCivilJudgment112792023.pdf": "SENTENCIA",
-  "ewhc_1383_2025.pdf": "SENTENCIA",
-  "TA_Orleans_n_2506461_France_29_dec._2025.pdf": "SENTENCIA",
-  "D085584.pdf": "SENTENCIA",
-  "thaler-perlmutter-certiorari-copyright-ia.pdf": "SENTENCIA",
-  "Zapata Vargas.pdf": "SENTENCIA",
-  "amparo-directo-6-2025-scjn-jurisprudencia.pdf": "SENTENCIA",
-  "jurisprudencia-ia-voice-cloning-lgberlin.pdf": "SENTENCIA",
-  "analisis_ukut_ai_hallucinations_supervision_2026.pdf": "SENTENCIA",
-  "caa_bordeaux_hallucinations_analisis.pdf": "SENTENCIA",
-  "boligportal-redata-scraping-api-bases-datos-ia.pdf": "SENTENCIA",
-  "usa_vs_heppner.pdf": "SENTENCIA",
-  "xai-openai-trade-secrets-analisis.pdf": "SENTENCIA"
+const sanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [
+    ...(defaultSchema as any).tagNames,
+    'table',
+    'thead',
+    'tbody',
+    'tr',
+    'th',
+    'td',
+    'caption'
+  ],
+  attributes: {
+    ...(defaultSchema as any).attributes,
+    table: ['className'],
+    thead: [],
+    tbody: [],
+    tr: [],
+    th: ['align', 'colspan', 'rowspan'],
+    td: ['align', 'colspan', 'rowspan'],
+    a: ['href', 'name', 'target', 'rel'],
+    img: ['src', 'alt', 'title', 'width', 'height'],
+    code: ['className']
+  }
+};
+
+type Params = {
+  slug: string;
 };
 
 export async function generateStaticParams() {
-  const [jsonSlugs, resourceSlugs] = await Promise.all([
-    listContentSlugs("jurisprudencia"),
-    listSectionResourceSlugs("jurisprudencia"),
-  ]);
+  const resourceSlugs = await listSectionResourceSlugs("jurisprudencia");
   
-  // Incluir slugs de posts MDX que tengan sección jurisprudencia
-  const mdxPosts = getAllPosts().filter(p => 
-    (p.frontmatter.section || "").toLowerCase() === "jurisprudencia" ||
-    (p.frontmatter.category || "").toLowerCase() === "jurisprudencia"
-  );
+  // Incluir slugs de posts MDX que tengan categoría jurisprudencia
+  const mdxPosts = getAllPosts().filter(p => p.frontmatter.section === "jurisprudencia" || p.frontmatter.category === "jurisprudencia" || p.frontmatter.category?.toLowerCase() === "jurisprudencia ia");
   const mdxSlugs = mdxPosts.map(p => p.slug);
 
-  const allSlugs = new Set<string>([...jsonSlugs, ...resourceSlugs, ...mdxSlugs]);
-  const seed = allSlugs.size ? Array.from(allSlugs) : ["nota-editorial-inaugural"];
-  return seed.map((slug) => ({ slug }));
+  const allSlugs = new Set<string>([...resourceSlugs, ...mdxSlugs]);
+  return Array.from(allSlugs).map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
 
   // Priorizar MDX nativo
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && ((mdxPost.frontmatter.category || "").toLowerCase() === "jurisprudencia" || (mdxPost.frontmatter.section || "").toLowerCase() === "jurisprudencia")) {
+  if (mdxPost && (mdxPost.frontmatter.section === "jurisprudencia" || mdxPost.frontmatter.category === "jurisprudencia" || mdxPost.frontmatter.category?.toLowerCase() === "jurisprudencia ia")) {
     const { title, description, category, date } = mdxPost.frontmatter;
     const metaDescription =
-      mdxPost.excerpt || description || "Análisis jurídico experto sobre IA por Ricardo Scarpa.";
-    const canonical = `https://www.derechoartificial.com/jurisprudencia/${slug}`;
+      mdxPost.excerpt || description || "Análisis jurídico experto sobre jurisprudencia en IA.";
+    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
     return {
       title: `${title} | Derecho Artificial`,
       description: metaDescription,
@@ -93,196 +82,208 @@ export async function generateMetadata({
         siteName: "Derecho Artificial",
         locale: "es_ES",
         publishedTime: date ? new Date(date).toISOString() : undefined,
-        authors: ["Ricardo Scarpa"],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title,
-        description: metaDescription,
-        creator: "@RicardoScarpa",
-      },
+        authors: ['Ricardo Scarpa']
+      }
     };
   }
 
-  // Fallback a JSON legacy
-  const jsonEntry = await getContentEntry("jurisprudencia", slug);
-  if (jsonEntry) {
-    const { title, description, datePublished } = jsonEntry;
-    const metaDescription = description || "Análisis de jurisprudencia sobre inteligencia artificial.";
-    const canonical = `https://www.derechoartificial.com/jurisprudencia/${slug}`;
-    return {
-      title: `${title} | Derecho Artificial`,
-      description: metaDescription,
-      alternates: { canonical },
-      robots: {
-        index: true,
-        follow: true,
-      },
-      openGraph: {
-        type: "article",
-        title,
-        description: metaDescription,
-        url: canonical,
-        siteName: "Derecho Artificial",
-        locale: "es_ES",
-        publishedTime: datePublished,
-        authors: ["Ricardo Scarpa"],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title,
-        description: metaDescription,
-        creator: "@RicardoScarpa",
-      },
-    };
-  }
+  const entry = await getSectionResourceEntry("jurisprudencia", slug);
+  if (!entry) return {};
+  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
+  const canonical = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
+  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
 
-  return notFound();
+  return {
+    title: `${entry.title} | Derecho Artificial`,
+    description,
+    alternates: {
+      canonical,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      type: "article",
+      title: entry.title,
+      description,
+      url: canonical,
+      siteName: "Derecho Artificial",
+      locale: "es_ES",
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: entry.title
+      }],
+      publishedTime: entry.dateMs != null ? new Date(entry.dateMs).toISOString() : undefined,
+      authors: ['Ricardo Scarpa']
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+      images: [ogImage],
+      creator: "@RicardoScarpa",
+    },
+  };
 }
 
-function PdfRecuadro({ pdf, pdfLabel }: { pdf?: string; pdfLabel?: string }) {
-  if (!pdf) return null;
-
-  // Extraer nombre del archivo de la ruta
-  const fileName = pdf.split('/').pop() || '';
-  
-  // Buscar en el mapa de PDFs especiales
-  const specialLabel = PDF_BOXES[fileName];
-  const displayLabel = pdfLabel || specialLabel || "DOCUMENTO";
-
-  return (
-    <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-2 h-8 bg-red-600 rounded-sm"></div>
-        <span className="text-red-600 font-bold text-sm tracking-wider">
-          {displayLabel}
-        </span>
-      </div>
-      <p className="text-slate-700 mb-6 leading-relaxed">
-        El documento completo en PDF incluye el análisis exhaustivo de la sentencia, 
-        los argumentos de las partes, el fundamento jurídico del tribunal y las 
-        implicaciones para la práctica profesional del derecho.
-      </p>
-      <Link
-        href={pdf}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-3 px-6 py-3 bg-red-600 text-white font-medium rounded-sm hover:bg-red-700 transition-colors"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        Descargar documento completo (PDF)
-      </Link>
-    </div>
-  );
-}
-
-export default async function JurisprudenciaSlugPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function JurisprudenciaSlugPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
 
   // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && ((mdxPost.frontmatter.category || "").toLowerCase() === "jurisprudencia" || (mdxPost.frontmatter.section || "").toLowerCase() === "jurisprudencia")) {
-    const { title, date, category } = mdxPost.frontmatter;
+  if (mdxPost && (mdxPost.frontmatter.section === "jurisprudencia" || mdxPost.frontmatter.category === "jurisprudencia" || mdxPost.frontmatter.category?.toLowerCase() === "jurisprudencia ia")) {
+    const { title, date, category, pdf } = mdxPost.frontmatter;
+    const pdfUrl =
+      pdf && (pdf.startsWith("/") || pdf.startsWith("http"))
+        ? pdf
+        : pdf
+        ? `/fuentes/${pdf}.pdf`
+        : "";
     return (
       <LegalLayout
         title={title}
-        category={category === "jurisprudencia" ? "Jurisprudencia IA" : (category || "Jurisprudencia IA")}
+        category={category === "jurisprudencia" ? "Jurisprudencia" : (category || "Jurisprudencia")}
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >
-        {mdxPost.frontmatter.pdf && (
-          <PdfRecuadro 
-            pdf={mdxPost.frontmatter.pdf} 
-            pdfLabel={mdxPost.frontmatter.pdfLabel} 
-          />
-        )}
-        <article className="prose prose-slate prose-lg max-w-none">
+        {pdfUrl ? (
+          <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
+            >
+              Sentencia
+            </a>
+          </div>
+        ) : null}
+        <div className="prose prose-lg max-w-none">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
+            rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}
             components={{
-              h1: ({children, ...props}) => (
-                <h1 className="text-4xl font-bold text-slate-900 mb-6" {...props}>
-                  {children}
-                </h1>
-              ),
-              h2: ({children, ...props}) => (
-                <h2 className="text-2xl font-bold text-slate-900 mb-4 mt-8" {...props}>
-                  {children}
-                </h2>
-              ),
+              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
             }}
           >
             {mdxPost.content}
           </ReactMarkdown>
-        </article>
+        </div>
+
+        <div className="mt-16 pt-8 border-t border-slate-200">
+          <RelatedArticles
+            currentSlug={slug}
+            currentTags={mdxPost.frontmatter.tags || []}
+            currentCategory={mdxPost.frontmatter.category || "jurisprudencia"}
+          />
+        </div>
+      </LegalLayout>
+    );
+  }
+
+  const entry = await getSectionResourceEntry("jurisprudencia", slug);
+  if (!entry) notFound();
+
+  const url = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
+  const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
+
+  const datePublished =
+    entry.dateMs != null && !Number.isNaN(entry.dateMs)
+      ? new Date(entry.dateMs).toISOString().slice(0, 10)
+      : new Date().toISOString().slice(0, 10);
+
+  const postDate = (entry as any).date || (entry as any).publishedAt || (entry as any).updatedAt || datePublished;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": entry.title,
+    "description": description,
+    "author": { 
+      "@type": "Person", 
+      "name": "Ricardo Scarpa",
+      "url": "https://www.derechoartificial.com/quienes-somos"
+    },
+    "publisher": { 
+      "@type": "Organization", 
+      "name": "Derecho Artificial",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.derechoartificial.com/logo-principal.png"
+      }
+    },
+    "datePublished": postDate,
+    "dateModified": (entry as any).updatedAt || postDate,
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "width": 1200,
+      "height": 630
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    }
+  };
+
+  const jsonLd = createLegalDecisionJsonLd({
+    url,
+    name: entry.title,
+    description,
+    datePublished,
+    courtName: entry.courtName ?? undefined,
+  });
+
+  const breadcrumbJsonLd = createBreadcrumbJsonLd({
+    items: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Jurisprudencia",
+        url: "https://derechoartificial.com/jurisprudencia",
+      },
+      {
+        name: entry.title,
+        url,
+      },
+    ],
+  });
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <StructuredData data={[jsonLd, breadcrumbJsonLd]} />
+      <LegalLayout title={entry.title} category="Jurisprudencia">
+        <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
+          {entry.summaryHtml ? (
+            <div
+              className="prose prose-slate max-w-none mb-6"
+              dangerouslySetInnerHTML={{ __html: entry.summaryHtml }}
+            />
+          ) : null}
+          {entry.sourceUrl ? (
+            <a
+              href={entry.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
+            >
+              Descargar documento original
+            </a>
+          ) : null}
+        </div>
+        {entry.bodyHtml ? <div dangerouslySetInnerHTML={{ __html: entry.bodyHtml }} /> : null}
         <RelatedArticles 
-          currentSlug={slug} 
+          currentSlug={entry.slug} 
           currentCategory="jurisprudencia"
-        />
-        <StructuredData 
-          jsonLd={createArticleJsonLd({
-            title,
-            description: mdxPost.excerpt || "",
-            url: `https://www.derechoartificial.com/jurisprudencia/${slug}`,
-            date: date || "",
-            author: "Ricardo Scarpa",
-          })}
+          currentTags={["#Jurisprudencia", "#IA"]}
         />
       </LegalLayout>
-    );
-  }
-
-  // Fallback a JSON legacy
-  const jsonEntry = await getContentEntry("jurisprudencia", slug);
-  if (jsonEntry) {
-    const { title, datePublished, body } = jsonEntry;
-    return (
-      <LegalLayout
-        title={title}
-        category="Jurisprudencia IA"
-        author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
-        date={datePublished}
-      >
-        <article className="prose prose-slate prose-lg max-w-none">
-          <div dangerouslySetInnerHTML={{ __html: body }} />
-        </article>
-        <StructuredData 
-          jsonLd={createGenericArticleJsonLd({
-            title,
-            description: jsonEntry.description || "",
-            url: `https://www.derechoartificial.com/jurisprudencia/${slug}`,
-            date: datePublished || "",
-            author: "Ricardo Scarpa",
-          })}
-        />
-      </LegalLayout>
-    );
-  }
-
-  // Fallback a recursos
-  const resourceEntry = await getSectionResourceEntry("jurisprudencia", slug);
-  if (resourceEntry) {
-    const { title, summaryHtml, displayDateMs } = resourceEntry;
-    return (
-      <LegalLayout
-        title={title}
-        category="Jurisprudencia IA"
-        author={{ name: "Derecho Artificial", href: "/quienes-somos" }}
-        date={displayDateMs ? new Date(displayDateMs).toISOString().split('T')[0] : undefined}
-      >
-        <article className="prose prose-slate prose-lg max-w-none">
-          <div dangerouslySetInnerHTML={{ __html: summaryHtml }} />
-        </article>
-      </LegalLayout>
-    );
-  }
-
-  return notFound();
+    </>
+  );
 }
