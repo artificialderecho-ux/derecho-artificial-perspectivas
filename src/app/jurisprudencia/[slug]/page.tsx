@@ -227,7 +227,7 @@ export default async function JurisprudenciaSlugPage({
           currentCategory="jurisprudencia"
         />
         <StructuredData 
-          jsonLd={createArticleJsonLd({
+          data={createArticleJsonLd({
             title,
             description: mdxPost.excerpt || "",
             url: `https://www.derechoartificial.com/jurisprudencia/${slug}`,
@@ -254,7 +254,7 @@ export default async function JurisprudenciaSlugPage({
           <div dangerouslySetInnerHTML={{ __html: body }} />
         </article>
         <StructuredData 
-          jsonLd={createGenericArticleJsonLd({
+          data={createGenericArticleJsonLd({
             title,
             description: jsonEntry.description || "",
             url: `https://www.derechoartificial.com/jurisprudencia/${slug}`,
