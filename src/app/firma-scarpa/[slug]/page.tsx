@@ -55,7 +55,7 @@ export async function generateMetadata({
     const { title, description, category, date, section } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre IA por Ricardo Scarpa.";
-    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+    const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
     return {
       title: `${title} | Derecho Artificial`,
       description: metaDescription,

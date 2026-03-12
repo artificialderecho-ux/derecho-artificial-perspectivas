@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import {
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const { title, description, category, date } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre jurisprudencia en IA.";
-    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+    const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
     return {
       title: `${title} | Derecho Artificial`,
       description: metaDescription,

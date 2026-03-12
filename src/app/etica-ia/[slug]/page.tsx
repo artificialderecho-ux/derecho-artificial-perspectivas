@@ -38,7 +38,7 @@ export async function generateMetadata({
   }
 
   const { title, description, category, date } = mdxPost.frontmatter;
-  const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+  const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
   const metaDescription =
     mdxPost.excerpt ||
     description ||
