@@ -472,11 +472,22 @@ export default async function HomePage() {
           priority
         />
         <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white px-6">
+          <Image
+            src="/logo-icono.png"
+            alt="Derecho Artificial"
+            width={80}
+            height={80}
+            className="mb-4 w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-2xl"
+          />
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
-            Derecho, ética y regulación de la IA
+            Derecho Artificial
           </h1>
-          <p className="text-base md:text-xl lg:text-2xl mt-4 max-w-3xl drop-shadow-lg">
+          <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl drop-shadow-lg font-medium">
+            Derecho, ética y regulación de la IA
+          </p>
+          <p className="text-xs md:text-sm lg:text-base mt-2 max-w-3xl drop-shadow-lg text-white/80">
             Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.
+          </p>
           </p>
           <div className="mt-8 flex flex-col md:flex-row gap-4">
             <Link
