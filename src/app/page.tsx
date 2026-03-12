@@ -650,28 +650,28 @@ export default async function HomePage() {
                   return (
                     <div
                       key={sec.category}
-                      className="group flex flex-col md:flex-col lg:flex-row rounded-lg overflow-hidden border border-divider shadow-md hover:shadow-lg transition"
+                      className="group flex flex-col rounded-lg overflow-hidden border border-divider shadow-md hover:shadow-lg transition"
                     >
                       <Link
                         href={sec.href}
-                        className="relative block w-full lg:w-5/12 aspect-[4/3] md:aspect-video lg:aspect-[4/3] overflow-hidden"
+                        className="relative block w-full aspect-video overflow-hidden"
                       >
                         <Image
                           src={sec.image}
                           alt={sec.title}
                           fill
-                          sizes="(min-width: 1024px) 40vw, 100vw"
+                          sizes="100vw"
                           className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
                           priority={false}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
-                        <div className="absolute inset-0 flex items-center justify-center text-center px-6">
-                          <h3 className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/50" />
+                        <div className="absolute inset-0 flex items-end px-6 pb-6">
+                          <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
                             {sec.title}
                           </h3>
                         </div>
                       </Link>
-                      <div className="w-full lg:w-7/12 p-6 flex flex-col gap-6 bg-white">
+                      <div className="w-full p-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white">
                         {slots.map((post, idx) =>
                           post ? (
                             <Link
