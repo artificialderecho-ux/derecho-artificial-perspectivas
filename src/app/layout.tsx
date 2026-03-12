@@ -41,6 +41,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/logo-icono.webp",
+    shortcut: "/logo-icono.webp",
+    apple: "/logo-icono.webp",
+  },
   openGraph: {
     type: "website",
     siteName: "Derecho Artificial",
@@ -70,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <head>
+        <link rel="icon" href="/logo-icono.webp" />
         <link rel="alternate" hrefLang="es" href="https://www.derechoartificial.com/" />
         <link rel="alternate" hrefLang="en" href="https://www.derechoartificial.com/en" />
         <link rel="alternate" hrefLang="x-default" href="https://www.derechoartificial.com/" />
