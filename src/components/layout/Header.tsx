@@ -110,7 +110,7 @@ export function Header() {
                 alt="Derecho Artificial"
                 width={300}
                 height={100}
-                className="h-[100px] w-auto object-contain"
+                className="h-[160px] w-auto object-contain"
                 style={{ mixBlendMode: "multiply" }}
                 priority
               />
