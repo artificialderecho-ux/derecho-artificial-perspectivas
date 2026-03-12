@@ -485,7 +485,7 @@ export default async function HomePage() {
           <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl drop-shadow-lg font-medium">
             Derecho, ética y regulación de la IA
           </p>
-          <p className="text-xs md:text-sm lg:text-base mt-2 max-w-3xl drop-shadow-lg text-white/80">
+          <p className="text-xs md:text-sm lg:text-base mt-2 max-w-3xl drop-shadow-lg text-white/80 text-center">
             Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.
           </p>
           <div className="mt-8 flex flex-col md:flex-row gap-4">
