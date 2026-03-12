@@ -477,7 +477,7 @@ export default async function HomePage() {
             alt="Derecho Artificial"
             width={80}
             height={80}
-            className="mb-4 w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-2xl brightness-0 invert"
+            className="mb-4 w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-2xl"
           />
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
             Derecho Artificial
