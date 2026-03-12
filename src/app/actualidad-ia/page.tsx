@@ -1,5 +1,4 @@
-﻿import type { Metadata } from "next";
-import Image from "next/image";
+import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import type { PreviewItem } from "@/components/ContentPreviewCard";
 import { LegalLayout } from "@/components/layout/LegalLayout";
@@ -14,7 +13,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Guías IA",
-  description: "Novedades diarias en regulación, jurisprudencia y guías prácticas sobre IA.",
+  description: "Guías y protocolos sobre inteligencia artificial elaborados por Ricardo Scarpa.",
   keywords: ["Guías IA", "regulación IA", "jurisprudencia IA", "guías IA", "noticias IA"],
   alternates: {
     canonical: "/actualidad-ia",
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Guías IA",
-    description: "Novedades diarias en regulación, jurisprudencia y guías prácticas sobre IA.",
+    description: "Guías y protocolos sobre inteligencia artificial elaborados por Ricardo Scarpa.",
     url: "/actualidad-ia",
     locale: "es_ES",
     images: [{ url: "/logo-principal.png" }],
@@ -127,7 +126,7 @@ export default async function ActualidadIAPage({
     if (Number.isNaN(d.getTime())) return null;
     return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
-  const fallbackImage = "/images/Guías IA 2.jpg";
+  const fallbackImage = "/logo-principal.png";
   const extractImage = (post: ReturnType<typeof getAllPosts>[number]) =>
     post.frontmatter.image || post.frontmatter.ogImage || post.frontmatter.cover || fallbackImage;
   const getSourceFromUrl = (url?: string | null) => {
@@ -220,29 +219,7 @@ export default async function ActualidadIAPage({
         title="Guías IA"
         category="Secciones"
         date={new Date().toISOString().slice(0, 10)}
-        hero={
-          <div className="relative w-full h-64 md:h-96">
-            <Image
-              src="/images/Guías IA 2.jpg"
-              alt="Guías IA"
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-black/50" />
-            <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-              <div className="max-w-3xl">
-                <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
-                  Guías IA
-                </h1>
-                <p className="text-base md:text-xl text-white/90 mt-4 drop-shadow-lg">
-                  Novedades diarias en regulación, jurisprudencia y guías prácticas sobre IA.
-                </p>
-              </div>
-            </div>
-          </div>
-        }
+
       >
         <ActualidadTabsClient
           initialTab={currentTab === "noticias" || currentTab === "guias" ? currentTab : "todas"}
