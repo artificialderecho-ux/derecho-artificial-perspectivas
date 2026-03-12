@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import type { PreviewItem } from "@/components/ContentPreviewCard";
@@ -13,9 +13,9 @@ import { ActualidadTabsClient } from "./ActualidadTabsClient";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Actualidad IA",
+  title: "Guías IA",
   description: "Novedades diarias en regulación, jurisprudencia y guías prácticas sobre IA.",
-  keywords: ["actualidad IA", "regulación IA", "jurisprudencia IA", "guías IA", "noticias IA"],
+  keywords: ["Guías IA", "regulación IA", "jurisprudencia IA", "guías IA", "noticias IA"],
   alternates: {
     canonical: "/actualidad-ia",
     languages: {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Actualidad IA",
+    title: "Guías IA",
     description: "Novedades diarias en regulación, jurisprudencia y guías prácticas sobre IA.",
     url: "/actualidad-ia",
     locale: "es_ES",
@@ -64,7 +64,7 @@ export default async function ActualidadIAPage({
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       { name: "Derecho Artificial", url: "https://derechoartificial.com" },
-      { name: "Actualidad IA", url: "https://derechoartificial.com/actualidad-ia" },
+      { name: "Guías IA", url: "https://derechoartificial.com/actualidad-ia" },
     ],
   });
 
@@ -127,7 +127,7 @@ export default async function ActualidadIAPage({
     if (Number.isNaN(d.getTime())) return null;
     return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
-  const fallbackImage = "/images/Actualidad IA 2.jpg";
+  const fallbackImage = "/images/Guías IA 2.jpg";
   const extractImage = (post: ReturnType<typeof getAllPosts>[number]) =>
     post.frontmatter.image || post.frontmatter.ogImage || post.frontmatter.cover || fallbackImage;
   const getSourceFromUrl = (url?: string | null) => {
@@ -215,16 +215,16 @@ export default async function ActualidadIAPage({
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
-      <Breadcrumbs items={[{ label: "Inicio", href: "/" }, { label: "Actualidad IA", href: "/actualidad-ia" }]} />
+      <Breadcrumbs items={[{ label: "Inicio", href: "/" }, { label: "Guías IA", href: "/actualidad-ia" }]} />
       <LegalLayout
-        title="Actualidad IA"
+        title="Guías IA"
         category="Secciones"
         date={new Date().toISOString().slice(0, 10)}
         hero={
           <div className="relative w-full h-64 md:h-96">
             <Image
-              src="/images/Actualidad IA 2.jpg"
-              alt="Actualidad IA"
+              src="/images/Guías IA 2.jpg"
+              alt="Guías IA"
               fill
               sizes="100vw"
               className="object-cover"
@@ -234,7 +234,7 @@ export default async function ActualidadIAPage({
             <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
               <div className="max-w-3xl">
                 <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
-                  Actualidad IA
+                  Guías IA
                 </h1>
                 <p className="text-base md:text-xl text-white/90 mt-4 drop-shadow-lg">
                   Novedades diarias en regulación, jurisprudencia y guías prácticas sobre IA.

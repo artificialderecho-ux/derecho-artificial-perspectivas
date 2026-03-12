@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +11,7 @@ const navigationES = [
   { name: "Firma Scarpa", href: "/firma-scarpa" },
   { name: "Normativa IA", href: "/normativa" },
   { name: "Jurisprudencia IA", href: "/jurisprudencia" },
-  { name: "Actualidad IA", href: "/actualidad-ia" },
+  { name: "Guías IA", href: "/actualidad-ia" },
   { name: "Propiedad Intelectual IA", href: "/propiedad-intelectual-ia" },
   { name: "Ética IA", href: "/etica-ia" },
   { name: "IA Global", href: "/ia-global" },

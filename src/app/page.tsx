@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
@@ -483,7 +483,7 @@ export default async function HomePage() {
               href="/actualidad-ia"
               className="bg-primary text-white px-8 py-4 rounded-lg font-bold hover:bg-primary/90 transition-colors"
             >
-              Ver noticias IA
+              Ver guías IA
             </Link>
             <Link
               href="/#secciones"
@@ -517,7 +517,7 @@ export default async function HomePage() {
                   href="/actualidad-ia"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
-                  Ver todas las noticias
+                  Ver todas las guías
                 </Link>
               </div>
             </div>
@@ -543,7 +543,7 @@ export default async function HomePage() {
                 href: "/jurisprudencia",
               },
               {
-                title: "Actualidad IA",
+                title: "Guías IA",
                 category: "actualidad-ia",
                 image: "/images/Actualidad IA 2.jpg",
                 href: "/actualidad-ia",

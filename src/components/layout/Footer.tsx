@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -89,7 +89,7 @@ export function Footer() {
                     href="/actualidad-ia"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
-                    Actualidad IA
+                    Guías IA
                   </Link>
                   <Link
                     href="/propiedad-intelectual-ia"
