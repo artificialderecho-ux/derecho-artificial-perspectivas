@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
@@ -465,7 +465,7 @@ export default async function HomePage() {
       <main>
       <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
         <Image
-          src="/images/hero-home.jpg"
+          src="/images/heroes/home-hero.webp"
           alt="Derecho e IA"
           fill
           className="object-cover bg-center"
@@ -527,43 +527,43 @@ export default async function HomePage() {
               {
                 title: "Firma Scarpa",
                 category: "firma-scarpa",
-                image: "/images/firma-scarpa.jpg",
+                image: "/images/heroes/firma-scarpa-hero.webp",
                 href: "/firma-scarpa",
               },
               {
                 title: "Normativa IA",
                 category: "normativa",
-                image: "/images/normativa.jpg",
+                image: "/images/heroes/normativa-ia-hero.webp",
                 href: "/normativa",
               },
               {
                 title: "Jurisprudencia IA",
                 category: "jurisprudencia",
-                image: "/images/jurisprudencia.jpg",
+                image: "/images/heroes/jurisprudencia-ia-hero.webp",
                 href: "/jurisprudencia",
               },
               {
                 title: "Guías IA",
                 category: "actualidad-ia",
-                image: "/images/Actualidad IA 2.jpg",
+                image: "/images/heroes/guias-ia-hero.webp",
                 href: "/actualidad-ia",
               },
               {
                 title: "Propiedad Intelectual IA",
                 category: "propiedad-intelectual-ia",
-                image: "/images/propiedad-intelectual.jpg",
+                image: "/images/heroes/propiedad-intelectual-ia-hero.webp",
                 href: "/propiedad-intelectual-ia",
               },
               {
                 title: "Ética IA",
                 category: "etica-ia",
-                image: "/images/etica.jpg",
+                image: "/images/heroes/etica-ia-hero.webp",
                 href: "/etica-ia",
               },
               {
                 title: "IA Global",
                 category: "ia-global",
-                image: "/images/ia-global.jpg",
+                image: "/images/heroes/ia-global-hero.webp",
                 href: "/ia-global",
               },
             ];
