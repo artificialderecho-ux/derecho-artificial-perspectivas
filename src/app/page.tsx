@@ -472,13 +472,6 @@ export default async function HomePage() {
           priority
         />
         <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
-          <Image
-            src="/logo-icono.png"
-            alt="Derecho Artificial"
-            width={80}
-            height={80}
-            className="mb-4 w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-2xl"
-          />
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
             Derecho Artificial
           </h1>
