@@ -106,7 +106,7 @@ export function Header() {
           <div className="flex flex-1 items-center justify-between gap-4 md:gap-6">
             <Link href={isEnglish ? "/en" : "/"} className="flex items-center group flex-shrink-0">
               <Image
-                src="/logo-principal.webp"
+                src="/logo-principal.png"
                 alt="Derecho Artificial"
                 width={300}
                 height={100}
