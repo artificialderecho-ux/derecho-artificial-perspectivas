@@ -30,6 +30,16 @@ const nextConfig = {
           "/propiedad-intelectual-ia/la-inteligencia-artificial-generativa-ante-el-desafio-del-derecho-de-autor-en-la-union-europea",
         permanent: true,
       },
+      {
+        source: "/ia-global",
+        destination: "/global-ia",
+        permanent: true,
+      },
+      {
+        source: "/ia-global/:slug*",
+        destination: "/global-ia/:slug*",
+        permanent: true,
+      },
     ];
   },
 };
