@@ -59,6 +59,7 @@ export async function generateMetadata({
       url: canonical,
       siteName: "Derecho Artificial",
       locale: "es_ES",
+      images: [{ url: "https://www.derechoartificial.com/og-default-1200x630.jpg", width: 1200, height: 630 }],
       publishedTime: date ? new Date(date).toISOString() : undefined,
       authors: [mdxPost.frontmatter.author || "Ricardo Scarpa"],
     },
