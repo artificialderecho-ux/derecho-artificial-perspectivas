@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     locale: "es_ES",
     images: [
       {
-        url: "/og-home-1200x630.jpg",
+        url: "/og-default-1200x630.jpg",
         width: 1200,
         height: 630,
       },
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: "Derecho Artificial",
     description:
       "Análisis jurídico experto del Reglamento IA. Guías prácticas y criterio independiente para abogados y compliance.",
-    images: ["/og-home-1200x630.jpg"],
+    images: ["/og-default-1200x630.jpg"],
   },
 };
 
