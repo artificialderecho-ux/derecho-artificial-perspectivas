@@ -85,21 +85,21 @@ export default async function GlobalIAPage() {
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-        <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
+        <div className="relative w-full h-64 md:h-96">
           <Image
             src="/images/heroes/ia-global-hero.webp"
             alt="Inteligencia Artificial Global"
             fill
             sizes="100vw"
             className="object-cover"
-            priority
           />
-          <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
+          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
               Global IA
             </h1>
           </div>
-        </section>
+        </div>
 
         {/* Content Section */}
         <section className="py-16">

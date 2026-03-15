@@ -141,21 +141,21 @@ export default async function JurisprudenciaPage() {
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <main className="section-spacing">
-        <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
+        <div className="relative w-full h-64 md:h-96">
           <Image
             src="/images/heroes/jurisprudencia-ia-hero.webp"
             alt="Jurisprudencia"
             fill
             sizes="100vw"
             className="object-cover"
-            priority
           />
-          <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
+          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
               Jurisprudencia
             </h1>
           </div>
-        </section>
+        </div>
         <div className="container mx-auto px-4 py-8">
           <p className="lead text-justify max-w-3xl">
             Repositorio crítico de resoluciones judiciales y administrativas que definen el Derecho de la IA. 
