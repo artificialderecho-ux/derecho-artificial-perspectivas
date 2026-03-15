@@ -49,7 +49,9 @@ type GlobalIAPost = {
 
 export default async function GlobalIAPage() {
   const mdxPosts = getAllPosts().filter(post => 
-    post.frontmatter.category === 'Global IA'
+    post.frontmatter.category === 'Global IA' || 
+    post.frontmatter.category === 'ia-global' ||
+    (post.frontmatter.category && post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'ia global')
   );
 
   const mdxItems: GlobalIAPost[] = mdxPosts.map(post => {
