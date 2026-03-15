@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
@@ -187,13 +186,15 @@ export default async function NormativaPage() {
       <StructuredData data={breadcrumbJsonLd} />
       <main className="section-spacing">
         <div className="relative w-full h-64 md:h-96">
-          <Image
-            src="/images/heroes/normativa-ia-hero.webp"
-            alt="Normativa"
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
+          <picture>
+            <source srcSet="/images/heroes/normativa-ia-hero.webp" type="image/webp" />
+            <img
+              src="/images/normativa.jpg"
+              alt="Normativa"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="eager"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
           <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
             <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">

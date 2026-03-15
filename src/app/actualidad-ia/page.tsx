@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import type { PreviewItem } from "@/components/ContentPreviewCard";
-import Image from "next/image";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
@@ -220,7 +219,25 @@ export default async function ActualidadIAPage({
         title="Guías IA"
         category="Secciones"
         date={new Date().toISOString().slice(0, 10)}
-
+        hero={
+          <div className="relative w-full h-64 md:h-96">
+            <picture>
+              <source srcSet="/images/heroes/guias-ia-hero.webp" type="image/webp" />
+              <img
+                src="/images/Actualidad IA 2.jpg"
+                alt="Guías IA"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="eager"
+              />
+            </picture>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
+            <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+              <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
+                Guías IA
+              </h1>
+            </div>
+          </div>
+        }
       >
         <ActualidadTabsClient
           initialTab={currentTab === "noticias" || currentTab === "guias" ? currentTab : "todas"}
