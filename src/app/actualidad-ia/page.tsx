@@ -220,7 +220,23 @@ export default async function ActualidadIAPage({
         title="Guías IA"
         category="Secciones"
         date={new Date().toISOString().slice(0, 10)}
-
+        hero={
+          <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
+            <Image
+              src="/images/heroes/guias-ia-hero.webp"
+              alt="Guías IA"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
+                Guías IA
+              </h1>
+            </div>
+          </section>
+        }
       >
         <ActualidadTabsClient
           initialTab={currentTab === "noticias" || currentTab === "guias" ? currentTab : "todas"}

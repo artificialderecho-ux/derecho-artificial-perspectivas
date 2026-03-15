@@ -66,21 +66,21 @@ export default async function EticaIAPage() {
         category="Secciones"
         date={new Date().toISOString().slice(0, 10)}
         hero={
-          <div className="relative w-full h-64 md:h-96">
+          <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
             <Image
               src="/images/heroes/etica-ia-hero.webp"
               alt="Ética IA"
               fill
               sizes="100vw"
               className="object-cover"
+              priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-            <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-              <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
+            <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
                 Ética IA
               </h1>
             </div>
-          </div>
+          </section>
         }
       >
         <div className="space-y-8">

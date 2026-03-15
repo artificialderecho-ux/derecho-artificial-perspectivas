@@ -181,22 +181,21 @@ export default async function FirmaScarpaPage() {
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <main className="section-spacing">
-        <div className="relative w-full h-64 md:h-96">
+        <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
           <Image
             src="/images/heroes/firma-scarpa-hero.webp"
             alt="Firma Scarpa"
             fill
             sizes="100vw"
             className="object-cover"
-            priority={false}
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
+          <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
               Firma Scarpa
             </h1>
           </div>
-        </div>
+        </section>
         <div className="container mx-auto px-4 py-8">
           <p className="lead text-justify max-w-3xl">
             Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión 
