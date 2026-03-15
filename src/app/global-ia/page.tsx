@@ -32,7 +32,9 @@ export const metadata: Metadata = {
     locale: "es_ES",
     images: [
       {
-        url: "/logo-principal.png",
+        url: "/images/heroes/ia-global-hero.webp",
+        width: 1200,
+        height: 630,
       },
     ],
   },
@@ -85,6 +87,15 @@ export default async function GlobalIAPage() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white">
+          <div className="absolute inset-0">
+            <Image
+              src="/images/heroes/ia-global-hero.webp"
+              alt="Inteligencia Artificial Global"
+              fill
+              className="object-cover opacity-30"
+              priority
+            />
+          </div>
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="relative container mx-auto px-4 py-24 sm:px-6 lg:px-8">
             <div className="text-center">
