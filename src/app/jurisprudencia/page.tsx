@@ -143,11 +143,12 @@ export default async function JurisprudenciaPage() {
       <main className="section-spacing">
         <div className="relative w-full h-64 md:h-96">
           <Image
-            src="/images/heroes/jurisprudencia-ia-hero.webp"
+            src="/images/jurisprudencia.jpg"
             alt="Jurisprudencia"
             fill
             sizes="100vw"
             className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
           <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
