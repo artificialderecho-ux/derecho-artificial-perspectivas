@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import type { PreviewItem } from "@/components/ContentPreviewCard";
 import Image from "next/image";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
@@ -212,6 +214,14 @@ export default async function ActualidadIAPage({
     (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
   );
 
+  const guiasHeroWepPath = join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep");
+  const guiasHeroWebpPath = join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.webp");
+  const guiasHeroImage = existsSync(guiasHeroWepPath)
+    ? "/images/heroes/guias-ia-hero.wep"
+    : existsSync(guiasHeroWebpPath)
+      ? "/images/heroes/guias-ia-hero.webp"
+      : "/images/heroes/home-hero.webp";
+
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
@@ -220,7 +230,27 @@ export default async function ActualidadIAPage({
         title="Guías IA"
         category="Secciones"
         date={new Date().toISOString().slice(0, 10)}
-
+        hero={
+          <section className="relative w-full h-72 md:h-80 lg:h-96">
+            <Image
+              src={guiasHeroImage}
+              alt="Guías IA"
+              fill
+              className="object-cover object-center"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/50 flex items-end">
+              <div className="container-narrow pb-8 md:pb-10">
+                <span className="inline-block py-1 px-3 mb-4 text-xs font-semibold tracking-wider text-white uppercase bg-white/10 border border-white/30 rounded-full">
+                  Secciones
+                </span>
+                <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white leading-tight">
+                  Guías IA
+                </h1>
+              </div>
+            </div>
+          </section>
+        }
       >
         <ActualidadTabsClient
           initialTab={currentTab === "noticias" || currentTab === "guias" ? currentTab : "todas"}
