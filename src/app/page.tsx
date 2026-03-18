@@ -248,6 +248,41 @@ export default async function HomePage() {
     .filter((post) => isAllowedLanguage(post.frontmatter.title, post.excerpt))
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
     .slice(0, 6);
+
+  const guideMdxCandidates = mdxPosts
+    .filter((post) => {
+      const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+      return tags.includes("guia") || tags.includes("guías") || tags.includes("protocolo");
+    })
+    .filter((post) => isAllowedLanguage(post.frontmatter.title, post.excerpt))
+    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+    .slice(0, 6);
+
+  const actualidadCombinedCandidates = [
+    ...newsMdxCandidates.map((post) => ({
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      date: new Date(post.frontmatter.date).getTime(),
+      urlPath: post.frontmatter.url || post.url,
+      slug: post.slug,
+    })),
+    ...guideMdxCandidates.map((post) => ({
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      date: new Date(post.frontmatter.date).getTime(),
+      urlPath: post.frontmatter.url || post.url,
+      slug: post.slug,
+    })),
+    ...unifiedActualidad.map((entry, idx) => ({
+      title: entry.title,
+      description: entry.description,
+      date: entry.date,
+      urlPath: entry.urlPath,
+      slug: `actualidad-unified-${idx}`,
+    })),
+  ]
+    .filter((entry) => Boolean(entry.urlPath))
+    .sort((a, b) => b.date - a.date);
   const newsEntries =
     newsMdxCandidates.length > 0
       ? newsMdxCandidates.map((post) => ({
@@ -528,6 +563,14 @@ export default async function HomePage() {
             </div>
           </div>
           {(() => {
+            const guiasHeroWepPath = join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep");
+            const guiasHeroWebpPath = join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.webp");
+            const guiasHeroImage = existsSync(guiasHeroWepPath)
+              ? "/images/heroes/guias-ia-hero.wep"
+              : existsSync(guiasHeroWebpPath)
+                ? "/images/heroes/guias-ia-hero.webp"
+                : "/images/heroes/home-hero.webp";
+
             const sections = [
               {
                 title: "Firma Scarpa",
@@ -550,9 +593,7 @@ export default async function HomePage() {
               {
                 title: "Guías IA",
                 category: "actualidad-ia",
-                image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
-                  ? "/images/heroes/guias-ia-hero.wep"
-                  : "/images/heroes/guias-ia-hero.webp",
+                image: guiasHeroImage,
                 href: "/actualidad-ia",
               },
               {
@@ -628,7 +669,7 @@ export default async function HomePage() {
             };
 
         const getLatestActualidadPosts = () =>
-          unifiedActualidad.slice(0, 2).map((entry, idx) => ({
+          actualidadCombinedCandidates.slice(0, 2).map((entry, idx) => ({
             slug: `actualidad-home-${idx}`,
             frontmatter: {
               title: entry.title,
