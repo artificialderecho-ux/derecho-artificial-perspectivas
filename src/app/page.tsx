@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
 import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
 import { getAllPosts } from '@/lib/mdx-utils';
@@ -548,7 +550,9 @@ export default async function HomePage() {
               {
                 title: "Guías IA",
                 category: "actualidad-ia",
-                image: "/images/heroes/guias-ia-hero.webp",
+                image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
+                  ? "/images/heroes/guias-ia-hero.wep"
+                  : "/images/heroes/guias-ia-hero.webp",
                 href: "/actualidad-ia",
               },
               {
@@ -623,7 +627,17 @@ export default async function HomePage() {
               }));
             };
 
-        const getLatestActualidadPosts = () => newsMdxCandidates.slice(0, 2);
+        const getLatestActualidadPosts = () =>
+          unifiedActualidad.slice(0, 2).map((entry, idx) => ({
+            slug: `actualidad-home-${idx}`,
+            frontmatter: {
+              title: entry.title,
+              date: new Date(entry.date).toISOString(),
+              category: "actualidad-ia",
+            },
+            excerpt: entry.description || "",
+            url: entry.urlPath,
+          }));
 
             const buildHref = (post: any) => {
               const c = (post.frontmatter.category || "").toLowerCase();
@@ -716,4 +730,5 @@ export default async function HomePage() {
     </>
   );
 }
+
 
