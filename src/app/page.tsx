@@ -547,9 +547,9 @@ export default async function HomePage() {
               },
               {
                 title: "Guías IA",
-                category: "actualidad-ia",
+                category: "guias",
                 image: "/images/heroes/guias-ia-hero.webp",
-                href: "/actualidad-ia",
+                href: "/recursos/guias",
               },
               {
                 title: "Propiedad Intelectual IA",
@@ -566,7 +566,7 @@ export default async function HomePage() {
               {
                 title: "IA Global",
                 category: "global-ia",
-                image: "/images/heroes/ia-global-hero.webp",
+                image: "/images/ia-global.jpg",
                 href: "/global-ia",
               },
             ];
@@ -599,6 +599,17 @@ export default async function HomePage() {
                            c === "global ia" ||
                            (post.frontmatter.section || "").toLowerCase() === "ia-global" ||
                            (post.frontmatter.section || "").toLowerCase() === "global-ia";
+                  }
+
+                  // Para Guías IA, mapear recursos etiquetados como guías
+                  if (cat === "guias") {
+                    const subcat = (post.frontmatter.subcategory || "").toLowerCase();
+                    const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+                    return (
+                      c === "guias" ||
+                      c === "guías" ||
+                      (c === "recursos" && (subcat === "guias" || subcat === "guías" || tags.includes("guias")))
+                    );
                   }
                   
                   if (c !== cat) return false;
