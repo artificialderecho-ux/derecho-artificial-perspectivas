@@ -548,7 +548,7 @@ export default async function HomePage() {
               {
                 title: "Guías IA",
                 category: "guias",
-                image: "/images/Actualidad%20IA%202.jpg",
+                image: "/images/heroes/guias-ia-hero.webp",
                 href: "/recursos/guias",
               },
               {
@@ -566,7 +566,7 @@ export default async function HomePage() {
               {
                 title: "IA Global",
                 category: "global-ia",
-                image: "/images/ia-global.jpg",
+                image: "/images/heroes/ia-global-hero.webp",
                 href: "/global-ia",
               },
             ];
