@@ -1,16 +1,11 @@
 ﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
-import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
 import { getAllPosts } from '@/lib/mdx-utils';
-import { formatDateFromMs, isNew } from '@/lib/badges';
+import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
+import { formatDateFromMs } from '@/lib/badges';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { cache } from 'react';
 
-// Revalidación automática cada hora
 export const revalidate = 60;
 
 export const metadata: Metadata = {
@@ -26,13 +21,6 @@ export const metadata: Metadata = {
     "jurisprudencia",
     "cumplimiento",
   ],
-  alternates: {
-    canonical: "/",
-    languages: {
-      "es-ES": "/",
-      "en-US": "/en",
-    },
-  },
   openGraph: {
     type: "website",
     title: "Derecho, ética y regulación de la IA",
@@ -46,689 +34,255 @@ export const metadata: Metadata = {
         url: "/logo-principal.png",
         width: 1200,
         height: 630,
-        alt: "Derecho Artificial - Perspectivas Legales sobre IA",
+        alt: "Derecho Artificial",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Derecho, ética y regulación de la IA",
-    description:
-      "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
-    images: ["/logo-principal.png"],
-    creator: "@RicardoScarpa", // Assuming this from previous context
   },
 };
 
 export default async function HomePage() {
+  const mdxPosts = getAllPosts();
+
   const [
-    actualidadJsonSlugs,
-    actualidadResourceSlugs,
-    firmaJsonSlugs,
-    firmaResourceSlugs,
     normativaSlugs,
     jurisprudenciaSlugs,
     guiasSlugs,
+    eticaSlugs,
   ] = await Promise.all([
-    listContentSlugs("actualidad-ia"),
-    listSectionResourceSlugs("actualidad-ia"),
-    listContentSlugs("firma-scarpa"),
-    listSectionResourceSlugs("firma-scarpa"),
     listSectionResourceSlugs("normativa"),
     listSectionResourceSlugs("jurisprudencia"),
     listSectionResourceSlugs("guias"),
+    listSectionResourceSlugs("etica-ia"),
   ]);
 
-  const [actualidadJsonEntries, actualidadResourceEntries, firmaJsonEntries, firmaResourceEntries] =
+  const [normativaEntries, jurisprudenciaEntries, guiasEntries, eticaEntries] =
     await Promise.all([
-      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("actualidad-ia", slug))),
-      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug))),
-      Promise.all(firmaJsonSlugs.map((slug) => getContentEntry("firma-scarpa", slug))),
-      Promise.all(firmaResourceSlugs.map((slug) => getSectionResourceEntry("firma-scarpa", slug))),
+      Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
+      Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
+      Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
+      Promise.all(eticaSlugs.map((slug) => getSectionResourceEntry("etica-ia", slug))),
     ]);
 
-  const resolvedActualidadJson = actualidadJsonEntries.filter(
-    (e): e is NonNullable<typeof e> => Boolean(e),
-  );
-  const resolvedActualidadResources = actualidadResourceEntries.filter(
-    (e): e is NonNullable<typeof e> => Boolean(e),
-  );
-  const resolvedFirmaJson = firmaJsonEntries.filter((e): e is NonNullable<typeof e> => Boolean(e));
-  const resolvedFirmaResources = firmaResourceEntries.filter(
-    (e): e is NonNullable<typeof e> => Boolean(e),
-  );
+  const filterAndSort = (entries: any[]) =>
+    entries
+      .filter((e): e is NonNullable<typeof e> => Boolean(e))
+      .sort((a, b) => (b.displayDateMs ?? b.dateMs ?? 0) - (a.displayDateMs ?? a.dateMs ?? 0));
 
-  const unifiedActualidad = [
-    ...resolvedActualidadJson.map((e) => ({
-      title: e.title,
-      description: e.description,
-      date: (() => {
-        const publishedMs =
-          typeof e.datePublished === "string" ? new Date(e.datePublished).getTime() : NaN;
-        const fallback = typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0;
-        return Number.isNaN(publishedMs) ? fallback : publishedMs;
-      })(),
-      urlPath: e.urlPath,
-      author: e.author,
-    })),
-    ...resolvedActualidadResources.map((e) => ({
-      title: e.title,
-      description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-      date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: `/actualidad-ia/${e.slug}`,
-      author: "Derecho Artificial",
-    })),
-  ];
-
-  const unifiedFirma = [
-    // Priorizar posts MDX de Firma Scarpa
-    ...getAllPosts().filter(post => 
-      post.frontmatter.category && 
-      (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
-       post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
-       post.frontmatter.category.toLowerCase() === 'firma scarpa' ||
-       post.frontmatter.category.toLowerCase() === 'firma-scarpa' ||
-       (post.frontmatter.section || "").toLowerCase() === 'firma-scarpa')
-    ).map(post => ({
-      title: post.frontmatter.title,
-      description: post.excerpt,
-      date: new Date(post.frontmatter.date).getTime(),
-      urlPath: post.url,
-      author: post.frontmatter.author || "Ricardo Scarpa",
-    })),
-    // Luego añadir recursos JSON legacy
-    ...resolvedFirmaJson.map((e) => ({
-      title: e.title,
-      description: e.description,
-      date: (() => {
-        const publishedMs =
-          typeof e.datePublished === "string" ? new Date(e.datePublished).getTime() : NaN;
-        const fallback = typeof e.dateMs === "number" && !Number.isNaN(e.dateMs) ? e.dateMs : 0;
-        return Number.isNaN(publishedMs) ? fallback : publishedMs;
-      })(),
-      urlPath: e.urlPath,
-      author: e.author,
-    })),
-    // Finalmente añadir recursos PDF
-    ...resolvedFirmaResources.map((e) => ({
-      title: e.title,
-      description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
-      date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: `/firma-scarpa/${e.slug}`,
-      author: "Derecho Artificial",
-    })),
-  ].sort((a, b) => b.date - a.date);
-
-  unifiedActualidad.sort((a, b) => b.date - a.date);
-
-  const latestActualidad = unifiedActualidad[0] ?? null;
-  const latestFirma = unifiedFirma[0] ?? null;
-
-  const homeFeaturedSlugs = [
-    "ai-act-guia-completa",
-    "rgpd-gobernanza-datos-ia",
-    "analisis-negligencia-chatgpt"
-  ];
-
-  const [latestNormativa, latestJurisprudencia, latestGuias] = await Promise.all([
-    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))).then((arr) => {
-      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort(
-        (a, b) =>
-          (b.displayDateMs ?? b.dateMs ?? 0) -
-          (a.displayDateMs ?? a.dateMs ?? 0),
-      );
-      return items[0] ?? null;
-    }),
-    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))).then((arr) => {
-      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort(
-        (a, b) =>
-          (b.displayDateMs ?? b.dateMs ?? 0) -
-          (a.displayDateMs ?? a.dateMs ?? 0),
-      );
-      return items[0] ?? null;
-    }),
-    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))).then((arr) => {
-      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort(
-        (a, b) =>
-          (b.displayDateMs ?? b.dateMs ?? 0) -
-          (a.displayDateMs ?? a.dateMs ?? 0),
-      );
-      return items[0] ?? null;
-    }),
-  ]);
-
-  const [normativaEntriesAll, jurisprudenciaEntriesAll, guiasEntriesAll] = await Promise.all([
-    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
-    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
-    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
-  ]);
-
-  // Crear una lista unificada de todas las entradas recientes para la sección "Actualidad y Análisis"
-  const mdxPosts = getAllPosts();
-  const normalizeLangText = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
-  const detectLanguage = (title: string, description: string): "es" | "other" => {
-    const text = normalizeLangText(`${title} ${description}`.toLowerCase());
-    const countMatches = (words: string[]) =>
-      words.reduce((acc, word) => acc + (text.match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 0), 0);
-    const esScore = countMatches([
-      "el",
-      "los",
-      "las",
-      "del",
-      "y",
-      "para",
-      "datos",
-      "proteccion",
-      "privacidad",
-      "agencia",
-      "inteligencia",
-    ]);
-    const frScore = countMatches(["le", "les", "des", "dans", "droits", "effacement"]);
-    if (esScore === 0) return "other";
-    if (esScore > frScore) return "es";
-    return "other";
-  };
-  const isAllowedLanguage = (title: string, description: string) => detectLanguage(title, description) === "es";
-  const newsMdxCandidates = mdxPosts
-    .filter((post) => {
-      const cat = (post.frontmatter.category || "").toLowerCase();
-      const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-      return (
-        cat === "noticia" ||
-        cat === "actualidad-ia" ||
-        tags.includes("noticia") ||
-        tags.includes("actualidad-ia") ||
-        tags.includes("actualidad") ||
-        tags.includes("news")
-      );
-    })
-    .filter((post) => isAllowedLanguage(post.frontmatter.title, post.excerpt))
-    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
-    .slice(0, 6);
-  const newsEntries =
-    newsMdxCandidates.length > 0
-      ? newsMdxCandidates.map((post) => ({
-          title: post.frontmatter.title,
-          description: post.excerpt,
-          date: new Date(post.frontmatter.date).getTime(),
-          urlPath: post.url,
-          author: post.frontmatter.author || "Derecho Artificial",
-          type: "Noticias IA" as const,
-        }))
-      : unifiedActualidad.slice(0, 6).map((e) => ({
-          title: e.title,
-          description: e.description,
-          date: e.date,
-          urlPath: e.urlPath,
-          author: e.author,
-          type: "Noticias IA" as const,
-        }));
-
-  const allRecentEntries: any[] = [];
+  const normativaTop = filterAndSort(normativaEntries).slice(0, 2);
+  const jurisprudenciaTop = filterAndSort(jurisprudenciaEntries).slice(0, 2);
+  const guiasTop = filterAndSort(guiasEntries).slice(0, 2);
+  const eticaTop = filterAndSort(eticaEntries).slice(0, 2);
 
   const formatDate = (value: string | number) => {
-    // Si es un timestamp numérico (milisegundos desde 1970)
-    if (typeof value === 'number') {
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return "";
-      return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
-    }
-    
-    // Si es una string de fecha (como "2026-02-10")
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return "";
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
-  const toMs = (value: string | number | Date | null | undefined) => {
-    if (value == null) return 0;
-    const d = new Date(value);
-    if (Number.isNaN(d.getTime())) return 0;
-    return d.getTime();
-  };
+  const getLatestPostsByCategory = (category: string) =>
+    mdxPosts
+      .filter((post) => {
+        const cat = (post.frontmatter.category || "").toLowerCase();
+        const section = (post.frontmatter.section || "").toLowerCase();
+        return cat === category.toLowerCase() || section === category.toLowerCase();
+      })
+      .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+      .slice(0, 2);
 
-  const [normativaTopEntries, jurisprudenciaTopEntries, guiasTopEntries] = await Promise.all([
-    Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))).then((arr) => {
-      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort(
-        (a, b) =>
-          (b.displayDateMs ?? b.dateMs ?? 0) -
-          (a.displayDateMs ?? a.dateMs ?? 0),
-      );
-      return items.slice(0, 2);
-    }),
-    Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))).then((arr) => {
-      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort(
-        (a, b) =>
-          (b.displayDateMs ?? b.dateMs ?? 0) -
-          (a.displayDateMs ?? a.dateMs ?? 0),
-      );
-      return items.slice(0, 2);
-    }),
-    Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))).then((arr) => {
-      const items = arr.filter((e): e is NonNullable<typeof e> => Boolean(e));
-      items.sort(
-        (a, b) =>
-          (b.displayDateMs ?? b.dateMs ?? 0) -
-          (a.displayDateMs ?? a.dateMs ?? 0),
-      );
-      return items.slice(0, 2);
-    }),
-  ]);
-
-  const normativaItems =
-    normativaTopEntries
-      .filter((e): e is NonNullable<typeof e> => Boolean(e))
-      .map((e) => ({
-        title: e.title,
-        href: `/normativa/${e.slug}`,
-        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Análisis normativo con fuentes oficiales`,
-        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
-      })) ?? [];
-
-  const jurisprudenciaItems =
-    jurisprudenciaTopEntries
-      .filter((e): e is NonNullable<typeof e> => Boolean(e))
-      .map((e) => ({
-        title: e.title,
-        href: `/jurisprudencia/${e.slug}`,
-        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Resoluciones clave sobre algoritmos y derechos`,
-        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
-      })) ?? [];
-
-  const guiasItems =
-    guiasTopEntries
-      .filter((e): e is NonNullable<typeof e> => Boolean(e))
-      .map((e) => ({
-        title: e.title,
-        href: `/recursos/guias/${e.slug}`,
-        description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
-        meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Repositorio de documentación técnica y ética`,
-        dateMs: e.displayDateMs ?? e.dateMs ?? 0,
-      })) ?? [];
-
-  const latestActualidadMs = toMs(unifiedActualidad[0]?.date);
-  const latestJurisprudenciaMs =
-    jurisprudenciaTopEntries[0]?.displayDateMs ?? jurisprudenciaTopEntries[0]?.dateMs ?? 0;
-  const latestNormativaMs =
-    normativaTopEntries[0]?.displayDateMs ?? normativaTopEntries[0]?.dateMs ?? 0;
-  const latestGuiasMs = guiasTopEntries[0]?.displayDateMs ?? guiasTopEntries[0]?.dateMs ?? 0;
-  const latestFirmaMs = toMs(unifiedFirma[0]?.date);
-  const actualidadWeeklyCount = unifiedActualidad.filter((e) => isNew(e.date)).length;
-  const firmaWeeklyCount = unifiedFirma.filter((e) => isNew(e.date)).length;
-
-  const normativaWeeklyCount = normativaEntriesAll
-    .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.displayDateMs ?? 0)).length;
-  const jurisprudenciaWeeklyCount = jurisprudenciaEntriesAll
-    .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.displayDateMs ?? 0)).length;
-  const guiasWeeklyCount = guiasEntriesAll
-    .filter((e): e is NonNullable<typeof e> => Boolean(e))
-    .filter((e) => isNew(e.displayDateMs ?? 0)).length;
-
-  const uniqueByHref = <T extends { href: string }>(arr: T[]) => {
-    const seen = new Set<string>();
-    const res: T[] = [];
-    for (const it of arr) {
-      if (seen.has(it.href)) continue;
-      seen.add(it.href);
-      res.push(it);
-    }
-    return res;
-  };
-
-  const sectionCards = [
+  const sectionConfigs = [
     {
       key: "firma-scarpa",
-      label: "Firma Scarpa",
+      title: "Firma Scarpa",
+      image: "/images/heroes/firma-scarpa-hero.webp",
       href: "/firma-scarpa",
-      items: uniqueByHref(
-        [unifiedFirma[0], unifiedFirma[1]]
-          .filter((e): e is NonNullable<typeof e> => Boolean(e))
-          .map((e) => ({
-            title: e.title,
-            href: e.urlPath,
-            description: e.description ?? "",
-            meta: `${formatDate(e.date)} · ${e.author}`,
-            dateMs: e.date,
-          })),
-      ),
-    },
-    {
-      key: "jurisprudencia",
-      label: "Jurisprudencia",
-      href: "/jurisprudencia",
-      items: uniqueByHref(jurisprudenciaItems).slice(0, 2),
+      getItems: () =>
+        getLatestPostsByCategory("firma-scarpa").map((post) => ({
+          title: post.frontmatter.title,
+          href: post.url,
+          description: post.excerpt,
+          date: new Date(post.frontmatter.date).getTime(),
+        })),
     },
     {
       key: "normativa",
-      label: "Normativa",
+      title: "Normativa IA",
+      image: "/images/heroes/normativa-ia-hero.webp",
       href: "/normativa",
-      items: uniqueByHref(normativaItems).slice(0, 2),
+      getItems: () =>
+        normativaTop.map((entry) => ({
+          title: entry.title,
+          href: `/normativa/${entry.slug}`,
+          description: entry.summaryHtml?.replace(/<[^>]+>/g, "").slice(0, 200) || "",
+          date: entry.displayDateMs ?? entry.dateMs ?? 0,
+        })),
+    },
+    {
+      key: "jurisprudencia",
+      title: "Jurisprudencia IA",
+      image: "/images/heroes/jurisprudencia-ia-hero.webp",
+      href: "/jurisprudencia",
+      getItems: () =>
+        jurisprudenciaTop.map((entry) => ({
+          title: entry.title,
+          href: `/jurisprudencia/${entry.slug}`,
+          description: entry.summaryHtml?.replace(/<[^>]+>/g, "").slice(0, 200) || "",
+          date: entry.displayDateMs ?? entry.dateMs ?? 0,
+        })),
     },
     {
       key: "guias",
-      label: "Guías y Protocolos",
+      title: "Guías IA",
+      image: "/images/heroes/guias-ia-hero.webp",
       href: "/recursos/guias",
-      items: uniqueByHref(guiasItems).slice(0, 2),
+      getItems: () =>
+        guiasTop.map((entry) => ({
+          title: entry.title,
+          href: `/recursos/guias/${entry.slug}`,
+          description: entry.summaryHtml?.replace(/<[^>]+>/g, "").slice(0, 200) || "",
+          date: entry.displayDateMs ?? entry.dateMs ?? 0,
+        })),
     },
     {
-      key: "glosario",
-      label: "Glosario IA legal",
-      href: "/glosario-ia-legal",
+      key: "propiedad-intelectual",
+      title: "Propiedad Intelectual IA",
+      image: "/images/heroes/propiedad-intelectual-ia-hero.webp",
+      href: "/propiedad-intelectual-ia",
+      getItems: () =>
+        getLatestPostsByCategory("propiedad-intelectual-ia").map((post) => ({
+          title: post.frontmatter.title,
+          href: post.url,
+          description: post.excerpt,
+          date: new Date(post.frontmatter.date).getTime(),
+        })),
     },
     {
-      key: "quienes-somos",
-      label: "Quiénes somos",
-      href: "/quienes-somos",
+      key: "etica",
+      title: "Ética IA",
+      image: "/images/heroes/etica-ia-hero.webp",
+      href: "/etica-ia",
+      getItems: () =>
+        eticaTop.map((entry) => ({
+          title: entry.title,
+          href: `/etica-ia/${entry.slug}`,
+          description: entry.summaryHtml?.replace(/<[^>]+>/g, "").slice(0, 200) || "",
+          date: entry.displayDateMs ?? entry.dateMs ?? 0,
+        })),
     },
     {
-      key: "contacto",
-      label: "Contacto",
-      href: "/contacto",
+      key: "ia-global",
+      title: "IA Global",
+      image: "/images/heroes/ia-global-hero.webp",
+      href: "/ia-global",
+      getItems: () =>
+        getLatestPostsByCategory("global-ia").concat(getLatestPostsByCategory("ia-global"))
+          .slice(0, 2)
+          .map((post) => ({
+            title: post.frontmatter.title,
+            href: post.url,
+            description: post.excerpt,
+            date: new Date(post.frontmatter.date).getTime(),
+          })),
     },
   ];
 
-  const getCtaLabel = (key: string) => {
-    switch (key) {
-      case "normativa":
-        return "Ver normativa";
-      case "jurisprudencia":
-        return "Ver jurisprudencia";
-      case "guias":
-        return "Navegar guías";
-      case "firma-scarpa":
-        return "Conocer la firma";
-      case "glosario":
-        return "Ver glosario";
-      case "quienes-somos":
-        return "Conocer el proyecto";
-      case "contacto":
-        return "Contactar";
-      default:
-        return "Ver sección";
-    }
-  };
-
   return (
     <>
-      <Breadcrumbs 
-        items={[
-          { label: "Inicio", href: "/" }
-        ]}
-      />
+      <Breadcrumbs items={[{ label: "Inicio", href: "/" }]} />
       <main>
-      <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
-        <Image
-          src="/images/heroes/home-hero.webp"
-          alt="Derecho e IA"
-          fill
-          className="object-cover bg-center"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
-            Derecho Artificial
-          </h1>
-          <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl drop-shadow-lg font-medium">
-            Derecho, ética y regulación de la IA
-          </p>
-          <p className="text-xs md:text-sm lg:text-base mt-2 max-w-3xl drop-shadow-lg text-white/80 text-center">
-            Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.
-          </p>
-          <div className="mt-8 flex flex-col md:flex-row gap-4">
-            <Link
-              href="/actualidad-ia"
-              className="bg-primary text-white px-8 py-4 rounded-lg font-bold hover:bg-primary/90 transition-colors"
-            >
-              Ver guías IA
-            </Link>
-            <Link
-              href="/#secciones"
-              className="bg-white text-primary px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors"
-            >
-              Explorar secciones
-            </Link>
+        <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
+          <Image
+            src="/images/heroes/home-hero.webp"
+            alt="Derecho e IA"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
+              Derecho Artificial
+            </h1>
+            <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl drop-shadow-lg font-medium">
+              Derecho, ética y regulación de la IA
+            </p>
+            <p className="text-xs md:text-sm lg:text-base mt-2 max-w-3xl drop-shadow-lg text-white/80">
+              Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.
+            </p>
+            <div className="mt-8 flex flex-col md:flex-row gap-4">
+              <Link
+                href="/firma-scarpa"
+                className="bg-primary text-white px-8 py-4 rounded-lg font-bold hover:bg-primary/90 transition-colors"
+              >
+                Explorar contenido
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
-      
-      
+        </section>
 
-      <section className="section-spacing bento-surface">
-        <div className="container-wide">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
-                Noticias IA
+        <section className="py-12 md:py-16 lg:py-20 px-6 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-12">
+              <p className="text-xs uppercase tracking-[0.25em] text-gray-500 mb-3">
+                Análisis y recursos
               </p>
-              <h2 className="font-serif text-2xl md:text-3xl text-foreground">
-                Últimas novedades por sección
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
+                Últimas actualizaciones por sección
               </h2>
             </div>
-            <div className="max-w-xl">
-              <p className="text-sm text-caption">
-                Explora nuestros últimos briefings, ensayos y actualizaciones. Selección editorial para aportar criterio técnico y jurídico.
-              </p>
-              <div className="mt-3">
-                <Link
-                  href="/actualidad-ia"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
-                >
-                  Ver todas las guías
-                </Link>
-              </div>
-            </div>
-          </div>
-          {(() => {
-            const sections = [
-              {
-                title: "Firma Scarpa",
-                category: "firma-scarpa",
-                image: "/images/heroes/firma-scarpa-hero.webp",
-                href: "/firma-scarpa",
-              },
-              {
-                title: "Normativa IA",
-                category: "normativa",
-                image: "/images/heroes/normativa-ia-hero.webp",
-                href: "/normativa",
-              },
-              {
-                title: "Jurisprudencia IA",
-                category: "jurisprudencia",
-                image: "/images/heroes/jurisprudencia-ia-hero.webp",
-                href: "/jurisprudencia",
-              },
-              {
-                title: "Guías IA",
-                category: "actualidad-ia",
-                image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
-                  ? "/images/heroes/guias-ia-hero.wep"
-                  : "/images/heroes/guias-ia-hero.webp",
-                href: "/actualidad-ia",
-              },
-              {
-                title: "Propiedad Intelectual IA",
-                category: "propiedad-intelectual-ia",
-                image: "/images/heroes/propiedad-intelectual-ia-hero.webp",
-                href: "/propiedad-intelectual-ia",
-              },
-              {
-                title: "Ética IA",
-                category: "etica-ia",
-                image: "/images/heroes/etica-ia-hero.webp",
-                href: "/etica-ia",
-              },
-              {
-                title: "IA Global",
-                category: "ia-global",
-                image: "/images/heroes/ia-global-hero.webp",
-                href: "/ia-global",
-              },
-            ];
-            const getLatestByCategory = (cat: string) =>
-              mdxPosts
-                .filter((post) => {
-                  const c = (post.frontmatter.category || "").toLowerCase();
-                  
-                  // Para normativa, incluir categorías relacionadas
-                  if (cat === "normativa") {
-                    return c === "normativa" || 
-                           c === "legislación digital" || 
-                           c === "legislación internacional" ||
-                           c === "legislación" ||
-                           c === "legislación ia" ||
-                           c === "regulación ue";
-                  }
-                  
-                  // Para jurisprudencia, incluir categorías relacionadas
-                  if (cat === "jurisprudencia") {
-                    return c === "jurisprudencia" || 
-                           c === "jurisprudencia ia" ||
-                           (post.frontmatter.section || "").toLowerCase() === "jurisprudencia";
-                  }
-                  
-                  // Para IA Global, incluir categorías relacionadas
-                  if (cat === "ia-global") {
-                    return c === "ia-global" || 
-                           c === "global ia" ||
-                           (post.frontmatter.section || "").toLowerCase() === "ia-global";
-                  }
-                  
-                  if (c !== cat) return false;
-                  if (c === "recursos") {
-                    const subcat = (post.frontmatter.subcategory || "").toLowerCase();
-                    const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-                    return subcat === "guias" || tags.includes("guias");
-                  }
-                  return true;
-                })
-                .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
-                .slice(0, 2);
 
-                    const getLatestFirmaPosts = () => {
-              return unifiedFirma.slice(0, 2).map((entry, idx) => ({
-                slug: "firma-home-" + idx,
-                frontmatter: {
-                  title: entry.title,
-                  date: new Date(entry.date).toISOString(),
-                  category: "firma-scarpa",
-                },
-                excerpt: entry.description || "",
-                url: entry.urlPath,
-              }));
-            };
+            <div className="space-y-8">
+              {sectionConfigs.map((sec) => {
+                const items = sec.getItems();
+                return (
+                  <div key={sec.key} className="group border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                    <Link href={sec.href} className="relative block w-full aspect-video overflow-hidden">
+                      <Image
+                        src={sec.image}
+                        alt={sec.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60" />
+                      <div className="absolute inset-0 flex items-end px-6 pb-6">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                          {sec.title}
+                        </h3>
+                      </div>
+                    </Link>
 
-        const getLatestActualidadPosts = () =>
-          unifiedActualidad.slice(0, 2).map((entry, idx) => ({
-            slug: `actualidad-home-${idx}`,
-            frontmatter: {
-              title: entry.title,
-              date: new Date(entry.date).toISOString(),
-              category: "actualidad-ia",
-            },
-            excerpt: entry.description || "",
-            url: entry.urlPath,
-          }));
-
-            const buildHref = (post: any) => {
-              const c = (post.frontmatter.category || "").toLowerCase();
-              const subcat = (post.frontmatter.subcategory || "").toLowerCase();
-              const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-
-              if (c === "noticia" && post.frontmatter.url) {
-                return post.frontmatter.url;
-              }
-              if (c === "recursos" && (subcat === "guias" || tags.includes("guias"))) {
-                return `/recursos/guias/${post.slug}`;
-              }
-
-              return post.url;
-            };
-
-            return (
-              <div className="space-y-10">
-                {sections.map((sec) => {
-              const items =
-                sec.category === "actualidad-ia"
-                  ? getLatestActualidadPosts()
-                  : sec.category === "firma-scarpa"
-                    ? getLatestFirmaPosts()
-                    : getLatestByCategory(sec.category);
-                  const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
-                  return (
-                    <div
-                      key={sec.category}
-                      className="group flex flex-col rounded-lg overflow-hidden border border-divider shadow-md hover:shadow-lg transition"
-                    >
-                      <Link
-                        href={sec.href}
-                        className="relative block w-full aspect-video overflow-hidden"
-                      >
-                        <Image
-                          src={sec.image}
-                          alt={sec.title}
-                          fill
-                          sizes="100vw"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
-                          priority={false}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/50" />
-                        <div className="absolute inset-0 flex items-end px-6 pb-6">
-                          <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-                            {sec.title}
-                          </h3>
-                        </div>
-                      </Link>
-                      <div className="w-full p-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white">
-                        {slots.map((post, idx) =>
-                          post ? (
-                            <Link
-                              key={`${post.slug}-${idx}`}
-                              href={buildHref(post)}
-                              className="group bg-white border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                            >
-                              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
+                    <div className="p-6 bg-white grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {items.length > 0 ? (
+                        items.map((item, idx) => (
+                          <Link
+                            key={`${sec.key}-${idx}`}
+                            href={item.href}
+                            className="p-5 border border-gray-200 rounded hover:border-primary hover:shadow-md transition-all flex flex-col justify-between group/card"
+                          >
+                            <div>
+                              <p className="text-[10px] uppercase tracking-[0.25em] text-gray-500 mb-2">
                                 {sec.title}
                               </p>
-                              <h4 className="font-serif text-lg text-foreground mb-2">
-                                {post.frontmatter.title}
-                                <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                              <h4 className="text-lg font-semibold text-gray-900 mb-2 group-hover/card:text-primary transition-colors">
+                                {item.title}
+                                <span className="opacity-0 group-hover/card:opacity-100 transition-opacity ml-2">→</span>
                               </h4>
-                              <p className="text-xs text-caption mb-2">{formatDate(post.frontmatter.date)}</p>
-                              <p className="text-sm text-body line-clamp-3">{post.excerpt}</p>
-                            </Link>
-                          ) : (
-                            <div
-                              key={`placeholder-${sec.category}-${idx}`}
-                              className="border border-dashed border-divider rounded-sm p-5 bg-white"
-                            >
-                              <p className="text-sm text-body">Próximamente contenido</p>
+                              <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
                             </div>
-                          ),
-                        )}
-                      </div>
+                            <p className="text-xs text-gray-500 mt-3">{formatDate(item.date)}</p>
+                          </Link>
+                        ))
+                      ) : (
+                        <div className="col-span-2 p-6 border border-dashed border-gray-300 rounded bg-gray-50 flex items-center justify-center">
+                          <p className="text-gray-500">Próximamente contenido</p>
+                        </div>
+                      )}
                     </div>
-                  );
-                })}
-              </div>
-            );
-          })()}
-        </div>
-      </section>
-
-      
-    </main>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
-
-
