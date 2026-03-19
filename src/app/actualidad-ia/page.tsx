@@ -1,7 +1,7 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import type { PreviewItem } from "@/components/ContentPreviewCard";
-// Image import removed - using native img
+import Image from "next/image";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
@@ -232,4 +232,3 @@ export default async function ActualidadIAPage({
     </>
   );
 }
-

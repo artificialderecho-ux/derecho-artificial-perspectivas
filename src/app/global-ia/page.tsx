@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
-// Image import removed - using native img
+import Image from "next/image";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
 
@@ -87,17 +87,17 @@ export default async function GlobalIAPage() {
       <StructuredData data={breadcrumbJsonLd} />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         {/* Hero Section */}
-        <section className="relative overflow-hidden text-white">
+        <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white">
           <div className="absolute inset-0">
             <Image
               src="/images/heroes/ia-global-hero.webp"
               alt="Inteligencia Artificial Global"
               fill
-              className="object-cover"
+              className="object-cover opacity-30"
               priority
             />
           </div>
-          <div className="absolute inset-0 bg-black/45"></div>
+          <div className="absolute inset-0 bg-black/20"></div>
           <div className="relative container mx-auto px-4 py-24 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
@@ -192,6 +192,4 @@ export default async function GlobalIAPage() {
     </>
   );
 }
-
-
 
