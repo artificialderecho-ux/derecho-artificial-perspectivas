@@ -1,8 +1,6 @@
 ﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
 import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
 import { getAllPosts } from '@/lib/mdx-utils';
@@ -549,11 +547,9 @@ export default async function HomePage() {
               },
               {
                 title: "Guías IA",
-                category: "actualidad-ia",
-                image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
-                  ? "/images/heroes/guias-ia-hero.wep"
-                  : "/images/heroes/guias-ia-hero.webp",
-                href: "/actualidad-ia",
+                category: "guias",
+                image: "/images/heroes/guias-ia-hero.webp",
+                href: "/recursos/guias",
               },
               {
                 title: "Propiedad Intelectual IA",
@@ -569,9 +565,9 @@ export default async function HomePage() {
               },
               {
                 title: "IA Global",
-                category: "ia-global",
+                category: "global-ia",
                 image: "/images/heroes/ia-global-hero.webp",
-                href: "/ia-global",
+                href: "/global-ia",
               },
             ];
             const getLatestByCategory = (cat: string) =>
@@ -597,10 +593,23 @@ export default async function HomePage() {
                   }
                   
                   // Para IA Global, incluir categorías relacionadas
-                  if (cat === "ia-global") {
+                  if (cat === "global-ia") {
                     return c === "ia-global" || 
+                           c === "global-ia" ||
                            c === "global ia" ||
-                           (post.frontmatter.section || "").toLowerCase() === "ia-global";
+                           (post.frontmatter.section || "").toLowerCase() === "ia-global" ||
+                           (post.frontmatter.section || "").toLowerCase() === "global-ia";
+                  }
+
+                  // Para Guías IA, mapear recursos etiquetados como guías
+                  if (cat === "guias") {
+                    const subcat = (post.frontmatter.subcategory || "").toLowerCase();
+                    const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+                    return (
+                      c === "guias" ||
+                      c === "guías" ||
+                      (c === "recursos" && (subcat === "guias" || subcat === "guías" || tags.includes("guias")))
+                    );
                   }
                   
                   if (c !== cat) return false;
@@ -615,15 +624,27 @@ export default async function HomePage() {
                 .slice(0, 2);
 
                     const getLatestFirmaPosts = () => {
-              return unifiedFirma.slice(0, 2).map((entry, idx) => ({
+              return mdxPosts
+                .filter((post) => {
+                  const category = (post.frontmatter.category || "").toLowerCase();
+                  const section = (post.frontmatter.section || "").toLowerCase();
+                  return (
+                    category === "firma-scarpa" ||
+                    category === "firma scarpa" ||
+                    section === "firma-scarpa"
+                  );
+                })
+                .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+                .slice(0, 2)
+                .map((post, idx) => ({
                 slug: "firma-home-" + idx,
                 frontmatter: {
-                  title: entry.title,
-                  date: new Date(entry.date).toISOString(),
+                  title: post.frontmatter.title,
+                  date: new Date(post.frontmatter.date).toISOString(),
                   category: "firma-scarpa",
                 },
-                excerpt: entry.description || "",
-                url: entry.urlPath,
+                excerpt: post.excerpt || "",
+                url: post.url,
               }));
             };
 
