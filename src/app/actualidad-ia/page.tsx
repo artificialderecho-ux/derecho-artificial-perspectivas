@@ -1,21 +1,18 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import type { PreviewItem } from "@/components/ContentPreviewCard";
-import Image from "next/image";
-import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
-import { ActualidadTabsClient } from "./ActualidadTabsClient";
 
-// Revalidación automática cada hora
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Guías IA",
-  description: "Guías y protocolos sobre inteligencia artificial elaborados por Ricardo Scarpa.",
-  keywords: ["Guías IA", "regulación IA", "jurisprudencia IA", "guías IA", "noticias IA"],
+  description: "Guías y protocolos sobre inteligencia artificial.",
+  keywords: ["Guías IA", "regulación IA", "jurisprudencia IA", "noticias IA"],
   alternates: {
     canonical: "/actualidad-ia",
     languages: {
@@ -26,40 +23,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Guías IA",
-    description: "Guías y protocolos sobre inteligencia artificial elaborados por Ricardo Scarpa.",
+    description: "Guías y protocolos sobre inteligencia artificial.",
     url: "/actualidad-ia",
     locale: "es_ES",
-    images: [{ url: "/logo-principal.png" }],
+    images: [{ url: "/images/heroes/guias-ia-hero.webp" }],
   },
 };
 
-const formatGuideTitle = (title: string, source?: string) => {
-  const normalized = title.trim().toLowerCase();
-  if (
-    normalized.startsWith("guía") ||
-    normalized.startsWith("guia") ||
-    normalized.startsWith("protocolo")
-  ) {
-    return title;
-  }
-  const sourceLabel = source?.trim();
-  if (sourceLabel) {
-    const normalizedSource = sourceLabel.toLowerCase();
-    if (normalized.startsWith(normalizedSource)) {
-      return title;
-    }
-    return `${sourceLabel} publica guía sobre ${title}`;
-  }
-  return `Guía publicada: ${title}`;
-};
+export default async function ActualidadIAPage() {
+  const mdxPosts = getAllPosts();
+  
+  const formatDateEs = (ms?: number | null) => {
+    if (!ms || Number.isNaN(ms)) return null;
+    const d = new Date(ms);
+    if (Number.isNaN(d.getTime())) return null;
+    return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+  };
 
-export default async function ActualidadIAPage({
-  searchParams,
-}: {
-  searchParams?: { tab?: string };
-}) {
-  const tab = (searchParams?.tab || "todas").toLowerCase();
-  const currentTab = tab === "noticias" || tab === "guias" ? tab : "todas";
+  const mdxGuides = mdxPosts.filter((p) => {
+    const tags = (p.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+    return tags.includes("guia") || tags.includes("protocolo");
+  });
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -68,167 +52,90 @@ export default async function ActualidadIAPage({
     ],
   });
 
-  const guideSlugs = await listSectionResourceSlugs("guias");
-  const guideEntries = await Promise.all(guideSlugs.map((slug) => getSectionResourceEntry("guias", slug)));
-  const resolvedGuides = guideEntries.filter((entry): entry is ResourceEntry => Boolean(entry));
-
-  const newsSlugs = await listSectionResourceSlugs("actualidad-ia");
-  const newsEntries = await Promise.all(newsSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug)));
-  const resolvedNews = newsEntries.filter((entry): entry is ResourceEntry => Boolean(entry));
-
-  const mdxPosts = getAllPosts();
-  const normalizeLangText = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
-  const detectLanguage = (title: string, description: string): "es" | "other" => {
-    const text = normalizeLangText(`${title} ${description}`.toLowerCase());
-    const countMatches = (words: string[]) =>
-      words.reduce((acc, word) => acc + (text.match(new RegExp(`\\b${word}\\b`, "g"))?.length ?? 0), 0);
-    const esScore = countMatches([
-      "el",
-      "los",
-      "las",
-      "del",
-      "y",
-      "para",
-      "datos",
-      "proteccion",
-      "privacidad",
-      "agencia",
-      "inteligencia",
-    ]);
-    const frScore = countMatches(["le", "les", "des", "dans", "droits", "effacement", "numerique", "omnibus"]);
-    if (esScore === 0 && frScore > 0) return "other";
-    if (esScore === 0) return "other";
-    if (esScore > frScore) return "es";
-    return "other";
-  };
-  const isAllowedLanguage = (title: string, description: string) => detectLanguage(title, description) === "es";
-  const normalizeTags = (tags?: string[]) => (tags ?? []).map((tag) => tag.toLowerCase());
-  const mdxGuides = mdxPosts.filter((p) => {
-    const tags = normalizeTags(p.frontmatter.tags);
-    return tags.includes("guia") || tags.includes("protocolo");
-  });
-  const mdxNews = mdxPosts.filter((p) => {
-    const category = p.frontmatter.category?.toLowerCase();
-    const tags = normalizeTags(p.frontmatter.tags);
-    const isGuide = tags.includes("guia") || tags.includes("protocolo");
-    return (
-      !isGuide &&
-      (category === "noticia" ||
-        category === "actualidad-ia" ||
-        tags.includes("actualidad") ||
-        tags.includes("actualidad-ia") ||
-        tags.includes("noticia"))
-    );
-  });
-
-  const formatDateEs = (ms?: number | null) => {
-    if (!ms || Number.isNaN(ms)) return null;
-    const d = new Date(ms);
-    if (Number.isNaN(d.getTime())) return null;
-    return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
-  };
-  const fallbackImage = "/logo-principal.png";
-  const extractImage = (post: ReturnType<typeof getAllPosts>[number]) =>
-    post.frontmatter.image || post.frontmatter.ogImage || post.frontmatter.cover || fallbackImage;
-  const getSourceFromUrl = (url?: string | null) => {
-    if (!url) return null;
-    try {
-      const { hostname } = new URL(url);
-      const host = hostname.replace(/^www\./, "");
-      if (host.includes("euipo")) return "EUIPO";
-      if (host.includes("eur-lex")) return "EUR-Lex";
-      if (host.includes("cnil")) return "CNIL";
-      if (host.includes("ico.org.uk")) return "ICO";
-      if (host.includes("aesia")) return "AESIA";
-      return host.split(".")[0]?.toUpperCase() ?? host;
-    } catch {
-      return null;
-    }
-  };
-  const buildMeta = (dateLabel: string | null, sourceLabel?: string | null) => {
-    const parts: string[] = [];
-    if (dateLabel) parts.push(dateLabel);
-    if (sourceLabel) parts.push(`Fuente: ${sourceLabel}`);
-    return parts.join(" · ");
-  };
-
-  const guideItems: PreviewItem[] = mdxGuides
+  const guideItems = mdxGuides
     .map((p) => {
       const d = new Date(p.frontmatter.date).getTime();
       const dateLabel = formatDateEs(d);
-      const sourceLabel = p.frontmatter.source || getSourceFromUrl(p.frontmatter.url);
-      const href = p.frontmatter.url || `/recursos/guias/${p.slug}`;
       return {
         id: `mdx-guide-${p.slug}`,
-        href,
-        title: formatGuideTitle(p.frontmatter.title, sourceLabel ?? undefined),
+        href: p.url,
+        title: p.frontmatter.title,
         description: p.excerpt,
         badge: "Guías y Protocolos",
-        meta: buildMeta(dateLabel, sourceLabel),
+        meta: dateLabel ? `${dateLabel}` : "",
         dateMs: d || 0,
         displayDateMs: d || 0,
-        imageUrl: extractImage(p),
       };
     })
     .sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
-
-  const rawNewsItems: PreviewItem[] = [
-    ...resolvedNews.map((n) => {
-      const dateLabel = formatDateEs(n.displayDateMs ?? n.dateMs);
-      const sourceLabel = getSourceFromUrl(n.sourceUrl);
-      return {
-        id: `news-${n.slug}`,
-        href: `/actualidad-ia/${n.slug}`,
-        title: n.title,
-        description: n.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 180),
-        badge: "Noticias IA",
-        meta: buildMeta(dateLabel, sourceLabel),
-        dateMs: n.dateMs ?? 0,
-        displayDateMs: n.displayDateMs ?? undefined,
-        imageUrl: fallbackImage,
-      };
-    }),
-    ...mdxNews.map((p) => {
-      const d = new Date(p.frontmatter.date).getTime();
-      const dateLabel = formatDateEs(d);
-      const sourceLabel = p.frontmatter.source || getSourceFromUrl(p.frontmatter.url);
-      return {
-        id: `mdx-news-${p.slug}`,
-        href: p.frontmatter.url || p.url,
-        title: p.frontmatter.title,
-        description: p.excerpt,
-        badge: "Noticias IA",
-        meta: buildMeta(dateLabel, sourceLabel),
-        dateMs: d || 0,
-        displayDateMs: d || 0,
-        imageUrl: extractImage(p),
-      };
-    }),
-  ].sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
-
-  const newsItems: PreviewItem[] = rawNewsItems.filter((item) => isAllowedLanguage(item.title, item.description));
-
-  const allItems: PreviewItem[] = [...newsItems, ...guideItems].sort(
-    (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
-  );
 
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <Breadcrumbs items={[{ label: "Inicio", href: "/" }, { label: "Guías IA", href: "/actualidad-ia" }]} />
-      <LegalLayout
-        title="Guías IA"
-        category="Secciones"
-        date={new Date().toISOString().slice(0, 10)}
+      
+      <main>
+        {/* Hero Section */}
+        <section className="relative overflow-hidden text-white h-96 md:h-[500px]">
+          <img
+            src="/images/heroes/guias-ia-hero.webp"
+            alt="Guías IA"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="relative container mx-auto px-4 h-full flex flex-col items-center justify-center text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Guías IA</h1>
+            <p className="text-lg md:text-xl text-gray-100 max-w-2xl">
+              Guías, protocolos y análisis sobre inteligencia artificial para profesionales del derecho
+            </p>
+          </div>
+        </section>
 
-      >
-        <ActualidadTabsClient
-          initialTab={currentTab === "noticias" || currentTab === "guias" ? currentTab : "todas"}
-          allItems={allItems}
-          noticiasItems={newsItems}
-          guiasItems={guideItems}
-        />
-      </LegalLayout>
+        {/* Content Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Últimas Guías y Protocolos
+              </h2>
+              <p className="text-gray-600 max-w-2xl">
+                Recursos prácticos para implementar inteligencia artificial en tu organización
+              </p>
+            </div>
+
+            {/* Grid */}
+            {guideItems.length > 0 ? (
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {guideItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-primary transition-all duration-300 flex flex-col"
+                  >
+                    <span className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
+                      {item.badge}
+                    </span>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 flex-1 hover:text-primary transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                      {item.description}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-500">{item.meta}</span>
+                      <span className="text-primary font-semibold">→</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">No hay guías disponibles en este momento.</p>
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
     </>
   );
 }
