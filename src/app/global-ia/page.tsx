@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
@@ -50,11 +50,12 @@ type GlobalIAPost = {
 };
 
 export default async function GlobalIAPage() {
-  const mdxPosts = getAllPosts().filter(post => 
-    post.frontmatter.category === 'Global IA' || 
-    post.frontmatter.category === 'ia-global' ||
-    (post.frontmatter.category && post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'ia global')
-  );
+  const mdxPosts = getAllPosts().filter(post =>
+  post.frontmatter.category === 'Global IA' ||
+  post.frontmatter.category === 'ia-global' ||
+  post.frontmatter.category === 'global-ia' ||
+  (post.frontmatter.category && post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'ia global')
+);
 
   const mdxItems: GlobalIAPost[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
@@ -191,3 +192,4 @@ export default async function GlobalIAPage() {
     </>
   );
 }
+
