@@ -1,6 +1,5 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
 
@@ -51,11 +50,11 @@ type GlobalIAPost = {
 
 export default async function GlobalIAPage() {
   const mdxPosts = getAllPosts().filter(post =>
-  post.frontmatter.category === 'Global IA' ||
-  post.frontmatter.category === 'ia-global' ||
-  post.frontmatter.category === 'global-ia' ||
-  (post.frontmatter.category && post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'ia global')
-);
+    post.frontmatter.category === "Global IA" ||
+    post.frontmatter.category === "ia-global" ||
+    post.frontmatter.category === "global-ia" ||
+    (post.frontmatter.category && post.frontmatter.category.toLowerCase().replace(/-/g, " ") === "ia global")
+  );
 
   const mdxItems: GlobalIAPost[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
@@ -87,17 +86,15 @@ export default async function GlobalIAPage() {
       <StructuredData data={breadcrumbJsonLd} />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white">
+        <section className="relative overflow-hidden text-white">
           <div className="absolute inset-0">
-            <Image
+            <img
               src="/images/heroes/ia-global-hero.webp"
               alt="Inteligencia Artificial Global"
-              fill
-              className="object-cover opacity-30"
-              priority
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
-          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute inset-0 bg-black/45"></div>
           <div className="relative container mx-auto px-4 py-24 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
@@ -107,7 +104,7 @@ export default async function GlobalIAPage() {
                 Inteligencia Artificial en el Derecho Global
               </p>
               <p className="text-lg text-blue-200 mb-12 max-w-2xl mx-auto">
-                Análisis exhaustivo de la regulación de IA a nivel mundial, incluyendo AI Act europeo, 
+                Análisis exhaustivo de la regulación de IA a nivel mundial, incluyendo AI Act europeo,
                 executive orders de EE.UU., regulaciones asiáticas y estándares internacionales.
               </p>
             </div>
@@ -122,7 +119,7 @@ export default async function GlobalIAPage() {
                 Análisis de Regulación Global de IA
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Explora nuestro análisis detallado de cómo diferentes jurisdicciones están abordando 
+                Explora nuestro análisis detallado de cómo diferentes jurisdicciones están abordando
                 los desafíos regulatorios de la inteligencia artificial.
               </p>
             </div>
@@ -192,4 +189,3 @@ export default async function GlobalIAPage() {
     </>
   );
 }
-
