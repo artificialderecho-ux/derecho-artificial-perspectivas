@@ -47,20 +47,17 @@ export default async function HomePage() {
     normativaSlugs,
     jurisprudenciaSlugs,
     guiasSlugs,
-    eticaSlugs,
   ] = await Promise.all([
     listSectionResourceSlugs("normativa"),
     listSectionResourceSlugs("jurisprudencia"),
     listSectionResourceSlugs("guias"),
-    listSectionResourceSlugs("etica-ia"),
   ]);
 
-  const [normativaEntries, jurisprudenciaEntries, guiasEntries, eticaEntries] =
+  const [normativaEntries, jurisprudenciaEntries, guiasEntries] =
     await Promise.all([
       Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
       Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
       Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
-      Promise.all(eticaSlugs.map((slug) => getSectionResourceEntry("etica-ia", slug))),
     ]);
 
   const filterAndSort = (entries: any[]) =>
@@ -71,7 +68,6 @@ export default async function HomePage() {
   const normativaTop = filterAndSort(normativaEntries).slice(0, 2);
   const jurisprudenciaTop = filterAndSort(jurisprudenciaEntries).slice(0, 2);
   const guiasTop = filterAndSort(guiasEntries).slice(0, 2);
-  const eticaTop = filterAndSort(eticaEntries).slice(0, 2);
 
   const formatDate = (value: string | number) => {
     const date = new Date(value);
@@ -161,11 +157,11 @@ export default async function HomePage() {
       image: "/images/heroes/etica-ia-hero.webp",
       href: "/etica-ia",
       getItems: () =>
-        eticaTop.map((entry) => ({
-          title: entry.title,
-          href: `/etica-ia/${entry.slug}`,
-          description: entry.summaryHtml?.replace(/<[^>]+>/g, "").slice(0, 200) || "",
-          date: entry.displayDateMs ?? entry.dateMs ?? 0,
+        getLatestPostsByCategory("etica-ia").map((post) => ({
+          title: post.frontmatter.title,
+          href: post.url,
+          description: post.excerpt,
+          date: new Date(post.frontmatter.date).getTime(),
         })),
     },
     {
