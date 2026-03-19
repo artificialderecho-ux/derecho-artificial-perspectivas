@@ -57,6 +57,23 @@ export default async function HomePage() {
       .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
       .slice(0, 2);
 
+  const getLatestPostsByCategories = (categories: string[]) => {
+    const normalized = categories.map((c) => c.toLowerCase());
+    const unique = new Map<string, (typeof mdxPosts)[number]>();
+
+    for (const post of mdxPosts) {
+      const cat = (post.frontmatter.category || "").toLowerCase();
+      const section = (post.frontmatter.section || "").toLowerCase();
+      if (normalized.includes(cat) || normalized.includes(section)) {
+        unique.set(post.slug, post);
+      }
+    }
+
+    return [...unique.values()]
+      .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+      .slice(0, 2);
+  };
+
   const sectionConfigs = [
     {
       key: "firma-scarpa",
@@ -140,10 +157,9 @@ export default async function HomePage() {
       key: "ia-global",
       title: "IA Global",
       image: "/images/heroes/ia-global-hero.webp",
-      href: "/ia-global",
+      href: "/global-ia",
       getItems: () =>
-        getLatestPostsByCategory("global-ia").concat(getLatestPostsByCategory("ia-global"))
-          .slice(0, 2)
+        getLatestPostsByCategories(["global-ia", "ia-global"])
           .map((post) => ({
             title: post.frontmatter.title,
             href: post.url,

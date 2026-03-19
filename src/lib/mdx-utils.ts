@@ -27,7 +27,7 @@ const SECTION_ROUTES: Record<string, string> = {
   'firma-scarpa':             'firma-scarpa',
   'etica-ia':                 'etica-ia',
   'propiedad-intelectual-ia': 'propiedad-intelectual-ia',
-  'ia-global':                'ia-global',
+  'ia-global':                'global-ia',
   'global-ia':                'global-ia',
   'guias':                    'recursos/guias',
   'glosario':                 'glosario-ia-legal',

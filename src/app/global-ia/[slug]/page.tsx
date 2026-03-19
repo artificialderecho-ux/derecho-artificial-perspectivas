@@ -24,8 +24,7 @@ function isGlobalIASection(frontmatter: { category?: string; section?: string })
 }
 
 function getGlobalIARoute(frontmatter: { category?: string; section?: string }) {
-  const section = (frontmatter.section || "").toLowerCase();
-  if (section === "ia-global") return "ia-global";
+  // Alias legacy `ia-global` hacia la ruta pública canonical `global-ia`.
   return "global-ia";
 }
 
