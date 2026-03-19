@@ -1,8 +1,6 @@
 ﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
 import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
 import { getAllPosts } from '@/lib/mdx-utils';
@@ -519,7 +517,7 @@ export default async function HomePage() {
               </p>
               <div className="mt-3">
                 <Link
-                  href="/actualidad-ia"
+                  href="/recursos/guias"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
                   Ver todas las guías
@@ -549,11 +547,9 @@ export default async function HomePage() {
               },
               {
                 title: "Guías IA",
-                category: "actualidad-ia",
-                image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
-                  ? "/images/heroes/guias-ia-hero.wep"
-                  : "/images/heroes/guias-ia-hero.webp",
-                href: "/actualidad-ia",
+                category: "recursos",
+                image: "/images/heroes/guias-ia-hero.webp",
+                href: "/recursos/guias",
               },
               {
                 title: "Propiedad Intelectual IA",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
@@ -90,7 +91,36 @@ export default async function GuiasIndexPage() {
           { label: "Guías y Protocolos", href: "/recursos/guias" },
         ]}
       />
-      <LegalLayout title="Guías y Protocolos" category="Actualidad IA" date={new Date().toISOString().slice(0, 10)}>
+      <LegalLayout
+        title="Guías y Protocolos"
+        category="Actualidad IA"
+        date={new Date().toISOString().slice(0, 10)}
+        hero={(
+          <section className="relative overflow-hidden text-white">
+            <div className="absolute inset-0">
+              <Image
+                src="/images/heroes/guias-ia-hero.webp"
+                alt="Guías IA"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            <div className="absolute inset-0 bg-black/45" />
+            <div className="relative container-narrow py-20 md:py-24">
+              <span className="inline-block py-1 px-3 mb-6 text-xs font-semibold tracking-wider text-white uppercase bg-black/35 border border-white/25 rounded-full">
+                Actualidad IA
+              </span>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6 text-balance">
+                Guías y Protocolos
+              </h1>
+              <p className="max-w-2xl text-sm md:text-base text-white/90">
+                Referencias prácticas para la adopción jurídica, técnica y organizativa de IA.
+              </p>
+            </div>
+          </section>
+        )}
+      >
         <ContentPreviewGrid items={items} columns={2} size="medium" />
       </LegalLayout>
     </>
