@@ -2,8 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts } from '@/lib/mdx-utils';
-import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
-import { formatDateFromMs } from '@/lib/badges';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const revalidate = 60;
@@ -43,32 +41,6 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   const mdxPosts = getAllPosts();
 
-  const [
-    normativaSlugs,
-    jurisprudenciaSlugs,
-    guiasSlugs,
-  ] = await Promise.all([
-    listSectionResourceSlugs("normativa"),
-    listSectionResourceSlugs("jurisprudencia"),
-    listSectionResourceSlugs("guias"),
-  ]);
-
-  const [normativaEntries, jurisprudenciaEntries, guiasEntries] =
-    await Promise.all([
-      Promise.all(normativaSlugs.map((slug) => getSectionResourceEntry("normativa", slug))),
-      Promise.all(jurisprudenciaSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug))),
-      Promise.all(guiasSlugs.map((slug) => getSectionResourceEntry("guias", slug))),
-    ]);
-
-  const filterAndSort = (entries: any[]) =>
-    entries
-      .filter((e): e is NonNullable<typeof e> => Boolean(e))
-      .sort((a, b) => (b.displayDateMs ?? b.dateMs ?? 0) - (a.displayDateMs ?? a.dateMs ?? 0));
-
-  const normativaTop = filterAndSort(normativaEntries).slice(0, 2);
-  const jurisprudenciaTop = filterAndSort(jurisprudenciaEntries).slice(0, 2);
-  const guiasTop = filterAndSort(guiasEntries).slice(0, 2);
-
   const formatDate = (value: string | number) => {
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return "";
@@ -105,11 +77,11 @@ export default async function HomePage() {
       image: "/images/heroes/normativa-ia-hero.webp",
       href: "/normativa",
       getItems: () =>
-        normativaTop.map((entry) => ({
-          title: entry.title,
-          href: `/normativa/${entry.slug}`,
-          description: entry.summaryHtml?.replace(/<[^>]+>/g, "").slice(0, 200) || "",
-          date: entry.displayDateMs ?? entry.dateMs ?? 0,
+        getLatestPostsByCategory("normativa").map((post) => ({
+          title: post.frontmatter.title,
+          href: post.url,
+          description: post.excerpt,
+          date: new Date(post.frontmatter.date).getTime(),
         })),
     },
     {
@@ -118,11 +90,11 @@ export default async function HomePage() {
       image: "/images/heroes/jurisprudencia-ia-hero.webp",
       href: "/jurisprudencia",
       getItems: () =>
-        jurisprudenciaTop.map((entry) => ({
-          title: entry.title,
-          href: `/jurisprudencia/${entry.slug}`,
-          description: entry.summaryHtml?.replace(/<[^>]+>/g, "").slice(0, 200) || "",
-          date: entry.displayDateMs ?? entry.dateMs ?? 0,
+        getLatestPostsByCategory("jurisprudencia").map((post) => ({
+          title: post.frontmatter.title,
+          href: post.url,
+          description: post.excerpt,
+          date: new Date(post.frontmatter.date).getTime(),
         })),
     },
     {
@@ -131,11 +103,11 @@ export default async function HomePage() {
       image: "/images/heroes/guias-ia-hero.webp",
       href: "/recursos/guias",
       getItems: () =>
-        guiasTop.map((entry) => ({
-          title: entry.title,
-          href: `/recursos/guias/${entry.slug}`,
-          description: entry.summaryHtml?.replace(/<[^>]+>/g, "").slice(0, 200) || "",
-          date: entry.displayDateMs ?? entry.dateMs ?? 0,
+        getLatestPostsByCategory("guias").map((post) => ({
+          title: post.frontmatter.title,
+          href: post.url,
+          description: post.excerpt,
+          date: new Date(post.frontmatter.date).getTime(),
         })),
     },
     {
