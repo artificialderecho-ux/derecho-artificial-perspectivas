@@ -59,23 +59,23 @@ export default async function NormativaPage() {
   );
 
   const mdxPosts = getAllPosts().filter(post =>
-    post.frontmatter.section === 'normativa' ||
-    post.frontmatter.category === 'normativa' ||
-    post.frontmatter.category === 'Legislación Digital' ||
-    post.frontmatter.category === 'Legislación Internacional' ||
-    post.frontmatter.category === 'Legislación' ||
-    post.frontmatter.category === 'Legislación IA' ||
-    post.frontmatter.category === 'Regulación UE'
+    post.frontmatter.section === "normativa" ||
+    post.frontmatter.category === "normativa" ||
+    post.frontmatter.category === "Legislación Digital" ||
+    post.frontmatter.category === "Legislación Internacional" ||
+    post.frontmatter.category === "Legislación" ||
+    post.frontmatter.category === "Legislación IA" ||
+    post.frontmatter.category === "Regulación UE"
   );
 
   const mdxItems: NormativaItem[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
     return {
-      id: mdx-$+{post.slug},
+      id: `mdx-${post.slug}`,
       href: post.url,
       title: post.frontmatter.title,
       description: post.excerpt,
-      meta: $+{new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · $+{post.frontmatter.author || "Redacción"},
+      meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.author || "Redacción"}`,
       dateMs: dateMs,
     };
   });
@@ -103,8 +103,8 @@ export default async function NormativaPage() {
     }
 
     return {
-      id: esource-$+{entry.slug},
-      href: /normativa/$+{entry.slug},
+      id: `resource-${entry.slug}`,
+      href: `/normativa/${entry.slug}`,
       title: entry.title,
       description: plainSummary,
       meta: parts.join(" · "),
