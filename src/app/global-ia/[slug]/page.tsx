@@ -17,10 +17,19 @@ type Params = {
   slug: string;
 };
 
+function isGlobalIASection(frontmatter: { category?: string; section?: string }) {
+  const category = (frontmatter.category || "").toLowerCase();
+  const section = (frontmatter.section || "").toLowerCase();
+  return category === "global-ia" || section === "global-ia" || section === "ia-global";
+}
+
+function getGlobalIARoute(frontmatter: { category?: string; section?: string }) {
+  // Alias legacy `ia-global` hacia la ruta pública canonical `global-ia`.
+  return "global-ia";
+}
+
 export async function generateStaticParams() {
-  const mdxPosts = getAllPosts().filter(
-    (p) => (p.frontmatter.category || "").toLowerCase() === "global-ia" || (p.frontmatter.section || "").toLowerCase() === "global-ia" || (p.frontmatter.section || "").toLowerCase() === "ia-global",
-  );
+  const mdxPosts = getAllPosts().filter((p) => isGlobalIASection(p.frontmatter));
   return mdxPosts.map((post) => ({ slug: post.slug }));
 }
 
@@ -32,12 +41,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "ia-global") {
+  if (!mdxPost || !isGlobalIASection(mdxPost.frontmatter)) {
     return {};
   }
 
-  const { title, description, category, date } = mdxPost.frontmatter;
-  const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+  const { title, description, date } = mdxPost.frontmatter;
+  const route = getGlobalIARoute(mdxPost.frontmatter);
+  const canonical = `https://www.derechoartificial.com/${route}/${slug}`;
   const metaDescription =
     mdxPost.excerpt ||
     description ||
@@ -73,14 +83,15 @@ export default async function IAGlobalSlugPage({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia") {
+  if (!mdxPost || !isGlobalIASection(mdxPost.frontmatter)) {
     notFound();
   }
 
-  const { title, date, category, pdf, author } = mdxPost.frontmatter;
+  const { title, date, pdf, author } = mdxPost.frontmatter;
+  const route = getGlobalIARoute(mdxPost.frontmatter);
 
   const jsonLd = createArticleJsonLd({
-    url: `https://www.derechoartificial.com/${category}/${slug}`,
+    url: `https://www.derechoartificial.com/${route}/${slug}`,
     headline: title,
     description: mdxPost.excerpt,
     datePublished: date,
@@ -88,7 +99,7 @@ export default async function IAGlobalSlugPage({
   });
 
   const genericJsonLd = createGenericArticleJsonLd({
-    url: `https://www.derechoartificial.com/${category}/${slug}`,
+    url: `https://www.derechoartificial.com/${route}/${slug}`,
     headline: title,
     description: mdxPost.excerpt,
     datePublished: date,
@@ -103,7 +114,7 @@ export default async function IAGlobalSlugPage({
         items={[
           { label: "Inicio", href: "/" },
           { label: "IA Global", href: "/global-ia" },
-          { label: title, href: `/${category}/${slug}` },
+          { label: title, href: `/${route}/${slug}` },
         ]}
       />
       <LegalLayout
@@ -128,7 +139,7 @@ export default async function IAGlobalSlugPage({
           <ReactMarkdown
             rehypePlugins={[rehypeRaw, rehypeSanitize]}
             components={{
-              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
+              img: ({ alt, ...props }: any) => <img {...props} alt={alt || ""} loading="lazy" decoding="async" />,
             }}
           >
             {mdxPost.content}
@@ -138,7 +149,7 @@ export default async function IAGlobalSlugPage({
           <RelatedArticles
             currentSlug={slug}
             currentTags={mdxPost.frontmatter.tags || []}
-            currentCategory={mdxPost.frontmatter.category || "global-ia"}
+            currentCategory="global-ia"
           />
         </div>
       </LegalLayout>
