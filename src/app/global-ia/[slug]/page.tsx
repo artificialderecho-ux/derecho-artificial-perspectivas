@@ -32,7 +32,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "ia-global") {
+  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia")) {
     return {};
   }
 
