@@ -70,14 +70,19 @@ export default async function NormativaPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post => 
-    post.frontmatter.category === 'normativa' || 
-    post.frontmatter.category === 'Legislación Digital' || 
-    post.frontmatter.category === 'Legislación Internacional' ||
-    post.frontmatter.category === 'Legislación' ||
-    post.frontmatter.category === 'Legislación IA' ||
-    post.frontmatter.category === 'Regulación UE'
-  );
+  const mdxPosts = getAllPosts().filter((post) => {
+    if (post.url.startsWith("/normativa/")) return true;
+
+    const category = post.frontmatter.category?.toLowerCase().trim();
+    return (
+      category === "normativa" ||
+      category === "legislación digital" ||
+      category === "legislación internacional" ||
+      category === "legislación" ||
+      category === "legislación ia" ||
+      category === "regulación ue"
+    );
+  });
 
   const mdxItems: PreviewItem[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
