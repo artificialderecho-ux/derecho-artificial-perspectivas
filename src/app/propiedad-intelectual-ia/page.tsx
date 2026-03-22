@@ -30,9 +30,11 @@ export default async function PropiedadIntelectualIAPage() {
     ],
   });
 
-  const mdxPosts = getAllPosts().filter(
-    (post) => (post.frontmatter.category || "").toLowerCase() === "propiedad-intelectual-ia",
-  );
+  const mdxPosts = getAllPosts().filter((post) => {
+    const category = (post.frontmatter.category || "").toLowerCase();
+    const section = (post.frontmatter.section || "").toLowerCase();
+    return category === "propiedad-intelectual-ia" || section === "propiedad-intelectual-ia";
+  });
 
   const items = mdxPosts
     .map((post) => {
