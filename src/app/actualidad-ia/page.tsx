@@ -41,8 +41,9 @@ export default async function ActualidadIAPage() {
   };
 
   const mdxGuides = mdxPosts.filter((p) => {
-    const tags = (p.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-    return tags.includes("guia") || tags.includes("protocolo");
+    const category = (p.frontmatter.category || "").toLowerCase().trim();
+    const section = (p.frontmatter.section || "").toLowerCase().trim();
+    return category === "guias" || section === "guias";
   });
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
