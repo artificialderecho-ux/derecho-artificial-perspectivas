@@ -62,6 +62,13 @@ export async function generateMetadata({
       publishedTime: date ? new Date(date).toISOString() : undefined,
       authors: [mdxPost.frontmatter.author || "Ricardo Scarpa"],
     },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: metaDescription,
+      images: ["https://www.derechoartificial.com/og-default-1200x630.jpg"],
+      creator: "@RicardoScarpa",
+    },
   };
 }
 
