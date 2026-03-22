@@ -33,9 +33,11 @@ export default async function GuiasIndexPage() {
   const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("guias", slug)));
   const resolved = entries.filter((e): e is NonNullable<typeof e> => Boolean(e));
 
-  const posts = getAllPosts().filter(
-    (p) => p.frontmatter.category === "recursos" && (p.frontmatter.subcategory === "guias" || p.frontmatter.tags?.includes("guias")),
-  );
+  const posts = getAllPosts().filter((p) => {
+    const category = (p.frontmatter.category || "").toLowerCase();
+    const section = (p.frontmatter.section || "").toLowerCase();
+    return category === "guias" || section === "guias";
+  });
 
   const formatDateEs = (ms?: number | null) => {
     if (!ms || Number.isNaN(ms)) return null;
@@ -69,7 +71,7 @@ export default async function GuiasIndexPage() {
       if (p.frontmatter.author) parts.push(p.frontmatter.author);
       return {
         id: `mdx-${p.slug}`,
-        href: `/recursos/guias/${p.slug}`,
+        href: p.url,
         title: p.frontmatter.title,
         description: p.excerpt,
         badge: "Guías y Protocolos",

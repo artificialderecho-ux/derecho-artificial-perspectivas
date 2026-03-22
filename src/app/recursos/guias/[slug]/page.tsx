@@ -22,7 +22,11 @@ type Params = {
 export async function generateStaticParams() {
   const resourceSlugs = await listSectionResourceSlugs("guias");
   const mdxSlugs = getAllPosts()
-    .filter(p => p.frontmatter.category === 'recursos' && p.frontmatter.subcategory === 'guias')
+    .filter((p) => {
+      const category = (p.frontmatter.category || "").toLowerCase();
+      const section = (p.frontmatter.section || "").toLowerCase();
+      return category === "guias" || section === "guias";
+    })
     .map(p => p.slug);
   
   const allSlugs = Array.from(new Set([...resourceSlugs, ...mdxSlugs]));
@@ -32,8 +36,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
-  
-  if (mdxPost) {
+
+  if (mdxPost && (((mdxPost.frontmatter.category || "").toLowerCase() === "guias") || ((mdxPost.frontmatter.section || "").toLowerCase() === "guias"))) {
     const title = `${mdxPost.frontmatter.title} | Derecho Artificial`;
     const description = mdxPost.excerpt || mdxPost.frontmatter.description || "Análisis jurídico experto sobre recursos y guías en IA.";
     const canonical = `https://www.derechoartificial.com/recursos/guias/${slug}`;
@@ -110,7 +114,7 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (mdxPost) {
+  if (mdxPost && (((mdxPost.frontmatter.category || "").toLowerCase() === "guias") || ((mdxPost.frontmatter.section || "").toLowerCase() === "guias"))) {
     const url = `https://derechoartificial.com/recursos/guias/${slug}`;
     const description = mdxPost.frontmatter.description || mdxPost.excerpt;
     const datePublished = new Date(mdxPost.frontmatter.date).toISOString().slice(0, 10);
@@ -258,7 +262,7 @@ export default async function GuiasSlugPage({ params }: { params: Promise<Params
           { label: 'Inicio', href: '/' },
           { label: 'Actualidad IA', href: '/actualidad-ia' },
           { label: 'Guías y Protocolos', href: '/recursos/guias' },
-          { label: mdxPost.frontmatter.title, href: `/recursos/guias/${slug}` }
+          { label: entry.title, href: `/recursos/guias/${slug}` }
         ]} />
         <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
           {entry.summaryHtml ? (

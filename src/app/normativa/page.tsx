@@ -113,6 +113,8 @@ export default async function NormativaPage() {
   });
 
   const items: NormativaItem[] = [...mdxItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+  const featuredItem = items[0];
+  const remainingItems = items.slice(1);
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -153,36 +155,22 @@ export default async function NormativaPage() {
           </p>
         </div>
         <div className="container-editorial">
-          <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
-            <Link
-              href="/normativa"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Framework</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">EU AI Act</h2>
-              <p className="text-sm text-body">Reglamento europeo sobre inteligencia artificial.</p>
-            </Link>
-            <Link
-              href="/normativa"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actividad</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Normativas vigentes</h2>
-              <p className="text-sm text-body">Análisis de regulación por jurisdicción.</p>
-              <div className="mt-4 text-xs text-caption">Total: {items.length}</div>
-            </Link>
-            <Link
-              href="/jurisprudencia"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Contexto</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Jurisprudencia</h2>
-              <p className="text-sm text-body">Cómo se interpreta la normativa en los tribunales.</p>
-            </Link>
-          </section>
+          {featuredItem ? (
+            <section className="mb-12">
+              <Link
+                href={featuredItem.href}
+                className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold mb-3">Normativa</p>
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-4">{featuredItem.title}</h2>
+                {featuredItem.description && <p className="text-lg text-body leading-relaxed max-w-4xl mb-4">{featuredItem.description}</p>}
+                {featuredItem.meta && <p className="text-sm text-caption">{featuredItem.meta}</p>}
+              </Link>
+            </section>
+          ) : null}
 
           <section className="grid gap-6 md:grid-cols-2">
-            {items.map((item) => (
+            {remainingItems.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}

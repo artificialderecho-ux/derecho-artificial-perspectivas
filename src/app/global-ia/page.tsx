@@ -73,6 +73,9 @@ export default async function GlobalIAPage() {
       dateMs: dateMs,
     };
   });
+  const sortedItems = [...mdxItems].sort((a, b) => b.dateMs - a.dateMs);
+  const featuredItem = sortedItems[0];
+  const remainingItems = sortedItems.slice(1);
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -130,57 +133,38 @@ export default async function GlobalIAPage() {
               </p>
             </div>
 
-            {/* Posts Grid */}
-            {mdxItems.length > 0 ? (
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {mdxItems
-                  .sort((a, b) => b.dateMs - a.dateMs)
-                  .map((post) => (
-                    <div
+            {sortedItems.length > 0 ? (
+              <div className="space-y-8">
+                {featuredItem ? (
+                  <Link
+                    href={featuredItem.href}
+                    className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+                  >
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold mb-3">Análisis</p>
+                    <h3 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-4">
+                      {featuredItem.title}
+                    </h3>
+                    {featuredItem.description && (
+                      <p className="text-lg text-body leading-relaxed max-w-4xl mb-4">{featuredItem.description}</p>
+                    )}
+                    <p className="text-sm text-caption">{featuredItem.meta}</p>
+                  </Link>
+                ) : null}
+
+                <div className="grid gap-6 md:grid-cols-2">
+                  {remainingItems.map((post) => (
+                    <Link
                       key={post.id}
-                      className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
+                      href={post.href}
+                      className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
                     >
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">
-                            Análisis
-                          </span>
-                          <span className="text-sm text-gray-500">
-                            {post.meta}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                          <Link href={post.href} className="hover:underline">
-                            {post.title}
-                          </Link>
-                        </h3>
-                        <p className="text-gray-600 mb-4 line-clamp-3">
-                          {post.description}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <Link
-                            href={post.href}
-                            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                          >
-                            Leer análisis
-                            <svg
-                              className="ml-2 h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 5l7 7-7 7"
-                              />
-                            </svg>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
+                      <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Análisis</p>
+                      <h3 className="font-serif text-2xl text-foreground mb-4">{post.title}</h3>
+                      <p className="text-body mb-4 line-clamp-3">{post.description}</p>
+                      <p className="text-sm text-caption">{post.meta}</p>
+                    </Link>
                   ))}
+                </div>
               </div>
             ) : (
               <div className="text-center py-12">
