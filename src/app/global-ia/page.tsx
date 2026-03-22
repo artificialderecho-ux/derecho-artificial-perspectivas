@@ -104,20 +104,7 @@ export default async function GlobalIAPage() {
             />
           </div>
           <div className="absolute inset-0 bg-black/45"></div>
-          <div className="relative container mx-auto px-4 py-24 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                Global IA
-              </h1>
-              <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-                Inteligencia Artificial en el Derecho Global
-              </p>
-              <p className="text-lg text-blue-200 mb-12 max-w-2xl mx-auto">
-                Análisis exhaustivo de la regulación de IA a nivel mundial, incluyendo AI Act europeo,
-                executive orders de EE.UU., regulaciones asiáticas y estándares internacionales.
-              </p>
-            </div>
-          </div>
+          <div className="relative h-64 md:h-96" />
         </section>
 
         {/* Content Section */}

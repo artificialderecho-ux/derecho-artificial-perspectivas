@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
-import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
 import { getAllPosts } from "@/lib/mdx-utils";
 import { ContentPreviewGrid, type PreviewItem } from "@/components/ContentPreviewCard";
 
@@ -29,10 +28,6 @@ export default async function GuiasIndexPage() {
     ],
   });
 
-  const slugs = await listSectionResourceSlugs("guias");
-  const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("guias", slug)));
-  const resolved = entries.filter((e): e is NonNullable<typeof e> => Boolean(e));
-
   const posts = getAllPosts().filter((p) => {
     const category = (p.frontmatter.category || "").toLowerCase();
     const section = (p.frontmatter.section || "").toLowerCase();
@@ -46,24 +41,7 @@ export default async function GuiasIndexPage() {
     return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
-  const items: PreviewItem[] = [
-    ...resolved.map((g) => {
-      const dateLabel = formatDateEs(g.displayDateMs ?? g.dateMs);
-      const parts: string[] = [];
-      if (dateLabel) parts.push(dateLabel);
-      if (g.sourceUrl) parts.push("Incluye descarga del documento");
-      return {
-        id: `guide-${g.slug}`,
-        href: `/recursos/guias/${g.slug}`,
-        title: g.title,
-        description: g.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 180),
-        badge: "Guías y Protocolos",
-        meta: parts.join(" · "),
-        dateMs: g.dateMs ?? 0,
-        displayDateMs: g.displayDateMs ?? undefined,
-      };
-    }),
-    ...posts.map((p) => {
+  const items: PreviewItem[] = posts.map((p) => {
       const d = new Date(p.frontmatter.date).getTime();
       const dateLabel = formatDateEs(d);
       const parts: string[] = [];
@@ -79,8 +57,8 @@ export default async function GuiasIndexPage() {
         dateMs: d || 0,
         displayDateMs: d || 0,
       };
-    }),
-  ].sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
+    })
+    .sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
 
   return (
     <>

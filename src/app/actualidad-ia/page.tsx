@@ -85,13 +85,7 @@ export default async function ActualidadIAPage() {
             alt="Guías IA"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/50"></div>
-          <div className="relative container mx-auto px-4 h-full flex flex-col items-center justify-center text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Guías IA</h1>
-            <p className="text-lg md:text-xl text-gray-100 max-w-2xl">
-              Guías, protocolos y análisis sobre inteligencia artificial para profesionales del derecho
-            </p>
-          </div>
+          <div className="absolute inset-0 bg-black/35"></div>
         </section>
 
         {/* Content Section */}
