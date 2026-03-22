@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { LegalLayout } from "@/components/layout/LegalLayout";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import {
@@ -16,6 +18,24 @@ import rehypeSanitize from "rehype-sanitize";
 type Params = {
   slug: string;
 };
+
+async function resolveAvailablePdfUrl(pdfUrl?: string): Promise<string | null> {
+  if (!pdfUrl) return null;
+
+  if (!pdfUrl.startsWith("/")) {
+    return null;
+  }
+
+  const normalizedPath = path.normalize(pdfUrl).replace(/^(\.\.(\/|\\|$))+/, "");
+  const publicPath = path.join(process.cwd(), "public", normalizedPath.replace(/^\/+/, ""));
+
+  try {
+    await fs.access(publicPath);
+    return pdfUrl;
+  } catch {
+    return null;
+  }
+}
 
 export async function generateStaticParams() {
   const mdxPosts = getAllPosts().filter(
@@ -36,8 +56,8 @@ export async function generateMetadata({
     return {};
   }
 
-  const { title, description, category, date } = mdxPost.frontmatter;
-  const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+  const { title, description, date } = mdxPost.frontmatter;
+  const canonical = `https://www.derechoartificial.com/propiedad-intelectual-ia/${slug}`;
   const metaDescription =
     mdxPost.excerpt ||
     description ||
@@ -77,10 +97,13 @@ export default async function PropiedadIntelectualIASlugPage({
     notFound();
   }
 
-  const { title, date, category, pdf, author } = mdxPost.frontmatter;
+  const { title, date, author } = mdxPost.frontmatter;
+  const availablePdfUrl = await resolveAvailablePdfUrl(
+    mdxPost.pdfUrl || mdxPost.frontmatter.pdf,
+  );
 
   const jsonLd = createArticleJsonLd({
-    url: `https://www.derechoartificial.com/${category}/${slug}`,
+    url: `https://www.derechoartificial.com/propiedad-intelectual-ia/${slug}`,
     headline: title,
     description: mdxPost.excerpt,
     datePublished: date,
@@ -88,7 +111,7 @@ export default async function PropiedadIntelectualIASlugPage({
   });
 
   const genericJsonLd = createGenericArticleJsonLd({
-    url: `https://www.derechoartificial.com/${category}/${slug}`,
+    url: `https://www.derechoartificial.com/propiedad-intelectual-ia/${slug}`,
     headline: title,
     description: mdxPost.excerpt,
     datePublished: date,
@@ -103,7 +126,7 @@ export default async function PropiedadIntelectualIASlugPage({
         items={[
           { label: "Inicio", href: "/" },
           { label: "Propiedad Intelectual IA", href: "/propiedad-intelectual-ia" },
-          { label: title, href: `/${category}/${slug}` },
+          { label: title, href: `/propiedad-intelectual-ia/${slug}` },
         ]}
       />
       <LegalLayout
@@ -112,10 +135,10 @@ export default async function PropiedadIntelectualIASlugPage({
         author={{ name: author || "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >
-        {pdf && (
+        {availablePdfUrl && (
           <div className="mb-12 p-8 bg-slate-50 border border-slate-200 rounded-sm not-prose">
             <a
-              href={pdf}
+              href={availablePdfUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition"
