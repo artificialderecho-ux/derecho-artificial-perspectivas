@@ -47,12 +47,26 @@ export default async function HomePage() {
     return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const normalizeLabel = (value: string) => value.toLowerCase().replace(/_/g, "-").trim();
+
+  const matchesCategory = (value: string, category: string) => {
+    const normalizedValue = normalizeLabel(value);
+    const normalizedCategory = normalizeLabel(category);
+
+    if (!normalizedValue || !normalizedCategory) return false;
+    if (normalizedValue === normalizedCategory) return true;
+
+    const valueNoHyphen = normalizedValue.replace(/-/g, " ");
+    const categoryNoHyphen = normalizedCategory.replace(/-/g, " ");
+    return valueNoHyphen === categoryNoHyphen;
+  };
+
   const getLatestPostsByCategory = (category: string) =>
     mdxPosts
       .filter((post) => {
-        const cat = (post.frontmatter.category || "").toLowerCase();
-        const section = (post.frontmatter.section || "").toLowerCase();
-        return cat === category.toLowerCase() || section === category.toLowerCase();
+        const cat = post.frontmatter.category || "";
+        const section = post.frontmatter.section || "";
+        return matchesCategory(cat, category) || matchesCategory(section, category);
       })
       .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
       .slice(0, 2);
@@ -140,16 +154,25 @@ export default async function HomePage() {
       key: "ia-global",
       title: "IA Global",
       image: "/images/heroes/ia-global-hero.webp",
-      href: "/ia-global",
-      getItems: () =>
-        getLatestPostsByCategory("global-ia").concat(getLatestPostsByCategory("ia-global"))
-          .slice(0, 2)
-          .map((post) => ({
-            title: post.frontmatter.title,
-            href: post.url,
-            description: post.excerpt,
-            date: new Date(post.frontmatter.date).getTime(),
-          })),
+      href: "/global-ia",
+      getItems: () => {
+        const globalPosts = [
+          ...getLatestPostsByCategory("global-ia"),
+          ...getLatestPostsByCategory("ia-global"),
+          ...getLatestPostsByCategory("Global IA"),
+        ];
+
+        const uniquePosts = Array.from(new Map(globalPosts.map((post) => [post.slug, post])).values())
+          .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+          .slice(0, 2);
+
+        return uniquePosts.map((post) => ({
+          title: post.frontmatter.title,
+          href: post.url,
+          description: post.excerpt,
+          date: new Date(post.frontmatter.date).getTime(),
+        }));
+      },
     },
   ];
 
