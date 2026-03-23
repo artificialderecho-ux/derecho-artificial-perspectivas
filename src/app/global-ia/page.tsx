@@ -1,11 +1,13 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
 
 export const metadata: Metadata = {
   title: "Global IA - Inteligencia Artificial en el Derecho Global",
-  description: "Análisis exhaustivo de la regulación de inteligencia artificial a nivel mundial, incluyendo AI Act europeo, executive orders de EE.UU., regulaciones asiáticas y estándares internacionales de IA.",
+  description:
+    "Análisis exhaustivo de la regulación de inteligencia artificial a nivel mundial, incluyendo AI Act europeo, executive orders de EE.UU., regulaciones asiáticas y estándares internacionales de IA.",
   keywords: [
     "Global IA",
     "regulación IA mundial",
@@ -26,7 +28,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Global IA - Inteligencia Artificial en el Derecho Global",
-    description: "Análisis exhaustivo de la regulación de inteligencia artificial a nivel mundial, incluyendo AI Act europeo, executive orders de EE.UU., regulaciones asiáticas y estándares internacionales de IA.",
+    description:
+      "Análisis exhaustivo de la regulación de inteligencia artificial a nivel mundial, incluyendo AI Act europeo, executive orders de EE.UU., regulaciones asiáticas y estándares internacionales de IA.",
     url: "/global-ia",
     locale: "es_ES",
     images: [
@@ -48,25 +51,39 @@ type GlobalIAPost = {
   dateMs: number;
 };
 
-export default async function GlobalIAPage() {
-  const mdxPosts = getAllPosts().filter(post =>
-    post.frontmatter.category === "Global IA" ||
-    post.frontmatter.category === "ia-global" ||
-    post.frontmatter.category === "global-ia" ||
-    (post.frontmatter.category && post.frontmatter.category.toLowerCase().replace(/-/g, " ") === "ia global")
-  );
+const normalizeGlobalIAValue = (value: string | undefined): string =>
+  (value || "").trim().toLowerCase().replace(/[_\s]+/g, "-");
 
-  const mdxItems: GlobalIAPost[] = mdxPosts.map(post => {
+const isGlobalIA = (value: string | undefined): boolean => {
+  const normalized = normalizeGlobalIAValue(value);
+  return normalized === "global-ia" || normalized === "ia-global";
+};
+
+export default async function GlobalIAPage() {
+  const mdxPosts = getAllPosts().filter((post) => {
+    return isGlobalIA(post.frontmatter.category) || isGlobalIA(post.frontmatter.section);
+  });
+
+  const mdxItems: GlobalIAPost[] = mdxPosts.map((post) => {
     const dateMs = new Date(post.frontmatter.date).getTime();
+
     return {
       id: `mdx-${post.slug}`,
       href: post.url,
       title: post.frontmatter.title,
       description: post.excerpt,
-      meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.authors?.[0] || "Derecho Artificial"}`,
-      dateMs: dateMs,
+      meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })} · ${post.frontmatter.authors?.[0] || "Derecho Artificial"}`,
+      dateMs,
     };
   });
+
+  const items = [...mdxItems].sort((a, b) => b.dateMs - a.dateMs);
+  const featuredItem = items[0];
+  const remainingItems = items.slice(1);
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -82,110 +99,74 @@ export default async function GlobalIAPage() {
   });
 
   return (
-    <>
+    <main className="section-spacing">
       <StructuredData data={breadcrumbJsonLd} />
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden text-white">
-          <div className="absolute inset-0">
-            <img
-              src="/images/heroes/ia-global-hero.webp"
-              alt="Inteligencia Artificial Global"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 bg-black/45"></div>
-          <div className="relative container mx-auto px-4 py-24 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                Global IA
-              </h1>
-              <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-                Inteligencia Artificial en el Derecho Global
-              </p>
-              <p className="text-lg text-blue-200 mb-12 max-w-2xl mx-auto">
-                Análisis exhaustivo de la regulación de IA a nivel mundial, incluyendo AI Act europeo,
-                executive orders de EE.UU., regulaciones asiáticas y estándares internacionales.
-              </p>
-            </div>
-          </div>
-        </section>
 
-        {/* Content Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Análisis de Regulación Global de IA
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Explora nuestro análisis detallado de cómo diferentes jurisdicciones están abordando
-                los desafíos regulatorios de la inteligencia artificial.
-              </p>
-            </div>
+      <section className="relative w-full h-64 md:h-96">
+        <Image
+          src="/images/heroes/ia-global-hero.webp"
+          alt="Global IA"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority={false}
+        />
+      </section>
 
-            {/* Posts Grid */}
-            {mdxItems.length > 0 ? (
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {mdxItems
-                  .sort((a, b) => b.dateMs - a.dateMs)
-                  .map((post) => (
-                    <div
-                      key={post.id}
-                      className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
-                    >
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">
-                            Análisis
-                          </span>
-                          <span className="text-sm text-gray-500">
-                            {post.meta}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                          <Link href={post.href} className="hover:underline">
-                            {post.title}
-                          </Link>
-                        </h3>
-                        <p className="text-gray-600 mb-4 line-clamp-3">
-                          {post.description}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <Link
-                            href={post.href}
-                            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                          >
-                            Leer análisis
-                            <svg
-                              className="ml-2 h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 5l7 7-7 7"
-                              />
-                            </svg>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500 text-lg">
-                  No hay análisis disponibles en este momento.
-                </p>
-              </div>
-            )}
-          </div>
-        </section>
+      <div className="container mx-auto px-4 py-8">
+        <p className="lead text-justify max-w-3xl">
+          Inteligencia Artificial en el Derecho Global. Análisis sobre gobernanza internacional, AI Act,
+          estrategia regulatoria comparada y tendencias en jurisdicciones clave.
+        </p>
       </div>
-    </>
+
+      <div className="container-editorial">
+        {featuredItem ? (
+          <section className="mb-12">
+            <Link
+              href={featuredItem.href}
+              className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+            >
+              <div className="flex flex-col gap-4">
+                <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold">Análisis</p>
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight">
+                  {featuredItem.title}
+                </h2>
+                {featuredItem.description && (
+                  <p className="text-lg text-body leading-relaxed max-w-4xl">{featuredItem.description}</p>
+                )}
+                {featuredItem.meta && <div className="text-sm text-caption mt-2">{featuredItem.meta}</div>}
+                <div className="mt-4">
+                  <span className="text-primary font-medium inline-flex items-center gap-2">
+                    Leer análisis completo <span className="text-xl">→</span>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </section>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-body text-lg">No hay análisis disponibles en este momento.</p>
+          </div>
+        )}
+
+        {remainingItems.length > 0 && (
+          <section className="grid gap-6 md:grid-cols-2">
+            {remainingItems.map((post) => (
+              <Link
+                key={post.id}
+                href={post.href}
+                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Análisis</p>
+                <h2 className="font-serif text-2xl text-foreground mb-4">{post.title}</h2>
+                {post.description && <p className="text-body mb-6">{post.description}</p>}
+                {post.meta && <div className="text-sm text-caption">{post.meta}</div>}
+              </Link>
+            ))}
+          </section>
+        )}
+      </div>
+    </main>
   );
 }

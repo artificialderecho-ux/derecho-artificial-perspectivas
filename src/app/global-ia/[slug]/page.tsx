@@ -17,10 +17,23 @@ type Params = {
   slug: string;
 };
 
-export async function generateStaticParams() {
-  const mdxPosts = getAllPosts().filter(
-    (p) => (p.frontmatter.category || "").toLowerCase() === "global-ia" || (p.frontmatter.section || "").toLowerCase() === "global-ia" || (p.frontmatter.section || "").toLowerCase() === "ia-global",
+function isGlobalIA(frontmatter: { category?: string; section?: string }) {
+  const normalize = (value?: string) =>
+    (value || "").toLowerCase().trim().replace(/_/g, "-");
+
+  const category = normalize(frontmatter.category);
+  const section = normalize(frontmatter.section);
+
+  return (
+    category === "global-ia" ||
+    category === "ia-global" ||
+    section === "global-ia" ||
+    section === "ia-global"
   );
+}
+
+export async function generateStaticParams() {
+  const mdxPosts = getAllPosts().filter((p) => isGlobalIA(p.frontmatter));
   return mdxPosts.map((post) => ({ slug: post.slug }));
 }
 
@@ -32,12 +45,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia")) {
+  if (!mdxPost || !isGlobalIA(mdxPost.frontmatter)) {
     return {};
   }
 
-  const { title, description, category, date } = mdxPost.frontmatter;
-  const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+  const { title, description, date } = mdxPost.frontmatter;
+  const canonical = `https://www.derechoartificial.com/global-ia/${slug}`;
   const metaDescription =
     mdxPost.excerpt ||
     description ||
@@ -73,14 +86,14 @@ export default async function IAGlobalSlugPage({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia") {
+  if (!mdxPost || !isGlobalIA(mdxPost.frontmatter)) {
     notFound();
   }
 
-  const { title, date, category, pdf, author } = mdxPost.frontmatter;
+  const { title, date, pdf, author } = mdxPost.frontmatter;
 
   const jsonLd = createArticleJsonLd({
-    url: `https://www.derechoartificial.com/${category}/${slug}`,
+    url: `https://www.derechoartificial.com/global-ia/${slug}`,
     headline: title,
     description: mdxPost.excerpt,
     datePublished: date,
@@ -88,7 +101,7 @@ export default async function IAGlobalSlugPage({
   });
 
   const genericJsonLd = createGenericArticleJsonLd({
-    url: `https://www.derechoartificial.com/${category}/${slug}`,
+    url: `https://www.derechoartificial.com/global-ia/${slug}`,
     headline: title,
     description: mdxPost.excerpt,
     datePublished: date,
@@ -103,7 +116,7 @@ export default async function IAGlobalSlugPage({
         items={[
           { label: "Inicio", href: "/" },
           { label: "IA Global", href: "/global-ia" },
-          { label: title, href: `/${category}/${slug}` },
+          { label: title, href: `/global-ia/${slug}` },
         ]}
       />
       <LegalLayout
