@@ -549,11 +549,11 @@ export default async function HomePage() {
               },
               {
                 title: "Guías IA",
-                category: "actualidad-ia",
+                category: "recursos",
                 image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
                   ? "/images/heroes/guias-ia-hero.wep"
                   : "/images/heroes/guias-ia-hero.webp",
-                href: "/actualidad-ia",
+                href: "/recursos/guias",
               },
               {
                 title: "Propiedad Intelectual IA",
@@ -624,6 +624,15 @@ export default async function HomePage() {
                       (post.frontmatter.section || "").toLowerCase() === "propiedad-intelectual-ia"
                     );
                   }
+                  // Para Ética IA, incluir categorías relacionadas
+                  if (cat === "etica-ia") {
+                    return (
+                      c === "etica-ia" ||
+                      cNormalized === "etica ia" ||
+                      (post.frontmatter.section || "").toLowerCase() === "etica-ia"
+                    );
+                  }
+                  
                   if (c !== cat) return false;
                   if (c === "recursos") {
                     const subcat = (post.frontmatter.subcategory || "").toLowerCase();
@@ -683,7 +692,9 @@ export default async function HomePage() {
                   ? getLatestActualidadPosts()
                   : sec.category === "firma-scarpa"
                     ? getLatestFirmaPosts()
-                    : getLatestByCategory(sec.category);
+                    : sec.category === "recursos"
+                      ? getLatestByCategory("recursos")
+                      : getLatestByCategory(sec.category);
                   const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
                   return (
                     <div
