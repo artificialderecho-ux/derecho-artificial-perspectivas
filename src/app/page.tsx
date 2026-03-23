@@ -578,31 +578,52 @@ export default async function HomePage() {
               mdxPosts
                 .filter((post) => {
                   const c = (post.frontmatter.category || "").toLowerCase();
-                  
+                  const cNormalized = c.replace(/-/g, ' ');
                   // Para normativa, incluir categorías relacionadas
                   if (cat === "normativa") {
-                    return c === "normativa" || 
-                           c === "legislación digital" || 
-                           c === "legislación internacional" ||
-                           c === "legislación" ||
-                           c === "legislación ia" ||
-                           c === "regulación ue";
+                    return (
+                      c === "normativa" ||
+                      cNormalized === "normativa" ||
+                      cNormalized === "normativa ia" ||
+                      c === "normativa-ia" ||
+                      c === "legislación digital" ||
+                      c === "legislación internacional" ||
+                      c === "legislación" ||
+                      c === "legislación ia" ||
+                      c === "regulación ue" ||
+                      (post.frontmatter.section || "").toLowerCase() === "normativa"
+                    );
                   }
-                  
                   // Para jurisprudencia, incluir categorías relacionadas
                   if (cat === "jurisprudencia") {
-                    return c === "jurisprudencia" || 
-                           c === "jurisprudencia ia" ||
-                           (post.frontmatter.section || "").toLowerCase() === "jurisprudencia";
+                    return (
+                      c === "jurisprudencia" ||
+                      cNormalized === "jurisprudencia" ||
+                      cNormalized === "jurisprudencia ia" ||
+                      c === "jurisprudencia-ia" ||
+                      (post.frontmatter.section || "").toLowerCase() === "jurisprudencia"
+                    );
                   }
-                  
                   // Para IA Global, incluir categorías relacionadas
                   if (cat === "ia-global") {
-                    return c === "ia-global" || 
-                           c === "global ia" ||
-                           (post.frontmatter.section || "").toLowerCase() === "ia-global";
+                    return (
+                      c === "ia-global" ||
+                      c === "global-ia" ||
+                      cNormalized === "global ia" ||
+                      cNormalized === "ia global" ||
+                      (post.frontmatter.section || "").toLowerCase() === "ia-global"
+                    );
                   }
-                  
+                  // Para Propiedad Intelectual, incluir categorías relacionadas
+                  if (cat === "propiedad-intelectual-ia") {
+                    return (
+                      c === "propiedad-intelectual-ia" ||
+                      cNormalized === "propiedad intelectual ia" ||
+                      cNormalized === "propiedad intelectual" ||
+                      c === "propiedad-intelectual" ||
+                      (post.frontmatter.section || "").toLowerCase() === "propiedad-intelectual-ia"
+                    );
+                  }
                   if (c !== cat) return false;
                   if (c === "recursos") {
                     const subcat = (post.frontmatter.subcategory || "").toLowerCase();
