@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
@@ -196,7 +196,7 @@ export default async function NormativaPage() {
           </div>
         </div>
         <div className="container mx-auto px-4 py-8">
-          <p className="lead text-justify max-w-3xl">
+          <p className="lead text-left max-w-3xl">
             Marco regulatorio completo sobre Inteligencia Artificial: AI Act europeo, normativa española, 
             directrices de AESIA y estándares internacionales de cumplimiento para empresas y profesionales del sector legal.
           </p>
@@ -264,3 +264,4 @@ export default async function NormativaPage() {
     </>
   );
 }
+

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
@@ -198,7 +198,7 @@ export default async function FirmaScarpaPage() {
           </div>
         </div>
         <div className="container mx-auto px-4 py-8">
-          <p className="lead text-justify max-w-3xl">
+          <p className="lead text-left max-w-3xl">
             Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión 
             profunda sobre la intersección entre tecnología y ley, abordando desde la ética del algoritmo 
             hasta las implicaciones prácticas del Reglamento de IA en el sector legal.
@@ -267,3 +267,4 @@ export default async function FirmaScarpaPage() {
     </>
   );
 }
+

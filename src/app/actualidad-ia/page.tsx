@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
-import Image from "next/image";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
-  title: "Actualidad IA",
-  description: "Noticias y actualidad sobre inteligencia artificial: regulación, jurisprudencia y tendencias del sector.",
-  keywords: ["actualidad IA", "noticias IA", "regulación IA", "tendencias IA", "novedades IA"],
+  title: "Guías IA",
+  description: "Guías y protocolos sobre inteligencia artificial.",
+  keywords: ["Guías IA", "regulación IA", "jurisprudencia IA", "noticias IA"],
   alternates: {
     canonical: "/actualidad-ia",
     languages: {
@@ -17,137 +19,90 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Actualidad IA",
-    description: "Noticias y actualidad sobre inteligencia artificial: regulación, jurisprudencia y tendencias del sector.",
+    title: "Guías IA",
+    description: "Guías y protocolos sobre inteligencia artificial.",
     url: "/actualidad-ia",
     locale: "es_ES",
-    images: [
-      {
-        url: "/images/heroes/guias-ia-hero.webp",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: [{ url: "/images/heroes/guias-ia-hero.webp" }],
   },
 };
 
-type ActualidadItem = {
-  id: string;
-  href: string;
-  title: string;
-  description: string;
-  meta: string;
-  dateMs: number;
-};
+const AUTOMATED_AUTHOR_PATTERNS = ["claude", "secretaría general", "secretaria general", "automatiz"];
 
 export default async function ActualidadIAPage() {
-  const mdxPosts = getAllPosts().filter(post => 
-    post.frontmatter.category && 
-    (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'actualidad ia')
-  );
+  const posts = getAllPosts();
 
-  const mdxItems: ActualidadItem[] = mdxPosts.map(post => {
-    const dateMs = new Date(post.frontmatter.date).getTime();
-    return {
-      id: `mdx-${post.slug}`,
-      href: post.url,
-      title: post.frontmatter.title,
-      description: post.excerpt,
-      meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.author || "Derecho Artificial"}`,
-      dateMs: dateMs,
-    };
-  });
+  const formatDateEs = (ms?: number | null) => {
+    if (!ms || Number.isNaN(ms)) return null;
+    const d = new Date(ms);
+    if (Number.isNaN(d.getTime())) return null;
+    return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+  };
 
-  // Ordenar por fecha (más reciente primero)
-  const sortedItems = mdxItems.sort((a, b) => b.dateMs - a.dateMs);
-
-  // El artículo destacado es automáticamente el más reciente
-  const featuredItems: ActualidadItem[] = sortedItems.length > 0 ? [sortedItems[0]] : [];
-  const remainingItems = sortedItems.length > 0 ? sortedItems.slice(1) : [];
+  const ownGuidePosts = posts
+    .filter((p) => p.frontmatter.category === "recursos" && p.frontmatter.subcategory === "guias")
+    .filter((p) => {
+      const author = String(p.frontmatter.author || "").toLowerCase();
+      return !AUTOMATED_AUTHOR_PATTERNS.some((pattern) => author.includes(pattern));
+    })
+    .map((p) => {
+      const d = new Date(p.frontmatter.date).getTime();
+      const dateLabel = formatDateEs(d);
+      const metaParts = [dateLabel, p.frontmatter.author].filter(Boolean);
+      return {
+        id: `mdx-guide-${p.slug}`,
+        href: `/recursos/guias/${p.slug}`,
+        title: p.frontmatter.title,
+        description: p.excerpt,
+        badge: "Guías y Protocolos",
+        meta: metaParts.join(" · "),
+        dateMs: d || 0,
+        displayDateMs: d || 0,
+      };
+    })
+    .sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
-      {
-        name: "Derecho Artificial",
-        url: "https://derechoartificial.com",
-      },
-      {
-        name: "Actualidad IA",
-        url: "https://derechoartificial.com/actualidad-ia",
-      },
+      { name: "Derecho Artificial", url: "https://derechoartificial.com" },
+      { name: "Guías IA", url: "https://derechoartificial.com/actualidad-ia" },
     ],
   });
 
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
+      <Breadcrumbs items={[{ label: "Inicio", href: "/" }, { label: "Guías IA", href: "/actualidad-ia" }]} />
+
       <main className="section-spacing">
-        {/* Hero Section */}
         <div className="relative w-full h-64 md:h-96">
-          <Image
+          <img
             src="/images/heroes/guias-ia-hero.webp"
-            alt="Actualidad IA"
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority={false}
+            alt="Guías IA"
+            className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
           <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
-              Actualidad IA
-            </h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">Guías IA</h1>
           </div>
         </div>
+
         <div className="container mx-auto px-4 py-8">
-          <p className="lead text-justify max-w-3xl">
-            Noticias y actualidad sobre inteligencia artificial: últimas regulaciones, jurisprudencia relevante, 
-            tendencias del sector y novedades que impactan en la práctica profesional del derecho digital.
+          <p className="lead text-left max-w-3xl">
+            Guías y protocolos propios sobre inteligencia artificial para profesionales jurídicos. Solo se muestran
+            publicaciones editoriales de elaboración propia y con enlace interno activo.
           </p>
         </div>
-        <div className="container-editorial">
-          {/* Artículos Destacados - Uno por fila */}
-          {featuredItems.map((item) => (
-            <section key={item.id} className="mb-12">
-              <Link
-                href={item.href}
-                className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
-              >
-                <div className="flex flex-col gap-4">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold">
-                    Noticia
-                  </p>
-                  <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight">
-                    {item.title}
-                  </h2>
-                  {item.description && (
-                    <p className="text-lg text-body leading-relaxed max-w-4xl">
-                      {item.description}
-                    </p>
-                  )}
-                  {item.meta && (
-                    <div className="text-sm text-caption mt-2">
-                      {item.meta}
-                    </div>
-                  )}
-                  <div className="mt-4">
-                    <span className="text-primary font-medium inline-flex items-center gap-2">
-                      Leer noticia completa <span className="text-xl">→</span>
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </section>
-          ))}
 
+        <div className="container-editorial">
           <section className="grid gap-6 md:grid-cols-2">
-            {remainingItems.map((item) => (
+            {ownGuidePosts.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
                 className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
               >
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Noticia</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
                 <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
                 {item.description && <p className="text-body mb-6">{item.description}</p>}
                 {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
@@ -155,14 +110,11 @@ export default async function ActualidadIAPage() {
             ))}
           </section>
 
-          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
-            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Enfoque de actualidad</p>
-            <p className="text-body max-w-3xl">
-              Cobertura continua de los desarrollos más relevantes en inteligencia artificial. 
-              Desde nuevas regulaciones hasta decisiones judiciales trascendentales, 
-              manteniéndote informado sobre lo que impacta directamente en tu práctica profesional.
-            </p>
-          </section>
+          {ownGuidePosts.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No hay guías propias disponibles en este momento.</p>
+            </div>
+          )}
         </div>
       </main>
     </>
