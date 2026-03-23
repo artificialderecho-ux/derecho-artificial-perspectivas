@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
@@ -165,8 +165,5 @@ export default async function GlobalIAPage() {
               Análisis comparado de la regulación de IA en diferentes jurisdicciones, examinando estándares 
               internacionales, conflictos de leyes y mejores prácticas para la gobernanza global de la inteligencia artificial.
             </p>
-          </section>
-      </div>
-    </>
-  );
-}
+          </section>`r`n      </div>`r`n  );`r`n}
+
