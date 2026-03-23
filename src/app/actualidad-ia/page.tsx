@@ -40,11 +40,7 @@ export default async function ActualidadIAPage() {
     return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
-  const mdxGuides = mdxPosts.filter((p) => {
-    const category = (p.frontmatter.category || "").toLowerCase().trim();
-    const section = (p.frontmatter.section || "").toLowerCase().trim();
-    return category === "guias" || section === "guias";
-  });
+  const mdxGuides = mdxPosts.filter((p) => p.url.startsWith("/recursos/guias/"));
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [

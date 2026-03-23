@@ -49,18 +49,7 @@ type GlobalIAPost = {
 };
 
 export default async function GlobalIAPage() {
-  const mdxPosts = getAllPosts().filter((post) => {
-    const normalizedCategory = (post.frontmatter.category || "").toLowerCase().replace(/_/g, "-").trim();
-    const normalizedSection = (post.frontmatter.section || "").toLowerCase().replace(/_/g, "-").trim();
-
-    return (
-      normalizedCategory === "global-ia" ||
-      normalizedCategory === "ia-global" ||
-      normalizedCategory.replace(/-/g, " ") === "ia global" ||
-      normalizedSection === "global-ia" ||
-      normalizedSection === "ia-global"
-    );
-  });
+  const mdxPosts = getAllPosts().filter((post) => post.url.startsWith("/global-ia/"));
 
   const mdxItems: GlobalIAPost[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();

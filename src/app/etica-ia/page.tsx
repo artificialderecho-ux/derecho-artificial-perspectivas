@@ -30,9 +30,7 @@ export default async function EticaIAPage() {
     ],
   });
 
-  const mdxPosts = getAllPosts().filter(
-    (post) => (post.frontmatter.category || "").toLowerCase() === "etica-ia",
-  );
+  const mdxPosts = getAllPosts().filter((post) => post.url.startsWith("/etica-ia/"));
 
   const items = mdxPosts
     .map((post) => {

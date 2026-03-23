@@ -28,11 +28,7 @@ export default async function GuiasIndexPage() {
     ],
   });
 
-  const posts = getAllPosts().filter((p) => {
-    const category = (p.frontmatter.category || "").toLowerCase();
-    const section = (p.frontmatter.section || "").toLowerCase();
-    return category === "guias" || section === "guias";
-  });
+  const posts = getAllPosts().filter((p) => p.url.startsWith("/recursos/guias/"));
 
   const formatDateEs = (ms?: number | null) => {
     if (!ms || Number.isNaN(ms)) return null;

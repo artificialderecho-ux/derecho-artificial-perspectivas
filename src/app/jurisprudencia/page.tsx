@@ -58,11 +58,7 @@ export default async function JurisprudenciaPage() {
     (entry): entry is NonNullable<typeof entry> => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post =>
-    post.frontmatter.section === 'jurisprudencia' ||
-    post.frontmatter.category === 'jurisprudencia' ||
-    post.frontmatter.category === 'Jurisprudencia IA'
-  );
+  const mdxPosts = getAllPosts().filter((post) => post.url.startsWith('/jurisprudencia/'));
 
   const mdxItems: SentenciaItem[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();

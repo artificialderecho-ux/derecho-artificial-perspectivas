@@ -58,15 +58,7 @@ export default async function NormativaPage() {
     (entry): entry is NonNullable<typeof entry> => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post =>
-    post.frontmatter.section === "normativa" ||
-    post.frontmatter.category === "normativa" ||
-    post.frontmatter.category === "Legislación Digital" ||
-    post.frontmatter.category === "Legislación Internacional" ||
-    post.frontmatter.category === "Legislación" ||
-    post.frontmatter.category === "Legislación IA" ||
-    post.frontmatter.category === "Regulación UE"
-  );
+  const mdxPosts = getAllPosts().filter((post) => post.url.startsWith("/normativa/"));
 
   const mdxItems: NormativaItem[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();

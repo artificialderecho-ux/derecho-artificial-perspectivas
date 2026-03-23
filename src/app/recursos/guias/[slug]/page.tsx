@@ -19,12 +19,8 @@ type Params = {
 
 export async function generateStaticParams() {
   const mdxSlugs = getAllPosts()
-    .filter((p) => {
-      const category = (p.frontmatter.category || "").toLowerCase();
-      const section = (p.frontmatter.section || "").toLowerCase();
-      return category === "guias" || section === "guias";
-    })
-    .map(p => p.slug);
+    .filter((p) => p.url.startsWith("/recursos/guias/"))
+    .map((p) => p.slug);
 
   return mdxSlugs.map((slug) => ({ slug }));
 }

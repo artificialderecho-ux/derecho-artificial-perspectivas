@@ -30,9 +30,7 @@ export default async function PropiedadIntelectualIAPage() {
     ],
   });
 
-  const mdxPosts = getAllPosts().filter(
-    (post) => (post.frontmatter.category || "").toLowerCase() === "propiedad-intelectual-ia",
-  );
+  const mdxPosts = getAllPosts().filter((post) => post.url.startsWith("/propiedad-intelectual-ia/"));
 
   const items = mdxPosts
     .map((post) => {
