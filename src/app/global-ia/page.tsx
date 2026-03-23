@@ -48,17 +48,17 @@ type GlobalIAPost = {
   dateMs: number;
 };
 
+const normalizeGlobalIAValue = (value: string | undefined): string =>
+  (value || "").trim().toLowerCase().replace(/[_\s]+/g, "-");
+
+const isGlobalIA = (value: string | undefined): boolean => {
+  const normalized = normalizeGlobalIAValue(value);
+  return normalized === "global-ia" || normalized === "ia-global";
+};
+
 export default async function GlobalIAPage() {
   const mdxPosts = getAllPosts().filter((post) => {
-    const category = (post.frontmatter.category || "").toLowerCase();
-    const section = (post.frontmatter.section || "").toLowerCase();
-
-    return (
-      category === "global-ia" ||
-      category === "ia-global" ||
-      section === "global-ia" ||
-      section === "ia-global"
-    );
+    return isGlobalIA(post.frontmatter.category) || isGlobalIA(post.frontmatter.section);
   });
 
   const mdxItems: GlobalIAPost[] = mdxPosts.map(post => {
