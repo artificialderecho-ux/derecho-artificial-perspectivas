@@ -70,9 +70,13 @@ export default async function GlobalIAPage() {
 
   const mdxItems: GlobalIAPost[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
+    const href = post.url.startsWith("/ia-global/")
+      ? post.url.replace("/ia-global/", "/global-ia/")
+      : post.url;
+
     return {
       id: `mdx-${post.slug}`,
-      href: post.url,
+      href,
       title: post.frontmatter.title,
       description: post.excerpt,
       meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.authors?.[0] || "Derecho Artificial"}`,
