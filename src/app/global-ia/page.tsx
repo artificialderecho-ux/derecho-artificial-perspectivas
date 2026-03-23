@@ -91,9 +91,9 @@ export default async function GlobalIAPage() {
   });
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       <StructuredData data={breadcrumbJsonLd} />
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      
         {/* Hero Section */}
         <section className="relative overflow-hidden text-white">
           <div className="absolute inset-0">
@@ -162,7 +162,6 @@ export default async function GlobalIAPage() {
             )}
           </div>
         </section>
-      </div>
-    </>
+    </div>
   );
 }
