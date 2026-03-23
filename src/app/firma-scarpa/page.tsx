@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import type { ResolvedContentEntry } from "@/lib/content";
 import { getContentEntry, listContentSlugs } from "@/lib/content";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
+import { SectionLanding } from "@/components/SectionLanding";
 import { getAllPosts } from "@/lib/mdx-utils";
 
-// Revalidación automática cada hora
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
@@ -38,12 +36,19 @@ export const metadata: Metadata = {
       "Textos y análisis firmados por el responsable editorial sobre Derecho e Inteligencia Artificial.",
     url: "/firma-scarpa",
     locale: "es_ES",
-    images: [
-      {
-        url: "/logo-principal.png",
-      },
-    ],
+    images: [{ url: "/logo-principal.png" }],
   },
+};
+
+type UnifiedItem = {
+  id: string;
+  href: string;
+  title: string;
+  description: string;
+  badge: string;
+  meta: string;
+  dateMs: number;
+  displayDateMs?: number;
 };
 
 export default async function FirmaScarpaPage() {
@@ -70,14 +75,15 @@ export default async function FirmaScarpaPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post => 
-    post.frontmatter.category && 
-    (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
-     post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
-     (post.frontmatter.section || "").toLowerCase() === 'firma-scarpa')
+  const mdxPosts = getAllPosts().filter(
+    (post) =>
+      post.frontmatter.category &&
+      (post.frontmatter.category.toLowerCase().replace(/-/g, " ") === "firma scarpa" ||
+        post.frontmatter.category.toLowerCase().replace(/-/g, " ") === "firma-scarpa" ||
+        (post.frontmatter.section || "").toLowerCase() === "firma-scarpa"),
   );
 
-  const mdxItems: UnifiedItem[] = mdxPosts.map(post => {
+  const mdxItems: UnifiedItem[] = mdxPosts.map((post) => {
     const dateMs = new Date(post.frontmatter.date).getTime();
     return {
       id: `mdx-${post.slug}`,
@@ -86,21 +92,10 @@ export default async function FirmaScarpaPage() {
       description: post.excerpt,
       badge: "Análisis",
       meta: `${formatDate(post.frontmatter.date)} · ${post.frontmatter.author || "Ricardo Scarpa"}`,
-      dateMs: dateMs,
+      dateMs,
       displayDateMs: dateMs,
     };
   });
-
-  type UnifiedItem = {
-    id: string;
-    href: string;
-    title: string;
-    description: string;
-    badge: string;
-    meta: string;
-    dateMs: number;
-    displayDateMs?: number;
-  };
 
   const contentItems: UnifiedItem[] = sortedEntries.map((entry) => {
     const safeTime = typeof entry.dateMs === "number" && !Number.isNaN(entry.dateMs) ? entry.dateMs : 0;
@@ -110,9 +105,7 @@ export default async function FirmaScarpaPage() {
     })();
     const parts: string[] = [];
     parts.push(formatDate(entry.datePublished));
-    if (entry.author) {
-      parts.push(entry.author);
-    }
+    if (entry.author) parts.push(entry.author);
     return {
       id: `content-${entry.slug}`,
       href: entry.urlPath,
@@ -129,21 +122,17 @@ export default async function FirmaScarpaPage() {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
     const date =
-      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? new Date(entry.displayDateMs) : null;
+      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs)
+        ? new Date(entry.displayDateMs)
+        : null;
     const dateLabel =
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
         : null;
-    const plainSummary = entry.description || (entry.summaryHtml
-      ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
-      : "");
+    const plainSummary = entry.description || (entry.summaryHtml ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "");
     const parts: string[] = [];
-    if (dateLabel) {
-      parts.push(dateLabel);
-    }
-    if (entry.sourceUrl) {
-      parts.push("Incluye descarga del documento original");
-    }
+    if (dateLabel) parts.push(dateLabel);
+    if (entry.sourceUrl) parts.push("Incluye descarga del documento original");
     return {
       id: `resource-${entry.slug}`,
       href: `/firma-scarpa/${entry.slug}`,
@@ -160,110 +149,23 @@ export default async function FirmaScarpaPage() {
     (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
   );
 
-  // El artículo destacado es automáticamente el más reciente (primero en la lista ordenada)
-  const featuredItems: UnifiedItem[] = items.length > 0 ? [items[0]] : [];
-  const remainingItems = items.length > 0 ? items.slice(1) : [];
-
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
-      {
-        name: "Derecho Artificial",
-        url: "https://derechoartificial.com",
-      },
-      {
-        name: "Firma Scarpa",
-        url: "https://derechoartificial.com/firma-scarpa",
-      },
+      { name: "Derecho Artificial", url: "https://derechoartificial.com" },
+      { name: "Firma Scarpa", url: "https://derechoartificial.com/firma-scarpa" },
     ],
   });
 
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
-      <main className="section-spacing">
-        <div className="relative w-full h-64 md:h-96">
-          <Image
-            src="/images/heroes/firma-scarpa-hero.webp"
-            alt="Firma Scarpa"
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority={false}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
-              Firma Scarpa
-            </h1>
-          </div>
-        </div>
-        <div className="container mx-auto px-4 py-8">
-          <p className="lead text-justify max-w-3xl">
-            Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión 
-            profunda sobre la intersección entre tecnología y ley, abordando desde la ética del algoritmo 
-            hasta las implicaciones prácticas del Reglamento de IA en el sector legal.
-          </p>
-        </div>
-        <div className="container-editorial">
-          {/* Artículos Destacados - Una por fila */}
-          {featuredItems.map((item) => (
-            <section key={item.id} className="mb-12">
-              <Link
-                href={item.href}
-                className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
-              >
-                <div className="flex flex-col gap-4">
-                  <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold">
-                    {item.badge}
-                  </p>
-                  <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight">
-                    {item.title}
-                  </h2>
-                  {item.description && (
-                    <p className="text-lg text-body leading-relaxed max-w-4xl">
-                      {item.description}
-                    </p>
-                  )}
-                  {item.meta && (
-                    <div className="text-sm text-caption mt-2">
-                      {item.meta}
-                    </div>
-                  )}
-                  <div className="mt-4">
-                    <span className="text-primary font-medium inline-flex items-center gap-2">
-                      Leer análisis completo <span className="text-xl">→</span>
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </section>
-          ))}
-
-          <section className="grid gap-6 md:grid-cols-2">
-            {remainingItems.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-              >
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Análisis</p>
-                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                {item.description && <p className="text-body mb-6">{item.description}</p>}
-                {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
-              </Link>
-            ))}
-          </section>
-
-          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
-            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Enfoque editorial</p>
-            <p className="text-body max-w-3xl">
-              La firma aborda el impacto jurídico de la IA desde la práctica profesional: cumplimiento normativo,
-              responsabilidad y diseño de garantías. Cada texto se construye a partir de fuentes verificables y
-              experiencias de implementación en entornos regulatorios complejos.
-            </p>
-          </section>
-        </div>
-      </main>
+      <SectionLanding
+        title="Firma Scarpa"
+        heroSrc="/images/heroes/firma-scarpa-hero.webp"
+        heroAlt="Firma Scarpa"
+        description="Columna editorial y ensayos jurídicos bajo la firma de Ricardo Scarpa. Un espacio de reflexión profunda sobre la intersección entre tecnología y ley, abordando desde la ética del algoritmo hasta las implicaciones prácticas del Reglamento de IA en el sector legal."
+        items={items}
+      />
     </>
   );
 }
