@@ -166,7 +166,9 @@ export default async function GlobalIAPage() {
               internacionales, conflictos de leyes y mejores prácticas para la gobernanza global de la inteligencia artificial.
             </p>
           </section>
-      </div>
+        </div>
+      </main>
+    </>
   );
 }
 
