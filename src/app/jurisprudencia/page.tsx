@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
@@ -159,7 +159,7 @@ export default async function JurisprudenciaPage() {
           </div>
         </div>
         <div className="container mx-auto px-4 py-8">
-          <p className="lead text-justify max-w-3xl">
+          <p className="lead text-left max-w-3xl">
             Repositorio crítico de resoluciones judiciales y administrativas que definen el Derecho de la IA. 
             Analizamos sentencias que sientan precedente sobre transparencia algorítmica, responsabilidad civil 
             y protección de derechos fundamentales en la era digital.
@@ -230,3 +230,4 @@ export default async function JurisprudenciaPage() {
     </>
   );
 }
+
