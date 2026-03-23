@@ -34,7 +34,9 @@ export const metadata: Metadata = {
     locale: "es_ES",
     images: [
       {
-        url: "/logo-principal.png",
+        url: "/images/heroes/jurisprudencia-hero.webp",
+        width: 1200,
+        height: 630,
       },
     ],
   },
@@ -55,13 +57,13 @@ export default async function JurisprudenciaPage() {
     resourceSlugs.map((slug) => getSectionResourceEntry("jurisprudencia", slug)),
   );
   const resolvedResourceEntries = resourceEntries.filter(
-    (entry): entry is NonNullable<typeof entry> => Boolean(entry),
+    (entry): entry is any => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post =>
-    post.frontmatter.section === 'jurisprudencia' ||
-    post.frontmatter.category === 'jurisprudencia' ||
-    post.frontmatter.category === 'Jurisprudencia IA'
+  const mdxPosts = getAllPosts().filter(post => 
+    post.frontmatter.category && 
+    (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'jurisprudencia' ||
+     post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'jurisprudencia ia')
   );
 
   const mdxItems: SentenciaItem[] = mdxPosts.map(post => {
@@ -71,12 +73,10 @@ export default async function JurisprudenciaPage() {
       href: post.url,
       title: post.frontmatter.title,
       description: post.excerpt,
-      meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.author || "Ricardo Scarpa"}`,
+      meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.author || "Derecho Artificial"}`,
       dateMs: dateMs,
     };
   });
-
-  
 
   const boscoDateString = "2026-01-30";
   const boscoTime = new Date(boscoDateString).getTime();
@@ -141,6 +141,7 @@ export default async function JurisprudenciaPage() {
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <main className="section-spacing">
+        {/* Hero Section */}
         <div className="relative w-full h-64 md:h-96">
           <Image
             src="/images/heroes/jurisprudencia-ia-hero.webp"
@@ -148,6 +149,7 @@ export default async function JurisprudenciaPage() {
             fill
             sizes="100vw"
             className="object-cover"
+            priority={false}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
           <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
@@ -164,48 +166,64 @@ export default async function JurisprudenciaPage() {
           </p>
         </div>
         <div className="container-editorial">
-          <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
-            <Link
-              href={boscoItem.href}
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Destacada</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Sentencia BOSCO</h2>
-              <p className="text-sm text-body">Transparencia algorítmica y acceso al código fuente.</p>
-              <div className="mt-4 text-xs text-caption">{boscoItem.meta}</div>
-            </Link>
-            <Link
-              href="/jurisprudencia"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actividad</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Últimas resoluciones</h2>
-              <p className="text-sm text-body">Entradas registradas en la sección.</p>
-              <div className="mt-4 text-xs text-caption">Total: {items.length}</div>
-            </Link>
-            <Link
-              href="/normativa"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Contexto</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Marco regulatorio</h2>
-              <p className="text-sm text-body">Relación con el EU AI Act y normativa aplicable.</p>
-            </Link>
-          </section>
+          {/* Artículos Destacados - Uno por fila */}
+          {items.length > 0 && (
+            <section className="mb-12">
+              <Link
+                href={items[0].href}
+                className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+              >
+                <div className="flex flex-col gap-4">
+                  <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+                    {items[0].id === 'bosco' ? 'Destacada' : 'Análisis'}
+                  </p>
+                  <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight">
+                    {items[0].title}
+                  </h2>
+                  {items[0].description && (
+                    <p className="text-lg text-body leading-relaxed max-w-4xl">
+                      {items[0].description}
+                    </p>
+                  )}
+                  {items[0].meta && (
+                    <div className="text-sm text-caption mt-2">
+                      {items[0].meta}
+                    </div>
+                  )}
+                  <div className="mt-4">
+                    <span className="text-primary font-medium inline-flex items-center gap-2">
+                      Leer análisis completo <span className="text-xl">→</span>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </section>
+          )}
 
           <section className="grid gap-6 md:grid-cols-2">
-            {items.map((item) => (
+            {(items.length > 1 ? items.slice(1) : items).map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
                 className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
               >
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Sentencia</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
+                  {item.id === 'bosco' ? 'Destacada' : 'Análisis'}
+                </p>
                 <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
                 {item.description && <p className="text-body mb-6">{item.description}</p>}
                 {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
               </Link>
             ))}
+          </section>
+
+          <section className="mt-12 rounded-lg border border-divider bg-surface p-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Enfoque jurisprudencial</p>
+            <p className="text-body max-w-3xl">
+              Análisis crítico de precedentes judiciales con impacto directo en la práctica profesional. 
+              Cada sentencia se examina desde la perspectiva del Derecho aplicable, identificando estándares 
+              y tendencias que moldean el futuro de la regulación de IA.
+            </p>
           </section>
         </div>
       </main>
