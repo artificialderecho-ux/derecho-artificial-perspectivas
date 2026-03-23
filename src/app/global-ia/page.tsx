@@ -50,33 +50,23 @@ type GlobalIAPost = {
 
 export default async function GlobalIAPage() {
   const mdxPosts = getAllPosts().filter((post) => {
-    const normalizedCategory = post.frontmatter.category
-      ?.toLowerCase()
-      .trim()
-      .replace(/[_-]+/g, " ");
-
-    const normalizedSection = post.frontmatter.section
-      ?.toLowerCase()
-      .trim()
-      .replace(/[_-]+/g, " ");
+    const category = (post.frontmatter.category || "").toLowerCase();
+    const section = (post.frontmatter.section || "").toLowerCase();
 
     return (
-      normalizedCategory === "global ia" ||
-      normalizedCategory === "ia global" ||
-      normalizedSection === "global ia" ||
-      normalizedSection === "ia global"
+      category === "global-ia" ||
+      category === "ia-global" ||
+      section === "global-ia" ||
+      section === "ia-global"
     );
   });
 
   const mdxItems: GlobalIAPost[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
-    const href = post.url.startsWith("/ia-global/")
-      ? post.url.replace("/ia-global/", "/global-ia/")
-      : post.url;
 
     return {
       id: `mdx-${post.slug}`,
-      href,
+      href: post.url,
       title: post.frontmatter.title,
       description: post.excerpt,
       meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.authors?.[0] || "Derecho Artificial"}`,
