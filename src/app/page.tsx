@@ -579,7 +579,44 @@ export default async function HomePage() {
                 .filter((post) => {
                   const c = (post.frontmatter.category || "").toLowerCase();
                   const cNormalized = c.replace(/-/g, ' ');
-                  // Para normativa, incluir categorías relacionadas
+                  const title = (post.frontmatter.title || "").toLowerCase();
+                  const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
+                  const subcat = (post.frontmatter.subcategory || "").toLowerCase();
+                  
+                  // Para Firma Scarpa, incluir categorías relacionadas y contenido específico
+                  if (cat === "firma-scarpa") {
+                    return (
+                      c === "firma-scarpa" ||
+                      c === "firma-scarpa" ||
+                      (post.frontmatter.section || "").toLowerCase() === "firma-scarpa" ||
+                      // Capturar posts sobre firma scarpa por título/tags
+                      title.includes("thomson reuters") ||
+                      title.includes("ross intelligence") ||
+                      title.includes("copyright") ||
+                      title.includes("fair use") ||
+                      title.includes("agents of chaos") ||
+                      title.includes("liability gap") ||
+                      title.includes("big brother watch") ||
+                      title.includes("vigilancia masiva") ||
+                      title.includes("blindaje") ||
+                      title.includes("propiedad intelectual") ||
+                      title.includes("negligencia") ||
+                      title.includes("tsj") ||
+                      title.includes("alucinaciones") ||
+                      tags.includes("thomson-reuters") ||
+                      tags.includes("ross-intelligence") ||
+                      tags.includes("copyright") ||
+                      tags.includes("fair-use") ||
+                      tags.includes("liability-gap") ||
+                      tags.includes("agentes-autonomos") ||
+                      tags.includes("vigilancia-masiva") ||
+                      tags.includes("propiedad-intelectual") ||
+                      tags.includes("negligencia-profesional") ||
+                      tags.includes("alucinaciones-ia")
+                    );
+                  }
+                  
+                  // Para normativa, incluir categorías relacionadas y contenido específico
                   if (cat === "normativa") {
                     return (
                       c === "normativa" ||
@@ -591,45 +628,168 @@ export default async function HomePage() {
                       c === "legislación" ||
                       c === "legislación ia" ||
                       c === "regulación ue" ||
-                      (post.frontmatter.section || "").toLowerCase() === "normativa"
+                      (post.frontmatter.section || "").toLowerCase() === "normativa" ||
+                      // Capturar posts sobre normativa por título/tags
+                      title.includes("convenio marco") ||
+                      title.includes("consejo de europa") ||
+                      title.includes("ia act") ||
+                      title.includes("reglamento") ||
+                      title.includes("ai act") ||
+                      title.includes("dma") ||
+                      title.includes("mercados digitales") ||
+                      title.includes("california") ||
+                      title.includes("sb 53") ||
+                      title.includes("transparencia") ||
+                      title.includes("senado") ||
+                      title.includes("directrices") ||
+                      title.includes("resolución") ||
+                      title.includes("seguridad") ||
+                      tags.includes("consejo-de-europa") ||
+                      tags.includes("reglamento-ia") ||
+                      tags.includes("ai-act") ||
+                      tags.includes("dma") ||
+                      tags.includes("mercados-digitales") ||
+                      tags.includes("california") ||
+                      tags.includes("transparencia-ia") ||
+                      tags.includes("seguridad-ia") ||
+                      tags.includes("resolucion-onu")
                     );
                   }
-                  // Para jurisprudencia, incluir categorías relacionadas
+                  
+                  // Para jurisprudencia, incluir categorías relacionadas y contenido específico
                   if (cat === "jurisprudencia") {
                     return (
                       c === "jurisprudencia" ||
                       cNormalized === "jurisprudencia" ||
                       cNormalized === "jurisprudencia ia" ||
                       c === "jurisprudencia-ia" ||
-                      (post.frontmatter.section || "").toLowerCase() === "jurisprudencia"
+                      (post.frontmatter.section || "").toLowerCase() === "jurisprudencia" ||
+                      // Capturar posts sobre jurisprudencia por título/tags
+                      title.includes("sentencia") ||
+                      title.includes("tribunal") ||
+                      title.includes("jurisprudencia") ||
+                      title.includes("orleans") ||
+                      title.includes("caa bordeaux") ||
+                      title.includes("ukut") ||
+                      title.includes("ewhc") ||
+                      title.includes("kettering") ||
+                      title.includes("medal") ||
+                      title.includes("amazon") ||
+                      title.includes("zapata") ||
+                      title.includes("tsj") ||
+                      title.includes("amparo") ||
+                      title.includes("scjn") ||
+                      title.includes("dabus") ||
+                      title.includes("uksc") ||
+                      tags.includes("sentencia") ||
+                      tags.includes("tribunal") ||
+                      tags.includes("caso") ||
+                      tags.includes("caa-bordeaux") ||
+                      tags.includes("ukut") ||
+                      tags.includes("alucinaciones") ||
+                      tags.includes("tsj-navarra") ||
+                      tags.includes("amparo-directo")
                     );
                   }
-                  // Para IA Global, incluir categorías relacionadas
+                  
+                  // Para IA Global, incluir categorías relacionadas y contenido específico
                   if (cat === "ia-global") {
                     return (
                       c === "ia-global" ||
                       c === "global-ia" ||
                       cNormalized === "global ia" ||
                       cNormalized === "ia global" ||
-                      (post.frontmatter.section || "").toLowerCase() === "ia-global"
+                      (post.frontmatter.section || "").toLowerCase() === "ia-global" ||
+                      // Capturar posts sobre IA global por título/tags
+                      title.includes("global") ||
+                      title.includes("internacional") ||
+                      title.includes("ee.uu") ||
+                      title.includes("estados unidos") ||
+                      title.includes("china") ||
+                      title.includes("europa") ||
+                      title.includes("singapur") ||
+                      title.includes("e-negotiation") ||
+                      title.includes("boligportal") ||
+                      title.includes("dinamarca") ||
+                      title.includes("redata") ||
+                      title.includes("getty images") ||
+                      title.includes("stability ai") ||
+                      title.includes("justicia inteligente") ||
+                      title.includes("blockchain") ||
+                      tags.includes("global") ||
+                      tags.includes("internacional") ||
+                      tags.includes("eeuu") ||
+                      tags.includes("anthropic") ||
+                      tags.includes("china") ||
+                      tags.includes("singapur") ||
+                      tags.includes("boligportal") ||
+                      tags.includes("getty-images") ||
+                      tags.includes("stability-ai")
                     );
                   }
-                  // Para Propiedad Intelectual, incluir categorías relacionadas
+                  
+                  // Para Propiedad Intelectual, incluir categorías relacionadas y contenido específico
                   if (cat === "propiedad-intelectual-ia") {
                     return (
                       c === "propiedad-intelectual-ia" ||
                       cNormalized === "propiedad intelectual ia" ||
                       cNormalized === "propiedad intelectual" ||
                       c === "propiedad-intelectual" ||
-                      (post.frontmatter.section || "").toLowerCase() === "propiedad-intelectual-ia"
+                      (post.frontmatter.section || "").toLowerCase() === "propiedad-intelectual-ia" ||
+                      // Capturar posts sobre propiedad intelectual por título/tags
+                      title.includes("copyright") ||
+                      title.includes("propiedad intelectual") ||
+                      title.includes("derechos de autor") ||
+                      title.includes("marca") ||
+                      title.includes("patente") ||
+                      title.includes("kneschke") ||
+                      title.includes("laion") ||
+                      title.includes("getty images") ||
+                      title.includes("stability ai") ||
+                      title.includes("thaler") ||
+                      title.includes("perlmutter") ||
+                      title.includes("parodia") ||
+                      title.includes("mercado único digital") ||
+                      title.includes("mineria de textos") ||
+                      title.includes("text and data mining") ||
+                      tags.includes("copyright") ||
+                      tags.includes("propiedad-intelectual") ||
+                      tags.includes("derechos-de-autor") ||
+                      tags.includes("thomson reuters") ||
+                      tags.includes("openai") ||
+                      tags.includes("getty-images") ||
+                      tags.includes("stability-ai") ||
+                      tags.includes("thaler-perlmutter") ||
+                      tags.includes("kneschke-vs-laion")
                     );
                   }
-                  // Para Ética IA, incluir categorías relacionadas
+                  
+                  // Para Ética IA, incluir categorías relacionadas y contenido específico
                   if (cat === "etica-ia") {
                     return (
                       c === "etica-ia" ||
                       cNormalized === "etica ia" ||
-                      (post.frontmatter.section || "").toLowerCase() === "etica-ia"
+                      (post.frontmatter.section || "").toLowerCase() === "etica-ia" ||
+                      // Capturar posts sobre ética por título/tags
+                      title.includes("ética") ||
+                      title.includes("defensa") ||
+                      title.includes("seguridad") ||
+                      title.includes("fiable") ||
+                      title.includes("carta ética") ||
+                      title.includes("sistemas judiciales") ||
+                      title.includes("derechos humanos") ||
+                      title.includes("democracia") ||
+                      title.includes("estado de derecho") ||
+                      title.includes("convenio marco") ||
+                      title.includes("consejo de europa") ||
+                      tags.includes("ética") ||
+                      tags.includes("defensa") ||
+                      tags.includes("seguridad") ||
+                      tags.includes("ia-fiable") ||
+                      tags.includes("derechos-humanos") ||
+                      tags.includes("carta-europea") ||
+                      tags.includes("consejo-de-europa") ||
+                      tags.includes("sistemas-judiciales")
                     );
                   }
                   
@@ -637,7 +797,27 @@ export default async function HomePage() {
                   if (c === "recursos") {
                     const subcat = (post.frontmatter.subcategory || "").toLowerCase();
                     const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-                    return subcat === "guias" || tags.includes("guias");
+                    return (
+                      subcat === "guias" || 
+                      tags.includes("guias") ||
+                      // Capturar posts sobre guías por título
+                      title.includes("guía") ||
+                      title.includes("ia agéntica") ||
+                      title.includes("rgpd") ||
+                      title.includes("protección de datos") ||
+                      title.includes("aepd") ||
+                      title.includes("imágenes") ||
+                      title.includes("riesgos") ||
+                      title.includes("seguridad") ||
+                      title.includes("oecd") ||
+                      title.includes("due diligence") ||
+                      tags.includes("ia-agentica") ||
+                      tags.includes("rgpd") ||
+                      tags.includes("proteccion-datos") ||
+                      tags.includes("aepd") ||
+                      tags.includes("seguridad-ia") ||
+                      tags.includes("oecd")
+                    );
                   }
                   return true;
                 })
