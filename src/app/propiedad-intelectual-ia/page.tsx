@@ -30,9 +30,11 @@ export default async function PropiedadIntelectualIAPage() {
     ],
   });
 
-  const mdxPosts = getAllPosts().filter(
-    (post) => (post.frontmatter.category || "").toLowerCase() === "propiedad-intelectual-ia",
-  );
+  const mdxPosts = getAllPosts().filter((post) => {
+    const category = (post.frontmatter.category || "").toLowerCase();
+    const section = (post.frontmatter.section || "").toLowerCase();
+    return category === "propiedad-intelectual-ia" || section === "propiedad-intelectual-ia";
+  });
 
   const items = mdxPosts
     .map((post) => {
@@ -51,6 +53,8 @@ export default async function PropiedadIntelectualIAPage() {
       };
     })
     .sort((a, b) => b.dateMs - a.dateMs);
+  const featuredItem = items[0];
+  const remainingItems = items.slice(1);
 
   return (
     <>
@@ -93,26 +97,53 @@ export default async function PropiedadIntelectualIAPage() {
           {items.length === 0 ? (
             <p className="text-body">Próximamente contenido.</p>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2">
-              {items.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={item.href}
-                  className="card-elevated p-6 hover:border-primary/30 transition-all duration-300 flex flex-col gap-3"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption">
-                    Análisis
-                  </p>
-                  <h2 className="font-serif text-xl md:text-2xl text-foreground">
-                    {item.title}
-                  </h2>
-                  <p className="text-sm text-body line-clamp-3">{item.excerpt}</p>
-                  <p className="text-xs text-caption mt-2">
-                    {item.dateLabel} · {item.author}
-                  </p>
-                </Link>
-              ))}
-            </div>
+            <>
+              {featuredItem && (
+                <section className="mb-12">
+                  <Link
+                    href={featuredItem.href}
+                    className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+                  >
+                    <div className="flex flex-col gap-4">
+                      <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+                        Análisis destacado
+                      </p>
+                      <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight">
+                        {featuredItem.title}
+                      </h2>
+                      <p className="text-lg text-body leading-relaxed max-w-4xl">
+                        {featuredItem.excerpt}
+                      </p>
+                      <div className="text-sm text-caption mt-2">
+                        {featuredItem.dateLabel} · {featuredItem.author}
+                      </div>
+                    </div>
+                  </Link>
+                </section>
+              )}
+              {remainingItems.length > 0 && (
+                <section className="grid gap-6 md:grid-cols-2">
+                  {remainingItems.map((item) => (
+                    <Link
+                      key={item.slug}
+                      href={item.href}
+                      className="card-elevated p-6 hover:border-primary/30 transition-all duration-300 flex flex-col gap-3"
+                    >
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-caption">
+                        Análisis
+                      </p>
+                      <h2 className="font-serif text-xl md:text-2xl text-foreground">
+                        {item.title}
+                      </h2>
+                      <p className="text-sm text-body line-clamp-3">{item.excerpt}</p>
+                      <p className="text-xs text-caption mt-2">
+                        {item.dateLabel} · {item.author}
+                      </p>
+                    </Link>
+                  ))}
+                </section>
+              )}
+            </>
           )}
         </div>
       </LegalLayout>
