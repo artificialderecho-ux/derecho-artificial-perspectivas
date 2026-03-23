@@ -40,10 +40,7 @@ export default async function ActualidadIAPage() {
     return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
-  const mdxGuides = mdxPosts.filter((p) => {
-    const tags = (p.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-    return tags.includes("guia") || tags.includes("protocolo");
-  });
+  const mdxGuides = mdxPosts.filter((p) => p.url.startsWith("/recursos/guias/"));
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -68,6 +65,8 @@ export default async function ActualidadIAPage() {
       };
     })
     .sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
+  const featuredItem = guideItems[0];
+  const remainingItems = guideItems.slice(1);
 
   return (
     <>
@@ -82,13 +81,7 @@ export default async function ActualidadIAPage() {
             alt="Guías IA"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/50"></div>
-          <div className="relative container mx-auto px-4 h-full flex flex-col items-center justify-center text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Guías IA</h1>
-            <p className="text-lg md:text-xl text-gray-100 max-w-2xl">
-              Guías, protocolos y análisis sobre inteligencia artificial para profesionales del derecho
-            </p>
-          </div>
+          <div className="absolute inset-0 bg-black/35"></div>
         </section>
 
         {/* Content Section */}
@@ -103,30 +96,41 @@ export default async function ActualidadIAPage() {
               </p>
             </div>
 
-            {/* Grid */}
             {guideItems.length > 0 ? (
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {guideItems.map((item) => (
+              <div className="space-y-8">
+                {featuredItem ? (
+                  <Link
+                    href={featuredItem.href}
+                    className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+                  >
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold mb-3">{featuredItem.badge}</p>
+                    <h3 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-4">{featuredItem.title}</h3>
+                    <p className="text-lg text-body leading-relaxed max-w-4xl mb-4">{featuredItem.description}</p>
+                    <p className="text-sm text-caption">{featuredItem.meta}</p>
+                  </Link>
+                ) : null}
+                <div className="grid gap-6 md:grid-cols-2">
+                {remainingItems.map((item) => (
                   <Link
                     key={item.id}
                     href={item.href}
-                    className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-primary transition-all duration-300 flex flex-col"
+                    className="card-elevated p-6 hover:border-primary/20 transition-all duration-300 flex flex-col"
                   >
-                    <span className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
+                    <span className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
                       {item.badge}
                     </span>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 flex-1 hover:text-primary transition-colors">
+                    <h3 className="font-serif text-2xl text-foreground mb-3 flex-1 hover:text-primary transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                    <p className="text-body text-sm mb-4 line-clamp-2">
                       {item.description}
                     </p>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-500">{item.meta}</span>
-                      <span className="text-primary font-semibold">→</span>
+                      <span className="text-xs text-caption">{item.meta}</span>
                     </div>
                   </Link>
                 ))}
+                </div>
               </div>
             ) : (
               <div className="text-center py-12">
