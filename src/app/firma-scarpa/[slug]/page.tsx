@@ -105,6 +105,7 @@ export async function generateMetadata({
       }
     };
   }
+  }
 
   const [jsonEntry, resourceEntry] = await Promise.all([
     getContentEntry("firma-scarpa", slug),
