@@ -597,7 +597,7 @@ export default async function HomePage() {
                       title.includes("agents of chaos") ||
                       title.includes("liability gap") ||
                       title.includes("big brother watch") ||
-                      title.includes("vigilancia masiva") ||
+                      (title.includes("vigilancia") && title.includes("masiva")) ||
                       title.includes("blindaje") ||
                       title.includes("propiedad intelectual") ||
                       title.includes("negligencia") ||
