@@ -34,10 +34,21 @@ export async function generateStaticParams() {
   ]);
   
   // Incluir slugs de posts MDX que tengan categoría firma-scarpa
-  const mdxPosts = getAllPosts().filter(p => 
-    (p.frontmatter.category || "").toLowerCase() === "firma-scarpa" || 
-    (p.frontmatter.section || "").toLowerCase() === "firma-scarpa"
-  );
+  const mdxPosts = getAllPosts().filter(p => {
+    const category = (p.frontmatter.category || "").toLowerCase();
+    const section = (p.frontmatter.section || "").toLowerCase();
+    const categoryNormalized = category.replace(/-/g, ' ');
+    const sectionNormalized = section.replace(/-/g, ' ');
+    
+    return (
+      category === "firma-scarpa" ||
+      categoryNormalized === "firma scarpa" ||
+      categoryNormalized === "firma-scarpa" ||
+      section === "firma-scarpa" ||
+      sectionNormalized === "firma scarpa" ||
+      sectionNormalized === "firma-scarpa"
+    );
+  });
   const mdxSlugs = mdxPosts.map(p => p.slug);
 
   const allSlugs = new Set<string>([...jsonSlugs, ...resourceSlugs, ...mdxSlugs]);
@@ -54,8 +65,23 @@ export async function generateMetadata({
 
   // Priorizar MDX nativo
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && ((mdxPost.frontmatter.category || "").toLowerCase() === "firma-scarpa" || (mdxPost.frontmatter.section || "").toLowerCase() === "firma-scarpa")) {
-    const { title, description, category, date, section } = mdxPost.frontmatter;
+  if (mdxPost) {
+    const category = (mdxPost.frontmatter.category || "").toLowerCase();
+    const section = (mdxPost.frontmatter.section || "").toLowerCase();
+    const categoryNormalized = category.replace(/-/g, ' ');
+    const sectionNormalized = section.replace(/-/g, ' ');
+    
+    const isValidFirmaScarpa = (
+      category === "firma-scarpa" ||
+      categoryNormalized === "firma scarpa" ||
+      categoryNormalized === "firma-scarpa" ||
+      section === "firma-scarpa" ||
+      sectionNormalized === "firma scarpa" ||
+      sectionNormalized === "firma-scarpa"
+    );
+    
+    if (isValidFirmaScarpa) {
+      const { title, description, category, date, section } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre IA por Ricardo Scarpa.";
     const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
@@ -155,8 +181,23 @@ export default async function FirmaScarpaSlugPage({
 
   // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && ((mdxPost.frontmatter.category || "").toLowerCase() === "firma-scarpa" || (mdxPost.frontmatter.section || "").toLowerCase() === "firma-scarpa")) {
-    const { title, date, category } = mdxPost.frontmatter;
+  if (mdxPost) {
+    const category = (mdxPost.frontmatter.category || "").toLowerCase();
+    const section = (mdxPost.frontmatter.section || "").toLowerCase();
+    const categoryNormalized = category.replace(/-/g, ' ');
+    const sectionNormalized = section.replace(/-/g, ' ');
+    
+    const isValidFirmaScarpa = (
+      category === "firma-scarpa" ||
+      categoryNormalized === "firma scarpa" ||
+      categoryNormalized === "firma-scarpa" ||
+      section === "firma-scarpa" ||
+      sectionNormalized === "firma scarpa" ||
+      sectionNormalized === "firma-scarpa"
+    );
+    
+    if (isValidFirmaScarpa) {
+      const { title, date, category } = mdxPost.frontmatter;
     return (
       <LegalLayout
         title={title}
