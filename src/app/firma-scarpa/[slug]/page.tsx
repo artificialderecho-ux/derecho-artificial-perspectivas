@@ -240,6 +240,7 @@ export default async function FirmaScarpaSlugPage({
       </LegalLayout>
     );
   }
+  }
 
   const jsonEntry = await getContentEntry("firma-scarpa", slug);
   const resourceEntry = jsonEntry ? null : await getSectionResourceEntry("firma-scarpa", slug);
