@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { getAllPosts, getPostBySlug } from "@/lib/mdx-utils";
 import { notFound } from "next/navigation";
-import LegalLayout from "@/components/layout/LegalLayout";
+import { LegalLayout } from "@/components/layout/LegalLayout";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
