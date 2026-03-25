@@ -1,13 +1,12 @@
 import { Metadata } from "next";
-import { getAllPosts, getPostBySlug } from "@/lib/content";
+import { getAllPosts, getPostBySlug } from "@/lib/mdx-utils";
 import { notFound } from "next/navigation";
-import LegalLayout from "@/components/LegalLayout";
+import LegalLayout from "@/components/layout/LegalLayout";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
-import RelatedArticles from "@/components/RelatedArticles";
-import { formatDate } from "@/lib/utils";
+import { RelatedArticles } from "@/components/RelatedArticles";
 
 export async function generateStaticParams() {
   const posts = getAllPosts().filter(
