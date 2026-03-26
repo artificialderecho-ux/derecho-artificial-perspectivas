@@ -24,11 +24,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const entry = await getResourceEntry(slug);
   if (!entry) return {};
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
+  const canonical = `https://www.derechoartificial.com/recursos/${entry.slug}`;
+  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
   return {
     title: entry.title,
     description,
     alternates: {
-      canonical: `/recursos/${entry.slug}`,
+      canonical,
     },
     robots: {
       index: true,
@@ -38,7 +40,22 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       type: "article",
       title: entry.title,
       description,
-      url: `/recursos/${entry.slug}`,
+      url: canonical,
+      siteName: "Derecho Artificial",
+      locale: "es_ES",
+      images: [{
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: entry.title,
+      }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+      images: [ogImage],
+      creator: "@RicardoScarpa",
     },
   };
 }

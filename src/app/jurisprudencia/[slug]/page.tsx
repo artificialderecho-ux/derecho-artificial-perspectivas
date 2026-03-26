@@ -66,6 +66,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre jurisprudencia en IA.";
     const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
+    const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
     return {
       title: `${title} | Derecho Artificial`,
       description: metaDescription,
@@ -81,9 +82,22 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         url: canonical,
         siteName: "Derecho Artificial",
         locale: "es_ES",
+        images: [{
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }],
         publishedTime: date ? new Date(date).toISOString() : undefined,
         authors: ['Ricardo Scarpa']
-      }
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description: metaDescription,
+        images: [ogImage],
+        creator: "@RicardoScarpa",
+      },
     };
   }
 
