@@ -5,7 +5,6 @@ import matter from 'gray-matter';
 // ─── Rutas base ───────────────────────────────────────────────────────────────
 
 const ROOT       = process.cwd();
-const POSTS_DIR  = path.join(ROOT, 'content', 'posts');   // legado (noticias automáticas)
 
 // Secciones con nueva arquitectura: content/<section>/<slug>/index.mdx
 const NEW_SECTIONS = [
@@ -31,15 +30,21 @@ const SECTION_ROUTES: Record<string, string> = {
   'global-ia':                'global-ia',
   'guias':                    'recursos/guias',
   'glosario':                 'glosario-ia-legal',
-  // Legado: category → ruta (para posts en content/posts/)
+  // Compatibilidad: category/section históricos → ruta del sitio
   'jurisprudencia ia':        'jurisprudencia',
   'legislación digital':      'normativa',
+  'legislacion digital':      'normativa',
   'legislación internacional':'normativa',
+  'legislacion internacional':'normativa',
   'legislación':              'normativa',
+  'legislacion':              'normativa',
   'legislación ia':           'normativa',
+  'legislacion ia':           'normativa',
   'regulación ue':            'normativa',
+  'regulacion ue':            'normativa',
   'firma scarpa':             'firma-scarpa',
   'global ia':                'global-ia',
+  'recursos':                 'recursos/guias',
 };
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
@@ -184,107 +189,18 @@ function readNewSectionPosts(): PostData[] {
   return posts;
 }
 
-// ─── Lector de arquitectura legada ───────────────────────────────────────────
-
-/**
- * Lee posts de content/posts/*.mdx (arquitectura anterior).
- * Se mantiene para compatibilidad con noticias automáticas y posts migrados pendientes.
- */
-function readLegacyPosts(): PostData[] {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-
-  const fileMap = new Map<string, string>();
-
-  const collectFiles = (dir: string, baseDir: string = '') => {
-    const files = fs.readdirSync(dir);
-    for (const file of files) {
-      const filePath = path.join(dir, file);
-      const stat = fs.statSync(filePath);
-      if (stat.isDirectory()) {
-        collectFiles(filePath, path.join(baseDir, file));
-      } else if (file.endsWith('.mdx') || file.endsWith('.md')) {
-        const relativePath = baseDir ? path.join(baseDir, file) : file;
-        const slug = relativePath.replace(/\.mdx?$/, '');
-        if (!fileMap.has(slug)) {
-          fileMap.set(slug, filePath);
-        }
-      }
-    }
-  };
-
-  collectFiles(POSTS_DIR);
-
-  const posts: PostData[] = [];
-
-  for (const [rawSlug, fullPath] of fileMap.entries()) {
-    try {
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data, content } = matter(fileContents);
-      const frontmatter = data as PostFrontmatter;
-
-      const category = (frontmatter.category || 'blog') as string;
-      const frontmatterUrl = frontmatter.url as string | undefined;
-
-      // Excluir noticias con URL externa
-      if (category.toLowerCase() === 'noticia' && frontmatterUrl) continue;
-
-      const slug  = frontmatter.slug || rawSlug;
-      const route = resolveRoute(frontmatter);
-
-      // Si no tiene ruta reconocida, saltar (evita posts huérfanos)
-      if (!route && category.toLowerCase() !== 'noticia') {
-        // Solo omitir si no es noticia — las noticias sin URL externa se sirven en /noticia/
-      }
-
-      const excerpt =
-        frontmatter.description ||
-        content.replace(/[#*`]/g, '').replace(/\n/g, ' ').trim().slice(0, 160) + '...';
-
-      const url = route
-        ? `/${route}/${slug}`
-        : `/noticia/${encodeURIComponent(slug)}`;
-
-      // PDF desde frontmatter (legado no tiene detección automática)
-      const pdfUrl = frontmatter.pdf
-        ? (frontmatter.pdf.startsWith('/') ? frontmatter.pdf : `/fuentes/${frontmatter.pdf}`)
-        : undefined;
-
-      posts.push({
-        slug,
-        frontmatter,
-        content,
-        url,
-        excerpt,
-        pdfUrl,
-        sourceDir: 'legacy',
-      });
-    } catch (e) {
-      console.warn(`[mdx-utils] Error leyendo ${fullPath}:`, e);
-    }
-  }
-
-  return posts;
-}
-
 // ─── API pública ──────────────────────────────────────────────────────────────
 
 let _postsCache: PostData[] | null = null;
 
 /**
- * Devuelve todos los posts del sitio (nueva arquitectura + legado), ordenados por fecha.
+ * Devuelve todos los posts del sitio (arquitectura por secciones), ordenados por fecha.
  * El resultado se cachea en memoria durante el proceso de build.
  */
 export function getAllPosts(): PostData[] {
   if (_postsCache) return _postsCache;
 
-  const newPosts    = readNewSectionPosts();
-  const legacyPosts = readLegacyPosts();
-
-  // Los nuevos tienen prioridad: si hay un slug duplicado, gana el nuevo
-  const newSlugs = new Set(newPosts.map(p => p.slug));
-  const filtered = legacyPosts.filter(p => !newSlugs.has(p.slug));
-
-  const all = [...newPosts, ...filtered].sort((a, b) => {
+  const all = readNewSectionPosts().sort((a, b) => {
     const dateA = new Date(a.frontmatter.date).getTime();
     const dateB = new Date(b.frontmatter.date).getTime();
     return dateB - dateA;
@@ -307,46 +223,10 @@ export function getPostsBySection(section: string): PostData[] {
  * Devuelve todas las noticias (category: "noticia").
  */
 export function getAllNoticias(): PostData[] {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-
-  const fileMap = new Map<string, string>();
-  const collectFiles = (dir: string, baseDir: string = '') => {
-    const files = fs.readdirSync(dir);
-    for (const file of files) {
-      const filePath = path.join(dir, file);
-      const stat = fs.statSync(filePath);
-      if (stat.isDirectory()) {
-        collectFiles(filePath, path.join(baseDir, file));
-      } else if (file.endsWith('.mdx')) {
-        const relativePath = baseDir ? path.join(baseDir, file) : file;
-        const slug = relativePath.replace(/\.mdx?$/, '');
-        if (!fileMap.has(slug)) fileMap.set(slug, filePath);
-      }
-    }
-  };
-  collectFiles(POSTS_DIR);
-
-  const noticias: PostData[] = [];
-
-  for (const [rawSlug, fullPath] of fileMap.entries()) {
-    try {
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data, content } = matter(fileContents);
-      const frontmatter = data as PostFrontmatter;
-
-      if (frontmatter.category?.toLowerCase() !== 'noticia') continue;
-
-      const slug    = frontmatter.slug || rawSlug;
-      const url     = frontmatter.url || `/noticia/${encodeURIComponent(slug)}`;
-      const excerpt = frontmatter.description ||
-        content.replace(/[#*`]/g, '').replace(/\n/g, ' ').trim().slice(0, 160) + '...';
-
-      noticias.push({ slug, frontmatter, content, url, excerpt, sourceDir: 'legacy' });
-    } catch { /* silencio */ }
-  }
-
-  return noticias.sort((a, b) =>
-    new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+  return getAllPosts()
+    .filter((post) => post.frontmatter.category?.toLowerCase() === 'noticia')
+    .sort((a, b) =>
+      new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
   );
 }
 
