@@ -51,6 +51,8 @@ export default async function EticaIAPage() {
       };
     })
     .sort((a, b) => b.dateMs - a.dateMs);
+  const featuredItem = items[0];
+  const remainingItems = items.slice(1);
 
   return (
     <>
@@ -74,12 +76,6 @@ export default async function EticaIAPage() {
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-            <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-              <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
-                Ética IA
-              </h1>
-            </div>
           </div>
         }
       >
@@ -93,25 +89,47 @@ export default async function EticaIAPage() {
           {items.length === 0 ? (
             <p className="text-body">Próximamente contenido.</p>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2">
-              {items.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={item.href}
-                  className="card-elevated p-6 hover:border-primary/30 transition-all duration-300 flex flex-col gap-3"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-caption">
-                    Análisis
-                  </p>
-                  <h2 className="font-serif text-xl md:text-2xl text-foreground">
-                    {item.title}
-                  </h2>
-                  <p className="text-sm text-body line-clamp-3">{item.excerpt}</p>
-                  <p className="text-xs text-caption mt-2">
-                    {item.dateLabel} · {item.author}
-                  </p>
-                </Link>
-              ))}
+            <div className="space-y-8">
+              {featuredItem && (
+                <section>
+                  <Link
+                    href={featuredItem.href}
+                    className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+                  >
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold mb-3">
+                      Análisis
+                    </p>
+                    <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-4">
+                      {featuredItem.title}
+                    </h2>
+                    <p className="text-lg text-body leading-relaxed max-w-4xl">{featuredItem.excerpt}</p>
+                    <p className="text-sm text-caption mt-4">
+                      {featuredItem.dateLabel} · {featuredItem.author}
+                    </p>
+                  </Link>
+                </section>
+              )}
+
+              <section className="grid gap-6 md:grid-cols-2">
+                {remainingItems.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={item.href}
+                    className="card-elevated p-6 hover:border-primary/30 transition-all duration-300 flex flex-col gap-3"
+                  >
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-caption">
+                      Análisis
+                    </p>
+                    <h2 className="font-serif text-xl md:text-2xl text-foreground">
+                      {item.title}
+                    </h2>
+                    <p className="text-sm text-body line-clamp-3">{item.excerpt}</p>
+                    <p className="text-xs text-caption mt-2">
+                      {item.dateLabel} · {item.author}
+                    </p>
+                  </Link>
+                ))}
+              </section>
             </div>
           )}
         </div>

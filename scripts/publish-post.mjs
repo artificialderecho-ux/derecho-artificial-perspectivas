@@ -54,6 +54,12 @@ function log(emoji, msg)  { console.log(`${emoji}  ${msg}`); }
 function warn(msg)        { console.warn(`⚠️   ${msg}`); }
 function fail(msg)        { console.error(`❌  ${msg}`); process.exit(1); }
 
+function listFromStdout(stdout) {
+  const trimmed = stdout.trim();
+  if (!trimmed) return [];
+  return trimmed.split('\n').map(line => line.trim()).filter(Boolean);
+}
+
 /**
  * Parsea el frontmatter YAML sin dependencias externas.
  * Devuelve un objeto con los campos clave o null si no hay frontmatter.
@@ -242,6 +248,29 @@ async function publishPost(seccionSlug) {
       cwd: projectRoot,
       stdio: 'inherit',
     });
+
+    const stagedFiles = listFromStdout(
+      execSync('git diff --cached --name-only', { cwd: projectRoot, encoding: 'utf8' })
+    );
+
+    if (stagedFiles.length === 0) {
+      warn('No hay cambios nuevos para commitear. El post ya parece publicado en git.');
+      log('✅', 'No se realizaron cambios de código ni de formato.');
+      return;
+    }
+
+    const allowedPrefix = `content/${argSection}/${argSlug}/`;
+    const disallowedFiles = stagedFiles.filter(file => !file.startsWith(allowedPrefix));
+
+    if (disallowedFiles.length > 0) {
+      fail(
+        `Se detectaron archivos fuera del post que iban a entrar al commit:\n` +
+        `${disallowedFiles.map(file => `- ${file}`).join('\n')}\n\n` +
+        `Para proteger el formato/estructura visual, este script solo permite publicar:\n` +
+        `${allowedPrefix}\n\n` +
+        `Haz "git restore --staged <archivo>" en esos archivos y vuelve a ejecutar el script.`
+      );
+    }
 
     const pdfNote   = hasPdf && !sectionConfig.pdfForbidden ? '\n- Incluye PDF' : '';
     const commitMsg =

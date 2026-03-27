@@ -123,6 +123,8 @@ export default async function JurisprudenciaPage() {
   });
 
   const items: SentenciaItem[] = [...mdxItems, boscoItem, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+  const featuredItem = items[0];
+  const remainingItems = items.slice(1);
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
@@ -149,12 +151,6 @@ export default async function JurisprudenciaPage() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
-              Jurisprudencia
-            </h1>
-          </div>
         </div>
         <div className="container mx-auto px-4 py-8">
           <p className="lead text-justify max-w-3xl">
@@ -164,49 +160,44 @@ export default async function JurisprudenciaPage() {
           </p>
         </div>
         <div className="container-editorial">
-          <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
-            <Link
-              href={boscoItem.href}
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Destacada</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Sentencia BOSCO</h2>
-              <p className="text-sm text-body">Transparencia algorítmica y acceso al código fuente.</p>
-              <div className="mt-4 text-xs text-caption">{boscoItem.meta}</div>
-            </Link>
-            <Link
-              href="/jurisprudencia"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actividad</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Últimas resoluciones</h2>
-              <p className="text-sm text-body">Entradas registradas en la sección.</p>
-              <div className="mt-4 text-xs text-caption">Total: {items.length}</div>
-            </Link>
-            <Link
-              href="/normativa"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Contexto</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Marco regulatorio</h2>
-              <p className="text-sm text-body">Relación con el EU AI Act y normativa aplicable.</p>
-            </Link>
-          </section>
-
-          <section className="grid gap-6 md:grid-cols-2">
-            {items.map((item) => (
+          {featuredItem ? (
+            <section className="mb-12">
               <Link
-                key={item.id}
-                href={item.href}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+                href={featuredItem.href}
+                className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
               >
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Sentencia</p>
-                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                {item.description && <p className="text-body mb-6">{item.description}</p>}
-                {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
+                <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold mb-3">Sentencia</p>
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-4">
+                  {featuredItem.title}
+                </h2>
+                {featuredItem.description && (
+                  <p className="text-lg text-body leading-relaxed max-w-4xl">{featuredItem.description}</p>
+                )}
+                {featuredItem.meta && <div className="text-sm text-caption mt-4">{featuredItem.meta}</div>}
               </Link>
-            ))}
-          </section>
+            </section>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-body text-lg">No hay sentencias disponibles en este momento.</p>
+            </div>
+          )}
+
+          {remainingItems.length > 0 && (
+            <section className="grid gap-6 md:grid-cols-2">
+              {remainingItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+                >
+                  <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Sentencia</p>
+                  <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                  {item.description && <p className="text-body mb-6">{item.description}</p>}
+                  {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
+                </Link>
+              ))}
+            </section>
+          )}
         </div>
       </main>
     </>

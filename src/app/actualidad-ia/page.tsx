@@ -68,73 +68,71 @@ export default async function ActualidadIAPage() {
       };
     })
     .sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
+  const featuredItem = guideItems[0];
+  const remainingItems = guideItems.slice(1);
 
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
       <Breadcrumbs items={[{ label: "Inicio", href: "/" }, { label: "Guías IA", href: "/actualidad-ia" }]} />
       
-      <main>
-        {/* Hero Section */}
-        <section className="relative overflow-hidden text-white h-96 md:h-[500px]">
+      <main className="section-spacing">
+        <section className="relative w-full h-64 md:h-96">
           <img
             src="/images/heroes/guias-ia-hero.webp"
             alt="Guías IA"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/50"></div>
-          <div className="relative container mx-auto px-4 h-full flex flex-col items-center justify-center text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Guías IA</h1>
-            <p className="text-lg md:text-xl text-gray-100 max-w-2xl">
-              Guías, protocolos y análisis sobre inteligencia artificial para profesionales del derecho
-            </p>
-          </div>
         </section>
 
-        {/* Content Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Últimas Guías y Protocolos
-              </h2>
-              <p className="text-gray-600 max-w-2xl">
-                Recursos prácticos para implementar inteligencia artificial en tu organización
-              </p>
+        <div className="container mx-auto px-4 py-8">
+          <p className="lead text-justify max-w-3xl">
+            Guías, protocolos y análisis prácticos para aplicar IA en entornos jurídicos y de cumplimiento.
+          </p>
+        </div>
+
+        <div className="container-editorial">
+          {featuredItem ? (
+            <section className="mb-12">
+              <Link
+                href={featuredItem.href}
+                className="block card-elevated p-8 hover:border-primary/30 transition-all duration-300 bg-slate-50/50"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-primary font-bold mb-3">
+                  {featuredItem.badge}
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground leading-tight mb-4">
+                  {featuredItem.title}
+                </h2>
+                {featuredItem.description && (
+                  <p className="text-lg text-body leading-relaxed max-w-4xl">{featuredItem.description}</p>
+                )}
+                {featuredItem.meta && <div className="text-sm text-caption mt-4">{featuredItem.meta}</div>}
+              </Link>
+            </section>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-body text-lg">No hay guías disponibles en este momento.</p>
             </div>
+          )}
 
-            {/* Grid */}
-            {guideItems.length > 0 ? (
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {guideItems.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={item.href}
-                    className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-primary transition-all duration-300 flex flex-col"
-                  >
-                    <span className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-                      {item.badge}
-                    </span>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 flex-1 hover:text-primary transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {item.description}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-500">{item.meta}</span>
-                      <span className="text-primary font-semibold">→</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500 text-lg">No hay guías disponibles en este momento.</p>
-              </div>
-            )}
-          </div>
-        </section>
+          {remainingItems.length > 0 && (
+            <section className="grid gap-6 md:grid-cols-2">
+              {remainingItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
+                >
+                  <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">{item.badge}</p>
+                  <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
+                  {item.description && <p className="text-body mb-6">{item.description}</p>}
+                  {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
+                </Link>
+              ))}
+            </section>
+          )}
+        </div>
       </main>
     </>
   );

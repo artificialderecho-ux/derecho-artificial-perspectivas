@@ -190,12 +190,6 @@ export default async function FirmaScarpaPage() {
             className="object-cover"
             priority={false}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
-              Firma Scarpa
-            </h1>
-          </div>
         </div>
         <div className="container mx-auto px-4 py-8">
           <p className="lead text-justify max-w-3xl">
