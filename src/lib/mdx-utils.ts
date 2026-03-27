@@ -1,4 +1,4 @@
-﻿import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
@@ -122,6 +122,35 @@ function detectPdf(postDir: string, slug: string, frontmatter: PostFrontmatter):
   }
 
   return undefined;
+}
+
+/**
+ * Determina la imagen hero para una sección.
+ */
+export function getHeroImage(section: string): string {
+  const HERO_BASE_PATH = '/images/heroes/posts_images';
+  const PUBLIC_DIR = path.join(ROOT, 'public');
+  
+  const sectionNormalized = section.toLowerCase().trim();
+  
+  const possibilities = [
+    `${sectionNormalized}.jpg`,
+    `${sectionNormalized}-hero.jpg`,
+    `${sectionNormalized}-ia-hero.jpg`,
+    // Swapped versions
+    `${sectionNormalized.split('-').reverse().join('-')}.jpg`,
+    `${sectionNormalized.split('-').reverse().join('-')}-hero.jpg`,
+    `${sectionNormalized.split('-').reverse().join('-')}-ia-hero.jpg`,
+  ];
+  
+  for (const pos of possibilities) {
+    const fullPath = path.join(PUBLIC_DIR, 'images', 'heroes', 'posts_images', pos);
+    if (fs.existsSync(fullPath)) {
+      return `${HERO_BASE_PATH}/${pos}`;
+    }
+  }
+  
+  return `${HERO_BASE_PATH}/default.jpg`;
 }
 
 // ─── Lector de nueva arquitectura ────────────────────────────────────────────

@@ -8,7 +8,7 @@ import {
 } from "@/components/seo/StructuredData";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
-import { getPostBySlug } from "@/lib/mdx-utils";
+import { getPostBySlug, getHeroImage } from "@/lib/mdx-utils";
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
@@ -60,6 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre normativa en IA.";
     const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+    const ogImage = getHeroImage("normativa");
     return {
       title: `${title} | Derecho Artificial`,
       description: metaDescription,
@@ -75,7 +76,19 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         url: canonical,
         siteName: "Derecho Artificial",
         locale: "es_ES",
-        authors: ['Ricardo Scarpa']
+        authors: ['Ricardo Scarpa'],
+        images: [{
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title
+        }]
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description: metaDescription,
+        images: [ogImage],
       }
     };
   }
@@ -84,7 +97,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!entry) return {};
   const description = entry.description || entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
   const canonical = `https://www.derechoartificial.com/normativa/${entry.slug}`;
-  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
+  const ogImage = getHeroImage("normativa");
 
   return {
     title: `${entry.title} | Derecho Artificial`,
