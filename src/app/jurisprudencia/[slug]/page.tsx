@@ -8,7 +8,7 @@ import {
 } from "@/components/seo/StructuredData";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { RelatedArticles } from "@/components/RelatedArticles";
-import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
+import { getPostBySlug, getAllPosts, getHeroImage } from "@/lib/mdx-utils";
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
@@ -66,6 +66,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre jurisprudencia en IA.";
     const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
+    const ogImage = getHeroImage("jurisprudencia");
     return {
       title: `${title} | Derecho Artificial`,
       description: metaDescription,
@@ -82,7 +83,19 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         siteName: "Derecho Artificial",
         locale: "es_ES",
         publishedTime: date ? new Date(date).toISOString() : undefined,
-        authors: ['Ricardo Scarpa']
+        authors: ['Ricardo Scarpa'],
+        images: [{
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title
+        }]
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description: metaDescription,
+        images: [ogImage],
       }
     };
   }
@@ -91,7 +104,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!entry) return {};
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
   const canonical = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
-  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
+  const ogImage = getHeroImage("jurisprudencia");
 
   return {
     title: `${entry.title} | Derecho Artificial`,

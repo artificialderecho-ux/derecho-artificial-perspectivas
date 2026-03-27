@@ -8,7 +8,7 @@ import {
   createGenericArticleJsonLd,
 } from "@/components/seo/StructuredData";
 import { RelatedArticles } from "@/components/RelatedArticles";
-import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
+import { getPostBySlug, getAllPosts, getHeroImage } from "@/lib/mdx-utils";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
@@ -43,26 +43,33 @@ export async function generateMetadata({
     description ||
     "Análisis comparado sobre regulación, justicia y gobernanza de la inteligencia artificial en el mundo.";
 
-  return {
-    title: `${title} | Derecho Artificial`,
-    description: metaDescription,
-    alternates: { canonical },
-    robots: {
-      index: true,
-      follow: true,
-    },
-    openGraph: {
-      type: "article",
-      title,
+    const ogImage = getHeroImage("global-ia");
+    return {
+      title: `${title} | Derecho Artificial`,
       description: metaDescription,
-      url: canonical,
-      siteName: "Derecho Artificial",
-      locale: "es_ES",
-      images: [{ url: "https://www.derechoartificial.com/og-default-1200x630.jpg", width: 1200, height: 630 }],
-      publishedTime: date ? new Date(date).toISOString() : undefined,
-      authors: [mdxPost.frontmatter.author || "Ricardo Scarpa"],
-    },
-  };
+      alternates: { canonical },
+      robots: {
+        index: true,
+        follow: true,
+      },
+      openGraph: {
+        type: "article",
+        title,
+        description: metaDescription,
+        url: canonical,
+        siteName: "Derecho Artificial",
+        locale: "es_ES",
+        images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+        publishedTime: date ? new Date(date).toISOString() : undefined,
+        authors: [mdxPost.frontmatter.author || "Ricardo Scarpa"],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description: metaDescription,
+        images: [ogImage],
+      }
+    };
 }
 
 export default async function IAGlobalSlugPage({

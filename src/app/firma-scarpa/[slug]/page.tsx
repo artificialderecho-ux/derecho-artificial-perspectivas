@@ -14,7 +14,7 @@ import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedArticles } from "@/components/RelatedArticles";
-import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
+import { getPostBySlug, getAllPosts, getHeroImage } from "@/lib/mdx-utils";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -85,25 +85,38 @@ export async function generateMetadata({
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre IA por Ricardo Scarpa.";
     const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
-    return {
-      title: `${title} | Derecho Artificial`,
-      description: metaDescription,
-      alternates: { canonical },
-      robots: {
-        index: true,
-        follow: true,
-      },
-      openGraph: {
-        type: "article",
-        title,
+      const ogImage = getHeroImage("firma-scarpa");
+      return {
+        title: `${title} | Derecho Artificial`,
         description: metaDescription,
-        url: canonical,
-        siteName: "Derecho Artificial",
-        locale: "es_ES",
-        publishedTime: date ? new Date(date).toISOString() : undefined,
-        authors: ['Ricardo Scarpa']
-      }
-    };
+        alternates: { canonical },
+        robots: {
+          index: true,
+          follow: true,
+        },
+        openGraph: {
+          type: "article",
+          title,
+          description: metaDescription,
+          url: canonical,
+          siteName: "Derecho Artificial",
+          locale: "es_ES",
+          publishedTime: date ? new Date(date).toISOString() : undefined,
+          authors: ['Ricardo Scarpa'],
+          images: [{
+            url: ogImage,
+            width: 1200,
+            height: 630,
+            alt: title
+          }]
+        },
+        twitter: {
+          card: "summary_large_image",
+          title,
+          description: metaDescription,
+          images: [ogImage],
+        }
+      };
   }
   }
 
@@ -134,7 +147,7 @@ export async function generateMetadata({
   // Get author information
   const authors = jsonEntry?.author ? [jsonEntry.author] : ["Ricardo Scarpa"];
 
-  const ogImage = "https://www.derechoartificial.com/og-default-1200x630.jpg";
+  const ogImage = getHeroImage("firma-scarpa");
 
   return {
     title,
