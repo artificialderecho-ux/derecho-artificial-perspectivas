@@ -12,7 +12,11 @@ import {
 } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.derechoartificial.com"),
+  metadataBase: new URL(
+    process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : "https://www.derechoartificial.com"
+  ),
   title: {
     default: "Derecho, ética y regulación de la IA",
     template: "%s | Derecho Artificial",
