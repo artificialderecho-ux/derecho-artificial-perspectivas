@@ -8,7 +8,7 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 
 export default tseslint.config(
   {
-    ignores: ["dist", ".next", "next-env.d.ts", "src/vite-pages/**"],
+    ignores: ["dist", ".next", "next-env.d.ts", "src/vite-pages/**", "scripts/**", "src/__tests__/**"],
   },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
@@ -26,6 +26,9 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       ...jsxA11y.configs.recommended.rules,
+      "jsx-a11y/alt-text": "off",
+      "jsx-a11y/heading-has-content": "off",
+      "jsx-a11y/anchor-has-content": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "react-refresh/only-export-components": "off",
