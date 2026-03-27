@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { LegalLayout } from "@/components/layout/LegalLayout";
-import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { listSectionResourceSlugs, getSectionResourceEntry } from "@/lib/resources";
 import { getAllPosts } from "@/lib/mdx-utils";
-import { ContentPreviewGrid, type PreviewItem } from "@/components/ContentPreviewCard";
+import { UnifiedSectionLayout, type UnifiedItem, type SectionConfig } from "@/components/layout/UnifiedSectionLayout";
 
 export const metadata: Metadata = {
   title: "Guías y Protocolos",
@@ -21,21 +18,24 @@ export const metadata: Metadata = {
 };
 
 export default async function GuiasIndexPage() {
-  const breadcrumbJsonLd = createBreadcrumbJsonLd({
-    items: [
-      { name: "Derecho Artificial", url: "https://derechoartificial.com" },
-      { name: "Actualidad IA", url: "https://derechoartificial.com/actualidad-ia" },
-      { name: "Guías y Protocolos", url: "https://derechoartificial.com/recursos/guias" },
-    ],
-  });
-
   const slugs = await listSectionResourceSlugs("guias");
   const entries = await Promise.all(slugs.map((slug) => getSectionResourceEntry("guias", slug)));
   const resolved = entries.filter((e): e is NonNullable<typeof e> => Boolean(e));
 
+  // Mejorar el filtrado para incluir posts de guías desde MDX también
   const posts = getAllPosts().filter(
-    (p) => p.frontmatter.category === "recursos" && (p.frontmatter.subcategory === "guias" || p.frontmatter.tags?.includes("guias")),
+    (p) => 
+      p.frontmatter.category === "recursos" && 
+      (p.frontmatter.subcategory === "guias" || p.frontmatter.tags?.includes("guias")) ||
+      (p.frontmatter.category || "").toLowerCase().replace(/-/g, ' ') === "actualidad ia" &&
+      (p.frontmatter.tags?.includes("guias") || p.frontmatter.tags?.includes("guías"))
   );
+
+  const formatDate = (value: string) => {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+    return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+  };
 
   const formatDateEs = (ms?: number | null) => {
     if (!ms || Number.isNaN(ms)) return null;
@@ -44,55 +44,68 @@ export default async function GuiasIndexPage() {
     return d.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
   };
 
-  const items: PreviewItem[] = [
-    ...resolved.map((g) => {
-      const dateLabel = formatDateEs(g.displayDateMs ?? g.dateMs);
-      const parts: string[] = [];
-      if (dateLabel) parts.push(dateLabel);
-      if (g.sourceUrl) parts.push("Incluye descarga del documento");
-      return {
-        id: `guide-${g.slug}`,
-        href: `/recursos/guias/${g.slug}`,
-        title: g.title,
-        description: g.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 180),
-        badge: "Guías y Protocolos",
-        meta: parts.join(" · "),
-        dateMs: g.dateMs ?? 0,
-        displayDateMs: g.displayDateMs ?? undefined,
-      };
-    }),
-    ...posts.map((p) => {
-      const d = new Date(p.frontmatter.date).getTime();
-      const dateLabel = formatDateEs(d);
-      const parts: string[] = [];
-      if (dateLabel) parts.push(dateLabel);
-      if (p.frontmatter.author) parts.push(p.frontmatter.author);
-      return {
-        id: `mdx-${p.slug}`,
-        href: `/recursos/guias/${p.slug}`,
-        title: p.frontmatter.title,
-        description: p.excerpt,
-        badge: "Guías y Protocolos",
-        meta: parts.join(" · "),
-        dateMs: d || 0,
-        displayDateMs: d || 0,
-      };
-    }),
-  ].sort((a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs));
+  // Items desde recursos (sistema legacy)
+  const resourceItems: UnifiedItem[] = resolved.map((g) => {
+    const dateLabel = formatDateEs(g.displayDateMs ?? g.dateMs);
+    const parts: string[] = [];
+    if (dateLabel) parts.push(dateLabel);
+    if (g.sourceUrl) parts.push("Incluye descarga del documento original");
+    
+    return {
+      id: `resource-${g.slug}`,
+      href: `/recursos/guias/${g.slug}`,
+      title: g.title,
+      description: g.description || (g.summaryHtml ? g.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : ""),
+      badge: "Guía",
+      meta: parts.join(" · "),
+      dateMs: g.dateMs ?? 0,
+      displayDateMs: g.displayDateMs,
+    };
+  });
 
-  return (
-    <>
-      <StructuredData data={breadcrumbJsonLd} />
-      <Breadcrumbs
-        items={[
-          { label: "Inicio", href: "/" },
-          { label: "Actualidad IA", href: "/actualidad-ia" },
-          { label: "Guías y Protocolos", href: "/recursos/guias" },
-        ]}
-      />
-      <LegalLayout title="Guías y Protocolos" category="Actualidad IA" date={new Date().toISOString().slice(0, 10)}>
-        <ContentPreviewGrid items={items} columns={2} size="medium" />
-      </LegalLayout>
-    </>
+  // Items desde posts MDX
+  const mdxItems: UnifiedItem[] = posts.map((post) => {
+    const dateMs = new Date(post.frontmatter.date).getTime();
+    return {
+      id: `mdx-${post.slug}`,
+      href: post.url,
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      badge: "Guía",
+      meta: `${formatDate(post.frontmatter.date)} · ${post.frontmatter.author || "Derecho Artificial"}`,
+      dateMs: dateMs,
+      displayDateMs: dateMs,
+    };
+  });
+
+  // Combinar y ordenar todos los items
+  const items: UnifiedItem[] = [...resourceItems, ...mdxItems].sort(
+    (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs)
   );
+
+  const config: SectionConfig = {
+    title: "Guías y Protocolos",
+    description: "Repositorio completo de guías prácticas y protocolos de referencia sobre inteligencia artificial. Documentación técnica para implementar IA de manera responsable y conforme al marco regulatorio.",
+    heroImage: "/images/heroes/guias-ia-hero.webp",
+    heroAlt: "Guías y Protocolos",
+    footerTitle: "Enfoque práctico",
+    footerDescription: "Nuestras guías están diseñadas para ser herramientas de aplicación directa. Incluyen checklists, plantillas y flujos de trabajo que facilitan la implementación de sistemas de IA en entornos profesionales y regulatorios.",
+    breadcrumbItems: [
+      {
+        name: "Derecho Artificial",
+        url: "https://derechoartificial.com",
+      },
+      {
+        name: "Actualidad IA",
+        url: "https://derechoartificial.com/actualidad-ia",
+      },
+      {
+        name: "Guías y Protocolos",
+        url: "https://derechoartificial.com/recursos/guias",
+      },
+    ],
+    metadata: metadata,
+  };
+
+  return <UnifiedSectionLayout config={config} items={items} />;
 }

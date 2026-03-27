@@ -19,7 +19,7 @@ type Params = {
 
 export async function generateStaticParams() {
   const mdxPosts = getAllPosts().filter(
-    (p) => (p.frontmatter.category || "").toLowerCase() === "global-ia" || (p.frontmatter.section || "").toLowerCase() === "global-ia" || (p.frontmatter.section || "").toLowerCase() === "ia-global",
+    (p) => (p.frontmatter.category || "").toLowerCase() === "global-ia" || (p.frontmatter.category || "").toLowerCase() === "ia-global" || (p.frontmatter.section || "").toLowerCase() === "global-ia" || (p.frontmatter.section || "").toLowerCase() === "ia-global",
   );
   return mdxPosts.map((post) => ({ slug: post.slug }));
 }
@@ -32,7 +32,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia")) {
+  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.category || "").toLowerCase() !== "ia-global" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "ia-global")) {
     return {};
   }
 
@@ -73,7 +73,7 @@ export default async function IAGlobalSlugPage({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || (mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia") {
+  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.category || "").toLowerCase() !== "ia-global")) {
     notFound();
   }
 

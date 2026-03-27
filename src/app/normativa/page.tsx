@@ -1,9 +1,10 @@
 ﻿import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import type { ResolvedContentEntry } from "@/lib/content";
+import { getContentEntry, listContentSlugs } from "@/lib/content";
+import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
-import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
 import { getAllPosts } from "@/lib/mdx-utils";
+import { UnifiedSectionLayout, type UnifiedItem, type SectionConfig } from "@/components/layout/UnifiedSectionLayout";
 
 export const metadata: Metadata = {
   title: "Normativa",
@@ -34,66 +35,97 @@ export const metadata: Metadata = {
     locale: "es_ES",
     images: [
       {
-        url: "/logo-principal.png",
+        url: "/images/heroes/normativa-hero.webp",
+        width: 1200,
+        height: 630,
       },
     ],
   },
 };
 
-type NormativaItem = {
-  id: string;
-  href: string;
-  title: string;
-  description: string;
-  meta: string;
-  dateMs: number;
-};
-
 export default async function NormativaPage() {
+  const slugs = await listContentSlugs("normativa");
+  const entries = await Promise.all(slugs.map((slug) => getContentEntry("normativa", slug)));
+  const resolvedEntries = entries.filter((entry): entry is ResolvedContentEntry => Boolean(entry));
+  const sortedEntries = resolvedEntries.sort((a, b) => {
+    const aTime = typeof a.dateMs === "number" ? a.dateMs : 0;
+    const bTime = typeof b.dateMs === "number" ? b.dateMs : 0;
+    return bTime - aTime;
+  });
+
+  const formatDate = (value: string) => {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+    return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
+  };
+
   const resourceSlugs = await listSectionResourceSlugs("normativa");
   const resourceEntries = await Promise.all(
     resourceSlugs.map((slug) => getSectionResourceEntry("normativa", slug)),
   );
   const resolvedResourceEntries = resourceEntries.filter(
-    (entry): entry is NonNullable<typeof entry> => Boolean(entry),
+    (entry): entry is ResourceEntry => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post =>
-    post.frontmatter.section === "normativa" ||
-    post.frontmatter.category === "normativa" ||
-    post.frontmatter.category === "Legislación Digital" ||
-    post.frontmatter.category === "Legislación Internacional" ||
-    post.frontmatter.category === "Legislación" ||
-    post.frontmatter.category === "Legislación IA" ||
-    post.frontmatter.category === "Regulación UE"
+  // Mejorar el filtrado para incluir más variantes de categoría
+  const mdxPosts = getAllPosts().filter(post => 
+    post.frontmatter.category && 
+    (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'normativa' ||
+     post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'normativa ia' ||
+     post.frontmatter.category.toLowerCase() === 'normativa' ||
+     post.frontmatter.category.toLowerCase() === 'normativa-ia' ||
+     (post.frontmatter.section || "").toLowerCase() === 'normativa')
   );
 
-  const mdxItems: NormativaItem[] = mdxPosts.map(post => {
+  const mdxItems: UnifiedItem[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
     return {
       id: `mdx-${post.slug}`,
       href: post.url,
       title: post.frontmatter.title,
       description: post.excerpt,
-      meta: `${new Date(post.frontmatter.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} · ${post.frontmatter.author || "Redacción"}`,
+      badge: "Análisis",
+      meta: `${formatDate(post.frontmatter.date)} · ${post.frontmatter.author || "Derecho Artificial"}`,
       dateMs: dateMs,
+      displayDateMs: dateMs,
     };
   });
 
-  const resourceItems: NormativaItem[] = resolvedResourceEntries.map((entry) => {
+  const contentItems: UnifiedItem[] = sortedEntries.map((entry) => {
+    const safeTime = typeof entry.dateMs === "number" && !Number.isNaN(entry.dateMs) ? entry.dateMs : 0;
+    const displayMs = (() => {
+      const d = new Date(entry.datePublished).getTime();
+      return Number.isNaN(d) ? undefined : d;
+    })();
+    const parts: string[] = [];
+    parts.push(formatDate(entry.datePublished));
+    if (entry.author) {
+      parts.push(entry.author);
+    }
+    return {
+      id: `content-${entry.slug}`,
+      href: entry.urlPath,
+      title: entry.title,
+      description: entry.description,
+      badge: "Análisis",
+      meta: parts.join(" · "),
+      dateMs: safeTime,
+      displayDateMs: displayMs,
+    };
+  });
+
+  const resourceItems: UnifiedItem[] = resolvedResourceEntries.map((entry) => {
     const time = entry.dateMs ?? 0;
     const safeTime = Number.isNaN(time) ? 0 : time;
-    const displayMs = entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? entry.displayDateMs : undefined;
-    const date = displayMs != null ? new Date(displayMs) : null;
+    const date =
+      entry.displayDateMs != null && !Number.isNaN(entry.displayDateMs) ? new Date(entry.displayDateMs) : null;
     const dateLabel =
       date && !Number.isNaN(date.getTime())
         ? date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })
         : null;
-
-    const plainSummary = entry.summaryHtml
+    const plainSummary = entry.description || (entry.summaryHtml
       ? entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200)
-      : "";
-
+      : "");
     const parts: string[] = [];
     if (dateLabel) {
       parts.push(dateLabel);
@@ -101,21 +133,30 @@ export default async function NormativaPage() {
     if (entry.sourceUrl) {
       parts.push("Incluye descarga del documento original");
     }
-
     return {
       id: `resource-${entry.slug}`,
       href: `/normativa/${entry.slug}`,
       title: entry.title,
       description: plainSummary,
+      badge: "Recurso",
       meta: parts.join(" · "),
-      dateMs: displayMs ?? safeTime,
+      dateMs: safeTime,
+      displayDateMs: entry.displayDateMs ?? undefined,
     };
   });
 
-  const items: NormativaItem[] = [...mdxItems, ...resourceItems].sort((a, b) => b.dateMs - a.dateMs);
+  const items: UnifiedItem[] = [...mdxItems, ...contentItems, ...resourceItems].sort(
+    (a, b) => (b.displayDateMs ?? b.dateMs) - (a.displayDateMs ?? a.dateMs),
+  );
 
-  const breadcrumbJsonLd = createBreadcrumbJsonLd({
-    items: [
+  const config: SectionConfig = {
+    title: "Normativa",
+    description: "Marco regulatorio completo sobre Inteligencia Artificial: AI Act europeo, normativa española, directrices de AESIA y estándares internacionales de cumplimiento para empresas y profesionales del sector legal.",
+    heroImage: "/images/heroes/normativa-ia-hero.webp",
+    heroAlt: "Normativa",
+    footerTitle: "Enfoque normativo",
+    footerDescription: "Análisis exhaustivo del marco regulatorio de IA con enfoque práctico para profesionales. Desglosamos obligaciones, plazos de cumplimiento y responsabilidades para facilitar la implementación efectiva en organizaciones españolas y europeas.",
+    breadcrumbItems: [
       {
         name: "Derecho Artificial",
         url: "https://derechoartificial.com",
@@ -125,78 +166,9 @@ export default async function NormativaPage() {
         url: "https://derechoartificial.com/normativa",
       },
     ],
-  });
+    metadata: metadata,
+  };
 
-  return (
-    <>
-      <StructuredData data={breadcrumbJsonLd} />
-      <main className="section-spacing">
-        <div className="relative w-full h-64 md:h-96">
-          <Image
-            src="/images/heroes/normativa-ia-hero.webp"
-            alt="Normativa"
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">
-              Normativa
-            </h1>
-          </div>
-        </div>
-        <div className="container mx-auto px-4 py-8">
-          <p className="lead text-justify max-w-3xl">
-            Marco regulatorio completo sobre Inteligencia Artificial. Análisis detallado del AI Act,
-            normativa europea y directrices de cumplimiento para profesionales del derecho.
-          </p>
-        </div>
-        <div className="container-editorial">
-          <section className="grid gap-6 md:grid-cols-3 mb-12 bento-surface">
-            <Link
-              href="/normativa"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Framework</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">EU AI Act</h2>
-              <p className="text-sm text-body">Reglamento europeo sobre inteligencia artificial.</p>
-            </Link>
-            <Link
-              href="/normativa"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actividad</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Normativas vigentes</h2>
-              <p className="text-sm text-body">Análisis de regulación por jurisdicción.</p>
-              <div className="mt-4 text-xs text-caption">Total: {items.length}</div>
-            </Link>
-            <Link
-              href="/jurisprudencia"
-              className="bg-card border border-border rounded-sm p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Contexto</p>
-              <h2 className="font-serif text-xl md:text-2xl text-foreground mb-2">Jurisprudencia</h2>
-              <p className="text-sm text-body">Cómo se interpreta la normativa en los tribunales.</p>
-            </Link>
-          </section>
-
-          <section className="grid gap-6 md:grid-cols-2">
-            {items.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="card-elevated p-6 hover:border-primary/20 transition-all duration-300"
-              >
-                <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">Normativa</p>
-                <h2 className="font-serif text-2xl text-foreground mb-4">{item.title}</h2>
-                {item.description && <p className="text-body mb-6">{item.description}</p>}
-                {item.meta && <div className="text-sm text-caption">{item.meta}</div>}
-              </Link>
-            ))}
-          </section>
-        </div>
-      </main>
-    </>
-  );
+  return <UnifiedSectionLayout config={config} items={items} />;
 }
+

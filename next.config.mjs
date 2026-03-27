@@ -40,6 +40,16 @@ const nextConfig = {
         destination: "/global-ia/:slug*",
         permanent: true,
       },
+      {
+        source: "/analisis-juridico/cox-sony-responsabilidad-secundaria-isp",
+        destination: "/firma-scarpa/cox-sony-responsabilidad-secundaria-isp",
+        permanent: true,
+      },
+      {
+        source: "/blog/kgm-meta-google-responsabilidad-algoritmico",
+        destination: "/firma-scarpa/kgm-meta-google-responsabilidad-algoritmico",
+        permanent: true,
+      },
     ];
   },
 };
