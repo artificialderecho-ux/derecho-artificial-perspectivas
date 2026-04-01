@@ -132,7 +132,7 @@ export default async function HomePage() {
     ).map(post => ({
       title: post.frontmatter.title,
       description: post.excerpt,
-      date: new Date(post.frontmatter.date).getTime(),
+      date: post.dateMs,
       urlPath: post.url,
       author: post.frontmatter.author || "Ricardo Scarpa",
     })),
@@ -246,14 +246,14 @@ export default async function HomePage() {
       );
     })
     .filter((post) => isAllowedLanguage(post.frontmatter.title, post.excerpt))
-    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+    .sort((a, b) => b.dateMs - a.dateMs)
     .slice(0, 6);
   const newsEntries =
     newsMdxCandidates.length > 0
       ? newsMdxCandidates.map((post) => ({
           title: post.frontmatter.title,
           description: post.excerpt,
-          date: new Date(post.frontmatter.date).getTime(),
+          date: post.dateMs,
           urlPath: post.url,
           author: post.frontmatter.author || "Derecho Artificial",
           type: "Noticias IA" as const,
@@ -652,7 +652,7 @@ export default async function HomePage() {
                   }
                   return true;
                 })
-                .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+                .sort((a, b) => b.dateMs - a.dateMs)
                 .slice(0, 2);
 
                     const getLatestFirmaPosts = () => {

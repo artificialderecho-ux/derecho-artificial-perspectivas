@@ -64,6 +64,7 @@ export interface PostData {
   content: string;
   url: string;
   excerpt: string;
+  dateMs: number;
   pdfUrl?: string;      // URL al PDF si existe (detectado automáticamente o desde frontmatter)
   sourceDir?: string;   // 'new' | 'legacy' — para debug
 }
@@ -82,6 +83,39 @@ function normalizeSlugForMatch(value: string) {
     .toLowerCase()
     .replace(/[_\s]+/g, '-')
     .replace(/-+/g, '-');
+}
+
+function parsePostDateToMs(rawDate: unknown, fallbackMs: number): number {
+  if (typeof rawDate === 'number' && Number.isFinite(rawDate)) {
+    return rawDate;
+  }
+
+  if (typeof rawDate !== 'string' || rawDate.trim().length === 0) {
+    return fallbackMs;
+  }
+
+  const value = rawDate.trim();
+
+  // YYYY-MM-DD (interpretar como fecha calendario, evitando variaciones por timezone)
+  const isoDateOnly = /^(\d{4})-(\d{2})-(\d{2})$/;
+  const isoMatch = value.match(isoDateOnly);
+  if (isoMatch) {
+    const [, y, m, d] = isoMatch;
+    const parsed = Date.UTC(Number(y), Number(m) - 1, Number(d), 12, 0, 0);
+    return Number.isNaN(parsed) ? fallbackMs : parsed;
+  }
+
+  // DD/MM/YYYY o DD-MM-YYYY (formatos usados en carga manual)
+  const esDate = /^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/;
+  const esMatch = value.match(esDate);
+  if (esMatch) {
+    const [, d, m, y] = esMatch;
+    const parsed = new Date(Number(y), Number(m) - 1, Number(d), 12, 0, 0).getTime();
+    return Number.isNaN(parsed) ? fallbackMs : parsed;
+  }
+
+  const direct = new Date(value).getTime();
+  return Number.isNaN(direct) ? fallbackMs : direct;
 }
 
 /**
@@ -180,6 +214,8 @@ function readNewSectionPosts(): PostData[] {
         const fileContents = fs.readFileSync(mdxPath, 'utf8');
         const { data, content } = matter(fileContents);
         const frontmatter = data as PostFrontmatter;
+        const fallbackMs = fs.statSync(mdxPath).mtimeMs;
+        const dateMs = parsePostDateToMs(frontmatter.date, fallbackMs);
 
         const slug = frontmatter.slug || slugDir;
         const route = resolveRoute(frontmatter) ?? section;
@@ -201,6 +237,7 @@ function readNewSectionPosts(): PostData[] {
           content,
           url: `/${route}/${slug}`,
           excerpt,
+          dateMs,
           pdfUrl,
           sourceDir: 'new',
         });
@@ -250,6 +287,8 @@ function readLegacyPosts(): PostData[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data, content } = matter(fileContents);
       const frontmatter = data as PostFrontmatter;
+      const fallbackMs = fs.statSync(fullPath).mtimeMs;
+      const dateMs = parsePostDateToMs(frontmatter.date, fallbackMs);
 
       const category = (frontmatter.category || 'blog') as string;
       const frontmatterUrl = frontmatter.url as string | undefined;
@@ -284,6 +323,7 @@ function readLegacyPosts(): PostData[] {
         content,
         url,
         excerpt,
+        dateMs,
         pdfUrl,
         sourceDir: 'legacy',
       });
@@ -314,9 +354,7 @@ export function getAllPosts(): PostData[] {
   const filtered = legacyPosts.filter(p => !newSlugs.has(p.slug));
 
   const all = [...newPosts, ...filtered].sort((a, b) => {
-    const dateA = new Date(a.frontmatter.date).getTime();
-    const dateB = new Date(b.frontmatter.date).getTime();
-    return dateB - dateA;
+    return b.dateMs - a.dateMs;
   });
 
   _postsCache = all;
@@ -369,14 +407,14 @@ export function getAllNoticias(): PostData[] {
       const url     = frontmatter.url || `/noticia/${encodeURIComponent(slug)}`;
       const excerpt = frontmatter.description ||
         content.replace(/[#*`]/g, '').replace(/\n/g, ' ').trim().slice(0, 160) + '...';
+      const fallbackMs = fs.statSync(fullPath).mtimeMs;
+      const dateMs = parsePostDateToMs(frontmatter.date, fallbackMs);
 
-      noticias.push({ slug, frontmatter, content, url, excerpt, sourceDir: 'legacy' });
+      noticias.push({ slug, frontmatter, content, url, excerpt, dateMs, sourceDir: 'legacy' });
     } catch { /* silencio */ }
   }
 
-  return noticias.sort((a, b) =>
-    new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
-  );
+  return noticias.sort((a, b) => b.dateMs - a.dateMs);
 }
 
 /**

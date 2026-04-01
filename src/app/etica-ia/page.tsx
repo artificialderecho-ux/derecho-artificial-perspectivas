@@ -34,7 +34,7 @@ export default async function EticaIAPage() {
   };
 
   const items: UnifiedItem[] = mdxPosts.map((post) => {
-    const dateMs = new Date(post.frontmatter.date).getTime();
+    const dateMs = post.dateMs;
     return {
       id: `mdx-${post.slug}`,
       href: post.url,
