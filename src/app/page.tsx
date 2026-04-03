@@ -347,7 +347,7 @@ export default async function HomePage() {
       .filter((e): e is NonNullable<typeof e> => Boolean(e))
       .map((e) => ({
         title: e.title,
-        href: `/recursos/guias/${e.slug}`,
+        href: `/guias-ia/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
         meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Repositorio de documentación técnica y ética`,
         dateMs: e.displayDateMs ?? e.dateMs ?? 0,
@@ -416,7 +416,7 @@ export default async function HomePage() {
     {
       key: "guias",
       label: "Guías y Protocolos",
-      href: "/recursos/guias",
+      href: "/guias-ia",
       items: uniqueByHref(guiasItems).slice(0, 2),
     },
     {
@@ -549,11 +549,11 @@ export default async function HomePage() {
               },
               {
                 title: "Guías IA",
-                category: "recursos",
+                category: "guias-ia",
                 image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
                   ? "/images/heroes/guias-ia-hero.wep"
                   : "/images/heroes/guias-ia-hero.webp",
-                href: "/recursos/guias",
+                href: "/guias-ia",
               },
               {
                 title: "Propiedad Intelectual IA",
@@ -569,9 +569,9 @@ export default async function HomePage() {
               },
               {
                 title: "IA Global",
-                category: "ia-global",
+                category: "global-ia",
                 image: "/images/heroes/ia-global-hero.webp",
-                href: "/ia-global",
+                href: "/global-ia",
               },
             ];
             const getLatestByCategory = (cat: string) =>
@@ -615,13 +615,13 @@ export default async function HomePage() {
                   }
                   
                   // Para IA Global, incluir categorías relacionadas y contenido específico
-                  if (cat === "ia-global") {
+                  if (cat === "ia-global" || cat === "global-ia") {
                     return (
                       c === "ia-global" ||
                       c === "global-ia" ||
                       cNormalized === "global ia" ||
                       cNormalized === "ia global" ||
-                      (post.frontmatter.section || "").toLowerCase() === "ia-global"
+                      (post.frontmatter.section || "").toLowerCase() === "global-ia"
                     );
                   }
                   
@@ -637,6 +637,16 @@ export default async function HomePage() {
                   }
                   
                   // Para Ética IA, incluir categorías relacionadas y contenido específico
+                                    // Para Guías IA, incluir tanto guias como guias-ia
+                  if (cat === "guias-ia" || cat === "guias") {
+                    return (
+                      c === "guias-ia" ||
+                      c === "guias" ||
+                      (post.frontmatter.section || "").toLowerCase() === "guias" ||
+                      (c === "recursos" && subcat === "guias")
+                    );
+                  }
+                  
                   if (cat === "etica-ia") {
                     return (
                       c === "etica-ia" ||
@@ -689,7 +699,7 @@ export default async function HomePage() {
                 return post.frontmatter.url;
               }
               if (c === "recursos" && (subcat === "guias" || tags.includes("guias"))) {
-                return `/recursos/guias/${post.slug}`;
+                return `/guias-ia/${post.slug}`;
               }
 
               return post.url;
@@ -699,9 +709,7 @@ export default async function HomePage() {
               <div className="space-y-10">
                 {sections.map((sec) => {
               const items =
-                sec.category === "guias-ia"
-                  ? getLatestActualidadPosts()
-                  : sec.category === "firma-scarpa"
+                sec.category === "firma-scarpa"
                     ? getLatestFirmaPosts()
                     : sec.category === "recursos"
                       ? getLatestByCategory("recursos")
