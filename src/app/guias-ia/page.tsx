@@ -40,7 +40,11 @@ export default async function ActualidadIAPage() {
   };
 
   const ownGuidePosts = posts
-    .filter((p) => p.frontmatter.section === "guias" || (p.frontmatter.category === "recursos" && p.frontmatter.subcategory === "guias"))
+    .filter((p) => 
+      p.frontmatter.section === "guias" || 
+      p.frontmatter.category === "guias-ia" ||
+      (p.frontmatter.category === "recursos" && p.frontmatter.subcategory === "guias")
+    )
     .filter((p) => {
       const author = String(p.frontmatter.author || "").toLowerCase();
       return !AUTOMATED_AUTHOR_PATTERNS.some((pattern) => author.includes(pattern));

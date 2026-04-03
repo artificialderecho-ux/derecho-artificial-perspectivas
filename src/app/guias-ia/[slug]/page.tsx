@@ -50,8 +50,12 @@ export async function generateStaticParams() {
     listSectionResourceSlugs("guias-ia"),
   ]);
 
-  // Incluir slugs de posts MDX que tengan categoría guias-ia
-  const mdxPosts = getAllPosts().filter(p => p.frontmatter.category === "guias-ia");
+  // Incluir slugs de posts MDX que tengan categoría guias o guias-ia
+  const mdxPosts = getAllPosts().filter(p => 
+    p.frontmatter.category === "guias-ia" || 
+    p.frontmatter.category === "guias" ||
+    p.frontmatter.section === "guias"
+  );
   const mdxSlugs = mdxPosts.map(p => p.slug);
 
   const allSlugs = new Set<string>([...jsonSlugs, ...resourceSlugs, ...mdxSlugs]);
@@ -68,11 +72,12 @@ export async function generateMetadata({
 
   // Priorizar MDX nativo
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && mdxPost.frontmatter.category === "guias-ia") {
-    const { title, description, category, date } = mdxPost.frontmatter;
+  if (mdxPost && (mdxPost.frontmatter.category === "guias-ia" || mdxPost.frontmatter.section === "guias" || mdxPost.frontmatter.category === "guias")) {
+    const { title, description, category, section, date } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Monitor editorial de novedades regulatorias sobre inteligencia artificial.";
-    const canonical = `https://www.derechoartificial.com/${category}/${slug}`;
+    const route = category === "guias-ia" ? "guias-ia" : "guias-ia"; // La ruta siempre es guias-ia
+    const canonical = `https://www.derechoartificial.com/guias-ia/${slug}`;
     return {
       title: `${title} | Derecho Artificial`,
       description: metaDescription,
@@ -154,12 +159,12 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
 
   // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && mdxPost.frontmatter.category === "guias-ia") {
-    const { title, date, category } = mdxPost.frontmatter;
+  if (mdxPost && (mdxPost.frontmatter.category === "guias-ia" || mdxPost.frontmatter.section === "guias" || mdxPost.frontmatter.category === "guias")) {
+    const { title, date, category, section } = mdxPost.frontmatter;
     return (
       <LegalLayout
         title={title}
-        category={category === "guias-ia" ? "Guías IA" : (category || "Guías IA")}
+        category="Guías IA"
         author={{ name: "Ricardo Scarpa", href: "/quienes-somos" }}
         date={date}
       >

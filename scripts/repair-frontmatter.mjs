@@ -36,7 +36,7 @@ function fix(dir, section) {
     });
     
     fm.section = section;
-    fm.category = section;
+    fm.category = (section === 'guias') ? 'guias-ia' : section;
     fm.slug = slug;
     
     const newFm = Object.entries(fm).map(([k, v]) => {
