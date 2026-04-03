@@ -80,7 +80,7 @@ export default async function IAGlobalSlugPage({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.category || "").toLowerCase() !== "ia-global")) {
+  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.category || "").toLowerCase() !== "ia-global" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "ia-global")) {
     notFound();
   }
 
