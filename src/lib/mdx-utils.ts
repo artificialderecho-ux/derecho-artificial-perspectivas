@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
@@ -14,7 +14,6 @@ const NEW_SECTIONS = [
   'firma-scarpa',
   'etica-ia',
   'propiedad-intelectual-ia',
-  'ia-global',
   'global-ia',
   'guias',
   'glosario',
@@ -27,7 +26,6 @@ const SECTION_ROUTES: Record<string, string> = {
   'firma-scarpa':             'firma-scarpa',
   'etica-ia':                 'etica-ia',
   'propiedad-intelectual-ia': 'propiedad-intelectual-ia',
-  'ia-global':                'global-ia',
   'global-ia':                'global-ia',
   'guias':                    'recursos/guias',
   'glosario':                 'glosario-ia-legal',
@@ -39,7 +37,6 @@ const SECTION_ROUTES: Record<string, string> = {
   'legislación ia':           'normativa',
   'regulación ue':            'normativa',
   'firma scarpa':             'firma-scarpa',
-  'global ia':                'global-ia',
 };
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
