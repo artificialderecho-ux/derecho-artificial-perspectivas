@@ -6,7 +6,7 @@ const recursosBaseDir = path.join(process.cwd(), "public", "Recursos");
 const analisisDir = path.join(recursosBaseDir, "Analisis");
 const fuentesDir = path.join(recursosBaseDir, "Fuentes");
 
-export type ResourceSection = "normativa" | "jurisprudencia" | "guias" | "firma-scarpa" | "actualidad-ia";
+export type ResourceSection = "normativa" | "jurisprudencia" | "guias" | "firma-scarpa" | "guias-ia";
 
 type ResourceSectionConfig = {
   id: ResourceSection;
@@ -46,11 +46,11 @@ const SECTION_CONFIGS: ResourceSectionConfig[] = [
     basePath: "/firma-scarpa",
   },
   {
-    id: "actualidad-ia",
-    analysisSubdir: "actualidad-ia",
-    fuentesSubdir: "actualidad-ia",
-    categoryLabel: "Actualidad IA",
-    basePath: "/actualidad-ia",
+    id: "guias-ia",
+    analysisSubdir: "guias-ia",
+    fuentesSubdir: "guias-ia",
+    categoryLabel: "Guías IA",
+    basePath: "/guias-ia",
   },
 ];
 
@@ -614,7 +614,7 @@ function kindForSection(section: ResourceSection): ResourceKind {
   if (section === "jurisprudencia") {
     return "LegalDecision";
   }
-  if (section === "actualidad-ia") {
+  if (section === "guias-ia") {
     return "NewsArticle";
   }
   return "Article";

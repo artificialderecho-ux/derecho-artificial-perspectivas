@@ -37,8 +37,8 @@ export default async function ReferenciaPage() {
     jurisprudenciaSlugs,
     guiasSlugs,
   ] = await Promise.all([
-    listContentSlugs("actualidad-ia"),
-    listSectionResourceSlugs("actualidad-ia"),
+    listContentSlugs("guias-ia"),
+    listSectionResourceSlugs("guias-ia"),
     listContentSlugs("firma-scarpa"),
     listSectionResourceSlugs("firma-scarpa"),
     listSectionResourceSlugs("normativa"),
@@ -48,8 +48,8 @@ export default async function ReferenciaPage() {
 
   const [actualidadJsonEntries, actualidadResourceEntries, firmaJsonEntries, firmaResourceEntries] =
     await Promise.all([
-      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("actualidad-ia", slug))),
-      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug))),
+      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("guias-ia", slug))),
+      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("guias-ia", slug))),
       Promise.all(firmaJsonSlugs.map((slug) => getContentEntry("firma-scarpa", slug))),
       Promise.all(firmaResourceSlugs.map((slug) => getSectionResourceEntry("firma-scarpa", slug))),
     ]);
@@ -77,7 +77,7 @@ export default async function ReferenciaPage() {
       title: e.title,
       description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
       date: e.dateMs ?? 0,
-      urlPath: `/actualidad-ia/${e.slug}`,
+      urlPath: `/guias-ia/${e.slug}`,
       author: "Derecho Artificial",
     })),
   ];
@@ -256,10 +256,10 @@ export default async function ReferenciaPage() {
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(160px,_auto)]">
               <Link
-                href="/actualidad-ia"
+                href="/guias-ia"
                 className="bg-card border border-border rounded-sm p-6 lg:col-span-3 hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Actualidad IA</p>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">Guías IA</p>
                 <h3 className="font-serif text-xl md:text-2xl text-foreground mb-2">Briefings y análisis editoriales</h3>
                 <p className="text-sm text-body">Últimas entradas y recursos de actualidad.</p>
                 <div className="mt-4 inline-flex items-center gap-2 text-xs text-caption">

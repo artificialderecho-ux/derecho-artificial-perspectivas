@@ -70,8 +70,8 @@ export default async function HomePage() {
     jurisprudenciaSlugs,
     guiasSlugs,
   ] = await Promise.all([
-    listContentSlugs("actualidad-ia"),
-    listSectionResourceSlugs("actualidad-ia"),
+    listContentSlugs("guias-ia"),
+    listSectionResourceSlugs("guias-ia"),
     listContentSlugs("firma-scarpa"),
     listSectionResourceSlugs("firma-scarpa"),
     listSectionResourceSlugs("normativa"),
@@ -81,8 +81,8 @@ export default async function HomePage() {
 
   const [actualidadJsonEntries, actualidadResourceEntries, firmaJsonEntries, firmaResourceEntries] =
     await Promise.all([
-      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("actualidad-ia", slug))),
-      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug))),
+      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("guias-ia", slug))),
+      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("guias-ia", slug))),
       Promise.all(firmaJsonSlugs.map((slug) => getContentEntry("firma-scarpa", slug))),
       Promise.all(firmaResourceSlugs.map((slug) => getSectionResourceEntry("firma-scarpa", slug))),
     ]);
@@ -115,7 +115,7 @@ export default async function HomePage() {
       title: e.title,
       description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
       date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: `/actualidad-ia/${e.slug}`,
+      urlPath: `/guias-ia/${e.slug}`,
       author: "Derecho Artificial",
     })),
   ];
@@ -238,9 +238,9 @@ export default async function HomePage() {
       const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
       return (
         cat === "noticia" ||
-        cat === "actualidad-ia" ||
+        cat === "guias-ia" ||
         tags.includes("noticia") ||
-        tags.includes("actualidad-ia") ||
+        tags.includes("guias-ia") ||
         tags.includes("actualidad") ||
         tags.includes("news")
       );
@@ -485,7 +485,7 @@ export default async function HomePage() {
           </p>
           <div className="mt-8 flex flex-col md:flex-row gap-4">
             <Link
-              href="/actualidad-ia"
+              href="/guias-ia"
               className="bg-primary text-white px-8 py-4 rounded-lg font-bold hover:bg-primary/90 transition-colors"
             >
               Ver guías IA
@@ -519,7 +519,7 @@ export default async function HomePage() {
               </p>
               <div className="mt-3">
                 <Link
-                  href="/actualidad-ia"
+                  href="/guias-ia"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
                   Ver todas las guías
@@ -674,7 +674,7 @@ export default async function HomePage() {
             frontmatter: {
               title: entry.title,
               date: new Date(entry.date).toISOString(),
-              category: "actualidad-ia",
+              category: "guias-ia",
             },
             excerpt: entry.description || "",
             url: entry.urlPath,
@@ -699,7 +699,7 @@ export default async function HomePage() {
               <div className="space-y-10">
                 {sections.map((sec) => {
               const items =
-                sec.category === "actualidad-ia"
+                sec.category === "guias-ia"
                   ? getLatestActualidadPosts()
                   : sec.category === "firma-scarpa"
                     ? getLatestFirmaPosts()

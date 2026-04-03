@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: "Guías y protocolos sobre inteligencia artificial.",
   keywords: ["Guías IA", "regulación IA", "jurisprudencia IA", "noticias IA"],
   alternates: {
-    canonical: "/actualidad-ia",
+    canonical: "/guias-ia",
     languages: {
-      "es-ES": "/actualidad-ia",
+      "es-ES": "/guias-ia",
       "en-US": "/en/ai-news",
     },
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Guías IA",
     description: "Guías y protocolos sobre inteligencia artificial.",
-    url: "/actualidad-ia",
+    url: "/guias-ia",
     locale: "es_ES",
     images: [{ url: "/images/heroes/guias-ia-hero.webp" }],
   },
@@ -40,7 +40,7 @@ export default async function ActualidadIAPage() {
   };
 
   const ownGuidePosts = posts
-    .filter((p) => p.frontmatter.category === "recursos" && p.frontmatter.subcategory === "guias")
+    .filter((p) => p.frontmatter.section === "guias" || (p.frontmatter.category === "recursos" && p.frontmatter.subcategory === "guias"))
     .filter((p) => {
       const author = String(p.frontmatter.author || "").toLowerCase();
       return !AUTOMATED_AUTHOR_PATTERNS.some((pattern) => author.includes(pattern));
@@ -51,7 +51,7 @@ export default async function ActualidadIAPage() {
       const metaParts = [dateLabel, p.frontmatter.author].filter(Boolean);
       return {
         id: `mdx-guide-${p.slug}`,
-        href: `/recursos/guias/${p.slug}`,
+        href: p.url,
         title: p.frontmatter.title,
         description: p.excerpt,
         badge: "Guías y Protocolos",
@@ -65,14 +65,14 @@ export default async function ActualidadIAPage() {
   const breadcrumbJsonLd = createBreadcrumbJsonLd({
     items: [
       { name: "Derecho Artificial", url: "https://derechoartificial.com" },
-      { name: "Guías IA", url: "https://derechoartificial.com/actualidad-ia" },
+      { name: "Guías IA", url: "https://derechoartificial.com/guias-ia" },
     ],
   });
 
   return (
     <>
       <StructuredData data={breadcrumbJsonLd} />
-      <Breadcrumbs items={[{ label: "Inicio", href: "/" }, { label: "Guías IA", href: "/actualidad-ia" }]} />
+      <Breadcrumbs items={[{ label: "Inicio", href: "/" }, { label: "Guías IA", href: "/guias-ia" }]} />
 
       <main className="section-spacing">
         <div className="relative w-full h-64 md:h-96">

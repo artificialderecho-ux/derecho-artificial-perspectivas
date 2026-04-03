@@ -11,7 +11,7 @@ const navigationES = [
   { name: "Firma Scarpa", href: "/firma-scarpa" },
   { name: "Normativa IA", href: "/normativa" },
   { name: "Jurisprudencia IA", href: "/jurisprudencia" },
-  { name: "Guías IA", href: "/actualidad-ia" },
+  { name: "Guías IA", href: "/guias-ia" },
   { name: "Propiedad Intelectual IA", href: "/propiedad-intelectual-ia" },
   { name: "Ética IA", href: "/etica-ia" },
   { name: "IA Global", href: "/ia-global" },
@@ -32,7 +32,7 @@ const esEnRouteMap: Record<string, string> = {
   "/": "/en",
   "/firma-scarpa": "/en/scarpa-firm",
   "/jurisprudencia": "/en/jurisprudence",
-  "/actualidad-ia": "/en/ai-news",
+  "/guias-ia": "/en/ai-news",
   "/normativa": "/en/legislation",
   "/propiedad-intelectual-ia": "/en",
   "/etica-ia": "/en",
@@ -45,7 +45,7 @@ const enEsRouteMap: Record<string, string> = {
   "/en": "/",
   "/en/scarpa-firm": "/firma-scarpa",
   "/en/jurisprudence": "/jurisprudencia",
-  "/en/ai-news": "/actualidad-ia",
+  "/en/ai-news": "/guias-ia",
   "/en/legislation": "/normativa",
   "/en/guides-protocols": "/recursos/guias",
 };
@@ -76,7 +76,7 @@ export function Header() {
       if (pathname.startsWith("/en/legislation")) return "/normativa";
       if (pathname.startsWith("/en/jurisprudence")) return "/jurisprudencia";
       if (pathname.startsWith("/en/guides-protocols")) return "/recursos/guias";
-      if (pathname.startsWith("/en/ai-news")) return "/actualidad-ia";
+      if (pathname.startsWith("/en/ai-news")) return "/guias-ia";
       return "/";
     }
     if (esEnRouteMap[pathname]) return esEnRouteMap[pathname];
@@ -85,7 +85,7 @@ export function Header() {
     if (pathname.startsWith("/jurisprudencia")) return "/en/jurisprudence";
     if (pathname.startsWith("/recursos/guias")) return "/en/guides-protocols";
     if (pathname.startsWith("/recursos")) return "/en/ai-news";
-    if (pathname.startsWith("/actualidad-ia")) return "/en/ai-news";
+    if (pathname.startsWith("/guias-ia")) return "/en/ai-news";
     // For sections without EN routes, send to EN home
     if (pathname.startsWith("/propiedad-intelectual-ia")) return "/en";
     if (pathname.startsWith("/etica-ia")) return "/en";

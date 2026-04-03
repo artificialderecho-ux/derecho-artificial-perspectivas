@@ -5,22 +5,22 @@ const nextConfig = {
     return [
       {
         source: "/recursos",
-        destination: "/actualidad-ia",
+        destination: "/guias-ia",
         permanent: true,
       },
       {
         source: "/recursos/noticias",
-        destination: "/actualidad-ia",
+        destination: "/guias-ia",
         permanent: true,
       },
       {
         source: "/en/ai-news",
-        destination: "/actualidad-ia",
+        destination: "/guias-ia",
         permanent: true,
       },
       {
         source: "/en/ai-news/:slug*",
-        destination: "/actualidad-ia",
+        destination: "/guias-ia",
         permanent: true,
       },
       {
@@ -48,6 +48,26 @@ const nextConfig = {
       {
         source: "/blog/kgm-meta-google-responsabilidad-algoritmico",
         destination: "/firma-scarpa/kgm-meta-google-responsabilidad-algoritmico",
+        permanent: true,
+      },
+      {
+        source: "/actualidad-ia",
+        destination: "/guias-ia",
+        permanent: true,
+      },
+      {
+        source: "/actualidad-ia/:slug*",
+        destination: "/guias-ia/:slug*",
+        permanent: true,
+      },
+      {
+        source: "/recursos/guias",
+        destination: "/guias-ia",
+        permanent: true,
+      },
+      {
+        source: "/recursos/guias/:slug*",
+        destination: "/guias-ia/:slug*",
         permanent: true,
       },
     ];

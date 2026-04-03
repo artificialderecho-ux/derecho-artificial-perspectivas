@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     const defaultPaths = [
       '/',
       '/firma-scarpa',
-      '/actualidad-ia',
+      '/guias-ia',
       '/jurisprudencia',
       '/normativa',
       '/recursos',

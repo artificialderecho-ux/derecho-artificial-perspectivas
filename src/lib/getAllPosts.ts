@@ -32,8 +32,8 @@ export async function getAllPosts(): Promise<Post[]> {
         date: p.date,
         excerpt: p.summary || p.description || "",
         tags: p.tags || [],
-        category: "actualidad-ia",
-        url: p.url.startsWith("http") ? p.url : `/actualidad-ia/${p.id || p.slug}`
+        category: "guias-ia",
+        url: p.url.startsWith("http") ? p.url : `/guias-ia/${p.id || p.slug}`
       })),
       ...libraryDocs.map((p: any) => ({
         slug: p.id || p.slug,
@@ -50,8 +50,8 @@ export async function getAllPosts(): Promise<Post[]> {
         date: p.date,
         excerpt: p.summary || p.description || "",
         tags: p.tags || [],
-        category: "actualidad-ia",
-        url: p.url.startsWith("http") ? p.url : `/actualidad-ia/${p.id || p.slug}`
+        category: "guias-ia",
+        url: p.url.startsWith("http") ? p.url : `/guias-ia/${p.id || p.slug}`
       }))
     ];
 

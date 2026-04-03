@@ -53,8 +53,8 @@ export default async function EnglishHomePage() {
     jurisprudenciaSlugs,
     guiasSlugs,
   ] = await Promise.all([
-    listContentSlugs("actualidad-ia"),
-    listSectionResourceSlugs("actualidad-ia"),
+    listContentSlugs("guias-ia"),
+    listSectionResourceSlugs("guias-ia"),
     listContentSlugs("firma-scarpa"),
     listSectionResourceSlugs("firma-scarpa"),
     listSectionResourceSlugs("normativa"),
@@ -64,8 +64,8 @@ export default async function EnglishHomePage() {
 
   const [actualidadJsonEntries, actualidadResourceEntries, firmaJsonEntries, firmaResourceEntries] =
     await Promise.all([
-      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("actualidad-ia", slug))),
-      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug))),
+      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("guias-ia", slug))),
+      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("guias-ia", slug))),
       Promise.all(firmaJsonSlugs.map((slug) => getContentEntry("firma-scarpa", slug))),
       Promise.all(firmaResourceSlugs.map((slug) => getSectionResourceEntry("firma-scarpa", slug))),
     ]);
@@ -93,7 +93,7 @@ export default async function EnglishHomePage() {
       title: e.title,
       description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
       date: e.dateMs ?? 0,
-      urlPath: `/actualidad-ia/${e.slug}`,
+      urlPath: `/guias-ia/${e.slug}`,
       author: "Derecho Artificial",
     })),
   ];
@@ -248,7 +248,7 @@ export default async function EnglishHomePage() {
     {
       key: "ai-resources",
       label: "AI Resources",
-      href: "/actualidad-ia",
+      href: "/guias-ia",
       items: uniqueByHref(
         [unifiedActualidad[0], unifiedActualidad[1]]
           .filter((e): e is NonNullable<typeof e> => Boolean(e))
@@ -333,7 +333,7 @@ export default async function EnglishHomePage() {
             Beyond the news: independent legal analysis and expert judgment on the AI Act and its legal impact. The practical reference for lawyers and compliance professionals.
           </h2>
           <div className="mt-6 flex items-center justify-center gap-3">
-            <Link href="/actualidad-ia" className="px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors">
+            <Link href="/guias-ia" className="px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors">
               View AI news
             </Link>
             <Link href="/en#sections" className="px-4 py-2 border border-divider rounded-sm text-foreground hover:bg-surface transition-colors">
@@ -353,7 +353,7 @@ export default async function EnglishHomePage() {
               <h3 className="font-serif text-xl text-foreground">Jurisprudence</h3>
               <h2 className="text-sm md:text-base text-body">Jurisprudence Observatory: Case law and rulings on Artificial Intelligence</h2>
             </Link>
-            <Link href="/actualidad-ia" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <Link href="/guias-ia" className="bg-gray-50 border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
               <h3 className="font-serif text-xl text-foreground">AI News</h3>
               <h2 className="text-sm md:text-base text-body">Legal Tech Updates: News and legal impact of technology</h2>
             </Link>
@@ -392,7 +392,7 @@ export default async function EnglishHomePage() {
               </p>
               <div className="mt-3">
                 <Link
-                  href="/actualidad-ia"
+                  href="/guias-ia"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
                   View all news
@@ -450,7 +450,7 @@ export default async function EnglishHomePage() {
               .filter((post) => {
                 const cat = (post.frontmatter.category || "").toLowerCase();
                 const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-                return cat === "noticia" || cat === "actualidad-ia" || tags.includes("noticia") || tags.includes("actualidad-ia") || tags.includes("news");
+                return cat === "noticia" || cat === "guias-ia" || tags.includes("noticia") || tags.includes("guias-ia") || tags.includes("news");
               })
               .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
               .slice(0, 6);
@@ -568,7 +568,7 @@ export default async function EnglishHomePage() {
               {
                 key: "resources",
                 label: "AI Resources",
-                href: "/actualidad-ia",
+                href: "/guias-ia",
                 description: "Guides, protocols and curated news",
                 items: recursosItems,
               },
