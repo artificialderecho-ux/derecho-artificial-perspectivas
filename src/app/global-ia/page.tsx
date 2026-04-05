@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/mdx-utils";
 import { UnifiedSectionLayout, type UnifiedItem, type SectionConfig } from "@/components/layout/UnifiedSectionLayout";
 
@@ -55,7 +55,8 @@ export default async function GlobalIAPage() {
     post.frontmatter.category === 'global-ia' ||
     (post.frontmatter.category && post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'ia global') ||
     (post.frontmatter.category && post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'global ia') ||
-    (post.frontmatter.section || "").toLowerCase() === 'ia-global'
+    (post.frontmatter.section || "").toLowerCase() === 'ia-global' ||
+    (post.frontmatter.section || "").toLowerCase() === 'global-ia'
   );
 
   const formatDate = (value: string) => {
