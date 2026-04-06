@@ -45,6 +45,7 @@ const SECTIONS = {
   'etica-ia':                 { route: 'etica-ia',                 pdfExpected: false },
   'propiedad-intelectual-ia': { route: 'propiedad-intelectual-ia', pdfExpected: false },
   'ia-global':                { route: 'global-ia',                pdfExpected: false },
+  'global-ia':                { route: 'global-ia',                pdfExpected: false },
   'guias':                    { route: 'recursos/guias',           pdfExpected: false },
 };
 
@@ -284,7 +285,7 @@ if (!arg) {
   console.error('Uso:     node scripts/publish-post.mjs <seccion>/<slug>');
   console.error('Ejemplo: node scripts/publish-post.mjs jurisprudencia/xai-openai-2026\n');
   console.error('Secciones: jurisprudencia | normativa | firma-scarpa | etica-ia |');
-  console.error('           propiedad-intelectual-ia | ia-global | guias\n');
+  console.error('           propiedad-intelectual-ia | ia-global | global-ia | guias\n');
   process.exit(1);
 }
 
