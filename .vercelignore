@@ -17,9 +17,6 @@ interlinking-structure-overview.md*
 *.zip
 *.rar
 backups/
-content-en/
-content/
-public/posts copia seguridad/
 
 # Tests and fixtures
 src/__tests__/
