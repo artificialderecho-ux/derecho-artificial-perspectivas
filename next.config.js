@@ -23,6 +23,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
+  experimental: {
+    cpus: 1,
+  },
+
   async headers() {
     return [];
   },
