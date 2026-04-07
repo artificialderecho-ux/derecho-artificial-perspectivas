@@ -1,0 +1,31 @@
+# Dependencies and local build output
+node_modules
+.next
+.vercel
+
+# Local/dev docs and reports
+A11Y_INSTRUCTIONS.md
+ACCESSIBILITY_CHECKLIST.md
+DEPLOYMENT_GUIDE.md
+GUIA-CORRECCION-FECHAS.md
+INTERLINKING_GUIDE.md
+interlinking-structure-overview.md*
+
+# Tooling/scripts not needed at runtime
+
+# Local archives and backups
+*.zip
+*.rar
+backups/
+content-en/
+content/
+public/posts copia seguridad/
+
+# Tests and fixtures
+src/__tests__/
+
+# Misc local artifacts
+*.csv
+*.bat
+*.ps1
+*.bak
