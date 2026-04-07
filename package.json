@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next-sitemap --config next-sitemap.config.cjs",
-    "build:vercel": "NEXT_DISABLE_ESLINT=1 NODE_OPTIONS=--max-old-space-size=1536 next build && next-sitemap --config next-sitemap.config.cjs",
+    "build:vercel": "NEXT_DISABLE_ESLINT=1 NODE_OPTIONS=--max-old-space-size=1024 next build --webpack && next-sitemap --config next-sitemap.config.cjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
