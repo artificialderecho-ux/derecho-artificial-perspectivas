@@ -23,10 +23,6 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  experimental: {
-    turbopackMinifier: true,
-  },
-
   async headers() {
     return [];
   },

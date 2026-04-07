@@ -5,7 +5,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
 import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
-import { getAllPosts } from '@/lib/mdx-utils';
+import { getAllPostsSummary } from '@/lib/mdx-utils';
 import { formatDateFromMs, isNew } from '@/lib/badges';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { cache } from 'react';
@@ -122,7 +122,7 @@ export default async function HomePage() {
 
   const unifiedFirma = [
     // Priorizar posts MDX de Firma Scarpa
-    ...getAllPosts().filter(post => 
+    ...getAllPostsSummary().filter(post => 
       post.frontmatter.category && 
       (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
        post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
@@ -207,7 +207,7 @@ export default async function HomePage() {
   ]);
 
   // Crear una lista unificada de todas las entradas recientes para la sección "Actualidad y Análisis"
-  const mdxPosts = getAllPosts();
+  const mdxPosts = getAllPostsSummary();
   const normalizeLangText = (value: string) => value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
   const detectLanguage = (title: string, description: string): "es" | "other" => {
     const text = normalizeLangText(`${title} ${description}`.toLowerCase());
