@@ -40,7 +40,7 @@ Deployment: Push to main branch → Vercel builds and deploys automatically (con
 
 Para reducir riesgo de OOM en el entorno de build de Vercel, este repo fija en `vercel.json`:
 
-- `installCommand`: `npm ci --no-audit --no-fund` (instalación reproducible y más ligera)
+- `installCommand`: `npm install --no-audit --no-fund` (evita bloqueos de preview por desajustes puntuales lockfile/package.json)
 - `buildCommand`: `NODE_OPTIONS=--max-old-space-size=4096 npm run build` (límite explícito de memoria para Node)
 
 Si en el futuro vuelve a aparecer un OOM, activa también `VERCEL_BUILD_SYSTEM_REPORT=1` en el proyecto para obtener diagnóstico detallado del proceso que agotó memoria.
