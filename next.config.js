@@ -1,9 +1,5 @@
 ﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {
-    resolveAlias: {},
-  },
-
   onDemandEntries: {
     maxInactiveAge: 5 * 60 * 1000,
     pagesBufferLength: 0,
@@ -21,10 +17,6 @@ const nextConfig = {
 
   typescript: {
     ignoreBuildErrors: true,
-  },
-
-  experimental: {
-    turbopackMinifier: true,
   },
 
   async headers() {
