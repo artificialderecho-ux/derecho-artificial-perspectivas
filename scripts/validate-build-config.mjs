@@ -20,6 +20,12 @@ if (!buildScript.includes('node --max-old-space-size=4096 ./node_modules/next/di
   );
 }
 
+if (pkg?.dependencies?.vercel) {
+  failures.push(
+    'package.json no debe incluir "vercel" en dependencies porque Vercel lo ignora en build y añade ruido/instalación innecesaria.',
+  );
+}
+
 const expectedBuildCommand = 'NODE_OPTIONS=--max-old-space-size=4096 npm run build';
 if (vercel?.buildCommand !== expectedBuildCommand) {
   failures.push(
