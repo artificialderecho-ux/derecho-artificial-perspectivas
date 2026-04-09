@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "node --max-old-space-size=3072 ./node_modules/next/dist/bin/next build && next-sitemap --config next-sitemap.config.cjs",
+    "build": "next build && next-sitemap --config next-sitemap.config.cjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -121,6 +121,7 @@
     "tsx": "^4.20.5",
     "ttf2woff2": "^8.0.0",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0"
+    "typescript-eslint": "^8.38.0",
+    "vercel": "^50.9.6"
   }
 }

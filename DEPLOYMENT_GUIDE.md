@@ -179,6 +179,41 @@ jobs:
 
 ### **Vercel Integration**
 
+#### **0. Evitar OOM (Out of Memory) en build**
+Este repositorio fija el límite de memoria de Node.js para builds de Vercel desde `vercel.json`:
+
+```json
+"buildCommand": "NODE_OPTIONS='--max-old-space-size=3072' npm run build"
+```
+
+Si vuelves a ver eventos OOM en Vercel:
+
+1. Revisa que `vercel.json` tenga ese `buildCommand`.
+2. En Vercel Dashboard, entra a **Project → Settings → General** y confirma que **Build Command** no esté sobrescrito manualmente.
+3. Si hay override en el Dashboard, usa exactamente:
+   ```bash
+   NODE_OPTIONS='--max-old-space-size=3072' npm run build
+   ```
+4. Reintenta el deploy con **Redeploy** y marca **Use existing Build Cache = off** para validar sin caché.
+
+#### **Cómo cambiar esto en local y subirlo a Vercel**
+
+```bash
+# 1) Editar configuración
+nano vercel.json
+
+# 2) Probar build local
+npm install
+npm run build
+
+# 3) Commit y push
+git add vercel.json DEPLOYMENT_GUIDE.md
+git commit -m "Configurar límite de memoria para build en Vercel"
+git push origin <tu-rama>
+```
+
+Una vez pusheado, Vercel detecta el push y ejecuta el nuevo `buildCommand` automáticamente.
+
 #### **1. Environment Variables**
 ```bash
 # En Vercel Dashboard
