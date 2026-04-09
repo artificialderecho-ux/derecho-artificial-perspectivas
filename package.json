@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next-sitemap --config next-sitemap.config.cjs",
+    "build": "node --max-old-space-size=4096 ./node_modules/next/dist/bin/next build --webpack && next-sitemap --config next-sitemap.config.cjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "prebuild": "node scripts/convert-sfpro.mjs",
+    "prebuild": "node scripts/validate-build-config.mjs && node scripts/convert-sfpro.mjs",
     "generate-md": "node scripts/generate-md-from-html.mjs",
     "deploy-content": "node scripts/deploy-content.mjs",
     "deploy-content:dry": "node scripts/deploy-content.mjs --dry",
@@ -121,7 +121,6 @@
     "tsx": "^4.20.5",
     "ttf2woff2": "^8.0.0",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0",
-    "vercel": "^50.9.6"
+    "typescript-eslint": "^8.38.0"
   }
 }
