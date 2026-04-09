@@ -9,6 +9,10 @@ const nextConfig = {
     pagesBufferLength: 0,
   },
 
+  // Reduce memory usage during build
+  swcMinify: true,
+  optimizeFonts: false,
+
   compress: true,
   productionBrowserSourceMaps: false,
 
