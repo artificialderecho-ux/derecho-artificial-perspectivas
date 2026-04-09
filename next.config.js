@@ -24,7 +24,7 @@ const nextConfig = {
   },
 
   experimental: {
-    turbopackMinifier: true,
+    // turbopackMinifier: true, // Disabled to reduce memory usage during build
   },
 
   async headers() {
