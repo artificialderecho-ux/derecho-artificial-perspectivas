@@ -13,9 +13,6 @@ const nextConfig = {
   compiler: {
     removeConsole: true,
   },
-  
-  // Disable font optimization to reduce memory usage
-  optimizeFonts: false,
 
   compress: true,
   productionBrowserSourceMaps: false,
