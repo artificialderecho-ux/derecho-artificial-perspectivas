@@ -10,7 +10,11 @@ const nextConfig = {
   },
 
   // Reduce memory usage during build
-  swcMinify: true,
+  compiler: {
+    removeConsole: true,
+  },
+  
+  // Disable font optimization to reduce memory usage
   optimizeFonts: false,
 
   compress: true,
