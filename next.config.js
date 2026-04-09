@@ -23,12 +23,23 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  experimental: {
-    turbopackMinifier: true,
-  },
-
   async headers() {
     return [];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/ia-global",
+        destination: "/global-ia",
+        permanent: true,
+      },
+      {
+        source: "/ia-global/:slug*",
+        destination: "/global-ia/:slug*",
+        permanent: true,
+      },
+    ];
   },
 
   async rewrites() {

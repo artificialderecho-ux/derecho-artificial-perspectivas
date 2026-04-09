@@ -6,7 +6,7 @@ import { getContentEntry, listContentSlugs } from "@/lib/content";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { StructuredData, createBreadcrumbJsonLd } from "@/components/seo/StructuredData";
-import { getAllPosts } from "@/lib/mdx-utils";
+import { getAllPostsSummary } from "@/lib/mdx-utils";
 
 // Revalidación automática cada hora
 export const revalidate = 3600;
@@ -70,7 +70,7 @@ export default async function FirmaScarpaPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post => 
+  const mdxPosts = getAllPostsSummary().filter(post => 
     post.frontmatter.category && 
     (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
      post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||

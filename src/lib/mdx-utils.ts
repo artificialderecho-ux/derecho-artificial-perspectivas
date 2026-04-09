@@ -189,7 +189,7 @@ export function getHeroImage(section: string): string {
 /**
  * Lee todos los posts de content/<section>/<slug>/index.mdx
  */
-function readNewSectionPosts(): PostData[] {
+function readNewSectionPosts(includeContent = true): PostData[] {
   const posts: PostData[] = [];
 
   for (const section of NEW_SECTIONS) {
@@ -231,7 +231,7 @@ function readNewSectionPosts(): PostData[] {
         posts.push({
           slug,
           frontmatter,
-          content,
+          content: includeContent ? content : '',
           url: `/${route}/${slug}`,
           excerpt,
           dateMs,
@@ -253,7 +253,7 @@ function readNewSectionPosts(): PostData[] {
  * Lee posts de content/posts/*.mdx (arquitectura anterior).
  * Se mantiene para compatibilidad con noticias automáticas y posts migrados pendientes.
  */
-function readLegacyPosts(): PostData[] {
+function readLegacyPosts(includeContent = true): PostData[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
 
   const fileMap = new Map<string, string>();
@@ -317,7 +317,7 @@ function readLegacyPosts(): PostData[] {
       posts.push({
         slug,
         frontmatter,
-        content,
+        content: includeContent ? content : '',
         url,
         excerpt,
         dateMs,
@@ -340,11 +340,11 @@ let _postsCache: PostData[] | null = null;
  * Devuelve todos los posts del sitio (nueva arquitectura + legado), ordenados por fecha.
  * El resultado se cachea en memoria durante el proceso de build.
  */
-export function getAllPosts(): PostData[] {
-  if (_postsCache) return _postsCache;
+function getAllPostsInternal(includeContent: boolean): PostData[] {
+  if (includeContent && _postsCache) return _postsCache;
 
-  const newPosts    = readNewSectionPosts();
-  const legacyPosts = readLegacyPosts();
+  const newPosts    = readNewSectionPosts(includeContent);
+  const legacyPosts = readLegacyPosts(includeContent);
 
   // Los nuevos tienen prioridad: si hay un slug duplicado, gana el nuevo
   const newSlugs = new Set(newPosts.map(p => p.slug));
@@ -354,8 +354,16 @@ export function getAllPosts(): PostData[] {
     return b.dateMs - a.dateMs;
   });
 
-  _postsCache = all;
+  if (includeContent) _postsCache = all;
   return all;
+}
+
+export function getAllPosts(): PostData[] {
+  return getAllPostsInternal(true);
+}
+
+export function getAllPostsSummary(): PostData[] {
+  return getAllPostsInternal(false);
 }
 
 /**
