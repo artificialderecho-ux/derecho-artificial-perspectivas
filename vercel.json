@@ -1,4 +1,6 @@
 {
+  "installCommand": "npm install --no-audit --no-fund",
+  "buildCommand": "NODE_OPTIONS=--max-old-space-size=4096 npm run build",
   "redirects": [
     {
       "source": "/sobre",

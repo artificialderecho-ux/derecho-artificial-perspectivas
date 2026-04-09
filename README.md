@@ -36,6 +36,15 @@ Para trabajar localmente en este proyecto, asegúrate de tener instalado Node.js
 
 Deployment: Push to main branch → Vercel builds and deploys automatically (connected via GitHub integration).
 
+## Estabilidad de builds en Vercel
+
+Para reducir riesgo de OOM en el entorno de build de Vercel, este repo fija en `vercel.json`:
+
+- `installCommand`: `npm install --no-audit --no-fund` (evita bloqueos de preview por desajustes puntuales lockfile/package.json)
+- `buildCommand`: `NODE_OPTIONS=--max-old-space-size=4096 npm run build` (límite explícito de memoria para Node)
+
+Si en el futuro vuelve a aparecer un OOM, activa también `VERCEL_BUILD_SYSTEM_REPORT=1` en el proyecto para obtener diagnóstico detallado del proceso que agotó memoria.
+
 ---
 
 **Nota importante**: El README anterior mencionaba Vite y Lovable.dev por error (probable residuo de template). El proyecto real usa Next.js App Router y se despliega de forma independiente en Vercel.
