@@ -46,7 +46,15 @@ const SECTIONS = {
   'propiedad-intelectual-ia': { route: 'propiedad-intelectual-ia', pdfExpected: false },
   'ia-global':                { route: 'global-ia',                pdfExpected: false },
   'global-ia':                { route: 'global-ia',                pdfExpected: false },
-  'guias':                    { route: 'recursos/guias',           pdfExpected: false },
+  'guias':                    { route: 'guias-ia',                 pdfExpected: false },
+  'guias-ia':                 { route: 'guias-ia',                 pdfExpected: false },
+};
+
+const SECTION_ALIASES = {
+  'ia-global': 'global-ia',
+  'global-ia': 'global-ia',
+  'guias': 'guias',
+  'guias-ia': 'guias',
 };
 
 // ─── Utilidades ───────────────────────────────────────────────────────────────
@@ -91,6 +99,11 @@ function parseFrontmatter(content) {
   }
 
   return fields;
+}
+
+function canonicalSection(section) {
+  const normalized = String(section || '').trim().toLowerCase();
+  return SECTION_ALIASES[normalized] || normalized;
 }
 
 // ─── Función principal ────────────────────────────────────────────────────────
@@ -169,7 +182,7 @@ async function publishPost(seccionSlug) {
   log('📋', `Slug:      ${fmSlug}`);
 
   // 6. Coherencia frontmatter ↔ carpeta
-  if (fmSection !== argSection) {
+  if (canonicalSection(fmSection) !== canonicalSection(argSection)) {
     fail(
       `El campo section del frontmatter ("${fmSection}") no coincide\n` +
       `con la carpeta del archivo ("${argSection}").\n` +

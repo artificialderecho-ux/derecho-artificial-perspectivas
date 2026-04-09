@@ -24,11 +24,26 @@ const nextConfig = {
   },
 
   experimental: {
-    turbopackMinifier: true,
+    cpus: 1,
   },
 
   async headers() {
     return [];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/ia-global',
+        destination: '/global-ia',
+        permanent: true,
+      },
+      {
+        source: '/ia-global/:slug*',
+        destination: '/global-ia/:slug*',
+        permanent: true,
+      },
+    ];
   },
 
   async rewrites() {
