@@ -28,10 +28,6 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  experimental: {
-    // turbopackMinifier: true, // Disabled to reduce memory usage during build
-  },
-
   async headers() {
     return [];
   },
