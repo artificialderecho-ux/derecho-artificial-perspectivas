@@ -122,14 +122,21 @@ export default async function HomePage() {
 
   const unifiedFirma = [
     // Priorizar posts MDX de Firma Scarpa
-    ...getAllPosts().filter(post => 
-      post.frontmatter.category && 
-      (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
-       post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
-       post.frontmatter.category.toLowerCase() === 'firma scarpa' ||
-       post.frontmatter.category.toLowerCase() === 'firma-scarpa' ||
-       (post.frontmatter.section || "").toLowerCase() === 'firma-scarpa')
-    ).map(post => ({
+    ...getAllPosts().filter(post => {
+      const category = (post.frontmatter.category || "").toLowerCase();
+      const section = (post.frontmatter.section || "").toLowerCase();
+      const categoryNormalized = category.replace(/-/g, ' ');
+      const sectionNormalized = section.replace(/-/g, ' ');
+      
+      return (
+        category === "firma-scarpa" ||
+        categoryNormalized === "firma scarpa" ||
+        categoryNormalized === "firma-scarpa" ||
+        section === "firma-scarpa" ||
+        sectionNormalized === "firma scarpa" ||
+        sectionNormalized === "firma-scarpa"
+      );
+    }).map(post => ({
       title: post.frontmatter.title,
       description: post.excerpt,
       date: post.dateMs,

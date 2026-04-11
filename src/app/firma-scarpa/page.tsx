@@ -70,12 +70,21 @@ export default async function FirmaScarpaPage() {
     (entry): entry is ResourceEntry => Boolean(entry),
   );
 
-  const mdxPosts = getAllPosts().filter(post => 
-    post.frontmatter.category && 
-    (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
-     post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
-     (post.frontmatter.section || "").toLowerCase() === 'firma-scarpa')
-  );
+  const mdxPosts = getAllPosts().filter(post => {
+    const category = (post.frontmatter.category || "").toLowerCase();
+    const section = (post.frontmatter.section || "").toLowerCase();
+    const categoryNormalized = category.replace(/-/g, ' ');
+    const sectionNormalized = section.replace(/-/g, ' ');
+    
+    return (
+      category === "firma-scarpa" ||
+      categoryNormalized === "firma scarpa" ||
+      categoryNormalized === "firma-scarpa" ||
+      section === "firma-scarpa" ||
+      sectionNormalized === "firma scarpa" ||
+      sectionNormalized === "firma-scarpa"
+    );
+  });
 
   const mdxItems: UnifiedItem[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
