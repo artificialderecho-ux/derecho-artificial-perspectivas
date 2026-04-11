@@ -66,6 +66,9 @@ async function verifyAndCreatePostPages() {
     } else if (category.toLowerCase() === 'normativa' || category.toLowerCase() === 'legislación digital' || category.toLowerCase() === 'legislación') {
       targetDir = normativaDir;
       routePath = 'normativa';
+    } else if (category.toLowerCase() === 'firma-scarpa') {
+      targetDir = path.join(appDir, 'firma-scarpa');
+      routePath = 'firma-scarpa';
     } else {
       console.log(`⚠️  Categoría no reconocida: ${category}`);
       continue;
