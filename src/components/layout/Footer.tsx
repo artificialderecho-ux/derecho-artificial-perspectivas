@@ -58,7 +58,7 @@ export function Footer() {
                   <Link href="/etica-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     AI Ethics
                   </Link>
-                  <Link href="/ia-global" className="text-sm text-body hover:text-foreground transition-colors duration-300">
+                  <Link href="/global-ia" className="text-sm text-body hover:text-foreground transition-colors duration-300">
                     Global AI
                   </Link>
                   <Link href="/en/legal-ai-glossary" className="text-sm text-body hover:text-foreground transition-colors duration-300">
@@ -104,7 +104,7 @@ export function Footer() {
                     Ética IA
                   </Link>
                   <Link
-                    href="/ia-global"
+                    href="/global-ia"
                     className="text-sm text-body hover:text-foreground transition-colors duration-300"
                   >
                     IA Global

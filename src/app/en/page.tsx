@@ -589,7 +589,7 @@ export default async function EnglishHomePage() {
               {
                 key: "global-ai",
                 label: "Global AI",
-                href: "/ia-global",
+                href: "/global-ia",
                 description: "Section in development, content coming soon",
                 items: globalItems,
               },

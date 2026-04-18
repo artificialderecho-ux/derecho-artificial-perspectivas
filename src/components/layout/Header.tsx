@@ -14,7 +14,7 @@ const navigationES = [
   { name: "Guías IA", href: "/guias-ia" },
   { name: "Propiedad Intelectual IA", href: "/propiedad-intelectual-ia" },
   { name: "Ética IA", href: "/etica-ia" },
-  { name: "IA Global", href: "/ia-global" },
+  { name: "IA Global", href: "/global-ia" },
 ];
 
 const navigationEN = [
@@ -24,7 +24,7 @@ const navigationEN = [
   { name: "AI News", href: "/en/ai-news" },
   { name: "AI Intellectual Property", href: "/propiedad-intelectual-ia" },
   { name: "AI Ethics", href: "/etica-ia" },
-  { name: "Global AI", href: "/ia-global" },
+  { name: "Global AI", href: "/global-ia" },
 ];
 
 // Map Spanish routes to English equivalents
@@ -36,7 +36,7 @@ const esEnRouteMap: Record<string, string> = {
   "/normativa": "/en/legislation",
   "/propiedad-intelectual-ia": "/en",
   "/etica-ia": "/en",
-  "/ia-global": "/en",
+  "/global-ia": "/en",
   "/recursos": "/en/ai-news",
 };
 
@@ -89,7 +89,7 @@ export function Header() {
     // For sections without EN routes, send to EN home
     if (pathname.startsWith("/propiedad-intelectual-ia")) return "/en";
     if (pathname.startsWith("/etica-ia")) return "/en";
-    if (pathname.startsWith("/ia-global")) return "/en";
+    if (pathname.startsWith("/global-ia")) return "/en";
     return "/en";
   };
 
