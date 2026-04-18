@@ -1,0 +1,10 @@
+# Archivos de respaldo / trabajo que no deben desplegarse
+public/posts copia seguridad/**
+*.bak
+*.backup.*
+content.rar
+
+# Artefactos locales
+.next/**
+coverage/**
+a11y-reports/**
