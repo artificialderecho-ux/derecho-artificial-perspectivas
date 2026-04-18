@@ -19,7 +19,10 @@ type Params = {
 
 export async function generateStaticParams() {
   const mdxPosts = getAllPosts().filter(
-    (p) => (p.frontmatter.category || "").toLowerCase() === "global-ia" || (p.frontmatter.section || "").toLowerCase() === "global-ia",
+    (p) => (p.frontmatter.category || "").toLowerCase() === "global-ia" || 
+           (p.frontmatter.category || "").toLowerCase() === "ia-global" ||
+           (p.frontmatter.section || "").toLowerCase() === "global-ia" ||
+           (p.frontmatter.section || "").toLowerCase() === "ia-global",
   );
   return mdxPosts.map((post) => ({ slug: post.slug }));
 }
@@ -32,7 +35,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia")) {
+  if (!mdxPost) {
+    return {};
+  }
+
+  const categoryLower = (mdxPost.frontmatter.category || "").toLowerCase();
+  const sectionLower = (mdxPost.frontmatter.section || "").toLowerCase();
+  const isValidGlobalIA = categoryLower === "global-ia" || categoryLower === "ia-global" ||
+                          sectionLower === "global-ia" || sectionLower === "ia-global";
+  
+  if (!isValidGlobalIA) {
     return {};
   }
 
@@ -80,7 +92,16 @@ export default async function IAGlobalSlugPage({
   const { slug } = await params;
   const mdxPost = getPostBySlug(slug);
 
-  if (!mdxPost || ((mdxPost.frontmatter.category || "").toLowerCase() !== "global-ia" && (mdxPost.frontmatter.section || "").toLowerCase() !== "global-ia")) {
+  if (!mdxPost) {
+    notFound();
+  }
+
+  const categoryLower = (mdxPost.frontmatter.category || "").toLowerCase();
+  const sectionLower = (mdxPost.frontmatter.section || "").toLowerCase();
+  const isValidGlobalIA = categoryLower === "global-ia" || categoryLower === "ia-global" ||
+                          sectionLower === "global-ia" || sectionLower === "ia-global";
+
+  if (!isValidGlobalIA) {
     notFound();
   }
 
