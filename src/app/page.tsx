@@ -628,7 +628,8 @@ export default async function HomePage() {
                       c === "global-ia" ||
                       cNormalized === "global ia" ||
                       cNormalized === "ia global" ||
-                      (post.frontmatter.section || "").toLowerCase() === "global-ia"
+                      (post.frontmatter.section || "").toLowerCase() === "global-ia" ||
+                      (post.frontmatter.section || "").toLowerCase() === "ia-global"
                     );
                   }
                   
