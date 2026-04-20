@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       "es-ES": "/",
-      "en-US": "/en",
+      "en-US": "https://decisionandlaw.com/",
     },
   },
   openGraph: {

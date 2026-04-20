@@ -39,6 +39,21 @@ const nextConfig = {
   async rewrites() {
     return [];
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/en",
+        destination: "https://decisionandlaw.com/",
+        permanent: true,
+      },
+      {
+        source: "/en/:path*",
+        destination: "https://decisionandlaw.com/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
