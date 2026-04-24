@@ -71,18 +71,16 @@ export default async function FirmaScarpaPage() {
   );
 
   const mdxPosts = getAllPosts().filter(post => {
-    const category = (post.frontmatter.category || "").toLowerCase();
-    const section = (post.frontmatter.section || "").toLowerCase();
-    const categoryNormalized = category.replace(/-/g, ' ');
-    const sectionNormalized = section.replace(/-/g, ' ');
-    
+    const category = (post.frontmatter.category || "").toLowerCase().trim();
+    const section = (post.frontmatter.section || "").toLowerCase().trim();
+    const categoryNormalized = category.replace(/-/g, " ").trim();
+    const sectionNormalized = section.replace(/-/g, " ").trim();
+
     return (
       category === "firma-scarpa" ||
       categoryNormalized === "firma scarpa" ||
-      categoryNormalized === "firma-scarpa" ||
       section === "firma-scarpa" ||
-      sectionNormalized === "firma scarpa" ||
-      sectionNormalized === "firma-scarpa"
+      sectionNormalized === "firma scarpa"
     );
   });
 
