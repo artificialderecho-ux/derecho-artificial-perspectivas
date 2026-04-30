@@ -17,38 +17,7 @@ const navigationES = [
   { name: "IA Global", href: "/global-ia" },
 ];
 
-const navigationEN = [
-  { name: "Scarpa Firm", href: "/firma-scarpa" },
-  { name: "AI Regulation", href: "/normativa" },
-  { name: "AI Jurisprudence", href: "/jurisprudencia" },
-  { name: "AI News", href: "/en/ai-news" },
-  { name: "AI Intellectual Property", href: "/propiedad-intelectual-ia" },
-  { name: "AI Ethics", href: "/etica-ia" },
-  { name: "Global AI", href: "/global-ia" },
-];
-
-// Map Spanish routes to English equivalents
-const esEnRouteMap: Record<string, string> = {
-  "/": "/en",
-  "/firma-scarpa": "/en/scarpa-firm",
-  "/jurisprudencia": "/en/jurisprudence",
-  "/guias-ia": "/en/ai-news",
-  "/normativa": "/en/legislation",
-  "/propiedad-intelectual-ia": "/en",
-  "/etica-ia": "/en",
-  "/global-ia": "/en",
-  "/recursos": "/en/ai-news",
-};
-
-// Map English routes to Spanish equivalents  
-const enEsRouteMap: Record<string, string> = {
-  "/en": "/",
-  "/en/scarpa-firm": "/firma-scarpa",
-  "/en/jurisprudence": "/jurisprudencia",
-  "/en/ai-news": "/guias-ia",
-  "/en/legislation": "/normativa",
-  "/en/guides-protocols": "/recursos/guias",
-};
+const ENGLISH_SITE_URL = "https://decisionandlaw.com/";
 
 export function Header() {
   const pathname = usePathname() ?? "/";
@@ -56,7 +25,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   
   const isEnglish = pathname.startsWith("/en");
-  const navigation = isEnglish ? navigationEN : navigationES;
+  const navigation = navigationES;
   
   // Handle scroll for sticky header
   useEffect(() => {
@@ -68,31 +37,6 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Get the equivalent route in the other language
-  const getAlternateRoute = () => {
-    if (isEnglish) {
-      if (enEsRouteMap[pathname]) return enEsRouteMap[pathname];
-      if (pathname.startsWith("/en/scarpa-firm")) return "/firma-scarpa";
-      if (pathname.startsWith("/en/legislation")) return "/normativa";
-      if (pathname.startsWith("/en/jurisprudence")) return "/jurisprudencia";
-      if (pathname.startsWith("/en/guides-protocols")) return "/recursos/guias";
-      if (pathname.startsWith("/en/ai-news")) return "/guias-ia";
-      return "/";
-    }
-    if (esEnRouteMap[pathname]) return esEnRouteMap[pathname];
-    if (pathname.startsWith("/firma-scarpa")) return "/en/scarpa-firm";
-    if (pathname.startsWith("/normativa")) return "/en/legislation";
-    if (pathname.startsWith("/jurisprudencia")) return "/en/jurisprudence";
-    if (pathname.startsWith("/recursos/guias")) return "/en/guides-protocols";
-    if (pathname.startsWith("/recursos")) return "/en/ai-news";
-    if (pathname.startsWith("/guias-ia")) return "/en/ai-news";
-    // For sections without EN routes, send to EN home
-    if (pathname.startsWith("/propiedad-intelectual-ia")) return "/en";
-    if (pathname.startsWith("/etica-ia")) return "/en";
-    if (pathname.startsWith("/global-ia")) return "/en";
-    return "/en";
-  };
-
   return (
     <header 
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
@@ -104,7 +48,7 @@ export function Header() {
       <div className="container-wide">
         <div className="flex items-center justify-between py-3 md:py-4 min-h-[120px]">
           <div className="flex flex-1 items-center justify-between gap-4 md:gap-6">
-            <Link href={isEnglish ? "/en" : "/"} className="flex items-center group flex-shrink-0">
+            <Link href="/" className="flex items-center group flex-shrink-0">
               <Image
                 src="/logo-icono.png"
                 alt="Derecho Artificial"
@@ -143,7 +87,7 @@ export function Header() {
               <div className="hidden md:flex items-center gap-3 pl-4 md:pl-6 border-l border-divider flex-shrink-0">
                 <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
                 <Link
-                  href={isEnglish ? getAlternateRoute() : pathname}
+                  href="/"
                   className={`text-xs uppercase tracking-wider transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded ${
                     !isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                   }`}
@@ -151,14 +95,16 @@ export function Header() {
                   ES
                 </Link>
                 <span className="text-caption">|</span>
-                <Link
-                  href={isEnglish ? pathname : getAlternateRoute()}
+                <a
+                  href={ENGLISH_SITE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`text-xs uppercase tracking-wider transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded ${
                     isEnglish ? "text-primary font-medium" : "text-caption hover:text-foreground"
                   }`}
                 >
                   EN
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -199,11 +145,13 @@ export function Header() {
                 <div className="flex items-center gap-3">
                   <Globe className="h-3.5 w-3.5 text-caption" strokeWidth={1.5} />
                   <Link
-                    href={getAlternateRoute()}
+                    href={ENGLISH_SITE_URL}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-sm text-primary hover:text-primary/80 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    {isEnglish ? "Versión en español" : "English version"}
+                    {isEnglish ? "Versión en español" : "English version (Decision & Law)"}
                   </Link>
                 </div>
               </div>

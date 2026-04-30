@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       "es-ES": "/",
-      "en-US": "/en",
+      "en-US": "https://decisionandlaw.com/",
     },
   },
   robots: {
@@ -81,7 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon" href="/logo-icono.png" />
         <link rel="alternate" hrefLang="es" href="https://www.derechoartificial.com/" />
-        <link rel="alternate" hrefLang="en" href="https://www.derechoartificial.com/en" />
+        <link rel="alternate" hrefLang="en" href="https://decisionandlaw.com/" />
         <link rel="alternate" hrefLang="x-default" href="https://www.derechoartificial.com/" />
         <StructuredData
           data={[
