@@ -8,3 +8,7 @@ content.rar
 .next/**
 coverage/**
 a11y-reports/**
+
+# PDFs pesados (provocan fallo al subir artefactos en deploy)
+public/fuentes/**
+public/Recursos/Fuentes/**
