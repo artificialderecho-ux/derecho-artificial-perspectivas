@@ -8,3 +8,29 @@ content.rar
 .next/**
 coverage/**
 a11y-reports/**
+
+# Excluir PDFs no referenciados para reducir tamaño de artefacto
+public/fuentes/1775591088458.pdf
+public/fuentes/1777011490507.pdf
+public/fuentes/A-10-2026-0019_ES.pdf
+public/fuentes/Francia. Carta de IA Jurisdicción Administrativa.pdf
+public/fuentes/Guidelines_on_prohibited_artificial_intelligence_practices_established_by_Regulation_EU_20241689_AI_Act_Spanish_d2Kyh6yv9bZzOxOC1Ak4klPjyGw_118659.PDF
+public/fuentes/JANE_DOE_COMPLETE_FINAL.pdf
+public/fuentes/La Inteligencia Artificial Generativa ante el Desafío del Derecho de Autor en la Unión Europea.pdf
+public/fuentes/OECD AI Cibersecurity .pdf
+public/fuentes/Zapata Vargas.pdf
+public/fuentes/caa_bordeaux_hallucinations_analisis.pdf
+public/fuentes/carta­_europea_inteligencia artificial.pdf
+public/fuentes/directrices-1-2026-cepd-investigacion-cientifica.pdf
+public/fuentes/etica-agentes-ia-hahn-dabrock.pdf
+public/fuentes/ewhc_1383_2025.pdf
+public/fuentes/gov.uscourts.cand.391955.1.0.pdf
+public/fuentes/guia-cifrado-autonomos-pymes.pdf
+public/fuentes/guia-ia-act-abogados.pdf
+public/fuentes/ia-agentica-rgpd.pdf
+public/fuentes/inteligencia_artificial_senado.pdf
+public/fuentes/jurisprudencia-ia-voice-cloning-lgberlin.pdf
+public/fuentes/nist-cswp-50-small-business-cybersecurity-non-employer-firms.pdf
+public/fuentes/propiedad-intelectual-mercado-unico-digital.pdf
+public/fuentes/resolucion_onu_78_265_analisis.pdf
+public/fuentes/ssrn-6525800.pdf
