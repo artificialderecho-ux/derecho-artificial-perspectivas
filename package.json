@@ -14,6 +14,8 @@
     "deploy-content": "node scripts/deploy-content.mjs",
     "deploy-content:dry": "node scripts/deploy-content.mjs --dry",
     "test": "jest --coverage --testMatch=\"**/__tests__/**/*.test.tsx\"",
+    "validate:content": "node scripts/validate-content.mjs",
+    "validate:content:strict": "node scripts/validate-content.mjs --strict",
     "audit:a11y": "npx axe https://derechoartificial.com --output json --output-file a11y-reports/report.json",
     "verify-posts": "node scripts/verify-posts.mjs",
     "publish-post": "node scripts/publish-post.mjs",
