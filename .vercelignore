@@ -8,4 +8,8 @@ content.rar
 .next/**
 coverage/**
 a11y-reports/**
+
+# PDFs servidos desde GitHub raw mediante redirects en vercel.json
+public/*.pdf
+public/**/*.pdf
 # cache bust 05/04/2026 07:58:51
