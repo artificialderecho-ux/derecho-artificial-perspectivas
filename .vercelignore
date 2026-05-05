@@ -1,4 +1,4 @@
-﻿# Archivos de respaldo / trabajo que no deben desplegarse
+# Archivos de respaldo / trabajo que no deben desplegarse
 public/posts copia seguridad/**
 *.bak
 *.backup.*
@@ -7,6 +7,4 @@ content.rar
 .next/**
 coverage/**
 a11y-reports/**
-# PDFs servidos desde GitHub raw mediante redirects en vercel.json
-public/*.pdf
 # cache bust 05/04/2026 07:58:51
