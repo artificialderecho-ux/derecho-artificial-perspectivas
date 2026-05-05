@@ -1,4 +1,4 @@
-﻿# Archivos de respaldo / trabajo que no deben desplegarse
+# Archivos de respaldo / trabajo que no deben desplegarse
 public/posts copia seguridad/**
 *.bak
 *.backup.*
@@ -9,4 +9,7 @@ coverage/**
 a11y-reports/**
 # PDFs servidos desde GitHub raw mediante redirects en vercel.json
 public/*.pdf
-# cache bust 05/04/2026 07:58:51
+# [TEMPORAL] Exclusión de fuentes PDF para aislar problema de deploy
+# Revertir después de alinear Node.js a 22.x en Vercel Dashboard
+public/fuentes/**
+# cache bust 05/05/2026
