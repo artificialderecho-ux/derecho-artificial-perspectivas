@@ -59,14 +59,16 @@ export default async function JurisprudenciaPage() {
   );
 
   // Mejorar el filtrado para incluir más variantes de categoría
-  const mdxPosts = getAllPosts().filter(post => 
-    post.frontmatter.category && 
-    (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'jurisprudencia' ||
-     post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'jurisprudencia ia' ||
-     post.frontmatter.category.toLowerCase() === 'jurisprudencia' ||
-     post.frontmatter.category.toLowerCase() === 'jurisprudencia-ia' ||
-     (post.frontmatter.section || "").toLowerCase() === 'jurisprudencia')
-  );
+  const mdxPosts = getAllPosts().filter((post) => {
+    const category = (post.frontmatter.category || "").toLowerCase().replace(/-/g, " ").trim();
+    const section = (post.frontmatter.section || "").toLowerCase().replace(/-/g, " ").trim();
+
+    return (
+      category === "jurisprudencia" ||
+      category === "jurisprudencia ia" ||
+      section === "jurisprudencia"
+    );
+  });
 
   const formatDate = (value: string) => {
     const date = new Date(value);
@@ -160,4 +162,3 @@ export default async function JurisprudenciaPage() {
 
   return <UnifiedSectionLayout config={config} items={items} />;
 }
-
