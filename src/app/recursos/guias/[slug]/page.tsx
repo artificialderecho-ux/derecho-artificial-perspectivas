@@ -1,3 +1,4 @@
+// Legacy passthrough keeps guias section logic from canonical route
 export {
   default,
   generateMetadata,
