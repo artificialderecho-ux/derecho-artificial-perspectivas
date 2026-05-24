@@ -20,7 +20,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar dependencias
@@ -39,6 +39,9 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Diagnóstico de contenido y rutas
+        run: node scripts/diagnostico.cjs
+
   # ─────────────────────────────────────────
   # 2. VALIDACIÓN DE ARCHIVOS MDX (CONTENIDO)
   # ─────────────────────────────────────────
@@ -52,7 +55,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar dependencias
@@ -130,7 +133,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar dependencias
@@ -196,7 +199,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar dependencias
