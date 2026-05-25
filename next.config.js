@@ -108,7 +108,30 @@ const nextConfig = {
   },
 
   async rewrites() {
-    return [];
+    return {
+      fallback: [
+        {
+          source: "/Recursos/Fuentes/:path*",
+          destination: "/fuentes/:path*",
+        },
+        {
+          source: "/Recursos/Fuentes/:path*/:file",
+          destination: "/fuentes/:file",
+        },
+        {
+          source: "/fuentes/:path*/:file",
+          destination: "/fuentes/:file",
+        },
+        {
+          source: "/fuentes/:file",
+          destination: "/:file",
+        },
+        {
+          source: "/docs/:file",
+          destination: "/fuentes/:file",
+        },
+      ],
+    };
   },
 };
 
