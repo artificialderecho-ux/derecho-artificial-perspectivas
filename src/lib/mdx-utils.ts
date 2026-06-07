@@ -16,6 +16,7 @@ const NEW_SECTIONS = [
   'propiedad-intelectual-ia',
   'global-ia',
   'guias',
+  'guias-ia',
   'glosario',
 ] as const;
 
@@ -28,6 +29,7 @@ const SECTION_ROUTES: Record<string, string> = {
   'propiedad-intelectual-ia': 'propiedad-intelectual-ia',
   'global-ia':                'global-ia',
   'guias':                    'guias-ia',
+  'guias-ia':                 'guias-ia',
   'glosario':                 'glosario-ia-legal',
   // Legado: category → ruta (para posts en content/posts/)
   'jurisprudencia ia':        'jurisprudencia',

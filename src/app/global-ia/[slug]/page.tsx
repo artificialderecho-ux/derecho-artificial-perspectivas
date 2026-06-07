@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
+import { MdxContent } from "@/components/mdx/MdxContent";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import {
   StructuredData,
@@ -9,9 +10,6 @@ import {
 } from "@/components/seo/StructuredData";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { getPostBySlug, getAllPosts, getHeroImage } from "@/lib/mdx-utils";
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import rehypeSanitize from "rehype-sanitize";
 
 type Params = {
   slug: string;
@@ -153,14 +151,7 @@ export default async function IAGlobalSlugPage({
           </div>
         )}
         <div className="mx-auto">
-          <ReactMarkdown
-            rehypePlugins={[rehypeRaw, rehypeSanitize]}
-            components={{
-              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
-            }}
-          >
-            {mdxPost.content}
-          </ReactMarkdown>
+          <MdxContent source={mdxPost.content} />
         </div>
         <div className="mt-16 pt-8 border-t border-slate-200">
           <RelatedArticles

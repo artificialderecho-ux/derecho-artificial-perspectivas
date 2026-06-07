@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalLayout } from "@/components/layout/LegalLayout";
+import { MdxContent } from "@/components/mdx/MdxContent";
 import {
   StructuredData,
   createBreadcrumbJsonLd,
@@ -9,37 +10,6 @@ import {
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { getPostBySlug, getAllPosts, getHeroImage } from "@/lib/mdx-utils";
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import rehypeSanitize from 'rehype-sanitize';
-import remarkGfm from 'remark-gfm';
-import { defaultSchema } from 'hast-util-sanitize';
-
-const sanitizeSchema = {
-  ...defaultSchema,
-  tagNames: [
-    ...(defaultSchema as any).tagNames,
-    'table',
-    'thead',
-    'tbody',
-    'tr',
-    'th',
-    'td',
-    'caption'
-  ],
-  attributes: {
-    ...(defaultSchema as any).attributes,
-    table: ['className'],
-    thead: [],
-    tbody: [],
-    tr: [],
-    th: ['align', 'colspan', 'rowspan'],
-    td: ['align', 'colspan', 'rowspan'],
-    a: ['href', 'name', 'target', 'rel'],
-    img: ['src', 'alt', 'title', 'width', 'height'],
-    code: ['className']
-  }
-};
 
 type Params = {
   slug: string;
@@ -175,15 +145,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
           </div>
         ) : null}
         <div className="prose prose-lg max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}
-            components={{
-              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
-            }}
-          >
-            {mdxPost.content}
-          </ReactMarkdown>
+          <MdxContent source={mdxPost.content} />
         </div>
 
         <div className="mt-16 pt-8 border-t border-slate-200">
