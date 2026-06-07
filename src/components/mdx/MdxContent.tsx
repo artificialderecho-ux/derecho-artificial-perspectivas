@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
+import { DespachoSeguroScrolly } from "@/components/mdx/DespachoSeguroScrolly";
 
 function Callout({ children, title, type = "info", className }: any) {
   const tone = type === "warning" || type === "error" ? "warning" : type === "success" ? "success" : "default";
@@ -49,13 +50,6 @@ function ChapterCard({ children, title, className }: any) {
   );
 }
 
-function DespachoSeguroScrolly() {
-  return (
-    <ScrollyCallout title="Scrollytelling disponible" tone="success">
-      Este bloque interactivo se puede reconstruir con Scrollytelling, ScrollyStep y ScrollyFigure en MDX.
-    </ScrollyCallout>
-  );
-}
 
 const components = {
   Scrollytelling,

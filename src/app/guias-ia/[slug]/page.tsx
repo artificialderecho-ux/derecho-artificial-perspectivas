@@ -24,7 +24,8 @@ export async function generateStaticParams() {
   const mdxPosts = getAllPosts().filter(p => 
     p.frontmatter.category === "guias-ia" || 
     p.frontmatter.category === "guias" ||
-    p.frontmatter.section === "guias"
+    p.frontmatter.section === "guias" ||
+    p.frontmatter.section === "guias-ia"
   );
   const mdxSlugs = mdxPosts.map(p => p.slug);
 
@@ -42,11 +43,10 @@ export async function generateMetadata({
 
   // Priorizar MDX nativo
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && (mdxPost.frontmatter.category === "guias-ia" || mdxPost.frontmatter.section === "guias" || mdxPost.frontmatter.category === "guias")) {
-    const { title, description, category, section, date } = mdxPost.frontmatter;
+  if (mdxPost && (mdxPost.frontmatter.category === "guias-ia" || mdxPost.frontmatter.section === "guias" || mdxPost.frontmatter.section === "guias-ia" || mdxPost.frontmatter.category === "guias")) {
+    const { title, description, date } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Monitor editorial de novedades regulatorias sobre inteligencia artificial.";
-    const route = category === "guias-ia" ? "guias-ia" : "guias-ia"; // La ruta siempre es guias-ia
     const canonical = `https://www.derechoartificial.com/guias-ia/${slug}`;
     return {
       title: `${title} | Derecho Artificial`,
@@ -129,8 +129,8 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
 
   // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
-  if (mdxPost && (mdxPost.frontmatter.category === "guias-ia" || mdxPost.frontmatter.section === "guias" || mdxPost.frontmatter.category === "guias")) {
-    const { title, date, category, section } = mdxPost.frontmatter;
+  if (mdxPost && (mdxPost.frontmatter.category === "guias-ia" || mdxPost.frontmatter.section === "guias" || mdxPost.frontmatter.section === "guias-ia" || mdxPost.frontmatter.category === "guias")) {
+    const { title, date } = mdxPost.frontmatter;
     return (
       <LegalLayout
         title={title}
