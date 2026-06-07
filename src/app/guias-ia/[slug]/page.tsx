@@ -13,6 +13,7 @@ import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import { DespachoSeguroScrolly } from '@/components/guia-ciberseguridad/DespachoSeguroScrolly'
 
 export async function generateStaticParams() {
   const [jsonSlugs, resourceSlugs] = await Promise.all([
@@ -135,7 +136,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         date={date}
       >
         <div className="prose prose-lg max-w-none">
-          <MDXRemote source={mdxPost.content} />
+          <MDXRemote source={mdxPost.content} components={{ DespachoSeguroScrolly }} />
         </div>
 
         <div className="mt-16 pt-8 border-t border-slate-200">
