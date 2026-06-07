@@ -1,0 +1,400 @@
+"use client"
+
+import { useState, useEffect, useRef, useCallback } from 'react'
+
+export const CHAPTERS = [
+  {
+    num: "01",
+    title: "El nuevo perímetro",
+    subtitle: "Resumen ejecutivo",
+    color: "#1e3a5f",
+    accent: "#3b82f6",
+    stat: "137.000 – 304.000 €",
+    statLabel: "presupuesto anual estimado para un despacho mediano",
+    lead: "Un despacho que integra IA no puede seguir pensando en ciberseguridad como antes. El perímetro ha desaparecido. El dato puede estar en un servidor on-premise, en una nube soberana europea y en el portátil de un abogado que trabaja desde Lisboa. Todo a la vez.",
+    body: "Esta guía describe un sistema completo construido sobre arquitectura Zero Trust, orientado al cumplimiento de RGPD, NIS2 (con los matices de ámbito que se explican más adelante), Reglamento de IA (UE) 2024/1689 y CCPA/CPRA. No es una lista de deseos: es un plan técnico ejecutable con presupuesto y fases.",
+    alert: null as string | null,
+    keyPoint: "Zero Trust no es un producto. Es una filosofía: nunca confiar, siempre verificar."
+  },
+  {
+    num: "02",
+    title: "Nunca confiar, siempre verificar",
+    subtitle: "Arquitectura Zero Trust",
+    color: "#1a3a4a",
+    accent: "#06b6d4",
+    stat: "12",
+    statLabel: "segmentos de red aislados (LEG-A, LEG-B, IA-PROD, ADMIN…)",
+    lead: "Un abogado que accede desde la oficina tiene los mismos controles que si accede desde una cafetería. Un agente de IA tiene permisos tan limitados como cualquier empleado. Un atacante que compromete un equipo no puede moverse hacia los expedientes de otros clientes.",
+    body: "Los cinco pilares son: ZTNA (sustitución de la VPN), microsegmentación de red, Identity-Aware Proxy para aplicaciones web, verificación continua del estado del dispositivo (posture checking cada 30 minutos) y asignación dinámica de VLAN por identidad en las oficinas físicas. El resultado: la red interna deja de ser una zona de confianza.",
+    alert: "La verificación de posture se realiza cada 30 minutos, no cada 5 ni cada 15. Ese intervalo equilibra seguridad y usabilidad para un despacho real.",
+    keyPoint: "LEG-A y LEG-B no se comunican nunca directamente. Ni siquiera el sistema de IA puede cruzar esa frontera sin una regla explícita."
+  },
+  {
+    num: "03",
+    title: "Cinco marcos, cuatro plazos",
+    subtitle: "Cumplimiento normativo",
+    color: "#2d1b4e",
+    accent: "#8b5cf6",
+    stat: "72 h",
+    statLabel: "plazo máximo para notificar una brecha a la AEPD (art. 33 RGPD)",
+    lead: "El error más común en las guías de ciberseguridad para despachos es presentar NIS2 como obligación directa para cualquier bufete de más de 50 empleados. No es así. Los Anexos I y II de la Directiva (UE) 2022/2555 no mencionan los despachos de abogados.",
+    body: "NIS2 afecta al despacho de forma indirecta: cuando presta servicios a entidades esenciales o importantes que deben auditar su cadena de suministro. Distinto es el RGPD y la LOPDGDD, que sí son de aplicación directa. Y el Reglamento de IA, cuya plena exigibilidad para sistemas de alto riesgo llega el 2 de agosto de 2026.",
+    alert: "Las multas del AI Act no son '20M€ o 4%' (esas son cifras del RGPD). El art. 99 RIA establece hasta 35M€ o 7% para prácticas prohibidas, y hasta 15M€ o 3% para incumplimientos del Anexo III.",
+    keyPoint: "NYDFS 23 NYCRR 500 no es directamente aplicable a un despacho europeo. Es un estándar de referencia que los clientes financieros pueden exigir contractualmente."
+  },
+  {
+    num: "04",
+    title: "Híbrido con soberanía",
+    subtitle: "Infraestructura técnica",
+    color: "#1a3a2a",
+    accent: "#10b981",
+    stat: "15 min / 4 h",
+    statLabel: "RPO (pérdida máxima de datos) y RTO (tiempo de restauración)",
+    lead: "Los datos más sensibles se quedan on-premise o en nube soberana europea. Las aplicaciones y el SIEM van a la nube. La IA de producción, con GPU bajo demanda, también. El backup está en las tres capas con inmutabilidad garantizada.",
+    body: "La topología define 12 segmentos lógicos. El controlador de dominio en nube necesita mínimo una instancia m6i.xlarge (4 vCPU, 16 GB RAM): la t3.large que aparece en otras guías es insuficiente para Kerberos + LDAP + ZTNA en producción real.",
+    alert: "IA-PROD no accede a los expedientes mediante SMB (TCP/445). Ese protocolo tiene demasiados CVEs históricos. El acceso es exclusivamente mediante API REST autenticada con tokens de corta vida sobre TCP/443.",
+    keyPoint: "Regla 3-2-1 para backups: 3 copias, 2 medios distintos, 1 fuera de las instalaciones. La copia fuera de línea se desconecta físicamente cada semana."
+  },
+  {
+    num: "05",
+    title: "La IA no decide sola",
+    subtitle: "Seguridad e integración IA",
+    color: "#3a1a2a",
+    accent: "#f43f5e",
+    stat: "3",
+    statLabel: "modos de despliegue: local aislado (A), externo con garantías (B), datos anónimos (C)",
+    lead: "El 90% de los casos de uso se resuelven con Modo A: el modelo corre completamente dentro de la infraestructura del despacho, sin comunicación exterior. Ningún prompt sale del entorno controlado. Ningún dato de cliente llega a un servidor externo.",
+    body: "Para el 10% restante (tareas no confidenciales: resumir jurisprudencia pública, revisar textos sin datos de partes), se usa Modo B con proveedor en la UE o certificado en el EU-US Data Privacy Framework, con contrato que prohíbe el uso de los datos para entrenamiento.",
+    alert: "El estándar DoD 5220.22-M está derogado desde 2007. Para el borrado seguro de pesos de modelos de IA, se aplica NIST SP 800-88 Rev. 1 (2014): borrado criptográfico (crypto erase) como método preferente.",
+    keyPoint: "El Reglamento de IA no exige 'dos abogados mínimo' para supervisión humana. El art. 14 RIA exige que la supervisión sea adecuada al riesgo concreto del sistema. El número de revisores lo determina la DPIA."
+  },
+  {
+    num: "06",
+    title: "La clave en la caja fuerte",
+    subtitle: "Cifrado y secreto profesional",
+    color: "#2a2a1a",
+    accent: "#f59e0b",
+    stat: "AES-256 + TLS 1.3",
+    statLabel: "estándar mínimo para reposo y tránsito respectivamente",
+    lead: "El cifrado no es una opción. Es la primera línea de defensa frente a la exfiltración. Y en un despacho de abogados, el secreto profesional no es una obligación más de privacidad: es un derecho fundamental del justiciable y un deber deontológico irrenunciable.",
+    body: "Las claves maestras se dividen mediante esquemas de umbral (Shamir Secret Sharing): ninguna persona tiene acceso completo en solitario. La rotación es anual como mínimo; inmediata ante compromiso o baja de personal con acceso. Los soportes que contenían claves se destruyen físicamente.",
+    alert: null as string | null,
+    keyPoint: "Ningún dato de cliente en claro se almacena en servicios cloud no evaluados y aprobados expresamente por el despacho. El CGAE ha publicado guías deontológicas sobre uso de IA que son de cumplimiento obligatorio para abogados colegiados."
+  },
+  {
+    num: "07",
+    title: "Quién responde de qué",
+    subtitle: "Gobernanza y formación",
+    color: "#1a2a3a",
+    accent: "#0ea5e9",
+    stat: "5",
+    statLabel: "roles diferenciados: Socio Director, CISO, DPO, Responsable TI, AI Owner",
+    lead: "La ciberseguridad falla cuando nadie sabe exactamente de qué es responsable. El CISO coordina la implantación técnica y dirige el SOC. El DPO supervisa el RGPD y aprueba las DPIAs. El AI Owner (un abogado designado por herramienta) reporta alucinaciones y solicita revisiones.",
+    body: "La formación es una medida técnica de seguridad, no una actividad administrativa. El acceso a cualquier herramienta de IA requiere superar una prueba de conocimiento previa. Los simulacros de phishing son trimestrales. Los simulacros de incidente, anuales con informe post-ejercicio.",
+    alert: null as string | null,
+    keyPoint: "MFA obligatoria para todos los accesos, sin excepción. Se priorizan claves físicas FIDO2/WebAuthn. El OTP por SMS como único factor es insuficiente."
+  },
+  {
+    num: "08",
+    title: "El SOC que nunca duerme",
+    subtitle: "Monitoreo y respuesta a incidentes",
+    color: "#1a1a2a",
+    accent: "#6366f1",
+    stat: "< 15 min",
+    statLabel: "tiempo máximo de notificación al despacho ante incidente P1 (SLA del Managed SOC)",
+    lead: "Un despacho mediano raramente puede mantener un SOC interno 24/7. La solución: un Managed SOC (MSSP) con acceso únicamente a los logs del SIEM y al XDR, nunca a los expedientes legales, con cláusulas de confidencialidad equivalentes al secreto profesional.",
+    body: "Los logs deben ser inmutables y con firma digital o hash de cadena. Sin esa garantía, no son admisibles ante un regulador. La retención mínima es 12 meses en línea y 5 años en almacenamiento frío para cumplimiento legal.",
+    alert: "Las siete fases del Plan de Respuesta a Incidentes: preparación → detección → contención → erradicación → recuperación → notificación regulatoria → lecciones aprendidas. La notificación regulatoria incluye la decisión documentada sobre si la brecha obliga a informar a la AEPD en 72 h.",
+    keyPoint: "El SOAR puede aislar automáticamente un endpoint infectado ante un incidente P1. El SOC notifica al CISO en menos de 15 minutos. El CISO activa el PRI."
+  },
+  {
+    num: "09",
+    title: "18 meses, no un día",
+    subtitle: "Plan de implementación",
+    color: "#1a3020",
+    accent: "#22c55e",
+    stat: "4 fases",
+    statLabel: "Diagnóstico → Identidad → Seguridad completa → IA y operación avanzada",
+    lead: "La implantación no es un proyecto puntual: es una transformación organizativa. La Fase 0 (meses 1-2) es el diagnóstico y la planificación. La Fase 1 (meses 3-6) despliega el ZTNA piloto con 5 usuarios y la microsegmentación inicial. No se activa la IA hasta que la base está consolidada.",
+    body: "La Fase 2 (meses 7-12) completa el ZTNA para todos los usuarios, el DLP, el PAM y el KMS. La Fase 3 (meses 13-18) despliega la primera herramienta de IA de nivel 1 en producción, con el SOC gestionado activo y el primer simulacro de incidente documentado.",
+    alert: null as string | null,
+    keyPoint: "Métrica clave: 100% de cobertura MFA en el primer mes. Sin esa base, el resto del sistema es frágil. La formación se mide con prueba de conocimiento, no con asistencia."
+  }
+]
+
+function ScrollNav({ active, total, onClick }: { active: number; total: number; onClick: (i: number) => void }) {
+  return (
+    <nav aria-label="Capítulos" style={{
+      position: 'sticky',
+      top: '6rem',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.5rem',
+      padding: '1rem 0',
+      width: '2.5rem',
+      alignSelf: 'flex-start',
+      zIndex: 10,
+      flexShrink: 0
+    }}>
+      {Array.from({ length: total }).map((_, i) => (
+        <button
+          key={i}
+          onClick={() => onClick(i)}
+          aria-label={`Ir al capítulo ${i + 1}`}
+          style={{
+            width: i === active ? '1.75rem' : '0.5rem',
+            height: '0.5rem',
+            borderRadius: '0.25rem',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            background: i === active
+              ? CHAPTERS[active]?.accent || '#3b82f6'
+              : i < active ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.15)',
+            padding: 0
+          }}
+        />
+      ))}
+    </nav>
+  )
+}
+
+function ChapterCard({ chapter, index, isActive, chapterRef }: {
+  chapter: typeof CHAPTERS[0];
+  index: number;
+  isActive: boolean;
+  chapterRef: (el: HTMLElement | null, i: number) => void;
+}) {
+  const [visible, setVisible] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = cardRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold: 0.15 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <section
+      ref={(el) => { (cardRef as any).current = el; if (chapterRef) chapterRef(el, index) }}
+      id={`chapter-${index}`}
+      style={{
+        minHeight: '90vh',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '4rem 0',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(2rem)',
+        transition: 'opacity 0.7s ease, transform 0.7s ease',
+      }}
+    >
+      <div style={{
+        background: `linear-gradient(135deg, ${chapter.color} 0%, ${chapter.color}dd 100%)`,
+        borderRadius: '1.25rem',
+        border: `1px solid ${chapter.accent}33`,
+        padding: '2.5rem',
+        width: '100%',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        <div style={{
+          position: 'absolute',
+          top: '-1rem',
+          right: '1.5rem',
+          fontSize: '8rem',
+          fontWeight: '900',
+          color: 'rgba(255,255,255,0.04)',
+          lineHeight: 1,
+          fontFamily: 'Georgia, serif',
+          userSelect: 'none',
+          pointerEvents: 'none'
+        }}>
+          {chapter.num}
+        </div>
+
+        <div style={{
+          display: 'inline-block',
+          background: `${chapter.accent}22`,
+          border: `1px solid ${chapter.accent}55`,
+          borderRadius: '0.5rem',
+          padding: '0.25rem 0.75rem',
+          marginBottom: '0.75rem'
+        }}>
+          <span style={{ color: chapter.accent, fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            {chapter.subtitle}
+          </span>
+        </div>
+
+        <h2 style={{
+          color: '#fff',
+          fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
+          fontWeight: 700,
+          margin: '0 0 1.5rem',
+          fontFamily: 'Georgia, serif',
+          lineHeight: 1.2
+        }}>
+          {chapter.title}
+        </h2>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '1.5rem', alignItems: 'start' }}>
+          <div>
+            <p style={{
+              color: 'rgba(255,255,255,0.9)',
+              fontSize: '1rem',
+              lineHeight: 1.7,
+              margin: '0 0 1rem',
+              fontFamily: 'Georgia, serif'
+            }}>
+              {chapter.lead}
+            </p>
+            <p style={{
+              color: 'rgba(255,255,255,0.7)',
+              fontSize: '0.9375rem',
+              lineHeight: 1.7,
+              margin: 0
+            }}>
+              {chapter.body}
+            </p>
+          </div>
+
+          <div style={{
+            background: 'rgba(255,255,255,0.06)',
+            border: `1px solid ${chapter.accent}44`,
+            borderRadius: '1rem',
+            padding: '1.25rem 1.5rem',
+            textAlign: 'center',
+            minWidth: '9rem',
+            flexShrink: 0
+          }}>
+            <div style={{
+              color: chapter.accent,
+              fontSize: 'clamp(1.1rem, 2.5vw, 1.75rem)',
+              fontWeight: 700,
+              lineHeight: 1.2,
+              marginBottom: '0.5rem',
+              fontVariantNumeric: 'tabular-nums'
+            }}>
+              {chapter.stat}
+            </div>
+            <div style={{
+              color: 'rgba(255,255,255,0.55)',
+              fontSize: '0.75rem',
+              lineHeight: 1.4
+            }}>
+              {chapter.statLabel}
+            </div>
+          </div>
+        </div>
+
+        {chapter.alert && (
+          <div style={{
+            marginTop: '1.5rem',
+            background: 'rgba(239,68,68,0.12)',
+            border: '1px solid rgba(239,68,68,0.4)',
+            borderRadius: '0.75rem',
+            padding: '0.875rem 1.125rem',
+            display: 'flex',
+            gap: '0.75rem',
+            alignItems: 'flex-start'
+          }}>
+            <span style={{ color: '#f87171', fontSize: '1.1rem', lineHeight: 1, flexShrink: 0 }}>⚠</span>
+            <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.875rem', lineHeight: 1.6, margin: 0 }}>
+              {chapter.alert}
+            </p>
+          </div>
+        )}
+
+        <div style={{
+          marginTop: '1.5rem',
+          padding: '1rem 1.25rem',
+          background: `${chapter.accent}11`,
+          borderLeft: `3px solid ${chapter.accent}`,
+          borderRadius: '0 0.5rem 0.5rem 0'
+        }}>
+          <p style={{ color: chapter.accent, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, fontStyle: 'italic' }}>
+            {chapter.keyPoint}
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function DespachoSeguroScrolly() {
+  const [activeChapter, setActiveChapter] = useState(0)
+  const sectionRefs = useRef<(HTMLElement | null)[]>([])
+
+  const handleRef = useCallback((el: HTMLElement | null, i: number) => {
+    sectionRefs.current[i] = el
+  }, [])
+
+  useEffect(() => {
+    const observers = sectionRefs.current.map((el, i) => {
+      if (!el) return null
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveChapter(i) },
+        { threshold: 0.3 }
+      )
+      obs.observe(el)
+      return obs
+    })
+    return () => observers.forEach(obs => obs?.disconnect())
+  }, [])
+
+  const scrollTo = (i: number) => {
+    sectionRefs.current[i]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  return (
+    <div style={{
+      background: '#0a0f1a',
+      borderRadius: '1.25rem',
+      padding: '2rem',
+      marginTop: '2rem',
+      marginBottom: '2rem',
+      color: '#fff'
+    }}>
+      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', margin: 0 }}>
+          Guía de ciberseguridad con IA · 9 capítulos · 18 meses de implementación
+        </p>
+        <div style={{
+          marginTop: '0.75rem',
+          height: '2px',
+          background: 'rgba(255,255,255,0.06)',
+          borderRadius: '1px',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            height: '100%',
+            width: `${((activeChapter + 1) / CHAPTERS.length) * 100}%`,
+            background: CHAPTERS[activeChapter]?.accent || '#3b82f6',
+            transition: 'width 0.5s ease, background 0.5s ease',
+            borderRadius: '1px'
+          }} />
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+        <ScrollNav active={activeChapter} total={CHAPTERS.length} onClick={scrollTo} />
+
+        <div style={{ flex: 1, minWidth: 0 }}>
+          {CHAPTERS.map((chapter, i) => (
+            <ChapterCard
+              key={i}
+              chapter={chapter}
+              index={i}
+              isActive={activeChapter === i}
+              chapterRef={handleRef}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}

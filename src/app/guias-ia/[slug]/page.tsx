@@ -12,37 +12,7 @@ import { Button } from "@/components/ui/button";
 import type { ResourceEntry } from "@/lib/resources";
 import { getSectionResourceEntry, listSectionResourceSlugs } from "@/lib/resources";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx-utils";
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import rehypeSanitize from 'rehype-sanitize';
-import remarkGfm from 'remark-gfm';
-import { defaultSchema } from 'hast-util-sanitize';
-
-const sanitizeSchema = {
-  ...defaultSchema,
-  tagNames: [
-    ...(defaultSchema as any).tagNames,
-    'table',
-    'thead',
-    'tbody',
-    'tr',
-    'th',
-    'td',
-    'caption'
-  ],
-  attributes: {
-    ...(defaultSchema as any).attributes,
-    table: ['className'],
-    thead: [],
-    tbody: [],
-    tr: [],
-    th: ['align', 'colspan', 'rowspan'],
-    td: ['align', 'colspan', 'rowspan'],
-    a: ['href', 'name', 'target', 'rel'],
-    img: ['src', 'alt', 'title', 'width', 'height'],
-    code: ['className']
-  }
-};
+import { MDXRemote } from 'next-mdx-remote/rsc'
 
 export async function generateStaticParams() {
   const [jsonSlugs, resourceSlugs] = await Promise.all([
@@ -50,7 +20,6 @@ export async function generateStaticParams() {
     listSectionResourceSlugs("guias-ia"),
   ]);
 
-  // Incluir slugs de posts MDX que tengan categoría guias o guias-ia
   const mdxPosts = getAllPosts().filter(p => 
     p.frontmatter.category === "guias-ia" || 
     p.frontmatter.category === "guias" ||
@@ -70,13 +39,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
 
-  // Priorizar MDX nativo
   const mdxPost = getPostBySlug(slug);
   if (mdxPost && (mdxPost.frontmatter.category === "guias-ia" || mdxPost.frontmatter.section === "guias" || mdxPost.frontmatter.category === "guias")) {
     const { title, description, category, section, date } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Monitor editorial de novedades regulatorias sobre inteligencia artificial.";
-    const route = category === "guias-ia" ? "guias-ia" : "guias-ia"; // La ruta siempre es guias-ia
     const canonical = `https://www.derechoartificial.com/guias-ia/${slug}`;
     return {
       title: `${title} | Derecho Artificial`,
@@ -157,10 +124,9 @@ export async function generateMetadata({
 export default async function ActualidadIASlugPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  // Intentar cargar desde MDX nativo primero
   const mdxPost = getPostBySlug(slug);
   if (mdxPost && (mdxPost.frontmatter.category === "guias-ia" || mdxPost.frontmatter.section === "guias" || mdxPost.frontmatter.category === "guias")) {
-    const { title, date, category, section } = mdxPost.frontmatter;
+    const { title, date } = mdxPost.frontmatter;
     return (
       <LegalLayout
         title={title}
@@ -169,15 +135,7 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
         date={date}
       >
         <div className="prose prose-lg max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw, [rehypeSanitize, { schema: sanitizeSchema }]]}
-            components={{
-              img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
-            }}
-          >
-            {mdxPost.content}
-          </ReactMarkdown>
+          <MDXRemote source={mdxPost.content} />
         </div>
 
         <div className="mt-16 pt-8 border-t border-slate-200">
@@ -281,7 +239,6 @@ export default async function ActualidadIASlugPage({ params }: { params: Promise
     );
   }
 
-  // It's a resource entry
   const entry = resourceEntry!;
   const datePublished = (entry as any).dateMs != null && !Number.isNaN((entry as any).dateMs)
     ? new Date((entry as any).dateMs).toISOString().slice(0, 10)
