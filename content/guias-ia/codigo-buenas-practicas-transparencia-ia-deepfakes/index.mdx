@@ -1,0 +1,54 @@
+---
+title: "El fin del anonimato algorítmico: cómo el Código de Buenas Prácticas de la UE redefine el marcaje de IA y los deepfakes"
+description: "Análisis técnico del nuevo Código de Buenas Prácticas sobre Transparencia de la IA: obligaciones de doble capa para proveedores y el uso de los nuevos iconos de la UE."
+date: "2026-06-19"
+tags: ["AI Act", "Código de Buenas Prácticas", "Watermarking", "Deepfakes", "Transparencia de IA"]
+section: "guias"
+category: "guia-practica"
+author: "Redacción"
+slug: "codigo-buenas-practicas-transparencia-ia-deepfakes"
+readingTime: "5 min"
+pdf: "/fuentes/1781850126871.pdf"
+---
+
+Ninguna técnica de marcaje por sí sola es suficiente para contener el avance de la desinformación sintética en la red[cite: 327]. La Oficina Europea de IA acaba de lanzar una exigencia monumental que cambiará por completo las reglas del juego para los desarrolladores de inteligencia artificial generativa: se acabó el confiar únicamente en un simple metadato o en una marca de agua aislada[cite: 327, 368]. Si tu sistema genera imágenes, videos o audios destinados a difundirse en el ecosistema digital, el nuevo esquema regulatorio te obliga a implementar una estrategia multinivel de doble capa (*multi-layered marking approach*)[cite: 368]. Esto no es una simple sugerencia de buenas prácticas para el futuro; se trata del marco operativo directo diseñado para demostrar el cumplimiento del artículo 50 de la Ley de IA (*AI Act*), y sus implicaciones prácticas van mucho más allá de lo que la industria anticipaba[cite: 319, 362].
+
+## La muerte de la técnica única: por qué la UE exige un marcaje de doble capa
+
+Aquí es donde se abre la complejidad técnica para los proveedores. El documento técnico coordinado por expertos como Kalina Bontcheva desvela de entrada una amarga verdad científica: bajo el estado del arte actual, ningún mecanismo aislado puede garantizar de forma simultánea la efectividad, interoperabilidad, robustez y fiabilidad que exige la ley[cite: 1, 327]. Por este motivo, el Código establece de forma obligatoria que los contenidos multimedia deben incluir al menos dos capas de marcado legibles por máquina[cite: 368]. La primera consiste en metadatos firmados criptográficamente y con sello de tiempo (*digitally signed metadata*), asegurando que cualquier manipulación posterior deje un rastro evidente[cite: 378, 379]. La segunda capa exige una marca de agua imperceptible (*imperceptible watermarking*) incrustada directamente en la estructura del archivo, lo que dificulta enormemente su eliminación por parte de terceros malintencionados[cite: 383, 387].
+
+Sin embargo, la Oficina de IA demuestra un notable pragmatismo al contemplar ciertas excepciones a esta regla general de doble capa[cite: 369, 371]. Dicho esto, conviene recordar que un marcaje de una sola capa se considerará suficiente en el caso de sistemas de IA integrados en productos físicos que generen contenidos sintéticos dentro de un entorno técnico controlado, cerrado y de carácter principalmente instructivo, siempre que existan medidas que impidan que ese archivo salga al exterior[cite: 369, 370]. Del mismo modo, el texto libre convencional, al carecer de la capacidad natural de transportar metadatos estructurados, queda exento de la doble capa, considerándose suficiente la aplicación de marcas de agua algorítmicas cuando el bloque de texto supere los 200 tokens[cite: 371, 385]. Lo que resulta llamativo es que el propio Código admite abiertamente que la fiabilidad del marcaje en textos libres largos sigue siendo inferior, sugiriendo de forma provisional que el acceso a las herramientas de detección correspondientes pueda restringirse a usuarios expertos verificados para evitar falsos positivos a gran escala[cite: 385, 386].
+
+## El agujero analógico y la guerra de resistencia contra la manipulación
+
+Y esto, en el ámbito jurídico y de cumplimiento, no es un detalle menor. La robustez exigida a las soluciones de transparencia no solo implica resistir operaciones típicas de edición digital como la compresión, el recorte o el cambio de formato[cite: 101, 102]. El verdadero desafío que plantea el Código es la supervivencia ante el denominado "agujero analógico" (*analogue hole*), es decir, la capacidad de que el marcado y su posterior detección sigan siendo operativos tras procesos tan disruptivos como imprimir un documento y volverlo a escanear, grabar una pantalla con la cámara de un teléfono móvil o reproducir un audio sintético para registrarlo mediante un micrófono externo[cite: 104].
+
+Ahora bien, para garantizar que este ecosistema de transparencia no sea saboteado desde el origen, el Código impone obligaciones estrictas de no eliminación[cite: 401]. Los firmantes deberán realizar sus mejores esfuerzos para preservar las marcas preexistentes en los datos de entrada cuando estos sean transformados por su sistema[cite: 401, 402]. Además, se prohíbe de manera explícita la comercialización, promoción o publicidad de cualquier tipo de herramienta informática cuyo propósito principal sea eludir o eliminar los marcados legibles por máquina[cite: 41]. Merece la pena notar que la normativa busca blindar toda la cadena de valor, empujando a los proveedores de modelos fundacionales a facilitar la labor de los desarrolladores derivados mediante la integración del marcado directamente en la fase de inferencia del modelo (*model watermarking*)[cite: 334, 390].
+
+## El nuevo icono oficial de la UE: la señal de advertencia para deepfakes y textos automáticos
+
+La responsabilidad no recae exclusivamente sobre quienes programan los modelos; los usuarios que los despliegan (*deployers*) se sitúan ahora en el centro de la diana regulatoria[cite: 159, 162]. Bajo la tutela del grupo de trabajo liderado por Anja Bechmann, el Código define los parámetros exactos para etiquetar los *deepfakes* visuales y sonoros, así como aquellos textos publicados con el fin de informar al público sobre asuntos de interés general que no hayan sido sometidos a un examen humano ni a un control editorial tradicional[cite: 159, 165]. La gran novedad es la introducción de unos iconos estáticos oficiales y universales creados por la Oficina de IA[cite: 171]. Estos distintivos visuales, que no requieren atribución ni pago de licencias, se dividen en dos variantes principales: "AI + GENERATED" para creaciones íntegramente sintéticas y "AI + MODIFIED" para contenidos originales que han sufrido modificaciones o distorsiones mediante algoritmos.
+
+La cuestión que se plantea de inmediato es cómo deben integrarse estos elementos sin arruinar la experiencia del usuario ni el valor estético de las obras[cite: 260]. Las reglas de colocación son estrictas: en imágenes o videos, el icono debe aparecer de forma visible y preferentemente en la esquina superior derecha, repitiéndose a intervalos regulares y de manera obligatoria tras cualquier interrupción comercial[cite: 226, 227]. Para los textos de carácter público, el sello deberá situarse de manera clara y consistente cerca del titular principal o en el colofón inicial[cite: 232]. Cuando nos encontramos ante contenidos puramente artísticos, satíricos o de ficción, el Código flexibiliza su postura para evitar que la advertencia destruya el disfrute de la obra, permitiendo soluciones contextuales alternativas como avisos adyacentes, notas explicativas en los créditos o menús interactivos donde el usuario pueda pasar el cursor para revelar la procedencia de la pieza[cite: 260, 267].
+
+## La pregunta que el lector no puede evitar
+
+Llegados a este punto, la incertidumbre que planea sobre toda la industria jurídica y tecnológica es inevitable: ¿cómo van a soportar las pequeñas y medianas empresas los costes derivados de mantener plataformas de detección totalmente gratuitas para el público? [cite: 65, 66] Aunque el Código prevé que las organizaciones con menos de un millón de usuarios mensuales puedan aplicar tarifas razonables y proporcionadas si un único cliente abusa del sistema mediante un volumen desmesurado de peticiones, la carga de mantener una infraestructura en la nube capaz de procesar millones de comprobaciones forenses amenaza con convertirse en una barrera de entrada asfixiante para las nuevas empresas de la Unión Europea[cite: 66].
+
+## Lo que viene en el documento
+
+El texto que tienes a tu disposición no se limita a este análisis de superficie; adentrarse en el PDF completo te permitirá descubrir aspectos técnicos críticos que resultan indispensables para cualquier estrategia de cumplimiento normativo:
+* Las especificaciones exactas de diseño gráfico, márgenes y variantes cromáticas de los iconos oficiales de la UE frente a fondos oscuros y claros.
+* Los estándares de criptografía y gestión de claves privadas necesarios para asegurar la inviolabilidad de los metadatos firmados digitalmente.
+* El marco metodológico detallado para la realización de pruebas internas de cumplimiento, auditorías periódicas y monitorización en entornos de uso real.
+* El plan de desarrollo de la futura segunda capa interactiva destinada a enriquecer los iconos estáticos con datos detallados de procedencia y el diseño del próximo icono oficial exclusivo para formatos de audio.
+
+> El documento original del *Code of Practice on Transparency of AI-Generated Content* constituye la hoja de ruta definitiva para los departamentos de cumplimiento normativo, abogados digitalistas y desarrolladores de software en la era de la Ley de IA. Puedes descargar el texto íntegro en formato PDF a través del siguiente enlace para auditar tu infraestructura técnica y adelantarte a las inspecciones de las autoridades de vigilancia de mercado.
+
+## Conclusiones finales
+
+* **Enfoque multinivel obligatorio**: Los proveedores de sistemas de IA generativa deben combinar metadatos firmados digitalmente con marcas de agua imperceptibles en contenidos multimedia para asegurar el cumplimiento legal[cite: 368].
+* **Excepciones de capa única**: Se permite el uso de una sola capa de marcado exclusivamente en textos libres de más de 200 tokens y en sistemas empotrados en productos físicos dentro de entornos controlados[cite: 369, 371].
+* **Supervivencia al agujero analógico**: Las soluciones de marcado técnico deben poseer la robustez suficiente para resistir la transición analógica, incluyendo capturas de pantalla, reimpresiones físicas y grabaciones externas de audio[cite: 104].
+* **Iconografía oficial de la UE**: Los encargados de desplegar *deepfakes* o textos informativos sin control editorial humano están obligados a utilizar las etiquetas universales "AI + GENERATED" o "AI + MODIFIED"[cite: 165, 171].
+* **Infraestructura de detección gratuita**: Las herramientas destinadas a verificar la autenticidad y detectar los marcados deben ofrecerse de forma gratuita, permitiendo cobros únicamente ante abusos de volumen en proveedores pequeños[cite: 65, 66].
