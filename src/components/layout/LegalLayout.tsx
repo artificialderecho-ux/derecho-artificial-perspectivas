@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Link from "next/link";
+import { HmcIndicator } from "@/components/HmcIndicator";
 
 interface LegalLayoutProps {
   children: ReactNode;
@@ -70,6 +71,7 @@ export function LegalLayout({
           <div className="prose-editorial">
             {children}
           </div>
+          <HmcIndicator />
         </div>
       </section>
     </main>
