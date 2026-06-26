@@ -16,6 +16,7 @@ export default {
     },
     extend: {
       fontFamily: {
+        display: ['Barlow Condensed', 'Arial Narrow', 'Impact', 'sans-serif'],
         serif: [
           '"SF Pro"',
           '"SF Pro Text"',
