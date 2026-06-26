@@ -3,7 +3,7 @@ import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content
 import { getAllPosts } from '@/lib/mdx-utils';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://www.derechoartificial.com';
+  const baseUrl = 'https://derechoartificial.com';
 
   // 1. Páginas estáticas
   const staticPages: MetadataRoute.Sitemap = [
@@ -22,11 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'guias-ia',
     'normativa',
     'jurisprudencia',
-    'propiedad-intelectual-ia',
     'etica-ia',
-    'global-ia',
-    'guia',
-    'recursos'
   ];
   let allArticlePages: MetadataRoute.Sitemap = [];
 
