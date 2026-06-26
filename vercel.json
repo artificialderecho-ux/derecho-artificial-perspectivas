@@ -30,6 +30,336 @@
       "source": "/manifiesto",
       "destination": "/quienes-somos",
       "permanent": true
+    },
+    {
+      "source": "/global-ia/stanford-ai-index-report-2026",
+      "destination": "/analisis/stanford-ai-index-report-2026-analisis",
+      "permanent": true
+    },
+    {
+      "source": "/gobernanza/magnifica-humanitas-enciclica-leon-xiv-etica-inteligencia-artificial",
+      "destination": "/etica-ia/magnifica-humanitas-enciclica-leon-xiv-etica-inteligencia-artificial",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/guias/guia-aepd-uso-de-imagenes-de-terceros-en-sistemas-ia_seo",
+      "destination": "/guias/guia-aepd-uso-de-imagenes-de-terceros-en-sistemas-ia",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-etico/estatuto-juridico-neurodatos-desafios-marco-normativo",
+      "destination": "/etica-ia/estatuto-juridico-neurodatos-desafios-marco-normativo",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/benavides-v-tesla-autopilot-veredicto-responsabilidad-ia",
+      "destination": "/jurisprudencia/benavides-v-tesla-autopilot-veredicto-responsabilidad-ia",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/guias/en-itl-20250227-ccbe-guidelines-on-the-use-of-cloud-computing-by-lawyers",
+      "destination": "/guias/pautas-ccbe-cloud-computing-abogados",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/guias/OECD AI Cibersecurity",
+      "destination": "/guias/oecd-ai-cybersecurity",
+      "permanent": true
+    },
+    {
+      "source": "/jurisprudencia/Analisis_Integridad_Procesal_Kennon_v_Ashley",
+      "destination": "/jurisprudencia",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/fbi-ic3-2025-perdidas-ciberneticas-implicaciones-juridicas",
+      "destination": "/firma-scarpa/fbi-ic3-2025-perdidas-ciberneticas-implicaciones-juridicas",
+      "permanent": true
+    },
+    {
+      "source": "/ia-global/caso-eeoc-v-itutorgroup-copia-ia-global",
+      "destination": "/global-ia/caso-eeoc-v-itutorgroup",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/ciberseguridad-nist-csf-empresas-sin-empleados",
+      "destination": "/firma-scarpa/ciberseguridad-nist-csf-empresas-sin-empleados",
+      "permanent": true
+    },
+    {
+      "source": "/propiedad-intelectual-ia/britannica-openai-alucinaciones-marcas-lanham",
+      "destination": "/propiedad-intelectual-ia/britannica-openai-alucinaciones-marcas",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/ia-agentica-regulacion-drcf-autonomia-responsabilidad",
+      "destination": "/firma-scarpa/ia-agentica-regulacion-drcf-2026",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/ia-razonamiento-legal-estudio-empirico",
+      "destination": "/firma-scarpa/ia-razonamiento-legal-estudio-empirico",
+      "permanent": true
+    },
+    {
+      "source": "/ia-global/getty-images-v-stability-ai-copia-ia-global",
+      "destination": "/propiedad-intelectual-ia/getty-images-v-stability-ai",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/guias/ccbe-guidelines-cloud-computing-lawyers",
+      "destination": "/guias/pautas-ccbe-cloud-computing-abogados",
+      "permanent": true
+    },
+    {
+      "source": "/global-ia/anthropic-pirateria-datos-bmg-caso-bartz",
+      "destination": "/global-ia",
+      "permanent": true
+    },
+    {
+      "source": "/firma-scarpa/anthropic-v-department-of-war-primera-enmienda-ia",
+      "destination": "/firma-scarpa",
+      "permanent": true
+    },
+    {
+      "source": "/noticia/2020-07-28-la-aepd-actualiza-su-guia-sobre-el-uso-de-cookies-para-adaptarla-a-las-nuevas-directrices-del-comite-europeo-de-proteccion-de-datos",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/guia-ia-jueces-protocolos",
+      "destination": "/guias/guia-ia-jueces-protocolos",
+      "permanent": true
+    },
+    {
+      "source": "/investigacion/proteccion-consumidor-mercado-digital",
+      "destination": "/firma-scarpa/proteccion-consumidor-mercado-digital",
+      "permanent": true
+    },
+    {
+      "source": "/firma-scarpa/propiedad-intelectual-mercado-unico-digital-jurisprudencia-europea",
+      "destination": "/firma-scarpa/propiedad-intelectual-mercado-unico-digital",
+      "permanent": true
+    },
+    {
+      "source": "/TS/tspr-irizarry-bonilla-alucinaciones-ia-deber-competencia",
+      "destination": "/jurisprudencia/tspr-irizarry-bonilla-alucinaciones-ia-deber-competencia",
+      "permanent": true
+    },
+    {
+      "source": "/riesgos/ia-en-el-trabajo-riesgos-psicosociales-regulacion",
+      "destination": "/etica-ia/ia-en-el-trabajo-riesgos-psicosociales-regulacion",
+      "permanent": true
+    },
+    {
+      "source": "/ia-global/sentencia-2025-audiencia-nacional-libertad-sindical-algoritmos-copia-ia-global",
+      "destination": "/jurisprudencia/sentencia-2025-audiencia-nacional-libertad-sindical-algoritmos",
+      "permanent": true
+    },
+    {
+      "source": "/firma-scarpa/fletcher-v-experian-analisis-doctrinal",
+      "destination": "/posts/fletcher-v-experian-analisis-seo",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/resumen_seo_ia_judicial",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ia-global/justicia-inteligente-en-china-copia-ia-global",
+      "destination": "/global-ia/justicia-inteligente-china",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/guia-aepd-uso-de-imagenes-de-terceros-en-sistemas-ia_seo",
+      "destination": "/guias/guia-aepd-uso-de-imagenes-de-terceros-en-sistemas-ia",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/oecd_due_diligence_guidance_analisis",
+      "destination": "/guias/oecd-due-diligence-guidance",
+      "permanent": true
+    },
+    {
+      "source": "/firma-scarpa/eu-ai-act-doctrinal-v3",
+      "destination": "/posts/eu-ai-act-doctrinal-v3",
+      "permanent": true
+    },
+    {
+      "source": "/firma-scarpa/betrayal-ai-act-liability-gap",
+      "destination": "/posts/betrayal-ai-act-liability-gap",
+      "permanent": true
+    },
+    {
+      "source": "/propiedad-intelectual-ia/ia-propiedad-intelectual-optimizado-copia-propiedad-intelectual-ia",
+      "destination": "/propiedad-intelectual-ia/ia-propiedad-intelectual-optimizado",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/responsabilidad-penal-ia-deepfakes-pornografia-infantil-2026-seo",
+      "destination": "/posts/responsabilidad-penal-ia-deepfakes-pornografia-infantil-2026-seo",
+      "permanent": true
+    },
+    {
+      "source": "/propiedad-intelectual-ia/analisis-caso-dabus-copia-propiedad-intelectual-ia",
+      "destination": "/propiedad-intelectual-ia/analisis-caso-dabus",
+      "permanent": true
+    },
+    {
+      "source": "/gobernanza/etica-algoritmica-ia-agentiva-abogacia",
+      "destination": "/etica-ia/etica-algoritmica-ia-agentiva-abogacia",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-jurisprudencial/opacidad-algoritmica-acceso-justicia-laboral-strike-out-gestion-automatizada-trabajo",
+      "destination": "/jurisprudencia/opacidad-algoritmica-acceso-justicia-laboral-strike-out-gestion-automatizada-trabajo",
+      "permanent": true
+    },
+    {
+      "source": "/propiedad-intelectual-ia/ia-generativa-copyright-estudio-ue-copia-propiedad-intelectual-ia",
+      "destination": "/propiedad-intelectual-ia/ia-generativa-derechos-autor-union-europea-resolucion",
+      "permanent": true
+    },
+    {
+      "source": "/propiedad-intelectual-ia/blindaje-de-propiedad-intelectual-en-la-era-de-la-ia-generativa-copia-propiedad-intelectual-ia",
+      "destination": "/propiedad-intelectual-ia/blindaje-de-propiedad-intelectual-en-la-era-de-la-ia-generativa",
+      "permanent": true
+    },
+    {
+      "source": "/propiedad-intelectual-ia/getty-images-v-stability-ai-copia-propiedad-intelectual-ia",
+      "destination": "/propiedad-intelectual-ia/getty-images-v-stability-ai",
+      "permanent": true
+    },
+    {
+      "source": "/propiedad-intelectual-ia/encrucijada-derecho-autor-ia-generativa-copia-propiedad-intelectual-ia",
+      "destination": "/propiedad-intelectual-ia/encrucijada-derecho-autor-ia-generativa",
+      "permanent": true
+    },
+    {
+      "source": "/firma-scarpa/justicia-inteligente-en-china",
+      "destination": "/global-ia/justicia-inteligente-china",
+      "permanent": true
+    },
+    {
+      "source": "/firma-scarpa/peritos-judiciales-inteligentes-regulacion-ia",
+      "destination": "/firma-scarpa/peritos-judiciales-inteligentes-marco-legal",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/adulation-algoritmica-sycophancy-ia-juicio-humano",
+      "destination": "/etica-ia/adulation-algoritmica-sycophancy-ia-juicio-humano",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/kgm-meta-google-responsabilidad-algoritmico",
+      "destination": "/firma-scarpa/kgm-meta-google-responsabilidad-algoritmico",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/guias/guia-ia-jueces-protocolos",
+      "destination": "/guias/guia-ia-jueces-protocolos",
+      "permanent": true
+    },
+    {
+      "source": "/análisis-jurídico/sin-domicilio-sin-ley-tratado-global-datos",
+      "destination": "/global-ia/sin-domicilio-sin-ley-tratado-global-datos",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/interes-superior-menor-verificacion-edad-privacidad",
+      "destination": "/etica-ia/interes-superior-menor-verificacion-edad-privacidad",
+      "permanent": true
+    },
+    {
+      "source": "/analisis/ia-alucina-tribunales-quien-paga-el-precio",
+      "destination": "/firma-scarpa/ia-acierta-sentencia-peligro-normalizacion-metodo-judicial",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/tendencias-gobierno-2026-ia",
+      "destination": "/firma-scarpa/tendencias-gobierno-2026-ia",
+      "permanent": true
+    },
+    {
+      "source": "/federal/ftc-v-air-ai-medidas-cautelares-fraude-algoritmico",
+      "destination": "/jurisprudencia/ftc-v-air-ai-medidas-cautelares-fraude-algoritmico",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/ia-abierta-7-capas-cerradas",
+      "destination": "/firma-scarpa/ia-abierta-7-capas-cerradas",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/superinteligencia-ordenamiento-juridico",
+      "destination": "/etica-ia/superinteligencia-ordenamiento-juridico",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/peritos-judiciales-inteligentes-regulacion-ia",
+      "destination": "/firma-scarpa/peritos-judiciales-inteligentes-marco-legal",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/transparencia-agentes-ia-dilema-regulatorio",
+      "destination": "/etica-ia/transparencia-agentes-ia-dilema-regulatorio",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/nyt-microsoft-openai-copyright-ia-generativa-fair-use",
+      "destination": "/jurisprudencia/nyt-microsoft-openai-copyright-ia-generativa-fair-use",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/sts-3826-2025-estado-abrir-algoritmos-bosco",
+      "destination": "/firma-scarpa/sts-3826-2025-estado-abrir-algoritmos-bosco",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/doe-v-xai-responsabilidad-desarrolladores-ia",
+      "destination": "/firma-scarpa/doe-v-xai-responsabilidad-desarrolladores-ia",
+      "permanent": true
+    },
+    {
+      "source": "/en/global-ai",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/jurisprudencia/citaciones-falsas-ia-abogados-sanciones",
+      "destination": "/jurisprudencia/payne-v-state-ia-citas-falsas-abogada-sancionada-georgia",
+      "permanent": true
+    },
+    {
+      "source": "/analisis-juridico/fraude-deepfake-tiempo-real-caso-arup-ai-act",
+      "destination": "/firma-scarpa/fraude-deepfake-tiempo-real-caso-arup-ai-act",
+      "permanent": true
+    },
+    {
+      "source": "/noticia/eurlex-fallback-1",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/noticia/2020-02-13-la-aepd-publica-una-guia-para-adaptar-al-rgpd-los-productos-y-servicios-que-utilicen-inteligencia-artificial",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/recursos/guia-cifrado-autonomos-pymes",
+      "destination": "/guias/guia-ciberseguridad-ia-despacho-abogados",
+      "permanent": true
+    },
+    {
+      "source": "/guia/2020-03-05-la-aepd-publica-un-modelo-de-informe-para-ayudar-a-las-empresas-a-realizar-evaluaciones-impacto-en-la-proteccion-de-datos",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/analisis/ia-sector-legal",
+      "destination": "/firma-scarpa/ia-servicios-profesionales-adopcion-sin-roi",
+      "permanent": true
     }
   ]
 }
