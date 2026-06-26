@@ -24,10 +24,11 @@ const warnings = [];
 const ok = [];
 
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  const normalized = content.replace(/^\uFEFF/, '');
+  const match = normalized.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) return {};
   const fm = {};
-  for (const line of match[1].split('\n')) {
+  for (const line of match[1].split(/\r?\n/)) {
     const m = line.match(/^(\w[\w-]*):\s*["']?([^"'\n#]+)["']?/);
     if (m) fm[m[1].trim()] = m[2].trim();
   }
@@ -47,7 +48,7 @@ for (const section of NEW_SECTIONS) {
     const content = fs.readFileSync(mdxPath, 'utf8');
     const fm = parseFrontmatter(content);
 
-    if (!content.startsWith('---')) {
+    if (!content.replace(/^\uFEFF/, '').startsWith('---')) {
       errors.push('SIN FRONTMATTER: content/' + section + '/' + slug + '/index.mdx');
       continue;
     }
@@ -95,7 +96,8 @@ for (const section of NEW_SECTIONS) {
   const slugPage = path.join(BASE, 'src', 'app', ...routePath.split('/'), '[slug]', 'page.tsx');
   if (!fs.existsSync(slugPage)) continue;
   const content = fs.readFileSync(slugPage, 'utf8');
-  if (!content.includes('section') && !content.includes('getPostBySlug') && !content.includes('listSectionResourceSlugs')) {
+  const isReExportToGuiasIa = content.includes('from "@/app/guias-ia/[slug]/page"') || content.includes("from '@/app/guias-ia/[slug]/page'");
+  if (!isReExportToGuiasIa && !content.includes('section') && !content.includes('getPostBySlug') && !content.includes('listSectionResourceSlugs')) {
     errors.push('FILTRO SIN section: src/app/' + routePath + '/[slug]/page.tsx no filtra por frontmatter.section');
   }
 }

@@ -20,7 +20,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar dependencias
@@ -39,6 +39,9 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Diagnóstico de contenido y rutas
+        run: npm run diagnostico
+
   # ─────────────────────────────────────────
   # 2. VALIDACIÓN DE ARCHIVOS MDX (CONTENIDO)
   # ─────────────────────────────────────────
@@ -52,7 +55,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar dependencias
@@ -74,7 +77,8 @@ jobs:
 
           files.forEach(file => {
             const content = fs.readFileSync(file, 'utf-8');
-            const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+            const normalized = content.replace(/^\uFEFF/, '');
+            const frontmatterMatch = normalized.match(/^---\r?\n([\s\S]*?)\r?\n---/);
 
             if (!frontmatterMatch) {
               errores.push(`❌ Sin frontmatter: ${file}`);
@@ -91,13 +95,13 @@ jobs:
             });
 
             // Comprobar que description no está vacía ni es "..."
-            const descMatch = frontmatter.match(/description:\s*["']?(.+?)["']?\n/);
+            const descMatch = frontmatter.match(/description:\s*["']?(.+?)["']?\r?\n/);
             if (descMatch && (descMatch[1].trim() === '...' || descMatch[1].trim() === '')) {
               errores.push(`⚠️  Description vacía o incompleta en: ${file}`);
             }
 
             // Comprobar que title tiene longitud razonable para SEO (30-70 chars)
-            const titleMatch = frontmatter.match(/title:\s*["']?(.+?)["']?\n/);
+            const titleMatch = frontmatter.match(/title:\s*["']?(.+?)["']?\r?\n/);
             if (titleMatch) {
               const len = titleMatch[1].trim().length;
               if (len < 20) errores.push(`⚠️  Título demasiado corto (${len} chars) en: ${file}`);
@@ -130,7 +134,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar dependencias
@@ -196,7 +200,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Instalar dependencias

@@ -24,7 +24,8 @@
     "revalidate:home:unix": "bash scripts/revalidate-home.sh",
     "interlinking": "node scripts/interlinking-complete-fixed.mjs",
     "interlinking:dry": "node scripts/interlinking-complete-fixed.mjs",
-    "interlinking:apply": "node -e \"import('./scripts/interlinking-complete-fixed.mjs').then(m => { m.processFiles(); })\""
+    "interlinking:apply": "node -e \"import('./scripts/interlinking-complete-fixed.mjs').then(m => { m.processFiles(); })\"",
+    "diagnostico": "node scripts/diagnostico.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
