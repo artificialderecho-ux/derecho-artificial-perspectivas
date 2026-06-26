@@ -46,7 +46,7 @@ export async function generateMetadata({
 
     const ogImage = getHeroImage("etica-ia");
     return {
-      title: `${title} | Derecho Artificial`,
+      title,
       description: metaDescription,
       alternates: { canonical },
       robots: {

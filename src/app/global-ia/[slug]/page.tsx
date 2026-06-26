@@ -57,7 +57,7 @@ export async function generateMetadata({
 
     const ogImage = getHeroImage("global-ia");
     return {
-      title: `${title} | Derecho Artificial`,
+      title,
       description: metaDescription,
       alternates: { canonical },
       robots: {

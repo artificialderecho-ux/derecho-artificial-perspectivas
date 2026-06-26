@@ -76,7 +76,7 @@ export async function generateMetadata({
       mdxPost.excerpt || description || "Monitor editorial de novedades regulatorias sobre inteligencia artificial.";
     const canonical = `https://derechoartificial.com/guias-ia/${slug}`;
     return {
-      title: `${title} | Derecho Artificial`,
+      title,
       description: metaDescription,
       alternates: { canonical },
       robots: {
@@ -105,7 +105,7 @@ export async function generateMetadata({
 
   const entry: ResolvedContentEntry | ResourceEntry = (jsonEntry ?? resourceEntry)!;
 
-  const title = `${entry.title} | Derecho Artificial`;
+  const title = entry.title;
   const description =
     jsonEntry?.description ??
     resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) ??

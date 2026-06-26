@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const canonical = mdxPost.frontmatter.canonical ?? `https://derechoartificial.com/${category}/${slug}`;
     const ogImage = getHeroImage("jurisprudencia");
     return {
-      title: `${title} | Derecho Artificial`,
+      title,
       description: metaDescription,
       alternates: { canonical },
       robots: {
@@ -107,7 +107,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const ogImage = getHeroImage("jurisprudencia");
 
   return {
-    title: `${entry.title} | Derecho Artificial`,
+    title: entry.title,
     description,
     alternates: {
       canonical,

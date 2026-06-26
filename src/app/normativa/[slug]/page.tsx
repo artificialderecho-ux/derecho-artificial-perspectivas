@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const canonical = `https://derechoartificial.com/${category}/${slug}`;
     const ogImage = getHeroImage("normativa");
     return {
-      title: `${title} | Derecho Artificial`,
+      title,
       description: metaDescription,
       alternates: { canonical },
       robots: {
@@ -100,7 +100,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const ogImage = getHeroImage("normativa");
 
   return {
-    title: `${entry.title} | Derecho Artificial`,
+    title: entry.title,
     description,
     alternates: {
       canonical,

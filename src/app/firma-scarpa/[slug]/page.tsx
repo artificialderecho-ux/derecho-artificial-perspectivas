@@ -87,7 +87,7 @@ export async function generateMetadata({
     const canonical = mdxPost.frontmatter.canonical ?? `https://derechoartificial.com/${category}/${slug}`;
       const ogImage = getHeroImage("firma-scarpa");
       return {
-        title: `${title} | Derecho Artificial`,
+        title,
         description: metaDescription,
         alternates: { canonical },
         robots: {
@@ -129,7 +129,7 @@ export async function generateMetadata({
 
   const entry: ResolvedContentEntry | ResourceEntry = (jsonEntry ?? resourceEntry)!;
 
-  const title = `${entry.title} | Derecho Artificial`;
+  const title = entry.title;
   const description =
     jsonEntry?.description ||
     (resourceEntry as ResourceEntry)?.description ||

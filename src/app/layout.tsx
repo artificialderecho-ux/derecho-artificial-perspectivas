@@ -12,17 +12,13 @@ import {
 } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : "https://derechoartificial.com"
-  ),
+  metadataBase: new URL("https://derechoartificial.com"),
   title: {
-    default: "Derecho, ética y regulación de la IA",
+    default: "Regulación IA: AI Act, RGPD y compliance | Derecho Artificial",
     template: "%s | Derecho Artificial",
   },
   description:
-    "Análisis jurídico experto del Reglamento IA. Guías prácticas y criterio independiente para abogados y compliance.",
+    "Domina el AI Act, el RGPD y la jurisprudencia IA. Análisis jurídico, guías de compliance y sentencias comentadas para abogados y DPO.",
   keywords: [
     "derecho artificial",
     "inteligencia artificial",
