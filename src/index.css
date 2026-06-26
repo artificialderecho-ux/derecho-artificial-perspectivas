@@ -1,3 +1,11 @@
+/* WIRED-inspired editorial tokens */
+:root {
+  --wired-black: 0 0% 0%;
+  --wired-white: 0 0% 100%;
+  --wired-ink: 0 0% 7%;
+  --wired-rule: 0 0% 0%;
+}
+
 /* Using local/system SF Pro; remove external font imports */
 
 @tailwind base;
@@ -38,7 +46,7 @@
   html {
     @apply scroll-smooth;
   }
-  
+
   body {
     @apply font-sans bg-background text-foreground antialiased text-base md:text-lg;
   }
@@ -148,12 +156,12 @@
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 0 0% 80%;
-    
+
     --text-body: 0 0% 80%;
     --text-caption: 0 0% 60%;
     --divider: 0 0% 20%;
     --highlight: 0 0% 15%;
-    
+
     --hero-bg: 0 0% 10%;
     --hero-overlay: 0 0% 15%;
   }
@@ -163,7 +171,7 @@
   .font-display {
     font-family: "SF Pro","SF Pro Text","SF Pro Display",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif !important;
   }
-  
+
   .bento-surface {
     background: linear-gradient(135deg, hsl(var(--background-gradient-start)), hsl(var(--background-gradient-end)));
     @apply border-b border-divider;
@@ -171,21 +179,21 @@
   .section-spacing {
     @apply py-16 md:py-24;
   }
-  
+
   .container-narrow {
     @apply container mx-auto px-6 max-w-3xl;
   }
-  
+
   .container-wide {
     @apply container mx-auto px-6 max-w-7xl;
   }
-  
+
   .container-editorial {
     @apply container mx-auto px-6 max-w-4xl;
   }
-  
+
   .prose-editorial {
-    @apply prose prose-neutral dark:prose-invert max-w-none 
+    @apply prose prose-neutral dark:prose-invert max-w-none
     prose-headings:font-sans prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl
     prose-p:text-lg prose-p:leading-relaxed prose-p:text-body prose-p:text-justify prose-p:font-medium
     prose-a:text-primary prose-a:no-underline prose-a:border-b prose-a:border-primary/30 hover:prose-a:border-primary
@@ -199,12 +207,12 @@
   .nav-link {
     @apply text-sm font-medium transition-colors hover:text-primary relative py-2;
   }
-  
+
   .nav-link::after {
     content: '';
     @apply absolute bottom-0 left-0 w-full h-[1px] bg-primary scale-x-0 transition-transform duration-300 origin-right;
   }
-  
+
   .nav-link:hover::after {
     @apply scale-x-100 origin-left;
   }

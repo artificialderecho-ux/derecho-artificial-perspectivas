@@ -1,8 +1,6 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { listContentSlugs, getContentEntry, ContentSection } from '@/lib/content';
 import { getSectionResourceEntry, listSectionResourceSlugs } from '@/lib/resources';
 import { getAllPosts } from '@/lib/mdx-utils';
@@ -115,31 +113,24 @@ export default async function HomePage() {
       title: e.title,
       description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
       date: e.displayDateMs ?? e.dateMs ?? 0,
-      urlPath: `/guias-ia/${e.slug}`,
+      urlPath: `/actualidad-ia/${e.slug}`,
       author: "Derecho Artificial",
     })),
   ];
 
   const unifiedFirma = [
     // Priorizar posts MDX de Firma Scarpa
-    ...getAllPosts().filter(post => {
-      const category = (post.frontmatter.category || "").toLowerCase();
-      const section = (post.frontmatter.section || "").toLowerCase();
-      const categoryNormalized = category.replace(/-/g, ' ');
-      const sectionNormalized = section.replace(/-/g, ' ');
-      
-      return (
-        category === "firma-scarpa" ||
-        categoryNormalized === "firma scarpa" ||
-        categoryNormalized === "firma-scarpa" ||
-        section === "firma-scarpa" ||
-        sectionNormalized === "firma scarpa" ||
-        sectionNormalized === "firma-scarpa"
-      );
-    }).map(post => ({
+    ...getAllPosts().filter(post =>
+      post.frontmatter.category &&
+      (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
+       post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
+       post.frontmatter.category.toLowerCase() === 'firma scarpa' ||
+       post.frontmatter.category.toLowerCase() === 'firma-scarpa' ||
+       (post.frontmatter.section || "").toLowerCase() === 'firma-scarpa')
+    ).map(post => ({
       title: post.frontmatter.title,
       description: post.excerpt,
-      date: post.dateMs,
+      date: new Date(post.frontmatter.date).getTime(),
       urlPath: post.url,
       author: post.frontmatter.author || "Ricardo Scarpa",
     })),
@@ -253,14 +244,14 @@ export default async function HomePage() {
       );
     })
     .filter((post) => isAllowedLanguage(post.frontmatter.title, post.excerpt))
-    .sort((a, b) => b.dateMs - a.dateMs)
+    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
     .slice(0, 6);
   const newsEntries =
     newsMdxCandidates.length > 0
       ? newsMdxCandidates.map((post) => ({
           title: post.frontmatter.title,
           description: post.excerpt,
-          date: post.dateMs,
+          date: new Date(post.frontmatter.date).getTime(),
           urlPath: post.url,
           author: post.frontmatter.author || "Derecho Artificial",
           type: "Noticias IA" as const,
@@ -283,7 +274,7 @@ export default async function HomePage() {
       if (Number.isNaN(date.getTime())) return "";
       return date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" });
     }
-    
+
     // Si es una string de fecha (como "2026-02-10")
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return "";
@@ -354,7 +345,7 @@ export default async function HomePage() {
       .filter((e): e is NonNullable<typeof e> => Boolean(e))
       .map((e) => ({
         title: e.title,
-        href: `/guias-ia/${e.slug}`,
+        href: `/recursos/guias/${e.slug}`,
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
         meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Repositorio de documentación técnica y ética`,
         dateMs: e.displayDateMs ?? e.dateMs ?? 0,
@@ -423,7 +414,7 @@ export default async function HomePage() {
     {
       key: "guias",
       label: "Guías y Protocolos",
-      href: "/guias-ia",
+      href: "/recursos/guias",
       items: uniqueByHref(guiasItems).slice(0, 2),
     },
     {
@@ -464,330 +455,107 @@ export default async function HomePage() {
     }
   };
 
+  const latestMdxCards = mdxPosts
+    .filter((post) => isAllowedLanguage(post.frontmatter.title, post.excerpt))
+    .sort((a, b) => b.dateMs - a.dateMs)
+    .slice(0, 7)
+    .map((post) => ({
+      title: post.frontmatter.title,
+      description: post.excerpt,
+      href: post.url,
+      meta: `${formatDate(post.dateMs)} · ${post.frontmatter.author || "Derecho Artificial"}`,
+      dateMs: post.dateMs,
+      section: post.frontmatter.category || post.frontmatter.section || "Análisis",
+    }));
+
+  const hero = unifiedFirma[0]
+    ? {
+        title: unifiedFirma[0].title,
+        description: unifiedFirma[0].description,
+        href: unifiedFirma[0].urlPath,
+        meta: `${formatDate(unifiedFirma[0].date)} · ${unifiedFirma[0].author}`,
+        section: "Firma Scarpa",
+      }
+    : latestMdxCards[0];
+
+  const heroSidebar = latestMdxCards.filter((item) => item.href !== hero?.href).slice(0, 4);
+  const topGrid = latestMdxCards.filter((item) => item.href !== hero?.href).slice(4, 7);
+  const firmaRow = unifiedFirma.slice(1, 4).map((entry) => ({
+    title: entry.title,
+    description: entry.description,
+    href: entry.urlPath,
+    meta: `${formatDate(entry.date)} · ${entry.author}`,
+    dateMs: entry.date,
+    section: "Firma Scarpa",
+  }));
+
+  const featuredPair = [normativaItems[0], jurisprudenciaItems[0]].filter(Boolean);
+  const newestBySection = [
+    { label: "Firma", value: latestFirmaMs },
+    { label: "Normativa", value: latestNormativaMs },
+    { label: "Jurisprudencia", value: latestJurisprudenciaMs },
+    { label: "Guías", value: latestGuiasMs },
+  ];
+
+  const SectionHeading = ({ eyebrow, title, href }: { eyebrow: string; title: string; href?: string }) => (
+    <div className="mb-5 flex items-end justify-between gap-4 border-b-4 border-black pb-2">
+      <div>
+        <p className="font-display text-xs font-black uppercase tracking-[0.22em] text-caption">{eyebrow}</p>
+        <h2 className="font-display text-3xl font-black uppercase leading-none tracking-[-0.04em] md:text-5xl">{title}</h2>
+      </div>
+      {href ? <Link href={href} className="hidden text-xs font-black uppercase tracking-[0.18em] underline underline-offset-4 sm:inline-flex">Ver todo</Link> : null}
+    </div>
+  );
+
+  const ArticleLink = ({ item, large = false }: { item: { title: string; description?: string; href: string; meta?: string; section?: string }; large?: boolean }) => (
+    <Link href={item.href} className="group block border-b border-black py-4 last:border-b-0">
+      <p className="mb-2 font-display text-[11px] font-black uppercase tracking-[0.22em] text-caption">{item.section || "Derecho Artificial"}</p>
+      <h3 className={`font-display font-black uppercase leading-[0.92] tracking-[-0.045em] group-hover:underline ${large ? "text-4xl md:text-6xl lg:text-7xl" : "text-xl md:text-2xl"}`}>{item.title}</h3>
+      {item.description ? <p className="mt-3 line-clamp-3 text-sm leading-6 text-body md:text-base">{item.description}</p> : null}
+      {item.meta ? <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.16em] text-caption">{item.meta}</p> : null}
+    </Link>
+  );
+
   return (
     <>
-      <Breadcrumbs 
-        items={[
-          { label: "Inicio", href: "/" }
-        ]}
-      />
-      <main>
-      <section className="relative w-full h-80 md:h-96 lg:h-[500px]">
-        <Image
-          src="/images/heroes/home-hero.webp"
-          alt="Derecho e IA"
-          fill
-          className="object-cover bg-center"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/65 flex flex-col items-center justify-center text-center text-white px-6">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl">
-            Derecho Artificial
-          </h1>
-          <p className="text-sm md:text-base lg:text-lg mt-2 max-w-2xl drop-shadow-lg font-medium">
-            Derecho, ética y regulación de la IA
-          </p>
-          <p className="text-xs md:text-sm lg:text-base mt-2 max-w-3xl drop-shadow-lg text-white/80 text-center">
-            Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.
-          </p>
-          <div className="mt-8 flex flex-col md:flex-row gap-4">
-            <Link
-              href="/guias-ia"
-              className="bg-primary text-white px-8 py-4 rounded-lg font-bold hover:bg-primary/90 transition-colors"
-            >
-              Ver guías IA
-            </Link>
-            <Link
-              href="/#secciones"
-              className="bg-white text-primary px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors"
-            >
-              Explorar secciones
-            </Link>
-          </div>
-        </div>
-      </section>
-      
-      
-
-      <section className="section-spacing bento-surface">
-        <div className="container-wide">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-caption mb-3">
-                Noticias IA
-              </p>
-              <h2 className="font-serif text-2xl md:text-3xl text-foreground">
-                Últimas novedades por sección
-              </h2>
+      <Breadcrumbs items={[{ label: "Inicio", href: "/" }]} />
+      <main className="bg-white text-black">
+        <section className="border-y-4 border-black">
+          <div className="mx-auto grid max-w-[1500px] grid-cols-1 lg:grid-cols-[1fr_360px]">
+            <div className="border-black p-4 md:p-8 lg:border-r">
+              <p className="font-display text-xs font-black uppercase tracking-[0.35em]">Derecho, ética y regulación de la IA</p>
+              {hero ? <ArticleLink item={hero} large /> : null}
             </div>
-            <div className="max-w-xl">
-              <p className="text-sm text-caption">
-                Explora nuestros últimos briefings, ensayos y actualizaciones. Selección editorial para aportar criterio técnico y jurídico.
-              </p>
-              <div className="mt-3">
-                <Link
-                  href="/guias-ia"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
-                >
-                  Ver todas las guías
-                </Link>
-              </div>
-            </div>
+            <aside className="divide-y divide-black border-t border-black lg:border-t-0">
+              <div className="bg-black px-4 py-3 text-white"><h2 className="font-display text-xl font-black uppercase tracking-[-0.03em]">Últimos titulares</h2></div>
+              {heroSidebar.map((item) => <div key={item.href} className="px-4"><ArticleLink item={item} /></div>)}
+            </aside>
           </div>
-          {(() => {
-            const sections = [
-              {
-                title: "Firma Scarpa",
-                category: "firma-scarpa",
-                image: "/images/heroes/firma-scarpa-hero.webp",
-                href: "/firma-scarpa",
-              },
-              {
-                title: "Normativa IA",
-                category: "normativa",
-                image: "/images/heroes/normativa-ia-hero.webp",
-                href: "/normativa",
-              },
-              {
-                title: "Jurisprudencia IA",
-                category: "jurisprudencia",
-                image: "/images/heroes/jurisprudencia-ia-hero.webp",
-                href: "/jurisprudencia",
-              },
-              {
-                title: "Guías IA",
-                category: "guias-ia",
-                image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
-                  ? "/images/heroes/guias-ia-hero.wep"
-                  : "/images/heroes/guias-ia-hero.webp",
-                href: "/guias-ia",
-              },
-              {
-                title: "Propiedad Intelectual IA",
-                category: "propiedad-intelectual-ia",
-                image: "/images/heroes/propiedad-intelectual-ia-hero.webp",
-                href: "/propiedad-intelectual-ia",
-              },
-              {
-                title: "Ética IA",
-                category: "etica-ia",
-                image: "/images/heroes/etica-ia-hero.webp",
-                href: "/etica-ia",
-              },
-              {
-                title: "IA Global",
-                category: "global-ia",
-                image: "/images/heroes/ia-global-hero.webp",
-                href: "/global-ia",
-              },
-            ];
-            const getLatestByCategory = (cat: string) =>
-              mdxPosts
-                .filter((post) => {
-                  const c = (post.frontmatter.category || "").toLowerCase();
-                  const cNormalized = c.replace(/-/g, ' ');
-                  const title = (post.frontmatter.title || "").toLowerCase();
-                  const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-                  const subcat = (post.frontmatter.subcategory || "").toLowerCase();
-                  
-                  // Para Firma Scarpa, incluir categorías relacionadas y contenido específico
-                  if (cat === "firma-scarpa") {
-                    return (
-                      c === "firma-scarpa" ||
-                      cNormalized === "firma scarpa" ||
-                      (post.frontmatter.section || "").toLowerCase() === "firma-scarpa"
-                    );
-                  }
-                  
-                  // Para normativa, incluir categorías relacionadas y contenido específico
-                  if (cat === "normativa") {
-                    return (
-                      c === "normativa" ||
-                      cNormalized === "normativa" ||
-                      cNormalized === "normativa ia" ||
-                      c === "normativa-ia" ||
-                      (post.frontmatter.section || "").toLowerCase() === "normativa"
-                    );
-                  }
-                  
-                  // Para jurisprudencia, incluir categorías relacionadas y contenido específico
-                  if (cat === "jurisprudencia") {
-                    return (
-                      c === "jurisprudencia" ||
-                      cNormalized === "jurisprudencia" ||
-                      cNormalized === "jurisprudencia ia" ||
-                      c === "jurisprudencia-ia" ||
-                      (post.frontmatter.section || "").toLowerCase() === "jurisprudencia"
-                    );
-                  }
-                  
-                  // Para IA Global, incluir categorías relacionadas y contenido específico
-                  if (cat === "ia-global" || cat === "global-ia") {
-                    return (
-                      c === "ia-global" ||
-                      c === "global-ia" ||
-                      cNormalized === "global ia" ||
-                      cNormalized === "ia global" ||
-                      (post.frontmatter.section || "").toLowerCase() === "global-ia" ||
-                      (post.frontmatter.section || "").toLowerCase() === "ia-global"
-                    );
-                  }
-                  
-                  // Para Propiedad Intelectual, incluir categorías relacionadas y contenido específico
-                  if (cat === "propiedad-intelectual-ia") {
-                    return (
-                      c === "propiedad-intelectual-ia" ||
-                      cNormalized === "propiedad intelectual ia" ||
-                      cNormalized === "propiedad intelectual" ||
-                      c === "propiedad-intelectual" ||
-                      (post.frontmatter.section || "").toLowerCase() === "propiedad-intelectual-ia"
-                    );
-                  }
-                  
-                  // Para Ética IA, incluir categorías relacionadas y contenido específico
-                                    // Para Guías IA, incluir tanto guias como guias-ia
-                  if (cat === "guias-ia" || cat === "guias") {
-                    return (
-                      c === "guias-ia" ||
-                      c === "guias" ||
-                      (post.frontmatter.section || "").toLowerCase() === "guias" ||
-                      (c === "recursos" && subcat === "guias")
-                    );
-                  }
-                  
-                  if (cat === "etica-ia") {
-                    return (
-                      c === "etica-ia" ||
-                      cNormalized === "etica ia" ||
-                      (post.frontmatter.section || "").toLowerCase() === "etica-ia"
-                    );
-                  }
-                  
-                  if (c !== cat) return false;
-                  if (c === "recursos") {
-                    const subcat = (post.frontmatter.subcategory || "").toLowerCase();
-                    return subcat === "guias";
-                  }
-                  return true;
-                })
-                .sort((a, b) => b.dateMs - a.dateMs)
-                .slice(0, 2);
-
-                    const getLatestFirmaPosts = () => {
-              return unifiedFirma.slice(0, 2).map((entry, idx) => ({
-                slug: "firma-home-" + idx,
-                frontmatter: {
-                  title: entry.title,
-                  date: new Date(entry.date).toISOString(),
-                  category: "firma-scarpa",
-                },
-                excerpt: entry.description || "",
-                url: entry.urlPath,
-              }));
-            };
-
-        const getLatestActualidadPosts = () =>
-          unifiedActualidad.slice(0, 2).map((entry, idx) => ({
-            slug: `actualidad-home-${idx}`,
-            frontmatter: {
-              title: entry.title,
-              date: new Date(entry.date).toISOString(),
-              category: "guias-ia",
-            },
-            excerpt: entry.description || "",
-            url: entry.urlPath,
-          }));
-
-            const buildHref = (post: any) => {
-              const c = (post.frontmatter.category || "").toLowerCase();
-              const subcat = (post.frontmatter.subcategory || "").toLowerCase();
-              const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-
-              if (c === "noticia" && post.frontmatter.url) {
-                return post.frontmatter.url;
-              }
-              if (c === "recursos" && (subcat === "guias" || tags.includes("guias"))) {
-                return `/guias-ia/${post.slug}`;
-              }
-
-              return post.url;
-            };
-
-            return (
-              <div className="space-y-10">
-                {sections.map((sec) => {
-              const items =
-                sec.category === "firma-scarpa"
-                    ? getLatestFirmaPosts()
-                    : sec.category === "recursos"
-                      ? getLatestByCategory("recursos")
-                      : getLatestByCategory(sec.category);
-                  const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
-                  return (
-                    <div
-                      key={sec.category}
-                      className="group flex flex-col rounded-lg overflow-hidden border border-divider shadow-md hover:shadow-lg transition"
-                    >
-                      <Link
-                        href={sec.href}
-                        className="relative block w-full aspect-video overflow-hidden"
-                      >
-                        <Image
-                          src={sec.image}
-                          alt={sec.title}
-                          fill
-                          sizes="100vw"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
-                          priority={false}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/50" />
-                        <div className="absolute inset-0 flex items-end px-6 pb-6">
-                          <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-                            {sec.title}
-                          </h3>
-                        </div>
-                      </Link>
-                      <div className="w-full p-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white">
-                        {slots.map((post, idx) =>
-                          post ? (
-                            <Link
-                              key={`${post.slug}-${idx}`}
-                              href={buildHref(post)}
-                              className="group bg-white border border-border rounded-sm p-5 md:p-6 min-h-36 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                            >
-                              <p className="text-[10px] uppercase tracking-[0.25em] text-caption mb-3">
-                                {sec.title}
-                              </p>
-                              <h4 className="font-serif text-lg text-foreground mb-2">
-                                {post.frontmatter.title}
-                                <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
-                              </h4>
-                              <p className="text-xs text-caption mb-2">{formatDate(post.frontmatter.date)}</p>
-                              <p className="text-sm text-body line-clamp-3">{post.excerpt}</p>
-                            </Link>
-                          ) : (
-                            <div
-                              key={`placeholder-${sec.category}-${idx}`}
-                              className="border border-dashed border-divider rounded-sm p-5 bg-white"
-                            >
-                              <p className="text-sm text-body">Próximamente contenido</p>
-                            </div>
-                          ),
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })()}
-        </div>
-      </section>
-
-      
-    </main>
+        </section>
+        <section className="mx-auto max-w-[1500px] px-4 py-8 md:px-8">
+          <div className="mb-8 grid grid-cols-2 gap-2 border-y border-black py-3 text-center md:grid-cols-4">
+            {newestBySection.map((item) => <div key={item.label} className="border-black px-2 md:border-r md:last:border-r-0"><p className="font-display text-xs font-black uppercase tracking-[0.2em]">{item.label}</p><p className="text-xs text-caption">{item.value ? formatDate(item.value) : "Sin fecha"}</p></div>)}
+          </div>
+          <SectionHeading eyebrow="Radar editorial" title="Lo último" />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">{topGrid.map((item) => <ArticleLink key={item.href} item={item} />)}</div>
+        </section>
+        <section className="mx-auto max-w-[1500px] px-4 py-8 md:px-8">
+          <SectionHeading eyebrow="Selección" title="Normativa y jurisprudencia" />
+          <div className="grid grid-cols-1 border-y border-black md:grid-cols-2">{featuredPair.map((item, index) => <div key={item.href} className={`p-4 md:p-6 ${index === 0 ? "md:border-r md:border-black" : ""}`}><ArticleLink item={{ ...item, section: index === 0 ? "Normativa" : "Jurisprudencia" }} large /></div>)}</div>
+        </section>
+        <section className="mx-auto max-w-[1500px] px-4 py-8 md:px-8">
+          <SectionHeading eyebrow="Opinión y análisis" title="Firma Scarpa" href="/firma-scarpa" />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">{firmaRow.map((item) => <ArticleLink key={item.href} item={item} />)}</div>
+        </section>
+        <section className="mx-auto grid max-w-[1500px] grid-cols-1 gap-8 px-4 py-8 md:px-8 lg:grid-cols-2">
+          <div><SectionHeading eyebrow="Fuentes oficiales" title="Normativa" href="/normativa" />{normativaItems.map((item) => <ArticleLink key={item.href} item={{ ...item, section: "Normativa" }} />)}</div>
+          <div><SectionHeading eyebrow="Resoluciones" title="Jurisprudencia" href="/jurisprudencia" />{jurisprudenciaItems.map((item) => <ArticleLink key={item.href} item={{ ...item, section: "Jurisprudencia" }} />)}</div>
+        </section>
+        <section className="mx-auto max-w-[1500px] px-4 py-8 md:px-8">
+          <SectionHeading eyebrow="Práctica profesional" title="Guías" href="/guias-ia" />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">{guiasItems.map((item) => <ArticleLink key={item.href} item={{ ...item, section: "Guías" }} />)}</div>
+        </section>
+      </main>
     </>
   );
 }
-
-
