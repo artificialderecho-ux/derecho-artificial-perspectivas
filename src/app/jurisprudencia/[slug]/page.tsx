@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const { title, description, category, date } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre jurisprudencia en IA.";
-    const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
+    const canonical = mdxPost.frontmatter.canonical ?? `https://derechoartificial.com/${category}/${slug}`;
     const ogImage = getHeroImage("jurisprudencia");
     return {
       title: `${title} | Derecho Artificial`,
@@ -103,7 +103,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const entry = await getSectionResourceEntry("jurisprudencia", slug);
   if (!entry) return {};
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) || "Análisis jurídico experto sobre IA por Ricardo Scarpa";
-  const canonical = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
+  const canonical = `https://derechoartificial.com/jurisprudencia/${entry.slug}`;
   const ogImage = getHeroImage("jurisprudencia");
 
   return {
@@ -200,7 +200,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
   const entry = await getSectionResourceEntry("jurisprudencia", slug);
   if (!entry) notFound();
 
-  const url = `https://www.derechoartificial.com/jurisprudencia/${entry.slug}`;
+  const url = `https://derechoartificial.com/jurisprudencia/${entry.slug}`;
   const description = entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200);
 
   const datePublished =
@@ -218,21 +218,21 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
     "author": { 
       "@type": "Person", 
       "name": "Ricardo Scarpa",
-      "url": "https://www.derechoartificial.com/quienes-somos"
+      "url": "https://derechoartificial.com/quienes-somos"
     },
     "publisher": { 
       "@type": "Organization", 
       "name": "Derecho Artificial",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.derechoartificial.com/logo-principal.png"
+        "url": "https://derechoartificial.com/logo-principal.png"
       }
     },
     "datePublished": postDate,
     "dateModified": (entry as any).updatedAt || postDate,
     "image": {
       "@type": "ImageObject",
-      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "url": "https://derechoartificial.com/og-default-1200x630.jpg",
       "width": 1200,
       "height": 630
     },

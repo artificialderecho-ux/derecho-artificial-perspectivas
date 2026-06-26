@@ -84,7 +84,7 @@ export async function generateMetadata({
       const { title, description, category, date, section } = mdxPost.frontmatter;
     const metaDescription =
       mdxPost.excerpt || description || "Análisis jurídico experto sobre IA por Ricardo Scarpa.";
-    const canonical = mdxPost.frontmatter.canonical ?? `https://www.derechoartificial.com/${category}/${slug}`;
+    const canonical = mdxPost.frontmatter.canonical ?? `https://derechoartificial.com/${category}/${slug}`;
       const ogImage = getHeroImage("firma-scarpa");
       return {
         title: `${title} | Derecho Artificial`,
@@ -136,7 +136,7 @@ export async function generateMetadata({
     resourceEntry?.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 158) ||
     entry.title.slice(0, 158);
 
-  const canonical = jsonEntry?.urlPath ?? `https://www.derechoartificial.com/firma-scarpa/${entry.slug}`;
+  const canonical = jsonEntry?.urlPath ?? `https://derechoartificial.com/firma-scarpa/${entry.slug}`;
   
   // Get published time for OpenGraph
   const publishedTime = jsonEntry?.datePublished || (resourceEntry as any)?.datePublished;
@@ -344,7 +344,7 @@ export default async function FirmaScarpaSlugPage({
       "@type": "Person",
       "name": "Ricardo Scarpa",
       "jobTitle": "Abogado experto en Derecho Digital e Inteligencia Artificial",
-      "url": "https://www.derechoartificial.com/quienes-somos",
+      "url": "https://derechoartificial.com/quienes-somos",
       "sameAs": [
         "https://www.linkedin.com/in/ricardoscarpa",
       ],
@@ -382,21 +382,21 @@ export default async function FirmaScarpaSlugPage({
       "author": { 
         "@type": "Person", 
         "name": "Ricardo Scarpa",
-        "url": "https://www.derechoartificial.com/quienes-somos"
+        "url": "https://derechoartificial.com/quienes-somos"
       },
       "publisher": { 
         "@type": "Organization", 
         "name": "Derecho Artificial",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.derechoartificial.com/logo-principal.png"
+          "url": "https://derechoartificial.com/logo-principal.png"
         }
       },
       "datePublished": jsonEntry.datePublished,
       "dateModified": jsonEntry.datePublished,
       "image": {
         "@type": "ImageObject",
-        "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+        "url": "https://derechoartificial.com/og-default-1200x630.jpg",
         "width": 1200,
         "height": 630
       },
@@ -489,7 +489,7 @@ export default async function FirmaScarpaSlugPage({
 
   const entry = resourceEntry as ResourceEntry;
 
-  const url = `https://www.derechoartificial.com/firma-scarpa/${entry.slug}`;
+  const url = `https://derechoartificial.com/firma-scarpa/${entry.slug}`;
   const description =
     entry.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) || entry.title;
 
@@ -508,21 +508,21 @@ export default async function FirmaScarpaSlugPage({
     "author": { 
       "@type": "Person", 
       "name": "Ricardo Scarpa",
-      "url": "https://www.derechoartificial.com/quienes-somos"
+      "url": "https://derechoartificial.com/quienes-somos"
     },
     "publisher": { 
       "@type": "Organization", 
       "name": "Derecho Artificial",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.derechoartificial.com/logo-principal.png"
+        "url": "https://derechoartificial.com/logo-principal.png"
       }
     },
     "datePublished": postDate,
     "dateModified": (entry as any).updatedAt || postDate,
     "image": {
       "@type": "ImageObject",
-      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "url": "https://derechoartificial.com/og-default-1200x630.jpg",
       "width": 1200,
       "height": 630
     },
@@ -584,7 +584,7 @@ export default async function FirmaScarpaSlugPage({
     "@type": "Person",
     "name": "Ricardo Scarpa",
     "jobTitle": "Abogado experto en Derecho Digital e Inteligencia Artificial",
-    "url": "https://www.derechoartificial.com/quienes-somos",
+    "url": "https://derechoartificial.com/quienes-somos",
     "sameAs": [
         "https://www.linkedin.com/in/ricardoscarpa",
       ],

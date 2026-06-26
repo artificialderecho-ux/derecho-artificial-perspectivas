@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { listContentSlugs, getContentEntry } from '@/lib/content'
 
 export async function GET() {
-  const baseUrl = 'https://www.derechoartificial.com'
+  const baseUrl = 'https://derechoartificial.com'
 
   // Cargar artículos normales
   const contentSlugs = await listContentSlugs('firma-scarpa')

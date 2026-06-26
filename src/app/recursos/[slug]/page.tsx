@@ -64,20 +64,20 @@ export default async function RecursoPage({ params }: { params: Promise<Params> 
     author: { 
       "@type": "Person", 
       name: "Ricardo Scarpa",
-      url: "https://www.derechoartificial.com/quienes-somos"
+      url: "https://derechoartificial.com/quienes-somos"
     },
     publisher: { 
       "@type": "Organization", 
       name: "Derecho Artificial",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.derechoartificial.com/logo-principal.png"
+        url: "https://derechoartificial.com/logo-principal.png"
       }
     },
     datePublished: datePublished,
     "image": {
       "@type": "ImageObject",
-      "url": "https://www.derechoartificial.com/og-default-1200x630.jpg",
+      "url": "https://derechoartificial.com/og-default-1200x630.jpg",
       "width": 1200,
       "height": 630
     },

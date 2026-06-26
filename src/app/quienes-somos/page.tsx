@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Quiénes somos | Derecho Artificial",
     description:
       "Conoce el proyecto editorial Derecho Artificial, la trayectoria del responsable editorial y el Manifiesto Editorial.",
-    url: "https://www.derechoartificial.com/quienes-somos",
+    url: "https://derechoartificial.com/quienes-somos",
     siteName: "Derecho Artificial",
     locale: "es_ES",
     images: [

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "Derecho, ética y regulación de la IA",
     description:
       "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
-    url: "https://www.derechoartificial.com",
+    url: "https://derechoartificial.com",
     siteName: "Derecho Artificial",
     locale: "es_ES",
     images: [

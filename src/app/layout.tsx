@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
-      : "https://www.derechoartificial.com"
+      : "https://derechoartificial.com"
   ),
   title: {
     default: "Derecho, ética y regulación de la IA",
@@ -80,16 +80,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es">
       <head>
         <link rel="icon" href="/logo-icono.png" />
-        <link rel="alternate" hrefLang="es" href="https://www.derechoartificial.com/" />
-        <link rel="alternate" hrefLang="en" href="https://www.derechoartificial.com/en" />
-        <link rel="alternate" hrefLang="x-default" href="https://www.derechoartificial.com/" />
+        <link rel="alternate" hrefLang="es" href="https://derechoartificial.com/" />
+        <link rel="alternate" hrefLang="en" href="https://derechoartificial.com/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://derechoartificial.com/" />
         <StructuredData
           data={[
             createOrganizationJsonLd(),
             createWebSiteJsonLd(),
             createPersonJsonLd({
               name: "Ricardo Scarpa",
-              url: "https://www.derechoartificial.com/quienes-somos",
+              url: "https://derechoartificial.com/quienes-somos",
               description:
                 "Responsable editorial de Derecho Artificial. Licenciado en Derecho por la Universidad Europea de Madrid. Máster en Informática Jurídica por la UNED. Máster en Dirección de Empresas Audiovisuales por el Instituto de Empresa (IE) de Madrid.",
             }),
