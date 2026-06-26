@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://derechoartificial.com
-
-# Sitemaps
-Sitemap: https://derechoartificial.com/sitemap.xml
