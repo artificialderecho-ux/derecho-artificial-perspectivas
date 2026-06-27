@@ -32,11 +32,6 @@
       "permanent": true
     },
     {
-      "source": "/global-ia/stanford-ai-index-report-2026",
-      "destination": "/analisis/stanford-ai-index-report-2026-analisis",
-      "permanent": true
-    },
-    {
       "source": "/gobernanza/magnifica-humanitas-enciclica-leon-xiv-etica-inteligencia-artificial",
       "destination": "/etica-ia/magnifica-humanitas-enciclica-leon-xiv-etica-inteligencia-artificial",
       "permanent": true
