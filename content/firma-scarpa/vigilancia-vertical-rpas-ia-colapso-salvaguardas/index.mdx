@@ -9,13 +9,17 @@ author: "Ricardo Scarpa"
 slug: "vigilancia-vertical-rpas-ia-colapso-salvaguardas"
 readingtime: "25 min"
 ---
-Los helicópteros policiales llegan tarde. Cuando la emergencia ya ha ocurrido, la aeronave tripulada sigue esperando en el hangar, con un coste de 1.314 libras por intervención. Mientras tanto, un sistema aéreo pilotado a distancia (RPAS) despega del maletín policial en 30 segundos, cuesta 1/50 del helicóptero y permanece silencioso a 120 metros de altura, invisible para quien está abajo. Lo que comienza como solución operativa —respuesta a un fracaso estructural de gobernanza aérea— se ha convertido en una arquitectura de vigilancia vertical que las normas diseñadas para cámaras fijas de circuito cerrado no pueden regular eficazmente.
+Los helicópteros policiales llegan tarde. Cuando la emergencia ya ha ocurrido, la aeronave tripulada sigue esperando en el hangar, con un coste de 1.314 libras por intervención. Mientras tanto, un sistema aéreo pilotado a distancia (RPAS) despega del maletín policial en 30 segundos, cuesta 1/50 del helicóptero y permanece silencioso a 120 metros de altura, invisible para quien está abajo.
+
+Lo que comienza como solución operativa —respuesta a un fracaso estructural de gobernanza aérea— se ha convertido en una arquitectura de vigilancia vertical que las normas diseñadas para cámaras fijas de circuito cerrado no pueden regular eficazmente.
 
 ## El panóptico aéreo: de globos de reconocimiento a la autonomía algorítmica
 
 La obsesión por vigilancia desde el aire no es reciente. Se remonta a los globos de reconocimiento de las Guerras Revolucionarias Francesas del siglo XVIII. La Primera Guerra Mundial vio nacer la fotografía aérea mediante pequeñas cámaras acopladas a palomas mensajeras. La Segunda Guerra Mundial consolidó los vehículos aéreos no tripulados (UAV) como herramientas no solo de observación, sino de intervención armada.
 
-Lo que distingue el presente es la transición desde una herramienta de apoyo hacia un agente autónomo de vigilancia. El "primer interviniente dron" operado con inteligencia artificial (deep learning) puede volar, evaluar situaciones y aterrizar sin intervención humana. El Reglamento (UE) 2024/1689, conocido como Reglamento de Inteligencia Artificial (RIA), lo clasificó explícitamente: los RPAS con capacidades de biometría remota son sistemas de alto riesgo (anexo III, punto 5.a), sometidos a evaluación de conformidad CE y registro obligatorio en base de datos UE a partir de agosto 2026.
+Lo que distingue el presente es la transición desde una herramienta de apoyo hacia un agente autónomo de vigilancia. El "primer interviniente dron" operado con inteligencia artificial (deep learning) puede volar, evaluar situaciones y aterrizar sin intervención humana.
+
+El Reglamento (UE) 2024/1689, conocido como Reglamento de Inteligencia Artificial (RIA), lo clasificó explícitamente: los RPAS con capacidades de biometría remota son sistemas de alto riesgo (anexo III, punto 5.a), sometidos a evaluación de conformidad CE y registro obligatorio en base de datos UE a partir de agosto 2026.
 
 Esto no es meramente técnico. El RIA sitúa estos sistemas al mismo nivel que autónomos de conducción o sistemas de puntuación crediticia: tecnologías cuyo fallo implica daño grave a derechos fundamentales. Una clasificación que expone el vacío regulatorio en que operan actualmente miles de drones policiales en Europa.
 
@@ -23,15 +27,23 @@ Esto no es meramente técnico. El RIA sitúa estos sistemas al mismo nivel que a
 
 Comprender el desorden regulatorio actual exige mapear tres marcos que teóricamente deberían convivir pero que, en la práctica, operan en tensión permanente.
 
-**Reino Unido: la Protection of Freedoms Act 2012.** Constituye el pilar fundamental de vigilancia policial. Su definición de "sistemas de cámaras de vigilancia" es suficientemente amplia para abarcar RPAS. Sin embargo, su aplicación por las 43 fuerzas territoriales de Inglaterra y Gales revela inconsistencias alarmantes. Cada fuerza interpreta diferentemente qué requiere autorización judicial previa, cuándo la vigilancia es "overt" (abierta, transparente) o "covert" (encubierta), y qué notificación ciudadana se considera adecuada.
+**Reino Unido: la Protection of Freedoms Act 2012.** Constituye el pilar fundamental de vigilancia policial. Su definición de "sistemas de cámaras de vigilancia" es suficientemente amplia para abarcar RPAS. Sin embargo, su aplicación por las 43 fuerzas territoriales de Inglaterra y Gales revela inconsistencias alarmantes.
 
-**España: dualidad técnica y orgánica.** Los Reglamentos Delegado (UE) 2019/945 y de Ejecución (UE) 2019/947 regulan el uso civil de RPAS incluso para la Policía Judicial. La Ley Orgánica 13/2015, modificatoria de la Ley de Enjuiciamiento Criminal, encuadra estrictamente los RPAS como "medida de investigación tecnológica" (art. 588 quinquies LECrim), exigiendo generalmente autorización judicial previa para limitar el derecho fundamental a la intimidad (art. 18 CE). A diferencia del modelo británico basado en "palancas blandas", España aplica normativa rígida: Reglamento (UE) 2016/679 (RGPD), Ley Orgánica 3/2018 (LOPDGDD) y especialmente la Directiva (UE) 2016/680 transposada por LO 7/2021 para tratamientos policiales penales.
+Cada fuerza interpreta diferentemente qué requiere autorización judicial previa, cuándo la vigilancia es "overt" (abierta, transparente) o "covert" (encubierta), y qué notificación ciudadana se considera adecuada.
 
-**Estados Unidos: Fourth Amendment y expectativa razonable de privacidad.** El régimen se fundamenta en la interpretación jurisprudencial. Doctrinas consolidadas en *California v. Ciraolo* (476 U.S. 207, 1986) y *Florida v. Riley* (488 U.S. 445, 1989) negaban expectativa razonable de privacidad sobre objetos visibles desde el "espacio aéreo navegable". Sin embargo, la sofisticación actual de RPAS —vigilancia persistente tridimensional en alta resolución— desafía esta doctrina. Estados como Florida promulgaron legislación específica que prohíbe obtener pruebas con RPAS sin orden judicial previa, reconociendo su carácter intrusivo cualitativamente superior a helicópteros.
+**España: dualidad técnica y orgánica.** Los Reglamentos Delegado (UE) 2019/945 y de Ejecución (UE) 2019/947 regulan el uso civil de RPAS incluso para la Policía Judicial. La Ley Orgánica 13/2015, modificatoria de la Ley de Enjuiciamiento Criminal, encuadra estrictamente los RPAS como "medida de investigación tecnológica" (art. 588 quinquies LECrim), exigiendo generalmente autorización judicial previa para limitar el derecho fundamental a la intimidad (art. 18 CE).
+
+A diferencia del modelo británico basado en "palancas blandas", España aplica normativa rígida: Reglamento (UE) 2016/679 (RGPD), Ley Orgánica 3/2018 (LOPDGDD) y especialmente la Directiva (UE) 2016/680 transposada por LO 7/2021 para tratamientos policiales penales.
+
+**Estados Unidos: Fourth Amendment y expectativa razonable de privacidad.** El régimen se fundamenta en la interpretación jurisprudencial. Doctrinas consolidadas en *California v. Ciraolo* (476 U.S. 207, 1986) y *Florida v. Riley* (488 U.S. 445, 1989) negaban expectativa razonable de privacidad sobre objetos visibles desde el "espacio aéreo navegable".
+
+Sin embargo, la sofisticación actual de RPAS —vigilancia persistente tridimensional en alta resolución— desafía esta doctrina. Estados como Florida promulgaron legislación específica que prohíbe obtener pruebas con RPAS sin orden judicial previa, reconociendo su carácter intrusivo cualitativamente superior a helicópteros.
 
 **Marco europeo común: el Reglamento (UE) 2024/1689 (RIA).** Vigente desde 12 de julio de 2024, clasifica los RPAS con capacidades de biometría remota como sistemas de alto riesgo (anexo III, punto 5.a), sujetos a evaluaciones de conformidad CE, registro obligatorio en base de datos UE y supervisión por Estados miembros antes de agosto 2026. El reconocimiento facial de emoción en tiempo real se encuentra prohibido (art. 5.1.d RIA), con excepciones estrictamente tasadas (art. 5.2).
 
-Una tensión doctrinal aguda reside en la ambigüedad entre normas de seguridad del vuelo y protección de derechos fundamentales. Las autoridades de aviación civil —CAA (Reino Unido), FAA (EE.UU.), EASA/AESA (UE/España)— priorizan primordialmente la seguridad operacional (safety): licencias de pilotos RPAS, altitudes máximas (120 m categoría A1-A3), separación de zonas urbanas y prevención de colisiones mediante Remote ID. Para estas agencias, el RPAS es ante todo aeronave.
+Una tensión doctrinal aguda reside en la ambigüedad entre normas de seguridad del vuelo y protección de derechos fundamentales. Las autoridades de aviación civil —CAA (Reino Unido), FAA (EE.
+
+UU.), EASA/AESA (UE/España)— priorizan primordialmente la seguridad operacional (safety): licencias de pilotos RPAS, altitudes máximas (120 m categoría A1-A3), separación de zonas urbanas y prevención de colisiones mediante Remote ID. Para estas agencias, el RPAS es ante todo aeronave.
 
 Esta preeminencia técnico-operacional ha conducido a que muchas fuerzas policiales adopten directrices de aviación civil como único marco regulatorio, ignorando que el cumplimiento aeronáutico no garantiza la licitud de la captación de datos personales. En España, la infracción de normativa EASA invalida automáticamente el tratamiento de datos bajo el principio de licitud del art. 10 Directiva (UE) 2016/680 (LO 7/2021, Disposición adicional quinta).
 
@@ -41,15 +53,21 @@ El panorama de supervisión independiente afronta una coyuntura crítica, especi
 
 Sin embargo, el Data Protection and Digital Information Bill propuso su abolición para "simplificar" el marco regulatorio, transfiriendo competencias a la Information Commissioner's Office (ICO) y la Investigatory Powers Commissioner's Office (IPCO). Expertos advierten que esta "simplificación" equivale a la extinción de la supervisión especializada.
 
-La ICO se centra en procesamiento de datos personales, pero la vigilancia aérea policial genera riesgos que lo trascienden: interferencia en libertad de reunión y expresión (arts. 10-11 CEDH), pérdida estructural del anonimato público y *chilling effect* en procesos democráticos. La desaparición de una autoridad dedicada específicamente a biometría y vigilancia aérea deja a las fuerzas policiales operando en un vacío de transparencia, donde tecnologías intrusivas como reconocimiento facial integrado en RPAS podrían normalizarse sin escrutinio parlamentario ni judicial robusto.
+La ICO se centra en procesamiento de datos personales, pero la vigilancia aérea policial genera riesgos que lo trascienden: interferencia en libertad de reunión y expresión (arts. 10-11 CEDH), pérdida estructural del anonimato público y *chilling effect* en procesos democráticos.
+
+La desaparición de una autoridad dedicada específicamente a biometría y vigilancia aérea deja a las fuerzas policiales operando en un vacío de transparencia, donde tecnologías intrusivas como reconocimiento facial integrado en RPAS podrían normalizarse sin escrutinio parlamentario ni judicial robusto.
 
 Esta erosión amenaza el modelo de *policing by consent* y la confianza pública en innovaciones tecnológicas estatales, particularmente ante la entrada en aplicación del RIA (agosto 2026) que exige precisamente autoridades de supervisión independientes con competencias técnicas especializadas (art. 57).
 
 ## La tensión orgánica: localismo frente a centralización
 
-La arquitectura de la seguridad pública en Inglaterra y Gales se fundamenta en el principio histórico de *policing by consent*, postulado que deriva la legitimidad policial de la aprobación pública y su capacidad para operar dentro de un marco de transparencia y rendición de cuentas. En la era de la transformación digital, este modelo enfrenta una encrucijada: el despliegue de tecnologías de vigilancia aérea se gestiona de manera descentralizada, otorgando a los Chief Constables amplia discrecionalidad operativa para decidir cuándo y cómo utilizar RPAS.
+La arquitectura de la seguridad pública en Inglaterra y Gales se fundamenta en el principio histórico de *policing by consent*, postulado que deriva la legitimidad policial de la aprobación pública y su capacidad para operar dentro de un marco de transparencia y rendición de cuentas.
 
-Esta autonomía resulta esencial para adaptar la policía a necesidades específicas de comunidades locales, pero ha generado un paisaje fragmentado donde las 43 fuerzas territoriales operan con diferente madurez tecnológica y criterios normativos. Los Chief Constables, junto con los Comisionados de Policía y Crimen (PCCs), ostentan responsabilidad conjunta por garantizar que el uso de RPAS sea justo, lícito y proporcional, equilibrando derechos de privacidad con seguridad pública.
+En la era de la transformación digital, este modelo enfrenta una encrucijada: el despliegue de tecnologías de vigilancia aérea se gestiona de manera descentralizada, otorgando a los Chief Constables amplia discrecionalidad operativa para decidir cuándo y cómo utilizar RPAS.
+
+Esta autonomía resulta esencial para adaptar la policía a necesidades específicas de comunidades locales, pero ha generado un paisaje fragmentado donde las 43 fuerzas territoriales operan con diferente madurez tecnológica y criterios normativos.
+
+Los Chief Constables, junto con los Comisionados de Policía y Crimen (PCCs), ostentan responsabilidad conjunta por garantizar que el uso de RPAS sea justo, lícito y proporcional, equilibrando derechos de privacidad con seguridad pública.
 
 Sin embargo, la ausencia de estrategia nacional unificada ha provocado implementaciones reactivas, orientadas a objetivos operativos de corto plazo, obstaculizando una visión sistémica a largo plazo. La tensión radica en que la proximidad local refuerza la confianza comunitaria, pero la fragmentación resultante dificulta la eficiencia económica y la interoperabilidad técnica ante criminalidad transfronteriza.
 
@@ -57,23 +75,33 @@ Sin embargo, la ausencia de estrategia nacional unificada ha provocado implement
 
 El análisis del soporte aéreo policial revela profunda insatisfacción con el modelo centralizado del NPAS, creado en 2012 para homogeneizar apoyo aéreo mediante helicópteros y aviones tripulados. Los datos muestran que más de la mitad de las fuerzas policiales aguardan en promedio más de 30 minutos para que una aeronave NPAS llegue a escena —retraso crítico en incidentes donde "la vida o la integridad física están en juego".
 
-El sistema de financiación impone un coste fijo por llamada atendida —£1.314 en 2017/18—, generando percepción de falta de valor económico, especialmente cuando condiciones climáticas o fallos técnicos impiden completar la misión. Frente a estas deficiencias, los RPAS locales emergen como solución disruptiva. Mientras NPAS permaneció "silencioso" sobre integración de aeronaves no tripuladas, las fuerzas locales desarrollaron programas propios para cubrir el vacío operativo.
+El sistema de financiación impone un coste fijo por llamada atendida —£1.314 en 2017/18—, generando percepción de falta de valor económico, especialmente cuando condiciones climáticas o fallos técnicos impiden completar la misión. Frente a estas deficiencias, los RPAS locales emergen como solución disruptiva.
+
+Mientras NPAS permaneció "silencioso" sobre integración de aeronaves no tripuladas, las fuerzas locales desarrollaron programas propios para cubrir el vacío operativo.
 
 El RPAS se despliega en segundos ("del maletín al aire" en 30 segundos), a una fracción del coste del helicóptero, con flexibilidad para búsquedas en terrenos hostiles o vigilancia de eventos públicos sin depender de infraestructura nacional saturada. La proliferación local de RPAS no constituye mera innovación técnica, sino respuesta institucional a fallos estructurales de gobernanza centralizada del espacio aéreo policial.
 
 ### Police-proofing: el diseño al servicio de la vigilancia
 
-Un aspecto cualitativo fundamental es la transición de equipos comerciales off-the-shelf a modelos diseñados específicamente para fuerzas de seguridad, proceso denominado "police-proofing". En fases iniciales ("prueba de concepto"), las unidades adquirían RPAS genéricos para captación de escenas del crimen o reconstrucción de accidentes de tráfico. El rigor policial —operaciones en clima adverso, temperaturas bajo cero, entornos urbanos con interferencias electromagnéticas— reveló limitaciones de equipos civiles estándar.
+Un aspecto cualitativo fundamental es la transición de equipos comerciales off-the-shelf a modelos diseñados específicamente para fuerzas de seguridad, proceso denominado "police-proofing". En fases iniciales ("prueba de concepto"), las unidades adquirían RPAS genéricos para captación de escenas del crimen o reconstrucción de accidentes de tráfico.
+
+El rigor policial —operaciones en clima adverso, temperaturas bajo cero, entornos urbanos con interferencias electromagnéticas— reveló limitaciones de equipos civiles estándar.
 
 El police-proofing implica relación simbiótica fabricante-pilotos policiales, donde estos últimos contribuyen activamente al diseño. Ejemplos incluyen: maletines de transporte resistentes al todo tiempo, impermeabilización de controladores, simplificación de interfaces para misiones de alta presión. Esta robustez técnica mitiga riesgos de fallos humanos/técnicos observados en fases iniciales —accidentes por errores GPS o manejo brusco de oficiales no especializados.
 
-El diseño del RPAS deja de ser cuestión estética/comercial para convertirse en extensión funcional de la "artesanía policial", integrándose en rutinas mediante infraestructuras compartidas con body-worn cameras y sistemas de gestión de pruebas digitales. Las implicaciones jurídicas son graves: la co-diseñada personalización genera responsabilidad solidaria fabricante-fuerza policial por defectos algorítmicos (art. 17 RIA) y exige DPIA específicas para sistemas "a medida" (art. 35 RGPD; art. 27 Directiva 2016/680).
+El diseño del RPAS deja de ser cuestión estética/comercial para convertirse en extensión funcional de la "artesanía policial", integrándose en rutinas mediante infraestructuras compartidas con body-worn cameras y sistemas de gestión de pruebas digitales.
+
+Las implicaciones jurídicas son graves: la co-diseñada personalización genera responsabilidad solidaria fabricante-fuerza policial por defectos algorítmicos (art. 17 RIA) y exige DPIA específicas para sistemas "a medida" (art. 35 RGPD; art. 27 Directiva 2016/680).
 
 ## El RPAS como medio de diligencia tecnológica
 
 La integración de los RPAS en la actividad probatoria exige delimitar su naturaleza jurídica para evitar confusión entre objeto material y medio de prueba. Doctrinalmente, el RPAS constituye un binomio hardware-software: el dispositivo físico (aeronave) como objeto material, la información intangible procesada como fuente de prueba electrónica.
 
-La prueba electrónica se define como aquel medio que acredita hechos relevantes mediante elemento técnico (hardware/canal electrónico) y elemento lógico (software intangible). En el ordenamiento procesal español, ante ausencia de tipología autónoma de evidencias electrónicas, las capturas RPAS se encuadran como documentos electrónicos en sentido amplio (Ley 6/2020, de 11 de noviembre, de determinados aspectos de los servicios electrónicos de confianza). Dada su naturaleza audiovisual, la práctica procesal las reconduce a medios de reproducción de palabra, sonido e imagen (art. 299.2 Ley Enjuiciamiento Civil), permitiendo que contenido (imágenes) y continente (soporte digital) operen independientemente como piezas de convicción.
+La prueba electrónica se define como aquel medio que acredita hechos relevantes mediante elemento técnico (hardware/canal electrónico) y elemento lógico (software intangible).
+
+En el ordenamiento procesal español, ante ausencia de tipología autónoma de evidencias electrónicas, las capturas RPAS se encuadran como documentos electrónicos en sentido amplio (Ley 6/2020, de 11 de noviembre, de determinados aspectos de los servicios electrónicos de confianza).
+
+Dada su naturaleza audiovisual, la práctica procesal las reconduce a medios de reproducción de palabra, sonido e imagen (art. 299.2 Ley Enjuiciamiento Civil), permitiendo que contenido (imágenes) y continente (soporte digital) operen independientemente como piezas de convicción.
 
 Cuando incorporan IA para análisis de imágenes (clasificación objetos, detección personas), los RPAS policiales califican como IA alto riesgo (anexo III.5 RIA), exigiendo marca CE y registro UE (arts. 48-57).
 
@@ -95,7 +123,9 @@ Ambigüedad tecnológica: RPAS operan a 120m+ con cámaras zoom 30x/estabilizaci
 
 Riesgos jurídicos: Despliegue sobre manifestación pública, aunque RPAS marcado policialmente, puede requerir autorización directed surveillance si obtiene información privada sin advertencia suficiente. La zona gris operativa es innegable: altitud 400ft (120m), nocturno, ausencia señalización audible → ambigüedad covert/overt.
 
-En España (art. 588 quinquies a) LECrim): Captación imágenes personas en lugares públicos para identificación/localización efectos delito, limitada a lo estrictamente necesario y sujeta a control judicial en operaciones no urgentes. El test de proporcionalidad (art. 8.2 CEDH) exige: idoneidad (superior a CCTV fija con cobertura 3D y movilidad), necesidad (preferible a helicóptero por silencio y coste 1/50) y proporcionalidad estricta (duración acotada, ámbito geográfico delimitado, borrado automático datos no relevantes).
+En España (art. 588 quinquies a) LECrim): Captación imágenes personas en lugares públicos para identificación/localización efectos delito, limitada a lo estrictamente necesario y sujeta a control judicial en operaciones no urgentes.
+
+El test de proporcionalidad (art. 8.2 CEDH) exige: idoneidad (superior a CCTV fija con cobertura 3D y movilidad), necesidad (preferible a helicóptero por silencio y coste 1/50) y proporcionalidad estricta (duración acotada, ámbito geográfico delimitado, borrado automático datos no relevantes).
 
 La doctrina del TEDH en *Szabó and Vissy v. Hungary* exige notificación previa o posterior salvo peligro grave inminente. Ausencia consenso policial sobre umbrales overt/covert normaliza vigilancia intrusiva sin salvaguardas RIPA/LECrim.
 
@@ -105,9 +135,13 @@ El derecho fundamental a la protección de datos personales —configurado como 
 
 Hallazgo doctrinal crítico: La vigilancia mediante RPAS no se reduce a protección de datos. Mientras RGPD/LOPDGDD regula actividades privadas/comerciales y Directiva (UE) 2016/680 (LO 7/2021) rige tratamientos policiales penales, la vigilancia aérea policial implica ejercicio de soberanía vertical que altera la relación de poder Estado-ciudadano.
 
-Marco normativo dual: RGPD (art. 6.1) como lex generalis de actividades privadas; Directiva (UE) 2016/680 (art. 10, LO 7/2021 Disp. adic. 5ª) como lex specialis para prevención/investigación delitos, exigiendo específicamente para RPAS policiales. El Reglamento (UE) 2024/1689 (RIA) superpone: art. 5.1.d prohibición reconocimiento facial emoción tiempo real; art. 5.1.h prohibición biometría remota tiempo real espacios públicos (excepciones art. 5.2); anexo III punto 5 → IA alto riesgo con evaluación conformidad CE obligatoria.
+Marco normativo dual: RGPD (art. 6.1) como lex generalis de actividades privadas; Directiva (UE) 2016/680 (art. 10, LO 7/2021 Disp. adic. 5ª) como lex specialis para prevención/investigación delitos, exigiendo específicamente para RPAS policiales.
 
-La doctrina advierte que el enfoque "neutral en valores" de protección de datos —limitado a verificar base legal del tratamiento— es insuficiente para analizar la aceptabilidad ética de propósitos y la obligación negativa del Estado de no interferir en vida privada (arts. 7-8 CEDH). La reforma DPDI (UK) propone subsumir supervisión vigilancia aérea bajo ICO, ignorando que daños como *chilling effect* sobre libertad expresión (art. 10 CEDH) trascienden procesamiento datos personales.
+El Reglamento (UE) 2024/1689 (RIA) superpone: art. 5.1.d prohibición reconocimiento facial emoción tiempo real; art. 5.1.h prohibición biometría remota tiempo real espacios públicos (excepciones art. 5.2); anexo III punto 5 → IA alto riesgo con evaluación conformidad CE obligatoria.
+
+La doctrina advierte que el enfoque "neutral en valores" de protección de datos —limitado a verificar base legal del tratamiento— es insuficiente para analizar la aceptabilidad ética de propósitos y la obligación negativa del Estado de no interferir en vida privada (arts. 7-8 CEDH).
+
+La reforma DPDI (UK) propone subsumir supervisión vigilancia aérea bajo ICO, ignorando que daños como *chilling effect* sobre libertad expresión (art. 10 CEDH) trascienden procesamiento datos personales.
 
 ### Evaluaciones de Impacto (DPIA) y privacy by design
 

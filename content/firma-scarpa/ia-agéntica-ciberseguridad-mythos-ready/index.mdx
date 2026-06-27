@@ -27,9 +27,13 @@ El mensaje técnico es claro: la cobertura temporal no sustituye a la profundida
 
 Lo que convierte este momento en una discontinuidad —y no en una mejora más del estado del arte— es la combinación de dos factores que antes nunca habían coincidido: capacidad de élite y coste marginal.
 
-En el *benchmark* Firefox 147, Claude Opus 4.6 generó 2 *exploits* exitosos sobre un conjunto de vulnerabilidades. Mythos generó 181 sobre las mismas vulnerabilidades. Una mejora de 90 veces. En el entorno CyberGym, que replica topologías empresariales reales, Mythos alcanzó una tasa de éxito del 83,1% frente al 66,6% de su predecesor. Y en el escenario *The Last Ones* —32 pasos de exfiltración que incluyen ingeniería inversa en Windows y recuperación de claves criptográficas— completó la secuencia al nivel de un analista humano experto trabajando durante seis horas.
+En el *benchmark* Firefox 147, Claude Opus 4.6 generó 2 *exploits* exitosos sobre un conjunto de vulnerabilidades. Mythos generó 181 sobre las mismas vulnerabilidades. Una mejora de 90 veces. En el entorno CyberGym, que replica topologías empresariales reales, Mythos alcanzó una tasa de éxito del 83,1% frente al 66,6% de su predecesor.
 
-Ahora bien, aquí es donde el análisis se complica. Porque estas mismas capacidades son las que Anthropic ha empleado en Project Glasswing para el parcheo proactivo de vulnerabilidades a escala. La coalición defensiva que Glasswing ha puesto en marcha integra 40 organizaciones de infraestructura crítica y estima que una sola vulnerabilidad parchada puede proteger mil millones de dispositivos. El argumento es poderoso. La dualidad, sin embargo, es estructural: las mismas técnicas que permiten defender, permiten atacar. No hay manera de separar ambas funciones en el nivel del modelo.
+Y en el escenario *The Last Ones* —32 pasos de exfiltración que incluyen ingeniería inversa en Windows y recuperación de claves criptográficas— completó la secuencia al nivel de un analista humano experto trabajando durante seis horas.
+
+Ahora bien, aquí es donde el análisis se complica. Porque estas mismas capacidades son las que Anthropic ha empleado en Project Glasswing para el parcheo proactivo de vulnerabilidades a escala. La coalición defensiva que Glasswing ha puesto en marcha integra 40 organizaciones de infraestructura crítica y estima que una sola vulnerabilidad parchada puede proteger mil millones de dispositivos. El argumento es poderoso.
+
+La dualidad, sin embargo, es estructural: las mismas técnicas que permiten defender, permiten atacar. No hay manera de separar ambas funciones en el nivel del modelo.
 
 ## El tiempo como variable crítica
 
@@ -37,7 +41,9 @@ Entre 2018 y 2026, la ventana entre la divulgación pública de una vulnerabilid
 
 Lo que resulta llamativo es la escala del problema acumulado: los repositorios críticos de código abierto concentran más de 100.000 vulnerabilidades sin parchear. La infraestructura CVE/NVD fue diseñada para procesar decenas de vulnerabilidades críticas al mes. Afronta ahora centenares semanales. No es un problema de voluntad ni de recursos humanos: es una asimetría de escala que solo puede resolverse con automatización agéntica en el lado de la defensa.
 
-Ahora bien, esa misma automatización plantea riesgos propios que el informe examina con detalle. La resistencia al apagado —*shutdown resistance*— como estrategia instrumental de un agente que prioriza la consecución de su misión sobre las instrucciones del operador es el escenario de pérdida de control más relevante en este contexto. Y no es especulación: es el tipo de comportamiento emergente que los marcos de supervisión humana del Reglamento de IA europeo intentan anticipar y contener.
+Ahora bien, esa misma automatización plantea riesgos propios que el informe examina con detalle. La resistencia al apagado —*shutdown resistance*— como estrategia instrumental de un agente que prioriza la consecución de su misión sobre las instrucciones del operador es el escenario de pérdida de control más relevante en este contexto.
+
+Y no es especulación: es el tipo de comportamiento emergente que los marcos de supervisión humana del Reglamento de IA europeo intentan anticipar y contener.
 
 ## La pregunta que nadie puede evitar
 
@@ -47,7 +53,9 @@ No es una pregunta retórica. Es la pregunta que define si el programa «Mythos-
 
 ## Lo que viene en el informe completo
 
-El análisis publicado va bastante más allá de lo que he podido desarrollar aquí. En el documento encontrarás el marco completo de clasificación de los Agentes de Capacidad Cibernética Altamente Autónomos (HACCA) según el nivel operativo OC3+, con la comparativa técnica entre malware convencional y agentes agénticos. También el análisis detallado del impacto jurídico del Reglamento (UE) 2024/1689 sobre los sistemas VulnOps: qué obligaciones activan, qué sanciones exponen y cómo articularlos con la Directiva NIS2 y las competencias de la AESIA en España.
+El análisis publicado va bastante más allá de lo que he podido desarrollar aquí. En el documento encontrarás el marco completo de clasificación de los Agentes de Capacidad Cibernética Altamente Autónomos (HACCA) según el nivel operativo OC3+, con la comparativa técnica entre malware convencional y agentes agénticos.
+
+También el análisis detallado del impacto jurídico del Reglamento (UE) 2024/1689 sobre los sistemas VulnOps: qué obligaciones activan, qué sanciones exponen y cómo articularlos con la Directiva NIS2 y las competencias de la AESIA en España.
 
 Y, sobre todo, el plan de acción de 90 días: una hoja de ruta concreta con responsables, métricas de éxito y criterios de priorización que he diseñado para CISOs y equipos de seguridad que necesitan moverse ahora, no en el próximo ciclo de planificación.
 

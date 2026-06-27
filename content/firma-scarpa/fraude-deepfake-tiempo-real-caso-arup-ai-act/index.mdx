@@ -20,9 +20,13 @@ Los fondos ya no estaban.
 
 ## Una reunión que no ocurrió, un crimen que el Código Penal no tiene nombre
 
-Lo que hace diferente al caso Arup de cualquier fraude anterior no es la cifra —aunque 25,6 millones de dólares en una sola operación es una cifra que obliga a detenerse. Lo diferente es el mecanismo. Los atacantes no alteraron ningún sistema informático. No falsificaron un correo electrónico con deficiencias ortográficas. Desplegaron lo que la doctrina especializada llama un *ataque de presentación en tiempo real*: descargaron material audiovisual público de los directivos suplantados —disponible en YouTube y LinkedIn—, aplicaron algoritmos de *face-swapping* y clonación de voz, y poblaron una videoconferencia con avatares indistinguibles de las personas reales.
+Lo que hace diferente al caso Arup de cualquier fraude anterior no es la cifra —aunque 25,6 millones de dólares en una sola operación es una cifra que obliga a detenerse. Lo diferente es el mecanismo. Los atacantes no alteraron ningún sistema informático. No falsificaron un correo electrónico con deficiencias ortográficas.
 
-Ahora bien, ¿qué tipo penal se aplica a esto? La respuesta es incómoda: ninguno específico. El Código Penal español permite reconducir la conducta hacia la estafa informática del artículo 248.2 o hacia la falsedad documental si se acepta —como la doctrina más reciente acepta razonablemente— que el flujo de una videoconferencia constituye un documento digital a efectos del artículo 26 CP. Pero esa reconducción es forzada. Los tipos penales existentes no estaban pensados para conductas en las que el engaño no altera ningún sistema, sino que suplanta directamente la voluntad humana mediante algoritmos opacos.
+Desplegaron lo que la doctrina especializada llama un *ataque de presentación en tiempo real*: descargaron material audiovisual público de los directivos suplantados —disponible en YouTube y LinkedIn—, aplicaron algoritmos de *face-swapping* y clonación de voz, y poblaron una videoconferencia con avatares indistinguibles de las personas reales.
+
+Ahora bien, ¿qué tipo penal se aplica a esto? La respuesta es incómoda: ninguno específico. El Código Penal español permite reconducir la conducta hacia la estafa informática del artículo 248.2 o hacia la falsedad documental si se acepta —como la doctrina más reciente acepta razonablemente— que el flujo de una videoconferencia constituye un documento digital a efectos del artículo 26 CP. Pero esa reconducción es forzada.
+
+Los tipos penales existentes no estaban pensados para conductas en las que el engaño no altera ningún sistema, sino que suplanta directamente la voluntad humana mediante algoritmos opacos.
 
 Y esto, en el ámbito jurídico, no es un detalle menor. El principio de legalidad penal —*lex certa*— exige que las conductas delictivas estén descritas con precisión suficiente para que el ciudadano pueda prever las consecuencias jurídicas de sus actos. Aplicar por analogía tipos que no anticiparon las *ultrasuplantaciones* es jurídicamente legítimo a corto plazo, pero normativamente insuficiente.
 
@@ -32,21 +36,31 @@ El Reglamento (UE) 2024/1689 —el *AI Act*— establece en su artículo 50.2 la
 
 El problema es estructural: esa obligación de etiquetado está diseñada para regular a los operadores legítimos del mercado. Una red criminal cuyo objetivo estratégico consiste en que la víctima no sepa que está siendo engañada no va a cumplir voluntariamente con el artículo 50. La norma es eficaz para los usos lícitos de la IA generativa. Es irrelevante para los usos maliciosos.
 
-Dicho esto, el *AI Act* abre otra vía que el informe desarrolla en detalle: los sistemas capaces de generar *deepfakes* de alta resolución en tiempo real podrían quedar comprendidos en la categoría de alto riesgo del Anexo III cuando operen en ámbitos que afecten a derechos fundamentales o seguridad crítica. Eso impondría a sus proveedores obligaciones de conformidad previas a la comercialización. La pregunta que el informe plantea es si esa clasificación, aplicada a plataformas como *Haotian AI* —que se vende abiertamente en mercados digitales por entre 1.200 y 9.900 dólares y permite *face-swapping* en tiempo real sin conocimientos técnicos avanzados—, podría generar alguna responsabilidad efectiva. La respuesta no es sencilla.
+Dicho esto, el *AI Act* abre otra vía que el informe desarrolla en detalle: los sistemas capaces de generar *deepfakes* de alta resolución en tiempo real podrían quedar comprendidos en la categoría de alto riesgo del Anexo III cuando operen en ámbitos que afecten a derechos fundamentales o seguridad crítica.
+
+Eso impondría a sus proveedores obligaciones de conformidad previas a la comercialización. La pregunta que el informe plantea es si esa clasificación, aplicada a plataformas como *Haotian AI* —que se vende abiertamente en mercados digitales por entre 1.200 y 9.900 dólares y permite *face-swapping* en tiempo real sin conocimientos técnicos avanzados—, podría generar alguna responsabilidad efectiva. La respuesta no es sencilla.
 
 ## La filosofía Zero Trust como norma operativa
 
 Hay una lección práctica en el caso Arup que resulta más accionable que cualquier reforma legislativa pendiente: los protocolos de verificación que descansan exclusivamente en la comprobación visual o auditiva de la identidad en entornos remotos son obsoletos.
 
-La filosofía *Zero Trust* —concebida originalmente como principio de arquitectura de sistemas informáticos— tiene que trasladarse a los procesos de autorización de transacciones financieras de alto valor. Ningún usuario, dispositivo ni instrucción puede considerarse auténtico por el mero hecho de presentar una apariencia familiar. Toda transferencia significativa debe confirmarse por un canal secundario e independiente, diferente al que se utilizó para recibirla.
+La filosofía *Zero Trust* —concebida originalmente como principio de arquitectura de sistemas informáticos— tiene que trasladarse a los procesos de autorización de transacciones financieras de alto valor. Ningún usuario, dispositivo ni instrucción puede considerarse auténtico por el mero hecho de presentar una apariencia familiar.
 
-El caso Ferrari que el informe documenta ilustra esto con precisión quirúrgica: un ejecutivo sospechó y formuló una pregunta personal que solo el verdadero interlocutor podría responder. El estafador colgó. Esta *prueba de vida contextual* —fuera de guion, imposible de anticipar para el modelo generativo— es exactamente el tipo de mecanismo que las organizaciones deben integrar en sus protocolos, especialmente en los sectores financiero e infraestructuras críticas.
+Toda transferencia significativa debe confirmarse por un canal secundario e independiente, diferente al que se utilizó para recibirla.
+
+El caso Ferrari que el informe documenta ilustra esto con precisión quirúrgica: un ejecutivo sospechó y formuló una pregunta personal que solo el verdadero interlocutor podría responder. El estafador colgó.
+
+Esta *prueba de vida contextual* —fuera de guion, imposible de anticipar para el modelo generativo— es exactamente el tipo de mecanismo que las organizaciones deben integrar en sus protocolos, especialmente en los sectores financiero e infraestructuras críticas.
 
 ## Lo que viene en el informe completo
 
-El documento desarrolla la arquitectura técnica completa de las Redes Adversarias Generativas (GANs) y explica cómo el proceso iterativo entre red generadora y red discriminadora tiende hacia un equilibrio de Nash en el que el contenido sintético resulta técnicamente indistinguible para los sistemas de detección convencionales. Analiza las modalidades técnicas específicas empleadas en el caso Arup —clonación de voz, *face-swapping*, sincronización labial— y su relación con la norma ISO/IEC 30107-3:2023 sobre detección de ataques de presentación.
+El documento desarrolla la arquitectura técnica completa de las Redes Adversarias Generativas (GANs) y explica cómo el proceso iterativo entre red generadora y red discriminadora tiende hacia un equilibrio de Nash en el que el contenido sintético resulta técnicamente indistinguible para los sistemas de detección convencionales.
 
-El informe examina también las propuestas de reforma legislativa (*lege ferenda*) más urgentes: la tipificación penal autónoma del *deepfake* malicioso, el régimen de responsabilidad objetiva para proveedores de IA generativa de alta resolución, y la transposición anticipada del AI Act para los sectores financiero y de infraestructuras críticas. Y analiza el vacío normativo generado por la retirada de la propuesta de Directiva sobre responsabilidad civil por daños causados por sistemas de IA, aprobada en el programa de trabajo de la Comisión para 2025.
+Analiza las modalidades técnicas específicas empleadas en el caso Arup —clonación de voz, *face-swapping*, sincronización labial— y su relación con la norma ISO/IEC 30107-3:2023 sobre detección de ataques de presentación.
+
+El informe examina también las propuestas de reforma legislativa (*lege ferenda*) más urgentes: la tipificación penal autónoma del *deepfake* malicioso, el régimen de responsabilidad objetiva para proveedores de IA generativa de alta resolución, y la transposición anticipada del AI Act para los sectores financiero y de infraestructuras críticas.
+
+Y analiza el vacío normativo generado por la retirada de la propuesta de Directiva sobre responsabilidad civil por daños causados por sistemas de IA, aprobada en el programa de trabajo de la Comisión para 2025.
 
 > **Descarga el informe completo** para acceder al análisis técnico de las GANs, la cronología detallada del ataque, el marco jurídico comparado (UE, EE.UU., China) y las estrategias de implementación del SGSI bajo ISO/IEC 27001 frente a ataques de presentación con IA generativa.
 

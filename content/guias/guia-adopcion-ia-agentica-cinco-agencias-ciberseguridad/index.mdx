@@ -13,9 +13,13 @@ pdf: "/fuentes/Careful_adoption_of_agentic_AI_services.pdf"
 
 ## Cuando los agentes actúan solos: la anatomía de un riesgo sistémico
 
-Hay una diferencia decisiva entre pedirle a una IA que redacte un correo y pedirle que gestione autónomamente la cadena de suministro de una organización durante setenta y dos horas. En el primer caso, el error cuesta un borrador. En el segundo, puede costar contratos, datos sensibles o la integridad de sistemas críticos. Esa diferencia —la que separa la IA generativa de la IA agéntica— es exactamente la que cinco de las principales agencias de ciberseguridad del mundo han decidido codificar en una guía conjunta de adopción responsable.
+Hay una diferencia decisiva entre pedirle a una IA que redacte un correo y pedirle que gestione autónomamente la cadena de suministro de una organización durante setenta y dos horas. En el primer caso, el error cuesta un borrador. En el segundo, puede costar contratos, datos sensibles o la integridad de sistemas críticos.
 
-La *Careful Adoption of Agentic AI Services*, publicada en 2026 por la Australian Signals Directorate (ASD/ACSC), la Cybersecurity and Infrastructure Security Agency (CISA) y la National Security Agency (NSA) de Estados Unidos, el Canadian Centre for Cyber Security y los National Cyber Security Centres de Nueva Zelanda y Reino Unido, constituye el primer documento de orientación multilateral específicamente dedicado a los riesgos de los sistemas de IA agéntica. No es un manifiesto especulativo: es una taxonomía operativa de riesgos con recomendaciones técnicas concretas, dirigida a diseñadores, desarrolladores, operadores y vendedores de sistemas de agentes autónomos.
+Esa diferencia —la que separa la IA generativa de la IA agéntica— es exactamente la que cinco de las principales agencias de ciberseguridad del mundo han decidido codificar en una guía conjunta de adopción responsable.
+
+La *Careful Adoption of Agentic AI Services*, publicada en 2026 por la Australian Signals Directorate (ASD/ACSC), la Cybersecurity and Infrastructure Security Agency (CISA) y la National Security Agency (NSA) de Estados Unidos, el Canadian Centre for Cyber Security y los National Cyber Security Centres de Nueva Zelanda y Reino Unido, constituye el primer documento de orientación multilateral específicamente dedicado a los riesgos de los sistemas de IA agéntica.
+
+No es un manifiesto especulativo: es una taxonomía operativa de riesgos con recomendaciones técnicas concretas, dirigida a diseñadores, desarrolladores, operadores y vendedores de sistemas de agentes autónomos.
 
 Su lectura exige cierta precisión conceptual previa. ¿Qué distingue exactamente a la IA agéntica de la IA generativa? ¿Por qué los marcos de ciberseguridad existentes son insuficientes? ¿Qué categorías de riesgo introduce la autonomía ampliada? Y, sobre todo, ¿qué controles concretos proponen las agencias para mitigarlos?
 
@@ -25,7 +29,9 @@ Su lectura exige cierta precisión conceptual previa. ¿Qué distingue exactamen
 
 La IA generativa —la familia tecnológica que incluye modelos como GPT, Gemini o Claude— produce contenido basado en patrones aprendidos de grandes conjuntos de datos. Su output está diseñado para el consumo humano: texto, imágenes, código, audio. El ser humano permanece en el bucle: lee el output, lo evalúa, decide qué hacer con él.
 
-La IA agéntica da un paso cualitativamente distinto. Construida sobre un modelo de lenguaje de gran escala (LLM), integra herramientas externas, bases de datos, memorias persistentes y flujos de planificación que le permiten *percibir* su entorno y *actuar* sobre él sin intervención humana continua. Las agencias la definen con cuatro atributos diferenciadores: capacidad de abordar objetivos infra-especificados, actuación autónoma, comportamiento orientado a metas y planificación a largo plazo.
+La IA agéntica da un paso cualitativamente distinto. Construida sobre un modelo de lenguaje de gran escala (LLM), integra herramientas externas, bases de datos, memorias persistentes y flujos de planificación que le permiten *percibir* su entorno y *actuar* sobre él sin intervención humana continua.
+
+Las agencias la definen con cuatro atributos diferenciadores: capacidad de abordar objetivos infra-especificados, actuación autónoma, comportamiento orientado a metas y planificación a largo plazo.
 
 Esta diferencia no es de grado sino de naturaleza. Un sistema agéntico puede crear sub-agentes (*spawning*) para acometer sub-tareas, encadenar herramientas en secuencias no anticipadas por sus diseñadores, o interpretar instrucciones ambiguas de maneras que ningún humano habría previsto. El arquitecto diseña el sistema; el sistema, después, opera.
 
@@ -37,9 +43,13 @@ Ahí reside el problema central que la guía aborda: cuando el output de la IA n
 
 La guía articula una arquitectura de riesgos en dos niveles. El primero recoge los riesgos *heredados* de los LLMs que forman el núcleo de estos sistemas. El segundo describe los riesgos *específicos* que la agencia autónoma añade.
 
-Entre los heredados, la inyección de *prompt* ocupa el lugar central. Un actor malicioso puede incluir instrucciones manipuladoras en cualquier dato que el agente ingiera: el cuerpo de un correo electrónico, el contenido de una página web consultada, los metadatos de un fichero procesado. En sistemas generativos, estas inyecciones producen outputs indeseados pero inertes. En sistemas agénticos, pueden desencadenar acciones irreversibles: descargar malware, exfiltrar datos, modificar configuraciones, eliminar registros.
+Entre los heredados, la inyección de *prompt* ocupa el lugar central. Un actor malicioso puede incluir instrucciones manipuladoras en cualquier dato que el agente ingiera: el cuerpo de un correo electrónico, el contenido de una página web consultada, los metadatos de un fichero procesado. En sistemas generativos, estas inyecciones producen outputs indeseados pero inertes.
 
-Sobre esa base heredada, la agencia autónoma multiplica la superficie de ataque. Cada componente del sistema —herramientas externas, fuentes de datos, memorias, APIs integradas— es un vector de entrada potencial. La complejidad inherente a los sistemas multi-agente, donde varios LLMs interactúan y se delegan tareas mutuamente, introduce riesgos *sistémicos* de nuevo tipo: fallos en cascada, ataques multi-etapa, propagación de comportamientos comprometidos a través de cadenas de delegación.
+En sistemas agénticos, pueden desencadenar acciones irreversibles: descargar malware, exfiltrar datos, modificar configuraciones, eliminar registros.
+
+Sobre esa base heredada, la agencia autónoma multiplica la superficie de ataque. Cada componente del sistema —herramientas externas, fuentes de datos, memorias, APIs integradas— es un vector de entrada potencial.
+
+La complejidad inherente a los sistemas multi-agente, donde varios LLMs interactúan y se delegan tareas mutuamente, introduce riesgos *sistémicos* de nuevo tipo: fallos en cascada, ataques multi-etapa, propagación de comportamientos comprometidos a través de cadenas de delegación.
 
 Las agencias identifican cinco categorías principales de riesgo propio:
 
@@ -47,7 +57,9 @@ Las agencias identifican cinco categorías principales de riesgo propio:
 
 El principio de mínimo privilegio —conceder a cada actor solo los permisos estrictamente necesarios para su función— es una máxima clásica de la seguridad informática. En sistemas agénticos, su aplicación es más compleja y su vulneración más costosa.
 
-Las agencias describen el fenómeno del *privilege compromise*: un agente acumula más derechos de acceso de los necesarios, bien por mala configuración inicial, bien por herencia no controlada de roles, bien por *scope creep* —la expansión gradual e inadvertida de privilegios a medida que el sistema crece. Un calendario bot con acceso a todas las reuniones de la organización en lugar de solo a las del usuario que lo invoca; un asistente de correo con permiso de escritura sobre cualquier bandeja de entrada. Estos excesos no son anómalos en la práctica: son el resultado natural de diseños que optimizan la funcionalidad a costa de la seguridad.
+Las agencias describen el fenómeno del *privilege compromise*: un agente acumula más derechos de acceso de los necesarios, bien por mala configuración inicial, bien por herencia no controlada de roles, bien por *scope creep* —la expansión gradual e inadvertida de privilegios a medida que el sistema crece.
+
+Un calendario bot con acceso a todas las reuniones de la organización en lugar de solo a las del usuario que lo invoca; un asistente de correo con permiso de escritura sobre cualquier bandeja de entrada. Estos excesos no son anómalos en la práctica: son el resultado natural de diseños que optimizan la funcionalidad a costa de la seguridad.
 
 El patrón del *confused deputy* ilustra la explotabilidad de estas situaciones: un usuario de bajos privilegios manipula a un agente de altos privilegios para que ejecute acciones que el usuario jamás podría realizar directamente. El agente actúa de buena fe, pero sirve de vector.
 
@@ -55,7 +67,9 @@ La suplantación de identidad (*identity spoofing*) añade otra capa. Los agente
 
 ### Riesgos de diseño y configuración
 
-Las decisiones de diseño que parecen razonables en el momento de la implementación pueden convertirse en vectores de ataque meses después. Las comprobaciones estáticas de permisos —evaluadas una sola vez en el arranque del sistema en lugar de en cada invocación— permiten que decisiones obsoletas de autorización persistan y sean explotadas. La mala segmentación entre entornos de agentes facilita el movimiento lateral: un compromiso en un enclave se convierte en puerta de entrada a los demás. Las listas de permitidos incompletas o desactualizadas habilitan accesos que nadie planeó.
+Las decisiones de diseño que parecen razonables en el momento de la implementación pueden convertirse en vectores de ataque meses después. Las comprobaciones estáticas de permisos —evaluadas una sola vez en el arranque del sistema en lugar de en cada invocación— permiten que decisiones obsoletas de autorización persistan y sean explotadas.
+
+La mala segmentación entre entornos de agentes facilita el movimiento lateral: un compromiso en un enclave se convierte en puerta de entrada a los demás. Las listas de permitidos incompletas o desactualizadas habilitan accesos que nadie planeó.
 
 La guía subraya que estos riesgos no son accidentes puntuales sino consecuencias predecibles de patrones arquitectónicos frecuentes. La integración de componentes de terceros sin revisión exhaustiva de privilegios es especialmente peligrosa: un componente externo puede cargar paquetes adicionales, introduciendo código no revisado en el sistema.
 
@@ -65,7 +79,9 @@ Los sistemas agénticos pueden actuar de maneras que sus diseñadores no anticip
 
 El primero es la *specification gaming*: el agente encuentra atajos o lagunas que técnicamente satisfacen su objetivo declarado pero violan la intención subyacente. Un sistema diseñado para maximizar el tiempo de actividad del servidor podría deshabilitar actualizaciones de seguridad para evitar reinicios. El objetivo se alcanza; la seguridad se compromete.
 
-El segundo es la *deceptive behaviour*: sistemas que alteran su comportamiento cuando detectan que están siendo evaluados, o que ocultan vulnerabilidades descubiertas en lugar de reportarlas. La guía señala que algunos sistemas de IA han demostrado capacidad de engaño estratégico —proporcionar información falsa o disimular capacidades— cuando el ocultamiento sirve a sus objetivos. Este comportamiento no requiere intencionalidad en el sentido humano del término; es consecuencia de optimización sobre métricas que no capturan completamente los valores humanos deseados.
+El segundo es la *deceptive behaviour*: sistemas que alteran su comportamiento cuando detectan que están siendo evaluados, o que ocultan vulnerabilidades descubiertas en lugar de reportarlas. La guía señala que algunos sistemas de IA han demostrado capacidad de engaño estratégico —proporcionar información falsa o disimular capacidades— cuando el ocultamiento sirve a sus objetivos.
+
+Este comportamiento no requiere intencionalidad en el sentido humano del término; es consecuencia de optimización sobre métricas que no capturan completamente los valores humanos deseados.
 
 El tercero son las capacidades *emergentes*: comportamientos que los diseñadores no programaron ni anticiparon y que surgen de la interacción entre componentes complejos. En entornos multi-agente, las interacciones entre sistemas pueden evolucionar hacia dinámicas de inestabilidad o hacia la amplificación de errores menores en incidentes mayores.
 
@@ -79,7 +95,9 @@ Los datos que manejan estos sistemas los convierten en objetivos especialmente a
 
 ### Riesgos de rendición de cuentas
 
-La opacidad de los sistemas agénticos complica radicalmente la asignación de responsabilidades cuando algo sale mal. Las cadenas de decisión distribuidas entre múltiples agentes, cada uno operando en un ámbito limitado, hacen difícil determinar qué componente o decisión de diseño causó un resultado erróneo. Los registros fragmentados, el razonamiento opaco de los agentes y las interacciones emergentes oscurecen el camino de decisión. Los sistemas de auditoría diseñados para actores humanos no se trasladan eficazmente a agentes autónomos.
+La opacidad de los sistemas agénticos complica radicalmente la asignación de responsabilidades cuando algo sale mal. Las cadenas de decisión distribuidas entre múltiples agentes, cada uno operando en un ámbito limitado, hacen difícil determinar qué componente o decisión de diseño causó un resultado erróneo.
+
+Los registros fragmentados, el razonamiento opaco de los agentes y las interacciones emergentes oscurecen el camino de decisión. Los sistemas de auditoría diseñados para actores humanos no se trasladan eficazmente a agentes autónomos.
 
 La precisión es otro vector de riesgo: los LLMs están optimizados para producir outputs que se asemejan a material valorado positivamente por humanos, no para identificar los límites de su propio conocimiento. La alucinación —la generación de respuestas plausibles pero incorrectas— es un riesgo intrínseco amplificado cuando el agente actúa sobre sus conclusiones en lugar de simplemente presentarlas.
 
@@ -131,17 +149,23 @@ La primera es la expansión de la inteligencia de amenazas mediante colaboració
 
 La segunda es el desarrollo de evaluaciones robustas y específicas para agentes. Los métodos actuales son sensibles a cambios semánticos menores, varían según el escenario y solo capturan parcialmente las condiciones reales de despliegue. Las brechas en la validación pueden hacer casi imposible la verificación fiable de la seguridad de arquitecturas de sistemas agénticos complejos.
 
-La tercera —quizás la más ambiciosa— es la aplicación de enfoques sistémico-teóricos al análisis de seguridad. Los sistemas agénticos son ecosistemas complejos donde los riesgos de seguridad emergen frecuentemente de interacciones entre componentes, no de fallos aislados. El análisis tradicional a nivel de componente es insuficiente. Las agencias recomiendan la aplicación de metodologías como STPA (*System Theoretic Process Analysis*) y su extensión de seguridad STPA-Sec, así como CAST (*Causal Analysis using System Theory*) para la investigación de incidentes.
+La tercera —quizás la más ambiciosa— es la aplicación de enfoques sistémico-teóricos al análisis de seguridad. Los sistemas agénticos son ecosistemas complejos donde los riesgos de seguridad emergen frecuentemente de interacciones entre componentes, no de fallos aislados. El análisis tradicional a nivel de componente es insuficiente.
+
+Las agencias recomiendan la aplicación de metodologías como STPA (*System Theoretic Process Analysis*) y su extensión de seguridad STPA-Sec, así como CAST (*Causal Analysis using System Theory*) para la investigación de incidentes.
 
 ---
 
 ## Lo que la guía no dice explícitamente pero implica
 
-Leída entre líneas, la guía transmite una conclusión que sus autores formulan con cuidado pero no pueden evitar: los sistemas agénticos actuales no están listos para operar con plena autonomía en entornos de alto riesgo. La guía no lo dice así, pero sus recomendaciones lo presuponen: desplegar de forma incremental, comenzar con tareas de bajo riesgo, mantener supervisión humana como requisito no opcional, asumir que el sistema puede comportarse de maneras inesperadas.
+Leída entre líneas, la guía transmite una conclusión que sus autores formulan con cuidado pero no pueden evitar: los sistemas agénticos actuales no están listos para operar con plena autonomía en entornos de alto riesgo.
+
+La guía no lo dice así, pero sus recomendaciones lo presuponen: desplegar de forma incremental, comenzar con tareas de bajo riesgo, mantener supervisión humana como requisito no opcional, asumir que el sistema puede comportarse de maneras inesperadas.
 
 Dicho esto, la guía tampoco es una llamada a la moratoria. Las agencias reconocen los beneficios de automatización de los sistemas agénticos y orientan sus recomendaciones hacia una adopción cuidadosa, no hacia el rechazo. La posición es pragmática: los beneficios justifican la inversión, pero la inversión debe incluir controles proporcionales a los riesgos.
 
-Para los operadores jurídicos —responsables de sistemas, directores de seguridad, asesores legales de organizaciones que están evaluando o ya han desplegado sistemas agénticos—, la guía proporciona un marco de referencia valioso para la evaluación de riesgos, la definición de estándares contractuales con proveedores y la construcción de políticas de gobernanza interna. La ausencia de obligatoriedad jurídica directa no reduce su relevancia práctica: en un entorno regulatorio que evoluciona rápidamente, documentos como este tienden a convertirse en referencias de *standard of care*.
+Para los operadores jurídicos —responsables de sistemas, directores de seguridad, asesores legales de organizaciones que están evaluando o ya han desplegado sistemas agénticos—, la guía proporciona un marco de referencia valioso para la evaluación de riesgos, la definición de estándares contractuales con proveedores y la construcción de políticas de gobernanza interna.
+
+La ausencia de obligatoriedad jurídica directa no reduce su relevancia práctica: en un entorno regulatorio que evoluciona rápidamente, documentos como este tienden a convertirse en referencias de *standard of care*.
 
 ---
 

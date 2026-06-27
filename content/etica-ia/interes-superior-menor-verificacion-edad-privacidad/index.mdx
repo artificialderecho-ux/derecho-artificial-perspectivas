@@ -21,32 +21,34 @@ pdf: null
 1. Resumen Ejecutivo: El cambio de paradigma hacia un Internet seguro por defecto  
 2. Introducción: La digitalización de la infancia y la tensión entre seguridad y privacidad  
 3. El Interés Superior del Menor: Fundamento ético y jurídico en el ecosistema digital  
-4. Metodología y objetivos del estudio  
+4. Metodología y objetivos del estudio
 
 **SECCIÓN II: MARCO NORMATIVO COMPARADO Y PRINCIPIOS RECTORES**  
 1. El Marco Comunitario: Intersección entre el Reglamento (UE) 2016/679 (RGPD) y el Reglamento (UE) 2022/2065 de Servicios Digitales (DSA)  
 2. El Régimen Jurídico en España: La Ley Orgánica 3/2018 (LOPDGDD) y la Ley 13/2022 General de Comunicación Audiovisual  
-3. El Modelo Anglosajón y Comparativa Internacional: La *Online Safety Act* (OSA) del Reino Unido y la *Children's Online Privacy Protection Act* (COPPA) en EE. UU.  
+3. El Modelo Anglosajón y Comparativa Internacional: La *Online Safety Act* (OSA) del Reino Unido y la *Children's Online Privacy Protection Act* (COPPA) en EE.
+
+UU.  
 4. Perspectiva Latinoamericana: Tendencias regulatorias en Brasil, Argentina y Chile frente a la explotación de datos  
-5. Principios Rectores: Autonomía progresiva, protección integral y prioridad absoluta  
+5. Principios Rectores: Autonomía progresiva, protección integral y prioridad absoluta
 
 **SECCIÓN III: ANÁLISIS TÉCNICO DE SISTEMAS DE VERIFICACIÓN DE EDAD Y ASEGURAMIENTO**  
 1. Taxonomía de Métodos: De la autodeclaración a la verificación documental y la estimación por inteligencia artificial  
 2. Modelos de Implementación: Diferenciación entre servicios para adultos y plataformas mixtas con protección por defecto  
 3. Tecnologías Emergentes de Identificación: La Cartera de Identidad Digital de la UE (EUDIW) y los atributos electrónicos  
-4. Soluciones Criptográficas para la Minimización: *Zero-Knowledge Proofs* (ZKP) y tokens de edad anónimos  
+4. Soluciones Criptográficas para la Minimización: *Zero-Knowledge Proofs* (ZKP) y tokens de edad anónimos
 
 **SECCIÓN IV: EVALUACIÓN DE RIESGOS PARA LA PRIVACIDAD Y LOS DERECHOS FUNDAMENTALES**  
 1. Tipología de Riesgos (Las 5 Cs): Contenido, Conducta, Contacto, Consumo y Riesgos Transversales  
 2. El Riesgo de Vigilancia Sistémica: Perfilado masivo, localización de menores y el efecto "pescar en una pecera"  
 3. Impacto en Derechos Fundamentales: Libertad de expresión, derecho al anonimato y riesgos de discriminación algorítmica  
-4. La Paradoja Privacidad-Seguridad: Análisis de la proporcionalidad y necesidad del tratamiento de datos biométricos  
+4. La Paradoja Privacidad-Seguridad: Análisis de la proporcionalidad y necesidad del tratamiento de datos biométricos
 
 **SECCIÓN V: BUENAS PRÁCTICAS, GOBERNANZA Y DISEÑO PROACTIVO**  
 1. Diseño Seguro por Defecto: El Decálogo de principios de la Agencia Española de Protección de Datos (AEPD)  
 2. Evaluaciones de Impacto: *Child Rights Impact Assessments* (CRIA) y Evaluaciones de Impacto en la Protección de Datos (EIPD)  
 3. La Doble Anonimidad: Estándares de Arcom y el aseguramiento de la privacidad del usuario  
-4. Marcos de Gobernanza y Responsabilidad Compartida: El papel de los Estados, la industria y los titulares de la patria potestad  
+4. Marcos de Gobernanza y Responsabilidad Compartida: El papel de los Estados, la industria y los titulares de la patria potestad
 
 **SECCIÓN VI: CONCLUSIONES Y REFERENCIAS**  
 1. Síntesis de hallazgos: Superación del "solucionismo tecnológico"  
@@ -60,7 +62,9 @@ pdf: null
 
 ## 1. Resumen Ejecutivo: El cambio de paradigma hacia un Internet seguro por defecto
 
-La protección de los niños, niñas y adolescentes (NNA) en el ecosistema digital atraviesa una transformación fundamental en su concepción jurídica y técnica. El modelo tradicional, caracterizado por una naturaleza reactiva que actúa solo tras la evidencia de un daño o impacto ya producido,¹ se revela insuficiente frente a la sofisticación de los riesgos sistémicos del entorno en línea. En su lugar, emerge la propuesta de un **Internet seguro por defecto**, fundamentado en los principios de protección de datos desde el diseño y por defecto establecidos en el Reglamento General de Protección de Datos (RGPD).²
+La protección de los niños, niñas y adolescentes (NNA) en el ecosistema digital atraviesa una transformación fundamental en su concepción jurídica y técnica. El modelo tradicional, caracterizado por una naturaleza reactiva que actúa solo tras la evidencia de un daño o impacto ya producido,¹ se revela insuficiente frente a la sofisticación de los riesgos sistémicos del entorno en línea.
+
+En su lugar, emerge la propuesta de un **Internet seguro por defecto**, fundamentado en los principios de protección de datos desde el diseño y por defecto establecidos en el Reglamento General de Protección de Datos (RGPD).²
 
 Este nuevo paradigma rechaza las estrategias de vigilancia masiva y perfilado de menores que, bajo la premisa de su protección, suelen derivar en el efecto "pescar en una pecera", localizando y exponiendo a los NNA ante actores maliciosos.³ La tesis central del presente estudio sostiene que la verificación de edad no debe concebirse como un fin en sí mismo —la identificación del menor—, sino como un **habilitador proactivo** para que el usuario adulto demuestre que supera un umbral de edad determinado para acceder a elementos de riesgo.⁴ De este modo, se traslada la carga de la prueba al adulto y se preserva el anonimato y la no trazabilidad de los menores, resolviendo de manera efectiva la denominada "paradoja privacidad-seguridad".⁵
 
@@ -120,7 +124,9 @@ Los objetivos principales son:
 
 ## 1. El Marco Comunitario: Intersección entre el Reglamento (UE) 2016/679 (RGPD) y el Reglamento (UE) 2022/2065 (DSA)
 
-La arquitectura jurídica europea para la protección de menores en el entorno digital se fundamenta en una relación de complementariedad entre el régimen general de protección de datos y la normativa de servicios digitales. El **Reglamento (UE) 2022/2065 (Digital Services Act, DSA)** establece, en su artículo 28, una obligación imperativa para los proveedores de plataformas en línea accesibles a menores: la implementación de medidas adecuadas y proporcionadas que garanticen un alto nivel de privacidad, seguridad y protección.¹ Esta disposición debe interpretarse en armonía con el **Reglamento (UE) 2016/679 (RGPD)**, el cual otorga a los niños una protección específica debido a su menor consciencia sobre los riesgos y salvaguardias en el tratamiento de sus datos.²
+La arquitectura jurídica europea para la protección de menores en el entorno digital se fundamenta en una relación de complementariedad entre el régimen general de protección de datos y la normativa de servicios digitales.
+
+El **Reglamento (UE) 2022/2065 (Digital Services Act, DSA)** establece, en su artículo 28, una obligación imperativa para los proveedores de plataformas en línea accesibles a menores: la implementación de medidas adecuadas y proporcionadas que garanticen un alto nivel de privacidad, seguridad y protección.¹ Esta disposición debe interpretarse en armonía con el **Reglamento (UE) 2016/679 (RGPD)**, el cual otorga a los niños una protección específica debido a su menor consciencia sobre los riesgos y salvaguardias en el tratamiento de sus datos.²
 
 Un elemento crítico en esta intersección es el principio de **minimización de datos**. El artículo 28, apartado 3, de la DSA clarifica explícitamente que el cumplimiento de las obligaciones de protección de menores no faculta a las plataformas para tratar datos personales adicionales con el fin exclusivo de evaluar la minoría de edad del usuario.³ En este sentido, la Comisión Europea subraya que las plataformas no pueden basar su exclusión de responsabilidad meramente en una declaración en sus términos y condiciones; si un servicio es accesible o conocido por atraer a menores, debe implementar medidas de mitigación efectivas más allá de la autodeclaración.⁴ Para las **Plataformas en Línea de Muy Gran Tamaño (VLOPs)** y los **Motores de Búsqueda de Muy Gran Tamaño (VLOSEs)**, la DSA impone obligaciones de diligencia debida reforzadas, exigiendo evaluaciones de riesgos sistémicos anuales que contemplen los efectos negativos sobre los derechos fundamentales de los menores.⁵
 
@@ -185,7 +191,9 @@ El sistema de protección de NNA debe operar bajo tres principios fundamentales 
 ## 1. Taxonomía de Métodos: De la autodeclaración a la verificación documental y la estimación por inteligencia artificial
 
 La operatividad de la protección del menor en el entorno digital descansa sobre una diversidad de métodos técnicos que presentan distintos niveles de certidumbre y riesgo para la privacidad. Los sistemas actuales se pueden categorizar en cuatro grandes bloques:¹  
-1. **Autodeclaración**: El usuario afirma su edad sin aportar pruebas adicionales. Las fuentes coinciden en que este método ha demostrado riesgos claros de falta de certidumbre y es generalmente insuficiente para escenarios de riesgo medio o alto.²  
+1. **Autodeclaración**: El usuario afirma su edad sin aportar pruebas adicionales.
+
+Las fuentes coinciden en que este método ha demostrado riesgos claros de falta de certidumbre y es generalmente insuficiente para escenarios de riesgo medio o alto.²  
 2. **Verificación Documental**: Consiste en la extracción de datos de documentos de identidad oficiales (DNI, pasaporte) mediante aplicaciones capaces de validar la titularidad mediante biometría o firma digital.³ Este método ofrece una certidumbre "cierta", no probabilística.⁴  
 3. **Estimación de Edad mediante IA**: Tecnologías que analizan la geometría facial del usuario para confirmar que supera un umbral de edad determinado.⁵ Ejemplos analizados muestran que estas soluciones pueden procesar la imagen en menos de un segundo y arrojar un resultado binario (sí/no), eliminando la imagen de forma inmediata tras el proceso.⁶  
 4. **Verificación por Terceros**: Involucra el uso de credenciales bancarias, tarjetas de crédito o el cruce de datos con registros oficiales como el número de seguro social (SSN).⁷
@@ -272,7 +280,9 @@ El derecho al **anonimato** es particularmente importante en contextos donde los
 
 ## 4. La Paradoja Privacidad-Seguridad: Proporcionalidad y necesidad del tratamiento de datos biométricos
 
-Una de las tensiones más críticas en la protección infantil contemporánea es la denominada "paradoja privacidad-seguridad".¹⁸ Esta paradoja plantea que, en ocasiones, los esfuerzos por aumentar la seguridad de los menores requieren la captura de datos personales que, a su vez, aumentan otros riesgos. En concreto, los sistemas de verificación mediante documentos de identidad o análisis biométrico ofrecen certidumbre sobre la edad del usuario, pero a cambio generan bases de datos centralizadas que pueden ser objeto de brechas de seguridad masivas, exposición de datos sensibles, y perfilado sistemático.¹⁹
+Una de las tensiones más críticas en la protección infantil contemporánea es la denominada "paradoja privacidad-seguridad".¹⁸ Esta paradoja plantea que, en ocasiones, los esfuerzos por aumentar la seguridad de los menores requieren la captura de datos personales que, a su vez, aumentan otros riesgos.
+
+En concreto, los sistemas de verificación mediante documentos de identidad o análisis biométrico ofrecen certidumbre sobre la edad del usuario, pero a cambio generan bases de datos centralizadas que pueden ser objeto de brechas de seguridad masivas, exposición de datos sensibles, y perfilado sistemático.¹⁹
 
 El análisis de proporcionalidad, consagrado en el Derecho Constitucional y en la jurisprudencia de Cortes superiores, exige que toda medida restrictiva de derechos sea evaluada bajo cuatro criterios: **(i) finalidad legítima** (la protección del menor es un fin legítimo), **(ii) idoneidad** (el método elegido debe ser efectivo para lograr ese fin), **(iii) necesidad** (no debe existir alternativa menos restrictiva), y **(iv) proporcionalidad en sentido estricto** (los beneficios deben superar los costos para los derechos afectados).²⁰ Aplicados estos criterios, los métodos que requieren identificación cierta fallan en la prueba de necesidad, puesto que existen alternativas menos invasivas (como las Pruebas de Conocimiento Cero) que logran el mismo fin con menor impacto sobre la privacidad.²¹ Por el contrario, métodos como la doble anonimidad y los tokens criptográficos pasan todas las pruebas, por lo que deberían ser priorizados en la gobernanza regulatoria.²²
 

@@ -14,13 +14,17 @@ pdf: "/fuentes/bmg_vs_anthropic.pdf"
 
 **1.500 millones de dólares.** Es la cifra que Anthropic desembolsó en agosto de 2025 para cerrar el litigio Bartz v. Anthropic, el acuerdo por infracción de derechos de autor más cuantioso en la historia judicial de Estados Unidos. Pero la cifra real de lo que está en juego es infinitamente mayor: nada menos que la integridad legal de cómo se entrenan los sistemas de IA en la era post-ChatGPT.
 
-Lo que comenzó como una empresa de "seguridad e investigación" que presumía de *Constitucional AI* terminó en los tribunales acusada de lo que sus propios demandantes denominan un "imperio construido sobre la piratería". Y los números no mienten: aproximadamente **siete millones de libros descargados vía BitTorrent** desde sitios ilegales como Library Genesis (LibGen) y Pirate Library Mirror (PiLiMi). Al menos 482.460 títulos certificados en la clase de demandantes. Un acto de infracción no doloso, sino deliberado, autorizado por Dario Amodei y Benjamin Mann en persona.
+Lo que comenzó como una empresa de "seguridad e investigación" que presumía de *Constitucional AI* terminó en los tribunales acusada de lo que sus propios demandantes denominan un "imperio construido sobre la piratería". Y los números no mienten: aproximadamente **siete millones de libros descargados vía BitTorrent** desde sitios ilegales como Library Genesis (LibGen) y Pirate Library Mirror (PiLiMi).
+
+Al menos 482.460 títulos certificados en la clase de demandantes. Un acto de infracción no doloso, sino deliberado, autorizado por Dario Amodei y Benjamin Mann en persona.
 
 La paradoja que atraviesa este caso es tan profunda que debería obligar a repensar la propia arquitectura de la IA "responsable": ¿cómo puede una empresa que se autodefine como *safety-first* haber violado sistemáticamente el derecho de autor de millones de creadores? ¿Y qué significa que, simultáneamente, el Pentágono designe a Anthropic como "riesgo para la cadena de suministro de seguridad nacional"?
 
 ## El acto de piratería como entidad jurídica autónoma
 
-La sentencia del Juez Alsup en el caso Bartz estableció una distinción binaria que ha redibujado el litigio de IA: la bifurcación entre el *entrenamiento del modelo* y la *adquisición ilícita de datos*. Mientras que algunos tribunales han validado que el análisis transformativo de obras protegidas durante el entrenamiento puede constituir un "uso justo", Alsup fue categórico: la descarga deliberada de copias desde bibliotecas sombra es un acto de infracción directa, irremediable e *independiente de cualquier uso posterior*.
+La sentencia del Juez Alsup en el caso Bartz estableció una distinción binaria que ha redibujado el litigio de IA: la bifurcación entre el *entrenamiento del modelo* y la *adquisición ilícita de datos*.
+
+Mientras que algunos tribunales han validado que el análisis transformativo de obras protegidas durante el entrenamiento puede constituir un "uso justo", Alsup fue categórico: la descarga deliberada de copias desde bibliotecas sombra es un acto de infracción directa, irremediable e *independiente de cualquier uso posterior*.
 
 Esto es revolucionario porque refuta la defensa favorita de Anthropic: que el carácter innovador del output (Claude como chatbot útil y seguro) justifica el input (piratería masiva). No. El tribunal dijo que no funciona así. El "blanqueamiento" doctrinal no existe.
 
@@ -34,7 +38,9 @@ Pero —y esto importa mucho— Anthropic no pasó por alto este "problema técn
 
 Porque, claro, la memorización es un activo comercial. La capacidad de Claude para responder con precisión a consultas sobre obras populares es un factor que atraía usuarios e inversores. El modelo que **reproduce canciones de Bruno Mars y líricas de Don McLean sin licencia** es un modelo más valioso que uno que dice "no puedo hacer eso".
 
-Universal Music Group y BMG presentaron pruebas documentales donde Claude generaba copias casi exactas de composiciones icónicas. Y lo más provocador: cuando se le pedía que escribiera una canción sobre "la muerte de Buddy Holly", el modelo respondía con "American Pie", atribuyéndose la autoría como si dijera: "una canción que yo escribí". No es un hallazgo técnico casual. Es un output infractor que competía directamente con agregadores de letras autorizados que sí pagaban cánones.
+Universal Music Group y BMG presentaron pruebas documentales donde Claude generaba copias casi exactas de composiciones icónicas. Y lo más provocador: cuando se le pedía que escribiera una canción sobre "la muerte de Buddy Holly", el modelo respondía con "American Pie", atribuyéndose la autoría como si dijera: "una canción que yo escribí". No es un hallazgo técnico casual.
+
+Es un output infractor que competía directamente con agregadores de letras autorizados que sí pagaban cánones.
 
 ## La "limpieza" del dataset como ocultamiento intencional
 
@@ -54,9 +60,13 @@ Los demandantes interpretan esto de manera radicalmente distinta: como una "estr
 
 **Si Claude necesita guardrails para impedir reproducir contenido protegido, es porque fue entrenado masivamente sobre ese contenido.** Si no hubiera asimilado las composiciones de Universal durante su fase de desarrollo, no requeriría filtros para evitar su reproducción. Conviene subrayar esto: la existencia misma de estas barreras es una **confesión técnica** de que el modelo fue construido sobre la vulneración de derechos exclusivos de reproducción.
 
-Además —y la evidencia es concluyente— los guardrails no funcionan. Usuarios pueden utilizar técnicas de *jailbreaking* o re-inducción para forzar al modelo a ignorar sus restricciones. La protección es selectiva: Anthropic bloqueó solo una lista limitada de 500 composiciones de los anexos del primer litigio, dejando desprotegido el vasto universo de millones de otras canciones. El sistema sigue entregando "mashups", distorsiones y versiones casi verbatim cuando se le solicita de manera persistente.
+Además —y la evidencia es concluyente— los guardrails no funcionan. Usuarios pueden utilizar técnicas de *jailbreaking* o re-inducción para forzar al modelo a ignorar sus restricciones. La protección es selectiva: Anthropic bloqueó solo una lista limitada de 500 composiciones de los anexos del primer litigio, dejando desprotegido el vasto universo de millones de otras canciones.
 
-Los demandantes lo llaman acertadamente una "curita" (*band-aid*), no una cura. No impide que el modelo siga poseyendo y procesando información infractora en sus capas internas. El acto de infracción se consumó cuando Anthropic reprodujo ilícitamente las obras para amasar su biblioteca de datos y codificarlas en el modelo. Los guardrails solo actúan sobre el síntoma —la respuesta visible del chatbot—, pero dejan intacta la vulneración de los derechos exclusivos que ocurre en la "caja negra" del entrenamiento.
+El sistema sigue entregando "mashups", distorsiones y versiones casi verbatim cuando se le solicita de manera persistente.
+
+Los demandantes lo llaman acertadamente una "curita" (*band-aid*), no una cura. No impide que el modelo siga poseyendo y procesando información infractora en sus capas internas. El acto de infracción se consumó cuando Anthropic reprodujo ilícitamente las obras para amasar su biblioteca de datos y codificarlas en el modelo.
+
+Los guardrails solo actúan sobre el síntoma —la respuesta visible del chatbot—, pero dejan intacta la vulneración de los derechos exclusivos que ocurre en la "caja negra" del entrenamiento.
 
 ## La responsabilidad personal de los fundadores
 
@@ -64,7 +74,9 @@ Una nota procesalmente agresiva: los demandantes no limitaron la acción a la en
 
 La evidencia sugiere que ambos tuvieron participación directa. Específicamente, se acusa a Benjamin Mann de haber utilizado personalmente BitTorrent en junio de 2021 para descargar aproximadamente cinco millones de libros piratas de LibGen. Dario Amodei habría discutido y autorizado expresamente estas descargas, a pesar de haber calificado internamente a LibGen como una fuente "sospechosa" (*sketchy*).
 
-El acto de piratería no fue una decisión técnica aislada. Fue una política corporativa deliberada para evitar el "tedio empresarial" de obtener licencias legales. Y esto, en términos de responsabilidad contributiva y vicaria, sitúa a los fundadores como los "motores principales" (*moving forces*) detrás de una operación sistemática de infracción. Porque, además, Anthropic alcanzó una valoración de mercado astronómica —entre 350.000 y 380.000 millones de dólares— fundamentada en gran medida en la capacidad de sus modelos para procesar y regurgitar contenidos que incluyen las obras protegidas. Al no haber abonado los cánones de licencia correspondientes, la empresa experimentó un enriquecimiento injusto derivado directamente de la explotación no autorizada.
+El acto de piratería no fue una decisión técnica aislada. Fue una política corporativa deliberada para evitar el "tedio empresarial" de obtener licencias legales. Y esto, en términos de responsabilidad contributiva y vicaria, sitúa a los fundadores como los "motores principales" (*moving forces*) detrás de una operación sistemática de infracción. Porque, además, Anthropic alcanzó una valoración de mercado astronómica —entre 350.000 y 380.000 millones de dólares— fundamentada en gran medida en la capacidad de sus modelos para procesar y regurgitar contenidos que incluyen las obras protegidas.
+
+Al no haber abonado los cánones de licencia correspondientes, la empresa experimentó un enriquecimiento injusto derivado directamente de la explotación no autorizada.
 
 ## Lo que viene en el informe completo
 

@@ -1,6 +1,8 @@
-﻿---
+---
 title: "Despacho Seguro: guía de ciberseguridad con IA para despachos de abogados"
-description: "Guía completa de ciberseguridad con IA para despachos de abogados: Zero Trust, RGPD, NIS2, AI Act y plan de implementación en 9 capítulos."
+description: "Guía completa de ciberseguridad con IA para despachos de abogados: Zero Trust, RGPD, NIS2, AI Act y plan de implementación en 9 capítulos.
+
+"
 date: "2026-06-08"
 tags: ["ciberseguridad", "Zero Trust", "RGPD", "AI Act", "NIS2", "despachos de abogados", "IA jurídica"]
 section: "guias"
@@ -11,11 +13,15 @@ readingTime: "45 min"
 pdf: "/fuentes/Despacho_Seguro.pdf"
 ---
 
-Un despacho que migra a inteligencia artificial necesita ciberseguridad de nivel máximo. Esta guía detalla un sistema completo construido sobre arquitectura Zero Trust, orientado al cumplimiento de las principales normativas aplicables: RGPD/GDPR, NIS2 (con las salvedades de ámbito subjetivo explicadas en el punto 3), Reglamento de IA (UE) 2024/1689, CCPA/CPRA y NYDFS 23 NYCRR Part 500 (como estándar de referencia y en la medida en que resulte de aplicación indirecta). Se describen los componentes técnicos —firewalls de siguiente generación, SASE, XDR, SIEM/SOAR, PAM, KMS, DLP— y los procesos organizativos —CISO, formación, simulacros, plan de respuesta a incidentes—. El plan de implementación está diseñado para un despacho mediano de entre 20 y 100 profesionales.
+Un despacho que migra a inteligencia artificial necesita ciberseguridad de nivel máximo. Esta guía detalla un sistema completo construido sobre arquitectura Zero Trust, orientado al cumplimiento de las principales normativas aplicables: RGPD/GDPR, NIS2 (con las salvedades de ámbito subjetivo explicadas en el punto 3), Reglamento de IA (UE) 2024/1689, CCPA/CPRA y NYDFS 23 NYCRR Part 500 (como estándar de referencia y en la medida en que resulte de aplicación indirecta).
+
+Se describen los componentes técnicos —firewalls de siguiente generación, SASE, XDR, SIEM/SOAR, PAM, KMS, DLP— y los procesos organizativos —CISO, formación, simulacros, plan de respuesta a incidentes—. El plan de implementación está diseñado para un despacho mediano de entre 20 y 100 profesionales.
 
 ## 1. Resumen ejecutivo
 
-El despacho migra a un sistema basado en inteligencia artificial, lo que exige una ciberseguridad de nivel máximo. Este documento detalla un sistema completo construido sobre **arquitectura Zero Trust**, que se orienta al cumplimiento de las principales normativas aplicables: **RGPD/GDPR, NIS2 (con las salvedades de ámbito subjetivo explicadas en el punto 3), Reglamento de IA (UE) 2024/1689, CCPA/CPRA y NYDFS 23 NYCRR Part 500 (como estándar de referencia y en la medida en que resulte de aplicación indirecta)**. Se describen los componentes técnicos —firewalls de siguiente generación, SASE, XDR, SIEM/SOAR, PAM, KMS, DLP— y los procesos organizativos —CISO, formación, simulacros, plan de respuesta a incidentes—. Se incluye un plan de implementación realista para un despacho mediano de entre 20 y 100 profesionales.
+El despacho migra a un sistema basado en inteligencia artificial, lo que exige una ciberseguridad de nivel máximo. Este documento detalla un sistema completo construido sobre **arquitectura Zero Trust**, que se orienta al cumplimiento de las principales normativas aplicables: **RGPD/GDPR, NIS2 (con las salvedades de ámbito subjetivo explicadas en el punto 3), Reglamento de IA (UE) 2024/1689, CCPA/CPRA y NYDFS 23 NYCRR Part 500 (como estándar de referencia y en la medida en que resulte de aplicación indirecta)**.
+
+Se describen los componentes técnicos —firewalls de siguiente generación, SASE, XDR, SIEM/SOAR, PAM, KMS, DLP— y los procesos organizativos —CISO, formación, simulacros, plan de respuesta a incidentes—. Se incluye un plan de implementación realista para un despacho mediano de entre 20 y 100 profesionales.
 
 ## 2. Arquitectura de Confianza Cero (Zero Trust)
 
@@ -54,6 +60,7 @@ A continuación se describen los **elementos técnicos necesarios**, con indepen
 | IA-SANDBOX | Entorno de pruebas de IA | Solo con internet controlado (sin acceso a LEG-*) |
 | IA-PROD | IA en producción que trata datos reales | Con LEG-A y LEG-B bajo políticas muy restrictivas |
 | ADMIN | Controladores de dominio y backups | Solo con los segmentos que lo necesiten |
+
 
 La microsegmentación ayuda a demostrar ante reguladores que se han aplicado medidas de contención de brechas, lo que resulta relevante a efectos de NIS2 y, en su caso, de NYDFS.
 
@@ -114,6 +121,7 @@ La microsegmentación ayuda a demostrar ante reguladores que se han aplicado med
 | Los abogados perciben el sistema como lento | Optimizar políticas: verificar posture cada 30 minutos; usar caché de autenticación; elegir un proveedor con baja latencia. |
 | Dificultad para integrar aplicaciones antiguas (legacy) | Usar un conector ZTNA que sirva la aplicación como si fuera web, o mantener un segmento especial legacy con controles adicionales. |
 
+
 ### 2.7. Resumen de entregables para este punto
 
 - ☐ Diagrama de red Zero Trust de alto nivel.
@@ -152,11 +160,16 @@ El RGPD aplica cuando el despacho trata datos personales de residentes en la UE,
 | Integridad y confidencialidad (art. 5.1.f) | Cifrado en reposo y en tránsito, controles de acceso ZTNA, auditoría continua. |
 | Responsabilidad proactiva (art. 5.2) | El despacho debe poder demostrar el cumplimiento. El sistema generará informes de auditoría, registros de acceso y evaluaciones de impacto (DPIA) firmadas. |
 
+
 #### 3.2.3. Delegado de Protección de Datos (DPD/DPO)
 
 El artículo 37 RGPD exige la designación de un DPO cuando las actividades principales del responsable implican el tratamiento a gran escala de categorías especiales de datos (art. 9 RGPD: datos de salud, condenas penales, origen racial, etc.). La LOPDGDD (art. 34) amplía esta obligación a colegios de abogados y asesorías jurídicas.
 
-Para un despacho mediano, la obligatoriedad del DPO depende de si el tratamiento de datos especiales constituye una **actividad principal** y se realiza a **gran escala**. Los indicadores de "gran escala" incluyen el número de interesados afectados, el volumen de datos, la duración del tratamiento y el ámbito geográfico (considerando 91 RGPD). Despachos que tramiten exclusivamente asuntos individuales pueden no alcanzar el umbral de "gran escala"; no obstante, la LOPDGDD establece la obligatoriedad para los colegios de abogados, lo que hace recomendable —y para muchos despachos obligatorio— la designación de un DPO. Se designará un DPO interno o externo desde el inicio del proyecto, independientemente del análisis de umbrales, como medida de cumplimiento proactivo y de diligencia debida.
+Para un despacho mediano, la obligatoriedad del DPO depende de si el tratamiento de datos especiales constituye una **actividad principal** y se realiza a **gran escala**. Los indicadores de "gran escala" incluyen el número de interesados afectados, el volumen de datos, la duración del tratamiento y el ámbito geográfico (considerando 91 RGPD).
+
+Despachos que tramiten exclusivamente asuntos individuales pueden no alcanzar el umbral de "gran escala"; no obstante, la LOPDGDD establece la obligatoriedad para los colegios de abogados, lo que hace recomendable —y para muchos despachos obligatorio— la designación de un DPO.
+
+Se designará un DPO interno o externo desde el inicio del proyecto, independientemente del análisis de umbrales, como medida de cumplimiento proactivo y de diligencia debida.
 
 #### 3.2.4. Evaluación de Impacto relativa a la Protección de Datos (DPIA)
 
@@ -218,6 +231,7 @@ En todo caso, **se recomienda que el despacho adopte las medidas de NIS2 como es
 | Formación en ciberseguridad de los directivos | Los socios y directores deben recibir formación específica (mínimo cada dos años) sobre riesgos y responsabilidades. |
 | Supervisión y control de la alta dirección | El órgano de administración debe aprobar las medidas de seguridad y supervisar su implementación. Se designará un CISO con recursos suficientes. |
 
+
 #### 3.3.3. Medidas técnicas mínimas exigidas por NIS2
 
 El sistema desarrollado debe cubrir las siguientes áreas:
@@ -248,7 +262,11 @@ El Reglamento de Inteligencia Artificial (RIA) clasifica los sistemas de IA en c
 | Análisis predictivo de éxito de litigios (evalúa probabilidades sobre datos de casos) | Alto riesgo (si se usa para apoyar decisiones en procedimientos judiciales, Anexo III, punto 8, letra a, RIA) | Sistema de gestión de calidad, documentación técnica, supervisión humana efectiva, registro en la base de datos de la UE, evaluación de conformidad. |
 | Selección de personal (filtrado de candidaturas) | Alto riesgo (Anexo III, punto 4, RIA) | Ídem. |
 
-**Nota sobre la evaluación de conformidad para sistemas de alto riesgo:** el RIA distingue entre proveedores (fabricantes) y responsables del despliegue (deployers). La obligación de realizar la evaluación de conformidad recae sobre el proveedor del sistema, no sobre el despacho como deployer. Para la mayoría de los sistemas de alto riesgo del Anexo III, la evaluación puede efectuarse mediante autoevaluación interna del proveedor (art. 43.2 RIA), sin necesidad de un organismo notificado. Solo determinadas categorías —como sistemas biométricos de identificación remota en tiempo real— exigen evaluación por tercero certificado. El despacho, como deployer, debe exigir al proveedor la documentación técnica y la declaración de conformidad UE, y registrar el sistema en la base de datos de la UE cuando así lo exija el RIA (art. 71).
+**Nota sobre la evaluación de conformidad para sistemas de alto riesgo:** el RIA distingue entre proveedores (fabricantes) y responsables del despliegue (deployers). La obligación de realizar la evaluación de conformidad recae sobre el proveedor del sistema, no sobre el despacho como deployer.
+
+Para la mayoría de los sistemas de alto riesgo del Anexo III, la evaluación puede efectuarse mediante autoevaluación interna del proveedor (art. 43.2 RIA), sin necesidad de un organismo notificado. Solo determinadas categorías —como sistemas biométricos de identificación remota en tiempo real— exigen evaluación por tercero certificado.
+
+El despacho, como deployer, debe exigir al proveedor la documentación técnica y la declaración de conformidad UE, y registrar el sistema en la base de datos de la UE cuando así lo exija el RIA (art. 71).
 
 #### 3.4.2. Calendario de aplicación del Reglamento de IA
 
@@ -336,6 +354,7 @@ No obstante, la normativa puede afectar al despacho de dos formas:
 | 500.15 | Registros de actividad (audit trails) | Logs inmutables con retención de 6 años. |
 | 500.16 | Inventario de sistemas y datos | Herramienta de inventario automático, actualización mensual. |
 
+
 ### 3.7. Secreto profesional y confidencialidad
 
 #### 3.7.1. Fundamento
@@ -362,6 +381,7 @@ Para facilitar la gestión, se creará una matriz de controles que relacione cad
 | Política de gestión de riesgos | NIS2 art. 21; NYDFS s. 500.04 | Documento aprobado | Dirección | Anual |
 | Inventario de sistemas | NYDFS s. 500.16 | Herramienta de inventario automático | TI | Mensual |
 
+
 ### 3.9. Riesgos específicos de incumplimiento y su mitigación
 
 | **Riesgo** | **Consecuencia** | **Mitigación** |
@@ -371,11 +391,14 @@ Para facilitar la gestión, se creará una matriz de controles que relacione cad
 | Brecha no notificada en 72 h | Multa + daño reputacional | Automatizar la alerta y disponer de un procedimiento documentado y simulado. |
 | Proveedor cloud sin garantías adecuadas | Riesgo de transferencia internacional inválida; posibles sanciones RGPD | Verificar certificación en el EU-US DPF o celebrar SCCs; aplicar cifrado con claves propias. |
 
+
 ## 4. Componentes técnicos y topología de servidores
 
 ### 4.1. Introducción y visión general
 
-Este punto describe la infraestructura física y lógica necesaria para alojar el sistema completo, incluyendo servidores, almacenamiento, red, componentes de seguridad e integración con herramientas de IA. Se detallan las especificaciones mínimas, las opciones de despliegue y la topología de red interna, alineadas con la arquitectura Zero Trust y los requisitos de cumplimiento normativo. Para un despacho de entre 20 y 100 profesionales se recomienda un modelo **híbrido**:
+Este punto describe la infraestructura física y lógica necesaria para alojar el sistema completo, incluyendo servidores, almacenamiento, red, componentes de seguridad e integración con herramientas de IA. Se detallan las especificaciones mínimas, las opciones de despliegue y la topología de red interna, alineadas con la arquitectura Zero Trust y los requisitos de cumplimiento normativo.
+
+Para un despacho de entre 20 y 100 profesionales se recomienda un modelo **híbrido**:
 
 - Nube privada o nube virtual soberana (europea) para los datos sensibles y los sistemas de IA en producción.
 - Componentes de borde y seguridad en las oficinas físicas (firewalls NGFW, SD-WAN).
@@ -393,6 +416,7 @@ Este punto describe la infraestructura física y lógica necesaria para alojar e
 | Switches de acceso con 802.1X | Asignación dinámica de VLAN según identidad del usuario. | Switches gestionables con soporte RADIUS. |
 | Microsegmentación por software | Controlador central que define políticas entre servidores y cargas de trabajo. | Agente en cada hipervisor o en cada VM; consola central. |
 
+
 #### 4.2.2. Capa de servidores y almacenamiento
 
 | **Componente** | **Descripción** | **Especificación mínima (on-premise)** | **Alternativa en nube** |
@@ -405,6 +429,7 @@ Este punto describe la infraestructura física y lógica necesaria para alojar e
 | Almacenamiento de backups | Copias de seguridad fuera de línea o inmutables. | 2× la capacidad total (p. ej., 40 TB) en disco o cinta. | Glacier Deep Archive o similar. |
 | Servidor de gestión de claves (KMS) | Almacenamiento de claves de cifrado con HSMs opcionales. | VM aislada con acceso restringido. | KMS gestionado (AWS KMS, Azure Key Vault) con claves del cliente. |
 
+
 #### 4.2.3. Capa de seguridad y monitorización
 
 | **Componente** | **Descripción** | **Despliegue** |
@@ -415,6 +440,7 @@ Este punto describe la infraestructura física y lógica necesaria para alojar e
 | DLP (Data Loss Prevention) | Políticas para evitar fugas de datos por correo, USB, impresión y portapapeles. | Gateway de correo + agente en endpoints. |
 | PAM (Privileged Access Management) | Gestión de cuentas de administrador y de servicio. Rotación automática de credenciales; registro de sesiones. | VM + agente en servidores críticos. |
 | Gestor de vulnerabilidades | Escaneo periódico de servidores, aplicaciones y contenedores. | Herramienta de red o agente interno. |
+
 
 ### 4.3. Topología de red detallada (con microsegmentación)
 
@@ -435,6 +461,7 @@ Este punto describe la infraestructura física y lógica necesaria para alojar e
 | ADMIN | 90 | Administración (CISO, TI). | Acceso a todos los segmentos con MFA y sesiones grabadas mediante PAM. |
 | GUEST | 999 | Wi-Fi para invitados. | Solo internet; sin acceso a ningún segmento interno. |
 
+
 #### 4.3.2. Políticas de firewall entre segmentos (ejemplos)
 
 **Nota importante sobre el acceso de IA a documentos:** el segmento IA-PROD no debe acceder a los expedientes del segmento LEG mediante el protocolo SMB (TCP/445). SMB ha sido el principal vector de propagación de ciberataques masivos (WannaCry, NotPetya). El acceso debe realizarse exclusivamente a través de una API REST autenticada con tokens de corta vida, o mediante HTTPS hacia el gestor documental, conforme a los principios Zero Trust.
@@ -449,6 +476,7 @@ Este punto describe la infraestructura física y lógica necesaria para alojar e
 | LEG-A | LEG-B | Cualquiera | No | Aislamiento estricto entre clientes. |
 | IA-SANDBOX | CORP-* | Cualquiera | No | El entorno de pruebas no toca datos reales. |
 | ADMIN | Cualquier segmento | Cualquiera, bajo PAM | Sí, con restricciones | Los administradores usan cuentas just-in-time. |
+
 
 ### 4.4. Opciones de despliegue
 
@@ -478,6 +506,7 @@ Solo viable con proveedores que ofrezcan regiones en la UE y acuerdos de procesa
 | NAS principal | — | — | 12× 16 TB HDD (RAID 6) + 2× 1,92 TB SSD caché | 2× 25 GbE | Almacenamiento compartido iSCSI/NFS. |
 | Backup Server | 1× Intel Xeon Silver 4310 | 64 GB | 4× 18 TB HDD (RAID 10) | 2× 10 GbE | Repositorio de backups inmutables. |
 
+
 #### 4.5.2. Servidores en nube (recursos mensuales orientativos)
 
 | **Componente** | **Tipo de instancia** | **vCPU / RAM** | **Almacenamiento** | **Observaciones** |
@@ -487,6 +516,7 @@ Solo viable con proveedores que ofrezcan regiones en la UE y acuerdos de procesa
 | Base de datos principal | db.r6i.xlarge | 4 vCPU / 32 GB | 500 GB io2 (5.000 IOPS) | Multi-AZ (2 zonas). |
 | IA-PROD (inferencia) | g4dn.xlarge (1× GPU T4) | 4 vCPU + 1 GPU / 16 GB | 100 GB | Solo para inferencia; no para entrenamiento. |
 | SIEM + XDR | m6i.4xlarge | 16 vCPU / 64 GB | 1 TB | Logs 90 días en línea. |
+
 
 **Nota sobre el controlador de dominio réplica:** la instancia t3.large (2 vCPU / 8 GB) que figuraba en versiones anteriores de este documento resulta insuficiente para un controlador de dominio de producción integrado con Kerberos, LDAP y ZTNA. Se recomienda como mínimo m6i.xlarge (4 vCPU / 16 GB).
 
@@ -518,11 +548,14 @@ Solo viable con proveedores que ofrezcan regiones en la UE y acuerdos de procesa
 | Conectividad (fibra redundante, SD-WAN) | 12.000 - 24.000 |
 | **Total estimado anual** | **137.000 - 304.000 €** |
 
+
 ## 5. Seguridad e integración de las herramientas de IA
 
 ### 5.1. Introducción y enfoque general
 
-La incorporación de inteligencia artificial en un despacho de abogados no solo aporta eficiencia, sino que introduce nuevos vectores de ataque y riesgos de cumplimiento. Este punto desarrolla un marco de seguridad específico para IA que cubre: el ciclo de vida completo de los modelos y datos; la protección de los *prompts* y sus respuestas; la integración segura con el resto del sistema (ZTNA, DLP, SIEM); y el cumplimiento con el RIA y las obligaciones de secreto profesional. Principio fundamental: **la IA no es un sistema autónomo, sino una herramienta bajo el control y supervisión humana**. El abogado sigue siendo el responsable último.
+La incorporación de inteligencia artificial en un despacho de abogados no solo aporta eficiencia, sino que introduce nuevos vectores de ataque y riesgos de cumplimiento. Este punto desarrolla un marco de seguridad específico para IA que cubre: el ciclo de vida completo de los modelos y datos; la protección de los *prompts* y sus respuestas; la integración segura con el resto del sistema (ZTNA, DLP, SIEM); y el cumplimiento con el RIA y las obligaciones de secreto profesional.
+
+Principio fundamental: **la IA no es un sistema autónomo, sino una herramienta bajo el control y supervisión humana**. El abogado sigue siendo el responsable último.
 
 ### 5.2. Clasificación interna de las herramientas de IA
 
@@ -533,6 +566,7 @@ Con anterioridad a la implantación de cualquier sistema de IA, debe realizarse 
 | Nivel 1: Riesgo mínimo | La IA asiste en tareas sin evaluar personas ni tomar decisiones autónomas. | Corrector ortográfico, resumidor de jurisprudencia, transcripción de audios. | Transparencia al usuario; logs de uso básicos. |
 | Nivel 2: Riesgo limitado | La IA interactúa con personas o genera contenido que puede requerir supervisión. | Chatbot de atención al cliente; asistente de redacción de borradores. | Transparencia explícita; posibilidad de desactivar la IA; supervisión recomendada. |
 | Nivel 3: Alto riesgo (solo si es imprescindible) | La IA evalúa personas o apoya decisiones legales que afectan a derechos. | Herramienta predictiva de éxito de litigios; selección de personal. | Todas las medidas del RIA para alto riesgo + supervisión humana efectiva + documentación técnica completa + exigencia de conformidad al proveedor. |
+
 
 **Recomendación estratégica:** el despacho debe limitarse a los niveles 1 y 2 durante al menos el primer año de implantación de IA.
 
@@ -568,6 +602,7 @@ Se envían datos previamente anonimizados. La anonimización debe ser técnicame
 | No almacenamiento persistente de prompts | Los logs de IA guardan solo metadatos (quién, cuándo, modelo, duración), no el contenido del prompt. Si se requiere conservar el prompt con fines legales, se almacena cifrado con control de acceso específico. |
 | Detección de fugas de datos (data leakage) | El DLP monitoriza el tráfico hacia servidores de IA no autorizados y detecta datos especialmente sensibles en los prompts. Si se detectan, se bloquea y se genera alerta. |
 | Prevención de inyección de prompts (prompt injection) | Validaciones de entrada: el sistema filtra comandos maliciosos y limita la longitud del prompt. Se emplea un modelo de seguridad adicional para detectar intentos de evasión (jailbreak). |
+
 
 ### 5.6. Integración con la arquitectura de seguridad general
 
@@ -636,6 +671,7 @@ Para sistemas de IA de alto riesgo, el sistema debe garantizar:
 | Supervisión humana y validación de respuestas | Técnicas para revisar y corregir salidas de IA; responsabilidad legal del abogado. | 2 horas | Anual. |
 | Procedimiento ante incidentes de IA | Qué hacer si la IA genera una respuesta errónea o potencialmente dañina. | 1 hora | Semestral. |
 
+
 ### 5.10. Plan de respuesta a incidentes específico de IA
 
 | **Escenario** | **Activación** | **Acciones inmediatas** | **Responsable** |
@@ -643,6 +679,7 @@ Para sistemas de IA de alto riesgo, el sistema debe garantizar:
 | Fuga de datos a través de IA | Alerta DLP o queja de cliente. | 1. Bloquear el acceso de ese usuario a la IA. 2. Solicitar al proveedor que elimine los datos. 3. Notificar al DPO. 4. Evaluar si constituye una brecha RGPD. | CISO + DPO |
 | Modelo comprometido | Anomalía en sumas de verificación del modelo o comportamiento atípico. | 1. Aislar el servidor IA-PROD. 2. Restaurar desde copia limpia. 3. Investigar el vector de ataque. 4. Notificar a los clientes si sus datos pudieron haberse visto expuestos. | CISO + TI |
 | Alucinación grave con daño al cliente | Queja del cliente o detección interna. | 1. Rectificar el consejo al cliente. 2. Revisar si el abogado omitió la supervisión obligatoria. 3. Acción disciplinaria si procede. 4. Reforzar las advertencias visibles del sistema de IA. | Socio director + CISO |
+
 
 ### 5.11. Lista de verificación para cada nueva herramienta de IA
 
@@ -722,6 +759,7 @@ La formación es una medida técnica de seguridad, no una actividad administrati
 | Gestión de incidentes y respuesta | CISO, TI, DPO, socios | 4 horas | Anual |
 | Obligaciones normativas (RGPD, RIA) | Socios y directores | 2 horas | Anual o ante cambios normativos |
 
+
 ## 8. Monitoreo continuo, SOC y respuesta a incidentes
 
 ### 8.1. Centro de Operaciones de Seguridad (SOC)
@@ -767,6 +805,7 @@ La implantación del sistema completo se divide en cuatro fases secuenciales, co
 | Fase 2: Seguridad completa y cumplimiento | Meses 7-12 | ZTNA para todos los usuarios; DLP; PAM; KMS; DPIAs completadas; plan de continuidad de negocio. | Certificación de cumplimiento RGPD interna; NYDFS readiness assessment; primera prueba de penetración. |
 | Fase 3: IA y operación avanzada | Meses 13-18 | Despliegue de primera herramienta de IA (nivel 1) en IA-PROD; SOC gestionado activo; simulacro de incidente; programa de formación completo. | Primera herramienta de IA en producción con checklist completo; SOC 24/7 activo; primer simulacro documentado. |
 
+
 ### 9.3. Métricas de éxito
 
 | **Métrica** | **Objetivo** | **Frecuencia de medición** |
@@ -779,6 +818,7 @@ La implantación del sistema completo se divide en cuatro fases secuenciales, co
 | DPIAs completadas antes de implantar IA | 100 % | Por implantación |
 | Simulacros de incidente realizados | Mínimo 1 al año con informe post-ejercicio | Anual |
 | Backups verificados y restaurables | 100 % de los backups probados en los últimos 30 días | Mensual |
+
 
 ### 9.4. Recursos necesarios
 

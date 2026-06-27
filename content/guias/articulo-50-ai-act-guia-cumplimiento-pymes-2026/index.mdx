@@ -25,13 +25,17 @@ El artículo no exige que las pymes contraten auditores externos ni que construy
 
 Hay cuatro obligaciones diferenciadas en el artículo 50. Cada una se dirige a un tipo de sistema o de contenido diferente. Y lo que conviene entender desde el principio es que un mismo sistema puede activar varias de ellas a la vez: un chatbot que además genera imágenes está sujeto simultáneamente al apartado primero y al segundo del artículo.
 
-Conviene también aclarar qué queda fuera. El uso puramente personal y no profesional no activa el artículo 50. Tampoco lo hace la investigación científica pura sin puesta en servicio, ni el software de código abierto que no realice ninguna de las funciones que el artículo describe. Sin embargo —y esto es un matiz que el borrador de Directrices subraya expresamente— la exclusión de "actividad personal" no ampara a quien genera un *deep fake* de un político y lo comparte en redes sociales con impacto público, aunque no tenga ánimo de lucro. El criterio relevante no es si se gana dinero, sino si hay impacto público.
+Conviene también aclarar qué queda fuera. El uso puramente personal y no profesional no activa el artículo 50. Tampoco lo hace la investigación científica pura sin puesta en servicio, ni el software de código abierto que no realice ninguna de las funciones que el artículo describe.
+
+Sin embargo —y esto es un matiz que el borrador de Directrices subraya expresamente— la exclusión de "actividad personal" no ampara a quien genera un *deep fake* de un político y lo comparte en redes sociales con impacto público, aunque no tenga ánimo de lucro. El criterio relevante no es si se gana dinero, sino si hay impacto público.
 
 ## Proveedor o desplegador: la distinción que lo cambia todo
 
 Antes de analizar cada obligación, es imprescindible identificar el rol que se ocupa en la cadena de IA. El AI Act distingue dos figuras principales, y la confusión entre ambas es una de las razones por las que muchas pymes asumen erróneamente que el Reglamento no les afecta.
 
-El **proveedor** es quien desarrolla o encarga el desarrollo de un sistema de IA y lo pone en el mercado bajo su nombre o marca. El **desplegador** es quien usa ese sistema bajo su propia responsabilidad y decide cómo y para qué se utiliza. Una clínica que contrata un chatbot de terceros para atender a sus pacientes es desplegadora. Una agencia de marketing que usa Midjourney para crear imágenes para sus clientes es desplegadora. Un medio digital que publica artículos redactados con asistencia de IA es desplegador.
+El **proveedor** es quien desarrolla o encarga el desarrollo de un sistema de IA y lo pone en el mercado bajo su nombre o marca. El **desplegador** es quien usa ese sistema bajo su propia responsabilidad y decide cómo y para qué se utiliza. Una clínica que contrata un chatbot de terceros para atender a sus pacientes es desplegadora. Una agencia de marketing que usa Midjourney para crear imágenes para sus clientes es desplegadora.
+
+Un medio digital que publica artículos redactados con asistencia de IA es desplegador.
 
 La consecuencia práctica es directa: si usas una herramienta de IA de un tercero para tu negocio, eres tú —como desplegador— el responsable de que los avisos se muestren correctamente, de que el contenido esté etiquetado y de que las personas expuestas estén informadas. No puedes delegar esa responsabilidad al proveedor de la herramienta alegando que "la IA es de otro". El proveedor tiene sus propias obligaciones, pero las tuyas son también propias e independientes.
 
@@ -49,7 +53,9 @@ Hay matices adicionales que merecen atención. Si el público puede incluir meno
 
 Los agentes de IA autónomos —sistemas que actúan solos para completar tareas como navegar por internet, enviar correos o gestionar calendarios— también están cubiertos por esta obligación. Deben identificarse como IA en toda interacción con personas. El borrador de Directrices añade que si el proveedor no puede anticipar cuándo habrá una persona al otro lado, el agente debe identificarse siempre por defecto.
 
-Existe una excepción: la llamada "interacción evidente", que se aplica cuando es absolutamente obvio para cualquier persona razonablemente informada que está interactuando con una IA. Pero esta excepción es más estrecha de lo que parece. Exige un análisis caso a caso que tenga en cuenta la composición de la audiencia, incluyendo la posible presencia de menores, personas mayores o personas con menor alfabetización digital. Una herramienta de asistencia de código accesible solo para desarrolladores profesionales puede acogerse a esta excepción. Un chatbot de atención al cliente de un e-commerce de acceso público, no.
+Existe una excepción: la llamada "interacción evidente", que se aplica cuando es absolutamente obvio para cualquier persona razonablemente informada que está interactuando con una IA. Pero esta excepción es más estrecha de lo que parece. Exige un análisis caso a caso que tenga en cuenta la composición de la audiencia, incluyendo la posible presencia de menores, personas mayores o personas con menor alfabetización digital.
+
+Una herramienta de asistencia de código accesible solo para desarrolladores profesionales puede acogerse a esta excepción. Un chatbot de atención al cliente de un e-commerce de acceso público, no.
 
 ## La segunda obligación: marcar lo que la IA genera o modifica
 
@@ -57,13 +63,19 @@ Si se usa IA para generar o modificar imágenes, audios, vídeos o textos de for
 
 El borrador de Directrices establece que esta obligación tiene dos partes acumulativas, ambas obligatorias: el marcado en formato legible por máquina, y la existencia de un sistema de detección disponible para el público que permita identificar ese marcado y producir un resultado comprensible para personas.
 
-El estándar de referencia para el marcado legible por máquina es el C2PA (Coalition for Content Provenance and Authenticity), un protocolo técnico internacional impulsado por Adobe, Microsoft y Google. Herramientas como Adobe Firefly, DALL-E 3 o Bing Image Creator ya incorporan soporte C2PA de forma nativa, lo que significa que parte del marcado puede gestionarse automáticamente si se usan esas herramientas. Conviene preguntar al proveedor de cada herramienta si ya incluye soporte C2PA y documentar la respuesta en la ficha del sistema.
+El estándar de referencia para el marcado legible por máquina es el C2PA (Coalition for Content Provenance and Authenticity), un protocolo técnico internacional impulsado por Adobe, Microsoft y Google. Herramientas como Adobe Firefly, DALL-E 3 o Bing Image Creator ya incorporan soporte C2PA de forma nativa, lo que significa que parte del marcado puede gestionarse automáticamente si se usan esas herramientas.
+
+Conviene preguntar al proveedor de cada herramienta si ya incluye soporte C2PA y documentar la respuesta en la ficha del sistema.
 
 El marcado debe ser efectivo, interoperable —funcionar con herramientas de terceros, no solo con la del proveedor original—, robusto —resistir manipulaciones razonables— y fiable. En el estado actual de la tecnología, puede ser necesario combinar varias técnicas: por ejemplo, metadatos C2PA más un *watermark* perceptible.
 
-Ahora bien, ¿qué ocurre si no existe herramienta de detección disponible para un formato concreto? No para todos los tipos de contenido existe aún una solución de detección pública e interoperable. En ese caso, la guía propone aplicar el principio de mejor esfuerzo: documentar qué técnica se ha aplicado, por qué se considera la más robusta disponible, y revisar periódicamente si aparecen nuevas soluciones. Las autoridades de control —en España, la AESIA— valorarán la buena fe y el esfuerzo documental.
+Ahora bien, ¿qué ocurre si no existe herramienta de detección disponible para un formato concreto? No para todos los tipos de contenido existe aún una solución de detección pública e interoperable. En ese caso, la guía propone aplicar el principio de mejor esfuerzo: documentar qué técnica se ha aplicado, por qué se considera la más robusta disponible, y revisar periódicamente si aparecen nuevas soluciones.
 
-¿Cuándo no aplica esta obligación? Las correcciones ortográficas y gramaticales menores no están cubiertas. Tampoco los ajustes técnicos de formato, compresión o reducción de ruido, ni los pequeños recortes o correcciones de color sin alterar el significado. La línea divisoria es si la IA altera sustancialmente el contenido original o su significado semántico. Lo que sí está incluido, aunque a veces sorprenda: traducciones con alteración sustancial, resúmenes que modifican el significado original, añadir o eliminar objetos en imágenes, clonar voces, crear imágenes o vídeos desde cero.
+Las autoridades de control —en España, la AESIA— valorarán la buena fe y el esfuerzo documental.
+
+¿Cuándo no aplica esta obligación? Las correcciones ortográficas y gramaticales menores no están cubiertas. Tampoco los ajustes técnicos de formato, compresión o reducción de ruido, ni los pequeños recortes o correcciones de color sin alterar el significado. La línea divisoria es si la IA altera sustancialmente el contenido original o su significado semántico.
+
+Lo que sí está incluido, aunque a veces sorprenda: traducciones con alteración sustancial, resúmenes que modifican el significado original, añadir o eliminar objetos en imágenes, clonar voces, crear imágenes o vídeos desde cero.
 
 ## La tercera obligación: informar cuando la IA analiza emociones o biometría
 
@@ -73,19 +85,25 @@ No es suficiente con incluir esta información en la política de privacidad. De
 
 Esta obligación se aplica a todo sistema de reconocimiento de emociones o de categorización biométrica, independientemente de que sea o no considerado de alto riesgo según la clasificación general del AI Act. No hay umbral de riesgo que la excluya.
 
-Hay además una capa adicional de obligaciones que esta actividad activa en paralelo: el RGPD. Los datos biométricos y los relativos a estados emocionales de personas identificables son datos de categoría especial según el artículo 9 del Reglamento General de Protección de Datos. Esto exige base jurídica específica, información en la política de privacidad y, en muchos casos, una Evaluación de Impacto sobre la Protección de Datos (DPIA). El cumplimiento del artículo 50 del AI Act no sustituye al cumplimiento del RGPD; ambos corren en paralelo.
+Hay además una capa adicional de obligaciones que esta actividad activa en paralelo: el RGPD. Los datos biométricos y los relativos a estados emocionales de personas identificables son datos de categoría especial según el artículo 9 del Reglamento General de Protección de Datos. Esto exige base jurídica específica, información en la política de privacidad y, en muchos casos, una Evaluación de Impacto sobre la Protección de Datos (DPIA).
+
+El cumplimiento del artículo 50 del AI Act no sustituye al cumplimiento del RGPD; ambos corren en paralelo.
 
 ## La cuarta obligación: *deep fakes* y textos de interés público
 
 El apartado cuarto del artículo 50 se divide en dos partes con lógicas distintas aunque relacionadas.
 
-La primera parte cubre los *deep fakes*: imágenes, audios o vídeos generados o manipulados por IA que se asemejan a algo real —personas, lugares, objetos, eventos— y que podrían llevar a pensar que son auténticos. Si se publican este tipo de contenidos en el contexto de una actividad profesional, deben etiquetarse de forma clara y perceptible, sin que la persona necesite usar herramientas técnicas para detectarlo. La etiqueta debe estar presente desde el inicio del contenido, no al final, y debe ser visible a simple vista.
+La primera parte cubre los *deep fakes*: imágenes, audios o vídeos generados o manipulados por IA que se asemejan a algo real —personas, lugares, objetos, eventos— y que podrían llevar a pensar que son auténticos. Si se publican este tipo de contenidos en el contexto de una actividad profesional, deben etiquetarse de forma clara y perceptible, sin que la persona necesite usar herramientas técnicas para detectarlo.
+
+La etiqueta debe estar presente desde el inicio del contenido, no al final, y debe ser visible a simple vista.
 
 Hay una modulación importante para obras artísticas o satíricas: la etiqueta sigue siendo obligatoria, pero puede aplicarse de forma que no arruine la experiencia —en los créditos, en la descripción, en el pie de imagen—. El borrador de Directrices confirma expresamente que la obligación no desaparece por tratarse de una obra artística o de sátira política.
 
 La segunda parte del apartado cuarto cubre los textos de interés público generados o modificados con IA. Si se publican textos con el objetivo de informar al público sobre asuntos de interés general —política, salud, economía, medio ambiente, cultura con impacto social—, debe revelarse que han sido generados por IA, salvo que se cumplan acumulativamente dos condiciones.
 
-La primera condición es que el texto haya sido revisado por una persona con la competencia adecuada y se haya ejercido un control editorial sustancial. Esto no significa releer el texto o corregir un par de errores ortográficos. Significa verificación de hechos, evaluación crítica y reformulación de secciones si es necesario. La segunda condición es que una persona física o jurídica asuma públicamente y de forma verificable la responsabilidad editorial de la publicación, con su identidad disponible en un lugar fácilmente accesible.
+La primera condición es que el texto haya sido revisado por una persona con la competencia adecuada y se haya ejercido un control editorial sustancial. Esto no significa releer el texto o corregir un par de errores ortográficos. Significa verificación de hechos, evaluación crítica y reformulación de secciones si es necesario.
+
+La segunda condición es que una persona física o jurídica asuma públicamente y de forma verificable la responsabilidad editorial de la publicación, con su identidad disponible en un lugar fácilmente accesible.
 
 Si "revisión humana" equivale a pulsar el botón de publicar, la excepción no aplica. Y si aplica la excepción, conviene documentarla con la Plantilla E que la guía incluye, porque en caso de inspección será necesario acreditarla.
 
@@ -103,7 +121,9 @@ Conviene recordar, ante estos números, que la existencia de documentación orde
 
 Una pregunta que genera mucha confusión práctica: ¿qué pasa con el contenido generado con IA antes del 2 de agosto de 2026?
 
-La respuesta es clara: no es necesario marcarlo retroactivamente. Los contenidos producidos antes de la fecha de aplicación no requieren ser revisados ni etiquetados con carácter retroactivo. Sin embargo —y aquí está el matiz que el borrador de Directrices subraya expresamente— si esos contenidos se vuelven a distribuir activamente después del 2 de agosto, la obligación de marcado aplica desde ese momento de redistribución activa. El criterio relevante no es la fecha de generación, sino la fecha de distribución activa.
+La respuesta es clara: no es necesario marcarlo retroactivamente. Los contenidos producidos antes de la fecha de aplicación no requieren ser revisados ni etiquetados con carácter retroactivo. Sin embargo —y aquí está el matiz que el borrador de Directrices subraya expresamente— si esos contenidos se vuelven a distribuir activamente después del 2 de agosto, la obligación de marcado aplica desde ese momento de redistribución activa.
+
+El criterio relevante no es la fecha de generación, sino la fecha de distribución activa.
 
 Esto tiene implicaciones prácticas para cualquier empresa que tenga un archivo de imágenes, vídeos o textos generados con IA que continúa usando en sus comunicaciones o redes sociales. Si esos materiales se siguen publicando, compartiendo o enviando después del 2 de agosto, activarán la obligación de marcado desde ese momento.
 
