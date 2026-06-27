@@ -68,6 +68,16 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+  
   // Get the equivalent route in the other language
   const getAlternateRoute = () => {
     if (isEnglish) {
@@ -102,7 +112,7 @@ export function Header() {
       }`}
     >
       <div className="container-wide">
-        <div className="flex items-center justify-between py-3 md:py-4 min-h-[120px]">
+        <div className="flex items-center justify-between py-2 md:py-4 min-h-[80px] md:min-h-[120px]">
           <div className="flex flex-1 items-center justify-between gap-4 md:gap-6">
             <Link href={isEnglish ? "/en" : "/"} className="flex items-center group flex-shrink-0">
               <Image
@@ -110,7 +120,7 @@ export function Header() {
                 alt="Derecho Artificial"
                 width={300}
                 height={100}
-                className="h-[160px] w-auto object-contain"
+                className="h-[100px] md:h-[160px] w-auto object-contain"
                 style={{ mixBlendMode: "multiply" }}
                 priority
               />
@@ -165,7 +175,7 @@ export function Header() {
 
           <button
             type="button"
-            className="lg:hidden p-2 -mr-2 text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="lg:hidden p-3 -mr-3 text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={isEnglish ? "Open menu" : "Abrir menú"}
           >
@@ -178,7 +188,9 @@ export function Header() {
         </div>
 
         {mobileMenuOpen && (
-          <nav className="lg:hidden border-t border-divider py-8 animate-fade-in" role="navigation" aria-label="Navegación móvil">
+          <>
+          <div className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden" onClick={() => setMobileMenuOpen(false)} />
+          <nav className="relative z-50 lg:hidden border-t border-divider py-8 bg-card animate-fadeIn" role="navigation" aria-label="Navegación móvil">
             <div className="flex flex-col gap-6">
               {navigation.map((item) => (
                 <Link
@@ -209,6 +221,7 @@ export function Header() {
               </div>
             </div>
           </nav>
+          </>
         )}
       </div>
     </header>

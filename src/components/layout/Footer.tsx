@@ -176,7 +176,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={isEnglish ? "X profile (Twitter)" : "Perfil en X (Twitter)"}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
               >
                 <Twitter className="h-4 w-4" />
               </a>
@@ -185,7 +185,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={isEnglish ? "Facebook page" : "Página en Facebook"}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
               >
                 <Facebook className="h-4 w-4" />
               </a>
@@ -194,7 +194,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={isEnglish ? "LinkedIn profile" : "Perfil en LinkedIn"}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-divider text-caption hover:text-primary hover:border-primary transition-colors duration-300"
               >
                 <Linkedin className="h-4 w-4" />
               </a>
