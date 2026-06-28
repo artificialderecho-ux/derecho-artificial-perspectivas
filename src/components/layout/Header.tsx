@@ -127,7 +127,7 @@ export function Header() {
             </Link>
 
             <div className="flex flex-1 items-center justify-end gap-3 sm:gap-4 md:gap-5">
-              <div className="w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32">
+              <div className={`w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32${mobileMenuOpen ? ' invisible' : ''}`}>
                 <SearchBar />
               </div>
 
