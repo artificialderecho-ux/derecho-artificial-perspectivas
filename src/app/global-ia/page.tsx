@@ -167,6 +167,7 @@ export default async function GlobalIAPage() {
             </p>
           </section>
       </div>
+    </main>
     </>
   );
 }
