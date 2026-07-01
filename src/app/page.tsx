@@ -14,15 +14,9 @@ import { cache } from 'react';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-<<<<<<< HEAD
   title: "Regulación IA: AI Act, RGPD y compliance",
   description:
     "Domina el AI Act, el RGPD y la jurisprudencia IA. Análisis jurídico, guías de compliance y sentencias comentadas para abogados y DPO.",
-=======
-  title: "Derecho, ética y regulación de la IA",
-  description:
-    "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
->>>>>>> work-final
   keywords: [
     "derecho artificial",
     "inteligencia artificial",
@@ -41,17 +35,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-<<<<<<< HEAD
     title: "Regulación IA: AI Act, RGPD y compliance",
     description:
       "Domina el AI Act, el RGPD y la jurisprudencia IA. Análisis jurídico, guías de compliance y sentencias comentadas para abogados y DPO.",
     url: "https://derechoartificial.com",
-=======
-    title: "Derecho, ética y regulación de la IA",
-    description:
-      "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
-    url: "https://www.derechoartificial.com",
->>>>>>> work-final
     siteName: "Derecho Artificial",
     locale: "es_ES",
     images: [
@@ -65,7 +52,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-<<<<<<< HEAD
     title: "Regulación IA: AI Act, RGPD y compliance",
     description:
       "Domina el AI Act, el RGPD y la jurisprudencia IA. Análisis jurídico, guías de compliance y sentencias comentadas para abogados y DPO.",
@@ -73,15 +59,6 @@ export const metadata: Metadata = {
     creator: "@RicardoScarpa",
   },
 };
-=======
-    title: "Derecho, ética y regulación de la IA",
-    description:
-      "Análisis jurídico del Reglamento IA y su impacto legal. Guías prácticas para abogados y profesionales del compliance.",
-    images: ["/logo-principal.png"],
-    creator: "@RicardoScarpa", // Assuming this from previous context
-  },
-};
->>>>>>> work-final
 
 export default async function HomePage() {
   const [
@@ -93,13 +70,8 @@ export default async function HomePage() {
     jurisprudenciaSlugs,
     guiasSlugs,
   ] = await Promise.all([
-<<<<<<< HEAD
     listContentSlugs("guias-ia"),
     listSectionResourceSlugs("guias-ia"),
-=======
-    listContentSlugs("actualidad-ia"),
-    listSectionResourceSlugs("actualidad-ia"),
->>>>>>> work-final
     listContentSlugs("firma-scarpa"),
     listSectionResourceSlugs("firma-scarpa"),
     listSectionResourceSlugs("normativa"),
@@ -109,13 +81,8 @@ export default async function HomePage() {
 
   const [actualidadJsonEntries, actualidadResourceEntries, firmaJsonEntries, firmaResourceEntries] =
     await Promise.all([
-<<<<<<< HEAD
       Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("guias-ia", slug))),
       Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("guias-ia", slug))),
-=======
-      Promise.all(actualidadJsonSlugs.map((slug) => getContentEntry("actualidad-ia", slug))),
-      Promise.all(actualidadResourceSlugs.map((slug) => getSectionResourceEntry("actualidad-ia", slug))),
->>>>>>> work-final
       Promise.all(firmaJsonSlugs.map((slug) => getContentEntry("firma-scarpa", slug))),
       Promise.all(firmaResourceSlugs.map((slug) => getSectionResourceEntry("firma-scarpa", slug))),
     ]);
@@ -148,18 +115,13 @@ export default async function HomePage() {
       title: e.title,
       description: e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200),
       date: e.displayDateMs ?? e.dateMs ?? 0,
-<<<<<<< HEAD
       urlPath: `/guias-ia/${e.slug}`,
-=======
-      urlPath: `/actualidad-ia/${e.slug}`,
->>>>>>> work-final
       author: "Derecho Artificial",
     })),
   ];
 
   const unifiedFirma = [
     // Priorizar posts MDX de Firma Scarpa
-<<<<<<< HEAD
     ...getAllPosts().filter(post => {
       const category = (post.frontmatter.category || "").toLowerCase();
       const section = (post.frontmatter.section || "").toLowerCase();
@@ -178,19 +140,6 @@ export default async function HomePage() {
       title: post.frontmatter.title,
       description: post.excerpt,
       date: post.dateMs,
-=======
-    ...getAllPosts().filter(post => 
-      post.frontmatter.category && 
-      (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma scarpa' ||
-       post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'firma-scarpa' ||
-       post.frontmatter.category.toLowerCase() === 'firma scarpa' ||
-       post.frontmatter.category.toLowerCase() === 'firma-scarpa' ||
-       (post.frontmatter.section || "").toLowerCase() === 'firma-scarpa')
-    ).map(post => ({
-      title: post.frontmatter.title,
-      description: post.excerpt,
-      date: new Date(post.frontmatter.date).getTime(),
->>>>>>> work-final
       urlPath: post.url,
       author: post.frontmatter.author || "Ricardo Scarpa",
     })),
@@ -296,36 +245,22 @@ export default async function HomePage() {
       const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
       return (
         cat === "noticia" ||
-<<<<<<< HEAD
         cat === "guias-ia" ||
         tags.includes("noticia") ||
         tags.includes("guias-ia") ||
-=======
-        cat === "actualidad-ia" ||
-        tags.includes("noticia") ||
-        tags.includes("actualidad-ia") ||
->>>>>>> work-final
         tags.includes("actualidad") ||
         tags.includes("news")
       );
     })
     .filter((post) => isAllowedLanguage(post.frontmatter.title, post.excerpt))
-<<<<<<< HEAD
     .sort((a, b) => b.dateMs - a.dateMs)
-=======
-    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
->>>>>>> work-final
     .slice(0, 6);
   const newsEntries =
     newsMdxCandidates.length > 0
       ? newsMdxCandidates.map((post) => ({
           title: post.frontmatter.title,
           description: post.excerpt,
-<<<<<<< HEAD
           date: post.dateMs,
-=======
-          date: new Date(post.frontmatter.date).getTime(),
->>>>>>> work-final
           urlPath: post.url,
           author: post.frontmatter.author || "Derecho Artificial",
           type: "Noticias IA" as const,
@@ -419,11 +354,7 @@ export default async function HomePage() {
       .filter((e): e is NonNullable<typeof e> => Boolean(e))
       .map((e) => ({
         title: e.title,
-<<<<<<< HEAD
         href: `/guias-ia/${e.slug}`,
-=======
-        href: `/recursos/guias/${e.slug}`,
->>>>>>> work-final
         description: e.summaryHtml ? e.summaryHtml.replace(/<[^>]+>/g, "").slice(0, 200) : "",
         meta: `${formatDateFromMs(e.displayDateMs ?? 0, "es-ES")} · Repositorio de documentación técnica y ética`,
         dateMs: e.displayDateMs ?? e.dateMs ?? 0,
@@ -492,11 +423,7 @@ export default async function HomePage() {
     {
       key: "guias",
       label: "Guías y Protocolos",
-<<<<<<< HEAD
       href: "/guias-ia",
-=======
-      href: "/recursos/guias",
->>>>>>> work-final
       items: uniqueByHref(guiasItems).slice(0, 2),
     },
     {
@@ -565,11 +492,7 @@ export default async function HomePage() {
           </p>
           <div className="mt-8 flex flex-col md:flex-row gap-4">
             <Link
-<<<<<<< HEAD
               href="/guias-ia"
-=======
-              href="/actualidad-ia"
->>>>>>> work-final
               className="bg-primary text-white px-8 py-4 rounded-lg font-bold hover:bg-primary/90 transition-colors"
             >
               Ver guías IA
@@ -603,11 +526,7 @@ export default async function HomePage() {
               </p>
               <div className="mt-3">
                 <Link
-<<<<<<< HEAD
                   href="/guias-ia"
-=======
-                  href="/actualidad-ia"
->>>>>>> work-final
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors"
                 >
                   Ver todas las guías
@@ -637,19 +556,11 @@ export default async function HomePage() {
               },
               {
                 title: "Guías IA",
-<<<<<<< HEAD
                 category: "guias-ia",
                 image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
                   ? "/images/heroes/guias-ia-hero.wep"
                   : "/images/heroes/guias-ia-hero.webp",
                 href: "/guias-ia",
-=======
-                category: "actualidad-ia",
-                image: existsSync(join(process.cwd(), "public", "images", "heroes", "guias-ia-hero.wep"))
-                  ? "/images/heroes/guias-ia-hero.wep"
-                  : "/images/heroes/guias-ia-hero.webp",
-                href: "/actualidad-ia",
->>>>>>> work-final
               },
               {
                 title: "Propiedad Intelectual IA",
@@ -665,22 +576,15 @@ export default async function HomePage() {
               },
               {
                 title: "IA Global",
-<<<<<<< HEAD
                 category: "global-ia",
                 image: "/images/heroes/ia-global-hero.webp",
                 href: "/global-ia",
-=======
-                category: "ia-global",
-                image: "/images/heroes/ia-global-hero.webp",
-                href: "/ia-global",
->>>>>>> work-final
               },
             ];
             const getLatestByCategory = (cat: string) =>
               mdxPosts
                 .filter((post) => {
                   const c = (post.frontmatter.category || "").toLowerCase();
-<<<<<<< HEAD
                   const cNormalized = c.replace(/-/g, ' ');
                   const title = (post.frontmatter.title || "").toLowerCase();
                   const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
@@ -757,50 +661,16 @@ export default async function HomePage() {
                       cNormalized === "etica ia" ||
                       (post.frontmatter.section || "").toLowerCase() === "etica-ia"
                     );
-=======
-                  
-                  // Para normativa, incluir categorías relacionadas
-                  if (cat === "normativa") {
-                    return c === "normativa" || 
-                           c === "legislación digital" || 
-                           c === "legislación internacional" ||
-                           c === "legislación" ||
-                           c === "legislación ia" ||
-                           c === "regulación ue";
-                  }
-                  
-                  // Para jurisprudencia, incluir categorías relacionadas
-                  if (cat === "jurisprudencia") {
-                    return c === "jurisprudencia" || 
-                           c === "jurisprudencia ia" ||
-                           (post.frontmatter.section || "").toLowerCase() === "jurisprudencia";
-                  }
-                  
-                  // Para IA Global, incluir categorías relacionadas
-                  if (cat === "ia-global") {
-                    return c === "ia-global" || 
-                           c === "global ia" ||
-                           (post.frontmatter.section || "").toLowerCase() === "ia-global";
->>>>>>> work-final
                   }
                   
                   if (c !== cat) return false;
                   if (c === "recursos") {
                     const subcat = (post.frontmatter.subcategory || "").toLowerCase();
-<<<<<<< HEAD
                     return subcat === "guias";
                   }
                   return true;
                 })
                 .sort((a, b) => b.dateMs - a.dateMs)
-=======
-                    const tags = (post.frontmatter.tags || []).map((t: string) => t.toLowerCase());
-                    return subcat === "guias" || tags.includes("guias");
-                  }
-                  return true;
-                })
-                .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
->>>>>>> work-final
                 .slice(0, 2);
 
                     const getLatestFirmaPosts = () => {
@@ -816,7 +686,6 @@ export default async function HomePage() {
               }));
             };
 
-<<<<<<< HEAD
         const getLatestActualidadPosts = () =>
           unifiedActualidad.slice(0, 2).map((entry, idx) => ({
             slug: `actualidad-home-${idx}`,
@@ -827,18 +696,6 @@ export default async function HomePage() {
             },
             excerpt: entry.description || "",
             url: entry.urlPath,
-=======
-        const getLatestActualidadPosts = () =>
-          unifiedActualidad.slice(0, 2).map((entry, idx) => ({
-            slug: `actualidad-home-${idx}`,
-            frontmatter: {
-              title: entry.title,
-              date: new Date(entry.date).toISOString(),
-              category: "actualidad-ia",
-            },
-            excerpt: entry.description || "",
-            url: entry.urlPath,
->>>>>>> work-final
           }));
 
             const buildHref = (post: any) => {
@@ -850,11 +707,7 @@ export default async function HomePage() {
                 return post.frontmatter.url;
               }
               if (c === "recursos" && (subcat === "guias" || tags.includes("guias"))) {
-<<<<<<< HEAD
                 return `/guias-ia/${post.slug}`;
-=======
-                return `/recursos/guias/${post.slug}`;
->>>>>>> work-final
               }
 
               return post.url;
@@ -864,19 +717,11 @@ export default async function HomePage() {
               <div className="space-y-10">
                 {sections.map((sec) => {
               const items =
-<<<<<<< HEAD
                 sec.category === "firma-scarpa"
                     ? getLatestFirmaPosts()
                     : sec.category === "recursos"
                       ? getLatestByCategory("recursos")
                       : getLatestByCategory(sec.category);
-=======
-                sec.category === "actualidad-ia"
-                  ? getLatestActualidadPosts()
-                  : sec.category === "firma-scarpa"
-                    ? getLatestFirmaPosts()
-                    : getLatestByCategory(sec.category);
->>>>>>> work-final
                   const slots = Array.from({ length: 2 }, (_, i) => items[i] ?? null);
                   return (
                     <div
