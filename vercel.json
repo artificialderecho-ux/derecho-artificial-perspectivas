@@ -2,18 +2,13 @@
   "buildCommand": "NODE_OPTIONS='--max-old-space-size=4096' npm run build",
   "redirects": [
     {
-      "source": "/fuentes/:path*",
-      "destination": "https://raw.githubusercontent.com/artificialderecho-ux/derecho-artificial-perspectivas/main/public/fuentes/:path*",
-      "permanent": false
-    },
-    {
       "source": "/Recursos/Fuentes/:path*",
-      "destination": "https://raw.githubusercontent.com/artificialderecho-ux/derecho-artificial-perspectivas/main/public/Recursos/Fuentes/:path*",
+      "destination": "/fuentes/:path*",
       "permanent": false
     },
     {
       "source": "/assets/docs/:path*",
-      "destination": "https://raw.githubusercontent.com/artificialderecho-ux/derecho-artificial-perspectivas/main/public/assets/docs/:path*",
+      "destination": "/fuentes/:path*",
       "permanent": false
     },
     {
