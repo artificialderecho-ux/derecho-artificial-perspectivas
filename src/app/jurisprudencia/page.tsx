@@ -93,12 +93,15 @@ export default async function JurisprudenciaPage() {
     if (entry.sourceUrl) {
       parts.push("Incluye descarga del documento original");
     }
+    const badge = entry.title?.toLowerCase().includes("aepd")
+      ? "Resolución"
+      : "Sentencia";
     return {
       id: `resource-${entry.slug}`,
       href: `/jurisprudencia/${entry.slug}`,
       title: entry.title,
       description: plainSummary,
-      badge: "Sentencia",
+      badge,
       meta: parts.join(" · "),
       dateMs: displayMs ?? safeTime,
       displayDateMs: entry.displayDateMs,
