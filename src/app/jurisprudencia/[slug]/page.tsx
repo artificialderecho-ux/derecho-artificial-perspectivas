@@ -149,6 +149,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
   const mdxPost = getPostBySlug(slug);
   if (mdxPost && (mdxPost.frontmatter.section === "jurisprudencia" || mdxPost.frontmatter.category === "jurisprudencia" || mdxPost.frontmatter.category?.toLowerCase() === "jurisprudencia ia")) {
     const { title, date, category, pdf, pdfLabel } = mdxPost.frontmatter;
+    const isResolucion = title?.toLowerCase().includes("aepd") || category?.toLowerCase() === "aepd";
     const pdfUrl =
       pdf && (pdf.startsWith("/") || pdf.startsWith("http"))
         ? pdf
@@ -170,7 +171,7 @@ export default async function JurisprudenciaSlugPage({ params }: { params: Promi
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white text-sm font-medium tracking-wide uppercase rounded-sm hover:bg-slate-800 transition !text-white"
             >
-              {pdfLabel || "Sentencia"}
+              {pdfLabel || (isResolucion ? "Resolución" : "Sentencia")}
             </a>
           </div>
         ) : null}
