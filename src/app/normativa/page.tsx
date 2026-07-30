@@ -68,14 +68,16 @@ export default async function NormativaPage() {
   );
 
   // Mejorar el filtrado para incluir más variantes de categoría
-  const mdxPosts = getAllPosts().filter(post => 
-    post.frontmatter.category && 
-    (post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'normativa' ||
-     post.frontmatter.category.toLowerCase().replace(/-/g, ' ') === 'normativa ia' ||
-     post.frontmatter.category.toLowerCase() === 'normativa' ||
-     post.frontmatter.category.toLowerCase() === 'normativa-ia' ||
-     (post.frontmatter.section || "").toLowerCase() === 'normativa')
-  );
+  const mdxPosts = getAllPosts().filter((post) => {
+    const category = (post.frontmatter.category || "").toLowerCase().replace(/-/g, " ").trim();
+    const section = (post.frontmatter.section || "").toLowerCase().replace(/-/g, " ").trim();
+
+    return (
+      category === "normativa" ||
+      category === "normativa ia" ||
+      section === "normativa"
+    );
+  });
 
   const mdxItems: UnifiedItem[] = mdxPosts.map(post => {
     const dateMs = new Date(post.frontmatter.date).getTime();
@@ -171,4 +173,3 @@ export default async function NormativaPage() {
 
   return <UnifiedSectionLayout config={config} items={items} />;
 }
-
